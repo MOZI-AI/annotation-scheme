@@ -1,0 +1,14 @@
+annotations:
+  - function_name: 'gene-go-annotation'
+    display_name : 'Gene Go Annotation'
+    description  : 'This core annotates genes from go terms'
+
+  - function_name: 'chem-gene'
+    display_name : 'Chemical Gene Annotation'
+    description  : 'This core annotates chemicals and genes'
+
+  - function_name: 'gene-protein'
+    display_name : 'Gene Protein Annotation'
+    description  : 'This core annotates genes and proteins'
+
+

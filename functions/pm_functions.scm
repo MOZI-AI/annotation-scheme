@@ -1,3 +1,81 @@
+;; a set of helper methods
+(define (get-params p)
+(if(equal? (cog-type p) 'ListLink)
+    (map (lambda (t)
+        (cog-name t)
+        ) (cog-outgoing-set p))
+
+    (list (cog-name p)))
+)
+
+(define (multi-word x)
+    (string-join (get-params x))
+)
+(define (remove-set-ln ln)
+    (if (cog-atom? ln)
+        (cog-outgoing-set ln)
+        '()
+    )
+)
+
+(define (get-name atom)
+ (if (> (length atom) 0)
+  (cog-name (car  atom))
+  ""
+ )
+)
+
+;;finds go name for parser function
+(define find-name
+    (lambda (atom)
+     (let*
+        (
+          [predicate (if (regexp-match? (string-match "GO:[0-9]+" (cog-name atom))) "GO_name" "has_name")]
+        )
+      (get-name
+       (remove-set-ln
+        (cog-execute!
+         (GetLink
+          (VariableNode "$name")
+
+          (EvaluationLink
+           (PredicateNode predicate)
+           (ListLink
+            atom
+            (VariableNode "$name")
+           )
+          )
+         )
+        )
+       )
+      )
+    )
+    )
+)
+
+;;finds go definition for parser function
+(define find-GO-def
+    (lambda (go)
+     (get-name
+      (remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$def")
+
+         (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+)
+
 
 (define (findGoterm g namespace)
         (cog-execute! (GetLink
@@ -6,9 +84,9 @@
               (MemberLink
                 g
                 (VariableNode "$a"))
-              (EvaluationLink 
+              (EvaluationLink
                (PredicateNode "GO_namespace")
-                 (ListLink 
+                 (ListLink
                    (VariableNode "$a")
                   (ConceptNode namespace)
                   )
@@ -25,9 +103,9 @@
               (InheritanceLink
                 go
                 (VariableNode "$a"))
-              (EvaluationLink 
+              (EvaluationLink
                (PredicateNode "GO_namespace")
-                 (ListLink 
+                 (ListLink
                    (VariableNode "$a")
                   (ConceptNode namespace)
                   )
@@ -54,7 +132,7 @@
     )
 )
 
-;; 
+;;
 
 (define (findMember gene)
 (cog-execute! (GetLink
@@ -68,16 +146,22 @@
 ;;
 
 (define (find_entrez gene)
-(cog-execute! (GetLink
-            (VariableNode "$a")
-            (EvaluationLink
-               (PredicateNode "has_entrez_id")
-               (ListLink
-               gene
-               (VariableNode "$a")
-              )
-            )
-    ))
+ (get-name
+   (remove-set-ln
+    (cog-execute!
+     (GetLink
+       (VariableNode "$a")
+       (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink
+         gene
+         (VariableNode "$a")
+        )
+       )
+    )
+   )
+  )
+ )
 )
 
 ;;
@@ -123,6 +207,15 @@
   )
 )
 
+
+
+;; append a list into a list to collect the result in one List
+(define (append . lsts)
+  (cond
+    ((null? lsts) '())
+    ((null? (car lsts)) (apply append (cdr lsts)))
+    (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
+
 ;;
 
 (define findGeneInteractor
@@ -137,10 +230,3 @@
               )
             )
     ))))
-
-;; append a list into a list to collect the result in one List
-(define (append . lsts)
-  (cond
-    ((null? lsts) '())
-    ((null? (car lsts)) (apply append (cdr lsts)))
-    (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))

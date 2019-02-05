@@ -2,7 +2,7 @@
 (define ns '())
 (define trav_result '())
 
-(define (gene_go_annotation namespace include_entrez P)
+(define (gene_go_annotation namespace P)
   ;; genelist and namespace contains space separated list of gene_symbols and namespaces respectively, from what user chooses 
   ;; e.g "WNT2 MYLK ADP" or "cellular_component molecular_function biological_process"
   ;; include_name and include_entrez are bolean values
@@ -25,10 +25,6 @@
            (if (> P 0) (set! result (append result (traverse_parent go P)))) ;; traverse for parents of the Go P times, of selected namespace
               
         )Goterms)
-
-	(if (equal? include_entrez "True")
-      		(set! result (append result
-		(list (EvaluationLink (PredicateNode "has_entrez_id") (ListLink gene (list-ref (cog-outgoing-set (find_entrez gene)) 0)))))))
 
   )gene_nodes)
 

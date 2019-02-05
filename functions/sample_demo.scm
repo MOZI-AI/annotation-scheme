@@ -11,16 +11,6 @@
 
 (primitive-load "sample_dataset.scm")
 
-;; define global variables 
-
-(define output '())  ;; final output to be returned to the user
-
-(define result '())  ;; result for each annotation
-
-(define gene_nodes '())
-
-(define interaction "")
-
 ;; load the scheme functions 
 
 (primitive-load "gene_go_annotation.scm")
@@ -33,8 +23,6 @@
 
 (primitive-load "pm_functions.scm")
 
-;; load the parser
-;;(primitive-load "parser.scm")
 
 ;; Load request handler
  
@@ -42,32 +30,42 @@
 
 
 ;; Do some examples
-;; 1
 
 (genes "MAP2K4 SPAG9")
 
-(do_annotation 
+;; 1
+(define ex1 (do_annotation_scm 
  (list 
   (gene_go_annotation "biological_process cellular_component" 0) 
   (gene_pathway_annotation "smpdb reactome" "True" "True")
   (biogrid_interaction_annotation)
  )
-)
+))
+;; - finds Go terms for a given gene of type biological process and cellular component, will not look for parents of the GO as it is 0
+;; - finds the pathways of a given gene from SMPDB and reactome. The proteins and Small molecules of the pathways are included
+;; - finds the PPI (protein protein interaction) from the biogrid data (in this demo you will notice that this result is empty as the 
+;;   proteins expresses by the given gene are not included in the sample dataset)
+
 
 ;;; 2
-
-(do_annotation 
+(define ex2 (do_annotation_scm 
  (list 
-  (gene_go_annotation "biological_process cellular_component" 0) 
+  (gene_go_annotation "biological_process molecular_function" 1) 
   (biogrid_interaction_annotation)
  )
-)
+))
+;; - finds Go terms for a given gene of type biological process and molecular funcction, will include the 1st level parents of the GO
+;; - finds the Gene-Gene interaction (As the gene pathways annotation is not selected) from the biogrid data
 
 
 ;; 3
-
-(do_annotation 
+(define ex3 (do_annotation_scm 
  (list 
   (biogrid_interaction_annotation)
  )
-)
+))
+;; - finds the Gene-Gene interaction (As the gene pathways annotation is not selected) from the biogrid data
+
+
+  
+

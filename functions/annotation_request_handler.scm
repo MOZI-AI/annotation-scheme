@@ -31,8 +31,13 @@ val_msg
 
 (define (do_annotation annotation_list)
 (set! interaction "genes")
-;; No deen to parse the results for the scm demo
-;;(parse annotation_list) 
+(parse annotation_list) 
+)
+
+;; No deen to parse the output to get the scm result
+
+(define (do_annotation_scm annotation_list)
+(set! interaction "genes")
 annotation_list
 ) 
 

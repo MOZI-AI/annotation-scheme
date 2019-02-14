@@ -34,7 +34,7 @@ val_msg
 (parse annotation_list) 
 )
 
-;; No deen to parse the output to get the scm result
+;; No need to parse the output to get the scm result
 
 (define (do_annotation_scm annotation_list)
 (set! interaction "genes")

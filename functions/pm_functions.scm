@@ -283,7 +283,7 @@
 		    (VariableNode "$b")
 		 ))
 	 )
-	(if (and (equal? (cog-type (VariableNode "$c")) "MoleculeNode") (equal? (cog-type (VariableNode "$c") "MoleculeNode")))
+	(if (and (equal? (cog-type (VariableNode "$c")) 'MoleculeNode) (equal? (cog-type (VariableNode "$c") 'MoleculeNode)))
 		(EvaluationLink
 		   (PredicateNode "interacts_with")
 		       (ListLink

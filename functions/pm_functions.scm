@@ -218,6 +218,29 @@
 
 ;;
 
+
+
+(define matchGeneInteractors
+    (lambda(gene)
+        (cog-execute! (BindLink
+            (VariableNode "$a")
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+               gene
+               (VariableNode "$a")
+              )
+            )
+	(EvaluationLink
+	    (PredicateNode "interacts_with")
+		(ListLink
+		    gene
+		    (VariableNode "$a")))
+    )	
+)))
+
+;;;
+
 (define findGeneInteractor
     (lambda(gene)
         (cog-execute! (GetLink
@@ -227,6 +250,47 @@
                (ListLink
                gene
                (VariableNode "$a")
-              )
-            )
-    ))))
+              ))
+    )	
+)))
+;;;
+
+
+(define findProtInteractor
+  (lambda(gene)
+     (cog-execute! (BindLink
+	(VariableList
+	 (VariableNode "$a")
+	 (VariableNode "$b")
+	 (VariableNode "$c"))
+	 (And 
+	    (EvaluationLink
+	       (PredicateNode "interacts_with")
+		  (ListLink
+		      gene
+		      (VariableNode "$a")
+		  ))
+	    (EvaluationLink
+	       (PredicateNode "expresses")
+		  (ListLink
+		    gene
+		    (VariableNode "$c")
+		 ))
+	    (EvaluationLink
+	       (PredicateNode "expresses")
+		  (ListLink
+		    (VariableNode "$a")
+		    (VariableNode "$b")
+		 ))
+	 )
+	(if (and (equal? (cog-type (VariableNode "$c")) "MoleculeNode") (equal? (cog-type (VariableNode "$c") "MoleculeNode")))
+		(EvaluationLink
+		   (PredicateNode "interacts_with")
+		       (ListLink
+			(VariableNode "$c")
+			(VariableNode "$b")
+		))
+		'()
+	)))
+))
+

@@ -6,21 +6,14 @@
     (for-each (lambda (gene)
 
 	(if (equal? interaction "proteins")
-	     (set! result (append result (cog-outgoing-set (findProtInteractor gene)))))
+		     (set! result (append result (cog-outgoing-set (findProtInteractor gene)))))
 
 	(if (equal? interaction "genes") 
-           (begin
+	      (begin
 		(set! result (append result (cog-outgoing-set (matchGeneInteractors gene))))
-                ;; check for output genes if interacting to each other
-		(set! gen_int (cog-outgoing-set (findGeneInteractor gene)))
-	        (for-each (lambda (g)
-	            (set! gen_int (cdr gen_int))
-		    (for-each (lambda (r)
-    			(if (member g (cog-outgoing-set (findGeneInteractor r)))
-    				(set! result (append result 
-				(list (EvaluationLink (PredicateNode "interacts_with") (ListLink g r))))))
-   		    ) gen_int)
-		)(cog-outgoing-set (findGeneInteractor gene)))))
+	        ;; Add output genes interacting to each other
+	        (set! result (append result (cog-outgoing-set (outputInteraction gene))))
+	      ))
 
     )gene_nodes)
 

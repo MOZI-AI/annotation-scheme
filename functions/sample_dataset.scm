@@ -1,6 +1,50 @@
 ;; sample data_set for testing the annotation service,
 ;; The data is all about genes MAP2K4 and SPAG9
 
+
+;; Gene expresses protein
+
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "MAP2K4")
+(MoleculeNode "Uniprot:Q5U0B8")))
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "MAP2K4")
+(MoleculeNode "Uniprot:Q6PIE6")))
+
+
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "FLNC")
+(MoleculeNode "Uniprot:Q9Y503")))
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "FLNC")
+(MoleculeNode "Uniprot:Q9NYE5")))
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "FLNC")
+(MoleculeNode "Uniprot:Q9NS12")))
+
+
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "MAPK8")
+(MoleculeNode "Uniprot:D3DX92")))
+(EvaluationLink
+(PredicateNode "expresses")
+(ListLink 
+(GeneNode "MAPK8")
+(MoleculeNode "Uniprot:B7ZLV4")))
+
+
 ;;;;; Biogrid
 
 (EvaluationLink
@@ -364,6 +408,54 @@
 (ListLink 
 (GeneNode "SPAG9")
 (ConceptNode "9043")))
+
+
+;; Output genes interacting eachother
+
+ (EvaluationLink
+   (PredicateNode "interacts_with")
+   (ListLink
+      (GeneNode "JUN")
+      (GeneNode "MAPK1")
+   )
+)
+
+ (EvaluationLink
+   (PredicateNode "interacts_with")
+   (ListLink
+      (GeneNode "GEMIN5")
+      (GeneNode "MAPK8")
+   )
+)
+
+   (EvaluationLink
+      (PredicateNode "interacts_with")
+      (ListLink
+         (GeneNode "SMC1A")
+         (GeneNode "USP15")
+      )
+   )
+   (EvaluationLink
+      (PredicateNode "interacts_with")
+      (ListLink
+         (GeneNode "MCM6")
+         (GeneNode "GAPVD1")
+      )
+   )
+   (EvaluationLink
+      (PredicateNode "interacts_with")
+      (ListLink
+         (GeneNode "USP15")
+         (GeneNode "IVNS1ABP")
+      )
+   )
+   (EvaluationLink
+      (PredicateNode "interacts_with")
+      (ListLink
+         (GeneNode "SMC1A")
+         (GeneNode "LARP7")
+      )
+   )
 
 ;;;;; Details about each gene interacting with given gene MAP2K4 and SPAG9
 

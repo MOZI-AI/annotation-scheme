@@ -215,3 +215,113 @@
     ((null? lsts) '())
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
+
+;;
+
+
+
+(define matchGeneInteractors
+    (lambda(gene)
+        (cog-execute! (BindLink
+            (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
+
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+               gene
+               (VariableNode "$a")
+              )
+            )
+	     (EvaluationLink
+	       (PredicateNode "interacts_with")
+		      (ListLink
+		        gene
+		        (VariableNode "$a")))
+    ))	
+))
+
+;;;
+
+(define outputInteraction
+    (lambda(gene)
+        (cog-execute! (BindLink
+          (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'GeneNode))
+            (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
+
+          (And  
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+               gene
+               (VariableNode "$a")
+              ))
+
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+               (VariableNode "$a")
+               (VariableNode "$b")
+              ))
+
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+                gene
+               (VariableNode "$b")
+              ))
+          )
+            (EvaluationLink
+               (PredicateNode "interacts_with")
+               (ListLink
+               (VariableNode "$a")
+               (VariableNode "$b")
+              ))
+    ))	
+))
+;;;
+
+
+(define findProtInteractor
+  (lambda(gene)
+     (cog-execute! (BindLink
+ 
+ 	  (VariableList
+      (TypedVariable (VariableNode "$a") (Type 'GeneNode))
+      (TypedVariable (VariableNode "$b") (Type 'MoleculeNode))
+	    (TypedVariable (VariableNode "$c") (Type 'MoleculeNode)))
+	  
+	 (And 
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            gene
+            (VariableNode "$c")
+      ))
+
+	    (EvaluationLink
+	     (PredicateNode "interacts_with")
+		    (ListLink
+		      gene
+		      (VariableNode "$a")
+		  ))
+
+	    (EvaluationLink
+	     (PredicateNode "expresses")
+		    (ListLink
+		      (VariableNode "$a")
+		      (VariableNode "$b")
+		 ))
+	 )
+
+		(EvaluationLink
+		  (PredicateNode "interacts_with")
+		   (ListLink
+			   (VariableNode "$c")
+			   (VariableNode "$b")
+		))
+	
+	))
+))
+

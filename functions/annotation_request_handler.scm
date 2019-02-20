@@ -1,8 +1,9 @@
-(define output '())  ;; final output to be returned to the user
 
 (define result '())  ;; result for each annotation
 
 (define gene_nodes '())
+
+(define interaction "genes")
 
 ;; Accept a Gene list and map to geneNodes
 
@@ -23,20 +24,23 @@
     (begin (set! val_msg (string-append "1:" (string-join unknown ",")))
 	   (set! gene_nodes '()))
 )
-
 val_msg
 )
+
 ;; The main function
 
 (define (do_annotation annotation_list)
-  (set! output '()) ;; to remove previous output
-    
-  (for-each (lambda (func)
-     (set! output (append output (list func)))
-  ) annotation_list)
+(set! interaction "genes")
+(parse annotation_list) 
+)
 
- (parse output)
+;; No need to parse the output to get the scm result
+
+(define (do_annotation_scm annotation_list)
+(set! interaction "genes")
+annotation_list
 ) 
+
 
 
 

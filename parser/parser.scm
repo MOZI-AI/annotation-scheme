@@ -1,5 +1,5 @@
-(primitive-load "../../functions/pm_functions.scm")
-(primitive-load "../../parser/sample_data.scm")
+(primitive-load "pm_functions.scm")
+(primitive-load "sample_data.scm")
 
 (define nodes '())
 (define edges '())

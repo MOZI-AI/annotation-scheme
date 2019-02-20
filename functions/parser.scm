@@ -1,3 +1,6 @@
+(primitive-load "pm_functions.scm")
+(primitive-load "sample_data.scm")
+
 (define nodes '())
 (define edges '())
 (define atoms '())
@@ -51,7 +54,7 @@
 						(set! atoms (cons node2-name atoms))
 					)
 				)
-				(set! edges (append (list (create-edge node1 node2 "Member-of" annotation)) edges))
+				(set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
 			   )
 			)
 		   )
@@ -89,7 +92,7 @@
 							(set! atoms (cons node2-name atoms))
 						)
 					)
-					(set! edges (append (list (create-edge node1 node2 "Part-of" annotation)) edges))
+					(set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
 					 )
 				)
 		   )
@@ -135,7 +138,7 @@
 						(set! atoms (cons (cog-name node) atoms))
 					 )
 			 )
-			 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) "Interacts-with" annotation)) edges))
+			 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
 			)
 		   )
 		  )
@@ -213,6 +216,7 @@
  )
 )
 
+
 (define* (build-desc-url node)
  (let*
 	(
@@ -222,8 +226,8 @@
  	(case atom-type
 	 ('MoleculeNode
 		(begin
-		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "ChEBI")
-			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (list-ref (string-split (cog-name node) #\:) 1)))
+		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "CHEBI")
+			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
 	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
 		 )
 		)
@@ -243,26 +247,4 @@
 	description
  )
 
-)
-
-(define* (write-to-file)
- (let*
-	(
-		[file-name (generate-filename)]
-	)
-	(call-with-output-file file-name
-  	(lambda (p)
-			(if (not (null? output))
-					(begin
-						(write result p)
-					)
-			)
-		)
-	)
-	file-name
- )
-)
-
-(define* (generate-filename)
- (string-append (get-environment-variable "SCM_DIR") (number->string (current-time)) ".scm")
 )

@@ -1,6 +1,3 @@
-;; 
-
-
 (define (gene_pathway_annotation pathway prot small_mol)
     (set! result (list (ConceptNode "gene_pathway_annotation")))
     (set! interaction "proteins")

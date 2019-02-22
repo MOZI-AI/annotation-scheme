@@ -1,11 +1,9 @@
-(primitive-load "pm_functions.scm")
-(primitive-load "sample_data.scm")
-
 (define nodes '())
 (define edges '())
 (define atoms '())
 (define graph '())
 (define json '())
+(define output '())
 
 (define-public (parse result)
    (let*
@@ -14,7 +12,8 @@
 			 [pathway-annotations (get-annotations "gene_pathway_annotation" result)]
 			 [biogrid-annotations (get-annotations "biogrid_interaction_annotation" result)]
       )
-		 (reset)
+	 (reset)
+	 (set! output result)
      (parse-go-annotations go-annotations)
      (parse-pathway-annotations pathway-annotations)
   	 (parse-biogrid-annotations biogrid-annotations)
@@ -74,25 +73,29 @@
 		   (if (equal? main-atom-type 'MemberLink)
 				(begin
 					 (let*
-					(
-						[node1-name (cog-name (cog-outgoing-atom annot 0))]
-						[node2-name (cog-name (cog-outgoing-atom annot 1))]
-						[node1 (create-node (cog-outgoing-atom annot 0) annotation)]
-						[node2 (create-node (cog-outgoing-atom annot 1) annotation)]
-					)
-					(if (not (node-exists? node1-name atoms))
-						 (begin
-							(set! nodes (append (list node1) nodes))
-							(set! atoms (cons node1-name atoms))
-						 )
-					)
-					(if (not (node-exists? node2-name atoms))
-						(begin
-							(set! nodes (append (list node2) nodes))
-							(set! atoms (cons node2-name atoms))
+						(
+							[node1-name (cog-name (cog-outgoing-atom annot 0))]
+							[node2-name (cog-name (cog-outgoing-atom annot 1))]
+							[node1-type (cog-type (cog-outgoing-atom annot 0))]
+							[node2-type (cog-type (cog-outgoing-atom annot 1))]
+							[node1 (create-node (cog-outgoing-atom annot 0) annotation)]
+							[node2 (create-node (cog-outgoing-atom annot 1) annotation)]
 						)
-					)
-					(set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
+						(if (not (node-exists? node1-name atoms))
+							 (begin
+								(set! nodes (append (list node1) nodes))
+								(set! atoms (cons node1-name atoms))
+							 )
+						)
+						(if (not (node-exists? node2-name atoms))
+							(begin
+								(set! nodes (append (list node2) nodes))
+								(set! atoms (cons node2-name atoms))
+							)
+						)
+						(if (check-nodes node1 node2 node1-type node2-type)
+						 (set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
+						)
 					 )
 				)
 		   )
@@ -101,6 +104,24 @@
 				 (
 					 [predicate (cog-outgoing-atom annot 0)]
 					 [listlink (cog-outgoing-atom annot 1)]
+					 [node1-name (cog-name (cog-outgoing-atom listlink 0))]
+					 [node2-name (cog-name (cog-outgoing-atom listlink 1))]
+					 [node1-type (cog-type (cog-outgoing-atom listlink 0))]
+					 [node2-type (cog-type (cog-outgoing-atom listlink 1))]
+					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
+					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
+				 )
+				 (if (not (node-exists? node1-name atoms))
+					 (begin
+						(set! nodes (append (list node1) nodes))
+						(set! atoms (cons node1-name atoms))
+					 )
+				 )
+				 (if (not (node-exists? node2-name atoms))
+					(begin
+						(set! nodes (append (list node2) nodes))
+						(set! atoms (cons node2-name atoms))
+					)
 				 )
 				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
 				)
@@ -216,6 +237,20 @@
  )
 )
 
+(define* (check-nodes node1 node2 n1type n2type)
+ (if (or
+	  (equal? (node-data-id (node-data node1)) (node-data-id (node-data node2)))
+	  (or (equal? n1type 'VariableNode) (equal? n2type 'VariableNode))
+	  (or
+	   (string= "" (node-data-id (node-data node1)))
+	   (string= "" (node-data-id (node-data node2)))
+	  )
+ 	)
+  #f
+  #t
+ )
+)
+
 
 (define* (build-desc-url node)
  (let*
@@ -246,5 +281,27 @@
 	)
 	description
  )
-
 )
+
+(define* (write-to-file)
+ (let*
+	(
+		[file-name (generate-filename)]
+	)
+	(call-with-output-file file-name
+  	(lambda (p)
+			(if (not (null? output))
+					(begin
+						(write result p)
+					)
+			)
+		)
+	)
+	file-name
+ )
+)
+
+(define* (generate-filename)
+ (string-append "scheme/result/"(number->string (current-time)) ".scm")
+)
+

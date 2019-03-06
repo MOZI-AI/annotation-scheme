@@ -21,6 +21,7 @@
 
         (for-each (lambda (go)
            (set! result (append result (list (InheritanceLink gene go)))) ;; find go-terms of selected namespace for a given gene
+	   (set! result (append result (go_info go)))
            (set! trav_result '())
            (if (> P 0) (set! result (append result (traverse_parent go P)))) ;; traverse for parents of the Go P times, of selected namespace
               
@@ -55,7 +56,16 @@
   (for-each (lambda (l) 
   (if (not (equal? (cog-name l) "GO_term"))
   (set! trav_result (append trav_result (list (InheritanceLink g l))))
+  (set! trav_result (append trav_result (go_info l)))
   )) parents)
 trav_result
 )
+
+
+;; Add namespace of the GO term
+(define (go_info go)
+(list
+(EvaluationLink (PredicateNode "GO_namespace") (ListLink go (find-GO-ns go)))
+))
+
 

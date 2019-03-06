@@ -1,6 +1,20 @@
 ;; a set of helper methods
+
+;; Parser PM functions
+
+(define-syntax try
+    (syntax-rules (catch)
+      ((_ body (catch catcher))
+       (call-with-current-continuation
+        (lambda (exit)
+          (with-exception-handler
+           (lambda (condition)
+             catcher
+             (exit condition))
+           (lambda () body)))))))
+
 (define (get-params p)
-(if(equal? (cog-type p) 'ListLink)
+ (if(equal? (cog-type p) 'ListLink)
     (map (lambda (t)
         (cog-name t)
         ) (cog-outgoing-set p))
@@ -76,7 +90,9 @@
     )
 )
 
+;;; Annotation's PM functions
 
+;; Finds a GO term of specific namespace for a given gene g 
 (define (findGoterm g namespace)
         (cog-execute! (GetLink
             (VariableNode "$a")
@@ -96,6 +112,7 @@
             )
 ))
 
+;; Finds parents of a GO term ( of given namespace type) 
 (define (parent_finder go namespace)
    (cog-execute! (GetLink
             (VariableNode "$a")
@@ -115,7 +132,7 @@
             )
 ))
 
-
+;; Finds the name of a GO term
 (define findGoname
     (lambda(go)
         (cog-execute! (GetLink
@@ -132,7 +149,7 @@
     )
 )
 
-;;
+;; Finds the namespace of a GO term
 (define (find-GO-ns go)
 (remove-set-ln
        (cog-execute!
@@ -151,8 +168,7 @@
       )
 )
 
-;;
-
+;; Finds a concept where a gene is a member of
 (define (findMember gene)
 (cog-execute! (GetLink
     (VariableNode "$a")
@@ -162,8 +178,7 @@
     ))
 )
 
-;;
-
+;; Finds entrez_id of a gene
 (define (find_entrez gene)
  (get-name
    (remove-set-ln
@@ -183,9 +198,7 @@
  )
 )
 
-;;
-
-
+;; Finds proteins a gene expresses
 (define findprotein
     (lambda(gene)
         (cog-execute! (GetLink
@@ -198,10 +211,8 @@
               )
             )
     ))))
-;;
 
-;; can also be used to get any node name beside pathway, Except GO (which has different structure)
-
+;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
     (lambda(pw)
         (cog-execute! (GetLink
@@ -215,8 +226,7 @@
             )
 ))))
 
-;;
-
+;; Finds molecules (proteins or chebi's) in a pathway 
 (define (findmol path)
   (cog-execute! (GetLink
     (VariableNode "$a")
@@ -227,7 +237,6 @@
 )
 
 
-
 ;; append a list into a list to collect the result in one List
 (define (append . lsts)
   (cond
@@ -235,10 +244,7 @@
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
 
-;;
-
-
-
+;; Finds genes interacting with a given gene
 (define matchGeneInteractors
     (lambda(gene)
         (cog-execute! (BindLink
@@ -260,8 +266,7 @@
     ))	
 ))
 
-;;;
-
+;;; Finds output genes interacting eachother 
 (define outputInteraction
     (lambda(gene)
         (cog-execute! (BindLink
@@ -299,9 +304,8 @@
               ))
     ))	
 ))
-;;;
 
-
+;; Finds Protein-protein equivalence of a gene-gene interaction 
 (define findProtInteractor
   (lambda(gene)
      (cog-execute! (BindLink

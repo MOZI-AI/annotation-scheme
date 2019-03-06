@@ -1,5 +1,4 @@
 (primitive-load "pm_functions.scm")
-(primitive-load "sample_data.scm")
 
 (define nodes '())
 (define edges '())

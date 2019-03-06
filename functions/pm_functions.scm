@@ -133,6 +133,25 @@
 )
 
 ;;
+(define (find-GO-ns go)
+(remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$ns")
+
+         (EvaluationLink
+          (PredicateNode "GO_namespace")
+          (ListLink
+           go
+           (VariableNode "$ns")
+          )
+         )
+        )
+       )
+      )
+)
+
+;;
 
 (define (findMember gene)
 (cog-execute! (GetLink

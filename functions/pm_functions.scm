@@ -168,6 +168,25 @@
       )
 )
 
+;; Finds the definition of a GO term
+(define (find-godef go)
+(remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$def")
+
+         (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )
+       )
+      )
+)
+
 ;; Finds a concept where a gene is a member of
 (define (findMember gene)
 (cog-execute! (GetLink
@@ -348,3 +367,45 @@
 	))
 ))
 
+;; build description URL of a node
+
+(define (build-desc-url node)
+ (let
+	(
+		[atom-type (cog-type node)]
+		[description ""]
+	)
+ 	(case atom-type
+	 ('MoleculeNode
+		(begin
+		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "CHEBI")
+			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
+	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
+		 )
+		)
+	 )
+	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (find_entrez node))))
+	 ('ConceptNode
+		(begin
+		 (if (string-contains (cog-name node) "SMP")
+		 	(set! description (string-append "http://smpdb.ca/view/" (cog-name node)))
+		 )
+		 (if (string-contains (cog-name node) "R-HSA")
+		 	(set! description (string-append "http://www.reactome.org/content/detail/" (cog-name node)))
+		 )
+		)
+	 )
+	)
+	description
+ )
+
+)
+
+;; Find node name and description
+
+(define (node-info node)
+    (list
+      (EvaluationLink (PredicateNode "has_name") (ListLink node (cog-outgoing-set (findpwname node))))
+      (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
+    )
+)

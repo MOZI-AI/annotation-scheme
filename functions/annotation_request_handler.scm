@@ -31,6 +31,7 @@ val_msg
 
 (define (do_annotation annotation_list)
 (set! interaction "genes")
+(set! annotation_list (append (gene_info gene_nodes) annotation_list))
 (parse annotation_list) 
 )
 
@@ -38,8 +39,21 @@ val_msg
 
 (define (do_annotation_scm annotation_list)
 (set! interaction "genes")
+(set! annotation_list (append (gene_info gene_nodes) annotation_list))
 annotation_list
 ) 
+
+;; Adds the name and description of gene_nodes
+
+(define (gene_info genes)
+    (define info '())
+         (for-each (lambda (g)
+              (set! info (append info (list (node-info g))))
+         ) genes)
+info
+)
+
+
 
 
 

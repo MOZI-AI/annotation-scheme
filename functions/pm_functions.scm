@@ -255,13 +255,15 @@
   )
 )
 
-
 ;; append a list into a list to collect the result in one List
 (define (append . lsts)
   (cond
     ((null? lsts) '())
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
+
+;; Collect Pair of nodes interacting eachother to avoid repeatation  
+(define pairs '())
 
 ;; Finds genes interacting with a given gene
 (define matchGeneInteractors
@@ -277,11 +279,12 @@
                (VariableNode "$a")
               )
             )
-	     (EvaluationLink
-	       (PredicateNode "interacts_with")
-		      (ListLink
-		        gene
-		        (VariableNode "$a")))
+            (ExecutionOutputLink
+              (GroundedSchemaNode "scm: generate_result")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
     ))	
 ))
 
@@ -315,11 +318,11 @@
                (VariableNode "$b")
               ))
           )
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               (VariableNode "$a")
-               (VariableNode "$b")
+          (ExecutionOutputLink
+            (GroundedSchemaNode "scm: generate_result")
+              (ListLink
+                (VariableNode "$a")
+                (VariableNode "$b")
               ))
     ))	
 ))
@@ -357,16 +360,35 @@
 		 ))
 	 )
 
-		(EvaluationLink
-		  (PredicateNode "interacts_with")
-		   (ListLink
-			   (VariableNode "$c")
-			   (VariableNode "$b")
-		))
+  ;; This will be executed if the above pattern is found.
+  (ExecutionOutputLink
+    (GroundedSchemaNode "scm: generate_result")
+		  (ListLink
+		    (VariableNode "$c")
+		    (VariableNode "$b")
+		  ))
 	
-	))
+))
 ))
 
+;; Grounded schema node to add info about matched variable nodes
+
+(define (generate_result var1 var2)
+  (if (and 
+    (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
+    (and (not (member (list var1 var2) pairs)) (not (member (list var2 var1) pairs))))
+
+    (begin
+    (set! pairs (append pairs (list (list var1 var2))))
+    (let ([output (ListLink
+          (EvaluationLink (PredicateNode "Interacts_with") (ListLink var1 var2))
+          (node-info var2)
+          (node-info var1)
+          )])
+    output
+    )
+    )
+))
 ;; build description URL of a node
 
 (define (build-desc-url node)

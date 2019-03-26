@@ -1,4 +1,16 @@
 ;; a set of helper methods
+
+(define-syntax try
+    (syntax-rules (catch)
+      ((_ body (catch catcher))
+       (call-with-current-continuation
+        (lambda (exit)
+          (with-exception-handler
+           (lambda (condition)
+             catcher
+             (exit condition))
+           (lambda () body)))))))
+
 (define (get-params p)
 (if(equal? (cog-type p) 'ListLink)
     (map (lambda (t)
@@ -25,7 +37,9 @@
  )
 )
 
-;;finds go name for parser function
+;; Parser PM functions
+
+;; finds go name for parser function
 (define find-name
     (lambda (atom)
      (let*
@@ -76,7 +90,9 @@
     )
 )
 
+;; Annotation's PM functions
 
+;; Finds a GO term of specific namespace for a given gene g 
 (define (findGoterm g namespace)
         (cog-execute! (GetLink
             (VariableNode "$a")
@@ -96,6 +112,7 @@
             )
 ))
 
+;; Finds parents of a GO term ( of given namespace type) 
 (define (parent_finder go namespace)
    (cog-execute! (GetLink
             (VariableNode "$a")
@@ -115,7 +132,7 @@
             )
 ))
 
-
+;; Finds the name of a GO term
 (define findGoname
     (lambda(go)
         (cog-execute! (GetLink
@@ -132,8 +149,7 @@
     )
 )
 
-;;
-
+;; Finds a concept where a gene is a member of
 (define (findMember gene)
 (cog-execute! (GetLink
     (VariableNode "$a")
@@ -143,8 +159,7 @@
     ))
 )
 
-;;
-
+;; Finds entrez_id of a gene
 (define (find_entrez gene)
  (get-name
    (remove-set-ln
@@ -164,9 +179,7 @@
  )
 )
 
-;;
-
-
+;; Finds proteins a gene expresses
 (define findprotein
     (lambda(gene)
         (cog-execute! (GetLink
@@ -179,10 +192,8 @@
               )
             )
     ))))
-;;
 
-;; can also be used to get any node name beside pathway, Except GO (which has different structure)
-
+;; Finds a name of any node (Except GO which has different structure)
 (define findpwname
     (lambda(pw)
         (cog-execute! (GetLink
@@ -196,8 +207,7 @@
             )
 ))))
 
-;;
-
+;; Finds molecules (proteins or/and chebi's) in a pathway 
 (define (findmol path)
   (cog-execute! (GetLink
     (VariableNode "$a")
@@ -206,7 +216,6 @@
        path))
   )
 )
-
 
 
 ;; append a list into a list to collect the result in one List
@@ -218,8 +227,10 @@
 
 ;;
 
+;; Collect Pair of nodes interacting eachother to avoid repetition  
+(define pairs '())
 
-
+;; Finds genes interacting with a given gene
 (define matchGeneInteractors
     (lambda(gene)
         (cog-execute! (BindLink
@@ -233,16 +244,16 @@
                (VariableNode "$a")
               )
             )
-	     (EvaluationLink
-	       (PredicateNode "interacts_with")
-		      (ListLink
-		        gene
-		        (VariableNode "$a")))
+            (ExecutionOutputLink
+              (GroundedSchemaNode "scm: generate_result")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
     ))	
 ))
 
-;;;
-
+;;; Finds output genes interacting eachother 
 (define outputInteraction
     (lambda(gene)
         (cog-execute! (BindLink
@@ -272,17 +283,16 @@
                (VariableNode "$b")
               ))
           )
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               (VariableNode "$a")
-               (VariableNode "$b")
+          (ExecutionOutputLink
+            (GroundedSchemaNode "scm: generate_result")
+              (ListLink
+                (VariableNode "$a")
+                (VariableNode "$b")
               ))
     ))	
 ))
-;;;
 
-
+;; Finds Protein-protein equivalence of a gene-gene interaction 
 (define findProtInteractor
   (lambda(gene)
      (cog-execute! (BindLink
@@ -315,13 +325,29 @@
 		 ))
 	 )
 
-		(EvaluationLink
-		  (PredicateNode "interacts_with")
-		   (ListLink
-			   (VariableNode "$c")
-			   (VariableNode "$b")
-		))
+  	     (ExecutionOutputLink
+    		(GroundedSchemaNode "scm: generate_result")
+		  (ListLink
+		    (VariableNode "$c")
+		    (VariableNode "$b")
+		  ))	
 	
 	))
+))
+
+;; Generate custome result for the matched variable nodes, called by the Grounded schemaNode
+(define (generate_result var1 var2)
+  (if (and 
+    (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
+    (and (not (member (list var1 var2) pairs)) (not (member (list var2 var1) pairs))))
+
+    (begin
+    (set! pairs (append pairs (list (list var1 var2))))
+    (let ([output 
+          (EvaluationLink (PredicateNode "Interacts_with") (ListLink var1 var2))
+          ])
+    output
+    )
+    )
 ))
 

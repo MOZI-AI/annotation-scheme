@@ -3,7 +3,7 @@
     	(set! result (list (ConceptNode "biogrid_interaction_annotation")))
     
     (for-each (lambda (gene)
-
+	(set! pairs '())
 	(if (equal? interaction "proteins")
 		     (set! result (append result (cog-outgoing-set (findProtInteractor gene)))))
 

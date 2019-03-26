@@ -21,7 +21,6 @@
 
 ;; Load the PM functions 
 
-(primitive-load "helpers/pm_functions.scm")
 (primitive-load "functions/pm_functions.scm")
 
 

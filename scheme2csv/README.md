@@ -14,6 +14,8 @@ for genes "MAP2K4 and SPAG9"
 Example-2.scm has the scheme result of the gene_go_annotation, gene_pathway_annotation and 
 biogrid_interaction_annotation for genes "MAP2K4 and SPAG9"
 
+Example-3.scm has the scheme result of the biogrid_interaction_annotation for gene "A1BG"
+
 
 RUN:
 
@@ -21,13 +23,21 @@ Use Python3, open a terminal from current directory and run the following:
 
 python3 scm2csv.py result_file_name.scm
 
-example:
+Example:
+
+python3 scm2csv.py Example-3.scm
+
+Generates biogrid_annotation.csv for Gene-Gene interaction annotation of a given gene "A1BG"
+
+------
 
 python3 scm2csv.py Example-2.scm
 
 Generates three CSV files for each annotation.
 
 Gene_GO_annotation.csv, Gene_pathway_annotations.csv and biogrid_annotation.csv 
+
+------
 
 Note:
 

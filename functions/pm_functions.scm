@@ -400,7 +400,7 @@
  	(case atom-type
 	 ('MoleculeNode
 		(begin
-		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "CHEBI")
+		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "ChEBI")
 			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
 	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
 		 )
@@ -427,7 +427,19 @@
 
 (define (node-info node)
     (list
-      (EvaluationLink (PredicateNode "has_name") (ListLink node (cog-outgoing-set (findpwname node))))
+      (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
       (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
     )
+)
+
+(define (node-name node)
+(let
+    ([lst (cog-outgoing-set (findpwname node))]
+    [name ""])
+    (if (>= (length lst) 1)
+	(set! name (list-ref lst 0))
+	(set! name (ConceptNode "")))
+name
+)
+
 )

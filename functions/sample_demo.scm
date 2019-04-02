@@ -22,6 +22,7 @@
 ;; Load the PM functions 
 
 (primitive-load "pm_functions.scm")
+(primitive-load "parser.scm")
 
 
 ;; Load request handler
@@ -41,8 +42,8 @@
 (define ex1 (do_annotation_scm 
  (list 
  ;; (gene_go_annotation "biological_process cellular_component" 1) 
-  (gene_pathway_annotation "smpdb reactome" "True" "True")
- ;; (biogrid_interaction_annotation)
+;  (gene_pathway_annotation "smpdb reactome" "True" "True")
+  (biogrid_interaction_annotation)
  )
 ))
 

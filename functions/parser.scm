@@ -5,6 +5,7 @@
 (define atoms '())
 (define graph '())
 (define json '())
+(define output '())
 
 (define-public (parse result)
    (let*
@@ -13,7 +14,8 @@
 			 [pathway-annotations (get-annotations "gene_pathway_annotation" result)]
 			 [biogrid-annotations (get-annotations "biogrid_interaction_annotation" result)]
       )
-		 (reset)
+	 (reset)
+	 (set! output result)
      (parse-go-annotations go-annotations)
      (parse-pathway-annotations pathway-annotations)
   	 (parse-biogrid-annotations biogrid-annotations)
@@ -23,11 +25,104 @@
    )
 )
 
+(define* (create-gene-nodes annotation-list)
+ (let*
+  (
+	  [gene-list (list-ref annotation-list 0)]
+	  [gene ""]
+	  [gene-name ""]
+	  [gene-definition ""]
+  )
+  (for-each
+    (lambda(annotations)
+;	 TODO: Better checking for genes.
+     (if (equal? 2 (length  annotations))
+	  (for-each
+	   (lambda(gene-defns)
+		(begin
+		  (if (equal? (cog-name (cog-outgoing-atom gene-defns 0)) "has_name")
+		   (begin
+			   (set! gene (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 0))
+			   (set! gene-name (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 1))
+		   )
+		  )
+		  (if (equal? (cog-name (cog-outgoing-atom gene-defns 0)) "has_definition")
+		       (set! gene-definition (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 1))
+		  )
+		  (if (not (node-exists? (cog-name gene) atoms))
+			 (begin
+				(set! nodes (append (list (create-node-2 (cog-name gene) gene-name gene-definition "")) nodes))
+				(set! atoms (cons (cog-name gene) atoms))
+			 )
+		  )
+	  	)
+	  )
+	 annotations)
+	)
+   )
+   annotation-list)
+  )
+)
+
+(define* (get-node-info node-info ref)
+ (let*
+  (
+	  [response ""]
+  )
+  (for-each
+  (lambda(info)
+   (if (equal? ref "name")
+	(begin
+		(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
+		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+		)
+	)
+   )
+   (if (equal? ref "defn")
+	(begin
+	 	(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
+		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+		)
+	)
+   )
+  )
+  node-info)
+  response
+ )
+)
+
+(define* (get-node-info-from-biogrid node-info ref id)
+ (let*
+  (
+	  [response ""]
+  )
+  (if (equal? ref "name")
+   (begin
+	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 0)) id)
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 1)))
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 3) 1) 1)))
+	)
+   )
+  )
+  (if (equal? ref "defn")
+   (begin
+	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 0)) id)
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 1)))
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 4) 1) 1)))
+	)
+   )
+  )
+  response
+ )
+)
+
 (define* (parse-go-annotations go-annotations)
 
-  (map (lambda(annot)
+  (map (lambda(main-annotation)
 		(let*
 		   (
+			   [annot (list-ref main-annotation 0)]
+			   [node-info (list-ref main-annotation 1)]
 			   [annotation "gene_go_annotation"]
 			   [main-atom-type (cog-type annot)]
 			   [inner-atom (cog-outgoing-atom annot 0)]
@@ -36,24 +131,19 @@
 			(begin
 			   (let*
 				(
-					[node1-name (cog-name (cog-outgoing-atom annot 0))]
-					[node2-name (cog-name (cog-outgoing-atom annot 1))]
-					[node1 (create-node (cog-outgoing-atom annot 0) annotation)]
-					[node2 (create-node (cog-outgoing-atom annot 1) annotation)]
+					[node-id (cog-name (cog-outgoing-atom annot 1))]
+					[node-name (get-node-info node-info "name")]
+					[node-definition (get-node-info node-info "defn")]
+					[node (create-node-2 node-id node-name node-definition annotation)]
+					[gene-node (cog-name (cog-outgoing-atom annot 0))]
 				)
-				(if (not (node-exists? node1-name atoms))
-					 (begin
-						(set! nodes (append (list node1) nodes))
-						(set! atoms (cons node1-name atoms))
-					 )
-		 		)
-				(if (not (node-exists? node2-name atoms))
+				(if (not (node-exists? node-id atoms))
 					(begin
-						(set! nodes (append (list node2) nodes))
-						(set! atoms (cons node2-name atoms))
+						(set! nodes (append (list node) nodes))
+						(set! atoms (cons node-id atoms))
 					)
 				)
-				(set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
+				(set! edges (append (list (create-edge-2 gene-node node-id  "annotates" annotation)) edges))
 			   )
 			)
 		   )
@@ -63,9 +153,11 @@
 )
 
 (define* (parse-pathway-annotations pathway-annotations)
-	(map (lambda(annot)
+	(map (lambda(main-annotation)
 		  (let*
 		   (
+			   [annot (list-ref main-annotation 0)]
+			   [node-info (list-ref main-annotation 1)]
 			   [annotation "gene_pathway_annotation"]
 			   [main-atom-type (cog-type annot)]
 			   [inner-atom (cog-outgoing-atom annot 0)]
@@ -73,71 +165,98 @@
 		   (if (equal? main-atom-type 'MemberLink)
 				(begin
 					 (let*
-					(
-						[node1-name (cog-name (cog-outgoing-atom annot 0))]
-						[node2-name (cog-name (cog-outgoing-atom annot 1))]
-						[node1 (create-node (cog-outgoing-atom annot 0) annotation)]
-						[node2 (create-node (cog-outgoing-atom annot 1) annotation)]
-					)
-					(if (not (node-exists? node1-name atoms))
-						 (begin
-							(set! nodes (append (list node1) nodes))
-							(set! atoms (cons node1-name atoms))
-						 )
-					)
-					(if (not (node-exists? node2-name atoms))
-						(begin
-							(set! nodes (append (list node2) nodes))
-							(set! atoms (cons node2-name atoms))
+						(
+							[node1-id (cog-name (cog-outgoing-atom annot 0))]
+							[node2-id (cog-name (cog-outgoing-atom annot 1))]
+;							TODO: Hedra should make sure either one of the atoms is not duplicate.
+							[node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
+							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
+							[node-name ""]
+							[node-definition (get-node-info node-info "defn")]
+							[node (create-node-2 node-id node-name node-definition annotation)]
+							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
-					)
-					(set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
+						(if (not (node-exists? node-id atoms))
+							 (begin
+;							  	(display (if (unspecified? node-id) "-------> " node-id))
+							  (display node-id)
+							  (display " ")
+							  	(display node1-id)
+							  (display " ")
+							  	(display node2-id)
+							  	(display "\n")
+								(set! nodes (append (list node) nodes))
+								(set! atoms (cons node-id atoms))
+							 )
+						)
+;						(if (check-nodes node1 node2 node1-type node2-type)
+						 (set! edges (append (list (create-edge-2 other-node-id node-id "annotates" annotation)) edges))
+;						)
 					 )
 				)
 		   )
-		   (if (equal? main-atom-type 'EvaluationLink)
-				(let*
-				 (
-					 [predicate (cog-outgoing-atom annot 0)]
-					 [listlink (cog-outgoing-atom annot 1)]
-				 )
-				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
-				)
-		   )
+;		   (if (equal? main-atom-type 'EvaluationLink)
+;				(let*
+;				 (
+;					 [predicate (cog-outgoing-atom annot 0)]
+;					 [listlink (cog-outgoing-atom annot 1)]
+;					 [node1-name (cog-name (cog-outgoing-atom listlink 0))]
+;					 [node2-name (cog-name (cog-outgoing-atom listlink 1))]
+;					 [node1-type (cog-type (cog-outgoing-atom listlink 0))]
+;					 [node2-type (cog-type (cog-outgoing-atom listlink 1))]
+;					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
+;					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
+;				 )
+;				 (if (not (node-exists? node1-name atoms))
+;					 (begin
+;						(set! nodes (append (list node1) nodes))
+;						(set! atoms (cons node1-name atoms))
+;					 )
+;				 )
+;				 (if (not (node-exists? node2-name atoms))
+;					(begin
+;						(set! nodes (append (list node2) nodes))
+;						(set! atoms (cons node2-name atoms))
+;					)
+;				 )
+;				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
+;				)
+;		   )
 		  )
 	)
 	pathway-annotations)
 )
 
 (define* (parse-biogrid-annotations biogrid-annotations)
-	 (map (lambda(annot)
+	 (map (lambda(main-annotation)
 		(let*
 		   (
 			   [annotation "biogrid_interaction_annotation"]
+			   [annot (cog-outgoing-atom main-annotation 0)]
 			   [main-atom-type (cog-type annot)]
-			   [inner-atom (cog-outgoing-atom annot 0)]
 		   )
 		   (if (equal? main-atom-type 'EvaluationLink)
 			(let*
 			 (
-				 [predicate (cog-outgoing-atom annot 0)]
+				 [predicate (cog-name (cog-outgoing-atom annot 0))]
 				 [listlink (cog-outgoing-atom annot 1)]
-				 [node (cog-outgoing-atom listlink 0)]
+				 [node1-id (cog-name (cog-outgoing-atom listlink 0))]
+				 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
+				 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
+				 [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
+;				 [node-name (get-node-info-from-biogrid main-annotation "name" node-id)]
+				 [node-name ""]
+				 [node-defn (get-node-info-from-biogrid main-annotation "defn" node-id)]
+				 [node (create-node-2 node-id node-name node-defn annotation)]
+				 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 			 )
-			 (if (not (node-exists? (cog-name node) atoms))
+			 (if (not (node-exists? node-id atoms))
 					 (begin
-						(set! nodes (append (list (create-node node annotation)) nodes))
-						(set! atoms (cons (cog-name node) atoms))
+						(set! nodes (append (list node) nodes))
+						(set! atoms (append (list node-id) atoms))
 					 )
 			 )
-			 (set! node (cog-outgoing-atom listlink 1))
-			 (if (not (node-exists? node atoms))
-					 (begin
-						(set! nodes (append (list (create-node node annotation)) nodes))
-						(set! atoms (cons (cog-name node) atoms))
-					 )
-			 )
-			 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
+			 (set! edges (append (list (create-edge-2 other-node-id node-id predicate  annotation)) edges))
 			)
 		   )
 		  )
@@ -151,7 +270,7 @@
             [id (cog-name term)]
             [name ""]
             [defn ""]
-						[is-go (regexp-match? (string-match "GO:[0-9]+" id))]
+			[is-go (regexp-match? (string-match "GO:[0-9]+" id))]
         )
 
 			 (set! name (find-name term))
@@ -165,6 +284,13 @@
 					(make-node (make-node-data id name defn annotation) "nodes")
 			)
     )
+)
+
+(define* (create-node-2 id name defn annotation)
+ (if (is-gene-main? id gene_nodes)
+ 	(make-node (make-node-data id name defn "main") "nodes")
+    (make-node (make-node-data id name defn annotation) "nodes")
+ )
 )
 
 (define (create-edge node1 node2 name annotation)
@@ -215,6 +341,20 @@
  )
 )
 
+(define* (check-nodes node1 node2 n1type n2type)
+ (if (or
+	  (equal? (node-data-id (node-data node1)) (node-data-id (node-data node2)))
+	  (or (equal? n1type 'VariableNode) (equal? n2type 'VariableNode))
+	  (or
+	   (string= "" (node-data-id (node-data node1)))
+	   (string= "" (node-data-id (node-data node2)))
+	  )
+ 	)
+  #f
+  #t
+ )
+)
+
 
 (define* (build-desc-url node)
  (let*
@@ -245,5 +385,27 @@
 	)
 	description
  )
-
 )
+
+(define* (write-to-file)
+ (let*
+	(
+		[file-name (generate-filename)]
+	)
+	(call-with-output-file file-name
+  	(lambda (p)
+			(if (not (null? output))
+					(begin
+						(write result p)
+					)
+			)
+		)
+	)
+	file-name
+ )
+)
+
+(define* (generate-filename)
+ (string-append "scheme/result/"(number->string (current-time)) ".scm")
+)
+

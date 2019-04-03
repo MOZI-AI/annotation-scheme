@@ -1,6 +1,7 @@
 import sys
 import re
 import pandas as pd
+import uuid
 
 def find_name(str):
 	name = re.findall('"([^"]*)"', str)
@@ -15,6 +16,8 @@ def to_csv(file):
 	go_annotation = 0
 	gene_pathway = 0
 	biogrid = 0
+	userid = str(uuid.uuid4())
+	result = []
 
 	f = open(file, "r")
 	lines=open(file, "r").readlines()
@@ -74,7 +77,8 @@ def to_csv(file):
 		go_df = pd.concat([pd.DataFrame([[g, node_name[g], node_defn[g], "\n".join(filter(None, gene_go[gene_go['Gene_ID'] == g]['GO_cellular_componenet'].get_values())), 
 		"\n".join(filter(None, gene_go[gene_go['Gene_ID'] == g]['GO_Molecular_function'].get_values())),
 		"\n".join(filter(None, gene_go[gene_go['Gene_ID'] == g]['GO_Biological_process'].get_values()))]], columns= col_go) for g in set(gene_go['Gene_ID'])], ignore_index=True)
-		go_df.to_csv("Gene_GO_annotation.csv")
+		go_df.to_csv(userid+"-Gene_GO_annotation.csv")
+		result.append(userid+"-Gene_GO_annotation.csv")
 
 	# Gene Pathway annotation
 	if gene_pathway != 0:
@@ -82,14 +86,18 @@ def to_csv(file):
 		pw_df = pd.concat([pd.DataFrame([[p, node_name[p], node_defn[p], '\n'.join(filter(None, gene_go[gene_go['pathway'] == p]['proteins'].get_values())), 
 		"\n".join(filter(None, gene_go[gene_go['pathway'] == p]['small_mol'].get_values())), "\n".join(filter(None, gene_go[gene_go['pathway'] == p]['Gene_ID'].get_values()))]], 
 		columns= col_pw) for p in set(filter(None, gene_go['pathway']))], ignore_index=True)
-		pw_df.to_csv("Gene_pathway_annotations.csv")
+		pw_df.to_csv(userid+"-Gene_pathway_annotations.csv")
+		result.append(userid+"-Gene_pathway_annotations.csv")
 
 	# Biogrid annotation
 	if biogrid != 0:
 		col_int = ["Interactor-1", "Interactor-1_Name", "Interactor-1_definition", "Interaction", "Interactor-2", "Interactor-2_Name", "Interactor-2_definition"]
 		bg_df = pd.concat([pd.DataFrame([[find_name(lines[i+2]), node_name[find_name(lines[i+2])], node_defn[find_name(lines[i+2])], "Interacts_with", 
 		find_name(lines[i+3]), node_name[find_name(lines[i+3])], node_defn[find_name(lines[i+3])]]], columns= col_int) for i in interaction], ignore_index=True)
-		bg_df.to_csv("biogrid_annotation.csv")
+		bg_df.to_csv(userid+"-biogrid_annotation.csv")
+		result.append(userid+"-biogrid_annotation.csv")
+
+	return result
 
 if __name__ == "__main__":
 	to_csv(sys.argv[1])

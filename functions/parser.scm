@@ -1,5 +1,3 @@
-(primitive-load "pm_functions.scm")
-
 (define nodes '())
 (define edges '())
 (define atoms '())
@@ -178,13 +176,6 @@
 						)
 						(if (not (node-exists? node-id atoms))
 							 (begin
-;							  	(display (if (unspecified? node-id) "-------> " node-id))
-							  (display node-id)
-							  (display " ")
-							  	(display node1-id)
-							  (display " ")
-							  	(display node2-id)
-							  	(display "\n")
 								(set! nodes (append (list node) nodes))
 								(set! atoms (cons node-id atoms))
 							 )

@@ -27,7 +27,7 @@
 
 ;; Load request handler
  
-(primitive-load "annotation_request_handler.scm")
+(primitive-load "functions/annotation_request_handler.scm")
 
 ;; Do some examples
 
@@ -40,8 +40,8 @@
 
 (define ex1 (do_annotation_scm 
  (list 
- ;; (gene_go_annotation "biological_process cellular_component" 1) 
-;  (gene_pathway_annotation "smpdb reactome" "True" "True")
+  (gene_go_annotation "biological_process cellular_component" 1)
+  (gene_pathway_annotation "smpdb reactome" "True" "True")
   (biogrid_interaction_annotation)
  )
 ))

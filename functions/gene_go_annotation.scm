@@ -63,9 +63,9 @@ trav_result
 ;; Add namespace of the GO term
 (define (go_info go)
 (list
-(EvaluationLink (PredicateNode "GO_namespace") (ListLink go (find-GO-ns go)))
-(EvaluationLink (PredicateNode "has_name") (ListLink go (cog-outgoing-set (findGoname go))))
-(EvaluationLink (PredicateNode "has_definition") (ListLink go (find-godef go)))
+(EvaluationLink (PredicateNode "GO_namespace") (ListLink go (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
+(EvaluationLink (PredicateNode "has_name") (ListLink go (if (equal? (cog-outgoing-set (findGoname go)) '() ) (ConceptNode "") (cog-outgoing-set (findGoname go)))))
+(EvaluationLink (PredicateNode "has_definition") (ListLink go (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go)))) 
 ))
 
 

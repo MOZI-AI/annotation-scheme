@@ -198,6 +198,7 @@
 ;					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
 ;					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
 ;				 )
+
 ;				 (if (not (node-exists? node1-name atoms))
 ;					 (begin
 ;						(set! nodes (append (list node1) nodes))

@@ -14,6 +14,7 @@
       )
 	 (reset)
 	 (set! output result)
+	 (create-gene-nodes result)
      (parse-go-annotations go-annotations)
      (parse-pathway-annotations pathway-annotations)
   	 (parse-biogrid-annotations biogrid-annotations)
@@ -26,37 +27,38 @@
 (define* (create-gene-nodes annotation-list)
  (let*
   (
-	  [gene-list (list-ref annotation-list 0)]
 	  [gene ""]
 	  [gene-name ""]
 	  [gene-definition ""]
   )
   (for-each
     (lambda(annotations)
-;	 TODO: Better checking for genes.
-     (if (equal? 2 (length  annotations))
-	  (for-each
-	   (lambda(gene-defns)
-		(begin
-		  (if (equal? (cog-name (cog-outgoing-atom gene-defns 0)) "has_name")
-		   (begin
-			   (set! gene (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 0))
-			   (set! gene-name (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 1))
-		   )
+	 (if (equal? 2 (length annotations))
+	  (begin
+	   (for-each
+		(lambda (gene-info)
+		 (begin
+		  (if (equal? (cog-name (cog-outgoing-atom gene-info 0)) "has_name")
+			   (begin
+				   (set! gene (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 0)))
+				   (set! gene-name (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 1)))
+			   )
 		  )
-		  (if (equal? (cog-name (cog-outgoing-atom gene-defns 0)) "has_definition")
-		       (set! gene-definition (cog-outgoing-atom (cog-outgoing-atom gene-defns 1) 1))
+		  (if (equal? (cog-name (cog-outgoing-atom gene-info 0)) "has_definition")
+		      (set! gene-definition (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 1)))
 		  )
-		  (if (not (node-exists? (cog-name gene) atoms))
-			 (begin
-				(set! nodes (append (list (create-node-2 (cog-name gene) gene-name gene-definition "")) nodes))
-				(set! atoms (cons (cog-name gene) atoms))
-			 )
+
+		  (if (not (node-exists? gene atoms))
+			  (begin
+				(set! nodes (append (list (create-node-2 gene gene-name gene-definition "")) nodes))
+				(set! atoms (cons gene atoms))
+			  )
 		  )
-	  	)
+		 )
+		)
+	   annotations)
 	  )
-	 annotations)
-	)
+	 )
    )
    annotation-list)
   )

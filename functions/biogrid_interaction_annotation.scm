@@ -1,6 +1,6 @@
 
-(define (biogrid_interaction_annotation)
-  (set! result (list (ConceptNode "biogrid_interaction_annotation")))
+(define (biogrid_interaction_annotation interaction gene_nodes )
+  (let ([result (list (ConceptNode "biogrid_interaction_annotation"))])
     
 	(for-each (lambda (gene)
 		(set! pairs '())
@@ -17,4 +17,4 @@
     )gene_nodes)
 
   result
-)
+))

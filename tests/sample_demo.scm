@@ -22,6 +22,7 @@
 ;; Load the PM functions 
 
 (primitive-load "helpers/pm_functions.scm")
+(primitive-load "helpers/parser_utils.scm")
 (primitive-load "functions/parser.scm")
 
 

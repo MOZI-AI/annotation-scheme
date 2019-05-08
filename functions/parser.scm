@@ -1,9 +1,3 @@
-(define nodes '())
-(define edges '())
-(define atoms '())
-(define graph '())
-(define json '())
-(define output '())
 
 (define-public (parse result)
    (let*
@@ -11,25 +5,34 @@
 			 [go-annotations (get-annotations "gene_go_annotation" result)]
 			 [pathway-annotations (get-annotations "gene_pathway_annotation" result)]
 			 [biogrid-annotations (get-annotations "biogrid_interaction_annotation" result)]
+			 [nodes '()]
+			 [edges '()]
+			 [atoms '()]
+			 [graph '()]
+			 [data '()]
+			 [json '()]
       )
-	 (reset)
-	 (set! output result)
-	 (create-gene-nodes result)
-     (parse-go-annotations go-annotations)
-     (parse-pathway-annotations pathway-annotations)
-  	 (parse-biogrid-annotations biogrid-annotations)
-     (set! graph (make-graph nodes edges))
-     (set! json (scm->json-string graph))
-     json
+	 (set! data (create-gene-nodes result data))
+	 (set! data (parse-go-annotations go-annotations data))
+	 (set! data (parse-pathway-annotations pathway-annotations data))
+	 (set! data (parse-biogrid-annotations biogrid-annotations data))
+	 (set! nodes (list-ref data 0))
+	 (set! atoms (list-ref data 1))
+	 (set! edges (list-ref data 2))
+	 (set! graph (make-graph nodes edges))
+	 (set! json (scm->json-string graph))
+	 json
    )
 )
 
-(define* (create-gene-nodes annotation-list)
+(define* (create-gene-nodes annotation-list data)
  (let*
   (
 	  [gene ""]
 	  [gene-name ""]
 	  [gene-definition ""]
+	  [nodes '()]
+	  [atoms '()]
   )
   (for-each
     (lambda(annotations)
@@ -61,63 +64,18 @@
 	 )
    )
    annotation-list)
+  (set! data (list nodes atoms))
+  data
   )
 )
 
-(define* (get-node-info node-info ref)
+(define* (parse-go-annotations go-annotations data)
  (let*
   (
-	  [response ""]
+	   [nodes (list-ref data 0)]
+	   [atoms (list-ref data 1)]
+	   [edges '()]
   )
-  (for-each
-  (lambda(info)
-   (if (equal? ref "name")
-	(begin
-		(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
-		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
-		)
-	)
-   )
-   (if (equal? ref "defn")
-	(begin
-	 	(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
-		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
-		)
-	)
-   )
-  )
-  node-info)
-  response
- )
-)
-
-(define* (get-node-info-from-biogrid node-info ref id)
- (let*
-  (
-	  [response ""]
-  )
-  (if (equal? ref "name")
-   (begin
-	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 0)) id)
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 1)))
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 3) 1) 1)))
-	)
-   )
-  )
-  (if (equal? ref "defn")
-   (begin
-	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 0)) id)
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 1)))
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 4) 1) 1)))
-	)
-   )
-  )
-  response
- )
-)
-
-(define* (parse-go-annotations go-annotations)
-
   (map (lambda(main-annotation)
 		(let*
 		   (
@@ -134,7 +92,7 @@
 					[node-id (cog-name (cog-outgoing-atom annot 1))]
 					[node-name (get-node-info node-info "name")]
 					[node-definition (get-node-info node-info "defn")]
-					[node (create-node-2 node-id node-name node-definition annotation)]
+					[node (create-node node-id node-name node-definition annotation)]
 					[gene-node (cog-name (cog-outgoing-atom annot 0))]
 				)
 				(if (not (node-exists? node-id atoms))
@@ -143,19 +101,29 @@
 						(set! atoms (cons node-id atoms))
 					)
 				)
-				(set! edges (append (list (create-edge-2 gene-node node-id  "annotates" annotation)) edges))
+				(set! edges (append (list (create-edge gene-node node-id  "annotates" annotation)) edges))
 			   )
 			)
 		   )
 		  )
 	  )
    go-annotations)
+  (set! data (list nodes atoms edges))
+  data
+ )
 )
 
-(define* (parse-pathway-annotations pathway-annotations)
-	(map (lambda(main-annotation)
+(define* (parse-pathway-annotations pathway-annotations data)
+ (let*
+  (
+	  [nodes (list-ref data 0)]
+	  [atoms (list-ref data 1)]
+	  [edges (list-ref data 2)]
+  )
+  (map (lambda(main-annotation)
 		  (let*
 		   (
+
 			   [annot (list-ref main-annotation 0)]
 			   [node-info (list-ref main-annotation 1)]
 			   [annotation "gene_pathway_annotation"]
@@ -173,7 +141,7 @@
 							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
 							[node-name ""]
 							[node-definition (get-node-info node-info "defn")]
-							[node (create-node-2 node-id node-name node-definition annotation)]
+							[node (create-node node-id node-name node-definition annotation)]
 							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
 						(if (not (node-exists? node-id atoms))
@@ -183,7 +151,7 @@
 							 )
 						)
 ;						(if (check-nodes node1 node2 node1-type node2-type)
-						 (set! edges (append (list (create-edge-2 other-node-id node-id "annotates" annotation)) edges))
+						 (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))
 ;						)
 					 )
 				)
@@ -219,10 +187,19 @@
 		  )
 	)
 	pathway-annotations)
+   (set! data (list nodes atoms edges))
+    data
+ )
 )
 
-(define* (parse-biogrid-annotations biogrid-annotations)
-	 (map (lambda(main-annotation)
+(define* (parse-biogrid-annotations biogrid-annotations data)
+ (let*
+  (
+	  [nodes (list-ref data 0)]
+	  [atoms (list-ref data 1)]
+	  [edges (list-ref data 2)]
+  )
+  (map (lambda(main-annotation)
 		(let*
 		   (
 			   [annotation "biogrid_interaction_annotation"]
@@ -241,7 +218,7 @@
 ;				 [node-name (get-node-info-from-biogrid main-annotation "name" node-id)]
 				 [node-name ""]
 				 [node-defn (get-node-info-from-biogrid main-annotation "defn" node-id)]
-				 [node (create-node-2 node-id node-name node-defn annotation)]
+				 [node (create-node node-id node-name node-defn annotation)]
 				 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 			 )
 			 (if (not (node-exists? node-id atoms))
@@ -250,156 +227,14 @@
 						(set! atoms (append (list node-id) atoms))
 					 )
 			 )
-			 (set! edges (append (list (create-edge-2 other-node-id node-id predicate  annotation)) edges))
+			 (set! edges (append (list (create-edge other-node-id node-id predicate  annotation)) edges))
 			)
 		   )
 		  )
 	 )
 	 biogrid-annotations)
-)
-
-(define* (create-node term annotation #:optional (main #f))
-    (let*
-        (
-            [id (cog-name term)]
-            [name ""]
-            [defn ""]
-			[is-go (regexp-match? (string-match "GO:[0-9]+" id))]
-        )
-
-			 (set! name (find-name term))
-			 (if is-go
-				(set! defn (find-GO-def term))
-				(set! defn (build-desc-url term))
-			 )
-
-			(if (is-gene-main? (cog-name term) gene_nodes)
-					(make-node (make-node-data id name defn "main") "nodes")
-					(make-node (make-node-data id name defn annotation) "nodes")
-			)
-    )
-)
-
-(define* (create-node-2 id name defn annotation)
- (if (is-gene-main? id gene_nodes)
- 	(make-node (make-node-data id name defn "main") "nodes")
-    (make-node (make-node-data id name defn annotation) "nodes")
+     (set! data (list nodes atoms edges))
+     data
  )
-)
-
-(define (create-edge node1 node2 name annotation)
-   (make-edge (make-edge-data (node-data-id (node-data node2)) (node-data-id (node-data node1)) name annotation) "edges")
-)
-
-(define (create-edge-2 node1 node2 name annotation)
-   (make-edge (make-edge-data node2 node1 name annotation) "edges")
-)
-
-(define* (node-exists? node node-list)
- (if (null? node-list) #f
-  (if (equal? node (car node-list) ) #t
-   (node-exists? node (cdr node-list))
-  )
- )
-)
-
-(define* (is-gene-main? gene gene_list)
- (if (null? gene_list) #f
-	(if (equal? gene (cog-name (car gene_list))) #t
-	    (is-gene-main? gene (cdr gene_list))
-	)
- )
-)
-
-(define* (reset)
- 	(set! nodes '())
-	(set! edges '())
-	(set! atoms '())
-	(set! graph '())
-	(set! json '())
-)
-
-(define* (get-annotations annotation annotation-list)
- (let*
-  (
-    [annotation_list '()]
-  )
-  (for-each
-    (lambda(annotations)
-     (if (equal? annotation (cog-name (car annotations)))
-      (set! annotation_list (cdr annotations))
-     )
-    )
-   annotation-list)
-   annotation_list
- )
-)
-
-(define* (check-nodes node1 node2 n1type n2type)
- (if (or
-	  (equal? (node-data-id (node-data node1)) (node-data-id (node-data node2)))
-	  (or (equal? n1type 'VariableNode) (equal? n2type 'VariableNode))
-	  (or
-	   (string= "" (node-data-id (node-data node1)))
-	   (string= "" (node-data-id (node-data node2)))
-	  )
- 	)
-  #f
-  #t
- )
-)
-
-
-(define* (build-desc-url node)
- (let*
-	(
-		[atom-type (cog-type node)]
-		[description ""]
-	)
- 	(case atom-type
-	 ('MoleculeNode
-		(begin
-		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "CHEBI")
-			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
-	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
-		 )
-		)
-	 )
-	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (find_entrez node))))
-	 ('ConceptNode
-		(begin
-		 (if (string-contains (cog-name node) "SMP")
-		 	(set! description (string-append "http://smpdb.ca/view/" (cog-name node)))
-		 )
-		 (if (string-contains (cog-name node) "R-HSA")
-		 	(set! description (string-append "http://www.reactome.org/content/detail/" (cog-name node)))
-		 )
-		)
-	 )
-	)
-	description
- )
-)
-
-(define* (write-to-file)
- (let*
-	(
-		[file-name (generate-filename)]
-	)
-	(call-with-output-file file-name
-  	(lambda (p)
-			(if (not (null? output))
-					(begin
-						(write result p)
-					)
-			)
-		)
-	)
-	file-name
- )
-)
-
-(define* (generate-filename)
- (string-append "scheme/result/"(number->string (current-time)) ".scm")
 )
 

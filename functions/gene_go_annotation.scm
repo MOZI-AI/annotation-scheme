@@ -1,3 +1,4 @@
+(use-modules (srfi srfi-1))
 
 (define (gene_go_annotation namespace P gene_nodes)
   (let ([Goterms '()]      
@@ -6,54 +7,133 @@
         [trav_result '()])
 
   (for-each (lambda (gene)
-    (set! Goterms '())
-              
-        (for-each (lambda (n)
-        (set! Goterms (append  Goterms (cog-outgoing-set (findGoterm gene n))))
-        )(string-split ns #\ ))
-
-        (for-each (lambda (go)
-           (set! result (append result (list (list (MemberLink gene go) (go_info go))))) ;; find go-terms of selected namespace for a given gene
-           (set! trav_result '())
-           (if (> P 0) (set! result (append result (traverse_parent go P ns trav_result)))) ;; traverse for parents of the Go P times, of selected namespace
-              
-        )Goterms)
-
+  (set! result (append result (find-go-term (cog-name gene) namespace P)))
   )gene_nodes)
 
  result
 ))
 
-;; traverse for parents of Go term g for p times
+;;Returns a namespace EvaluationLink of namespaces
+(define namespace-eval (lambda (nsp)
+    (map (lambda (n)
+          (EvaluationLink
+               (PredicateNode "GO_namespace")
+                 (ListLink
+                   (VariableNode "$a")
+                  (ConceptNode n)
+                  )
+                )
+    )
+        
+    (string-split nsp #\ )
+    )
+))
 
-(define (traverse_parent go p ns trav_result) 
-  (define parents '())
-  (let ([loop 0])
-  (for-each (lambda (g)
-    (for-each (lambda(n)
-      (relationship g (cog-outgoing-set (parent_finder g n)) trav_result)
-      (set! parents (append parents (cog-outgoing-set (parent_finder g n))))
-    )(string-split ns #\ ))
-  (set! loop (+ loop 1))
-  (if (> p loop) 
-  (traverse_parent parents (- p loop)))
-  ) (list go) ))
-    
-  trav_result
+;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
+(define find-parent
+  (lambda (node namespaces)
+        (let ([atom (cog-outgoing-atom node 1)])
+          (cog-outgoing-set (cog-execute! (BindLink
+            (VariableNode "$a")
+            (AndLink
+              (InheritanceLink
+                atom
+                (VariableNode "$a"))
+              (OrLink (namespace-eval namespaces))
+            )
+          (ExecutionOutputLink
+              (GroundedSchemaNode "scm: add-go-info")
+                (ListLink
+                  atom
+                  (VariableNode "$a")
+                ))
+        )
+      )
+        
+    )    
   )
+      
+))
 
-;; links g and its parents with InheritanceLink
-
-(define (relationship g parents trav_result)
-  (for-each (lambda (l) 
-  (if (not (equal? (cog-name l) "GO_term"))
-  (set! trav_result (append trav_result (list (list (InheritanceLink g l) (go_info l) ))))
-  )) parents)
-trav_result
+;;Finds Go terms of a gene
+(define find-memberln 
+  (lambda (gene namespaces)
+     (cog-outgoing-set (cog-execute! (BindLink
+            (VariableNode "$a")
+            (AndLink
+              (MemberLink
+                gene
+                (VariableNode "$a"))
+                (OrLink (namespace-eval namespaces))
+            ) 
+           (ExecutionOutputLink
+              (GroundedSchemaNode "scm: add-go-info")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
+          )
+  )
+))
 )
 
+;;
+(define (add-go-info child-atom parent-atom)
+(if (and (equal? (cog-type child-atom) 'GeneNode)
+    (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO"))
+  (ListLink  
+    (MemberLink
+        child-atom
+        parent-atom
+    )
+    (go_info parent-atom)
+  )
+  (begin
+    (if (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO")
+      (ListLink 
+          (InheritanceLink
+       child-atom
+       parent-atom
+        )
+    (go_info parent-atom)
+    )
+  ))
+))
 
-;; Add namespace of the GO term
+;;a helper function to flatten a list, i.e convert a list of lists into a single list
+(define (flatten x)
+  (cond ((null? x) '())
+        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
+        (else (list x))))
+
+;;the main function to find the go terms for a gene with a specification of the parents
+(define find-go-term 
+  (lambda (g namespaces p)
+      (let (
+        [res  (find-memberln (GeneNode g) namespaces)]
+        
+      
+      )
+      (define parents (flatten (let loop (
+        [i p]
+        [ls res]
+        [acc '()]
+      )
+      (cond 
+        [(= i 0) (append ls acc)]
+        [(null? ls) acc]
+        [else (cons (loop (- i 1)  (find-parent (car ls) namespaces) (append ls acc)) (loop i (cdr ls) '()))
+          ]
+      )
+      )))
+      (if (= 1 p)
+        (delete-duplicates parents)
+        (parents)
+      )
+    )
+  ))
+
+;; Add details about the GO term
 (define (go_info go)
 (list
 (EvaluationLink (PredicateNode "GO_namespace") (ListLink go (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))

@@ -25,7 +25,7 @@
                 )
     )
         
-    (string-split nsp #\ )
+    nsp
     )
 ))
 
@@ -122,14 +122,12 @@
       (cond 
         [(= i 0) (append ls acc)]
         [(null? ls) acc]
-        [else (cons (loop (- i 1)  (find-parent (car ls) namespaces) (append ls acc)) (loop i (cdr ls) '()))
+        [else (cons (loop (- i 1)  (find-parent (car (cog-outgoing-set (car ls))) namespaces) (append ls acc)) (loop i (cdr ls) '()))
           ]
       )
       )))
-      (if (= 1 p)
-        (delete-duplicates parents)
-        (parents)
-      )
+       (delete-duplicates parents)
+
     )
   ))
 

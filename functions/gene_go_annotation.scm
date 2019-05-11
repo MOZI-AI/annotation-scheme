@@ -1,16 +1,13 @@
 (use-modules (srfi srfi-1))
 
 (define (gene_go_annotation namespace P gene_nodes)
-  (let ([Goterms '()]      
-        [result (list (ConceptNode "gene_go_annotation"))]
-        [ns namespace]
-        [trav_result '()])
+  (let ([result (list (ConceptNode "gene_go_annotation"))])
 
   (for-each (lambda (gene)
   (set! result (append result (find-go-term (cog-name gene) namespace P)))
   )gene_nodes)
 
- result
+ (ListLink result)
 ))
 
 ;;Returns a namespace EvaluationLink of namespaces

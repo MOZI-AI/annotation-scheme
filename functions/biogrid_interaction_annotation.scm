@@ -16,5 +16,5 @@
 
     )gene_nodes)
 
-  result
+  (ListLink result)
 ))

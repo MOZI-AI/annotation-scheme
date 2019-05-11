@@ -39,28 +39,28 @@
 (set! ex1 
  (append (gene_info (map_symbol "MAP2K4 SPAG9"))
  (list 
-  (gene_go_annotation "biological_process cellular_component" 1 (map_symbol "MAP2K4 SPAG9"))
+  (gene_go_annotation (list "biological_process" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9"))
   (gene_pathway_annotation "smpdb reactome" "True" "True" (map_symbol "MAP2K4 SPAG9"))
   (biogrid_interaction_annotation "proteins" (map_symbol "MAP2K4 SPAG9"))
  ))
 )
 
-(set! ex2  
- (append (gene_info (map_symbol "MAP2K4 SPAG9"))
- (list 
-  (gene_go_annotation "biological_process molecular_function cellular_component" 1 (map_symbol "MAP2K4 SPAG9")) 
-  (biogrid_interaction_annotation "genes" (map_symbol "MAP2K4 SPAG9"))
- ))
-)))
+; (set! ex2  
+;  (append (gene_info (map_symbol "MAP2K4 SPAG9"))
+;  (list 
+;   (gene_go_annotation (list "biological_process" "molecular_function" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9")) 
+;   (biogrid_interaction_annotation "genes" (map_symbol "MAP2K4 SPAG9"))
+;  )))
+))
 
 
 (call-with-output-file "example-1.scm"
 (lambda (output-port)
 (display ex1 output-port)))
 
-(call-with-output-file "example-2.scm"
-(lambda (output-port)
-(display ex2 output-port)))
+; (call-with-output-file "example-2.scm"
+; (lambda (output-port)
+; (display ex2 output-port)))
 
   
 

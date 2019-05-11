@@ -1,10 +1,3 @@
-(define ghost-result)
-
-(define-public (ghost-get-result)
-"Return the most recent result generated."
-ghost-result)
-
-
 (define (get-member-link g s)
 (map (lambda (t) (MemberLink g t)) (cog-outgoing-set s))
 )
@@ -136,3 +129,9 @@ ghost-result)
         (map (lambda (x) x) res)
     )
 )
+
+;;a helper function to flatten a list, i.e convert a list of lists into a single list
+(define (flatten x)
+  (cond ((null? x) '())
+        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
+        (else (list x))))

@@ -25,7 +25,7 @@
 
 (define* (parse-go-annotations go-annotations)
 
-  (map (lambda(annot)
+  (map (lambda (annot)
 		(let*
 		   (
 			   [annotation "gene_go_annotation"]

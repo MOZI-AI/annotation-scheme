@@ -168,6 +168,25 @@
       )
 )
 
+;; Finds the definition of a GO term
+(define (find-godef go)
+(remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$def")
+
+         (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )
+       )
+      )
+)
+
 ;; Finds a concept where a gene is a member of
 (define (findMember gene)
 (cog-execute! (GetLink
@@ -236,13 +255,13 @@
   )
 )
 
-
 ;; append a list into a list to collect the result in one List
 (define (append . lsts)
   (cond
     ((null? lsts) '())
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
+
 
 ;; Finds genes interacting with a given gene
 (define matchGeneInteractors
@@ -258,11 +277,12 @@
                (VariableNode "$a")
               )
             )
-	     (EvaluationLink
-	       (PredicateNode "interacts_with")
-		      (ListLink
-		        gene
-		        (VariableNode "$a")))
+            (ExecutionOutputLink
+              (GroundedSchemaNode "scm: generate_result")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
     ))	
 ))
 
@@ -296,11 +316,11 @@
                (VariableNode "$b")
               ))
           )
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               (VariableNode "$a")
-               (VariableNode "$b")
+          (ExecutionOutputLink
+            (GroundedSchemaNode "scm: generate_result")
+              (ListLink
+                (VariableNode "$a")
+                (VariableNode "$b")
               ))
     ))	
 ))
@@ -338,13 +358,116 @@
 		 ))
 	 )
 
-		(EvaluationLink
-		  (PredicateNode "interacts_with")
-		   (ListLink
-			   (VariableNode "$c")
-			   (VariableNode "$b")
-		))
+  ;; This will be executed if the above pattern is found.
+  (ExecutionOutputLink
+    (GroundedSchemaNode "scm: generate_result")
+		  (ListLink
+		    (VariableNode "$c")
+		    (VariableNode "$b")
+		  ))
 	
-	))
+))
 ))
 
+;; Grounded schema node to add info about matched variable nodes
+
+(define (generate_result var1 var2)
+  (if  
+    (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
+
+    (begin
+    (let ([output (ListLink
+          (EvaluationLink (PredicateNode "Interacts_with") (ListLink var1 var2))
+          (node-info var2)
+          (node-info var1)
+          )])
+    output
+    )
+    )
+))
+;; build description URL of a node
+
+(define (build-desc-url node)
+ (let
+	(
+		[atom-type (cog-type node)]
+		[description ""]
+	)
+ 	(case atom-type
+	 ('MoleculeNode
+		(begin
+		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "ChEBI")
+			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
+	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
+		 )
+		)
+	 )
+	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (find_entrez node))))
+	 ('ConceptNode
+		(begin
+		 (if (string-contains (cog-name node) "SMP")
+		 	(set! description (string-append "http://smpdb.ca/view/" (cog-name node)))
+		 )
+		 (if (string-contains (cog-name node) "R-HSA")
+		 	(set! description (string-append "http://www.reactome.org/content/detail/" (cog-name node)))
+		 )
+		)
+	 )
+	)
+	description
+ )
+
+)
+
+;; Find node name and description
+
+(define (node-info node)
+    (ListLink
+      (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+      (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
+    )
+)
+
+(define (node-name node)
+(let
+    ([lst (cog-outgoing-set (findpwname node))]
+    [name ""])
+    (if (>= (length lst) 1)
+	(set! name (list-ref lst 0))
+	(set! name (ConceptNode "")))
+name
+)
+
+)
+
+;; Add location of a gene/Molecule node in context of Reactome pathway
+
+(define (add-loc node)
+(let ([child (cog-outgoing-atom node 0)] 
+      [parent (cog-outgoing-atom node 1) ])
+(cog-outgoing-set (cog-execute!
+  (BindLink
+    (VariableNode "$loc")
+    (AndLink
+      (MemberLink (stv 1 1) 
+        child
+        parent)
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+
+    (AndLink
+      (MemberLink (stv 1 1) 
+        child
+        parent)
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+  )))
+))

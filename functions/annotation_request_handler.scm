@@ -1,45 +1,42 @@
-
-(define result '())  ;; result for each annotation
-
-(define gene_nodes '())
-
-(define interaction "genes")
-
-;; Accept a Gene list and map to geneNodes
+;; validates if given gene symbols exist in the atomspace
 
 (define (genes gene_list)
-(define val_msg "")
-(define unknown '())
-(set! gene_nodes '()) ;; to remove previously annotated gene lists
+(let ((val_msg "")
+     (unknown '()))
 
 (for-each (lambda(g)
-    (if (equal? (cog-node 'GeneNode g) '())  ;; validates if given gene symbols exist in the atomspace
+    (if (equal? (cog-node 'GeneNode g) '())  
       (set! unknown (append unknown (list g)) )
-      (set! gene_nodes (append gene_nodes (list (GeneNode g))))
     )
   ) (string-split gene_list #\ ))
 
 (if (equal? unknown '())
     (set! val_msg "0")
-    (begin (set! val_msg (string-append "1:" (string-join unknown ",")))
-	   (set! gene_nodes '()))
+    (set! val_msg (string-append "1:" (string-join unknown ",")))
 )
-val_msg
-)
+val_msg ))
 
-;; The main function
 
-(define (do_annotation annotation_list)
-(set! interaction "genes")
-(parse annotation_list) 
-)
+;; Adds the name and description of gene_nodes
 
-;; No need to parse the output to get the scm result
+(define (gene_info genes)
+    (let ([info '()])
+         (for-each (lambda (g)
+              (set! info (append info (list (node-info g))))
+         ) genes)
+info))
 
-(define (do_annotation_scm annotation_list)
-(set! interaction "genes")
-annotation_list
-) 
+;; Map gene symbols into GeneNodes
+
+(define (map_symbol gene_list)
+(let ([gene_nodes '()])
+(for-each (lambda (g)
+(set! gene_nodes (append gene_nodes (list (GeneNode g))))
+) (string-split gene_list #\ ))
+gene_nodes
+))
+
+
 
 
 

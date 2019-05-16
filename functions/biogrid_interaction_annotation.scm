@@ -3,15 +3,14 @@
   (let ([result (list (ConceptNode "biogrid_interaction_annotation"))])
     
 	(for-each (lambda (gene)
-		(set! pairs '())
 		(if (equal? interaction "proteins")
-		     (set! result (append result (cog-outgoing-set (findProtInteractor gene)))))
+		     (set! result (append result (delete-duplicates (cog-outgoing-set (findProtInteractor gene))))))
 
 		(if (equal? interaction "genes") 
 	      (begin
-				(set! result (append result (cog-outgoing-set (matchGeneInteractors gene))))
+				(set! result (append result (delete-duplicates (cog-outgoing-set (matchGeneInteractors gene)))))
 	        ;; Add output genes interacting to each other
-	        (set! result (append result (cog-outgoing-set (outputInteraction gene))))
+	        (set! result (append result (delete-duplicates (cog-outgoing-set (outputInteraction gene)))))
 	      ))
 
     )gene_nodes)

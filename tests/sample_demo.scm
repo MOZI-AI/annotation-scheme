@@ -32,55 +32,36 @@
 
 ;; Do some examples
 
-(genes "MAP2K4 SPAG9")
+(define ex1 '())
+(define ex2 '())
 
-;; 1
-;; - finds Go terms for a given genes (of type biological process and cellular component), will traverse 1st level of parents of GO
-;; - finds the pathways from SMPDB and reactome. The proteins and Small molecules of the pathways are included
-;; - finds the PPI (protein protein interaction) from the biogrid data. 
-
-(define ex1 (do_annotation_scm 
+(if (equal? (genes "MAP2K4 SPAG9") "0") 
+(begin
+(set! ex1 
+ (append (gene_info (map_symbol "MAP2K4 SPAG9"))
  (list 
-  (gene_go_annotation "biological_process cellular_component" 1)
-  (gene_pathway_annotation "smpdb reactome" "True" "True")
-  (biogrid_interaction_annotation)
- )
+  (gene_go_annotation (list "biological_process" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9"))
+  (gene_pathway_annotation "smpdb reactome" "True" "True" (map_symbol "MAP2K4 SPAG9"))
+  (biogrid_interaction_annotation "proteins" (map_symbol "MAP2K4 SPAG9"))
+ ))
+)
+
+; (set! ex2  
+;  (append (gene_info (map_symbol "MAP2K4 SPAG9"))
+;  (list 
+;   (gene_go_annotation (list "biological_process" "molecular_function" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9")) 
+;   (biogrid_interaction_annotation "genes" (map_symbol "MAP2K4 SPAG9"))
+;  )))
 ))
+
 
 (call-with-output-file "example-1.scm"
 (lambda (output-port)
 (display ex1 output-port)))
 
-
-;;; 2
-;; - finds Go terms for a given genes (of type biological process, molecular funcction and cellular component), will include the 1st level parents of the GO
-;; - finds the Gene-Gene interaction (As the gene pathways annotation is not selected) from the biogrid data
-(define ex2 (do_annotation_scm 
- (list 
-  (gene_go_annotation "biological_process molecular_function cellular_component" 1) 
-  ;;(biogrid_interaction_annotation)
- )
-))
-
-(call-with-output-file "example-2.scm"
-(lambda (output-port)
-(display ex2 output-port)))
-
-
-;; 3
-;; - finds the Gene-Gene interaction (As the gene pathways annotation is not selected) from the biogrid data
-(define ex3 (do_annotation_scm 
- (list 
-  (biogrid_interaction_annotation)
- )
-))
-
-
-(call-with-output-file "example-3.scm"
-(lambda (output-port)
-(display ex3 output-port)))
-
-
+; (call-with-output-file "example-2.scm"
+; (lambda (output-port)
+; (display ex2 output-port)))
 
   
 

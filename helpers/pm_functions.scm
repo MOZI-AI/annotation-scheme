@@ -262,8 +262,6 @@
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
 
-;; Collect Pair of nodes interacting eachother to avoid repeatation  
-(define pairs '())
 
 ;; Finds genes interacting with a given gene
 (define matchGeneInteractors
@@ -374,12 +372,10 @@
 ;; Grounded schema node to add info about matched variable nodes
 
 (define (generate_result var1 var2)
-  (if (and 
+  (if  
     (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
-    (and (not (member (list var1 var2) pairs)) (not (member (list var2 var1) pairs))))
 
     (begin
-    (set! pairs (append pairs (list (list var1 var2))))
     (let ([output (ListLink
           (EvaluationLink (PredicateNode "Interacts_with") (ListLink var1 var2))
           (node-info var2)
@@ -426,7 +422,7 @@
 ;; Find node name and description
 
 (define (node-info node)
-    (list
+    (ListLink
       (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
       (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
     )
@@ -443,3 +439,35 @@ name
 )
 
 )
+
+;; Add location of a gene/Molecule node in context of Reactome pathway
+
+(define (add-loc node)
+(let ([child (cog-outgoing-atom node 0)] 
+      [parent (cog-outgoing-atom node 1) ])
+(cog-outgoing-set (cog-execute!
+  (BindLink
+    (VariableNode "$loc")
+    (AndLink
+      (MemberLink (stv 1 1) 
+        child
+        parent)
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+
+    (AndLink
+      (MemberLink (stv 1 1) 
+        child
+        parent)
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+  )))
+))

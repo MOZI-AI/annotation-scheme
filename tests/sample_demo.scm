@@ -5,7 +5,8 @@
 (use-modules (opencog query))
 (use-modules (opencog exec))
 (use-modules (opencog bioscience))
-(use-modules (ice-9 textual-ports)) 
+(use-modules (ice-9 textual-ports))
+(use-modules (srfi srfi-1))
 
 ;; load sample dataset
 
@@ -21,8 +22,8 @@
 
 ;; Load the PM functions 
 
-(primitive-load "helpers/pm_functions.scm")
-(primitive-load "functions/parser.scm")
+(primitive-load "functions/pm_functions.scm")
+(primitive-load "helpers/utils.scm")
 
 
 ;; Load request handler
@@ -39,7 +40,7 @@
 (set! ex1 
  (append (gene_info (map_symbol "MAP2K4 SPAG9"))
  (list 
-  (gene_go_annotation (list "biological_process" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9"))
+  (gene-go-annotation (list "MAP2K4" "SPAG9") (list "biological_process" "cellular_component"))
   (gene_pathway_annotation "smpdb reactome" "True" "True" (map_symbol "MAP2K4 SPAG9"))
   (biogrid_interaction_annotation "proteins" (map_symbol "MAP2K4 SPAG9"))
  ))

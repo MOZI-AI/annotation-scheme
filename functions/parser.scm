@@ -14,7 +14,6 @@
       )
 	 (reset)
 	 (set! output result)
-	 (create-gene-nodes result)
      (parse-go-annotations go-annotations)
      (parse-pathway-annotations pathway-annotations)
   	 (parse-biogrid-annotations biogrid-annotations)
@@ -118,7 +117,7 @@
 
 (define* (parse-go-annotations go-annotations)
 
-  (map (lambda(main-annotation)
+  (map (lambda (annot)
 		(let*
 		   (
 			   [annot (list-ref main-annotation 0)]
@@ -166,56 +165,58 @@
 				(begin
 					 (let*
 						(
-							[node1-id (cog-name (cog-outgoing-atom annot 0))]
-							[node2-id (cog-name (cog-outgoing-atom annot 1))]
-;							TODO: Hedra should make sure either one of the atoms is not duplicate.
-							[node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
-							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-							[node-name ""]
-							[node-definition (get-node-info node-info "defn")]
-							[node (create-node-2 node-id node-name node-definition annotation)]
-							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
+							[node1-name (cog-name (cog-outgoing-atom annot 0))]
+							[node2-name (cog-name (cog-outgoing-atom annot 1))]
+							[node1-type (cog-type (cog-outgoing-atom annot 0))]
+							[node2-type (cog-type (cog-outgoing-atom annot 1))]
+							[node1 (create-node (cog-outgoing-atom annot 0) annotation)]
+							[node2 (create-node (cog-outgoing-atom annot 1) annotation)]
 						)
-						(if (not (node-exists? node-id atoms))
+						(if (not (node-exists? node1-name atoms))
 							 (begin
-								(set! nodes (append (list node) nodes))
-								(set! atoms (cons node-id atoms))
+								(set! nodes (append (list node1) nodes))
+								(set! atoms (cons node1-name atoms))
 							 )
 						)
-;						(if (check-nodes node1 node2 node1-type node2-type)
-						 (set! edges (append (list (create-edge-2 other-node-id node-id "annotates" annotation)) edges))
-;						)
+						(if (not (node-exists? node2-name atoms))
+							(begin
+								(set! nodes (append (list node2) nodes))
+								(set! atoms (cons node2-name atoms))
+							)
+						)
+						(if (check-nodes node1 node2 node1-type node2-type)
+						 (set! edges (append (list (create-edge node1 node2 "annotates" annotation)) edges))
+						)
 					 )
 				)
 		   )
-;		   (if (equal? main-atom-type 'EvaluationLink)
-;				(let*
-;				 (
-;					 [predicate (cog-outgoing-atom annot 0)]
-;					 [listlink (cog-outgoing-atom annot 1)]
-;					 [node1-name (cog-name (cog-outgoing-atom listlink 0))]
-;					 [node2-name (cog-name (cog-outgoing-atom listlink 1))]
-;					 [node1-type (cog-type (cog-outgoing-atom listlink 0))]
-;					 [node2-type (cog-type (cog-outgoing-atom listlink 1))]
-;					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
-;					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
-;				 )
-
-;				 (if (not (node-exists? node1-name atoms))
-;					 (begin
-;						(set! nodes (append (list node1) nodes))
-;						(set! atoms (cons node1-name atoms))
-;					 )
-;				 )
-;				 (if (not (node-exists? node2-name atoms))
-;					(begin
-;						(set! nodes (append (list node2) nodes))
-;						(set! atoms (cons node2-name atoms))
-;					)
-;				 )
-;				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
-;				)
-;		   )
+		   (if (equal? main-atom-type 'EvaluationLink)
+				(let*
+				 (
+					 [predicate (cog-outgoing-atom annot 0)]
+					 [listlink (cog-outgoing-atom annot 1)]
+					 [node1-name (cog-name (cog-outgoing-atom listlink 0))]
+					 [node2-name (cog-name (cog-outgoing-atom listlink 1))]
+					 [node1-type (cog-type (cog-outgoing-atom listlink 0))]
+					 [node2-type (cog-type (cog-outgoing-atom listlink 1))]
+					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
+					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
+				 )
+				 (if (not (node-exists? node1-name atoms))
+					 (begin
+						(set! nodes (append (list node1) nodes))
+						(set! atoms (cons node1-name atoms))
+					 )
+				 )
+				 (if (not (node-exists? node2-name atoms))
+					(begin
+						(set! nodes (append (list node2) nodes))
+						(set! atoms (cons node2-name atoms))
+					)
+				 )
+				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
+				)
+		   )
 		  )
 	)
 	pathway-annotations)

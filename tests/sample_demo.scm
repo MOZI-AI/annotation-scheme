@@ -23,6 +23,9 @@
 ;; Load the PM functions 
 
 (primitive-load "functions/pm_functions.scm")
+
+
+(primitive-load "functions/parser.scm")
 (primitive-load "helpers/utils.scm")
 
 
@@ -33,25 +36,17 @@
 ;; Do some examples
 
 (define ex1 '())
-(define ex2 '())
 
-(if (equal? (genes "MAP2K4 SPAG9") "0") 
+(if (equal? (genes (list "MAP2K4" "SPAG9")) "0") 
 (begin
 (set! ex1 
- (append (gene_info (map_symbol "MAP2K4 SPAG9"))
+ (append (gene-info (mapSymbol (list "MAP2K4" "SPAG9")))
  (list 
   (gene-go-annotation (list "MAP2K4" "SPAG9") (list "biological_process" "cellular_component"))
-  (gene_pathway_annotation "smpdb reactome" "True" "True" (map_symbol "MAP2K4 SPAG9"))
-  (biogrid_interaction_annotation "proteins" (map_symbol "MAP2K4 SPAG9"))
+  (gene-pathway-annotation (list "MAP2K4" "SPAG9") "smpdb reactome" "True" "True")
+  (biogrid-interaction-annotation (list "MAP2K4" "SPAG9") "proteins" )
  ))
 )
-
-; (set! ex2  
-;  (append (gene_info (map_symbol "MAP2K4 SPAG9"))
-;  (list 
-;   (gene_go_annotation (list "biological_process" "molecular_function" "cellular_component") 1 (map_symbol "MAP2K4 SPAG9")) 
-;   (biogrid_interaction_annotation "genes" (map_symbol "MAP2K4 SPAG9"))
-;  )))
 ))
 
 
@@ -59,9 +54,6 @@
 (lambda (output-port)
 (display ex1 output-port)))
 
-; (call-with-output-file "example-2.scm"
-; (lambda (output-port)
-; (display ex2 output-port)))
 
   
 

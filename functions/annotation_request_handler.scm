@@ -1,25 +1,25 @@
 ;; validates if given gene symbols exist in the atomspace
 
-(define (genes gene_list)
-(let ((val_msg "")
+(define (genes gene-list)
+(let ((val-msg "")
      (unknown '()))
 
 (for-each (lambda(g)
     (if (equal? (cog-node 'GeneNode g) '())  
       (set! unknown (append unknown (list g)) )
     )
-  ) (string-split gene_list #\ ))
+  ) gene-list)
 
 (if (equal? unknown '())
-    (set! val_msg "0")
-    (set! val_msg (string-append "1:" (string-join unknown ",")))
+    (set! val-msg "0")
+    (set! val-msg (string-append "1:" (string-join unknown ",")))
 )
-val_msg ))
+val-msg ))
 
 
 ;; Adds the name and description of gene_nodes
 
-(define (gene_info genes)
+(define (gene-info genes)
     (let ([info '()])
          (for-each (lambda (g)
               (set! info (append info (list (node-info g))))
@@ -28,12 +28,12 @@ info))
 
 ;; Map gene symbols into GeneNodes
 
-(define (map_symbol gene_list)
-(let ([gene_nodes '()])
+(define (mapSymbol gene-list)
+(let ([gene-nodes '()])
 (for-each (lambda (g)
-(set! gene_nodes (append gene_nodes (list (GeneNode g))))
-) (string-split gene_list #\ ))
-gene_nodes
+(set! gene-nodes (append gene-nodes (list (GeneNode g))))
+) gene-list )
+gene-nodes
 ))
 
 

@@ -231,25 +231,6 @@
   )
 )
 
-(define (parent_finder go namespace)
-   (cog-execute! (GetLink
-            (VariableNode "$a")
-            (AndLink
-              (InheritanceLink
-                go
-                (VariableNode "$a"))
-              (EvaluationLink
-               (PredicateNode "GO_namespace")
-                 (ListLink
-                   (VariableNode "$a")
-                  (ConceptNode namespace)
-                  )
-                )
-            )
-
-            )
-))
-
 ;; Finds the name of a GO term
 (define findGoname
     (lambda(go)
@@ -396,7 +377,7 @@
               )
             )
             (ExecutionOutputLink
-              (GroundedSchemaNode "scm: generate_result")
+              (GroundedSchemaNode "scm: generate-result")
                 (ListLink
                   gene
                   (VariableNode "$a")
@@ -435,7 +416,7 @@
               ))
           )
           (ExecutionOutputLink
-            (GroundedSchemaNode "scm: generate_result")
+            (GroundedSchemaNode "scm: generate-result")
               (ListLink
                 (VariableNode "$a")
                 (VariableNode "$b")
@@ -478,7 +459,7 @@
 
   ;; This will be executed if the above pattern is found.
   (ExecutionOutputLink
-    (GroundedSchemaNode "scm: generate_result")
+    (GroundedSchemaNode "scm: generate-result")
 		  (ListLink
 		    (VariableNode "$c")
 		    (VariableNode "$b")
@@ -489,7 +470,7 @@
 
 ;; Grounded schema node to add info about matched variable nodes
 
-(define (generate_result var1 var2)
+(define (generate-result var1 var2)
   (if  
     (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
 

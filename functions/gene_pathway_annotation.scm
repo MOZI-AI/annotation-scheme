@@ -1,4 +1,4 @@
-(define (gene_pathway_annotation pathway prot small_mol gene_nodes)
+(define (gene-pathway-annotation gene_nodes pathway prot small_mol)
     (let ([result (list (ConceptNode "gene_pathway_annotation"))])
 
     (for-each (lambda (gene)
@@ -10,7 +10,7 @@
             (set! result (reactome gene prot small_mol result))
             )
                 )(string-split pathway #\ ))
-    )gene_nodes)
+    )(mapSymbol gene_nodes))
  
   (ListLink result)
 ))  
@@ -19,11 +19,11 @@
 ;; From SMPDB 
 
 (define (smpdb gene prot sm result)
-  (let ([pw (identify_pw gene "SMP")])
+  (let ([pw (identify-pw gene "SMP")])
   (for-each (lambda(path)
         (set! result (append result (list (ListLink (MemberLink gene path) (node-info path)))))
         (if (equal? sm "True")
-            (filter_by (cog-outgoing-set (findmol path)) "ChEBI:" path result))
+            (filter-by (cog-outgoing-set (findmol path)) "ChEBI:" path result))
       )pw)
   (if (equal? prot "True")
       (for-each (lambda(pro)
@@ -35,7 +35,7 @@ result
 
 ;;
 
-(define (filter_by res str path result)
+(define (filter-by res str path result)
 (for-each (lambda (m)
   (if (string-contains (cog-name m) str)
       (set! result (append result (list (ListLink (MemberLink m path) (node-info m))))
@@ -45,7 +45,7 @@ result
 ;; From reactome
 
 (define (reactome gene prot small_mol result)
-    (let ([pw (identify_pw gene "R-HSA")])
+    (let ([pw (identify-pw gene "R-HSA")])
   
       (for-each (lambda(path)
         (set! result (append result (list (ListLink (add-loc (MemberLink gene path)) (node-info path)))))
@@ -66,7 +66,7 @@ result
 
 ;; Identify Pathway based on given str (SMPDB or Reactome)
 
-(define (identify_pw gene str)
+(define (identify-pw gene str)
   (let ([pw '()] 
        [mem (cog-outgoing-set (findMember gene))])
   (for-each (lambda (m)

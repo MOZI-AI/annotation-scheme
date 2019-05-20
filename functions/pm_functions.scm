@@ -75,33 +75,28 @@
     )
 )
 
-;;Returns a namespace EvaluationLink of namespaces
-(define namespace-eval (lambda (nsp)
-    (map (lambda (n)
-          (EvaluationLink
-               (PredicateNode "GO_namespace")
-                 (ListLink
-                   (VariableNode "$a")
-                  (ConceptNode n)
-                  )
-                )
-    )
-        
-    nsp
-    )
-))
-
 ;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
 (define find-parent
+
   (lambda (node namespaces)
-        (let ([atom (cog-outgoing-atom node 1)])
-          (cog-outgoing-set (cog-execute! (BindLink
+        (let (
+          [atom (cog-outgoing-atom node 1)]
+          [parents '()]
+        )
+        (for-each (lambda (ns)
+          (set! parents (append parents (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")
             (AndLink
               (InheritanceLink
                 atom
                 (VariableNode "$a"))
-              (OrLink (namespace-eval namespaces))
+              (EvaluationLink
+                (PredicateNode "GO_namespace")
+                (ListLink
+                  (VariableNode "$a")
+                  (ConceptNode ns)
+                )
+              )
             )
           (ExecutionOutputLink
               (GroundedSchemaNode "scm: add-go-info")
@@ -109,24 +104,33 @@
                   atom
                   (VariableNode "$a")
                 ))
+        ))))) 
         )
       )
-        
-    )    
+    parents  
   )
-      
 ))
 
 ;;Finds Go terms of a gene
 (define find-memberln 
   (lambda (gene namespaces)
-     (cog-outgoing-set (cog-execute! (BindLink
+    (let ([go-atoms '()])
+
+      (for-each (lambda (ns)
+      
+        (set! go-atoms (append go-atoms (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")
             (AndLink
               (MemberLink
                 gene
                 (VariableNode "$a"))
-                (OrLink (namespace-eval namespaces))
+                (EvaluationLink
+                (PredicateNode "GO_namespace")
+                (ListLink
+                  (VariableNode "$a")
+                  (ConceptNode ns)
+                )
+              )
             ) 
            (ExecutionOutputLink
               (GroundedSchemaNode "scm: add-go-info")
@@ -134,9 +138,10 @@
                   gene
                   (VariableNode "$a")
                 ))
-          )
-  )
-))
+          )))))
+      ) namespaces)
+          go-atoms
+          ))
 )
 
 ;;

@@ -62,33 +62,6 @@
    (ListLink
       (MemberLink
          (GeneNode "MAP2K4")
-         (ConceptNode "GO:0030424")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0030424")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0030424")
-            (ConceptNode "axon")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0030424")
-            (ConceptNode "The long process of a neuron that conducts nerve impulses, usually away from the cell body to the terminals and varicosities, which are sites of storage and release of neurotransmitter.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
          (ConceptNode "GO:0006915")
       )
       (EvaluationLink
@@ -137,33 +110,6 @@
          (ListLink
             (ConceptNode "GO:0045740")
             (ConceptNode "Any process that activates or increases the frequency, rate or extent of DNA replication.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
-         (ConceptNode "GO:0032839")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0032839")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0032839")
-            (ConceptNode "dendrite cytoplasm")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0032839")
-            (ConceptNode "All of the contents of a dendrite, excluding the surrounding plasma membrane.")
          )
       )
    )
@@ -251,33 +197,6 @@
    (ListLink
       (MemberLink
          (GeneNode "MAP2K4")
-         (ConceptNode "GO:0004713")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0004713")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0004713")
-            (ConceptNode "protein tyrosine kinase activity")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0004713")
-            (ConceptNode "Catalysis of the reaction: ATP + a protein tyrosine = ADP + protein tyrosine phosphate.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
          (ConceptNode "GO:0034393")
       )
       (EvaluationLink
@@ -359,87 +278,6 @@
    (ListLink
       (MemberLink
          (GeneNode "MAP2K4")
-         (ConceptNode "GO:0043204")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0043204")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0043204")
-            (ConceptNode "perikaryon")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0043204")
-            (ConceptNode "The portion of the cell soma [neuronal cell body] that excludes the nucleus.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
-         (ConceptNode "GO:0005515")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "protein binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "Interacting selectively and non-covalently with any protein or protein complex [a complex of two or more proteins that may include other nonprotein molecules].")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
-         (ConceptNode "GO:0005829")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "cytosol")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "The part of the cytoplasm that does not contain organelles but which does contain other particulate matter, such as protein complexes.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
          (ConceptNode "GO:0072709")
       )
       (EvaluationLink
@@ -461,33 +299,6 @@
          (ListLink
             (ConceptNode "GO:0072709")
             (ConceptNode "Any process that results in a change in state or activity of a cell [in terms of movement, secretion, enzyme production, gene expression, etc.] as a result of a sorbitol stimulus.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "MAP2K4")
-         (ConceptNode "GO:0031435")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0031435")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0031435")
-            (ConceptNode "mitogen-activated protein kinase kinase kinase binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0031435")
-            (ConceptNode "Interacting selectively and non-covalently with a mitogen-activated protein kinase kinase kinase, any protein that can phosphorylate a MAP kinase kinase.")
          )
       )
    )
@@ -575,27 +386,108 @@
    (ListLink
       (MemberLink
          (GeneNode "MAP2K4")
-         (ConceptNode "GO:0004672")
+         (ConceptNode "GO:0030424")
       )
       (EvaluationLink
          (PredicateNode "GO_namespace")
          (ListLink
-            (ConceptNode "GO:0004672")
-            (ConceptNode "molecular_function")
+            (ConceptNode "GO:0030424")
+            (ConceptNode "cellular_component")
          )
       )
       (EvaluationLink
          (PredicateNode "has_name")
          (ListLink
-            (ConceptNode "GO:0004672")
-            (ConceptNode "protein kinase activity")
+            (ConceptNode "GO:0030424")
+            (ConceptNode "axon")
          )
       )
       (EvaluationLink
          (PredicateNode "has_definition")
          (ListLink
-            (ConceptNode "GO:0004672")
-            (ConceptNode "Catalysis of the phosphorylation of an amino acid residue in a protein, usually according to the reaction: a protein + ATP = a phosphoprotein + ADP.")
+            (ConceptNode "GO:0030424")
+            (ConceptNode "The long process of a neuron that conducts nerve impulses, usually away from the cell body to the terminals and varicosities, which are sites of storage and release of neurotransmitter.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "MAP2K4")
+         (ConceptNode "GO:0032839")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0032839")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0032839")
+            (ConceptNode "dendrite cytoplasm")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0032839")
+            (ConceptNode "All of the contents of a dendrite, excluding the surrounding plasma membrane.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "MAP2K4")
+         (ConceptNode "GO:0043204")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0043204")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0043204")
+            (ConceptNode "perikaryon")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0043204")
+            (ConceptNode "The portion of the cell soma [neuronal cell body] that excludes the nucleus.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "MAP2K4")
+         (ConceptNode "GO:0005829")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "cytosol")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "The part of the cytoplasm that does not contain organelles but which does contain other particulate matter, such as protein complexes.")
          )
       )
    )
@@ -628,60 +520,6 @@
    )
    (ListLink
       (MemberLink
-         (GeneNode "MAP2K4")
-         (ConceptNode "GO:0005524")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005524")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005524")
-            (ConceptNode "ATP binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005524")
-            (ConceptNode "")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0005515")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "protein binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005515")
-            (ConceptNode "Interacting selectively and non-covalently with any protein or protein complex [a complex of two or more proteins that may include other nonprotein molecules].")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
          (GeneNode "SPAG9")
          (ConceptNode "GO:0007257")
       )
@@ -704,60 +542,6 @@
          (ListLink
             (ConceptNode "GO:0007257")
             (ConceptNode "The initiation of the activity of the inactive enzyme JUN kinase [JNK].")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0005815")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005815")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005815")
-            (ConceptNode "microtubule organizing center")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005815")
-            (ConceptNode "An intracellular structure that can catalyze gamma-tubulin-dependent microtubule nucleation and that can anchor microtubules by interacting with their minus ends, plus ends or sides.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0048471")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0048471")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0048471")
-            (ConceptNode "perinuclear region of cytoplasm")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0048471")
-            (ConceptNode "Cytoplasm situated near, or occurring around, the nucleus.")
          )
       )
    )
@@ -818,60 +602,6 @@
    (ListLink
       (MemberLink
          (GeneNode "SPAG9")
-         (ConceptNode "GO:0005078")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005078")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005078")
-            (ConceptNode "MAP-kinase scaffold activity")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005078")
-            (ConceptNode "The binding activity of a molecule that functions as a physical support for the assembly of a multiprotein mitogen-activated protein kinase [MAPK] complex. Binds multiple kinases of the MAPKKK cascade, and also upstream signaling proteins, permitting those molecules to function in a coordinated way. Bringing together multiple enzymes and their substrates enables the signal to be transduced quickly and efficiently.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0030159")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0030159")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0030159")
-            (ConceptNode "receptor signaling complex scaffold activity")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0030159")
-            (ConceptNode "Functions to provide a physical support for the assembly of a multiprotein receptor signaling complex.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
          (ConceptNode "GO:0051146")
       )
       (EvaluationLink
@@ -920,60 +650,6 @@
          (ListLink
             (ConceptNode "GO:0045666")
             (ConceptNode "Any process that activates or increases the frequency, rate or extent of neuron differentiation.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0005737")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005737")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005737")
-            (ConceptNode "cytoplasm")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005737")
-            (ConceptNode "All of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0008432")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0008432")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0008432")
-            (ConceptNode "JUN kinase binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0008432")
-            (ConceptNode "Interacting selectively and non-covalently with JUN kinase, an enzyme that catalyzes the phosphorylation and activation of members of the JUN family.")
          )
       )
    )
@@ -1034,33 +710,6 @@
    (ListLink
       (MemberLink
          (GeneNode "SPAG9")
-         (ConceptNode "GO:0005829")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "cytosol")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0005829")
-            (ConceptNode "The part of the cytoplasm that does not contain organelles but which does contain other particulate matter, such as protein complexes.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
          (ConceptNode "GO:0051260")
       )
       (EvaluationLink
@@ -1082,6 +731,114 @@
          (ListLink
             (ConceptNode "GO:0051260")
             (ConceptNode "The process of creating protein oligomers, compounds composed of a small number, usually between three and ten, of identical component monomers. Oligomers may be formed by the polymerization of a number of monomers or the depolymerization of a large protein polymer.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "SPAG9")
+         (ConceptNode "GO:0005815")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0005815")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0005815")
+            (ConceptNode "microtubule organizing center")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0005815")
+            (ConceptNode "An intracellular structure that can catalyze gamma-tubulin-dependent microtubule nucleation and that can anchor microtubules by interacting with their minus ends, plus ends or sides.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "SPAG9")
+         (ConceptNode "GO:0048471")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0048471")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0048471")
+            (ConceptNode "perinuclear region of cytoplasm")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0048471")
+            (ConceptNode "Cytoplasm situated near, or occurring around, the nucleus.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "SPAG9")
+         (ConceptNode "GO:0005737")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0005737")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0005737")
+            (ConceptNode "cytoplasm")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0005737")
+            (ConceptNode "All of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.")
+         )
+      )
+   )
+   (ListLink
+      (MemberLink
+         (GeneNode "SPAG9")
+         (ConceptNode "GO:0005829")
+      )
+      (EvaluationLink
+         (PredicateNode "GO_namespace")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "cellular_component")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "cytosol")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_definition")
+         (ListLink
+            (ConceptNode "GO:0005829")
+            (ConceptNode "The part of the cytoplasm that does not contain organelles but which does contain other particulate matter, such as protein complexes.")
          )
       )
    )
@@ -1136,87 +893,6 @@
          (ListLink
             (ConceptNode "GO:0001669")
             (ConceptNode "A structure in the head of a spermatozoon that contains acid hydrolases, and is concerned with the breakdown of the outer membrane of the ovum during fertilization. It lies just beneath the plasma membrane and is derived from the lysosome.")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "SPAG9")
-         (ConceptNode "GO:0019894")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0019894")
-            (ConceptNode "molecular_function")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0019894")
-            (ConceptNode "kinesin binding")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0019894")
-            (ConceptNode "Interacting selectively and non-covalently and stoichiometrically with kinesin, a member of a superfamily of microtubule-based motor proteins that perform force-generating tasks such as organelle transport and chromosome segregation.")
-         )
-      )
-   )
-   (ListLink
-      (InheritanceLink
-         (ConceptNode "GO:0030335")
-         (ConceptNode "GO:0001666")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "")
-         )
-      )
-   )
-   (ListLink
-      (InheritanceLink
-         (ConceptNode "GO:0001669")
-         (ConceptNode "GO:0001666")
-      )
-      (EvaluationLink
-         (PredicateNode "GO_namespace")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "cellular_component")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (ConceptNode "GO:0001666")
-            (ConceptNode "")
          )
       )
    )
@@ -1382,31 +1058,6 @@
          (PredicateNode "expresses")
          (ListLink
             (GeneNode "MAP2K4")
-            (VariableNode "$c")
-         )
-      )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (VariableNode "$c")
-               (ConceptNode "")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (VariableNode "$c")
-               (ConceptNode "")
-            )
-         )
-      )
-   )
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "expresses")
-         (ListLink
-            (GeneNode "MAP2K4")
             (MoleculeNode "Uniprot:P45985")
          )
       )
@@ -1478,19 +1129,6 @@
       )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (GeneNode "MAP2K4")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (GeneNode "MAP2K4")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1507,21 +1145,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8NFZ5")
-            (ConceptNode "R-HSA-5684264")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8NFZ5")
+               (GeneNode "MAP2K4")
                (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (GeneNode "MAP2K4")
+            (ConceptNode "R-HSA-5684264")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1538,21 +1176,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45985")
+            (MoleculeNode "Uniprot:Q8NFZ5")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45985")
+               (MoleculeNode "Uniprot:Q8NFZ5")
                (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1569,99 +1207,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "nucleoplasm")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
+            (MoleculeNode "Uniprot:P45985")
             (ConceptNode "R-HSA-5684264")
          )
-      )
-      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62987")
+               (MoleculeNode "Uniprot:P45985")
                (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "mitochondrial outer membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endosome membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endoplasmic reticulum membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endocytic vesicle membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1678,21 +1238,99 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "mitochondrial outer membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q02750")
+            (MoleculeNode "Uniprot:P62987")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q02750")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endosome membrane")
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endoplasmic reticulum membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endocytic vesicle membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1709,99 +1347,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
+            (MoleculeNode "Uniprot:Q02750")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endocytic vesicle membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
+               (MoleculeNode "Uniprot:Q02750")
                (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endoplasmic reticulum membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "mitochondrial outer membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1818,43 +1378,15 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-5684264")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "endocytic vesicle membrane")
             )
          )
@@ -1863,54 +1395,82 @@
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "mitochondrial outer membrane")
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-5684264")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "nucleoplasm")
             )
          )
       )
       (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "endosome membrane")
+            )
+         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "endoplasmic reticulum membrane")
             )
          )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-5684264")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "mitochondrial outer membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-5684264")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -1927,8 +1487,115 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endocytic vesicle membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "mitochondrial outer membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endoplasmic reticulum membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P62979")
@@ -2020,50 +1687,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q13616")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q13616")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q13616")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q13616")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2080,34 +1705,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9Y297")
+            (MoleculeNode "Uniprot:Q13616")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y297")
+               (MoleculeNode "Uniprot:Q13616")
                (ConceptNode "cytosol")
             )
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9Y297")
+            (MoleculeNode "Uniprot:Q13616")
             (ConceptNode "R-HSA-5684264")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y297")
+               (MoleculeNode "Uniprot:Q13616")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2124,21 +1749,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9Y297")
+            (ConceptNode "R-HSA-5684264")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P41279")
+               (MoleculeNode "Uniprot:Q9Y297")
                (ConceptNode "cytosol")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P41279")
+            (MoleculeNode "Uniprot:Q9Y297")
             (ConceptNode "R-HSA-5684264")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9Y297")
+               (ConceptNode "nucleoplasm")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2155,8 +1793,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P41279")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P41279")
+            (ConceptNode "R-HSA-5684264")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9Y6K9")
+               (ConceptNode "Ub-285-IKBKG")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9Y6K9")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y6K9")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -2183,24 +1850,24 @@
             (ConceptNode "R-HSA-5684264")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y6K9")
-               (ConceptNode "Ub-285-IKBKG")
+               (MoleculeNode "Uniprot:P19838")
+               (ConceptNode "NFKB1(1-968)")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y6K9")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y6K9")
+               (MoleculeNode "Uniprot:P19838")
+               (ConceptNode "https://www.uniprot.org/uniprot/P19838")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P19838")
@@ -2266,24 +1933,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P19838")
-               (ConceptNode "NFKB1(1-968)")
+               (MoleculeNode "Uniprot:P63208")
+               (ConceptNode "SKP1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P19838")
-               (ConceptNode "https://www.uniprot.org/uniprot/P19838")
+               (MoleculeNode "Uniprot:P63208")
+               (ConceptNode "https://www.uniprot.org/uniprot/P63208")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -2310,37 +1977,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P63208")
-               (ConceptNode "SKP1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P63208")
-               (ConceptNode "https://www.uniprot.org/uniprot/P63208")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UKB1")
-            (ConceptNode "R-HSA-5684264")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9UKB1")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2357,8 +1995,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9UKB1")
+            (ConceptNode "R-HSA-5684264")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9UKB1")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:16761")
@@ -2489,24 +2156,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -2650,37 +2317,8 @@
             (ConceptNode "R-HSA-5684264")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (GeneNode "MAP2K4")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (GeneNode "MAP2K4")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2697,34 +2335,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (GeneNode "MAP2K4")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9H6X2-1")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9H6X2-1")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9H6X2-1")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9H6X2-1")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2741,21 +2366,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8WUM4")
-            (ConceptNode "R-HSA-5210891")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8WUM4")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q9H6X2-1")
+               (ConceptNode "endosome membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9H6X2-1")
+            (ConceptNode "R-HSA-5210891")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9H6X2-1")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9H6X2-1")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2772,60 +2410,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P40136")
+            (MoleculeNode "Uniprot:Q8WUM4")
             (ConceptNode "R-HSA-5210891")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P40136")
+               (MoleculeNode "Uniprot:Q8WUM4")
                (ConceptNode "cytosol")
             )
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P40136")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P40136")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P40136")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P40136")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P40136")
-            (ConceptNode "R-HSA-5210891")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P40136")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2842,8 +2441,76 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P40136")
+            (ConceptNode "R-HSA-5210891")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P40136")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P40136")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P40136")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P40136")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P40136")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P40136")
+            (ConceptNode "R-HSA-5210891")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P40136")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P58335-4")
+               (ConceptNode "ANTXR2-4")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P58335-4")
+               (ConceptNode "https://www.uniprot.org/uniprot/P58335-4")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -2870,37 +2537,8 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P58335-4")
-               (ConceptNode "ANTXR2-4")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P58335-4")
-               (ConceptNode "https://www.uniprot.org/uniprot/P58335-4")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P45985")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45985")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -2917,8 +2555,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P45985")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45985")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P13423")
+               (ConceptNode "PA83")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P13423")
+               (ConceptNode "https://www.uniprot.org/uniprot/P13423")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P13423")
@@ -2958,37 +2625,8 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P13423")
-               (ConceptNode "PA83")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P13423")
-               (ConceptNode "https://www.uniprot.org/uniprot/P13423")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q02750")
-            (ConceptNode "R-HSA-5210891")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q02750")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -3005,8 +2643,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q02750")
+            (ConceptNode "R-HSA-5210891")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q02750")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P09958")
+               (ConceptNode "FURIN")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P09958")
+               (ConceptNode "https://www.uniprot.org/uniprot/P09958")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -3059,24 +2726,24 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P09958")
-               (ConceptNode "FURIN")
+               (MoleculeNode "Uniprot:P58335-1")
+               (ConceptNode "ANTXR2-1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P09958")
-               (ConceptNode "https://www.uniprot.org/uniprot/P09958")
+               (MoleculeNode "Uniprot:P58335-1")
+               (ConceptNode "https://www.uniprot.org/uniprot/P58335-1")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -3103,37 +2770,8 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P58335-1")
-               (ConceptNode "ANTXR2-1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P58335-1")
-               (ConceptNode "https://www.uniprot.org/uniprot/P58335-1")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P52564-1")
-            (ConceptNode "R-HSA-5210891")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P52564-1")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -3150,21 +2788,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P36507")
+            (MoleculeNode "Uniprot:P52564-1")
             (ConceptNode "R-HSA-5210891")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P36507")
+               (MoleculeNode "Uniprot:P52564-1")
                (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -3181,21 +2819,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P46734-3")
+            (MoleculeNode "Uniprot:P36507")
             (ConceptNode "R-HSA-5210891")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P46734-3")
+               (MoleculeNode "Uniprot:P36507")
                (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -3212,8 +2850,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P46734-3")
+            (ConceptNode "R-HSA-5210891")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P46734-3")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P0DP23")
+               (ConceptNode "Me3K115-CALM1")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P0DP23")
+               (ConceptNode "https://www.uniprot.org/uniprot/P0DP23")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -3266,24 +2933,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P0DP23")
-               (ConceptNode "Me3K115-CALM1")
+               (MoleculeNode "Uniprot:P15917")
+               (ConceptNode "LF")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P0DP23")
-               (ConceptNode "https://www.uniprot.org/uniprot/P0DP23")
+               (MoleculeNode "Uniprot:P15917")
+               (ConceptNode "https://www.uniprot.org/uniprot/P15917")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -3336,24 +3003,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P15917")
-               (ConceptNode "LF")
+               (MoleculeNode "Uniprot:Q9H6X2-2")
+               (ConceptNode "ANTXR1-2")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P15917")
-               (ConceptNode "https://www.uniprot.org/uniprot/P15917")
+               (MoleculeNode "Uniprot:Q9H6X2-2")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q9H6X2-2")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -3380,37 +3047,8 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9H6X2-2")
-               (ConceptNode "ANTXR1-2")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9H6X2-2")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q9H6X2-2")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:O14733")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O14733")
-            (ConceptNode "R-HSA-5210891")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -3427,8 +3065,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:O14733")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O14733")
+            (ConceptNode "R-HSA-5210891")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:15378")
+               (ConceptNode "hydron")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:15378")
+               (ConceptNode "https://www.uniprot.org/uniprot/15378")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15378")
@@ -3767,24 +3434,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:15378")
-               (ConceptNode "hydron")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:15378")
-               (ConceptNode "https://www.uniprot.org/uniprot/15378")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15422")
@@ -3928,24 +3595,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
+               (MoleculeNode "ChEBI:29108")
+               (ConceptNode "Ca2+ ")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
+               (MoleculeNode "ChEBI:29108")
+               (ConceptNode "https://www.uniprot.org/uniprot/29108")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4193,37 +3860,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:29108")
-               (ConceptNode "Ca2+ ")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:29108")
-               (ConceptNode "https://www.uniprot.org/uniprot/29108")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17489")
-            (ConceptNode "R-HSA-5210891")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17489")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -4240,8 +3878,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17489")
+            (ConceptNode "R-HSA-5210891")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17489")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:29105")
+               (ConceptNode "zinc(2+) ion")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:29105")
+               (ConceptNode "https://www.uniprot.org/uniprot/29105")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4515,24 +4182,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:29105")
-               (ConceptNode "zinc(2+) ion")
+               (MoleculeNode "ChEBI:29888")
+               (ConceptNode "PPi ")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:29105")
-               (ConceptNode "https://www.uniprot.org/uniprot/29105")
+               (MoleculeNode "ChEBI:29888")
+               (ConceptNode "https://www.uniprot.org/uniprot/29888")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4637,37 +4304,8 @@
             (ConceptNode "R-HSA-5210891")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:29888")
-               (ConceptNode "PPi ")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:29888")
-               (ConceptNode "https://www.uniprot.org/uniprot/29888")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (GeneNode "MAP2K4")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (GeneNode "MAP2K4")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -4684,8 +4322,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (GeneNode "MAP2K4")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P19174")
+               (ConceptNode "1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-1")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P19174")
+               (ConceptNode "https://www.uniprot.org/uniprot/P19174")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4712,50 +4379,8 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P19174")
-               (ConceptNode "1-phosphatidylinositol 4,5-bisphosphate phosphodiesterase gamma-1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P19174")
-               (ConceptNode "https://www.uniprot.org/uniprot/P19174")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01614")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01614")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01614")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01614")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -4772,34 +4397,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01614")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06315")
+               (MoleculeNode "Uniprot:P01614")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06315")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01614")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06315")
+               (MoleculeNode "Uniprot:P01614")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06315")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -4816,8 +4441,50 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06315")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06315")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06315")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06315")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P01705")
+               (ConceptNode "Ig")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P01705")
+               (ConceptNode "https://www.uniprot.org/uniprot/P01705")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4844,24 +4511,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P01705")
-               (ConceptNode "Ig")
+               (MoleculeNode "Uniprot:Q13177")
+               (ConceptNode "PAK2")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P01705")
-               (ConceptNode "https://www.uniprot.org/uniprot/P01705")
+               (MoleculeNode "Uniprot:Q13177")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q13177")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -4901,24 +4568,24 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:Q13177")
-               (ConceptNode "PAK2")
+               (MoleculeNode "Uniprot:Q13153")
+               (ConceptNode "PAK1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:Q13177")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q13177")
+               (MoleculeNode "Uniprot:Q13153")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q13153")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:Q13153")
@@ -4945,50 +4612,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:Q13153")
-               (ConceptNode "PAK1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:Q13153")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q13153")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04211")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04211")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04211")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04211")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5005,34 +4630,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01762")
+            (MoleculeNode "Uniprot:P04211")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01762")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01762")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01762")
+               (MoleculeNode "Uniprot:P04211")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04211")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04211")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5049,34 +4674,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01594")
+            (MoleculeNode "Uniprot:P01762")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01594")
+               (MoleculeNode "Uniprot:P01762")
                (ConceptNode "plasma membrane")
             )
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01594")
+            (MoleculeNode "Uniprot:P01762")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01594")
+               (MoleculeNode "Uniprot:P01762")
                (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5093,8 +4718,50 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01594")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01594")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01594")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01594")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P01817")
+               (ConceptNode "Ig")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P01817")
+               (ConceptNode "https://www.uniprot.org/uniprot/P01817")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P01817")
@@ -5121,37 +4788,8 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P01817")
-               (ConceptNode "Ig")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P01817")
-               (ConceptNode "https://www.uniprot.org/uniprot/P01817")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV64")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q5NV64")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5168,8 +4806,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV64")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV64")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P01111")
+               (ConceptNode "G12S")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P01111")
+               (ConceptNode "https://www.uniprot.org/uniprot/P01111")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P01111")
@@ -5196,50 +4863,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P01111")
-               (ConceptNode "G12S")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P01111")
-               (ConceptNode "https://www.uniprot.org/uniprot/P01111")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01706")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01706")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01706")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01706")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5256,34 +4881,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01743")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01743")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01743")
+               (MoleculeNode "Uniprot:P01706")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01743")
+            (MoleculeNode "Uniprot:P01706")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01706")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01706")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5300,34 +4925,34 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01743")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01743")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01743")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01743")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53779")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P53779")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53779")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P53779")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5344,34 +4969,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P45984")
-               (ConceptNode "cytosol")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
+            (MoleculeNode "Uniprot:P53779")
             (ConceptNode "R-HSA-2871796")
          )
-      )
-      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45984")
+               (MoleculeNode "Uniprot:P53779")
                (ConceptNode "nucleoplasm")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
+            (MoleculeNode "Uniprot:P53779")
             (ConceptNode "R-HSA-2871796")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P53779")
+               (ConceptNode "cytosol")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5388,21 +5013,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01116")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01116")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:P45984")
+               (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45984")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P45984")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45984")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5419,34 +5057,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01116")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A0A0C4DH73")
+               (MoleculeNode "Uniprot:P01116")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A0C4DH73")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:A0A0C4DH73")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A0C4DH73")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5463,21 +5088,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV62")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV62")
+               (MoleculeNode "Uniprot:A0A0C4DH73")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0A0C4DH73")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:A0A0C4DH73")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0A0C4DH73")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5494,52 +5132,21 @@
             )
          )
       )
-   )
-   (ListLink
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG06")
-               (ConceptNode "IGLC3")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG06")
-               (ConceptNode "https://www.uniprot.org/uniprot/P0CG06")
-            )
-         )
-      )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01701")
+            (MoleculeNode "Uniprot:Q5NV62")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01701")
+               (MoleculeNode "Uniprot:Q5NV62")
                (ConceptNode "extracellular region")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01701")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01701")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5556,21 +5163,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV69")
+            (MoleculeNode "Uniprot:P01701")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV69")
+               (MoleculeNode "Uniprot:P01701")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01701")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01701")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5587,21 +5207,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV69")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P12319")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:Q5NV69")
+               (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P12319")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5618,34 +5238,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01721")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01721")
+               (MoleculeNode "Uniprot:P12319")
                (ConceptNode "plasma membrane")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01721")
+            (MoleculeNode "Uniprot:P12319")
             (ConceptNode "R-HSA-2871796")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01721")
-               (ConceptNode "extracellular region")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5662,21 +5269,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01721")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01112")
+               (MoleculeNode "Uniprot:P01721")
                (ConceptNode "plasma membrane")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01112")
+            (MoleculeNode "Uniprot:P01721")
             (ConceptNode "R-HSA-2871796")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01721")
+               (ConceptNode "extracellular region")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5693,34 +5313,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01700")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01700")
+               (MoleculeNode "Uniprot:P01112")
                (ConceptNode "plasma membrane")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01700")
+            (MoleculeNode "Uniprot:P01112")
             (ConceptNode "R-HSA-2871796")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01700")
-               (ConceptNode "extracellular region")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5737,21 +5344,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01700")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45985")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P01700")
+               (ConceptNode "plasma membrane")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45985")
+            (MoleculeNode "Uniprot:P01700")
             (ConceptNode "R-HSA-2871796")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01700")
+               (ConceptNode "extracellular region")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5768,34 +5388,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P15498")
+               (MoleculeNode "Uniprot:P45985")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15498")
+            (MoleculeNode "Uniprot:P45985")
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P15498")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15498")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5812,21 +5419,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV68")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:P15498")
+               (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV68")
+            (MoleculeNode "Uniprot:P15498")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P15498")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P15498")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5843,34 +5463,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06312")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06312")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P06312")
+               (MoleculeNode "Uniprot:Q5NV68")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06312")
+            (MoleculeNode "Uniprot:Q5NV68")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5887,34 +5494,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01764")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01764")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01764")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01764")
+               (MoleculeNode "Uniprot:P06312")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06312")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06312")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06312")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5931,34 +5538,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01825")
+            (MoleculeNode "Uniprot:P01764")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01825")
+               (MoleculeNode "Uniprot:P01764")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01764")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01764")
                (ConceptNode "plasma membrane")
             )
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01825")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01825")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -5975,21 +5582,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01825")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01825")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P52735")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P01825")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P52735")
+            (MoleculeNode "Uniprot:P01825")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6006,34 +5626,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P52735")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P52735")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01597")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01597")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01597")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01597")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6050,34 +5657,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q07889")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q07889")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q07889")
+               (MoleculeNode "Uniprot:P01597")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q07889")
+            (MoleculeNode "Uniprot:P01597")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01597")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01597")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6094,34 +5701,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q07889")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q07889")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CF74")
+               (MoleculeNode "Uniprot:Q07889")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CF74")
+            (MoleculeNode "Uniprot:Q07889")
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CF74")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CF74")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6138,34 +5745,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01601")
+               (MoleculeNode "Uniprot:P0CF74")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01601")
+            (MoleculeNode "Uniprot:P0CF74")
             (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01601")
+            (MoleculeNode "Uniprot:P0CF74")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01601")
+               (MoleculeNode "Uniprot:P0CF74")
                (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6182,34 +5789,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62993-1")
+               (MoleculeNode "Uniprot:P01601")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62993-1")
+            (MoleculeNode "Uniprot:P01601")
             (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62993-1")
+            (MoleculeNode "Uniprot:P01601")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62993-1")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P01601")
+               (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6226,34 +5833,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01715")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01715")
+               (MoleculeNode "Uniprot:P62993-1")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62993-1")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01715")
+            (MoleculeNode "Uniprot:P62993-1")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01715")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:P62993-1")
+               (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6270,21 +5877,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01715")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV80")
+               (MoleculeNode "Uniprot:P01715")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01715")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01715")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV80")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6301,21 +5921,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01100")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q5NV80")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01100")
+            (MoleculeNode "Uniprot:Q5NV80")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6332,21 +5952,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV87")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV87")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:P01100")
+               (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01100")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6363,34 +5983,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV87")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV87")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P43405")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P43405")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P43405")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P43405")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6407,34 +6014,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01766")
+            (MoleculeNode "Uniprot:P43405")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01766")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01766")
+               (MoleculeNode "Uniprot:P43405")
                (ConceptNode "plasma membrane")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01766")
+            (MoleculeNode "Uniprot:P43405")
             (ConceptNode "R-HSA-2871796")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P43405")
+               (ConceptNode "cytosol")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6451,34 +6058,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01780")
+            (MoleculeNode "Uniprot:P01766")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01780")
+               (MoleculeNode "Uniprot:P01766")
                (ConceptNode "extracellular region")
             )
          )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01780")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01780")
+               (MoleculeNode "Uniprot:P01766")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01766")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6495,34 +6102,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01780")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06310")
+               (MoleculeNode "Uniprot:P01780")
                (ConceptNode "extracellular region")
             )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06310")
-            (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06310")
+            (MoleculeNode "Uniprot:P01780")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06310")
+               (MoleculeNode "Uniprot:P01780")
                (ConceptNode "plasma membrane")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6539,34 +6146,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01717")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01717")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01717")
+               (MoleculeNode "Uniprot:P06310")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01717")
+            (MoleculeNode "Uniprot:P06310")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06310")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06310")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6583,8 +6190,50 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01717")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01717")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01717")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01717")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:A0A0C4DH25")
+               (ConceptNode "IGKV3D-20")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:A0A0C4DH25")
+               (ConceptNode "https://www.uniprot.org/uniprot/A0A0C4DH25")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:A0A0C4DH25")
@@ -6611,37 +6260,8 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:A0A0C4DH25")
-               (ConceptNode "IGKV3D-20")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:A0A0C4DH25")
-               (ConceptNode "https://www.uniprot.org/uniprot/A0A0C4DH25")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q5NV90")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV90")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6658,39 +6278,21 @@
             )
          )
       )
-   )
-   (ListLink
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG05")
-               (ConceptNode "IGLC2")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG05")
-               (ConceptNode "https://www.uniprot.org/uniprot/P0CG05")
-            )
-         )
-      )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV65")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV65")
+               (MoleculeNode "Uniprot:Q5NV90")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV90")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6707,21 +6309,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q13094")
+            (MoleculeNode "Uniprot:Q5NV65")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q13094")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q5NV65")
+               (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6738,21 +6340,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q13094")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV66")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:Q13094")
+               (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV66")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6769,8 +6371,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV66")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV66")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P45983")
+               (ConceptNode "Mitogen-activated protein kinase 8")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P45983")
+               (ConceptNode "https://www.uniprot.org/uniprot/P45983")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -6797,24 +6428,24 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P45983")
-               (ConceptNode "Mitogen-activated protein kinase 8")
+               (MoleculeNode "Uniprot:P63000")
+               (ConceptNode "GGC-PalmC-RAC1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P45983")
-               (ConceptNode "https://www.uniprot.org/uniprot/P45983")
+               (MoleculeNode "Uniprot:P63000")
+               (ConceptNode "https://www.uniprot.org/uniprot/P63000")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P63000")
@@ -6880,50 +6511,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P63000")
-               (ConceptNode "GGC-PalmC-RAC1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P63000")
-               (ConceptNode "https://www.uniprot.org/uniprot/P63000")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01742")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01742")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01742")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01742")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6940,34 +6529,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01703")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01703")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01703")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01703")
+               (MoleculeNode "Uniprot:P01742")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01742")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01742")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01742")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -6984,21 +6573,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01703")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV89")
+               (MoleculeNode "Uniprot:P01703")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01703")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01703")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV89")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7015,8 +6617,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV89")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV89")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:A2NXD2")
+               (ConceptNode "IGLV(23-?)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:A2NXD2")
+               (ConceptNode "https://www.uniprot.org/uniprot/A2NXD2")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:A2NXD2")
@@ -7043,24 +6674,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:A2NXD2")
-               (ConceptNode "IGLV(23-?)")
+               (MoleculeNode "Uniprot:P07948")
+               (ConceptNode "MyrG2-PalmC3-LYN")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:A2NXD2")
-               (ConceptNode "https://www.uniprot.org/uniprot/A2NXD2")
+               (MoleculeNode "Uniprot:P07948")
+               (ConceptNode "https://www.uniprot.org/uniprot/P07948")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P07948")
@@ -7087,37 +6718,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P07948")
-               (ConceptNode "MyrG2-PalmC3-LYN")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P07948")
-               (ConceptNode "https://www.uniprot.org/uniprot/P07948")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV79")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q5NV79")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7134,34 +6736,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01624")
+            (MoleculeNode "Uniprot:Q5NV79")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01624")
+               (MoleculeNode "Uniprot:Q5NV79")
                (ConceptNode "extracellular region")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01624")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01624")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7178,8 +6767,50 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01624")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01624")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01624")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01624")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P01763")
+               (ConceptNode "Ig")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P01763")
+               (ConceptNode "https://www.uniprot.org/uniprot/P01763")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P01763")
@@ -7206,24 +6837,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P01763")
-               (ConceptNode "Ig")
+               (MoleculeNode "Uniprot:P30273")
+               (ConceptNode "FCER1G")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P01763")
-               (ConceptNode "https://www.uniprot.org/uniprot/P01763")
+               (MoleculeNode "Uniprot:P30273")
+               (ConceptNode "https://www.uniprot.org/uniprot/P30273")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -7263,50 +6894,8 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P30273")
-               (ConceptNode "FCER1G")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P30273")
-               (ConceptNode "https://www.uniprot.org/uniprot/P30273")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01824")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01824")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01824")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01824")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7323,21 +6912,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV85")
+               (MoleculeNode "Uniprot:P01824")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV85")
+            (MoleculeNode "Uniprot:P01824")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01824")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01824")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7354,34 +6956,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG04")
+               (MoleculeNode "Uniprot:Q5NV85")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG04")
+            (MoleculeNode "Uniprot:Q5NV85")
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG04")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG04")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7398,34 +6987,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01767")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01767")
+               (MoleculeNode "Uniprot:P0CG04")
                (ConceptNode "extracellular region")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01767")
+            (MoleculeNode "Uniprot:P0CG04")
             (ConceptNode "R-HSA-2871796")
          )
+      )
+      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01767")
+               (MoleculeNode "Uniprot:P0CG04")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG04")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7442,34 +7031,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01699")
-               (ConceptNode "plasma membrane")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01699")
+            (MoleculeNode "Uniprot:P01767")
             (ConceptNode "R-HSA-2871796")
          )
-      )
-      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01699")
+               (MoleculeNode "Uniprot:P01767")
                (ConceptNode "extracellular region")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01699")
+            (MoleculeNode "Uniprot:P01767")
             (ConceptNode "R-HSA-2871796")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01767")
+               (ConceptNode "plasma membrane")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7486,34 +7075,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P23083")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P23083")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P23083")
+               (MoleculeNode "Uniprot:P01699")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P23083")
+            (MoleculeNode "Uniprot:P01699")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01699")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01699")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7530,21 +7119,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV92")
+            (MoleculeNode "Uniprot:P23083")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV92")
+               (MoleculeNode "Uniprot:P23083")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P23083")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P23083")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7561,21 +7163,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV92")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV67")
+               (MoleculeNode "Uniprot:Q5NV92")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV67")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7592,34 +7194,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04432")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04432")
+               (MoleculeNode "Uniprot:Q5NV67")
                (ConceptNode "extracellular region")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04432")
+            (MoleculeNode "Uniprot:Q5NV67")
             (ConceptNode "R-HSA-2871796")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04432")
-               (ConceptNode "plasma membrane")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7636,21 +7225,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O43561-2")
+            (MoleculeNode "Uniprot:P04432")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O43561-2")
+               (MoleculeNode "Uniprot:P04432")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04432")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04432")
                (ConceptNode "plasma membrane")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7667,34 +7269,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A2KUC3")
+            (MoleculeNode "Uniprot:O43561-2")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A2KUC3")
+               (MoleculeNode "Uniprot:O43561-2")
                (ConceptNode "plasma membrane")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A2KUC3")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:A2KUC3")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7711,21 +7300,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A2KUC3")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV75")
+               (MoleculeNode "Uniprot:A2KUC3")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A2KUC3")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:A2KUC3")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV75")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7742,21 +7344,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O75791")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q5NV75")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O75791")
+            (MoleculeNode "Uniprot:Q5NV75")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7773,21 +7375,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV82")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:O75791")
+               (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV82")
+            (MoleculeNode "Uniprot:O75791")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7804,34 +7406,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04433")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04433")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04433")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04433")
+               (MoleculeNode "Uniprot:Q5NV82")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV82")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7848,34 +7437,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01615")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01615")
+               (MoleculeNode "Uniprot:P04433")
                (ConceptNode "plasma membrane")
             )
          )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01615")
-               (ConceptNode "extracellular region")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01615")
+            (MoleculeNode "Uniprot:P04433")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04433")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04433")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7892,21 +7481,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01854")
+            (MoleculeNode "Uniprot:P01615")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01854")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:P01615")
+               (ConceptNode "plasma membrane")
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01615")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01615")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7923,34 +7525,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A075B6S6")
+            (MoleculeNode "Uniprot:P01854")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A0A075B6S6")
+               (MoleculeNode "Uniprot:P01854")
                (ConceptNode "extracellular region")
             )
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:A0A075B6S6")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A075B6S6")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -7967,34 +7556,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01593")
+            (MoleculeNode "Uniprot:A0A075B6S6")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01593")
+               (MoleculeNode "Uniprot:A0A075B6S6")
                (ConceptNode "extracellular region")
             )
          )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01593")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01593")
+               (MoleculeNode "Uniprot:A0A075B6S6")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0A075B6S6")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8011,21 +7600,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV86")
+            (MoleculeNode "Uniprot:P01593")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV86")
+               (MoleculeNode "Uniprot:P01593")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01593")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01593")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8042,34 +7644,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01768")
+            (MoleculeNode "Uniprot:Q5NV86")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01768")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01768")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01768")
+               (MoleculeNode "Uniprot:Q5NV86")
                (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8086,34 +7675,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01768")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01602")
+               (MoleculeNode "Uniprot:P01768")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01602")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01768")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01602")
+               (MoleculeNode "Uniprot:P01768")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01602")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8130,34 +7719,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01611")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01611")
+               (MoleculeNode "Uniprot:P01602")
                (ConceptNode "plasma membrane")
             )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01602")
+            (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01611")
+               (MoleculeNode "Uniprot:P01602")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01611")
+            (MoleculeNode "Uniprot:P01602")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8174,34 +7763,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01611")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01619")
+               (MoleculeNode "Uniprot:P01611")
                (ConceptNode "plasma membrane")
             )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01619")
-            (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01619")
+               (MoleculeNode "Uniprot:P01611")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01619")
+            (MoleculeNode "Uniprot:P01611")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8218,34 +7807,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01714")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01714")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01714")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01714")
+               (MoleculeNode "Uniprot:P01619")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01619")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01619")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01619")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8262,34 +7851,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01714")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A0A075B6P5")
+               (MoleculeNode "Uniprot:P01714")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A075B6P5")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01714")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A0A075B6P5")
+               (MoleculeNode "Uniprot:P01714")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0A075B6P5")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8306,21 +7895,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV61")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV61")
+               (MoleculeNode "Uniprot:A0A075B6P5")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0A075B6P5")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:A0A075B6P5")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0A075B6P5")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8337,34 +7939,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV61")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV61")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P16885")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P16885")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P16885")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P16885")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8381,34 +7970,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P16885")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P16885")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0M8Q6")
+            (MoleculeNode "Uniprot:P16885")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A0M8Q6")
+               (MoleculeNode "Uniprot:P16885")
                (ConceptNode "plasma membrane")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A0M8Q6")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:A0M8Q6")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8425,34 +8014,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04430")
+            (MoleculeNode "Uniprot:A0M8Q6")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04430")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04430")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04430")
+               (MoleculeNode "Uniprot:A0M8Q6")
                (ConceptNode "plasma membrane")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A0M8Q6")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:A0M8Q6")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8469,34 +8058,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01814")
+            (MoleculeNode "Uniprot:P04430")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01814")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01814")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01814")
+               (MoleculeNode "Uniprot:P04430")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04430")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04430")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8513,21 +8102,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01814")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV83")
+               (MoleculeNode "Uniprot:P01814")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01814")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01814")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV83")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8544,21 +8146,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV84")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV84")
+               (MoleculeNode "Uniprot:Q5NV83")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV83")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8575,8 +8177,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV84")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q5NV84")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P05412")
+               (ConceptNode "Transcription factor AP-1")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P05412")
+               (ConceptNode "https://www.uniprot.org/uniprot/P05412")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -8603,50 +8234,8 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P05412")
-               (ConceptNode "Transcription factor AP-1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P05412")
-               (ConceptNode "https://www.uniprot.org/uniprot/P05412")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01834")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01834")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01834")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01834")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8663,21 +8252,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV91")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV91")
+               (MoleculeNode "Uniprot:P01834")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01834")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01834")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01834")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8694,21 +8296,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q5NV91")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q5NV81")
+               (MoleculeNode "Uniprot:Q5NV91")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q5NV81")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8725,21 +8327,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q13233")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q5NV81")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q13233")
+            (MoleculeNode "Uniprot:Q5NV81")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8756,34 +8358,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q13233")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q13233")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P80748")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P80748")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P80748")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P80748")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8800,18 +8389,16 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01782")
+               (MoleculeNode "Uniprot:P80748")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01782")
+            (MoleculeNode "Uniprot:P80748")
             (ConceptNode "R-HSA-2871796")
          )
       )
@@ -8819,15 +8406,17 @@
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01782")
+               (MoleculeNode "Uniprot:P80748")
                (ConceptNode "plasma membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01782")
+            (MoleculeNode "Uniprot:P80748")
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8844,34 +8433,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q6PIL0")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q6PIL0")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q6PIL0")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q6PIL0")
+               (MoleculeNode "Uniprot:P01782")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01782")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01782")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01782")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8888,34 +8477,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P06331")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06331")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06331")
+            (MoleculeNode "Uniprot:Q6PIL0")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06331")
+               (MoleculeNode "Uniprot:Q6PIL0")
                (ConceptNode "plasma membrane")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q6PIL0")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q6PIL0")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8932,21 +8521,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06331")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06331")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UKW4")
+            (MoleculeNode "Uniprot:P06331")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9UKW4")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P06331")
+               (ConceptNode "plasma membrane")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -8963,34 +8565,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9UKW4")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9UKW4")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01709")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01709")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01709")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01709")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9007,34 +8596,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01709")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01718")
+               (MoleculeNode "Uniprot:P01709")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01718")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01709")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01718")
+               (MoleculeNode "Uniprot:P01709")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01718")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9051,34 +8640,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A2NJV5")
+               (MoleculeNode "Uniprot:P01718")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A2NJV5")
+            (MoleculeNode "Uniprot:P01718")
             (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:A2NJV5")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:A2NJV5")
+               (MoleculeNode "Uniprot:P01718")
                (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01718")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9095,34 +8684,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P29353-2")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:A2NJV5")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P29353-2")
+            (MoleculeNode "Uniprot:A2NJV5")
             (ConceptNode "R-HSA-2871796")
          )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:A2NJV5")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P29353-2")
+               (MoleculeNode "Uniprot:A2NJV5")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P29353-2")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9139,21 +8728,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O14733")
+               (MoleculeNode "Uniprot:P29353-2")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O14733")
+            (MoleculeNode "Uniprot:P29353-2")
             (ConceptNode "R-HSA-2871796")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P29353-2")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P29353-2")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9170,34 +8772,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:O14733")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O14733")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01704")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01704")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01704")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01704")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9214,34 +8803,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01704")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01599")
+               (MoleculeNode "Uniprot:P01704")
                (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01599")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01704")
+            (ConceptNode "R-HSA-2871796")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01599")
+               (MoleculeNode "Uniprot:P01704")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01599")
-            (ConceptNode "R-HSA-2871796")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9258,34 +8847,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01772")
-            (ConceptNode "R-HSA-2871796")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01772")
+               (MoleculeNode "Uniprot:P01599")
                (ConceptNode "plasma membrane")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01772")
+            (MoleculeNode "Uniprot:P01599")
             (ConceptNode "R-HSA-2871796")
          )
+      )
+      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01772")
+               (MoleculeNode "Uniprot:P01599")
                (ConceptNode "extracellular region")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01599")
+            (ConceptNode "R-HSA-2871796")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9302,164 +8891,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
+            (MoleculeNode "Uniprot:P01772")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "lysosomal membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "Golgi lumen")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "mitochondrial matrix")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "cytoplasmic vesicle membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "platelet dense granule lumen")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "endoplasmic reticulum lumen")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
+               (MoleculeNode "Uniprot:P01772")
                (ConceptNode "plasma membrane")
             )
          )
       )
       (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "cilium")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
+            (MoleculeNode "Uniprot:P01772")
             (ConceptNode "R-HSA-2871796")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P01772")
+               (ConceptNode "extracellular region")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:17552")
-            (ConceptNode "R-HSA-2871796")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:17552")
-               (ConceptNode "endocytic vesicle lumen")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -9476,8 +8935,180 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "lysosomal membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "Golgi lumen")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "mitochondrial matrix")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "cytoplasmic vesicle membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "platelet dense granule lumen")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "endoplasmic reticulum lumen")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "cilium")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:17552")
+            (ConceptNode "R-HSA-2871796")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:17552")
+               (ConceptNode "endocytic vesicle lumen")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -9608,24 +9239,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15422")
@@ -9769,24 +9400,24 @@
             (ConceptNode "R-HSA-2871796")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
+               (MoleculeNode "ChEBI:15996")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(2-amino-6-oxo-6,9-dihydro-1H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
+               (MoleculeNode "ChEBI:15996")
+               (ConceptNode "https://www.uniprot.org/uniprot/15996")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15996")
@@ -9956,37 +9587,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:15996")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(2-amino-6-oxo-6,9-dihydro-1H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:15996")
-               (ConceptNode "https://www.uniprot.org/uniprot/15996")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (GeneNode "MAP2K4")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (GeneNode "MAP2K4")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10003,34 +9605,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (GeneNode "MAP2K4")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62805")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62805")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62805")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62805")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10047,34 +9636,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62805")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99878")
+               (MoleculeNode "Uniprot:P62805")
                (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99878")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99878")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99878")
+               (MoleculeNode "Uniprot:P62805")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62805")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10091,21 +9680,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q99878")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q99878")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q71UI9")
+            (MoleculeNode "Uniprot:Q99878")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q71UI9")
+               (MoleculeNode "Uniprot:Q99878")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10122,21 +9724,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q06587")
+            (MoleculeNode "Uniprot:Q71UI9")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q06587")
+               (MoleculeNode "Uniprot:Q71UI9")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10153,34 +9755,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P52564")
+            (MoleculeNode "Uniprot:Q06587")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P52564")
+               (MoleculeNode "Uniprot:Q06587")
                (ConceptNode "nucleoplasm")
             )
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P52564")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P52564")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10197,8 +9786,50 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P52564")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P52564")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P52564")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P52564")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P53779")
+               (ConceptNode "MAPK10")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P53779")
+               (ConceptNode "https://www.uniprot.org/uniprot/P53779")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P53779")
@@ -10225,50 +9856,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P53779")
-               (ConceptNode "MAPK10")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P53779")
-               (ConceptNode "https://www.uniprot.org/uniprot/P53779")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O60814")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:O60814")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O60814")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:O60814")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10285,34 +9874,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O60814")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45984")
+               (MoleculeNode "Uniprot:O60814")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O60814")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:O60814")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P45984")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10329,34 +9918,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04637")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04637")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04637")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P04637")
+               (MoleculeNode "Uniprot:P45984")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45984")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P45984")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45984")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10373,21 +9962,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P55273")
+            (MoleculeNode "Uniprot:P04637")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P55273")
+               (MoleculeNode "Uniprot:P04637")
                (ConceptNode "cytosol")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04637")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04637")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10404,21 +10006,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UKE5")
+            (MoleculeNode "Uniprot:P55273")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9UKE5")
+               (MoleculeNode "Uniprot:P55273")
                (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10435,21 +10037,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O15054")
+            (MoleculeNode "Uniprot:Q9UKE5")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O15054")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q9UKE5")
+               (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10466,21 +10068,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O15054")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O00257")
+               (MoleculeNode "Uniprot:O15054")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O00257")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10497,21 +10099,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O15151")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O15151")
+               (MoleculeNode "Uniprot:O00257")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O00257")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10528,21 +10130,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O15151")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q09028")
+               (MoleculeNode "Uniprot:O15151")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q09028")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10559,34 +10161,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q96A08")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q96A08")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q96A08")
+               (MoleculeNode "Uniprot:Q09028")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q96A08")
+            (MoleculeNode "Uniprot:Q09028")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10603,21 +10192,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q14781")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q14781")
+               (MoleculeNode "Uniprot:Q96A08")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q96A08")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q96A08")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q96A08")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10634,34 +10236,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q93079")
+            (MoleculeNode "Uniprot:Q14781")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q93079")
+               (MoleculeNode "Uniprot:Q14781")
                (ConceptNode "nucleoplasm")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q93079")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q93079")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10678,21 +10267,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O95819")
+            (MoleculeNode "Uniprot:Q93079")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O95819")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q93079")
+               (ConceptNode "nucleoplasm")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q93079")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q93079")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10709,47 +10311,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P68431")
+            (MoleculeNode "Uniprot:O95819")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P68431")
+               (MoleculeNode "Uniprot:O95819")
                (ConceptNode "cytosol")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P68431")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P68431")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P68431")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P68431")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10766,21 +10342,47 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45985")
+            (MoleculeNode "Uniprot:P68431")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45985")
+               (MoleculeNode "Uniprot:P68431")
                (ConceptNode "cytosol")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P68431")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P68431")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P68431")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P68431")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10797,34 +10399,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45985")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P45985")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q93077")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q93077")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q93077")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q93077")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10841,21 +10430,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01574")
+            (MoleculeNode "Uniprot:Q93077")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P01574")
+               (MoleculeNode "Uniprot:Q93077")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q93077")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q93077")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10872,34 +10474,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P01574")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P01574")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P49137")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P49137")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P49137")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P49137")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10916,21 +10505,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P49137")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q16576")
+               (MoleculeNode "Uniprot:P49137")
                (ConceptNode "nucleoplasm")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16576")
+            (MoleculeNode "Uniprot:P49137")
             (ConceptNode "R-HSA-2559580")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P49137")
+               (ConceptNode "cytosol")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10947,34 +10549,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P23527")
+               (MoleculeNode "Uniprot:Q16576")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P23527")
+            (MoleculeNode "Uniprot:Q16576")
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P23527")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P23527")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -10991,34 +10580,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q16777")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16777")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q16777")
+               (MoleculeNode "Uniprot:P23527")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16777")
+            (MoleculeNode "Uniprot:P23527")
             (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P23527")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P23527")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11035,21 +10624,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9HCK5")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q16777")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9HCK5")
+            (MoleculeNode "Uniprot:Q16777")
             (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16777")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q16777")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11066,34 +10668,21 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9HCK5")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9HCK5")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q99877")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99877")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99877")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q99877")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11110,34 +10699,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q99877")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q99877")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0C0S5")
+            (MoleculeNode "Uniprot:Q99877")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0C0S5")
+               (MoleculeNode "Uniprot:Q99877")
                (ConceptNode "extracellular region")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0C0S5")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0C0S5")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11154,8 +10743,50 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0C0S5")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0C0S5")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0C0S5")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0C0S5")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "N6-glycyl-L-lysine-UBA52(1-76)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "https://www.uniprot.org/uniprot/P62987")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P62987")
@@ -11247,37 +10878,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "N6-glycyl-L-lysine-UBA52(1-76)")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "https://www.uniprot.org/uniprot/P62987")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P01100")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P01100")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11294,21 +10896,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9HCE1")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P01100")
+               (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9HCE1")
+            (MoleculeNode "Uniprot:P01100")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11325,34 +10927,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P11802")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P11802")
+               (MoleculeNode "Uniprot:Q9HCE1")
                (ConceptNode "cytosol")
             )
          )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P11802")
-               (ConceptNode "nucleoplasm")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P11802")
+            (MoleculeNode "Uniprot:Q9HCE1")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11369,34 +10958,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q8IW41")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8IW41")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8IW41")
+            (MoleculeNode "Uniprot:P11802")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8IW41")
+               (MoleculeNode "Uniprot:P11802")
                (ConceptNode "cytosol")
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P11802")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P11802")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11413,34 +11002,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04908")
+               (MoleculeNode "Uniprot:Q8IW41")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04908")
+            (MoleculeNode "Uniprot:Q8IW41")
             (ConceptNode "R-HSA-2559580")
          )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8IW41")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P04908")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:Q8IW41")
+               (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P04908")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11457,21 +11046,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8IXK0")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8IXK0")
+               (MoleculeNode "Uniprot:P04908")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04908")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P04908")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P04908")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11488,34 +11090,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P58876")
+            (MoleculeNode "Uniprot:Q8IXK0")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P58876")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P58876")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P58876")
+               (MoleculeNode "Uniprot:Q8IXK0")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11532,21 +11121,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P58876")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q14209")
+               (MoleculeNode "Uniprot:P58876")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P58876")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P58876")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q14209")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11563,34 +11165,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P10599")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P10599")
+               (MoleculeNode "Uniprot:Q14209")
                (ConceptNode "nucleoplasm")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P10599")
+            (MoleculeNode "Uniprot:Q14209")
             (ConceptNode "R-HSA-2559580")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P10599")
-               (ConceptNode "cytosol")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11607,21 +11196,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15910")
+            (MoleculeNode "Uniprot:P10599")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q15910")
+               (MoleculeNode "Uniprot:P10599")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P10599")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P10599")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11638,21 +11240,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q15910")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q15022")
+               (MoleculeNode "Uniprot:Q15910")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15022")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11669,21 +11271,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9HCJ0")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q15022")
+               (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9HCJ0")
+            (MoleculeNode "Uniprot:Q15022")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11700,21 +11302,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N4C8")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N4C8")
+               (MoleculeNode "Uniprot:Q9HCJ0")
                (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9HCJ0")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11731,8 +11333,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8N4C8")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q8N4C8")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P45983")
+               (ConceptNode "Mitogen-activated protein kinase 8")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P45983")
+               (ConceptNode "https://www.uniprot.org/uniprot/P45983")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P45983")
@@ -11759,37 +11390,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P45983")
-               (ConceptNode "Mitogen-activated protein kinase 8")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P45983")
-               (ConceptNode "https://www.uniprot.org/uniprot/P45983")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P42773")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P42773")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11806,21 +11408,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P42773")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99496")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:P42773")
+               (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99496")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11837,21 +11439,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q01094")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q01094")
+               (MoleculeNode "Uniprot:Q99496")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q99496")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -11868,8 +11470,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q01094")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q01094")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "N6-glycyl-L-lysine-UBC(229-304)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "https://www.uniprot.org/uniprot/P0CG48")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -11961,50 +11592,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "N6-glycyl-L-lysine-UBC(229-304)")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "https://www.uniprot.org/uniprot/P0CG48")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q00534")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q00534")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q00534")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q00534")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12021,99 +11610,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:Q00534")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:Q00534")
             (ConceptNode "R-HSA-2559580")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:Q00534")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "endoplasmic reticulum membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "endocytic vesicle membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "mitochondrial outer membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:Q00534")
                (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12130,8 +11654,115 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endoplasmic reticulum membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endocytic vesicle membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "mitochondrial outer membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -12223,37 +11854,8 @@
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P78364")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P78364")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12270,21 +11872,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9HC52")
+               (MoleculeNode "Uniprot:P78364")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9HC52")
+            (MoleculeNode "Uniprot:P78364")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12301,21 +11903,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P42771")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P42771")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q9HC52")
+               (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9HC52")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12332,8 +11934,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P42771")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P42771")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16539")
+               (ConceptNode "Mitogen-activated protein kinase 14")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16539")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q16539")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -12399,37 +12030,8 @@
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:Q16539")
-               (ConceptNode "Mitogen-activated protein kinase 14")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:Q16539")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q16539")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q96GD3-2")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q96GD3-2")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12446,34 +12048,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16644")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q16644")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16644")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q16644")
+               (MoleculeNode "Uniprot:Q96GD3-2")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q96GD3-2")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12490,21 +12079,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P35226")
+            (MoleculeNode "Uniprot:Q16644")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P35226")
+               (MoleculeNode "Uniprot:Q16644")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q16644")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16644")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12521,34 +12123,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P35226")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8NDV7")
+               (MoleculeNode "Uniprot:P35226")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8NDV7")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q8NDV7")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8NDV7")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12565,34 +12154,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P46734")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P46734")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P46734")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P46734")
+               (MoleculeNode "Uniprot:Q8NDV7")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8NDV7")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q8NDV7")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8NDV7")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12609,34 +12198,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P46734")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99879")
+               (MoleculeNode "Uniprot:P46734")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P46734")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P46734")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99879")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99879")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q99879")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12653,34 +12242,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P16104")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P16104")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P16104")
+               (MoleculeNode "Uniprot:Q99879")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P16104")
+            (MoleculeNode "Uniprot:Q99879")
             (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q99879")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q99879")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12697,21 +12286,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O75530")
+               (MoleculeNode "Uniprot:P16104")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P16104")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P16104")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O75530")
+            (MoleculeNode "Uniprot:P16104")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12728,34 +12330,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q16778")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16778")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q16778")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q16778")
+               (MoleculeNode "Uniprot:O75530")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O75530")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12772,34 +12361,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0C5Y9")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0C5Y9")
+               (MoleculeNode "Uniprot:Q16778")
                (ConceptNode "extracellular region")
             )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q16778")
+            (ConceptNode "R-HSA-2559580")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0C5Y9")
+            (MoleculeNode "Uniprot:Q16778")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0C5Y9")
+               (MoleculeNode "Uniprot:Q16778")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12816,21 +12405,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0C5Y9")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q14188")
+               (MoleculeNode "Uniprot:P0C5Y9")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0C5Y9")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0C5Y9")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q14188")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12847,21 +12449,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99683")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99683")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q14188")
+               (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q14188")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12878,21 +12480,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UPQ9")
+            (MoleculeNode "Uniprot:Q99683")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9UPQ9")
+               (MoleculeNode "Uniprot:Q99683")
                (ConceptNode "cytosol")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12909,34 +12511,21 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9UPQ9")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9UPQ9")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P33778")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P33778")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P33778")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P33778")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12953,34 +12542,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q8N257")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N257")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N257")
+            (MoleculeNode "Uniprot:P33778")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N257")
+               (MoleculeNode "Uniprot:P33778")
                (ConceptNode "extracellular region")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P33778")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P33778")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -12997,21 +12586,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q8N257")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8N257")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N726")
+            (MoleculeNode "Uniprot:Q8N257")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N726")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q8N257")
+               (ConceptNode "extracellular region")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13028,21 +12630,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9BTM1")
+            (MoleculeNode "Uniprot:Q8N726")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9BTM1")
+               (MoleculeNode "Uniprot:Q8N726")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13059,34 +12661,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15759")
+            (MoleculeNode "Uniprot:Q9BTM1")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q15759")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15759")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q15759")
+               (MoleculeNode "Uniprot:Q9BTM1")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13103,21 +12692,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P42772")
+            (MoleculeNode "Uniprot:Q15759")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P42772")
+               (MoleculeNode "Uniprot:Q15759")
                (ConceptNode "cytosol")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q15759")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q15759")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13134,34 +12736,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P42772")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9UL18")
+               (MoleculeNode "Uniprot:P42772")
                (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UL18")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9UL18")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9UL18")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13178,34 +12767,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06899")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06899")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:Q9UL18")
+               (ConceptNode "cytosol")
             )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9UL18")
+            (ConceptNode "R-HSA-2559580")
          )
       )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P06899")
+               (MoleculeNode "Uniprot:Q9UL18")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P06899")
+            (MoleculeNode "Uniprot:Q9UL18")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13222,34 +12811,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P06899")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P06899")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P05412")
+               (MoleculeNode "Uniprot:P06899")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P05412")
+            (MoleculeNode "Uniprot:P06899")
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P05412")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P05412")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13266,21 +12855,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O00716")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O00716")
+               (MoleculeNode "Uniprot:P05412")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P05412")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P05412")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P05412")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13297,21 +12899,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O00716")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8NDX5")
+               (MoleculeNode "Uniprot:O00716")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8NDX5")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13328,34 +12930,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P84243")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P84243")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P84243")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P84243")
+               (MoleculeNode "Uniprot:Q8NDX5")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8NDX5")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13372,34 +12961,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P20671")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P20671")
+               (MoleculeNode "Uniprot:P84243")
                (ConceptNode "extracellular region")
             )
          )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P20671")
-               (ConceptNode "nucleoplasm")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P20671")
+            (MoleculeNode "Uniprot:P84243")
             (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P84243")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P84243")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13416,34 +13005,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q6FI13")
+            (MoleculeNode "Uniprot:P20671")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q6FI13")
+               (MoleculeNode "Uniprot:P20671")
                (ConceptNode "extracellular region")
             )
          )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q6FI13")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q6FI13")
+               (MoleculeNode "Uniprot:P20671")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P20671")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13460,47 +13049,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q71DI3")
+            (MoleculeNode "Uniprot:Q6FI13")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q71DI3")
+               (MoleculeNode "Uniprot:Q6FI13")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q6FI13")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q6FI13")
                (ConceptNode "nucleoplasm")
             )
          )
       )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q71DI3")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q71DI3")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q71DI3")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q71DI3")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13517,21 +13093,47 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q71DI3")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q71DI3")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q14186")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q71DI3")
+               (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q14186")
+            (MoleculeNode "Uniprot:Q71DI3")
             (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q71DI3")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q71DI3")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13548,34 +13150,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P57053")
-            (ConceptNode "R-HSA-2559580")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P57053")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P57053")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P57053")
+               (MoleculeNode "Uniprot:Q14186")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q14186")
+            (ConceptNode "R-HSA-2559580")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13592,21 +13181,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O95503")
+            (MoleculeNode "Uniprot:P57053")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O95503")
+               (MoleculeNode "Uniprot:P57053")
+               (ConceptNode "extracellular region")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P57053")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P57053")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13623,34 +13225,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99880")
+            (MoleculeNode "Uniprot:O95503")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99880")
-               (ConceptNode "extracellular region")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99880")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q99880")
+               (MoleculeNode "Uniprot:O95503")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13667,34 +13256,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62807")
+            (MoleculeNode "Uniprot:Q99880")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62807")
+               (MoleculeNode "Uniprot:Q99880")
                (ConceptNode "extracellular region")
             )
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62807")
+            (MoleculeNode "Uniprot:Q99880")
             (ConceptNode "R-HSA-2559580")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62807")
+               (MoleculeNode "Uniprot:Q99880")
                (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13711,21 +13300,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62807")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9H9G7")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P62807")
+               (ConceptNode "extracellular region")
             )
          )
+      )
+      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9H9G7")
+            (MoleculeNode "Uniprot:P62807")
             (ConceptNode "R-HSA-2559580")
          )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62807")
+               (ConceptNode "nucleoplasm")
+            )
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13742,21 +13344,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:18248")
+               (MoleculeNode "Uniprot:Q9H9G7")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:18248")
+            (MoleculeNode "Uniprot:Q9H9G7")
             (ConceptNode "R-HSA-2559580")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13773,8 +13375,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:18248")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:18248")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -13905,76 +13536,8 @@
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "https://www.uniprot.org/uniprot/16761")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15414")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15414")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15414")
-               (ConceptNode "mitochondrial matrix")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15414")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15414")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15414")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15414")
-               (ConceptNode "cytoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15414")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -13991,8 +13554,76 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15414")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15414")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15414")
+               (ConceptNode "mitochondrial matrix")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15414")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15414")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15414")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15414")
+               (ConceptNode "cytoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15414")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15422")
@@ -14136,76 +13767,8 @@
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:30915")
-               (ConceptNode "extracellular region")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:30915")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:30915")
-               (ConceptNode "endoplasmic reticulum lumen")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:30915")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:30915")
-               (ConceptNode "peroxisomal matrix")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:30915")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:30915")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:30915")
-               (ConceptNode "mitochondrial matrix")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14222,44 +13785,16 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15741")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15741")
-               (ConceptNode "mitochondrial matrix")
-            )
-         )
-      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:15741")
-               (ConceptNode "endoplasmic reticulum lumen")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15741")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:15741")
+               (MoleculeNode "ChEBI:30915")
                (ConceptNode "extracellular region")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15741")
+            (MoleculeNode "ChEBI:30915")
             (ConceptNode "R-HSA-2559580")
          )
       )
@@ -14267,28 +13802,43 @@
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:15741")
+               (MoleculeNode "ChEBI:30915")
+               (ConceptNode "endoplasmic reticulum lumen")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:30915")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:30915")
                (ConceptNode "peroxisomal matrix")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15741")
+            (MoleculeNode "ChEBI:30915")
             (ConceptNode "R-HSA-2559580")
          )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:30915")
+            (ConceptNode "R-HSA-2559580")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:15741")
-               (ConceptNode "cytoplasm")
+               (MoleculeNode "ChEBI:30915")
+               (ConceptNode "mitochondrial matrix")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:15741")
-            (ConceptNode "R-HSA-2559580")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14305,8 +13855,89 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15741")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15741")
+               (ConceptNode "mitochondrial matrix")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15741")
+               (ConceptNode "endoplasmic reticulum lumen")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15741")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15741")
+               (ConceptNode "extracellular region")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15741")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15741")
+               (ConceptNode "peroxisomal matrix")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15741")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:15741")
+               (ConceptNode "cytoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:15741")
+            (ConceptNode "R-HSA-2559580")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16680")
+               (ConceptNode "AdoHcy ")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16680")
+               (ConceptNode "https://www.uniprot.org/uniprot/16680")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -14359,50 +13990,8 @@
             (ConceptNode "R-HSA-2559580")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:16680")
-               (ConceptNode "AdoHcy ")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:16680")
-               (ConceptNode "https://www.uniprot.org/uniprot/16680")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:26523")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:26523")
-            (ConceptNode "R-HSA-2559580")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:26523")
-            (ConceptNode "R-HSA-2559580")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:26523")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14419,21 +14008,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (GeneNode "MAP2K4")
-               (ConceptNode "cytosol")
+               (MoleculeNode "ChEBI:26523")
+               (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (GeneNode "MAP2K4")
-            (ConceptNode "R-HSA-450321")
+            (MoleculeNode "ChEBI:26523")
+            (ConceptNode "R-HSA-2559580")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "ChEBI:26523")
+            (ConceptNode "R-HSA-2559580")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "ChEBI:26523")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14450,34 +14052,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q15750")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15750")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q15750")
+               (GeneNode "MAP2K4")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q15750")
+            (GeneNode "MAP2K4")
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14494,34 +14083,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53779")
-            (ConceptNode "R-HSA-450321")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P53779")
+               (MoleculeNode "Uniprot:Q15750")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q15750")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q15750")
                (ConceptNode "cytosol")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53779")
+            (MoleculeNode "Uniprot:Q15750")
             (ConceptNode "R-HSA-450321")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P53779")
-               (ConceptNode "nucleoplasm")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14538,34 +14127,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
+            (MoleculeNode "Uniprot:P53779")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45984")
+               (MoleculeNode "Uniprot:P53779")
                (ConceptNode "cytosol")
             )
          )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P53779")
+            (ConceptNode "R-HSA-450321")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45984")
+               (MoleculeNode "Uniprot:P53779")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45984")
-            (ConceptNode "R-HSA-450321")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14582,21 +14171,34 @@
             )
          )
       )
-   )
-   (ListLink
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45984")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P45984")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45985")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P45984")
+               (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45985")
+            (MoleculeNode "Uniprot:P45984")
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14613,21 +14215,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O43353")
-            (ConceptNode "R-HSA-450321")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O43353")
+               (MoleculeNode "Uniprot:P45985")
                (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P45985")
+            (ConceptNode "R-HSA-450321")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14644,99 +14246,21 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "mitochondrial outer membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
+            (MoleculeNode "Uniprot:O43353")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endocytic vesicle membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
+               (MoleculeNode "Uniprot:O43353")
                (ConceptNode "cytosol")
             )
          )
       )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endosome membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P62987")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P62987")
-               (ConceptNode "endoplasmic reticulum membrane")
-            )
-         )
-      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14753,47 +14277,99 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N5C8")
-               (ConceptNode "endosome membrane")
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "mitochondrial outer membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N5C8")
+            (MoleculeNode "Uniprot:P62987")
             (ConceptNode "R-HSA-450321")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N5C8")
+            (MoleculeNode "Uniprot:P62987")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N5C8")
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endocytic vesicle membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
                (ConceptNode "cytosol")
             )
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q8N5C8")
+            (MoleculeNode "Uniprot:P62987")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q8N5C8")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endosome membrane")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P62987")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P62987")
+               (ConceptNode "endoplasmic reticulum membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14810,60 +14386,47 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9NYJ8")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9NYJ8")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9NYJ8")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9NYJ8")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9NYJ8")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9NYJ8")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9NYJ8")
+               (MoleculeNode "Uniprot:Q8N5C8")
                (ConceptNode "endosome membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9NYJ8")
+            (MoleculeNode "Uniprot:Q8N5C8")
             (ConceptNode "R-HSA-450321")
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8N5C8")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q8N5C8")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q8N5C8")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q8N5C8")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14880,18 +14443,16 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P61088")
+               (MoleculeNode "Uniprot:Q9NYJ8")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P61088")
+            (MoleculeNode "Uniprot:Q9NYJ8")
             (ConceptNode "R-HSA-450321")
          )
       )
@@ -14899,15 +14460,43 @@
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P61088")
+               (MoleculeNode "Uniprot:Q9NYJ8")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9NYJ8")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9NYJ8")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P61088")
+            (MoleculeNode "Uniprot:Q9NYJ8")
             (ConceptNode "R-HSA-450321")
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9NYJ8")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9NYJ8")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14924,34 +14513,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45983")
-            (ConceptNode "R-HSA-450321")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45983")
+               (MoleculeNode "Uniprot:P61088")
                (ConceptNode "cytosol")
             )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P61088")
+            (ConceptNode "R-HSA-450321")
          )
       )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P45983")
+               (MoleculeNode "Uniprot:P61088")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P45983")
+            (MoleculeNode "Uniprot:P61088")
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -14968,99 +14557,34 @@
             )
          )
       )
-   )
-   (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "mitochondrial outer membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
+            (MoleculeNode "Uniprot:P45983")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endoplasmic reticulum membrane")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
+               (MoleculeNode "Uniprot:P45983")
                (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-450321")
-         )
       )
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
-            (ConceptNode "R-HSA-450321")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "endocytic vesicle membrane")
+               (MoleculeNode "Uniprot:P45983")
+               (ConceptNode "nucleoplasm")
             )
          )
-      )
-      (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG48")
+            (MoleculeNode "Uniprot:P45983")
             (ConceptNode "R-HSA-450321")
          )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG48")
-               (ConceptNode "plasma membrane")
-            )
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15077,99 +14601,99 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "endosome membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
-               (ConceptNode "plasma membrane")
-            )
-         )
-      )
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "mitochondrial outer membrane")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-450321")
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "endoplasmic reticulum membrane")
             )
          )
       )
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P0CG47")
+            (MoleculeNode "Uniprot:P0CG48")
             (ConceptNode "R-HSA-450321")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P0CG47")
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
                (ConceptNode "endocytic vesicle membrane")
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG48")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG48")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15186,8 +14710,115 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endosome membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "plasma membrane")
+            )
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "mitochondrial outer membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endoplasmic reticulum membrane")
+            )
+         )
+      )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P0CG47")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P0CG47")
+               (ConceptNode "endocytic vesicle membrane")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P62979")
+               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -15279,24 +14910,24 @@
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "N6-glycyl-L-lysine-RPS27A(1-76)")
+               (MoleculeNode "Uniprot:Q9Y4K3")
+               (ConceptNode "K63polyUb-TRAF6")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P62979")
-               (ConceptNode "https://www.uniprot.org/uniprot/P62979")
+               (MoleculeNode "Uniprot:Q9Y4K3")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y4K3")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:Q9Y4K3")
@@ -15336,37 +14967,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9Y4K3")
-               (ConceptNode "K63polyUb-TRAF6")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9Y4K3")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y4K3")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q13404")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q13404")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15383,8 +14985,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q13404")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q13404")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:O43318")
+               (ConceptNode "PolyUb-MAP3K7")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:O43318")
+               (ConceptNode "https://www.uniprot.org/uniprot/O43318")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -15411,37 +15042,8 @@
             (ConceptNode "R-HSA-450321")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:O43318")
-               (ConceptNode "PolyUb-MAP3K7")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:O43318")
-               (ConceptNode "https://www.uniprot.org/uniprot/O43318")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9HC29")
-            (ConceptNode "R-HSA-450321")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9HC29")
-               (ConceptNode "cytosol")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15458,8 +15060,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9HC29")
+            (ConceptNode "R-HSA-450321")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9HC29")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9Y6K9")
+               (ConceptNode "Ub-285-IKBKG")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:Q9Y6K9")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y6K9")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -15486,24 +15117,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y6K9")
-               (ConceptNode "Ub-285-IKBKG")
+               (MoleculeNode "Uniprot:O43187")
+               (ConceptNode "p-IRAK2")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:Q9Y6K9")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q9Y6K9")
+               (MoleculeNode "Uniprot:O43187")
+               (ConceptNode "https://www.uniprot.org/uniprot/O43187")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -15543,37 +15174,8 @@
             (ConceptNode "R-HSA-450321")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:O43187")
-               (ConceptNode "p-IRAK2")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:O43187")
-               (ConceptNode "https://www.uniprot.org/uniprot/O43187")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q9Y239")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9Y239")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15590,21 +15192,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O14733")
+               (MoleculeNode "Uniprot:Q9Y239")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O14733")
+            (MoleculeNode "Uniprot:Q9Y239")
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15621,8 +15223,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:O14733")
+               (ConceptNode "cytosol")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O14733")
+            (ConceptNode "R-HSA-450321")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -15753,24 +15384,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15422")
@@ -15914,37 +15545,8 @@
             (ConceptNode "R-HSA-450321")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "ChEBI:59414")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:59414")
-            (ConceptNode "R-HSA-450321")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15961,21 +15563,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "ChEBI:59271")
+               (MoleculeNode "ChEBI:59414")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "ChEBI:59271")
+            (MoleculeNode "ChEBI:59414")
             (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -15992,46 +15594,21 @@
             )
          )
       )
-   )
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "expresses")
-         (ListLink
-            (GeneNode "SPAG9")
-            (VariableNode "$c")
-         )
-      )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (VariableNode "$c")
-               (ConceptNode "")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (VariableNode "$c")
-               (ConceptNode "")
-            )
-         )
-      )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (GeneNode "SPAG9")
+               (MoleculeNode "ChEBI:59271")
                (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (GeneNode "SPAG9")
-            (ConceptNode "R-HSA-375170")
+            (MoleculeNode "ChEBI:59271")
+            (ConceptNode "R-HSA-450321")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16048,34 +15625,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53778")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P53778")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P53778")
-            (ConceptNode "R-HSA-375170")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P53778")
+               (GeneNode "SPAG9")
                (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (GeneNode "SPAG9")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16092,47 +15656,34 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P35222")
-               (ConceptNode "cytosol")
-            )
-         )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P35222")
+            (MoleculeNode "Uniprot:P53778")
             (ConceptNode "R-HSA-375170")
          )
-      )
-      (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P35222")
+               (MoleculeNode "Uniprot:P53778")
                (ConceptNode "nucleoplasm")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P35222")
-            (ConceptNode "R-HSA-375170")
-         )
       )
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P53778")
+            (ConceptNode "R-HSA-375170")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P35222")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:P53778")
+               (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P35222")
-            (ConceptNode "R-HSA-375170")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16149,21 +15700,47 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O00634")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O00634")
-               (ConceptNode "extracellular region")
+               (MoleculeNode "Uniprot:P35222")
+               (ConceptNode "cytosol")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P35222")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P35222")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P35222")
+            (ConceptNode "R-HSA-375170")
+         )
+      )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P35222")
+               (ConceptNode "plasma membrane")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P35222")
+            (ConceptNode "R-HSA-375170")
+         )
+      )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16180,21 +15757,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O00634")
+            (ConceptNode "R-HSA-375170")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P55283")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:O00634")
+               (ConceptNode "extracellular region")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P55283")
-            (ConceptNode "R-HSA-375170")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16211,21 +15788,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q02080")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q02080")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:P55283")
+               (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P55283")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16242,21 +15819,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q12982")
+            (MoleculeNode "Uniprot:Q02080")
             (ConceptNode "R-HSA-375170")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q12982")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:Q02080")
+               (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16273,21 +15850,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q12982")
+            (ConceptNode "R-HSA-375170")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q4KMG0")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:Q12982")
+               (ConceptNode "cytosol")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q4KMG0")
-            (ConceptNode "R-HSA-375170")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16304,21 +15881,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P23409")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P23409")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q4KMG0")
+               (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q4KMG0")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16335,21 +15912,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:O60271")
+            (MoleculeNode "Uniprot:P23409")
             (ConceptNode "R-HSA-375170")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:O60271")
-               (ConceptNode "cytosol")
+               (MoleculeNode "Uniprot:P23409")
+               (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16366,8 +15943,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:O60271")
+            (ConceptNode "R-HSA-375170")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:O60271")
+               (ConceptNode "cytosol")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P19022")
+               (ConceptNode "CDH2")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P19022")
+               (ConceptNode "https://www.uniprot.org/uniprot/P19022")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P19022")
@@ -16394,37 +16000,8 @@
             )
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P19022")
-               (ConceptNode "CDH2")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P19022")
-               (ConceptNode "https://www.uniprot.org/uniprot/P19022")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P15923")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15923")
-            (ConceptNode "R-HSA-375170")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16441,8 +16018,37 @@
             )
          )
       )
+      (AndLink
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P15923")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P15923")
+            (ConceptNode "R-HSA-375170")
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P60953")
+               (ConceptNode "Cell division control protein 42 homolog")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:P60953")
+               (ConceptNode "https://www.uniprot.org/uniprot/P60953")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P60953")
@@ -16482,24 +16088,24 @@
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P60953")
-               (ConceptNode "Cell division control protein 42 homolog")
+               (MoleculeNode "Uniprot:P00519")
+               (ConceptNode "ABL1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:P60953")
-               (ConceptNode "https://www.uniprot.org/uniprot/P60953")
+               (MoleculeNode "Uniprot:P00519")
+               (ConceptNode "https://www.uniprot.org/uniprot/P00519")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "Uniprot:P00519")
@@ -16526,37 +16132,8 @@
             (ConceptNode "R-HSA-375170")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P00519")
-               (ConceptNode "ABL1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P00519")
-               (ConceptNode "https://www.uniprot.org/uniprot/P00519")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q92859")
-               (ConceptNode "plasma membrane")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q92859")
-            (ConceptNode "R-HSA-375170")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16573,21 +16150,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q99081")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q99081")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q92859")
+               (ConceptNode "plasma membrane")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q92859")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16604,21 +16181,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P55291")
+            (MoleculeNode "Uniprot:Q99081")
             (ConceptNode "R-HSA-375170")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P55291")
-               (ConceptNode "plasma membrane")
+               (MoleculeNode "Uniprot:Q99081")
+               (ConceptNode "nucleoplasm")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16635,21 +16212,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q9BWV1-1")
+            (MoleculeNode "Uniprot:P55291")
             (ConceptNode "R-HSA-375170")
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q9BWV1-1")
+               (MoleculeNode "Uniprot:P55291")
                (ConceptNode "plasma membrane")
             )
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16666,21 +16243,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q9BWV1-1")
+            (ConceptNode "R-HSA-375170")
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P15884")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:Q9BWV1-1")
+               (ConceptNode "plasma membrane")
             )
          )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15884")
-            (ConceptNode "R-HSA-375170")
-         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16697,21 +16274,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q06413")
+               (MoleculeNode "Uniprot:P15884")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q06413")
+            (MoleculeNode "Uniprot:P15884")
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16728,21 +16305,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P13349")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P13349")
+               (MoleculeNode "Uniprot:Q06413")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q06413")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16759,8 +16336,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P13349")
+            (ConceptNode "R-HSA-375170")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P13349")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16539")
+               (ConceptNode "Mitogen-activated protein kinase 14")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:Q16539")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q16539")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -16826,24 +16432,24 @@
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:Q16539")
-               (ConceptNode "Mitogen-activated protein kinase 14")
+               (MoleculeNode "Uniprot:P35221")
+               (ConceptNode "CTNNA1")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "Uniprot:Q16539")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q16539")
+               (MoleculeNode "Uniprot:P35221")
+               (ConceptNode "https://www.uniprot.org/uniprot/P35221")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -16870,37 +16476,8 @@
             (ConceptNode "R-HSA-375170")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:P35221")
-               (ConceptNode "CTNNA1")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P35221")
-               (ConceptNode "https://www.uniprot.org/uniprot/P35221")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:P26232")
-               (ConceptNode "cytosol")
-            )
-         )
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P26232")
-            (ConceptNode "R-HSA-375170")
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16917,21 +16494,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P15172")
-               (ConceptNode "nucleoplasm")
+               (MoleculeNode "Uniprot:P26232")
+               (ConceptNode "cytosol")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15172")
+            (MoleculeNode "Uniprot:P26232")
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16948,21 +16525,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:Q14814")
+               (MoleculeNode "Uniprot:P15172")
                (ConceptNode "nucleoplasm")
             )
          )
          (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q14814")
+            (MoleculeNode "Uniprot:P15172")
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -16979,21 +16556,21 @@
             )
          )
       )
-   )
-   (ListLink
       (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:P15173")
-            (ConceptNode "R-HSA-375170")
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P15173")
+               (MoleculeNode "Uniprot:Q14814")
                (ConceptNode "nucleoplasm")
             )
          )
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q14814")
+            (ConceptNode "R-HSA-375170")
+         )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -17010,8 +16587,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:P15173")
+            (ConceptNode "R-HSA-375170")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:P15173")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:Q15759")
+               (ConceptNode "Mitogen-activated protein kinase 11")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "Uniprot:Q15759")
+               (ConceptNode "https://www.uniprot.org/uniprot/Q15759")
+            )
+         )
+      )
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -17038,37 +16644,8 @@
             (ConceptNode "R-HSA-375170")
          )
       )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "Uniprot:Q15759")
-               (ConceptNode "Mitogen-activated protein kinase 11")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:Q15759")
-               (ConceptNode "https://www.uniprot.org/uniprot/Q15759")
-            )
-         )
-      )
    )
    (ListLink
-      (AndLink
-         (MemberLink (stv 1 1)
-            (MoleculeNode "Uniprot:Q02078")
-            (ConceptNode "R-HSA-375170")
-         )
-         (EvaluationLink (stv 1 1)
-            (PredicateNode "has_location")
-            (ListLink
-               (MoleculeNode "Uniprot:Q02078")
-               (ConceptNode "nucleoplasm")
-            )
-         )
-      )
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
@@ -17085,8 +16662,37 @@
             )
          )
       )
+      (AndLink
+         (MemberLink (stv 1 1)
+            (MoleculeNode "Uniprot:Q02078")
+            (ConceptNode "R-HSA-375170")
+         )
+         (EvaluationLink (stv 1 1)
+            (PredicateNode "has_location")
+            (ListLink
+               (MoleculeNode "Uniprot:Q02078")
+               (ConceptNode "nucleoplasm")
+            )
+         )
+      )
    )
    (ListLink
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+            )
+         )
+         (EvaluationLink
+            (PredicateNode "has_definition")
+            (ListLink
+               (MoleculeNode "ChEBI:16761")
+               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+            )
+         )
+      )
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:16761")
@@ -17217,24 +16823,24 @@
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy]phosphonic acid")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:16761")
-               (ConceptNode "https://www.uniprot.org/uniprot/16761")
+               (MoleculeNode "ChEBI:15422")
+               (ConceptNode "https://www.uniprot.org/uniprot/15422")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
@@ -17378,24 +16984,24 @@
             (ConceptNode "R-HSA-375170")
          )
       )
+   )
+   (ListLink
       (ListLink
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
+               (MoleculeNode "ChEBI:15996")
+               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(2-amino-6-oxo-6,9-dihydro-1H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
             )
          )
          (EvaluationLink
             (PredicateNode "has_definition")
             (ListLink
-               (MoleculeNode "ChEBI:15422")
-               (ConceptNode "https://www.uniprot.org/uniprot/15422")
+               (MoleculeNode "ChEBI:15996")
+               (ConceptNode "https://www.uniprot.org/uniprot/15996")
             )
          )
       )
-   )
-   (ListLink
       (AndLink
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15996")
@@ -17563,22 +17169,6 @@
          (MemberLink (stv 1 1)
             (MoleculeNode "ChEBI:15996")
             (ConceptNode "R-HSA-375170")
-         )
-      )
-      (ListLink
-         (EvaluationLink
-            (PredicateNode "has_name")
-            (ListLink
-               (MoleculeNode "ChEBI:15996")
-               (ConceptNode "({[({[(2R,3S,4R,5R)-5-(2-amino-6-oxo-6,9-dihydro-1H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy}(hydroxy)phosphoryl)oxy](hydroxy)phosphoryl}oxy)phosphonic acid")
-            )
-         )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "ChEBI:15996")
-               (ConceptNode "https://www.uniprot.org/uniprot/15996")
-            )
          )
       )
    )

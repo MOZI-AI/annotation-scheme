@@ -557,11 +557,6 @@ name
           child
           (VariableNode "$loc")))
     )
-
-    (AndLink
-      (MemberLink (stv 1 1) 
-        child
-        parent)
       (EvaluationLink (stv 1 1)
         (PredicateNode "has_location")
         (ListLink
@@ -569,4 +564,4 @@ name
           (VariableNode "$loc")))
     )
   )))
-))
+)

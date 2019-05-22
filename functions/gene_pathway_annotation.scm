@@ -48,19 +48,19 @@ result
     (let ([pw (identify-pw gene "R-HSA")])
   
       (for-each (lambda(path)
-        (set! result (append result (list (ListLink (node-info path) (add-loc (MemberLink gene path)) ))))
+        (set! result (append result (list (ListLink (node-info path) (MemberLink gene path) (ListLink (add-loc (MemberLink gene path))) ))))
 
         (if (equal? prot "True")
             (for-each (lambda (mol)
                 (if (string-contains (cog-name mol) "Uniprot:") 
                 (set! result (append result
-                    (list (ListLink (node-info mol) (add-loc (MemberLink mol path)) )))))) (cog-outgoing-set (findmol path))))
+                    (list (ListLink (node-info mol) (MemberLink mol path) (ListLink (add-loc (MemberLink mol path))) )))))) (cog-outgoing-set (findmol path))))
             
         (if (equal? small_mol "True")
             (for-each (lambda (smol)
             (if (string-contains (cog-name smol) "ChEBI:") 
             (set! result (append result
-                    (list (ListLink (node-info smol) (add-loc (MemberLink smol path)) )))))) (cog-outgoing-set (findmol path))))
+                    (list (ListLink (node-info smol) (MemberLink smol path) (ListLink (add-loc (MemberLink smol path))) )))))) (cog-outgoing-set (findmol path))))
       )pw)
 ) result)
 

@@ -14,7 +14,7 @@
            (lambda () body)))))))
 
 (define (get-params p)
- (if(equal? (cog-type p) 'ListLink)
+(if(equal? (cog-type p) 'ListLink)
     (map (lambda (t)
         (cog-name t)
         ) (cog-outgoing-set p))
@@ -89,28 +89,34 @@
     )
 )
 
+;;Returns a namespace EvaluationLink of namespaces
+(define namespace-eval (lambda (nsp)
+    (map (lambda (n)
+          (EvaluationLink
+               (PredicateNode "GO_namespace")
+                 (ListLink
+                   (VariableNode "$a")
+                  (ConceptNode n)
+                  )
+                )
+    )
+        
+    nsp
+    )
+))
+
 ;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
 (define find-parent
-
   (lambda (node namespaces)
         (let (
-          [atom (cog-outgoing-atom node 1)]
-          [parents '()]
-        )
-        (for-each (lambda (ns)
-          (set! parents (append parents (cog-outgoing-set (cog-execute! (BindLink
+        (let ([atom (cog-outgoing-atom node 1)])
+          (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")
             (AndLink
               (InheritanceLink
                 atom
                 (VariableNode "$a"))
-              (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
+              (OrLink (namespace-eval namespaces))
             )
           (ExecutionOutputLink
               (GroundedSchemaNode "scm: add-go-info")
@@ -118,33 +124,24 @@
                   atom
                   (VariableNode "$a")
                 ))
-        ))))) 
         )
       )
-    parents  
+        
+    )    
   )
+      
 ))
 
 ;;Finds Go terms of a gene
 (define find-memberln 
   (lambda (gene namespaces)
-    (let ([go-atoms '()])
-
-      (for-each (lambda (ns)
-      
-        (set! go-atoms (append go-atoms (cog-outgoing-set (cog-execute! (BindLink
+     (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")
             (AndLink
               (MemberLink
                 gene
                 (VariableNode "$a"))
-                (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
+                (OrLink (namespace-eval namespaces))
             ) 
            (ExecutionOutputLink
               (GroundedSchemaNode "scm: add-go-info")
@@ -152,10 +149,9 @@
                   gene
                   (VariableNode "$a")
                 ))
-          )))))
-      ) namespaces)
-          go-atoms
-          ))
+          )
+  )
+))
 )
 
 ;;
@@ -181,6 +177,12 @@
     ))
   )
 )
+
+;;a helper function to flatten a list, i.e convert a list of lists into a single list
+(define (flatten x)
+  (cond ((null? x) '())
+        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
+        (else (list x))))
 
 ;;the main function to find the go terms for a gene with a specification of the parents
 (define find-go-term 
@@ -255,24 +257,53 @@
         (GetLink
          (VariableNode "$ns")
 
-         (EvaluationLink
-          (PredicateNode "GO_namespace")
-          (ListLink
+(define (findMember gene db)
+  (cog-outgoing-set (cog-execute! (BindLink
+      (VariableNode "$a")
+      (AndLink
+        (EvaluationLink
+          (GroundedPredicateNode "scm: filter-atoms")
+          (ListLink 
            go
-           (VariableNode "$ns")
+            (VariableNode "$a")
+            (ConceptNode db)
           )
          )
         )
-       )
+        (MemberLink
+          gene
+          (VariableNode "$a"))
       )
+      (ExecutionOutputLink
+              (GroundedSchemaNode "scm: add-pathway-info")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
+    )))
 )
 
-;; Finds the definition of a GO term
-(define (find-godef go)
-(remove-set-ln
-       (cog-execute!
-        (GetLink
-         (VariableNode "$def")
+(define add-pathway-info 
+  (lambda (gene pathway)
+     (let ([res '()])
+      (if  (string-contains (cog-name pathway) "R-HSA")
+        (set! res (ListLink 
+            (node-info pathway)
+            (MemberLink gene pathway)
+            (ListLink 
+              (add-loc (MemberLink gene pathway))
+            )
+        ))
+     )
+     (if (string-contains (cog-name pathway) "SMP")
+        (set! res (ListLink 
+            (node-info pathway)
+            (MemberLink gene pathway)
+        ))
+     )
+     res
+     )
+))
 
          (EvaluationLink
           (PredicateNode "GO_definition")
@@ -287,14 +318,6 @@
 )
 
 ;; Finds a concept where a gene is a member of
-(define (findMember gene)
-(cog-execute! (GetLink
-    (VariableNode "$a")
-    (MemberLink
-       gene
-       (VariableNode "$a"))
-    )))
-
 
 ;; Finds entrez_id of a gene
 (define (find_entrez gene)
@@ -318,8 +341,8 @@
 
 ;; Finds proteins a gene expresses
 (define findprotein
-    (lambda(gene)
-        (cog-execute! (GetLink
+    (lambda (gene)
+        (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")
             (EvaluationLink
                (PredicateNode "expresses")
@@ -328,7 +351,22 @@
                (VariableNode "$a")
               )
             )
-    ))))
+            (ListLink
+              (EvaluationLink
+                (PredicateNode "expresses")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                )
+              )
+              (node-info (VariableNode "$a"))
+            )
+    )))
+    
+    ))
+;;
+
+;; can also be used to get any node name beside pathway, Except GO (which has different structure)
 
 ;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
@@ -345,14 +383,54 @@
 ))))
 
 ;; Finds molecules (proteins or chebi's) in a pathway 
-(define (findmol path)
-  (cog-execute! (GetLink
+(define (findmol path identifier)
+  (cog-execute! (BindLink
     (VariableNode "$a")
-    (MemberLink
+    (AndLink
+      (EvaluationLink
+        (GroundedPredicateNode "scm: filter-atoms")
+        (ListLink
+          (VariableNode "$a")
+          (ConceptNode identifier)
+        )
+      )
+       (MemberLink
        (VariableNode "$a")
-       path))
+       path)
+    )
+    (ExecutionOutputLink
+      (GroundedSchemaNode "scm: add-mol-info")
+      (ListLink
+        (VariableNode "$a")
+        path
+      )
+    )
+    )
+    )
+)
+
+(define add-mol-info
+  (lambda (mol path)
+    (ListLink
+      (node-info path)
+      (MemberLink mol path)
+      (ListLink 
+        (add-loc (MemberLink mol path))
+      )
+    )
   )
 )
+
+(define filter-atoms
+  (lambda (atom identifier)
+    (if (string-contains (cog-name atom) (cog-name identifier))
+        (cog-new-stv 1 1)
+        (cog-new-stv 0 0) 
+    )
+  )
+) 
+
+
 
 ;; append a list into a list to collect the result in one List
 (define (append . lsts)

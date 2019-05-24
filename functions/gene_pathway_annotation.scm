@@ -18,39 +18,60 @@
 
 ;; From SMPDB 
 
-(define (smpdb gene prot sm result)
-  (let ([pw (identify-pw gene "SMP")])
-  (for-each (lambda(path)
+(define (smpdb gene prot sm)
+  (let (
+    [pw (findMember (GeneNode gene) "SMP")]
+  
+  )
+
+  (define ls (flatten (map (lambda (path)
+      (let (
+        [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
+      )
         (set! result (append result (list (ListLink (MemberLink gene path) (node-info path)))))
-        (if (equal? sm "True")
-            (filter-by (cog-outgoing-set (findmol path)) "ChEBI:" path result))
-      )pw)
+      (if (equal? sm "True")
+        (ListLink (cog-outgoing-set (findmol node "ChEBI")))
+        '()
+        )
+
+      )
+  ) pw)) )
+
   (if (equal? prot "True")
-      (for-each (lambda(pro)
-            (set! result (append result
+   (append pw ls (findprotein (GeneNode gene)))
                     (list (ListLink (EvaluationLink (PredicateNode "expresses") (ListLink gene pro)) (node-info pro)))))
-                  )(cog-outgoing-set (findprotein gene))))
+   (append pw ls)
+  )
 result
 ))
 
-;;
-
-(define (filter-by res str path result)
-(for-each (lambda (m)
-  (if (string-contains (cog-name m) str)
-      (set! result (append result (list (ListLink (MemberLink m path) (node-info m))))
-              )res)
-  ) res))
-
 ;; From reactome
 
-(define (reactome gene prot small_mol result)
-    (let ([pw (identify-pw gene "R-HSA")])
-  
-      (for-each (lambda(path)
-        (set! result (append result (list (ListLink (node-info path) (MemberLink gene path) (ListLink (add-loc (MemberLink gene path))) ))))
+(define (reactome gene prot sm)
+    (let (
+      [pw (findMember (GeneNode gene) "R-HSA")]
+      [ls '()]
+      )
 
-        (if (equal? prot "True")
+      (set! ls (flatten (map (lambda (path)
+        (let (
+            [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
+            [tmp '()]
+        )
+          (if (equal? prot "True")
+            (set! tmp (append tmp (cog-outgoing-set (findmol node "UniProt"))))
+          )
+          (if (equal? sm "True")
+            (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
+          )
+
+          (if (null? tmp)
+            '()
+            tmp
+          )
+        )
+
+      )    
             (for-each (lambda (mol)
                 (if (string-contains (cog-name mol) "Uniprot:") 
                 (set! result (append result
@@ -61,18 +82,9 @@ result
             (if (string-contains (cog-name smol) "ChEBI:") 
             (set! result (append result
                     (list (ListLink (node-info smol) (MemberLink smol path) (ListLink (add-loc (MemberLink smol path))) )))))) (cog-outgoing-set (findmol path))))
-      )pw)
+      pw)))
 ) result)
 
-;; Identify Pathway based on given str (SMPDB or Reactome)
-
-(define (identify-pw gene str)
-  (let ([pw '()] 
-       [mem (cog-outgoing-set (findMember gene))])
-  (for-each (lambda (m)
-  (if (string-contains (cog-name m) str)
-      (set! pw (append pw (list m))))
-              )mem)
-  pw
+      (append pw ls) 
 ))
 

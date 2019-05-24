@@ -1,5 +1,5 @@
 
-(define (biogrid_interaction_annotation interaction gene_nodes )
+(define (biogrid-interaction-annotation gene_nodes interaction)
   (let ([result (list (ConceptNode "biogrid_interaction_annotation"))])
     
 	(for-each (lambda (gene)
@@ -13,7 +13,7 @@
 	        (set! result (append result (delete-duplicates (cog-outgoing-set (outputInteraction gene)))))
 	      ))
 
-    )gene_nodes)
+    )(mapSymbol gene_nodes))
 
   (ListLink result)
 ))

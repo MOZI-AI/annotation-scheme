@@ -146,10 +146,10 @@
 							[node (create-node genes node-id node-name node-definition annotation)]
 							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
-						(if (not (node-exists? node-id atoms))
+						(if (not (node-exists? node1-name atoms))
 							 (begin
-								(set! nodes (append (list node) nodes))
-								(set! atoms (cons node-id atoms))
+								(set! nodes (append (list node1) nodes))
+								(set! atoms (cons node1-name atoms))
 							 )
 						)
 					    (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))

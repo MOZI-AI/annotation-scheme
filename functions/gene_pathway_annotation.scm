@@ -2,15 +2,15 @@
     (let ([result (list (ConceptNode "gene_pathway_annotation"))])
 
     (for-each (lambda (gene)
-    (for-each (lambda(pathw)
+    (for-each (lambda (pathw)
         (if (equal? pathw "smpdb")
-            (set! result (smpdb gene prot small_mol result))
+            (set! result (append result (smpdb gene prot small_mol)))
             )
         (if (equal? pathw "reactome")
-            (set! result (reactome gene prot small_mol result))
+            (set! result (append result (reactome gene prot small_mol)))
             )
-                )(string-split pathway #\ ))
-    )(mapSymbol gene_nodes))
+        )(string-split pathway #\ ))
+    ) gene_nodes)
  
   (ListLink result)
 ))  
@@ -28,7 +28,6 @@
       (let (
         [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
       )
-        (set! result (append result (list (ListLink (MemberLink gene path) (node-info path)))))
       (if (equal? sm "True")
         (ListLink (cog-outgoing-set (findmol node "ChEBI")))
         '()
@@ -39,11 +38,10 @@
 
   (if (equal? prot "True")
    (append pw ls (findprotein (GeneNode gene)))
-                    (list (ListLink (EvaluationLink (PredicateNode "expresses") (ListLink gene pro)) (node-info pro)))))
-   (append pw ls)
+               
+   (append pw ls))
   )
-result
-))
+)
 
 ;; From reactome
 
@@ -73,7 +71,7 @@ result
 
       )    
       pw)))
-) result)
-
       (append pw ls) 
-))
+  ) 
+
+)

@@ -108,7 +108,6 @@
 ;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
 (define find-parent
   (lambda (node namespaces)
-        (let (
         (let ([atom (cog-outgoing-atom node 1)])
           (cog-outgoing-set (cog-execute! (BindLink
             (VariableNode "$a")

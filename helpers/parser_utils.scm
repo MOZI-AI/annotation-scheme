@@ -1,7 +1,7 @@
-(define* (create-node id name defn annotation)
- (if (is-gene-main? id gene_nodes)
- 	(make-node (make-node-data id name defn "main") "nodes")
-    (make-node (make-node-data id name defn annotation) "nodes")
+(define* (create-node genes id name defn annotation)
+ (if (is-gene-main? id genes)
+ 	(make-node (make-node-data id name defn "" "main") "nodes")
+    (make-node (make-node-data id name defn "" annotation) "nodes")
  )
 )
 
@@ -19,7 +19,7 @@
 
 (define* (is-gene-main? gene gene_list)
  (if (null? gene_list) #f
-	(if (equal? gene (cog-name (car gene_list))) #t
+	(if (equal? gene (car gene_list)) #t
 	    (is-gene-main? gene (cdr gene_list))
 	)
  )
@@ -32,8 +32,8 @@
   )
   (for-each
     (lambda(annotations)
-     (if (equal? annotation (cog-name (car annotations)))
-      (set! annotation_list (cdr annotations))
+     (if (equal? annotation (cog-name (car (cog-outgoing-set annotations) )))
+      (set! annotation_list (cdr (cog-outgoing-set annotations)))
      )
     )
    annotation-list)
@@ -82,6 +82,10 @@
  )
 )
 
+;(define* (get-node-location node-info)
+;
+;)
+
 (define* (get-node-info-from-biogrid node-info ref id)
  (let*
   (
@@ -89,17 +93,17 @@
   )
   (if (equal? ref "name")
    (begin
-	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 0)) id)
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 1)))
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 3) 1) 1)))
+	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 0) 1) 0)) id)
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 0) 1) 1)))
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 0) 1) 1)))
 	)
    )
   )
   (if (equal? ref "defn")
    (begin
-	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 0)) id)
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 1)))
-	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 4) 1) 1)))
+	(if (equal? (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 0) 1) 0)) id)
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 1) 1) 1) 1)))
+	 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom node-info 2) 1) 1) 1)))
 	)
    )
   )

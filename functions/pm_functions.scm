@@ -1,6 +1,20 @@
 ;; a set of helper methods
+
+;; Parser PM functions
+
+(define-syntax try
+    (syntax-rules (catch)
+      ((_ body (catch catcher))
+       (call-with-current-continuation
+        (lambda (exit)
+          (with-exception-handler
+           (lambda (condition)
+             catcher
+             (exit condition))
+           (lambda () body)))))))
+
 (define (get-params p)
-(if(equal? (cog-type p) 'ListLink)
+ (if(equal? (cog-type p) 'ListLink)
     (map (lambda (t)
         (cog-name t)
         ) (cog-outgoing-set p))
@@ -198,6 +212,7 @@
 (EvaluationLink (PredicateNode "has_definition") (ListLink go (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go)))) 
 ))
 
+;; Finds parents of a GO term ( of given namespace type) 
 (define find-GO-ns 
   (lambda (go)
     (cog-outgoing-set (cog-execute!
@@ -216,26 +231,7 @@
   )
 )
 
-(define (parent_finder go namespace)
-   (cog-execute! (GetLink
-            (VariableNode "$a")
-            (AndLink
-              (InheritanceLink
-                go
-                (VariableNode "$a"))
-              (EvaluationLink
-               (PredicateNode "GO_namespace")
-                 (ListLink
-                   (VariableNode "$a")
-                  (ConceptNode namespace)
-                  )
-                )
-            )
-
-            )
-))
-
-
+;; Finds the name of a GO term
 (define findGoname
     (lambda(go)
         (cog-execute! (GetLink
@@ -252,8 +248,45 @@
     )
 )
 
-;;
+;; Finds the namespace of a GO term
+(define (find-GO-ns go)
+(remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$ns")
 
+         (EvaluationLink
+          (PredicateNode "GO_namespace")
+          (ListLink
+           go
+           (VariableNode "$ns")
+          )
+         )
+        )
+       )
+      )
+)
+
+;; Finds the definition of a GO term
+(define (find-godef go)
+(remove-set-ln
+       (cog-execute!
+        (GetLink
+         (VariableNode "$def")
+
+         (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )
+       )
+      )
+)
+
+;; Finds a concept where a gene is a member of
 (define (findMember gene)
 (cog-execute! (GetLink
     (VariableNode "$a")
@@ -263,8 +296,7 @@
     )))
 
 
-;;
-
+;; Finds entrez_id of a gene
 (define (find_entrez gene)
  (get-name
    (remove-set-ln
@@ -284,9 +316,7 @@
  )
 )
 
-;;
-
-
+;; Finds proteins a gene expresses
 (define findprotein
     (lambda(gene)
         (cog-execute! (GetLink
@@ -299,10 +329,8 @@
               )
             )
     ))))
-;;
 
-;; can also be used to get any node name beside pathway, Except GO (which has different structure)
-
+;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
     (lambda(pw)
         (cog-execute! (GetLink
@@ -316,8 +344,7 @@
             )
 ))))
 
-;;
-
+;; Finds molecules (proteins or chebi's) in a pathway 
 (define (findmol path)
   (cog-execute! (GetLink
     (VariableNode "$a")
@@ -327,8 +354,6 @@
   )
 )
 
-
-
 ;; append a list into a list to collect the result in one List
 (define (append . lsts)
   (cond
@@ -336,10 +361,8 @@
     ((null? (car lsts)) (apply append (cdr lsts)))
     (else (cons (caar lsts) (apply append (cdar lsts) (cdr lsts))))))
 
-;;
 
-
-
+;; Finds genes interacting with a given gene
 (define matchGeneInteractors
     (lambda(gene)
         (cog-execute! (BindLink
@@ -353,16 +376,16 @@
                (VariableNode "$a")
               )
             )
-	     (EvaluationLink
-	       (PredicateNode "interacts_with")
-		      (ListLink
-		        gene
-		        (VariableNode "$a")))
+            (ExecutionOutputLink
+              (GroundedSchemaNode "scm: generate-result")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                ))
     ))	
 ))
 
-;;;
-
+;;; Finds output genes interacting eachother 
 (define outputInteraction
     (lambda(gene)
         (cog-execute! (BindLink
@@ -392,17 +415,16 @@
                (VariableNode "$b")
               ))
           )
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               (VariableNode "$a")
-               (VariableNode "$b")
+          (ExecutionOutputLink
+            (GroundedSchemaNode "scm: generate-result")
+              (ListLink
+                (VariableNode "$a")
+                (VariableNode "$b")
               ))
     ))	
 ))
-;;;
 
-
+;; Finds Protein-protein equivalence of a gene-gene interaction 
 (define findProtInteractor
   (lambda(gene)
      (cog-execute! (BindLink
@@ -435,13 +457,61 @@
 		 ))
 	 )
 
-		(EvaluationLink
-		  (PredicateNode "interacts_with")
-		   (ListLink
-			   (VariableNode "$c")
-			   (VariableNode "$b")
-		))
+  ;; This will be executed if the above pattern is found.
+  (ExecutionOutputLink
+    (GroundedSchemaNode "scm: generate-result")
+		  (ListLink
+		    (VariableNode "$c")
+		    (VariableNode "$b")
+		  ))
 	
-	))
+))
+))
+
+;; Find node name and description
+
+(define (node-info node)
+    (ListLink
+      (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+      (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
+    )
 )
+
+(define (node-name node)
+(let
+    ([lst (cog-outgoing-set (findpwname node))]
+    [name ""])
+    (if (>= (length lst) 1)
+	(set! name (list-ref lst 0))
+	(set! name (ConceptNode "")))
+name
+)
+
+)
+
+;; Add location of a gene/Molecule node in context of Reactome pathway
+
+(define (add-loc node)
+(let ([child (cog-outgoing-atom node 0)] 
+      [parent (cog-outgoing-atom node 1) ])
+(cog-outgoing-set (cog-execute!
+  (BindLink
+    (VariableNode "$loc")
+    (AndLink
+      (MemberLink (stv 1 1) 
+        child
+        parent)
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+      (EvaluationLink (stv 1 1)
+        (PredicateNode "has_location")
+        (ListLink
+          child
+          (VariableNode "$loc")))
+    )
+  )))
 )

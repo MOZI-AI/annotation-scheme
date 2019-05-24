@@ -1,7 +1,7 @@
-(define* (create-node genes id name defn annotation)
+(define* (create-node genes id name defn location annotation)
  (if (is-gene-main? id genes)
- 	(make-node (make-node-data id name defn "" "main") "nodes")
-    (make-node (make-node-data id name defn "" annotation) "nodes")
+ 	(make-node (make-node-data id name defn location "main") "nodes")
+    (make-node (make-node-data id name defn location annotation) "nodes")
  )
 )
 
@@ -82,10 +82,6 @@
  )
 )
 
-;(define* (get-node-location node-info)
-;
-;)
-
 (define* (get-node-info-from-biogrid node-info ref id)
  (let*
   (
@@ -107,6 +103,67 @@
 	)
    )
   )
+  response
+ )
+)
+
+(define* (is-cellular_component? node-info)
+ (let*
+  (
+	 [response #f]
+  )
+  (for-each
+   (lambda (info)
+    (if (equal? (cog-name (cog-outgoing-atom info 0)) "GO_namespace")
+	 (set! response (if (equal? "cellular_component" (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1))) #t #f))
+    )
+   )
+  node-info)
+  response
+ )
+)
+
+(define* (get-node-loc node-info)
+ (let*
+  (
+	  [response ""]
+  )
+  (if (is-cellular_component? node-info)
+   (for-each
+	(lambda (info)
+	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
+	 	   (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+	   )
+	)
+	node-info)
+  )
+  response
+ )
+)
+
+(define* (get-node-loc-pathway node-info)
+ (let*
+  (
+	[response ""]
+  )
+ (for-each
+  (lambda (info)
+   (if (equal? 'ListLink (cog-type info))
+	(let*
+	 (
+		 [location-list (cog-outgoing-set info)]
+	 )
+	 (for-each
+	  (lambda (loc)
+	   (if (equal? (cog-name (cog-outgoing-atom loc 0)) "has_location")
+		(set! response (string-append (cog-name (cog-outgoing-atom (cog-outgoing-atom loc 1) 1)) " , "response))
+	   )
+	  )
+	 location-list)
+	)
+   )
+  )
+  node-info)
   response
  )
 )

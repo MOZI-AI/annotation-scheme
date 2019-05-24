@@ -53,7 +53,7 @@
 		   )
 		   (if (not (node-exists? gene atoms))
 			(begin
-			 (set! nodes (append (list (create-node genes gene gene-name gene-definition "")) nodes))
+			 (set! nodes (append (list (create-node genes gene gene-name gene-definition "" "")) nodes))
 			 (set! atoms (cons gene atoms))
 			)
 		   )
@@ -93,8 +93,8 @@
 					[node-id (cog-name (cog-outgoing-atom annot 1))]
 					[node-name (get-node-info node-info "name")]
 					[node-definition (get-node-info node-info "defn")]
-;					[node-location (get-node-location node-info)]
-					[node (create-node genes node-id node-name node-definition annotation)]
+					[node-location (get-node-loc node-info)]
+					[node (create-node genes node-id node-name node-definition node-location annotation)]
 					[gene-node (cog-name (cog-outgoing-atom annot 0))]
 				)
 				(if (not (node-exists? node-id atoms))
@@ -143,13 +143,14 @@
 							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
 							[node-name ""]
 							[node-definition (get-node-info node-info "defn")]
-							[node (create-node genes node-id node-name node-definition annotation)]
+							[node-location (get-node-loc-pathway node-info)]
+							[node (create-node genes node-id node-name node-definition node-location annotation)]
 							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
-						(if (not (node-exists? node1-name atoms))
+						(if (not (node-exists? node-id atoms))
 							 (begin
-								(set! nodes (append (list node1) nodes))
-								(set! atoms (cons node1-name atoms))
+								(set! nodes (append (list node) nodes))
+								(set! atoms (cons node-id atoms))
 							 )
 						)
 					    (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))
@@ -161,27 +162,24 @@
 				 (
 					 [predicate (cog-outgoing-atom annot 0)]
 					 [listlink (cog-outgoing-atom annot 1)]
-					 [node1-name (cog-name (cog-outgoing-atom listlink 0))]
-					 [node2-name (cog-name (cog-outgoing-atom listlink 1))]
-					 [node1-type (cog-type (cog-outgoing-atom listlink 0))]
-					 [node2-type (cog-type (cog-outgoing-atom listlink 1))]
-					 [node1 (create-node (cog-outgoing-atom listlink 0) annotation)]
-					 [node2 (create-node (cog-outgoing-atom listlink 1) annotation)]
+					 [node1-id (cog-name (cog-outgoing-atom listlink 0))]
+					 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
+					 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
+					 [node-id (if (unspecified? node-id) node1-id node-id)]
+					 [node-name ""]
+					 [node-definition (get-node-info node-info "defn")]
+					 [node-location (get-node-loc-pathway node-info)]
+					 [node (create-node genes node-id node-name node-definition node-location annotation)]
+					 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 				 )
 
-				 (if (not (node-exists? node1-name atoms))
+				 (if (not (node-exists? node-id atoms))
 					 (begin
-						(set! nodes (append (list node1) nodes))
-						(set! atoms (cons node1-name atoms))
+						(set! nodes (append (list node) nodes))
+						(set! atoms (cons node-id atoms))
 					 )
 				 )
-				 (if (not (node-exists? node2-name atoms))
-					(begin
-						(set! nodes (append (list node2) nodes))
-						(set! atoms (cons node2-name atoms))
-					)
-				 )
-				 (set! edges (append (list (create-edge-2 (cog-name (cog-outgoing-atom listlink 0)) (cog-name (cog-outgoing-atom listlink 1)) (cog-name predicate) annotation)) edges))
+				 (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))
 				)
 		   )
 		  )
@@ -219,7 +217,7 @@
 				 [node-name ""]
 				 [node-defn (get-node-info-from-biogrid  main-annotation "defn" node-id)]
 ;				 [node-defn ""]
-				 [node (create-node genes node-id node-name node-defn annotation)]
+				 [node (create-node genes node-id node-name node-defn "" annotation)]
 				 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 			 )
 			 (if (not (node-exists? node-id atoms))

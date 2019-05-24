@@ -25,7 +25,7 @@
 (primitive-load "helpers/pm_functions.scm")
 (primitive-load "helpers/parser_utils.scm")
 (primitive-load "functions/parser.scm")
-(primitive-load "helpers/utils.scm")
+
 
 
 ;; Load request handler

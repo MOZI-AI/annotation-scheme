@@ -119,7 +119,7 @@
                   (VariableNode "$a")
                 ))
         ))))) 
-        )
+        ) namespaces
       )
     parents  
   )
@@ -518,7 +518,7 @@
 ;; Find node name and description
 
 (define (node-info node)
-    (ListLink
+    (list
       (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
       (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
     )

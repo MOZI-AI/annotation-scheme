@@ -10,7 +10,7 @@
     )
   ) gene-list)
 
-(if (equal? unknown '())
+(if (null? unknown )
     (set! val-msg "0")
     (set! val-msg (string-append "1:" (string-join unknown ",")))
 )

@@ -93,14 +93,16 @@
 					[node-id (cog-name (cog-outgoing-atom annot 1))]
 					[node-name (get-node-info node-info "name")]
 					[node-definition (get-node-info node-info "defn")]
-					[node-location (get-node-loc node-info)]
-					[node (create-node genes node-id node-name node-definition node-location annotation)]
+					[node-locations (get-node-loc node-info)]
 					[gene-node (cog-name (cog-outgoing-atom annot 0))]
 				)
 				(if (not (node-exists? node-id atoms))
 					(begin
-						(set! nodes (append (list node) nodes))
-						(set! atoms (cons node-id atoms))
+					 	(set! atoms (cons node-id atoms))
+					 	(map (lambda (location)
+							  (set! nodes (append (list (create-node genes node-id node-name node-definition location annotation)) nodes))
+						)
+					 	node-locations)
 					)
 				)
 				(set! edges (append (list (create-edge gene-node node-id  "annotates" annotation)) edges))
@@ -141,16 +143,19 @@
 ;							TODO: Hedra should make sure either one of the atoms is not duplicate.
 							[node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-							[node-name ""]
+							[node-name (get-node-info node-info "name")]
 							[node-definition (get-node-info node-info "defn")]
-							[node-location (get-node-loc-pathway node-info)]
-							[node (create-node genes node-id node-name node-definition node-location annotation)]
+							[node-locations (get-node-loc-pathway node-info)]
 							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
 						(if (not (node-exists? node-id atoms))
 							 (begin
-								(set! nodes (append (list node) nodes))
-								(set! atoms (cons node-id atoms))
+							  	(set! atoms (cons node-id atoms))
+								(map (lambda (location)
+							  		(set! nodes (append (list (create-node genes node-id node-name node-definition location annotation)) nodes))
+								)
+					 			node-locations)
+
 							 )
 						)
 					    (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))
@@ -166,7 +171,7 @@
 					 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
 					 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 					 [node-id (if (unspecified? node-id) node1-id node-id)]
-					 [node-name ""]
+					 [node-name (get-node-info node-info "name")]
 					 [node-definition (get-node-info node-info "defn")]
 					 [node-location (get-node-loc-pathway node-info)]
 					 [node (create-node genes node-id node-name node-definition node-location annotation)]
@@ -214,7 +219,7 @@
 				 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 				 [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
 ;				 [node-name (get-node-info-from-biogrid (cog-outgoing-set main-annotation)"name" node-id)]
-				 [node-name ""]
+				 [node-name (get-node-info-from-biogrid  main-annotation "name" node-id)]
 				 [node-defn (get-node-info-from-biogrid  main-annotation "defn" node-id)]
 ;				 [node-defn ""]
 				 [node (create-node genes node-id node-name node-defn "" annotation)]

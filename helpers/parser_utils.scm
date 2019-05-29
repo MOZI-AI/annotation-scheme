@@ -126,13 +126,13 @@
 (define* (get-node-loc node-info)
  (let*
   (
-	  [response ""]
+	  [response '()]
   )
   (if (is-cellular_component? node-info)
    (for-each
 	(lambda (info)
 	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
-	 	   (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+	 	   (set! response (cons (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) response))
 	   )
 	)
 	node-info)
@@ -144,7 +144,7 @@
 (define* (get-node-loc-pathway node-info)
  (let*
   (
-	[response ""]
+	[response '()]
   )
  (for-each
   (lambda (info)
@@ -156,7 +156,7 @@
 	 (for-each
 	  (lambda (loc)
 	   (if (equal? (cog-name (cog-outgoing-atom loc 0)) "has_location")
-		(set! response (string-append (cog-name (cog-outgoing-atom (cog-outgoing-atom loc 1) 1)) " , "response))
+		(set! response (cons (cog-name (cog-outgoing-atom (cog-outgoing-atom loc 1) 1)) response))
 	   )
 	  )
 	 location-list)

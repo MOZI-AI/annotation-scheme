@@ -26,6 +26,8 @@
 (primitive-load "functions/pm_functions.scm")
 
 (primitive-load "helpers/utils.scm")
+(primitive-load "helpers/parser_utils.scm")
+
 (primitive-load "functions/parser.scm")
 
 
@@ -45,7 +47,7 @@
  (list 
   (gene-go-annotation (list "MAP2K4" "SPAG9") (list "biological_process" "cellular_component"))
   (gene-pathway-annotation (list "MAP2K4" "SPAG9") "smpdb reactome" "True" "True")
-  (biogrid-interaction-annotation (list "MAP2K4" "SPAG9") "proteins" )
+  (biogrid-interaction-annotation (list "MAP2K4" "SPAG9") "genes" )
  ))
 )
 ))
@@ -55,7 +57,7 @@
 (lambda (output-port)
 (display ex1 output-port)))
 
-(parse ex1 (list "MAP2K4" "SPAG9"))
+;;(parse ex1 (list "MAP2K4" "SPAG9")) 
 
   
 

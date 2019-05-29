@@ -131,7 +131,7 @@
   (if (is-cellular_component? node-info)
    (for-each
 	(lambda (info)
-	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
+	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_location")
 	 	   (set! response (cons (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) response))
 	   )
 	)

@@ -1,6 +1,6 @@
 
 (define (biogrid-interaction-annotation gene_nodes interaction)
-  (let ([result (list (ConceptNode "biogrid_interaction_annotation"))])
+  (let ([result (list (ConceptNode "biogrid-interaction-annotation"))])
     
 	(for-each (lambda (gene)
 		(if (equal? interaction "proteins")

@@ -1,5 +1,5 @@
 (define (gene-pathway-annotation gene_nodes pathway prot small_mol)
-    (let ([result (list (ConceptNode "gene_pathway_annotation"))])
+    (let ([result (list (ConceptNode "gene-pathway-annotation"))])
 
     (for-each (lambda (gene)
     (for-each (lambda (pathw)

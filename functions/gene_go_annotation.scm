@@ -3,7 +3,7 @@
     )
   (ListLink (ConceptNode "gene-go-annotation")
     (flatten (map (lambda (gene) 
-      (find-go-term gene namespace parents)
+      (find-go-term gene  (string-split namespace #\ ) parents)
   
   ) gene_nodes)))
   )

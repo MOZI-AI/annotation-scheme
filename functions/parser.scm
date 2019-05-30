@@ -93,16 +93,14 @@
 					[node-id (cog-name (cog-outgoing-atom annot 1))]
 					[node-name (get-node-info node-info "name")]
 					[node-definition (get-node-info node-info "defn")]
-					[node-locations (get-node-loc node-info)]
+					[node-location (get-node-loc node-info)]
+					[node (create-node genes node-id node-name node-definition node-location annotation)]
 					[gene-node (cog-name (cog-outgoing-atom annot 0))]
 				)
 				(if (not (node-exists? node-id atoms))
 					(begin
 					 	(set! atoms (cons node-id atoms))
-					 	(map (lambda (location)
-							  (set! nodes (append (list (create-node genes node-id node-name node-definition location annotation)) nodes))
-						)
-					 	node-locations)
+					 	(set! nodes (append (list node) nodes))
 					)
 				)
 				(set! edges (append (list (create-edge gene-node node-id  "annotates" annotation)) edges))
@@ -128,7 +126,7 @@
 		  (let*
 		   (
 
-			   [annot (list-ref (cog-outgoing-set main-annotation) 0)]
+			   [annot (list-ref (cog-outgoing-set main-annotation) 1)]
 			   [node-info (cog-outgoing-set main-annotation)]
 			   [annotation "gene_pathway_annotation"]
 			   [main-atom-type (cog-type annot)]

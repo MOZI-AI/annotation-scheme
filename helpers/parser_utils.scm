@@ -126,13 +126,13 @@
 (define* (get-node-loc node-info)
  (let*
   (
-	  [response '()]
+	  [response ""]
   )
   (if (is-cellular_component? node-info)
    (for-each
 	(lambda (info)
-	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_location")
-	 	   (set! response (cons (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) response))
+	   (if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
+	 	   (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
 	   )
 	)
 	node-info)

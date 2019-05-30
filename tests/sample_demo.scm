@@ -55,7 +55,7 @@
 (lambda (output-port)
 (display ex1 output-port)))
 
-(parse ex1 (list "MAP2K4" "SPAG9"))
+;(parse ex1 (list "MAP2K4" "SPAG9"))
 
   
 

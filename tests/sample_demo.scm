@@ -7,6 +7,7 @@
 (use-modules (opencog bioscience))
 (use-modules (ice-9 textual-ports))
 (use-modules (srfi srfi-1))
+(use-modules (json))
 
 ;; load sample dataset
 
@@ -24,9 +25,11 @@
 
 (primitive-load "functions/pm_functions.scm")
 
+(primitive-load "helpers/utils.scm")
+(primitive-load "helpers/parser_utils.scm")
 
 (primitive-load "functions/parser.scm")
-(primitive-load "helpers/utils.scm")
+
 
 
 ;; Load request handler
@@ -54,6 +57,7 @@
 (lambda (output-port)
 (display ex1 output-port)))
 
+;;(parse ex1 (list "MAP2K4" "SPAG9"))
 
   
 

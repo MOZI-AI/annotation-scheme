@@ -178,7 +178,9 @@
 
     (begin
     (let ([output (ListLink
-          (EvaluationLink (PredicateNode "Interacts_with") (ListLink var1 var2))
+          (if (null? (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))))
+            (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))
+            (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))))
           (node-info var2)
           (node-info var1)
           )])

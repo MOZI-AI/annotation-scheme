@@ -2,9 +2,9 @@
 (define-public (parse result genes)
    (let*
       (
-			 [go-annotations (get-annotations "gene_go_annotation" result)]
-			 [pathway-annotations (get-annotations "gene_pathway_annotation" result)]
-			 [biogrid-annotations (get-annotations "biogrid_interaction_annotation" result)]
+			 [go-annotations (get-annotations "gene-go-annotation" result)]
+			 [pathway-annotations (get-annotations "gene-pathway-annotation" result)]
+			 [biogrid-annotations (get-annotations "biogrid-interaction-annotation" result)]
 			 [nodes '()]
 			 [edges '()]
 			 [graph '()]
@@ -82,7 +82,7 @@
 		   (
 			   [annot (list-ref (cog-outgoing-set main-annotation) 0)]
 			   [node-info (cog-outgoing-set main-annotation)]
-			   [annotation "gene_go_annotation"]
+			   [annotation "gene-go-annotation"]
 			   [main-atom-type (cog-type annot)]
 			   [inner-atom (cog-outgoing-atom annot 0)]
 		   )
@@ -128,7 +128,7 @@
 
 			   [annot (list-ref (cog-outgoing-set main-annotation) 1)]
 			   [node-info (cog-outgoing-set main-annotation)]
-			   [annotation "gene_pathway_annotation"]
+			   [annotation "gene-pathway-annotation"]
 			   [main-atom-type (cog-type annot)]
 			   [inner-atom (cog-outgoing-atom annot 0)]
 		   )
@@ -204,7 +204,7 @@
   (map (lambda(main-annotation)
 		(let*
 		   (
-			   [annotation "biogrid_interaction_annotation"]
+			   [annotation "biogrid-interaction-annotation"]
 			   [annot (cog-outgoing-atom  main-annotation 0)]
 			   [main-atom-type (cog-type annot)]
 			   [node-info (cog-outgoing-set main-annotation)]

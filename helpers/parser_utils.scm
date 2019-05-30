@@ -226,12 +226,10 @@
 	)
 	(call-with-output-file file-name
   	(lambda (p)
-			(if (not (null? output))
-					(begin
-						(write result p)
-					)
-			)
+		(begin
+			(write result p)
 		)
+	)
 	)
 	file-name
  )

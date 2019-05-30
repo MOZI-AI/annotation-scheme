@@ -131,360 +131,1428 @@
 ;;;;; Biogrid
 
 (EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "FLNC")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK8")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAP2K7")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "AKT1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "ITCH")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK9")))
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "PML")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK10")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAP3K1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAP3K4")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK8")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK14")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "APP")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "JUN")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAP3K7")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK10")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK9")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAPK1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "GEMIN5")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "RBBP8")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "NBR1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "MAP3K3")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "NBR1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "KTI12")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "VASP")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "MAP2K4")
-(GeneNode "FLNB")))
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "FLNC")
+         )
+      )
+      (ConceptNode "pubmed:9006895")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:13130464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:16533805")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:10713157")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:15998799")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:11707464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9808624")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9207092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:11279118")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9162092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP2K7")
+         )
+      )
+      (ConceptNode "pubmed:13130464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP2K7")
+         )
+      )
+      (ConceptNode "pubmed:11062067")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "AKT1")
+         )
+      )
+      (ConceptNode "pubmed:15998799")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "AKT1")
+         )
+      )
+      (ConceptNode "pubmed:11707464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "ITCH")
+         )
+      )
+      (ConceptNode "pubmed:19737936")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:21900206")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:22366412")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "PML")
+         )
+      )
+      (ConceptNode "pubmed:10620019")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK10")
+         )
+      )
+      (ConceptNode "pubmed:15299005")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK10")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:9808624")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:15866172")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:10713157")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:16472679")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:27806347")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:14581471")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:12228228")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:14500727")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K1")
+         )
+      )
+      (ConceptNode "pubmed:15299005")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K4")
+         )
+      )
+      (ConceptNode "pubmed:9841871")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K4")
+         )
+      )
+      (ConceptNode "pubmed:15866172")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:13130464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:16533805")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:10713157")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:15998799")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:11707464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9808624")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9207092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:11279118")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:9162092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK14")
+         )
+      )
+      (ConceptNode "pubmed:9162092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK14")
+         )
+      )
+      (ConceptNode "pubmed:9808624")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "APP")
+         )
+      )
+      (ConceptNode "pubmed:21832049")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "JUN")
+         )
+      )
+      (ConceptNode "pubmed:13130464")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K7")
+         )
+      )
+      (ConceptNode "pubmed:12429732")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K7")
+         )
+      )
+      (ConceptNode "pubmed:12556533")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK10")
+         )
+      )
+      (ConceptNode "pubmed:15299005")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK10")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:21900206")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK9")
+         )
+      )
+      (ConceptNode "pubmed:22366412")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAPK1")
+         )
+      )
+      (ConceptNode "pubmed:12788955")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "GEMIN5")
+         )
+      )
+      (ConceptNode "pubmed:17541429")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "RBBP8")
+         )
+      )
+      (ConceptNode "pubmed:21988832")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "NBR1")
+         )
+      )
+      (ConceptNode "pubmed:25043814")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K3")
+         )
+      )
+      (ConceptNode "pubmed:9162092")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "MAP3K3")
+         )
+      )
+      (ConceptNode "pubmed:25043814")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "NBR1")
+         )
+      )
+      (ConceptNode "pubmed:25043814")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "KTI12")
+         )
+      )
+      (ConceptNode "pubmed:26344197")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "VASP")
+         )
+      )
+      (ConceptNode "pubmed:26344197")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MAP2K4")
+            (GeneNode "FLNB")
+         )
+      )
+      (ConceptNode "pubmed:19270716")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MAP2K4")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MAP2K4")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MAP3K3")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "NDRG1")
+         )
+      )
+      (ConceptNode "pubmed:22939629")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "NENF")
+         )
+      )
+      (ConceptNode "pubmed:22939629")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "CD2AP")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "HUWE1")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "LARP7")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "NOLC1")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "RABEP2")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "TXNDC9")
+         )
+      )
+      (ConceptNode "pubmed:22863883")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "ABL1")
+         )
+      )
+      (ConceptNode "pubmed:19470755")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "USP15")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MCM2")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MCM4")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MCM6")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "IVNS1ABP")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "SMC1A")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "ANK3")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "GAPVD1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "SMC3")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "SBNO1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "SOX4")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "PPP4R2")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "HSF1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "KIAA1468")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MCM7")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "PLK1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "PLK1")
+         )
+      )
+      (ConceptNode "pubmed:19596235")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "PLK1")
+         )
+      )
+      (ConceptNode "pubmed:28514442")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "ATG2B")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "SMEK1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "WEE1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SPAG9")
+            (GeneNode "MAX")
+         )
+      )
+      (ConceptNode "pubmed:12391307")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "JUN")
+            (GeneNode "MAPK1")
+         )
+      )
+      (ConceptNode "pubmed:29225075")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "JUN")
+            (GeneNode "MAPK1")
+         )
+      )
+      (ConceptNode "pubmed:10419510")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "JUN")
+            (GeneNode "MAPK1")
+         )
+      )
+      (ConceptNode "pubmed:11431474")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "GEMIN5")
+            (GeneNode "MAPK8")
+         )
+      )
+      (ConceptNode "pubmed:17541429")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SMC1A")
+            (GeneNode "USP15")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "MCM6")
+            (GeneNode "GAPVD1")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "USP15")
+            (GeneNode "IVNS1ABP")
+         )
+      )
+      (ConceptNode "pubmed:27173435")
+   )
+)
+ (EvaluationLink
+   (PredicateNode "has_pubmedID")
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "interacts_with")
+         (ListLink
+            (GeneNode "SMC1A")
+            (GeneNode "LARP7")
+         )
+      )
+      (ConceptNode "pubmed:29845934")
+   )
+)
 
 (EvaluationLink
 (PredicateNode "has_entrez_id")
 (ListLink 
 (GeneNode "MAP2K4")
 (ConceptNode "6416")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MAP2K4")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MAPK8")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MAP2K4")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MAP3K3")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "NDRG1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "NENF")))
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "CD2AP")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "HUWE1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "LARP7")))
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "NOLC1")))
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "RABEP2")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "TXNDC9")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "ABL1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "USP15")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MCM2")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MCM4")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MCM6")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "IVNS1ABP")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "SMC1A")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "ANK3")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "GAPVD1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "SMC3")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "SBNO1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "SOX4")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "PPP4R2")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "HSF1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "KIAA1468")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MCM7")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "PLK1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "ATG2B")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "SMEK1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "WEE1")))
-
-(EvaluationLink
-(PredicateNode "interacts_with")
-(ListLink 
-(GeneNode "SPAG9")
-(GeneNode "MAX")))
 
 (EvaluationLink
 (PredicateNode "has_entrez_id")

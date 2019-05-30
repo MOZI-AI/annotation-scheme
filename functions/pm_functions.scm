@@ -515,3 +515,20 @@ name
     )
   )))
 )
+
+;;                           
+(define (findpubmed interaction)
+(cog-outgoing-set
+(cog-execute! (BindLink
+(VariableNode "$p")
+(EvaluationLink
+(PredicateNode "has_pubmedID")
+(ListLink
+interaction
+(VariableNode "$p")))
+(EvaluationLink
+(PredicateNode "has_pubmedID")
+(ListLink
+interaction
+(VariableNode "$p")))))))
+

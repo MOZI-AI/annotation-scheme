@@ -5,8 +5,8 @@
  )
 )
 
-(define (create-edge node1 node2 name annotation)
-   (make-edge (make-edge-data node2 node1 name annotation) "edges")
+(define* (create-edge node1 node2 name annotation #:optional (pubmedId ""))
+   (make-edge (make-edge-data node2 node1 name pubmedId annotation) "edges")
 )
 
 (define* (node-exists? node node-list)
@@ -164,6 +164,25 @@
    )
   )
   node-info)
+  response
+ )
+)
+
+(define* (get-pubmedID node-info)
+ (let*
+  (
+	 [response ""]
+  )
+
+ (for-each
+ (lambda (info)
+  (if (equal? 'PredicateNode (cog-type (cog-outgoing-atom info 0)))
+   (if (equal? "has_pubmedID" (cog-name (cog-outgoing-atom info 0)))
+	(set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
+   )
+  )
+ )
+ node-info)
   response
  )
 )

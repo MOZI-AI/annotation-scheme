@@ -207,6 +207,8 @@
 			   [annotation "biogrid_interaction_annotation"]
 			   [annot (cog-outgoing-atom  main-annotation 0)]
 			   [main-atom-type (cog-type annot)]
+			   [node-info (cog-outgoing-set main-annotation)]
+
 		   )
 		   (if (equal? main-atom-type 'EvaluationLink)
 			(let*
@@ -217,12 +219,11 @@
 				 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
 				 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 				 [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-;				 [node-name (get-node-info-from-biogrid (cog-outgoing-set main-annotation)"name" node-id)]
 				 [node-name (get-node-info-from-biogrid  main-annotation "name" node-id)]
 				 [node-defn (get-node-info-from-biogrid  main-annotation "defn" node-id)]
-;				 [node-defn ""]
 				 [node (create-node genes node-id node-name node-defn "" annotation)]
 				 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
+				 [edge-pubmed-id (get-pubmedID node-info)]
 			 )
 			 (if (not (node-exists? node-id atoms))
 					 (begin
@@ -230,7 +231,7 @@
 						(set! atoms (append (list node-id) atoms))
 					 )
 			 )
-			 (set! edges (append (list (create-edge other-node-id node-id predicate  annotation)) edges))
+			 (set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
 			)
 		   )
 		  )

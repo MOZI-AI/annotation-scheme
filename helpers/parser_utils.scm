@@ -55,7 +55,7 @@
  )
 )
 
-(define* (get-node-info node-info ref)
+(define* (get-node-info-go node-info ref)
  (let*
   (
 	  [response ""]
@@ -74,6 +74,40 @@
 	 	(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
 		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
 		)
+	)
+   )
+  )
+  node-info)
+  response
+ )
+)
+
+(define* (get-node-info node-info ref)
+ (let*
+  (
+	[response ""]
+  )
+ (for-each
+  (lambda (info)
+   (if (equal? 'ListLink (cog-type info))
+	(let*
+	 (
+		 [location-list (cog-outgoing-set info)]
+	 )
+	 (for-each
+	  (lambda (loc)
+	   (if (equal? ref "name")
+	   	(if (equal? (cog-name (cog-outgoing-atom loc 0)) "has_name")
+		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom loc 1) 1)) )
+	    )
+	   )
+	   (if (equal? ref "defn")
+	   (if (equal? (cog-name (cog-outgoing-atom loc 0)) "has_definition")
+		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom loc 1) 1)))
+	    )
+	   )
+	  )
+	 location-list)
 	)
    )
   )
@@ -178,7 +212,7 @@
  (lambda (info)
   (if (equal? 'PredicateNode (cog-type (cog-outgoing-atom info 0)))
    (if (equal? "has_pubmedID" (cog-name (cog-outgoing-atom info 0)))
-	(set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
+	(set! response (build-pubmed-url (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1))))
    )
   )
  )
@@ -217,6 +251,10 @@
 	)
 	description
  )
+)
+
+(define* (build-pubmed-url nodename)
+ (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (list-ref (string-split nodename #\:) 1))
 )
 
 (define* (write-to-file)

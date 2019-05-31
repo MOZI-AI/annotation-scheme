@@ -91,8 +91,8 @@
 			   (let*
 				(
 					[node-id (cog-name (cog-outgoing-atom annot 1))]
-					[node-name (get-node-info node-info "name")]
-					[node-definition (get-node-info node-info "defn")]
+					[node-name (get-node-info-go node-info "name")]
+					[node-definition (get-node-info-go node-info "defn")]
 					[node-location (get-node-loc node-info)]
 					[node (create-node genes node-id node-name node-definition node-location annotation)]
 					[gene-node (cog-name (cog-outgoing-atom annot 0))]
@@ -221,23 +221,51 @@
 			 (
 				 [predicate (cog-name (cog-outgoing-atom annot 0))]
 				 [listlink (cog-outgoing-atom annot 1)]
-				 [node1-id (cog-name (cog-outgoing-atom listlink 0))]
-				 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
-				 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
-				 [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-				 [node-name (get-node-info-from-biogrid  main-annotation "name" node-id)]
-				 [node-defn (get-node-info-from-biogrid  main-annotation "defn" node-id)]
-				 [node (create-node genes node-id node-name node-defn "" annotation)]
-				 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
-				 [edge-pubmed-id (get-pubmedID node-info)]
 			 )
-			 (if (not (node-exists? node-id atoms))
+			 (if (equal? 'MemberLink (cog-type (cog-outgoing-atom listlink 0)))
+			  (let*
+			   (
+				   [node1-id (cog-name (cog-outgoing-atom listlink 0))]
+				   [node2-id (cog-name (cog-outgoing-atom listlink 1))]
+				   [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
+				   [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
+				   [node-name (get-node-info  node-info "name")]
+				   [node-defn (get-node-info  node-info "defn")]
+				   [node (create-node genes node-id node-name node-defn "" annotation)]
+				   [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
+				   [edge-pubmed-id (get-pubmedID node-info)]
+			   )
+			    (if (not (node-exists? node-id atoms))
 					 (begin
 						(set! nodes (append (list node) nodes))
 						(set! atoms (append (list node-id) atoms))
 					 )
+			    )
+			   	(set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
+			  )
 			 )
-			 (set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
+			 (if (equal? 'EvaluationLink (cog-type (cog-outgoing-atom listlink 0)))
+			  (let*
+			   (
+				   [node1-id (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom listlink 0) 1) 0))]
+				   [node2-id (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom listlink 0) 1) 1))]
+				   [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
+				   [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
+				   [node-name (get-node-info  node-info "name")]
+				   [node-defn (get-node-info  node-info "defn")]
+				   [node (create-node genes node-id node-name node-defn "" annotation)]
+				   [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
+				   [edge-pubmed-id (get-pubmedID node-info)]
+			   )
+			   (if (not (node-exists? node-id atoms))
+					(begin
+						(set! nodes (append (list node) nodes))
+						(set! atoms (append (list node-id) atoms))
+					)
+			   )
+			   (set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
+			  )
+			 )
 			)
 		   )
 		  )

@@ -56,7 +56,8 @@
 )
 
 (define* (get-node-info-go node-info ref)
- (let*
+ (call/cc (lambda (k)
+	(let*
   (
 	  [response ""]
   )
@@ -65,21 +66,29 @@
    (if (equal? ref "name")
 	(begin
 		(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
-		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
+		 (if (not (string-null? response))
+		 		(k response)
+		 )
+
+		 )
 		)
 	)
-   )
    (if (equal? ref "defn")
 	(begin
 	 	(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
 		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+		 (if (not (string-null? response))
+		 		(k response)
+		 )
 		)
 	)
-   )
-  )
+   ))
   node-info)
   response
  )
+ 
+ ))
 )
 
 (define* (get-node-info node-info ref)

@@ -1,10 +1,9 @@
-
 (define-public (parse result genes)
    (let*
       (
 			 [go-annotations (get-annotations "gene-go-annotation" (cdr result))]
 			 [pathway-annotations (get-annotations "gene-pathway-annotation" (cdr result))]
-			 [biogrid-annotations (get-annotations "gene-pathway-annotation" (cdr result))]
+			 [biogrid-annotations (get-annotations "biogrid-interaction-annotation" (cdr result))]
 			 [nodes '()]
 			 [edges '()]
 			 [graph '()]
@@ -126,7 +125,7 @@
 		  (let*
 		   (
 
-			   [annot (list-ref (cog-outgoing-set main-annotation) 2)]
+			   [annot (car (cog-outgoing-set main-annotation))]
 			   [node-info (cog-outgoing-set main-annotation)]
 			   [annotation "gene-pathway-annotation"]
 			   [main-atom-type (cog-type annot)]
@@ -141,8 +140,8 @@
 ;							TODO: Hedra should make sure either one of the atoms is not duplicate.
 							[node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 							[node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-							[node-name (get-node-info node-info "name")]
-							[node-definition (get-node-info node-info "defn")]
+							[node-name (get-node-info-go node-info "name")]
+							[node-definition (get-node-info-go node-info "defn")]
 							[node-locations (get-node-loc-pathway node-info)]
 							[other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 						)
@@ -172,8 +171,8 @@
 					 [node2-id (cog-name (cog-outgoing-atom listlink 1))]
 					 [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 					 [node-id (if (unspecified? node-id) node1-id node-id)]
-					 [node-name (get-node-info node-info "name")]
-					 [node-definition (get-node-info node-info "defn")]
+					 [node-name (get-node-info-go node-info "name")]
+					 [node-definition (get-node-info-go node-info "defn")]
 					 [node-locations (get-node-loc-pathway node-info)]
 					 [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 				 )
@@ -229,8 +228,8 @@
 				   [node2-id (cog-name (cog-outgoing-atom listlink 1))]
 				   [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 				   [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-				   [node-name (get-node-info  node-info "name")]
-				   [node-defn (get-node-info  node-info "defn")]
+				   [node-name (get-node-info-go  node-info "name")]
+				   [node-defn (get-node-info-go  node-info "defn")]
 				   [node (create-node genes node-id node-name node-defn "" annotation)]
 				   [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 				   [edge-pubmed-id (get-pubmedID node-info)]
@@ -241,7 +240,7 @@
 						(set! atoms (append (list node-id) atoms))
 					 )
 			    )
-			   	(set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
+			   	(set! edges (append (list (create-edge other-node-id node-id predicate annotation edge-pubmed-id)) edges))
 			  )
 			 )
 			 (if (equal? 'EvaluationLink (cog-type (cog-outgoing-atom listlink 0)))
@@ -251,8 +250,8 @@
 				   [node2-id (cog-name (cog-outgoing-atom (cog-outgoing-atom (cog-outgoing-atom listlink 0) 1) 1))]
 				   [node-id (if (not (node-exists? node1-id atoms)) node1-id (if (not (node-exists? node2-id atoms)) node2-id))]
 				   [node-id (if (unspecified? node-id) node1-id node-id)] ;TODO Weird issue where a node becomes unspecified for no reason
-				   [node-name (get-node-info  node-info "name")]
-				   [node-defn (get-node-info  node-info "defn")]
+				   [node-name (get-node-info-go  node-info "name")]
+				   [node-defn (get-node-info-go  node-info "defn")]
 				   [node (create-node genes node-id node-name node-defn "" annotation)]
 				   [other-node-id (if (equal? node1-id node-id) node2-id node1-id)]
 				   [edge-pubmed-id (get-pubmedID node-info)]
@@ -263,7 +262,7 @@
 						(set! atoms (append (list node-id) atoms))
 					)
 			   )
-			   (set! edges (append (list (create-edge other-node-id node-id predicate edge-pubmed-id annotation)) edges))
+			   (set! edges (append (list (create-edge other-node-id node-id predicate annotation edge-pubmed-id)) edges))
 			  )
 			 )
 			)
@@ -275,4 +274,3 @@
      data
  )
 )
-

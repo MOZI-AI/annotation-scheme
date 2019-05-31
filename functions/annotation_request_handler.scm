@@ -22,7 +22,7 @@ val-msg ))
 (define (gene-info genes)
     (let ([info '()])
          (for-each (lambda (g)
-              (set! info (append info (list (node-info g))))
+              (set! info (append info (list (ListLink (node-info g)))))
          ) genes)
 info))
 

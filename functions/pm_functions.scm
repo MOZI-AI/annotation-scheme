@@ -277,8 +277,8 @@
      (let ([res '()])
       (if  (string-contains (cog-name pathway) "R-HSA")
         (set! res (ListLink 
-            (node-info pathway)
             (MemberLink gene pathway)
+            (node-info pathway)
             (ListLink 
               (add-loc (MemberLink gene pathway))
             )
@@ -286,8 +286,8 @@
      )
      (if (string-contains (cog-name pathway) "SMP")
         (set! res (ListLink 
-            (node-info pathway)
             (MemberLink gene pathway)
+            (node-info pathway)
         ))
      )
      res

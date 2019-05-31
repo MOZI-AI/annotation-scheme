@@ -29,8 +29,12 @@
         [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
       )
       (if (equal? sm "True")
-        (ListLink (cog-outgoing-set (findmol node "ChEBI")))
-        '()
+          (let ([mols (cog-outgoing-set (findmol node "ChEBI"))])
+            (if (not (null? mols))
+              (ListLink mols)
+              '()
+            )
+          )
         )
 
       )

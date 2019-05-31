@@ -2,16 +2,16 @@
 (define-public (parse result genes)
    (let*
       (
-			 [go-annotations (get-annotations "gene-go-annotation" result)]
-			 [pathway-annotations (get-annotations "gene-pathway-annotation" result)]
-			 [biogrid-annotations (get-annotations "biogrid-interaction-annotation" result)]
+			 [go-annotations (get-annotations "gene-go-annotation" (cdr result))]
+			 [pathway-annotations (get-annotations "gene-pathway-annotation" (cdr result))]
+			 [biogrid-annotations (get-annotations "gene-pathway-annotation" (cdr result))]
 			 [nodes '()]
 			 [edges '()]
 			 [graph '()]
 			 [data '()]
 			 [json '()]
       )
-	 (set! data (create-gene-nodes result data genes))
+	 (set! data (create-gene-nodes (car result) data genes))
 	 (set! data (parse-go-annotations go-annotations data genes))
 	 (set! data (parse-pathway-annotations pathway-annotations data genes))
 	 (set! data (parse-biogrid-annotations biogrid-annotations data genes))
@@ -33,23 +33,23 @@
 	  [atoms '()]
   )
   (for-each
-    (lambda(annotation-atoms)
+    (lambda (annotation-atoms)
 	 (let*
 	  (
 		  [annotations (cog-outgoing-set annotation-atoms)]
 	  )
-	  (if (equal? 2 (length annotations))
+	  (if (equal? 2 (length annotations)) ;;there should be a better way to 
 	   (begin
 		(for-each
 		 (lambda (gene-info)
 		  (begin (if (equal? (cog-name (cog-outgoing-atom gene-info 0)) "has_name")
 			(begin
-			 (set! gene (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 0)))
-			 (set! gene-name (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 1)))
+			 (set! gene (cog-name (car (cog-outgoing-set (cog-outgoing-atom gene-info 1)))))
+			 (set! gene-name (cog-name (cadr (cog-outgoing-set (cog-outgoing-atom gene-info 1)))))
 			)
 		   )
-		   (if (equal? (cog-name (cog-outgoing-atom gene-info 0)) "has_definition")
-			(set! gene-definition (cog-name (cog-outgoing-atom (cog-outgoing-atom gene-info 1) 1)))
+		   (if (equal? (cog-name (cog-outgoing-atom gene-info 1)) "has_definition")
+			(set! gene-definition (cog-name (cadr (cog-outgoing-set (cog-outgoing-atom gene-info 1)))))
 		   )
 		   (if (not (node-exists? gene atoms))
 			(begin
@@ -126,7 +126,7 @@
 		  (let*
 		   (
 
-			   [annot (list-ref (cog-outgoing-set main-annotation) 1)]
+			   [annot (list-ref (cog-outgoing-set main-annotation) 2)]
 			   [node-info (cog-outgoing-set main-annotation)]
 			   [annotation "gene-pathway-annotation"]
 			   [main-atom-type (cog-type annot)]
@@ -149,10 +149,13 @@
 						(if (not (node-exists? node-id atoms))
 							 (begin
 							  	(set! atoms (cons node-id atoms))
-								(map (lambda (location)
-							  		(set! nodes (append (list (create-node genes node-id node-name node-definition location annotation)) nodes))
-								)
-					 			node-locations)
+									(if (null? node-locations)
+										(set! nodes (append (list (create-node genes node-id node-name node-definition "" annotation)) nodes))
+										(map (lambda (location)
+							  			(set! nodes (append (list (create-node genes node-id node-name node-definition location 	annotation)) nodes))
+											)
+					 						node-locations)
+									)
 
 							 )
 						)
@@ -177,10 +180,13 @@
 				 (if (not (node-exists? node-id atoms))
 					 (begin
 						(set! atoms (cons node-id atoms))
-						(map (lambda (location)
-							(set! nodes (append (list (create-node genes node-id node-name node-definition location annotation)) nodes))
-						)
-						node-locations)
+						(if (null? node-locations)
+										(set! nodes (append (list (create-node genes node-id node-name node-definition "" 	annotation)) nodes))
+										(map (lambda (location)
+							  			(set! nodes (append (list (create-node genes node-id node-name node-definition location 	annotation)) nodes))
+											)
+					 						node-locations)
+									)
 					 )
 				 )
 				 (set! edges (append (list (create-edge other-node-id node-id "annotates" annotation)) edges))

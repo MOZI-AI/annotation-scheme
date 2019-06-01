@@ -21,23 +21,22 @@
 (define (smpdb gene prot sm)
   (let (
     [pw (findMember (GeneNode gene) "SMP")]
+    [ls '()]
   
   )
 
-  (define ls (flatten (map (lambda (path)
+  (set! ls (flatten (map (lambda (path)
       (let (
-        [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
+        [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
+        [tmp '()]
       )
       (if (equal? sm "True")
-          (let ([mols (cog-outgoing-set (findmol node "ChEBI"))])
-            (if (not (null? mols))
-              (ListLink mols)
-              '()
-            )
+          (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
+      )
+        (if (null? tmp)
+            '()
+            tmp
           )
-          '()
-        )
-
       )
   ) pw)) )
 
@@ -58,11 +57,11 @@
 
       (set! ls (flatten (map (lambda (path)
         (let (
-            [node (cog-outgoing-atom (cog-outgoing-atom path 1) 1)]
+            [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
             [tmp '()]
         )
           (if (equal? prot "True")
-            (set! tmp (append tmp (cog-outgoing-set (findmol node "UniProt"))))
+            (set! tmp (append tmp (cog-outgoing-set (findmol node "Uniprot"))))
           )
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))

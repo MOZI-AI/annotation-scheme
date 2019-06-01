@@ -381,8 +381,8 @@
 (define add-mol-info
   (lambda (mol path)
     (ListLink
-      (node-info path)
       (MemberLink mol path)
+      (node-info mol)
       (ListLink 
         (add-loc (MemberLink mol path))
       )

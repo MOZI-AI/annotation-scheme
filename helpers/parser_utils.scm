@@ -62,28 +62,35 @@
 	  [response ""]
   )
   (for-each
-  (lambda(info)
-   (if (equal? ref "name")
-	(begin
-		(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
-		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
-		 (if (not (string-null? response))
-		 		(k response)
-		 )
+  (lambda (info)
+		(let ([link (cog-outgoing-atom info 0)])
+			(if (not (null? link))
+				(begin 
+					(if (equal? ref "name")
+				(begin
+					(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_name")
+					(set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)))
+					(if (not (string-null? response))
+							(k response)
+					)
 
-		 )
+					)
+					)
+			)
+			(if (equal? ref "defn")
+				(begin
+					(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
+					(set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
+					(if (not (string-null? response))
+							(k response)
+					)
+					)
+				)
+			)
+				)
+			)
+		)		
 		)
-	)
-   (if (equal? ref "defn")
-	(begin
-	 	(if (equal? (cog-name (cog-outgoing-atom info 0)) "has_definition")
-		 (set! response (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1)) )
-		 (if (not (string-null? response))
-		 		(k response)
-		 )
-		)
-	)
-   ))
   node-info)
   response
  )
@@ -240,8 +247,8 @@
  	(case atom-type
 	 ('MoleculeNode
 		(begin
-		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "CHEBI")
-			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
+		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "ChEBI")
+			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (list-ref (string-split (cog-name node) #\:) 1)))
 	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
 		 )
 		)

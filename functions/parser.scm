@@ -221,7 +221,16 @@
 				 [predicate (cog-name (cog-outgoing-atom annot 0))]
 				 [listlink (cog-outgoing-atom annot 1)]
 			 )
-			 (if (equal? 'MemberLink (cog-type (cog-outgoing-atom listlink 0)))
+			 ;sample main atom for protein type biogrid result
+			 ;(EvaluationLink
+      		 ;	(PredicateNode "interacts_with")
+			 ;		  (ListLink
+			 ;			 (MoleculeNode "Uniprot:Q6PIE6")
+			 ;			 (MoleculeNode "Uniprot:Q9NYE5")
+			 ;		  )
+			 ;)
+			 ; Case handling Biogrid Protein Results
+			 (if (equal? 'MoleculeNode (cog-type (cog-outgoing-atom listlink 0)))
 			  (let*
 			   (
 				   [node1-id (cog-name (cog-outgoing-atom listlink 0))]
@@ -243,6 +252,21 @@
 			   	(set! edges (append (list (create-edge other-node-id node-id predicate annotation edge-pubmed-id)) edges))
 			  )
 			 )
+			 ;sample main atom for gene type biogrid result
+			 ;(EvaluationLink
+			 ;  (PredicateNode "has_pubmedID")
+			 ;  (ListLink
+			 ;    (EvaluationLink
+			 ;       (PredicateNode "interacts_with")
+			 ;          (ListLink
+			 ;            (GeneNode "SMC1A")
+			 ;            (GeneNode "USP15")
+			 ;           )
+			 ;       )
+			 ;    (ConceptNode "pubmed:27173435")
+			 ;  )
+			 ;)
+			 ;case handling Biogrid Gene Results
 			 (if (equal? 'EvaluationLink (cog-type (cog-outgoing-atom listlink 0)))
 			  (let*
 			   (

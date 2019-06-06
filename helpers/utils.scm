@@ -136,40 +136,6 @@
         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
         (else (list x))))
 
-;; build description URL of a node
-
-(define (build-desc-url node)
- (let
-	(
-		[atom-type (cog-type node)]
-		[description ""]
-	)
- 	(case atom-type
-	 ('MoleculeNode
-		(begin
-		 (if (equal? (list-ref (string-split (cog-name node) #\:) 0) "ChEBI")
-			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:" (cog-name node)))
-	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (list-ref (string-split (cog-name node) #\:) 1)))
-		 )
-		)
-	 )
-	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (find_entrez node))))
-	 ('ConceptNode
-		(begin
-		 (if (string-contains (cog-name node) "SMP")
-		 	(set! description (string-append "http://smpdb.ca/view/" (cog-name node)))
-		 )
-		 (if (string-contains (cog-name node) "R-HSA")
-		 	(set! description (string-append "http://www.reactome.org/content/detail/" (cog-name node)))
-		 )
-		)
-	 )
-	)
-	description
- )
-
-)
-
 ;; Grounded schema node to add info about matched variable nodes
 
 (define (generate-result var1 var2)

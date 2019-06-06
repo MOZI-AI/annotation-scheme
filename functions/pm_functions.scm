@@ -173,11 +173,11 @@
       (if (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO")
         (ListLink 
             (InheritanceLink
-        child-atom
-        parent-atom
+              child-atom
+              parent-atom
           )
-      (go-info parent-atom)
-      )
+          (go-info parent-atom)
+        )
     ))
   )
 )

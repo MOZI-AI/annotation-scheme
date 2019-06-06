@@ -85,7 +85,7 @@
 			   [main-atom-type (cog-type annot)]
 			   [inner-atom (cog-outgoing-atom annot 0)]
 		   )
-		   (if (equal? main-atom-type 'MemberLink)
+		   (if (or (equal? main-atom-type 'MemberLink) (equal? main-atom-type 'InheritanceLink))
 			(begin
 			   (let*
 				(

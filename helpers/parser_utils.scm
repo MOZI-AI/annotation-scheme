@@ -253,7 +253,7 @@
 		 )
 		)
 	 )
-	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (find_entrez node))))
+	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/" (cadr (string-split (find_entrez node) #\:)))))
 	 ('ConceptNode
 		(begin
 		 (if (string-contains (cog-name node) "SMP")

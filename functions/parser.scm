@@ -47,9 +47,9 @@
 			 (set! gene-name (cog-name (cadr (cog-outgoing-set (cog-outgoing-atom gene-info 1)))))
 			)
 		   )
-		   (if (equal? (cog-name (cog-outgoing-atom gene-info 1)) "has_definition")
-			(set! gene-definition (cog-name (cadr (cog-outgoing-set (cog-outgoing-atom gene-info 1)))))
-		   )
+		   
+		   (set! gene-definition (build-desc-url (GeneNode gene)))
+		   
 		   (if (not (node-exists? gene atoms))
 			(begin
 			 (set! nodes (append (list (create-node genes gene gene-name gene-definition "" "")) nodes))

@@ -295,7 +295,8 @@
 ))
 ;; Finds entrez_id of a gene
 (define (find_entrez gene)
- (get-name
+  (let ((entrez '()))
+    (set! entrez (get-name
    (remove-set-ln
     (cog-execute!
      (GetLink
@@ -310,7 +311,12 @@
     )
    )
   )
- )
+  ))
+   (if (equal? (length (string-split entrez #\:)) 1)
+       entrez
+       (cadr  (string-split entrez #\:))
+   )
+  )
 )
 
 ;; Finds proteins a gene expresses

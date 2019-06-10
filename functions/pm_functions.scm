@@ -323,27 +323,47 @@
 (define findprotein
     (lambda (gene)
         (cog-outgoing-set (cog-execute! (BindLink
+          (VariableList
             (VariableNode "$a")
-            (EvaluationLink
-               (PredicateNode "expresses")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                )
-            )
+            (VariableNode "$pw"))
+           (AndLink
+            (MemberLink
+             gene
+             (VariableNode "$pw"))
+            (MemberLink
+            (VariableNode "$a")
+            (VariableNode "$pw"))
+           )
+        (ExecutionOutputLink
+          (GroundedSchemaNode "scm: filter-smpdb")
             (ListLink
-              (EvaluationLink
-                (PredicateNode "expresses")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                )
-              )
-              (node-info (VariableNode "$a"))
+              gene
+              (VariableNode "$a")
+              (VariableNode "$pw")
             )
-    )))
-    
-  ))
+        )
+        )))))
+
+(define filter-smpdb (lambda (gene prot pathway)
+(if (and (equal? (find-prefix prot) "Uniprot") (string-contains (cog-name pathway) "SMP"))
+  (ListLink
+    (EvaluationLink
+      (PredicateNode "expresses")
+        (ListLink
+           gene
+        prot
+        )
+        )
+      (node-info prot)
+  )
+)))
+
+(define (find-prefix node)
+(if (equal? (length (string-split (cog-name node) #\:)) 1)
+       (cog-name node)
+       (car  (string-split (cog-name node) #\:))
+   )
+)
 ;;
 ;;Finds a name of any node (Except GO which has different structure)
 (define findpwname

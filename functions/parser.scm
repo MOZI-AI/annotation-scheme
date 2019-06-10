@@ -19,7 +19,7 @@
 	 (set! edges (list-ref data 2))
 	 (set! graph (make-graph nodes edges))
 	 (set! json (scm->json-string graph))
-	 (write-to-file file-name)
+	 (write-to-file result file-name)
 	 json
    )
 )

@@ -273,7 +273,7 @@
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (list-ref (string-split nodename #\:) 1))
 )
 
-(define* (write-to-file name)
+(define* (write-to-file result name)
  (let*
 	(
 		[file-name (string-append "scheme/result/" name ".scm")]

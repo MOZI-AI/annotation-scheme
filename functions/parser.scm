@@ -1,6 +1,7 @@
-(define-public (parse result genes)
+(define-public (parse annotation file-name genes)
    (let*
       (
+		     [result annotation]
 			 [go-annotations (get-annotations "gene-go-annotation" (cdr result))]
 			 [pathway-annotations (get-annotations "gene-pathway-annotation" (cdr result))]
 			 [biogrid-annotations (get-annotations "biogrid-interaction-annotation" (cdr result))]
@@ -18,6 +19,7 @@
 	 (set! edges (list-ref data 2))
 	 (set! graph (make-graph nodes edges))
 	 (set! json (scm->json-string graph))
+	 (write-to-file file-name)
 	 json
    )
 )

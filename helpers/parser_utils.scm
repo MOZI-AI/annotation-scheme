@@ -273,10 +273,10 @@
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (list-ref (string-split nodename #\:) 1))
 )
 
-(define* (write-to-file)
+(define* (write-to-file name)
  (let*
 	(
-		[file-name (generate-filename)]
+		[file-name (string-append "scheme/result/" name ".scm")]
 	)
 	(call-with-output-file file-name
   	(lambda (p)
@@ -285,10 +285,5 @@
 		)
 	)
 	)
-	file-name
  )
-)
-
-(define* (generate-filename)
- (string-append "scheme/result/"(number->string (current-time)) ".scm")
 )

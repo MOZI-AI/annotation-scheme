@@ -348,7 +348,7 @@
 (define filter-pathway (lambda (gene prot pathway option)
 (if (and (equal? (find-prefix prot) "Uniprot") (string-contains (cog-name pathway) "SMP"))
   (if (equal? option (Number "0"))
-    (if (string-contains (cog-name pathway) "SMP")
+    (cond ((string-contains (cog-name pathway) "SMP")
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
@@ -356,15 +356,19 @@
             gene
             prot ))
         (node-info prot)
-    )
+    ))
+    ((string-contains (cog-name pathway) "R-HSA")
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
           (ListLink
             gene
             prot ))
-    ))
-
+      (ListLink 
+        (add-loc (MemberLink gene path))
+      )
+    )))
+    
   (ListLink
   (MemberLink
     prot

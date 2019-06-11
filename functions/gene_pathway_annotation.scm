@@ -20,13 +20,8 @@
 
 (define (smpdb gene prot sm)
   (let (
-    [pw '()]
+    [pw (findMember (GeneNode gene) "SMP")]
     [ls '()]
-  )
-
-  (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-    (set! pw (findMember (GeneNode gene) "SMP"))
   )
 
   (set! ls (flatten (map (lambda (path)
@@ -44,6 +39,12 @@
       )
   ) pw)) )
 
+
+  (if (equal? prot "True")
+    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (findMember (GeneNode gene) "SMP"))
+  )
+
   (if (equal? prot "True")
    (append pw ls (findprotein (GeneNode gene) 0))
                
@@ -55,13 +56,9 @@
 
 (define (reactome gene prot sm)
     (let (
-      [pw '()]
+      [pw (findMember (GeneNode gene) "R-HSA")]
       [ls '()]
       )
-    (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-    (set! pw (findMember (GeneNode gene) "R-HSA"))
-    )
 
       (set! ls (flatten (map (lambda (path)
         (let (
@@ -83,6 +80,11 @@
 
       )    
       pw)))
+
+    (if (equal? prot "True")
+    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (findMember (GeneNode gene) "R-HSA"))
+    )
       (append pw ls) 
   ) 
 

@@ -321,7 +321,7 @@
 
 ;; Finds proteins a gene expresses
 (define findprotein
-    (lambda (gene)
+    (lambda (gene option)
         (cog-outgoing-set (cog-execute! (BindLink
           (VariableList
             (VariableNode "$a")
@@ -335,27 +335,42 @@
             (VariableNode "$pw"))
            )
         (ExecutionOutputLink
-          (GroundedSchemaNode "scm: filter-smpdb")
+          (GroundedSchemaNode "scm: filter-pathway")
             (ListLink
               gene
               (VariableNode "$a")
               (VariableNode "$pw")
+              (Number option)
             )
         )
         )))))
 
-(define filter-smpdb (lambda (gene prot pathway)
+(define filter-pathway (lambda (gene prot pathway option)
 (if (and (equal? (find-prefix prot) "Uniprot") (string-contains (cog-name pathway) "SMP"))
+  (if (equal? option (Number "0"))
+    (if (string-contains (cog-name pathway) "SMP")
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            gene
+            prot ))
+        (node-info prot)
+    )
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            gene
+            prot ))
+    ))
+
   (ListLink
-    (EvaluationLink
-      (PredicateNode "expresses")
-        (ListLink
-           gene
-        prot
-        )
-        )
-      (node-info prot)
-  )
+  (MemberLink
+    prot
+    pathway)
+  (node-info pathway)
+  ))
 )))
 
 (define (find-prefix node)

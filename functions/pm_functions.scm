@@ -346,35 +346,27 @@
         )))))
 
 (define filter-pathway (lambda (gene prot pathway option)
-(if (and (equal? (find-prefix prot) "Uniprot") (string-contains (cog-name pathway) "SMP"))
-  (if (equal? option (Number "0"))
-    (cond ((string-contains (cog-name pathway) "SMP")
+(if (and (equal? (find-prefix prot) "Uniprot") (or (string-contains (cog-name pathway) "SMP") (string-contains (cog-name pathway) "R-HSA")))
+  (cond ((equal? option (Number "0")) 
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
           (ListLink
             gene
             prot ))
-        (node-info prot)
+       (node-info prot)
     ))
-    ((string-contains (cog-name pathway) "R-HSA")
+    ((equal? option (Number "1"))
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
           (ListLink
             gene
             prot ))
-      (ListLink 
-        (add-loc (MemberLink gene path))
-      )
+      ; (ListLink 
+      ;   (add-loc (MemberLink gene path))
+      ; )
     )))
-    
-  (ListLink
-  (MemberLink
-    prot
-    pathway)
-  (node-info pathway)
-  ))
 )))
 
 (define (find-prefix node)
@@ -425,6 +417,7 @@
 
 (define add-mol-info
   (lambda (mol path)
+  (if (string-contains (cog-name path) "R-HSA")
     (ListLink
       (MemberLink mol path)
       (node-info mol)
@@ -432,8 +425,12 @@
         (add-loc (MemberLink mol path))
       )
     )
+    (ListLink
+      (MemberLink mol path)
+      (node-info mol)
+    )
   )
-)
+))
 
 (define filter-atoms
   (lambda (atom identifier)
@@ -590,16 +587,16 @@ name
   (BindLink
     (VariableNode "$loc")
     (AndLink
-      (MemberLink (stv 1 1) 
+      (MemberLink 
         child
         parent)
-      (EvaluationLink (stv 1 1)
+      (EvaluationLink
         (PredicateNode "has_location")
         (ListLink
           child
           (VariableNode "$loc")))
     )
-      (EvaluationLink (stv 1 1)
+      (EvaluationLink
         (PredicateNode "has_location")
         (ListLink
           child

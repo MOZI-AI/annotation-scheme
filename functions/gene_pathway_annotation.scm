@@ -32,6 +32,9 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
       )
+      (if (equal? prot "True")
+          (set! tmp (append tmp (cog-outgoing-set (findmol node "Uniprot"))))
+      )
         (if (null? tmp)
             '()
             tmp
@@ -41,16 +44,12 @@
 
 
   (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     (set! pw (findMember (GeneNode gene) "SMP"))
   )
 
-  (if (equal? prot "True")
-   (append pw ls (findprotein (GeneNode gene) 0))
-               
-   (append pw ls))
-  )
-)
+  (append pw ls)
+))
 
 ;; From reactome
 
@@ -82,7 +81,7 @@
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     (set! pw (findMember (GeneNode gene) "R-HSA"))
     )
       (append pw ls) 

@@ -45,7 +45,6 @@
 
   (if (equal? prot "True")
     (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-    (set! pw (findMember (GeneNode gene) "SMP"))
   )
 
   (append pw ls)
@@ -82,7 +81,6 @@
 
     (if (equal? prot "True")
     (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-    (set! pw (findMember (GeneNode gene) "R-HSA"))
     )
       (append pw ls) 
   ) 

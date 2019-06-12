@@ -512,9 +512,11 @@
 
   ;; This will be executed if the above pattern is found.
   (ExecutionOutputLink
-    (GroundedSchemaNode "scm: generate-result")
+    (GroundedSchemaNode "scm: generate-ppi-result")
 		  (ListLink
+        gene
 		    (VariableNode "$c")
+        (VariableNode "$a")
 		    (VariableNode "$b")
 		  ))
 	
@@ -571,17 +573,22 @@ name
 
 ;;                           
 (define (findpubmed interaction)
-(cog-outgoing-set
-(cog-execute! (BindLink
-(VariableNode "$p")
-(EvaluationLink
-(PredicateNode "has_pubmedID")
-(ListLink
-interaction
-(VariableNode "$p")))
-(EvaluationLink
-(PredicateNode "has_pubmedID")
-(ListLink
-interaction
-(VariableNode "$p")))))))
+  (let ([ids (cog-outgoing-set
+    (cog-execute! (GetLink
+      (VariableNode "$p")
+      (EvaluationLink
+        (PredicateNode "has_pubmedID")
+        (ListLink
+          interaction
+          (VariableNode "$p"))))
+    )
+
+)])
+  (EvaluationLink
+        (PredicateNode "has_pubmedID")
+        (ListLink
+          interaction
+          (ListLink ids)
+          )))
+)
 

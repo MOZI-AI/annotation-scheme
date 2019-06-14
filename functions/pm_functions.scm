@@ -584,11 +584,8 @@ name
     )
 
 )])
-  (EvaluationLink
-        (PredicateNode "has_pubmedID")
-        (ListLink
-          interaction
-          (ListLink ids)
-          )))
+    ids
+  )
+  
 )
 

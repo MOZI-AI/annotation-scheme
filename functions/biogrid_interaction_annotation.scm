@@ -4,7 +4,10 @@
     
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-		     (set! result (append result (delete-duplicates (cog-outgoing-set (findProtInteractor gene))))))
+		     (set! result (append result (delete-duplicates (cog-outgoing-set (findProtInteractor gene))) (delete-duplicates (cog-outgoing-set (outputInteraction gene)))
+			 )))
+			 
+			 
 
 		(if (equal? interaction "Genes") 
 	      (begin

@@ -1561,6 +1561,20 @@
 (ConceptNode "entrez:9043")))
 
 
+;;; uniprot2GO
+(MemberLink 
+(MoleculeNode "Uniprot:Q8NFZ5")
+(ConceptNode "GO:0005634"))
+
+(MemberLink 
+(MoleculeNode "Uniprot:Q8NFZ5")
+(ConceptNode "GO:0005829"))
+
+(MemberLink 
+(MoleculeNode "Uniprot:Q8NFZ5")
+(ConceptNode "GO:0070530"))
+
+
 ;; Output genes interacting eachother
 
  (EvaluationLink
@@ -3734,11 +3748,7 @@
    (MoleculeNode "ChEBI:15996.0")
    (ConceptNode "SMP0066977")
 )
- (MemberLink
-   (MoleculeNode "ChEBI:nan")
-   (ConceptNode "SMP0066977")
-)
- (MemberLink
+(MemberLink
    (MoleculeNode "ChEBI:61049.0")
    (ConceptNode "SMP0066977")
 )

@@ -154,3 +154,17 @@
     )
     )
 ))
+
+(define (generate-ppi-result gene-a prot-a gene-b prot-b)
+    (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
+            (ListLink
+                pubmed
+                (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
+                (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
+                (node-info gene-b)
+                (node-info prot-a)
+                (node-info prot-b)
+            )
+    )
+
+)

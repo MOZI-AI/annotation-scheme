@@ -1552,13 +1552,13 @@
 (PredicateNode "has_entrez_id")
 (ListLink 
 (GeneNode "MAP2K4")
-(ConceptNode "6416")))
+(ConceptNode "entrez:6416")))
 
 (EvaluationLink
 (PredicateNode "has_entrez_id")
 (ListLink 
 (GeneNode "SPAG9")
-(ConceptNode "9043")))
+(ConceptNode "entrez:9043")))
 
 
 ;; Output genes interacting eachother
@@ -1614,7 +1614,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "KTI12")
-      (ConceptNode "112970")
+      (ConceptNode "entrez:112970")
    )
 )
  (EvaluationLink
@@ -1628,7 +1628,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "NBR1")
-      (ConceptNode "4077")
+      (ConceptNode "entrez:4077")
    )
 )
  (EvaluationLink
@@ -1642,7 +1642,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK1")
-      (ConceptNode "5594")
+      (ConceptNode "entrez:5594")
    )
 )
  (EvaluationLink
@@ -1656,7 +1656,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "AKT1")
-      (ConceptNode "207")
+      (ConceptNode "entrez:207")
    )
 )
  (EvaluationLink
@@ -1670,7 +1670,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK8")
-      (ConceptNode "5599")
+      (ConceptNode "entrez:5599")
    )
 )
  (EvaluationLink
@@ -1684,7 +1684,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K1")
-      (ConceptNode "4214")
+      (ConceptNode "entrez:4214")
    )
 )
  (EvaluationLink
@@ -1698,7 +1698,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K3")
-      (ConceptNode "4215")
+      (ConceptNode "entrez:4215")
    )
 )
  (EvaluationLink
@@ -1712,7 +1712,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K7")
-      (ConceptNode "6885")
+      (ConceptNode "entrez:6885")
    )
 )
  (EvaluationLink
@@ -1726,7 +1726,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "Flna")
-      (ConceptNode "192176")
+      (ConceptNode "entrez:192176")
    )
 )
  (EvaluationLink
@@ -1739,7 +1739,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP2K7")
-      (ConceptNode "5609")
+      (ConceptNode "entrez:5609")
    )
 )
  (EvaluationLink
@@ -1753,7 +1753,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "RBBP8")
-      (ConceptNode "5932")
+      (ConceptNode "entrez:5932")
    )
 )
  (EvaluationLink
@@ -1767,7 +1767,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K5")
-      (ConceptNode "4217")
+      (ConceptNode "entrez:4217")
    )
 )
  (EvaluationLink
@@ -1781,7 +1781,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "ITCH")
-      (ConceptNode "83737")
+      (ConceptNode "entrez:83737")
    )
 )
  (EvaluationLink
@@ -1795,7 +1795,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K4")
-      (ConceptNode "4216")
+      (ConceptNode "entrez:4216")
    )
 )
  (EvaluationLink
@@ -1809,7 +1809,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "VASP")
-      (ConceptNode "7408")
+      (ConceptNode "entrez:7408")
    )
 )
  (EvaluationLink
@@ -1823,7 +1823,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "GEMIN5")
-      (ConceptNode "25929")
+      (ConceptNode "entrez:25929")
    )
 )
  (EvaluationLink
@@ -1837,7 +1837,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK14")
-      (ConceptNode "1432")
+      (ConceptNode "entrez:1432")
    )
 )
  (EvaluationLink
@@ -1851,7 +1851,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "JUN")
-      (ConceptNode "3725")
+      (ConceptNode "entrez:3725")
    )
 )
  (EvaluationLink
@@ -1865,7 +1865,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "PML")
-      (ConceptNode "5371")
+      (ConceptNode "entrez:5371")
    )
 )
  (EvaluationLink
@@ -1879,7 +1879,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK10")
-      (ConceptNode "5602")
+      (ConceptNode "entrez:5602")
    )
 )
  (EvaluationLink
@@ -1893,7 +1893,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "FLNC")
-      (ConceptNode "2318")
+      (ConceptNode "entrez:2318")
    )
 )
  (EvaluationLink
@@ -1907,7 +1907,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "APP")
-      (ConceptNode "351")
+      (ConceptNode "entrez:351")
    )
 )
  (EvaluationLink
@@ -1921,7 +1921,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK9")
-      (ConceptNode "5601")
+      (ConceptNode "entrez:5601")
    )
 )
  (EvaluationLink
@@ -1935,7 +1935,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "FLNB")
-      (ConceptNode "2317")
+      (ConceptNode "entrez:2317")
    )
 )
  (EvaluationLink
@@ -1950,7 +1950,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "IVNS1ABP")
-      (ConceptNode "10625")
+      (ConceptNode "entrez:10625")
    )
 )
  (EvaluationLink
@@ -1964,7 +1964,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MCM4")
-      (ConceptNode "856130")
+      (ConceptNode "entrez:856130")
    )
 )
  (EvaluationLink
@@ -1978,7 +1978,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "PLK1")
-      (ConceptNode "5347")
+      (ConceptNode "entrez:5347")
    )
 )
  (EvaluationLink
@@ -1992,7 +1992,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "NOLC1")
-      (ConceptNode "9221")
+      (ConceptNode "entrez:9221")
    )
 )
  (EvaluationLink
@@ -2006,7 +2006,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP2K4")
-      (ConceptNode "6416")
+      (ConceptNode "entrez:6416")
    )
 )
  (EvaluationLink
@@ -2020,7 +2020,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAX")
-      (ConceptNode "4149")
+      (ConceptNode "entrez:4149")
    )
 )
  (EvaluationLink
@@ -2034,7 +2034,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "ABL1")
-      (ConceptNode "25")
+      (ConceptNode "entrez:25")
    )
 )
  (EvaluationLink
@@ -2048,7 +2048,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MCM7")
-      (ConceptNode "4176")
+      (ConceptNode "entrez:4176")
    )
 )
  (EvaluationLink
@@ -2062,7 +2062,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "LARP7")
-      (ConceptNode "51574")
+      (ConceptNode "entrez:51574")
    )
 )
  (EvaluationLink
@@ -2076,7 +2076,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "TXNDC9")
-      (ConceptNode "10190")
+      (ConceptNode "entrez:10190")
    )
 )
  (EvaluationLink
@@ -2090,7 +2090,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "HSF1")
-      (ConceptNode "422169")
+      (ConceptNode "entrez:422169")
    )
 )
  (EvaluationLink
@@ -2104,7 +2104,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "NDRG1")
-      (ConceptNode "10397")
+      (ConceptNode "entrez:10397")
    )
 )
  (EvaluationLink
@@ -2118,7 +2118,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "SMC1A")
-      (ConceptNode "8243")
+      (ConceptNode "entrez:8243")
    )
 )
  (EvaluationLink
@@ -2132,7 +2132,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "USP15")
-      (ConceptNode "9958")
+      (ConceptNode "entrez:9958")
    )
 )
  (EvaluationLink
@@ -2146,7 +2146,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "NENF")
-      (ConceptNode "29937")
+      (ConceptNode "entrez:29937")
    )
 )
  (EvaluationLink
@@ -2160,7 +2160,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MCM2")
-      (ConceptNode "4171")
+      (ConceptNode "entrez:4171")
    )
 )
  (EvaluationLink
@@ -2174,7 +2174,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK8")
-      (ConceptNode "5599")
+      (ConceptNode "entrez:5599")
    )
 )
  (EvaluationLink
@@ -2188,7 +2188,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "SOX4")
-      (ConceptNode "6659")
+      (ConceptNode "entrez:6659")
    )
 )
  (EvaluationLink
@@ -2202,7 +2202,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAP3K3")
-      (ConceptNode "4215")
+      (ConceptNode "entrez:4215")
    )
 )
  (EvaluationLink
@@ -2216,7 +2216,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "HUWE1")
-      (ConceptNode "10075")
+      (ConceptNode "entrez:10075")
    )
 )
  (EvaluationLink
@@ -2230,7 +2230,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "GAPVD1")
-      (ConceptNode "26130")
+      (ConceptNode "entrez:26130")
    )
 )
  (EvaluationLink
@@ -2244,7 +2244,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MCM6")
-      (ConceptNode "4175")
+      (ConceptNode "entrez:4175")
    )
 )
  (EvaluationLink
@@ -2258,7 +2258,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "PPP4R2")
-      (ConceptNode "151987")
+      (ConceptNode "entrez:151987")
    )
 )
  (EvaluationLink
@@ -2272,7 +2272,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "KIAA1468")
-      (ConceptNode "57614")
+      (ConceptNode "entrez:57614")
    )
 )
  (EvaluationLink
@@ -2285,7 +2285,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "SMC3")
-      (ConceptNode "9126")
+      (ConceptNode "entrez:9126")
    )
 )
  (EvaluationLink
@@ -2299,7 +2299,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "WEE1")
-      (ConceptNode "7465")
+      (ConceptNode "entrez:7465")
    )
 )
  (EvaluationLink
@@ -2313,7 +2313,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "SBNO1")
-      (ConceptNode "55206")
+      (ConceptNode "entrez:55206")
    )
 )
  (EvaluationLink
@@ -2327,7 +2327,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "MAPK14")
-      (ConceptNode "1432")
+      (ConceptNode "entrez:1432")
    )
 )
  (EvaluationLink
@@ -2341,7 +2341,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "ANK3")
-      (ConceptNode "288")
+      (ConceptNode "entrez:288")
    )
 )
  (EvaluationLink
@@ -2355,7 +2355,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "SMEK1")
-      (ConceptNode "55671")
+      (ConceptNode "entrez:55671")
    )
 )
  (EvaluationLink
@@ -2368,7 +2368,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "ATG2B")
-      (ConceptNode "55102")
+      (ConceptNode "entrez:55102")
    )
 )
  (EvaluationLink
@@ -2382,7 +2382,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "RABEP2")
-      (ConceptNode "79874")
+      (ConceptNode "entrez:79874")
    )
 )
  (EvaluationLink
@@ -2396,7 +2396,7 @@
    (PredicateNode "has_entrez_id")
    (ListLink
       (GeneNode "CD2AP")
-      (ConceptNode "23607")
+      (ConceptNode "entrez:23607")
    )
 )
  (EvaluationLink

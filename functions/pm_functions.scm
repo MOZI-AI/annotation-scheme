@@ -651,13 +651,13 @@ interaction
 (define (filter-loc go)
 (let ([loc (string-downcase (find-name go))])
 (if (or (and (not (string-contains loc "complex")) 
-    (or (string-endswith loc "ome") (string-endswith loc "ome membrane"))) (is_compartment loc))
+    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is_compartment loc))
       (ConceptNode loc)
 )
 ))
 
 (define (is_compartment loc)
-(let([compartments (list "vesicles" "endosome" "golgi" "endoplasmic" "mitochondria" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
+(let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
      [res #f])
 (for-each (lambda (comp)
 (if (string-contains loc comp)
@@ -668,16 +668,3 @@ interaction
   #f
 )))
 
-(define (string-endswith str suf)
-(let ([strlen (length (string->list str))]
-      [suflen (length (string->list suf))])
-(if (> suflen strlen) 
-  #f
-  (begin
-    (if (string=? (list->string (list-tail (string->list str) (- strlen suflen))) suf)
-      #t
-      #f
-    )
-  )
-)
-))

@@ -22,7 +22,6 @@
   (let (
     [pw (findMember (GeneNode gene) "SMP")]
     [ls '()]
-  
   )
 
   (set! ls (flatten (map (lambda (path)
@@ -33,6 +32,9 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
       )
+      (if (equal? prot "True")
+          (set! tmp (append tmp (cog-outgoing-set (findmol node "Uniprot"))))
+      )
         (if (null? tmp)
             '()
             tmp
@@ -40,12 +42,13 @@
       )
   ) pw)) )
 
+
   (if (equal? prot "True")
-   (append pw ls (findprotein (GeneNode gene)))
-               
-   (append pw ls))
+    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
   )
-)
+
+  (append pw ls)
+))
 
 ;; From reactome
 
@@ -75,6 +78,10 @@
 
       )    
       pw)))
+
+    (if (equal? prot "True")
+    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    )
       (append pw ls) 
   ) 
 

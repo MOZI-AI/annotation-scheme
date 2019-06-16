@@ -321,29 +321,59 @@
 
 ;; Finds proteins a gene expresses
 (define findprotein
-    (lambda (gene)
+    (lambda (gene option)
         (cog-outgoing-set (cog-execute! (BindLink
+          (VariableList
             (VariableNode "$a")
-            (EvaluationLink
-               (PredicateNode "expresses")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                )
-            )
+            (VariableNode "$pw"))
+           (AndLink
+            (MemberLink
+             gene
+             (VariableNode "$pw"))
+            (MemberLink
+            (VariableNode "$a")
+            (VariableNode "$pw"))
+           )
+        (ExecutionOutputLink
+          (GroundedSchemaNode "scm: filter-pathway")
             (ListLink
-              (EvaluationLink
-                (PredicateNode "expresses")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                )
-              )
-              (node-info (VariableNode "$a"))
+              gene
+              (VariableNode "$a")
+              (VariableNode "$pw")
+              (Number option)
             )
+        )
+        )))))
+
+(define filter-pathway (lambda (gene prot pathway option)
+(if (and (string=? (find-prefix prot) "Uniprot") (or (string-contains (cog-name pathway) "SMP") (string-contains (cog-name pathway) "R-HSA")))
+  (cond ((equal? option (Number "0")) 
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            gene
+            prot ))
+    ))
+    ((equal? option (Number "1"))
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            gene
+            prot ))
+      (ListLink 
+        (add-loc (MemberLink gene pathway))
+      )
     )))
-    
-  ))
+)))
+
+(define (find-prefix node)
+(if (equal? (length (string-split (cog-name node) #\:)) 1)
+       (cog-name node)
+       (car  (string-split (cog-name node) #\:))
+   )
+)
 ;;
 ;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
@@ -386,6 +416,7 @@
 
 (define add-mol-info
   (lambda (mol path)
+  (if (string-contains (cog-name path) "R-HSA")
     (ListLink
       (MemberLink mol path)
       (node-info mol)
@@ -393,8 +424,12 @@
         (add-loc (MemberLink mol path))
       )
     )
+    (ListLink
+      (MemberLink mol path)
+      (node-info mol)
+    )
   )
-)
+))
 
 (define filter-atoms
   (lambda (atom identifier)
@@ -553,16 +588,16 @@ name
   (BindLink
     (VariableNode "$loc")
     (AndLink
-      (MemberLink (stv 1 1) 
+      (MemberLink 
         child
         parent)
-      (EvaluationLink (stv 1 1)
+      (EvaluationLink
         (PredicateNode "has_location")
         (ListLink
           child
           (VariableNode "$loc")))
     )
-      (EvaluationLink (stv 1 1)
+      (EvaluationLink
         (PredicateNode "has_location")
         (ListLink
           child
@@ -588,4 +623,52 @@ name
   )
   
 )
+
+;;; Locate a node
+
+(define locate-node
+  (lambda(node)
+      (cog-outgoing-set (cog-execute!
+        (BindLink
+        (VariableNode "$go")
+        (AndLink
+          (MemberLink 
+            node
+            (VariableNode "$go"))
+          (EvaluationLink
+            (PredicateNode "GO_namespace")
+            (ListLink
+              (VariableNode "$go")
+              (ConceptNode "cellular_component")))
+        )
+        (ExecutionOutputLink
+        (GroundedSchemaNode "scm: filter-loc")
+          (ListLink
+            (VariableNode "$go")
+          )))
+      ))
+    )
+)
+
+;; filter only Cell membrane and compartments
+
+(define (filter-loc go)
+(let ([loc (string-downcase (find-name go))])
+(if (or (and (not (string-contains loc "complex")) 
+    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is_compartment loc))
+      (ConceptNode loc)
+)
+))
+
+(define (is_compartment loc)
+(let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
+     [res #f])
+(for-each (lambda (comp)
+(if (string-contains loc comp)
+  (set! res #t)
+)) compartments)
+(if res 
+  #t
+  #f
+)))
 

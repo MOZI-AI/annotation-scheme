@@ -1,12 +1,12 @@
 (define* (create-node genes id name defn location annotation)
  (if (is-gene-main? id genes)
- 	(make-node (make-node-data id name defn location "main") "nodes")
-    (make-node (make-node-data id name defn location annotation) "nodes")
+ 	(make-node (make-node-info id name defn location "main") "nodes")
+    (make-node (make-node-info id name defn location annotation) "nodes")
  )
 )
 
 (define* (create-edge node1 node2 name annotation #:optional (pubmedId ""))
-   (make-edge (make-edge-data node2 node1 name pubmedId annotation) "edges")
+   (make-edge (make-edge-info node2 node1 name pubmedId annotation) "edges")
 )
 
 (define* (node-exists? node node-list)
@@ -43,11 +43,11 @@
 
 (define* (check-nodes node1 node2 n1type n2type)
  (if (or
-	  (equal? (node-data-id (node-data node1)) (node-data-id (node-data node2)))
+	  (equal? (node-info-id (node-data node1)) (node-info-id (node-data node2)))
 	  (or (equal? n1type 'VariableNode) (equal? n2type 'VariableNode))
 	  (or
-	   (string= "" (node-data-id (node-data node1)))
-	   (string= "" (node-data-id (node-data node2)))
+	   (string= "" (node-info-id (node-data node1)))
+	   (string= "" (node-info-id (node-data node2)))
 	  )
  	)
   #f

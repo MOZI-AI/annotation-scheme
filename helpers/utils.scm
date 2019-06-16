@@ -21,8 +21,8 @@
         
 
         (if main 
-            (make-node (make-node-data id name defn "main") "nodes")
-            (make-node (make-node-data id name defn "GO") "nodes")
+            (make-node (make-node-info id name defn "main") "nodes")
+            (make-node (make-node-info id name defn "GO") "nodes")
             )
         
         
@@ -38,28 +38,28 @@
             [node '()]
         )
         (if main 
-            (make-node (make-node-data id id "" "Gene") "nodes")
-            (make-node (make-node-data id id "" "Gene") "nodes")
+            (make-node (make-node-info id id "" "Gene") "nodes")
+            (make-node (make-node-info id id "" "Gene") "nodes")
             )
     )
 
 )
 
 (define (create-member-link gene go)
-   (make-edge (make-edge-data (node-data-id (node-data go)) (node-data-id (node-data gene)) "annotates" "memeberln") "edges")
+   (make-edge (make-edge-info (node-info-id (node-info go)) (node-info-id (node-info gene)) "annotates" "memeberln") "edges")
 )
 
 (define (create-member-ln elm set)
     (map (lambda (t)
-        (make-edge (make-edge-data (node-data-id (node-data t)) (node-data-id (node-data elm)) "annotates" "memeberln") "edges")
+        (make-edge (make-edge-info (node-info-id (node-info t)) (node-info-id (node-info elm)) "annotates" "memeberln") "edges")info
     )
     set)
-
+info
 )
 
 (define (create-member-ln-rev elm set)
     (map (lambda (t)
-    (make-edge (make-edge-data (node-data-id (node-data elm)) (node-data-id (node-data t)) "annotates" "memeberln") "edges")
+    (make-edge (make-edge-info (node-info-id (node-info elm)) (node-info-id (node-info t)) "annotates" "memeberln") "edges")
     ) set)
 )
 
@@ -72,19 +72,19 @@
 
 (define (create-is-ln elm set)
 (map (lambda (t) 
-    (make-edge (make-edge-data  (node-data-id (node-data elm)) (node-data-id (node-data t)) "is_a" "isln") "edges")
+    (make-edge (make-edge-info  (node-info-id (node-info elm)) (node-info-id (node-info t)) "is_a" "isln") "edges")
 ) set) 
 )
 
 (define (create-is-ln-rev elm set)
     (map (lambda (t) 
-        (make-edge (make-edge-data  (node-data-id (node-data t)) (node-data-id (node-data elm)) "is_a" "isln") "edges")
+        (make-edge (make-edge-info  (node-info-id (node-info t)) (node-info-id (node-info elm)) "is_a" "isln") "edges")
     ) set)
 )
 (define (node-exists? node ls)
     (let(
-        [ids (map (lambda (x) (if (node? x) (node-data-id (node-data x)))) ls)]
-        [n-id (node-data-id (node-data node))]
+        [ids (map (lambda (x) (if (node? x) (node-info-id (node-data x)))) ls)]
+        [n-id (node-info-id (node-data node))]
     )
         (member n-id ids)    
     )
@@ -143,22 +143,45 @@
     (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
 
     (begin
-    (let ([output (ListLink
-          (if (null? (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))))
-            (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))
-            (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))))
-          (node-info var2)
-          (node-info var1)
-          )])
-    output
-    )
-    )
-))
+    (let ([output (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2)))])
+          (if (null? output)
+            (ListLink 
+                (EvaluationLink 
+                    (PredicateNode "interacts_with") 
+                    (ListLink var1 var2))
+                (node-info var2)
+                (node-info var1)
+            )
+            (ListLink 
+                (EvaluationLink
+                    (PredicateNode "has_pubmedId")
+                    (ListLink 
+                        (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))
+                        (ListLink output)
+                    )
+                )
+                (node-info var2)
+                (node-info var1)
+                )
+            )
+          )
+    ))
+)
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)
     (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
             (ListLink
-                pubmed
+                (EvaluationLink (PredicateNode "has_pubmedId")
+                    (ListLink
+                        (EvaluationLink 
+                            (PredicateNode "interacts_with")
+                            (ListLink gene-a gene-b)
+                        )
+                        (ListLink
+                            pubmed
+                        )
+                    )
+                )
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
                 (node-info gene-b)

@@ -30,6 +30,7 @@
 	  [gene ""]
 	  [gene-name ""]
 	  [gene-definition ""]
+	  [gene-location ""]
 	  [nodes '()]
 	  [atoms '()]
   )
@@ -51,6 +52,7 @@
 		   )
 		   
 		   (set! gene-definition (build-desc-url (GeneNode gene)))
+		   (set! gene-location (locate-node (Gene gene)))
 		   
 		   (if (not (node-exists? gene atoms))
 			(begin

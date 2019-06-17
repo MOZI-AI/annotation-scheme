@@ -207,9 +207,20 @@
 ;; Add details about the GO term
 (define (go-info go)
 (list
-(EvaluationLink (PredicateNode "GO_namespace") (ListLink go (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
-(EvaluationLink (PredicateNode "has_name") (ListLink go (if (equal? (cog-outgoing-set (findGoname go)) '() ) (ConceptNode "") (cog-outgoing-set (findGoname go)))))
-(EvaluationLink (PredicateNode "has_definition") (ListLink go (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go)))) 
+  (EvaluationLink (PredicateNode "has_name") 
+    (ListLink 
+      go 
+      (if (equal? (cog-outgoing-set (findGoname go)) '() ) (ConceptNode "") (cog-outgoing-set (findGoname go)))))
+    (EvaluationLink 
+      (PredicateNode "has_definition") 
+      (ListLink 
+        go 
+        (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go))))
+    (EvaluationLink 
+      (PredicateNode "GO_namespace") 
+      (ListLink 
+        go 
+        (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
 ))
 
 ;; Finds parents of a GO term ( of given namespace type) 
@@ -279,9 +290,6 @@
         (set! res (ListLink 
             (MemberLink gene pathway)
             (node-info pathway)
-            (ListLink 
-              (add-loc (MemberLink gene pathway))
-            )
         ))
      )
      (if (string-contains (cog-name pathway) "SMP")
@@ -362,9 +370,6 @@
           (ListLink
             gene
             prot ))
-      (ListLink 
-        (add-loc (MemberLink gene pathway))
-      )
     )))
 )))
 
@@ -655,20 +660,22 @@ name
 (define (filter-loc go)
 (let ([loc (string-downcase (find-name go))])
 (if (or (and (not (string-contains loc "complex")) 
-    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is_compartment loc))
+    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
       (ConceptNode loc)
 )
 ))
 
-(define (is_compartment loc)
-(let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
-     [res #f])
-(for-each (lambda (comp)
-(if (string-contains loc comp)
-  (set! res #t)
-)) compartments)
-(if res 
-  #t
-  #f
-)))
+(define (is-compartment loc)
+  (let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
+      [res #f])
+    (for-each (lambda (comp)
+      (if (string-contains loc comp)
+        (set! res #t)
+      )) compartments)
+      (if res 
+        #t
+        #f
+      )
+  )
+)
 

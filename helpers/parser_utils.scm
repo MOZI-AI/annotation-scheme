@@ -1,12 +1,12 @@
-(define* (create-node genes id name defn location annotation)
+(define* (create-node genes id name defn location annotation #:optional (subgroup ""))
  (if (is-gene-main? id genes)
- 	(make-node (make-node-info id name defn location "main") "nodes")
-    (make-node (make-node-info id name defn location annotation) "nodes")
+ 	(make-node (make-node-info id name defn location subgroup "main") "nodes")
+    (make-node (make-node-info id name defn location subgroup annotation) "nodes")
  )
 )
 
-(define* (create-edge node1 node2 name annotation #:optional (pubmedId ""))
-   (make-edge (make-edge-info node2 node1 name pubmedId annotation) "edges")
+(define* (create-edge node1 node2 name annotation #:optional (pubmedId "") (subgroup ""))
+   (make-edge (make-edge-info node2 node1 name pubmedId subgroup annotation) "edges")
 )
 
 (define* (node-exists? node node-list)

@@ -144,9 +144,9 @@
             )))))
   )
 )
-(define nodes '())
-(define edges '())
-(define atoms '())
+; (define nodes '())
+; (define edges '())
+; (define atoms '())
 (define (atomese-parser genes)
     (let (
           [annotation "biogrid"]
@@ -309,8 +309,12 @@
 
 (define-public (cs-parse genes port)
     (let* (
+           [nodes '()]
+           [edges '()]
+           [atoms '()]
            [parser (atomese-parser genes)]
         )
         (parser (make-lexer port) error)
+        (make-graph nodes edges)
     )
 )

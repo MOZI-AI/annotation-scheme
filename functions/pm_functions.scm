@@ -354,6 +354,7 @@
           (ListLink
             gene
             prot ))
+    (node-info pathway)
     ))
     ((equal? option (Number "1"))
     (ListLink
@@ -362,6 +363,7 @@
           (ListLink
             gene
             prot ))
+      (node-info pathway)
       (ListLink 
         (add-loc (MemberLink gene pathway))
       )

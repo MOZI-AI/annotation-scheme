@@ -22,9 +22,9 @@ val-msg ))
 (define (gene-info genes)
     (let ([info '()])
          (for-each (lambda (g)
-              (set! info (append info (list (ListLink (node-info g)))))
+              (set! info (append info (list (ListLink (node-info (GeneNode g)) (ListLink (add-loc (GeneNode g)))))))
          ) genes)
-info))
+(ListLink info)))
 
 ;; Map gene symbols into GeneNodes
 

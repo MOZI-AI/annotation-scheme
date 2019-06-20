@@ -100,78 +100,78 @@
 
                 (start links)
                 (grammar
-                (links
-                    (link ($$ $1))
-                    (links link ($$ (list $1 $2)))
-                )
+                    (links
+                        (link ($$ $1))
+                        (links link ($$ (list $1 $2)))
+                    )
 
-                (link 
-                    (list-ln)
-                    (eval-ln)
-                    (inheritance-ln)
-                    (member-ln)
-                    (and-ln)
-                    (or-ln)
-                )
+                    (link 
+                        (list-ln)
+                        (eval-ln)
+                        (inheritance-ln)
+                        (member-ln)
+                        (and-ln)
+                        (or-ln)
+                    )
 
-                (and-ln
-                    ("(" "And" links ")")
-                    ("(" "AndLink" links ")")
-                )
-                (or-ln
-                    ("(" "Or" links ")")
-                    ("(" "OrLink" links ")")
-                )
+                    (and-ln
+                        ("(" "And" links ")")
+                        ("(" "AndLink" links ")")
+                    )
+                    (or-ln
+                        ("(" "Or" links ")")
+                        ("(" "OrLink" links ")")
+                    )
 
-                (list-ln 
-                    ("(" "List" nodes ")" ($$ (handle-list-ln $3)))
-                    ("(" "List" links ")" ($$ (handle-list-ln $3)))
-                    ("(" "List" links nodes ")" ($$ (handle-list-ln $4)))
-                    ("(" "List" nodes links ")" ($$ (handle-list-ln $3)))
-                    ("(" "List" ")" ($$ '()) ) ;empty ListLink
-                    ("(" "ListLink" nodes ")" ($$ (handle-list-ln $3)))
-                    ("(" "ListLink" links ")" ($$ (handle-list-ln $3)))
-                    ("(" "ListLink" links nodes ")" ($$ (handle-list-ln $4)))
-                    ("(" "ListLink" nodes links ")" ($$ (handle-list-ln $3)))
-                    ("(" "ListLink" ")" ($$ '()) ) ;empty ListLink
-                )
+                    (list-ln 
+                        ("(" "List" nodes ")" ($$ (handle-list-ln $3)))
+                        ("(" "List" links ")" ($$ (handle-list-ln $3)))
+                        ("(" "List" links nodes ")" ($$ (handle-list-ln $4)))
+                        ("(" "List" nodes links ")" ($$ (handle-list-ln $3)))
+                        ("(" "List" ")" ($$ '()) ) ;empty ListLink
+                        ("(" "ListLink" nodes ")" ($$ (handle-list-ln $3)))
+                        ("(" "ListLink" links ")" ($$ (handle-list-ln $3)))
+                        ("(" "ListLink" links nodes ")" ($$ (handle-list-ln $4)))
+                        ("(" "ListLink" nodes links ")" ($$ (handle-list-ln $3)))
+                        ("(" "ListLink" ")" ($$ '()) ) ;empty ListLink
+                    )
 
-                (eval-ln
-                    ("(" "Evaluation" node list-ln ")" ($$ (handle-eval-ln $3 $4)))
-                    ("(" "Evaluation" "(" "stv" $fixed $fixed ")" node list-ln ")" ($$ (handle-eval-ln $4 $5)))
-                    ("(" "EvaluationLink" node list-ln ")" ($$ (handle-eval-ln $3 $4)))
-                    ("(" "EvaluationLink" "(" "stv" $fixed $fixed ")" node list-ln ")" ($$ (handle-eval-ln $4 $5)))
-                )
+                    (eval-ln
+                        ("(" "Evaluation" node list-ln ")" ($$ (handle-eval-ln $3 $4)))
+                        ("(" "Evaluation" "(" "stv" $fixed $fixed ")" node list-ln ")" ($$ (handle-eval-ln $4 $5)))
+                        ("(" "EvaluationLink" node list-ln ")" ($$ (handle-eval-ln $3 $4)))
+                        ("(" "EvaluationLink" "(" "stv" $fixed $fixed ")" node list-ln ")" ($$ (handle-eval-ln $4 $5)))
+                    )
 
-                (member-ln
-                    ("(" "Member" node node ")" ($$ (handle-ln $3 $4 "annotates")))
-                    ("(" "Member" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "annotates")))
-                    ("(" "MemberLink" node node ")" ($$ (handle-ln $3 $4 "annotates")))
-                    ("(" "MemberLink" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "annotates")))
-                )
-                (inheritance-ln 
-                    ("(" "Inheritance" node node ")" ($$ (handle-ln $3 $4 "child_of")))
-                    ("(" "Inheritance" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "child_of")))
-                    ("(" "InheritanceLink" node node ")" ($$ (handle-ln $3 $4 "child_of")))
-                    ("(" "InheritanceLink" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "child_of")))
-                )
-                (nodes
-                    (node ($$ $1))
-                    (nodes node ($$ (list $1 $2)))
-                )
+                    (member-ln
+                        ("(" "Member" node node ")" ($$ (handle-ln $3 $4 "annotates")))
+                        ("(" "Member" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "annotates")))
+                        ("(" "MemberLink" node node ")" ($$ (handle-ln $3 $4 "annotates")))
+                        ("(" "MemberLink" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "annotates")))
+                    )
+                    (inheritance-ln 
+                        ("(" "Inheritance" node node ")" ($$ (handle-ln $3 $4 "child_of")))
+                        ("(" "Inheritance" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "child_of")))
+                        ("(" "InheritanceLink" node node ")" ($$ (handle-ln $3 $4 "child_of")))
+                        ("(" "InheritanceLink" "(" "stv" $fixed $fixed ")" node node ")" ($$ (handle-ln $4 $5 "child_of")))
+                    )
+                    (nodes
+                        (node ($$ $1))
+                        (nodes node ($$ (list $1 $2)))
+                    )
 
-                (node
-                    ("(" "Predicate" $string ")" ($$ $3))
-                    ("(" "PredicateNode" $string ")" ($$ $3))
-                    ("(" "Concept" $string ")" ($$ $3))
-                    ("(" "ConceptNode" $string ")" ($$ $3))
-                    ("(" "Gene" $string ")" ($$ $3))
-                    ("(" "GeneNode" $string ")" ($$ $3))
-                    ("(" "MoleculeNode" $string ")" ($$ $3))
-                    ("(" "Molecule" $string ")" ($$ $3))
-                    ("(" "Variable" $string ")")
-                    ("(" "VariableNode" $string  ")")
-                )
+                    (node
+                        ("(" "Predicate" $string ")" ($$ $3))
+                        ("(" "PredicateNode" $string ")" ($$ $3))
+                        ("(" "Concept" $string ")" ($$ $3))
+                        ("(" "ConceptNode" $string ")" ($$ $3))
+                        ("(" "Gene" $string ")" ($$ $3))
+                        ("(" "GeneNode" $string ")" ($$ $3))
+                        ("(" "MoleculeNode" $string ")" ($$ $3))
+                        ("(" "Molecule" $string ")" ($$ $3))
+                        ("(" "Variable" $string ")")
+                        ("(" "VariableNode" $string  ")")
+                    )
             ))]
         [mach (make-lalr-machine spec)]
         [mtab (lalr-match-table mach)]

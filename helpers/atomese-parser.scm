@@ -92,7 +92,7 @@
                 )
             
     )))
-(define annts '("gene-go-annotation" "gene-pathway-annoatation" "biogrid-interaction-annotation"))
+(define annts '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation"))
 (define (atomese-parser port)
     (let* (
         [spec (lalr-spec
@@ -128,10 +128,12 @@
                     ("(" "List" links ")" ($$ (handle-list-ln $3)))
                     ("(" "List" links nodes ")" ($$ (handle-list-ln $4)))
                     ("(" "List" nodes links ")" ($$ (handle-list-ln $3)))
+                    ("(" "List" ")" ($$ '()) ) ;empty ListLink
                     ("(" "ListLink" nodes ")" ($$ (handle-list-ln $3)))
                     ("(" "ListLink" links ")" ($$ (handle-list-ln $3)))
                     ("(" "ListLink" links nodes ")" ($$ (handle-list-ln $4)))
                     ("(" "ListLink" nodes links ")" ($$ (handle-list-ln $3)))
+                    ("(" "ListLink" ")" ($$ '()) ) ;empty ListLink
                 )
 
                 (eval-ln
@@ -167,6 +169,8 @@
                     ("(" "GeneNode" $string ")" ($$ $3))
                     ("(" "MoleculeNode" $string ")" ($$ $3))
                     ("(" "Molecule" $string ")" ($$ $3))
+                    ("(" "Variable" $string ")")
+                    ("(" "VariableNode" $string  ")")
                 )
             ))]
         [mach (make-lalr-machine spec)]

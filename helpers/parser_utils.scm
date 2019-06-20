@@ -1,5 +1,5 @@
 (define* (create-node genes id name defn location annotation #:optional (subgroup ""))
- (if (is-gene-main? id genes)
+ (if (member id genes)
  	(make-node (make-node-info id name defn location subgroup "main") "nodes")
     (make-node (make-node-info id name defn location subgroup annotation) "nodes")
  )

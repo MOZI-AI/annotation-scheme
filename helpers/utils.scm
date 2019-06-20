@@ -140,54 +140,68 @@ info
 
 (define (generate-result var1 var2)
   (if  
-    (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))) 
+    (and (not (equal? (cog-type var1) 'VariableNode)) (not (equal? (cog-type var2) 'VariableNode))
+        (or (member (cons gene-a gene-b) (pairs))
+                (member (cons gene-b gene-a) (pairs)))
+    ) 
 
-    (begin
-    (let ([output (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2)))])
-          (if (null? output)
-            (ListLink 
-                (EvaluationLink 
-                    (PredicateNode "interacts_with") 
-                    (ListLink var1 var2))
-                (node-info var2)
-                (node-info var1)
-            )
-            (ListLink 
-                (EvaluationLink
-                    (PredicateNode "has_pubmedId")
+        (begin
+            (let ([output (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2)))])
+                (pairs (append (list (cons gene-a gene-b)) (pairs)))
+                (if (null? output)
                     (ListLink 
-                        (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))
-                        (ListLink output)
+                        (EvaluationLink 
+                            (PredicateNode "interacts_with") 
+                            (ListLink var1 var2))
+                        (node-info var2)
+                        (node-info var1)
+                    )
+                    (ListLink 
+                        (EvaluationLink
+                            (PredicateNode "has_pubmedId")
+                            (ListLink 
+                                (EvaluationLink (PredicateNode "interacts_with") (ListLink var1 var2))
+                                (ListLink output)
+                            )
+                        )
+                        (node-info var2)
+                        (node-info var1)
+                        )
                     )
                 )
-                (node-info var2)
-                (node-info var1)
-                )
-            )
-          )
-    ))
-)
+        )
+    
+))
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)
-    (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
+    (if (or (member (cons gene-a gene-b) (pairs))
+                (member (cons gene-b gene-a) (pairs)))
             (ListLink
-                (EvaluationLink (PredicateNode "has_pubmedId")
-                    (ListLink
-                        (EvaluationLink 
-                            (PredicateNode "interacts_with")
-                            (ListLink gene-a gene-b)
-                        )
-                        (ListLink
-                            pubmed
-                        )
-                    )
-                )
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
-                (node-info gene-b)
                 (node-info prot-a)
                 (node-info prot-b)
             )
-    )
-
-)
+            (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
+                    (display gene-a)(newline)
+                    (pairs (append (list (cons gene-a gene-b)) (pairs)))
+                    (ListLink
+                        (EvaluationLink (PredicateNode "has_pubmedId")
+                            (ListLink
+                                (EvaluationLink 
+                                    (PredicateNode "interacts_with")
+                                    (ListLink gene-a gene-b)
+                                )
+                                (ListLink
+                                    pubmed
+                                )
+                            )
+                        )
+                        (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
+                        (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
+                        (node-info gene-b)
+                        (node-info prot-a)
+                        (node-info prot-b)
+                    )
+        )
+))

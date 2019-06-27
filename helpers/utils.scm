@@ -139,7 +139,6 @@ info
 ;; Grounded schema node to add info about matched variable nodes
 
 (define (generate-result gene-a gene-b)
-(display (pairs))(newline)
   (if  
     (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
     ) 
@@ -176,11 +175,14 @@ info
     (if (and (not (member (cons gene-a prot-a) (pairs)))
             (not (member (cons gene-b prot-b) (pairs)))
         )
-        (ListLink
-                (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
-                (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
-                (node-info prot-a)
-                (node-info prot-b)
+        (begin
+            (pairs (append (list (cons gene-a prot-a)  (cons gene-b prot-b)) (pairs)))
+            (ListLink
+                    (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
+                    (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
+                    (node-info prot-a)
+                    (node-info prot-b)
+            )
         )
     )
 )

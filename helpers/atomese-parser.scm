@@ -48,7 +48,6 @@
 
                     ((string=? predicate "has_pubmedID")
                         (begin 
-                        (display (format #f "~a" (string-join lns ",")))(newline)
                         (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
                         '()
                         )

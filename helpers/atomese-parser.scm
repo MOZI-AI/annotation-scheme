@@ -20,8 +20,7 @@
                         (begin 
                         (edges (append (list (create-edge (cadr lns) (car lns) predicate (annotation) "" predicate)) (edges)))
                         '()
-                        )
-                    )
+                        ))
                     ((string=? predicate "has_name")
                         (if (not (member (car lns) (atoms)))
                             (begin 

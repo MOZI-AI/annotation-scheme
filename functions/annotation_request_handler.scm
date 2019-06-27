@@ -1,6 +1,6 @@
 ;; validates if given gene symbols exist in the atomspace
 
-(define (genes gene-list)
+(define (find-genes gene-list)
 (let ((val-msg "")
      (unknown '()))
 
@@ -22,7 +22,7 @@ val-msg ))
 (define (gene-info genes)
     (let ([info '()])
          (for-each (lambda (g)
-              (set! info (append info (list (ListLink (node-info (GeneNode g)) (ListLink (add-loc (GeneNode g)))))))
+              (set! info (append info (list (ListLink (node-info (GeneNode g)) (ListLink (car (locate-node (GeneNode g))))))))
          ) genes)
 (ListLink info)))
 
@@ -36,7 +36,28 @@ val-msg ))
 gene-nodes
 ))
 
+(define nodes (make-parameter '()))
+(define edges (make-parameter '()))
+(define atoms (make-parameter '()))
+(define genes (make-parameter '()))
+(define pairs (make-parameter '()))
+(define annotation (make-parameter '()))
 
+(define (annotate-genes gene-list file-name annts-fns)
+  (parameterize ( (nodes '()) 
+                  (edges '()) 
+                  (atoms '()) 
+                  (genes gene-list)
+                  (pairs '())
+                  (annotation '())
+              ) 
+      (let* ([result (ListLink (force annts-fns))])
+      (write-to-file result file-name)
+      (scm->json-string (atomese-parser (format #f "~a" result)))
+    )
+  )
+
+)
 
 
 

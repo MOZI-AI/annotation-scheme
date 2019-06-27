@@ -4,8 +4,8 @@
     
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-		     (set! result (append result (delete-duplicates (cog-outgoing-set (findProtInteractor gene))) (delete-duplicates (cog-outgoing-set (outputInteraction gene)))
-			 )))
+		     (set! result (append result (cog-outgoing-set (findProtInteractor gene)) (cog-outgoing-set (outputInteraction gene))
+			 ))
 			 
 			 
 
@@ -16,7 +16,8 @@
 	        (set! result (append result (delete-duplicates (cog-outgoing-set (outputInteraction gene)))))
 	      ))
 
-    )(mapSymbol gene_nodes))
+    ))(mapSymbol gene_nodes))
 
   (ListLink result)
-))
+  )
+)

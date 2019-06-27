@@ -141,8 +141,6 @@ info
 (define (generate-result gene-a gene-b)
   (if  
     (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
-        (or (member (cons gene-a gene-b) (pairs))
-                (member (cons gene-b gene-a) (pairs)))
     ) 
 
         (begin
@@ -158,7 +156,7 @@ info
                     )
                     (ListLink 
                         (EvaluationLink
-                            (PredicateNode "has_pubmedId")
+                            (PredicateNode "has_pubmedID")
                             (ListLink 
                                 (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b))
                                 (ListLink output)
@@ -174,33 +172,46 @@ info
 ))
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)
-    (if (or (member (cons gene-a gene-b) (pairs))
-                (member (cons gene-b gene-a) (pairs)))
-            (ListLink
-                (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
-                (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
-                (node-info prot-a)
-                (node-info prot-b)
-            )
-            (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
-                    (pairs (append (list (cons gene-a gene-b)) (pairs)))
+    (if (and (not (member (cons gene-a prot-a) (pairs)))
+            (not (member (cons gene-b prot-b) (pairs)))
+        )
+        (let ()
+            (if (or  (member (cons gene-a gene-b) (pairs))
+                    (member (cons gene-b gene-a) (pairs)))
+                (begin 
+                    (pairs (append (list (cons gene-a prot-a)
+                                (cons gene-b prot-b)) (pairs)))
                     (ListLink
-                        (EvaluationLink (PredicateNode "has_pubmedId")
-                            (ListLink
-                                (EvaluationLink 
-                                    (PredicateNode "interacts_with")
-                                    (ListLink gene-a gene-b)
-                                )
-                                (ListLink
-                                    pubmed
-                                )
-                            )
-                        )
                         (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
                         (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
-                        (node-info gene-b)
                         (node-info prot-a)
                         (node-info prot-b)
+                ))
+                (let ([pubmed (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
+                        (pairs (append (list (cons gene-a gene-b)
+                                (cons gene-a prot-a)
+                                (cons gene-b prot-b)) (pairs)))
+                        (ListLink
+                            (EvaluationLink (PredicateNode "has_pubmedID")
+                                (ListLink
+                                    (EvaluationLink 
+                                        (PredicateNode "interacts_with")
+                                        (ListLink gene-a gene-b)
+                                    )
+                                    (ListLink
+                                        pubmed
+                                    )
+                                )
+                            )
+                            (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
+                            (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
+                            (node-info gene-b)
+                            (node-info prot-a)
+                            (node-info prot-b)
+                        )
                     )
-        )
-))
+                )
+            )
+
+    )
+)

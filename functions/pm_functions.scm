@@ -613,20 +613,37 @@ name
 
 ;;                           
 (define (findpubmed interaction)
-  (let ([ids (cog-outgoing-set
-    (cog-execute! (GetLink
-      (VariableNode "$p")
-      (EvaluationLink
+    (cog-outgoing-set (cog-execute! 
+      (GetLink
+        (VariableNode "$pub")
+        (AndLink
+          (EvaluationLink
+            (PredicateNode "has_pubmedID")
+            (ListLink
+              interaction
+              (VariableNode "$pub")
+            )     
+          )
+        
+        )
+        ; (ExecutionOutputLink
+        ;   (GroundedSchemaNode "scm: generate-pubmedID")
+        ;     (ListLink
+        ;       interaction
+        ;       (VariableNode "$pub")
+        ;   ))
+      
+      )
+    
+    ))
+)
+
+(define( generate-pubmedID interaction ids)
+    (EvaluationLink
         (PredicateNode "has_pubmedID")
         (ListLink
           interaction
-          (VariableNode "$p"))))
-    )
-
-)])
-    ids
-  )
-  
+          ids))
 )
 
 ;;; Locate a node
@@ -649,6 +666,7 @@ name
         (ExecutionOutputLink
         (GroundedSchemaNode "scm: filter-loc")
           (ListLink
+            node
             (VariableNode "$go")
           )))
       ))
@@ -657,11 +675,17 @@ name
 
 ;; filter only Cell membrane and compartments
 
-(define (filter-loc go)
+(define (filter-loc node go)
 (let ([loc (string-downcase (find-name go))])
 (if (or (and (not (string-contains loc "complex")) 
     (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
-      (ConceptNode loc)
+      (EvaluationLink
+        (PredicateNode "has_location")
+        (ListLink
+          node
+          (ConceptNode loc)
+        )
+      )
 )
 ))
 

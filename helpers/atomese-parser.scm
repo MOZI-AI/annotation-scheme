@@ -33,14 +33,14 @@
                         
                     )
                     ((string=? predicate "has_definition")
-                        (if (member (car lns) (atoms))
+                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (car (nodes)))))
                             (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
                         )
                         '()
                     )
 
                     ((string=? predicate "GO_namespace")
-                      (if (member (car lns) (atoms))
+                      (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (car (nodes)))))
                             (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
                         )
                        '()
@@ -53,16 +53,20 @@
                         )
                     )
                     ((string=? predicate "has_location")
+                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (car (nodes)))))
                         (let* ([info (node-data (car (nodes)))]
-                               [loc (node-info-location info)]
+                               [old-loc (node-info-location info)]
+                               [new-loc (cadr lns)]
                             )
-                            (if (string=? loc "")
-                                (node-info-location-set! info (cadr lns))
-                                (node-info-location-set! info (string-append loc "," (cadr lns)))
+                            (if (string=? old-loc "")
+                                (node-info-location-set! info new-loc)
+                                (if (not (string-contains old-loc new-loc))
+                                    (node-info-location-set! info (string-append old-loc "," new-loc))
+                                )
                             )
                            '()
                         
-                        )
+                        ))
                     )
                     (else (error (format #f "Unrecognized predicate ~a" predicate)))
                     

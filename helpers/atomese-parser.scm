@@ -25,7 +25,7 @@
                         (if (not (member (car lns) (atoms)))
                             (begin 
                                 
-                                (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation))) (nodes)))
+                                (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (car (string-split (car lns) #\:)))) (nodes)))
                                 (atoms (append (list (car lns)) (atoms)))
                             )
                         )
@@ -33,14 +33,14 @@
                         
                     )
                     ((string=? predicate "has_definition")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (car (nodes)))))
+                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data (car (nodes))))))
                             (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
                         )
                         '()
                     )
 
                     ((string=? predicate "GO_namespace")
-                      (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (car (nodes)))))
+                      (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))
                             (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
                         )
                        '()
@@ -53,7 +53,7 @@
                         )
                     )
                     ((string=? predicate "has_location")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (car (nodes)))))
+                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data (car (nodes))))))
                         (let* ([info (node-data (car (nodes)))]
                                [old-loc (node-info-location info)]
                                [new-loc (cadr lns)]

@@ -578,9 +578,9 @@
     ( [lst (cog-outgoing-set (findpwname node))])
     (if (null? lst)
       (ConceptNode "N/A")
-      (ConceptNode (car lst))
+      (car lst)
   )
-)
+))
 
 ;; Add location of a gene/Molecule node in context of Reactome pathway
 

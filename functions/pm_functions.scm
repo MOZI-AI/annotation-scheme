@@ -664,30 +664,18 @@
 ;;                           
 (define (findpubmed interaction)
     (cog-outgoing-set (cog-execute! 
-    (cog-execute! (GetLink
       (GetLink
         (VariableNode "$pub")
-        (AndLink
-          (EvaluationLink
+        (EvaluationLink
             (PredicateNode "has_pubmedID")
             (ListLink
               interaction
               (VariableNode "$pub")
             )     
           )
-        
-        )
-        ; (ExecutionOutputLink
-        ;   (GroundedSchemaNode "scm: generate-pubmedID")
-        ;     (ListLink
-        ;       interaction
-        ;       (VariableNode "$pub")
-        ;   ))
-      
-      )
     
     ))
-)
+))
 
 (define( generate-pubmedID interaction ids)
     (EvaluationLink

@@ -22,13 +22,11 @@
                         '()
                         ))
                     ((string=? predicate "has_name")
-                        (if (not (member (car lns) (atoms)))
                             (begin 
                                 
                                 (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (car (string-split (car lns) #\:)))) (nodes)))
                                 (atoms (append (list (car lns)) (atoms)))
                             )
-                        )
                        '()
                         
                     )

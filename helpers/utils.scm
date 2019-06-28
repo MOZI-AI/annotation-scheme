@@ -141,6 +141,8 @@ info
 (define (generate-result gene-a gene-b)
   (if  
     (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
+    (not (member (cons gene-a gene-b) (pairs)))
+     (not (member (cons gene-b gene-a) (pairs)))
     ) 
 
         (begin
@@ -159,7 +161,7 @@ info
                             (PredicateNode "has_pubmedID")
                             (ListLink 
                                 (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b))
-                                (ListLink output)
+                                output
                             )
                         )
                         (node-info gene-a)

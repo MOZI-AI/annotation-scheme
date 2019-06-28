@@ -1,5 +1,6 @@
 (define (gene-pathway-annotation gene_nodes pathway prot small_mol)
-    (let ([result (list (ConceptNode "gene-pathway-annotation"))])
+    (let ([result (list (ConceptNode "gene-pathway-annotation"))]
+          [pwlst '()])
 
     (for-each (lambda (gene)
     (for-each (lambda (pathw)
@@ -7,8 +8,11 @@
             (set! result (append result (smpdb gene prot small_mol)))
             )
         (if (equal? pathw "reactome")
-            (set! result (append result (reactome gene prot small_mol)))
-            )
+            (begin
+            (let ([res (reactome gene prot small_mol pwlst)])
+              (set! result (append result (car res)))
+              (set! pwlst (append pwlst (cdr res)))
+            )))
         )(string-split pathway #\ ))
     ) gene_nodes)
  
@@ -52,7 +56,7 @@
 
 ;; From reactome
 
-(define (reactome gene prot sm)
+(define (reactome gene prot sm pwlst)
     (let (
       [pw (findMember (GeneNode gene) "R-HSA")]
       [ls '()]
@@ -63,13 +67,14 @@
             [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
             [tmp '()]
         )
+          (set! pwlst (append pwlst (list node)))
           (if (equal? prot "True")
             (set! tmp (append tmp (cog-outgoing-set (findmol node "Uniprot"))))
           )
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
           )
-
+          (set! tmp (append tmp (list (pathway-heirarchy node pwlst))))
           (if (null? tmp)
             '()
             tmp
@@ -82,7 +87,7 @@
     (if (equal? prot "True")
     (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     )
-      (append pw ls) 
+      (list (append pw ls) pwlst) 
   ) 
 
 )

@@ -354,22 +354,27 @@
         )))))
 
 (define filter-pathway (lambda (gene prot pathway option)
-(if (and (string=? (find-prefix prot) "Uniprot") (or (string-contains (cog-name pathway) "SMP") (string-contains (cog-name pathway) "R-HSA")))
-  (cond ((equal? option (Number "0")) 
+(if (and (string=? (find-prefix prot) "Uniprot") )
+  (cond ((and (string-contains (cog-name pathway) "SMP") (equal? option (Number "0")))
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
           (ListLink
             gene
             prot ))
+    (node-info pathway)
     ))
-    ((equal? option (Number "1"))
+    ((and (equal? option (Number "1")) (string-contains (cog-name pathway) "R-HSA"))
     (ListLink
       (EvaluationLink
         (PredicateNode "expresses")
           (ListLink
             gene
             prot ))
+      (node-info pathway)
+      (ListLink 
+        (add-loc (MemberLink gene pathway))
+      )
     )))
 )))
 
@@ -379,7 +384,54 @@
        (car  (string-split (cog-name node) #\:))
    )
 )
-;;
+;; Find heirarchy of the reactome pathway
+(define pathway-heirarchy
+  (lambda (pw lst)
+    (let ([res 
+      (cog-outgoing-set (cog-execute! (BindLink
+        (VariableNode "$parentpw")
+          (InheritanceLink
+            pw
+          (VariableNode "$parentpw"))
+        (ExecutionOutputLink
+          (GroundedSchemaNode "scm: check-pw")
+          (ListLink
+            pw
+            (VariableNode "$parentpw")
+            (ListLink lst)
+          )
+        ))
+      ))
+    ])
+  (if (null? res)
+    (cog-outgoing-set (cog-execute! (BindLink
+      (VariableNode "$parentpw")
+      (InheritanceLink
+        (VariableNode "$parentpw")
+        pw)
+      (ExecutionOutputLink
+        (GroundedSchemaNode "scm: check-pw")
+        (ListLink
+         (VariableNode "$parentpw")
+         pw
+         (ListLink lst)
+        )
+      ))
+    ))
+    res
+  )))
+)
+
+(define check-pw
+  (lambda (pw parent-pw lst)
+    (if (member parent-pw (cog-outgoing-set lst))
+    (ListLink
+      (InheritanceLink
+      pw
+      parent-pw)
+    ))
+))
+
 ;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
     (lambda(pw)
@@ -612,6 +664,7 @@
 ;;                           
 (define (findpubmed interaction)
     (cog-outgoing-set (cog-execute! 
+    (cog-execute! (GetLink
       (GetLink
         (VariableNode "$pub")
         (AndLink

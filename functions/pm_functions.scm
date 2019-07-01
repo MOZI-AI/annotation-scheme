@@ -669,10 +669,14 @@
        (EvaluationLink
            (PredicateNode "has_pubmedID")
            (ListLink
-             gene-a
-             gene-b
+            (EvaluationLink 
+                (PredicateNode "interacts_with") 
+                  (ListLink
+                    gene-a
+                    gene-b
+                  ))
+            (VariableNode "$pub")
            )
-           (VariableNode "$pub")
          )
 
    )))])
@@ -686,7 +690,7 @@
              (EvaluationLink 
                 (PredicateNode "interacts_with") 
                   (ListLink
-                     gene-b
+                    gene-b
                     gene-a
                   ))
              (VariableNode "$pub")

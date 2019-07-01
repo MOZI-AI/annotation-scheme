@@ -207,9 +207,20 @@
 ;; Add details about the GO term
 (define (go-info go)
 (list
-(EvaluationLink (PredicateNode "GO_namespace") (ListLink go (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
-(EvaluationLink (PredicateNode "has_name") (ListLink go (if (equal? (cog-outgoing-set (findGoname go)) '() ) (ConceptNode "") (cog-outgoing-set (findGoname go)))))
-(EvaluationLink (PredicateNode "has_definition") (ListLink go (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go)))) 
+  (EvaluationLink (PredicateNode "has_name") 
+    (ListLink 
+      go 
+      (if (equal? (cog-outgoing-set (findGoname go)) '() ) (ConceptNode "") (cog-outgoing-set (findGoname go)))))
+    (EvaluationLink 
+      (PredicateNode "has_definition") 
+      (ListLink 
+        go 
+        (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go))))
+    (EvaluationLink 
+      (PredicateNode "GO_namespace") 
+      (ListLink 
+        go 
+        (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
 ))
 
 ;; Finds parents of a GO term ( of given namespace type) 
@@ -279,9 +290,6 @@
         (set! res (ListLink 
             (MemberLink gene pathway)
             (node-info pathway)
-            (ListLink 
-              (add-loc (MemberLink gene pathway))
-            )
         ))
      )
      (if (string-contains (cog-name pathway) "SMP")
@@ -476,6 +484,7 @@
     (ListLink
       (MemberLink mol path)
       (node-info mol)
+      (ListLink (locate-node mol))
     )
   )
 ))
@@ -618,15 +627,12 @@
 
 (define (node-name node)
 (let
-    ([lst (cog-outgoing-set (findpwname node))]
-    [name ""])
-    (if (>= (length lst) 1)
-	(set! name (list-ref lst 0))
-	(set! name (ConceptNode "")))
-name
-)
-
-)
+    ( [lst (cog-outgoing-set (findpwname node))])
+    (if (null? lst)
+      (ConceptNode "N/A")
+      (car lst)
+  )
+))
 
 ;; Add location of a gene/Molecule node in context of Reactome pathway
 
@@ -656,21 +662,47 @@ name
 )
 
 ;;                           
-(define (findpubmed interaction)
-  (let ([ids (cog-outgoing-set
-    (cog-execute! (GetLink
-      (VariableNode "$p")
-      (EvaluationLink
+(define (findpubmed gene-a gene-b)
+ (let ([pub (cog-outgoing-set (cog-execute!
+     (GetLink
+       (VariableNode "$pub")
+       (EvaluationLink
+           (PredicateNode "has_pubmedID")
+           (ListLink
+             gene-a
+             gene-b
+           )
+           (VariableNode "$pub")
+         )
+
+   )))])
+   (if (null? pub)
+     (set! pub (cog-outgoing-set (cog-execute!
+     (GetLink
+       (VariableNode "$pub")
+       (EvaluationLink
+           (PredicateNode "has_pubmedID")
+           (ListLink
+             (EvaluationLink 
+                (PredicateNode "interacts_with") 
+                  (ListLink
+                     gene-b
+                    gene-a
+                  ))
+             (VariableNode "$pub")
+           )
+         )
+   )))
+   ))
+   pub
+))
+
+(define( generate-pubmedID interaction ids)
+    (EvaluationLink
         (PredicateNode "has_pubmedID")
         (ListLink
           interaction
-          (VariableNode "$p"))))
-    )
-
-)])
-    ids
-  )
-  
+          ids))
 )
 
 ;;; Locate a node
@@ -693,6 +725,7 @@ name
         (ExecutionOutputLink
         (GroundedSchemaNode "scm: filter-loc")
           (ListLink
+            node
             (VariableNode "$go")
           )))
       ))
@@ -701,23 +734,31 @@ name
 
 ;; filter only Cell membrane and compartments
 
-(define (filter-loc go)
+(define (filter-loc node go)
 (let ([loc (string-downcase (find-name go))])
 (if (or (and (not (string-contains loc "complex")) 
-    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is_compartment loc))
-      (ConceptNode loc)
+    (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
+      (EvaluationLink
+        (PredicateNode "has_location")
+        (ListLink
+          node
+          (ConceptNode loc)
+        )
+      )
 )
 ))
 
-(define (is_compartment loc)
-(let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
-     [res #f])
-(for-each (lambda (comp)
-(if (string-contains loc comp)
-  (set! res #t)
-)) compartments)
-(if res 
-  #t
-  #f
-)))
+(define (is-compartment loc)
+  (let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
+      [res #f])
+    (for-each (lambda (comp)
+      (if (string-contains loc comp)
+        (set! res #t)
+      )) compartments)
+      (if res 
+        #t
+        #f
+      )
+  )
+)
 

@@ -131,1422 +131,891 @@
 ;;;;; Biogrid
 
 (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "FLNC")
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "JUN")
+            )
          )
-      )
-      (ConceptNode "pubmed:9006895")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=13130464")
          )
       )
-      (ConceptNode "pubmed:13130464")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "KTI12")
+            )
          )
-      )
-      (ConceptNode "pubmed:16533805")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=26344197")
          )
       )
-      (ConceptNode "pubmed:10713157")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP3K4")
+            )
          )
-      )
-      (ConceptNode "pubmed:15998799")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15866172")
          )
       )
-      (ConceptNode "pubmed:12391307")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "APP")
+            )
          )
-      )
-      (ConceptNode "pubmed:11707464")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=21832049")
          )
       )
-      (ConceptNode "pubmed:9808624")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "FLNC")
+            )
          )
-      )
-      (ConceptNode "pubmed:12788955")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9006895")
          )
       )
-      (ConceptNode "pubmed:9207092")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAPK8")
+            )
          )
-      )
-      (ConceptNode "pubmed:11279118")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12788955")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15998799")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=13130464")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11707464")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9808624")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11279118")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9162092")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10713157")
          )
       )
-      (ConceptNode "pubmed:9162092")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP2K7")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAPK10")
+            )
          )
-      )
-      (ConceptNode "pubmed:13130464")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP2K7")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15299005")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12788955")
          )
       )
-      (ConceptNode "pubmed:11062067")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "AKT1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "NBR1")
+            )
          )
-      )
-      (ConceptNode "pubmed:15998799")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "AKT1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=25043814")
          )
       )
-      (ConceptNode "pubmed:11707464")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "ITCH")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP2K7")
+            )
          )
-      )
-      (ConceptNode "pubmed:19737936")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11062067")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=13130464")
          )
       )
-      (ConceptNode "pubmed:12788955")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP3K1")
+            )
          )
-      )
-      (ConceptNode "pubmed:21900206")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15299005")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9808624")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15866172")
          )
       )
-      (ConceptNode "pubmed:22366412")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "PML")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "PML")
+            )
          )
-      )
-      (ConceptNode "pubmed:10620019")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK10")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10620019")
          )
       )
-      (ConceptNode "pubmed:15299005")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK10")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP2K4")
+            )
          )
-      )
-      (ConceptNode "pubmed:12788955")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9162092")
          )
       )
-      (ConceptNode "pubmed:9808624")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "RBBP8")
+            )
          )
-      )
-      (ConceptNode "pubmed:15866172")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=21988832")
          )
       )
-      (ConceptNode "pubmed:10713157")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "AKT1")
+            )
          )
-      )
-      (ConceptNode "pubmed:16472679")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11707464")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15998799")
          )
       )
-      (ConceptNode "pubmed:27806347")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "GEMIN5")
+            )
          )
-      )
-      (ConceptNode "pubmed:14581471")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=17541429")
          )
       )
-      (ConceptNode "pubmed:12228228")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "VASP")
+            )
          )
-      )
-      (ConceptNode "pubmed:14500727")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=26344197")
          )
       )
-      (ConceptNode "pubmed:15299005")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K4")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP3K7")
+            )
          )
-      )
-      (ConceptNode "pubmed:9841871")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K4")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12556533")
          )
       )
-      (ConceptNode "pubmed:15866172")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP3K3")
+            )
          )
-      )
-      (ConceptNode "pubmed:13130464")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=25043814")
          )
       )
-      (ConceptNode "pubmed:16533805")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "FLNA")
+            )
          )
-      )
-      (ConceptNode "pubmed:10713157")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9006895")
          )
       )
-      (ConceptNode "pubmed:15998799")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "FLNB")
+            )
          )
-      )
-      (ConceptNode "pubmed:12391307")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=19270716")
          )
       )
-      (ConceptNode "pubmed:11707464")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAP3K5")
+            )
          )
-      )
-      (ConceptNode "pubmed:9808624")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=15299005")
          )
       )
-      (ConceptNode "pubmed:12788955")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAPK1")
+            )
          )
-      )
-      (ConceptNode "pubmed:9207092")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12788955")
          )
       )
-      (ConceptNode "pubmed:11279118")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "ITCH")
+            )
          )
-      )
-      (ConceptNode "pubmed:9162092")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK14")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=19737936")
          )
       )
-      (ConceptNode "pubmed:9162092")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK14")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAPK9")
+            )
          )
-      )
-      (ConceptNode "pubmed:9808624")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "APP")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12788955")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=21900206")
          )
       )
-      (ConceptNode "pubmed:21832049")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "JUN")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "MAP2K4")
+               (GeneNode "MAPK14")
+            )
          )
-      )
-      (ConceptNode "pubmed:13130464")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K7")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9808624")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9162092")
          )
       )
-      (ConceptNode "pubmed:12429732")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K7")
+
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "CD2AP")
+            )
          )
-      )
-      (ConceptNode "pubmed:12556533")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK10")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:15299005")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK10")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "NENF")
+            )
          )
-      )
-      (ConceptNode "pubmed:12788955")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22939629")
          )
       )
-      (ConceptNode "pubmed:12788955")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "SMC3")
+            )
          )
-      )
-      (ConceptNode "pubmed:21900206")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK9")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:22366412")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAPK1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "PLK1")
+            )
          )
-      )
-      (ConceptNode "pubmed:12788955")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "GEMIN5")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:17541429")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "RBBP8")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "SBNO1")
+            )
          )
-      )
-      (ConceptNode "pubmed:21988832")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "NBR1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:25043814")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K3")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MCM4")
+            )
          )
-      )
-      (ConceptNode "pubmed:9162092")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "MAP3K3")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:25043814")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "NBR1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MAP2K4")
+            )
          )
-      )
-      (ConceptNode "pubmed:25043814")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "KTI12")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
          )
       )
-      (ConceptNode "pubmed:26344197")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "VASP")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "ATG2B")
+            )
          )
-      )
-      (ConceptNode "pubmed:26344197")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "MAP2K4")
-            (GeneNode "FLNB")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:19270716")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MAP2K4")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "SOX4")
+            )
          )
-      )
-      (ConceptNode "pubmed:12391307")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:12391307")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MAP2K4")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "RABEP2")
+            )
          )
-      )
-      (ConceptNode "pubmed:12391307")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MAP3K3")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:12391307")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "NDRG1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "USP15")
+            )
          )
-      )
-      (ConceptNode "pubmed:22939629")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "NENF")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:22939629")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "CD2AP")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "LARP7")
+            )
          )
-      )
-      (ConceptNode "pubmed:22863883")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "HUWE1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:22863883")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "LARP7")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "NOLC1")
+            )
          )
-      )
-      (ConceptNode "pubmed:22863883")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "NOLC1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:22863883")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "RABEP2")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "NDRG1")
+            )
          )
-      )
-      (ConceptNode "pubmed:22863883")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "TXNDC9")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22939629")
          )
       )
-      (ConceptNode "pubmed:22863883")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "ABL1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MCM7")
+            )
          )
-      )
-      (ConceptNode "pubmed:19470755")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "USP15")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MCM2")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "SMEK1")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MCM4")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MCM6")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "ABL1")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "IVNS1ABP")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=19470755")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "SMC1A")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MCM2")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "ANK3")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "GAPVD1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "IVNS1ABP")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "SMC3")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "SBNO1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "KIAA1468")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "SOX4")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "PPP4R2")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MAPK8")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "HSF1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "KIAA1468")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "ANK3")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MCM7")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "PLK1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "GAPVD1")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "PLK1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:19596235")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "PLK1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "PPP4R2")
+            )
          )
-      )
-      (ConceptNode "pubmed:28514442")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "ATG2B")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "SMEK1")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MCM6")
+            )
          )
-      )
-      (ConceptNode "pubmed:27173435")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "WEE1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
-         (ListLink
-            (GeneNode "SPAG9")
-            (GeneNode "MAX")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MAX")
+            )
          )
-      )
-      (ConceptNode "pubmed:12391307")
-   )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
          (ListLink
-            (GeneNode "JUN")
-            (GeneNode "MAPK1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
          )
       )
-      (ConceptNode "pubmed:29225075")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "HSF1")
+            )
+         )
          (ListLink
-            (GeneNode "JUN")
-            (GeneNode "MAPK1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:10419510")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "SMC1A")
+            )
+         )
          (ListLink
-            (GeneNode "JUN")
-            (GeneNode "MAPK1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:11431474")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "TXNDC9")
+            )
+         )
          (ListLink
-            (GeneNode "GEMIN5")
-            (GeneNode "MAPK8")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:17541429")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "WEE1")
+            )
+         )
          (ListLink
-            (GeneNode "SMC1A")
-            (GeneNode "USP15")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MAP3K3")
+            )
+         )
          (ListLink
-            (GeneNode "MCM6")
-            (GeneNode "GAPVD1")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "HUWE1")
+            )
+         )
          (ListLink
-            (GeneNode "USP15")
-            (GeneNode "IVNS1ABP")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22863883")
          )
       )
-      (ConceptNode "pubmed:27173435")
    )
-)
- (EvaluationLink
-   (PredicateNode "has_pubmedID")
-   (ListLink
-      (EvaluationLink
-         (PredicateNode "interacts_with")
+   (EvaluationLink
+      (PredicateNode "has_pubmedID")
+      (ListLink
+         (EvaluationLink
+            (PredicateNode "interacts_with")
+            (ListLink
+               (GeneNode "SPAG9")
+               (GeneNode "MAPK14")
+            )
+         )
          (ListLink
-            (GeneNode "SMC1A")
-            (GeneNode "LARP7")
+            (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12391307")
          )
       )
-      (ConceptNode "pubmed:29845934")
    )
-)
 
 (EvaluationLink
 (PredicateNode "has_entrez_id")

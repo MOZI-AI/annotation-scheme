@@ -37,7 +37,11 @@
           (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
       )
       (if (equal? prot "True")
-          (set! tmp (append tmp (cog-outgoing-set (findmol node "Uniprot"))))
+          (let ([prots (cog-outgoing-set (findmol node "Uniprot"))])
+          (if (not (null? prots))
+            (set! tmp (append tmp prots))
+            (set! tmp (append tmp (node-info node)))))
+      
       )
         (if (null? tmp)
             '()

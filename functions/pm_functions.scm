@@ -387,7 +387,7 @@
 ;; Find heirarchy of the reactome pathway
 (define pathway-heirarchy
   (lambda (pw lst)
-    (let ([res 
+    (let ([res-parent
       (cog-outgoing-set (cog-execute! (BindLink
         (VariableNode "$parentpw")
           (InheritanceLink
@@ -402,9 +402,8 @@
           )
         ))
       ))
-    ])
-  (if (null? res)
-    (cog-outgoing-set (cog-execute! (BindLink
+    ]
+    [res-child (cog-outgoing-set (cog-execute! (BindLink
       (VariableNode "$parentpw")
       (InheritanceLink
         (VariableNode "$parentpw")
@@ -417,14 +416,14 @@
          (ListLink lst)
         )
       ))
-    ))
-    res
-  )))
-)
+    ))]
+  )
+  (append res-parent res-child)
+)))
 
 (define check-pw
   (lambda (pw parent-pw lst)
-    (if (member parent-pw (cog-outgoing-set lst))
+    (if (and (member parent-pw (cog-outgoing-set lst)) (member pw (cog-outgoing-set lst)))
     (ListLink
       (InheritanceLink
       pw

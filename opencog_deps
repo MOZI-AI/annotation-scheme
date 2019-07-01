@@ -18,15 +18,3 @@
 
 (use-modules (ice-9 ftw))
 (use-modules (srfi srfi-1))
-
-(primitive-load "/opt/helpers/utils.scm")
-
-(primitive-load "/opt/helpers/parser_utils.scm")
-(for-each (lambda (f) 
-    (if (not (or (equal? "." f) (equal? ".." f)))
-        (primitive-load (string-append "/opt/functions/" f))
-    )) (scandir "/opt/functions"))
-
-(primitive-load "/opt/tests/sample_dataset.scm")
-
-(primitive-load "/opt/helpers/atomese-parser.scm")

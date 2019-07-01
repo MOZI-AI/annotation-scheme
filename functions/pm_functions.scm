@@ -662,19 +662,39 @@
 )
 
 ;;                           
-(define (findpubmed interaction)
-    (cog-outgoing-set (cog-execute! 
-      (GetLink
-        (VariableNode "$pub")
-        (EvaluationLink
-            (PredicateNode "has_pubmedID")
-            (ListLink
-              interaction
-              (VariableNode "$pub")
-            )     
-          )
-    
-    ))
+(define (findpubmed gene-a gene-b)
+ (let ([pub (cog-outgoing-set (cog-execute!
+     (GetLink
+       (VariableNode "$pub")
+       (EvaluationLink
+           (PredicateNode "has_pubmedID")
+           (ListLink
+             gene-a
+             gene-b
+           )
+           (VariableNode "$pub")
+         )
+
+   )))])
+   (if (null? pub)
+     (set! pub (cog-outgoing-set (cog-execute!
+     (GetLink
+       (VariableNode "$pub")
+       (EvaluationLink
+           (PredicateNode "has_pubmedID")
+           (ListLink
+             (EvaluationLink 
+                (PredicateNode "interacts_with") 
+                  (ListLink
+                     gene-b
+                    gene-a
+                  ))
+             (VariableNode "$pub")
+           )
+         )
+   )))
+   ))
+   pub
 ))
 
 (define( generate-pubmedID interaction ids)

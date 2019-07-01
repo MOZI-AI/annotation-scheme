@@ -146,7 +146,7 @@ info
     ) 
 
         (begin
-            (let ([output (findpubmed (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b)))])
+            (let ([output (findpubmed gene-a gene-b)])
                 (pairs (append (list (cons gene-a gene-b)) (pairs)))
                 (if (null? output)
                     (ListLink 

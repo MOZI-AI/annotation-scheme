@@ -341,6 +341,11 @@
             (MemberLink
             (VariableNode "$a")
             (VariableNode "$pw"))
+            (EvaluationLink
+            (PredicateNode "expresses")
+              (ListLink
+                gene
+                (VariableNode "$a") ))
            )
         (ExecutionOutputLink
           (GroundedSchemaNode "scm: filter-pathway")

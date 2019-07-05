@@ -18,23 +18,18 @@
 ;;; along with this software.  If not, see
 ;;; <http://www.gnu.org/licenses/>.
 
-;; validates if given gene symbols exist in the atomspace
+(use-modules (srfi srfi-1)
+             (ice-9 match))
 
 (define (find-genes gene-list)
-(let ((val-msg "")
-     (unknown '()))
-
-(for-each (lambda(g)
-    (if (equal? (cog-node 'GeneNode g) '())  
-      (set! unknown (append unknown (list g)) )
-    )
-  ) gene-list)
-
-(if (null? unknown )
-    (set! val-msg "0")
-    (set! val-msg (string-append "1:" (string-join unknown ",")))
-)
-val-msg ))
+  "Validate if given gene strings in GENE-LIST exist in the
+atomspace."
+  (let ((unknown (filter (lambda (gene)
+                           (null? (cog-node 'GeneNode gene)))
+                         gene-list)))
+    (match unknown
+      (() "0")
+      (_ (string-append "1:" (string-join unknown ","))))))
 
 
 ;; Adds the name and description of gene_nodes

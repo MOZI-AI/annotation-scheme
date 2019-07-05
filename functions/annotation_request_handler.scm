@@ -31,15 +31,14 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-
-;; Adds the name and description of gene_nodes
-
 (define (gene-info genes)
-    (let ([info '()])
-         (for-each (lambda (g)
-              (set! info (append info (list (ListLink (node-info (GeneNode g)) (ListLink (locate-node (GeneNode g)))))))
-         ) genes)
-(ListLink info)))
+  "Add the name and description of gene nodes to the given list of GENES."
+  (let ((info
+         (map (lambda (gene)
+                (list (ListLink (node-info (GeneNode gene))
+                                (ListLink (locate-node (GeneNode gene))))))
+              genes)))
+    (ListLink info)))
 
 ;; Map gene symbols into GeneNodes
 

@@ -40,15 +40,9 @@ atomspace."
               genes)))
     (ListLink info)))
 
-;; Map gene symbols into GeneNodes
-
 (define (mapSymbol gene-list)
-(let ([gene-nodes '()])
-(for-each (lambda (g)
-(set! gene-nodes (append gene-nodes (list (GeneNode g))))
-) gene-list )
-gene-nodes
-))
+  "Map gene symbols into GeneNodes."
+  (map GeneNode gene-list))
 
 (define nodes (make-parameter '()))
 (define edges (make-parameter '()))

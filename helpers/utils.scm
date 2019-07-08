@@ -172,7 +172,7 @@ info
                     )
                 )
         )
-    
+        (ListLink )
 ))
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)

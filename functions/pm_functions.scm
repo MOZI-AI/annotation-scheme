@@ -439,7 +439,18 @@
 ;;Finds a name of any node (Except GO which has different structure)
 (define findpwname
     (lambda(pw)
-        (cog-execute! (GetLink
+    (if (string=? (find-prefix pw) "Uniprot")
+      (cog-execute! (GetLink
+            (VariableNode "$a")
+            (EvaluationLink
+               (PredicateNode "expresses")
+               (ListLink
+               (VariableNode "$a")
+               pw
+              )
+            )
+      ))
+      (cog-execute! (GetLink
             (VariableNode "$a")
             (EvaluationLink
                (PredicateNode "has_name")
@@ -448,7 +459,9 @@
                (VariableNode "$a")
               )
             )
-))))
+      ))
+  ))
+)  
 
 ;; Finds molecules (proteins or chebi's) in a pathway 
 (define (findmol path identifier)

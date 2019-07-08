@@ -769,4 +769,37 @@
       )
   )
 )
-
+;; Gene interactors for genes in the pathway
+(define-public pwgene-interactors 
+  (lambda (pw gene)
+  (cog-outgoing-set (cog-execute! (BindLink
+    (VariableList
+      (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
+      (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
+	    (TypedVariable (VariableNode "$p") (Type 'MoleculeNode)))
+    (AndLink
+    (MemberLink (VariableNode "$p") pw)
+    (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p")))
+    (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2"))) 
+    (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g2") gene))
+    )
+  (ExecutionOutputLink
+    (GroundedSchemaNode "scm: generate-interactors")
+		  (ListLink
+      pw
+      gene
+        (VariableNode "$g1")
+		    (VariableNode "$g2")
+		  ))
+  ))
+)))
+(define (generate-interactors path gene var1 var2)
+(if (and (not (string=? (cog-name var1) (cog-name var2)))
+        (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
+    )
+    (ListLink
+    (MemberLink var1 path) 
+    (MemberLink var2 path)
+    (generate-result var1 var2)
+    )
+))

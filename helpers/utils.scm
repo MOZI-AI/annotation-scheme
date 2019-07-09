@@ -192,6 +192,7 @@ info
                 )
             )
         )
+        (ListLink)
 ))
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)
@@ -208,4 +209,17 @@ info
             )
         )
     )
+)
+
+(define (generate-interactors path gene var1 var2)
+  (if (and (not (string=? (cog-name var1) (cog-name var2)))
+          (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
+      )
+      (ListLink
+      (MemberLink var1 path) 
+      (MemberLink var2 path)
+      (generate-result var1 var2)
+      )
+      (ListLink)
+  )
 )

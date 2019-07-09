@@ -146,33 +146,52 @@ info
     ) 
 
         (begin
-            (let ([output (findpubmed gene-a gene-b)])
+            (let* ([output (findpubmed gene-a gene-b)]
+                  [res (flatten (map (lambda (x) 
+                                    (if (not (member (cog-name x) (atoms)))
+                                        (cog-name x)
+                                        '()
+                                    ) 
+                    )  (list gene-a gene-b))) ]
+                  [interaction (if (null? output) (EvaluationLink 
+                                        (PredicateNode "interacts_with") 
+                                        (ListLink gene-a gene-b))
+                                        (EvaluationLink
+                                            (PredicateNode "has_pubmedID")
+                                            (ListLink (EvaluationLink 
+                                                     (PredicateNode "interacts_with") 
+                                                     (ListLink gene-a gene-b))  
+                                                    output)
+                                        ))]   
+                )
                 (pairs (append (list (cons gene-a gene-b)) (pairs)))
-                (if (null? output)
-                    (ListLink 
-                        (EvaluationLink 
-                            (PredicateNode "interacts_with") 
-                            (ListLink gene-a gene-b))
-                        (node-info gene-b)
-                        (node-info gene-a)
-                    )
-                    (ListLink 
-                        (EvaluationLink
-                            (PredicateNode "has_pubmedID")
-                            (ListLink 
-                                (EvaluationLink (PredicateNode "interacts_with") (ListLink gene-a gene-b))
-                                output
+                (match res
+                    ((a b)
+                        (begin 
+                            (atoms (append (list a b) (atoms)))
+                            (ListLink
+                                interaction
+                                (node-info (GeneNode a))
+                                (node-info (GeneNode b))
                             )
                         )
-                        (node-info gene-a)
-                        (ListLink (locate-node gene-a))
-                        (node-info gene-b)
-                        (ListLink (locate-node gene-b))
-                        )
+                    )
+                    ((a)
+                        (begin 
+                            (atoms (append (list a) (atoms)))
+                            (ListLink
+                                interaction
+                            (node-info (GeneNode a))
+                        ))
+                    )
+                    (()
+                            (ListLink
+                                interaction
+                            )
                     )
                 )
+            )
         )
-        (ListLink )
 ))
 
 (define (generate-ppi-result gene-a prot-a gene-b prot-b)

@@ -15,6 +15,6 @@
 (use-modules (ice-9 regex))
 (use-modules (srfi srfi-98))
 
-
+(use-modules (ice-9 match))
 (use-modules (ice-9 ftw))
 (use-modules (srfi srfi-1))

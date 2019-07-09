@@ -56,7 +56,7 @@
   )
 
   (append pw ls)
-))
+)
 
 ;; From reactome
 

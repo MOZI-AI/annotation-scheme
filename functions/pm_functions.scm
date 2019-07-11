@@ -526,9 +526,9 @@
 
 
 ;; Finds genes interacting with a given gene
-(define matchGeneInteractors
-    (lambda(gene)
-        (cog-execute! (BindLink
+(define match-gene-interactors
+    (lambda (gene prot)
+        (cog-outgoing-set (cog-execute! (BindLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
 
@@ -539,19 +539,29 @@
                (VariableNode "$a")
               )
             )
-            (ExecutionOutputLink
-              (GroundedSchemaNode "scm: generate-result")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                ))
-    ))	
+            (ListLink 
+              (ExecutionOutputLink
+                (GroundedSchemaNode "scm: generate-result")
+                  (ListLink
+                    gene
+                    (VariableNode "$a")
+                  ))
+              (ExecutionOutputLink
+                (GroundedSchemaNode "scm: find-protein-interactor")
+                  (ListLink
+                    (VariableNode "$a")
+                    (Number prot)
+                  ))
+                
+            )
+        )))	
 ))
 
 ;;; Finds output genes interacting eachother 
-(define outputInteraction
+(define find-output-interactors
     (lambda(gene)
-        (cog-execute! (BindLink
+        (cog-outgoing-set 
+          (cog-execute! (BindLink
           (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode))
             (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
@@ -584,53 +594,35 @@
                 (VariableNode "$a")
                 (VariableNode "$b")
               ))
-    ))	
+        )))	
 ))
 
 ;; Finds Protein-protein equivalence of a gene-gene interaction 
-(define findProtInteractor
-  (lambda(gene)
-     (cog-execute! (BindLink
- 
- 	  (VariableList
-      (TypedVariable (VariableNode "$a") (Type 'GeneNode))
-      (TypedVariable (VariableNode "$b") (Type 'MoleculeNode))
-	    (TypedVariable (VariableNode "$c") (Type 'MoleculeNode)))
-	  
-	 (And 
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            gene
-            (VariableNode "$c")
-      ))
-
-	    (EvaluationLink
-	     (PredicateNode "interacts_with")
-		    (ListLink
-		      gene
-		      (VariableNode "$a")
-		  ))
-
-	    (EvaluationLink
-	     (PredicateNode "expresses")
-		    (ListLink
-		      (VariableNode "$a")
-		      (VariableNode "$b")
-		 ))
-	 )
-
-  ;; This will be executed if the above pattern is found.
-  (ExecutionOutputLink
-    (GroundedSchemaNode "scm: generate-ppi-result")
-		  (ListLink
-        gene
-		    (VariableNode "$c")
-        (VariableNode "$a")
-		    (VariableNode "$b")
-		  ))
-	
-))
+(define find-protein-interactor
+  (lambda (gene prot)
+    (if (= 0 (string->number (cog-name prot)))
+        '()
+      (cog-outgoing-set (cog-execute! 
+        (BindLink
+  
+          (VariableList
+              (TypedVariable (VariableNode "$b") (Type 'MoleculeNode)))
+              (EvaluationLink
+              (PredicateNode "expresses")
+                (ListLink
+                gene
+                (VariableNode "$b")
+              ))
+          ;; This will be executed if the above pattern is found.
+          (ExecutionOutputLink
+            (GroundedSchemaNode "scm: generate-ppi-result")
+              (ListLink
+                gene
+                (VariableNode "$b")
+              ))
+    
+        )))
+    )
 ))
 
 ;; Find node name and description

@@ -148,7 +148,7 @@ info
         (begin
             (let* ([output (findpubmed gene-a gene-b)]
                   [res (flatten (map (lambda (x) 
-                                    (if (not (member (cog-name x) (atoms)))
+                                    (if (not (member (cog-name x) (biogrid-genes)))
                                         (cog-name x)
                                         '()
                                     ) 
@@ -168,7 +168,7 @@ info
                 (match res
                     ((a b)
                         (begin 
-                            (atoms (append (list a b) (atoms)))
+                            (biogrid-genes (append (list a b) (biogrid-genes)))
                             (ListLink
                                 interaction
                                 (node-info (GeneNode a))
@@ -178,7 +178,7 @@ info
                     )
                     ((a)
                         (begin 
-                            (atoms (append (list a) (atoms)))
+                            (biogrid-genes (append (list a) (biogrid-genes)))
                             (ListLink
                                 interaction
                             (node-info (GeneNode a))
@@ -195,20 +195,13 @@ info
         (ListLink)
 ))
 
-(define (generate-ppi-result gene-a prot-a gene-b prot-b)
-    (if (and (not (member (cons gene-a prot-a) (pairs)))
-            (not (member (cons gene-b prot-b) (pairs)))
-        )
+(define (generate-ppi-result gene-a prot-a )
         (begin
-            (pairs (append (list (cons gene-a prot-a)  (cons gene-b prot-b)) (pairs)))
             (ListLink
                     (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
-                    (EvaluationLink (PredicateNode "expresses") (ListLink gene-b prot-b))
                     (node-info prot-a)
-                    (node-info prot-b)
             )
         )
-    )
 )
 
 (define (generate-interactors path gene var1 var2)
@@ -216,9 +209,9 @@ info
           (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
       )
       (ListLink
-      (MemberLink var1 path) 
-      (MemberLink var2 path)
-      (generate-result var1 var2)
+        (MemberLink var1 path) 
+        (MemberLink var2 path)
+        (generate-result var1 var2)
       )
       (ListLink)
   )

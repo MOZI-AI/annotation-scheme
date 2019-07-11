@@ -49,6 +49,7 @@ atomspace."
 (define atoms (make-parameter '()))
 (define genes (make-parameter '()))
 (define pairs (make-parameter '()))
+(define biogrid-genes (make-parameter '()))
 (define annotation (make-parameter '()))
 
 (define (annotate-genes gene-list file-name annts-fns)
@@ -57,6 +58,7 @@ atomspace."
                   (atoms '()) 
                   (genes gene-list)
                   (pairs '())
+                  (biogrid-genes '())
                   (annotation '())
               ) 
       (let* ([result (ListLink (force annts-fns))])

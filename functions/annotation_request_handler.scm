@@ -48,7 +48,6 @@ atomspace."
 (define edges (make-parameter '()))
 (define atoms (make-parameter '()))
 (define genes (make-parameter '()))
-; (define pairs (make-parameter '()))
 (define biogrid-genes (make-parameter '()))
 (define annotation (make-parameter '()))
 
@@ -57,7 +56,6 @@ atomspace."
                   (edges '()) 
                   (atoms '()) 
                   (genes gene-list)
-                  (pairs '())
                   (biogrid-genes '())
                   (annotation '())
               ) 

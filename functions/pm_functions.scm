@@ -531,31 +531,33 @@
         (cog-outgoing-set (cog-execute! (BindLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               gene
-               (VariableNode "$a")
+            (ChoiceLink 
+                (EvaluationLink
+                  (PredicateNode "interacts_with")
+                  (ListLink
+                  gene
+                  (VariableNode "$a")
+                )
+              )
+               (EvaluationLink
+                  (PredicateNode "interacts_with")
+                  (ListLink
+                   (VariableNode "$a")
+                   gene
+                )
               )
             )
-            (ListLink 
-              (ExecutionOutputLink
-                (GroundedSchemaNode "scm: generate-result")
-                  (ListLink
-                    gene
-                    (VariableNode "$a")
-                  ))
-              (ExecutionOutputLink
-                (GroundedSchemaNode "scm: find-protein-interactor")
-                  (ListLink
-                    (VariableNode "$a")
-                    (Number prot)
-                  ))
-                
+            
+            (ExecutionOutputLink
+              (GroundedSchemaNode "scm: generate-result")
+                (ListLink
+                  gene
+                  (VariableNode "$a")
+                  (Number prot)
+                ))        
             )
         )))	
-))
+)
 
 ;;; Finds output genes interacting eachother 
 (define find-output-interactors
@@ -577,9 +579,9 @@
             (EvaluationLink
                (PredicateNode "interacts_with")
                (ListLink
-               (VariableNode "$a")
-               (VariableNode "$b")
-              ))
+                (VariableNode "$a")
+                (VariableNode "$b")
+            ))
 
             (EvaluationLink
                (PredicateNode "interacts_with")
@@ -593,6 +595,7 @@
               (ListLink
                 (VariableNode "$a")
                 (VariableNode "$b")
+                (Number 0)
               ))
         )))	
 ))

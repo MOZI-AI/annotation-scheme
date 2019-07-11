@@ -138,15 +138,14 @@ info
 
 ;; Grounded schema node to add info about matched variable nodes
 
-(define (generate-result gene-a gene-b)
-  (if  
-    (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
-    (not (member (cons gene-a gene-b) (pairs)))
-     (not (member (cons gene-b gene-a) (pairs)))
+(define (generate-result gene-a gene-b prot)
+    (if  
+     (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
     ) 
 
         (begin
             (let* ([output (findpubmed gene-a gene-b)]
+                  [prot-links (find-protein-interactor gene-b prot)]
                   [res (flatten (map (lambda (x) 
                                     (if (not (member (cog-name x) (biogrid-genes)))
                                         (cog-name x)
@@ -164,7 +163,6 @@ info
                                                     output)
                                         ))]   
                 )
-                (pairs (append (list (cons gene-a gene-b)) (pairs)))
                 (match res
                     ((a b)
                         (begin 
@@ -173,6 +171,7 @@ info
                                 interaction
                                 (node-info (GeneNode a))
                                 (node-info (GeneNode b))
+                                prot-links
                             )
                         )
                     )
@@ -181,12 +180,14 @@ info
                             (biogrid-genes (append (list a) (biogrid-genes)))
                             (ListLink
                                 interaction
-                            (node-info (GeneNode a))
+                                (node-info (GeneNode a))
+                                prot-links
                         ))
                     )
                     (()
                             (ListLink
                                 interaction
+                                prot-links
                             )
                     )
                 )
@@ -196,11 +197,9 @@ info
 ))
 
 (define (generate-ppi-result gene-a prot-a )
-        (begin
-            (ListLink
-                    (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
-                    (node-info prot-a)
-            )
+        (ListLink
+                (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
+                (node-info prot-a)
         )
 )
 
@@ -211,7 +210,7 @@ info
       (ListLink
         (MemberLink var1 path) 
         (MemberLink var2 path)
-        (generate-result var1 var2)
+        (generate-result var1 var2 (Number 0))
       )
       (ListLink)
   )

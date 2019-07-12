@@ -219,6 +219,8 @@ info
                         (ListLink var1 var2))  
                 output)
             )
+            (node-info var1)
+            (node-info var2)
         )
       )
       (ListLink)

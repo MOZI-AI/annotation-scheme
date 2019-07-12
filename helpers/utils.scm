@@ -207,7 +207,7 @@ info
   (if (and (not (string=? (cog-name var1) (cog-name var2)))
           (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
       )
-      (let ([output (findpubmed gene-a gene-b)])
+      (let ([output (findpubmed var1 var2)])
          (ListLink
             (MemberLink var1 path) 
             (MemberLink var2 path)
@@ -216,7 +216,7 @@ info
                 (ListLink 
                     (EvaluationLink 
                         (PredicateNode "interacts_with") 
-                        (ListLink gene-a gene-b))  
+                        (ListLink var1 var2))  
                 output)
             )
         )

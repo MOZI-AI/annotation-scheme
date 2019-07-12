@@ -207,10 +207,19 @@ info
   (if (and (not (string=? (cog-name var1) (cog-name var2)))
           (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
       )
-      (ListLink
-        (MemberLink var1 path) 
-        (MemberLink var2 path)
-        (generate-result var1 var2 (Number 0))
+      (let ([output (findpubmed gene-a gene-b)])
+         (ListLink
+            (MemberLink var1 path) 
+            (MemberLink var2 path)
+            (EvaluationLink
+                (PredicateNode "has_pubmedID")
+                (ListLink 
+                    (EvaluationLink 
+                        (PredicateNode "interacts_with") 
+                        (ListLink gene-a gene-b))  
+                output)
+            )
+        )
       )
       (ListLink)
   )

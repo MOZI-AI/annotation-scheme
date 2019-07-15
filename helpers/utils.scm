@@ -229,3 +229,19 @@ info
       (ListLink)
   )
 )
+
+(define-public (find-subgroup name) 
+    (let ((initial (string-split name #\:)))
+        (match initial
+            ((a b) a )
+            ((a)
+                (cond 
+                    ((string-prefix? "R-HSA" a) "Reactome")
+                    ((string-prefix? "SMP" a) "SMPDB")
+                    (else "Genes")
+                )
+            )
+        )
+    )
+
+)

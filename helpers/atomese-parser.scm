@@ -24,7 +24,7 @@
                     ((string=? predicate "has_name")
                             (begin 
                                 
-                                (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (car (string-split (car lns) #\:)))) (nodes)))
+                                (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
                                 (atoms (append (list (car lns)) (atoms)))
                             )
                        '()

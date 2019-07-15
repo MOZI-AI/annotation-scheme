@@ -7,9 +7,9 @@
 		)
 
 		(if (equal? interaction "Genes") 
-			(set! result (append result  (match-gene-interactors gene 0)
-				(find-output-interactors gene)
-			))
+			(begin
+				(set! result (append result  (match-gene-interactors gene 0) (find-output-interactors gene)))
+			)
 		)
 	) (mapSymbol gene_nodes))
 

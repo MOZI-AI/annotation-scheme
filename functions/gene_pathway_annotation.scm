@@ -47,8 +47,7 @@
             '()
             tmp
           )
-      )
-  ) pw)) )
+      ) pw)) )
 
 
   (if (equal? prot "True")
@@ -56,7 +55,7 @@
   )
 
   (append pw ls)
-)
+))
 
 ;; From reactome
 

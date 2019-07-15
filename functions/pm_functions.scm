@@ -531,22 +531,22 @@
         (cog-outgoing-set (cog-execute! (BindLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-            (ChoiceLink 
+              (ChoiceLink 
                 (EvaluationLink
                   (PredicateNode "interacts_with")
                   (ListLink
                   gene
                   (VariableNode "$a")
+                  )
                 )
-              )
-               (EvaluationLink
+                (EvaluationLink
                   (PredicateNode "interacts_with")
                   (ListLink
                    (VariableNode "$a")
                    gene
-                )
-              )
-            )
+                  )
+                )       
+             )
             
             (ExecutionOutputLink
               (GroundedSchemaNode "scm: generate-result")

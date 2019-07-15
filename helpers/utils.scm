@@ -142,8 +142,6 @@ info
     (if  
      (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
     ) 
-
-        (begin
             (let* ([output (findpubmed gene-a gene-b)]
                   [prot-links (find-protein-interactor gene-b prot)]
                   [res (flatten (map (lambda (x) 
@@ -161,7 +159,7 @@ info
                                                      (PredicateNode "interacts_with") 
                                                      (ListLink gene-a gene-b))  
                                                     output)
-                                        ))]   
+                    ))]   
                 )
                 (match res
                     ((a b)
@@ -191,8 +189,7 @@ info
                             )
                     )
                 )
-            )
-        )
+           )
         (ListLink)
 ))
 

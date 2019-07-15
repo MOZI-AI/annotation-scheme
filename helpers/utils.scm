@@ -161,34 +161,40 @@ info
                                                     output)
                     ))]   
                 )
-                (match res
-                    ((a b)
-                        (begin 
-                            (biogrid-genes (append (list a b) (biogrid-genes)))
-                            (ListLink
-                                interaction
-                                (node-info (GeneNode a))
-                                (node-info (GeneNode b))
-                                prot-links
-                            )
-                        )
-                    )
-                    ((a)
-                        (begin 
-                            (biogrid-genes (append (list a) (biogrid-genes)))
-                            (ListLink
-                                interaction
-                                (node-info (GeneNode a))
-                                prot-links
-                        ))
-                    )
-                    (()
-                            (ListLink
-                                interaction
-                                prot-links
-                            )
-                    )
+                (ListLink
+                    interaction
+                    (node-info (GeneNode a))
+                    (node-info (GeneNode b))
+                    prot-links
                 )
+                ; (match res
+                ;     ((a b)
+                ;         (begin 
+                ;             (biogrid-genes (append (list a b) (biogrid-genes)))
+                ;             (ListLink
+                ;                 interaction
+                ;                 (node-info (GeneNode a))
+                ;                 (node-info (GeneNode b))
+                ;                 prot-links
+                ;             )
+                ;         )
+                ;     )
+                ;     ((a)
+                ;         (begin 
+                ;             (biogrid-genes (append (list a) (biogrid-genes)))
+                ;             (ListLink
+                ;                 interaction
+                ;                 (node-info (GeneNode a))
+                ;                 prot-links
+                ;         ))
+                ;     )
+                ;     (()
+                ;             (ListLink
+                ;                 interaction
+                ;                 prot-links
+                ;             )
+                ;     )
+                ; )
            )
         (ListLink)
 ))

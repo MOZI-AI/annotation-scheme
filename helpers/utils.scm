@@ -163,8 +163,8 @@ info
                 )
                 (ListLink
                     interaction
-                    (node-info (GeneNode a))
-                    (node-info (GeneNode b))
+                    (node-info gene-a)
+                    (node-info gene-b)
                     prot-links
                 )
                 ; (match res

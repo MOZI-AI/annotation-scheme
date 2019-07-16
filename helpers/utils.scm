@@ -142,7 +142,8 @@ info
     (if  
      (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
     ) 
-            (let* ([output (findpubmed gene-a gene-b)]
+            (let* (
+                  [output (findpubmed gene-a gene-b)]
                   [prot-links (find-protein-interactor gene-b prot)]
                   [res (flatten (map (lambda (x) 
                                     (if (not (member (cog-name x) (biogrid-genes)))
@@ -161,40 +162,34 @@ info
                                                     output)
                     ))]   
                 )
-                (ListLink
-                    interaction
-                    (node-info gene-a)
-                    (node-info gene-b)
-                    prot-links
+                (match res
+                    ((a b)
+                        (begin 
+                            (biogrid-genes (append (list a b) (biogrid-genes)))
+                            (ListLink
+                                interaction
+                                (node-info (GeneNode a))
+                                (node-info (GeneNode b))
+                                prot-links
+                            )
+                        )
+                    )
+                    ((a)
+                        (begin 
+                            (biogrid-genes (append (list a) (biogrid-genes)))
+                            (ListLink
+                                interaction
+                                (node-info (GeneNode a))
+                                prot-links
+                        ))
+                    )
+                    (()
+                            (ListLink
+                                interaction
+                                prot-links
+                            )
+                    )
                 )
-                ; (match res
-                ;     ((a b)
-                ;         (begin 
-                ;             (biogrid-genes (append (list a b) (biogrid-genes)))
-                ;             (ListLink
-                ;                 interaction
-                ;                 (node-info (GeneNode a))
-                ;                 (node-info (GeneNode b))
-                ;                 prot-links
-                ;             )
-                ;         )
-                ;     )
-                ;     ((a)
-                ;         (begin 
-                ;             (biogrid-genes (append (list a) (biogrid-genes)))
-                ;             (ListLink
-                ;                 interaction
-                ;                 (node-info (GeneNode a))
-                ;                 prot-links
-                ;         ))
-                ;     )
-                ;     (()
-                ;             (ListLink
-                ;                 interaction
-                ;                 prot-links
-                ;             )
-                ;     )
-                ; )
            )
         (ListLink)
 ))

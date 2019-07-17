@@ -17,14 +17,27 @@
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with")]
-                        (begin 
-                        (edges (append (list (create-edge (cadr lns) (car lns) predicate (annotation) "" predicate)) (edges)))
-                        '()
-                        ))
+                            (let (
+                                 [el1 (if (member (car lns) (genes))
+                                    (car lns)    
+                                    (string-append (annotation) ":" (car lns))
+                                )
+                                ]   
+                                [el2 (if (member (cadr lns) (genes)) 
+                                        (cadr lns)
+                                        (string-append (annotation) ":" (cadr lns))
+                                )]
+                                )
+                                 (edges (append (list (create-edge el2 el1 predicate (annotation) "" predicate)) (edges)))
+                                '()
+                            )
+                        )
                     ((string=? predicate "has_name")
                             (begin 
-                                
-                                (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
+                                (if (member (car lns) (genes))
+                                    (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
+                                    (nodes (append (list (create-node (genes) (string-append (annotation) ":" (car lns))(cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
+                                )
                                 (atoms (append (list (car lns)) (atoms)))
                             )
                        '()
@@ -73,7 +86,10 @@
 
 (define handle-ln (lambda (node-a node-b link)
         (let ()
-            (edges (append (list (create-edge node-a node-b link (annotation) "" link)) (edges)))
+            (if (member node-a (genes))
+                (edges (append (list (create-edge node-a (string-append (annotation) ":" node-b)link (annotation) "" link)) (edges)))
+                (edges (append (list (create-edge (string-append (annotation) ":" node-a) (string-append (annotation) ":" node-b)link (annotation) "" link)) (edges)))
+            )
             '()           
         ))
 )

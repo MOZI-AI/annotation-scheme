@@ -17,34 +17,35 @@
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with")]
-                            (let (
-                                 [el1 (if (member (car lns) (genes))
-                                    (car lns)    
-                                    (string-append (annotation) ":" (car lns))
-                                )
-                                ]   
-                                [el2 (if (member (cadr lns) (genes)) 
-                                        (cadr lns)
-                                        (string-append (annotation) ":" (cadr lns))
-                                )]
-                                )
-                                 (edges (append (list (create-edge el2 el1 predicate (annotation) "" predicate)) (edges)))
-                                '()
+                            (begin 
+                                (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
+                                '()    
                             )
                         )
                     ((string=? predicate "has_name")
-                            (begin 
-                                (if (member (car lns) (genes))
-                                    (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
-                                    (nodes (append (list (create-node (genes) (string-append (annotation) ":" (car lns))(cadr lns) "" "" (annotation) (find-subgroup (car lns)))) (nodes)))
+                            (if (member (car lns) (atoms))
+                                (if (and (not (string-null? (prev-annotation)))
+                                        (not (string=? (prev-annotation) (annotation)))
+                                    )
+                                     (let* (
+                                        [node (car (filter (lambda (n) 
+                                            (string=? (node-info-id (node-data n)) (car lns))
+                                        ) (nodes)))]
+                                        [node-group (node-info-group (node-data node))]
+                                    )
+                                        (node-info-group-set! (node-data node)  (list (prev-annotation) (annotation)))
+                                    )
                                 )
-                                (atoms (append (list (car lns)) (atoms)))
+                                (begin 
+                                    (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
+                                    (atoms (append (list (car lns)) (atoms)))
+                                )
                             )
                        '()
                         
                     )
                     ((string=? predicate "has_definition")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data (car (nodes))))))
+                        (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
                             (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
                         )
                         '()
@@ -64,7 +65,7 @@
                         )
                     )
                     ((string=? predicate "has_location")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data (car (nodes))))))
+                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data            (car (nodes))))))
                         (let* ([info (node-data (car (nodes)))]
                                [old-loc (node-info-location info)]
                                [new-loc (cadr lns)]
@@ -85,13 +86,9 @@
  )))
 
 (define handle-ln (lambda (node-a node-b link)
-        (let ()
-            (if (member node-a (genes))
-                (edges (append (list (create-edge node-a (string-append (annotation) ":" node-b)link (annotation) "" link)) (edges)))
-                (edges (append (list (create-edge (string-append (annotation) ":" node-a) (string-append (annotation) ":" node-b)link (annotation) "" link)) (edges)))
-            )
-            '()           
-        ))
+        (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
+        '()
+    )
 )
 
 (define handle-list-ln (lambda (node)
@@ -105,7 +102,10 @@
 (define handle-node 
     (lambda (node)
         (if (member node annts)
-            (annotation node)
+            (begin 
+                (prev-annotation (annotation))
+                (annotation node)
+            )
         )
         node
     )

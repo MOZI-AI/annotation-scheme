@@ -11,9 +11,9 @@
 (use-modules (nyacc lex))
 (use-modules (nyacc parse))
 
-(define annts '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation"))
-
-(define handle-eval-ln (lambda (predicate lns)
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation"))
+(define (handle-eval-ln  predicate lns)
+    (call/cc (lambda (k)
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with")]
@@ -32,12 +32,17 @@
                                             (string=? (node-info-id (node-data n)) (car lns))
                                         ) (nodes)))]
                                         [node-group (node-info-group (node-data node))]
+                                    )   
+                                        ;;check if it is the same node and exit if it is
+                                        (if (string=? (car node-group) (annotation))
+                                            (k '())
+                                        )
+                                        (node-info-group-set! (node-data node)  (append node-group (list (annotation))))
                                     )
-                                        (node-info-group-set! (node-data node)  (list (prev-annotation) (annotation)))
-                                    )
+                                    
                                 )
                                 (begin 
-                                    (nodes (append (list (create-node (genes) (car lns) (cadr lns) "" "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
+                                    (nodes (append (list (create-node (car lns) (cadr lns) "" "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
                                     (atoms (append (list (car lns)) (atoms)))
                                 )
                             )
@@ -83,7 +88,10 @@
                     (else (error (format #f "Unrecognized predicate ~a" predicate)))
                     
                 )
- )))
+            )
+    )
+    )
+)
 
 (define handle-ln (lambda (node-a node-b link)
         (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))

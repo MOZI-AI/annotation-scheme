@@ -38,7 +38,7 @@ atomspace."
                 (list (ListLink (node-info (GeneNode gene))
                                 (ListLink (locate-node (GeneNode gene))))))
               genes)))
-    (ListLink info)))
+    (ListLink (ConceptNode "main") info)))
 
 (define (mapSymbol gene-list)
   "Map gene symbols into GeneNodes."

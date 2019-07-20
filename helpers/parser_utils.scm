@@ -1,8 +1,5 @@
-(define* (create-node genes id name defn location annotation #:optional (subgroup ""))
- (if (member id genes)
- 	(make-node (make-node-info id name defn location subgroup "main") "nodes")
+(define* (create-node id name defn location annotation #:optional (subgroup ""))
     (make-node (make-node-info id name defn location subgroup annotation) "nodes")
- )
 )
 
 (define* (create-edge node1 node2 name annotation #:optional (pubmedId "") (subgroup ""))

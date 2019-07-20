@@ -186,7 +186,7 @@
 (define find-go-term 
   (lambda (g namespaces p)
       (let (
-        [res  (find-memberln (GeneNode g) namespaces)]      
+        [res  (list (node-info (GeneNode g)) (find-memberln (GeneNode g) namespaces))]      
       )
       (define parents (flatten (let loop (
         [i p]

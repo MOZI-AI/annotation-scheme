@@ -186,7 +186,7 @@
 (define find-go-term 
   (lambda (g namespaces p)
       (let (
-        [res  (list (node-info (GeneNode g)) (find-memberln (GeneNode g) namespaces))]      
+        [res  (find-memberln (GeneNode g) namespaces)]      
       )
       (define parents (flatten (let loop (
         [i p]
@@ -194,7 +194,7 @@
         [acc '()]
       )
       (cond 
-        [(= i 0) (append ls acc)]
+        [(= i 0) (append (node-info (GeneNode g)) ls acc)]
         [(null? ls) acc]
         [else (cons (loop (- i 1)  (find-parent (car (cog-outgoing-set (car ls))) namespaces) (append ls acc)) (loop i (cdr ls) '()))
           ]

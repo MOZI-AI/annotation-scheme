@@ -2,7 +2,10 @@
 ;; The data is all about genes MAP2K4 and SPAG9
 
 ;; GO term parenting example
-
+(use-modules (opencog))
+(use-modules (opencog query))
+(use-modules (opencog exec))
+(use-modules (opencog bioscience))
 (MemberLink 
  	(GeneNode "SPAG9")
 	(ConceptNode "GO:0001669"))

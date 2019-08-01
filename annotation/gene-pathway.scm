@@ -1,4 +1,33 @@
-(define (gene-pathway-annotation gene_nodes pathway prot small_mol)
+;;; MOZI-AI Annotation Scheme
+;;; Copyright © 2019 Abdulrahman Semrie
+;;; Copyright © 2019 Hedra Seid
+;;;
+;;; This file is part of MOZI-AI Annotation Scheme
+;;;
+;;; MOZI-AI Annotation Scheme is free software; you can redistribute
+;;; it and/or modify it under the terms of the GNU General Public
+;;; License as published by the Free Software Foundation; either
+;;; version 3 of the License, or (at your option) any later version.
+;;;
+;;; This software is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;;; General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with this software.  If not, see
+;;; <http://www.gnu.org/licenses/>.
+
+(define-module (annotation gene-pathway)
+      #:use-module (annotation functions)
+      #:use-module (annotation util)
+      #:use-module (opencog)
+      #:use-module (opencog query)
+      #:use-module (opencog exec)
+      #:use-module (opencog bioscience)
+)
+
+(define-public (gene-pathway-annotation gene_nodes pathway prot small_mol)
     (let ([result (list (ConceptNode "gene-pathway-annotation"))]
           [pwlst '()])
 
@@ -25,7 +54,7 @@
 
 (define (smpdb gene prot sm)
   (let (
-    [pw (findMember (GeneNode gene) "SMP")]
+    [pw (find-pathway-member (GeneNode gene) "SMP")]
     [ls '()]
   )
 
@@ -35,24 +64,24 @@
         [tmp '()]
       )
       (if (equal? sm "True")
-          (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
+          (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
       )
       (if (equal? prot "True")
-        (let ([prots (cog-outgoing-set (findmol node "Uniprot"))])
+        (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
           (if (not (null? prots))
             (set! tmp (append tmp prots))
             (set! tmp (append tmp (node-info node)))))
         (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
-      )
         (if (null? tmp)
-            '()
-            tmp
-          )
+          '()
+          tmp
+        )
+      )
       ) pw)) )
 
 
   (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (find-protein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
   )
 
   (append pw ls)
@@ -62,7 +91,7 @@
 
 (define (reactome gene prot sm pwlst)
     (let (
-      [pw (findMember (GeneNode gene) "R-HSA")]
+      [pw (find-pathway-member (GeneNode gene) "R-HSA")]
       [ls '()]
       )
 
@@ -73,14 +102,14 @@
         )
           (set! pwlst (append pwlst (list node)))
           (if (equal? prot "True")
-            (let ([prots (cog-outgoing-set (findmol node "Uniprot"))])
+            (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
               (if (not (null? prots))
                 (set! tmp (append tmp prots))
                 (set! tmp (append tmp (node-info node)))))
             (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
             )
           (if (equal? sm "True")
-            (set! tmp (append tmp (cog-outgoing-set (findmol node "ChEBI"))))
+            (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
           )
           (set! tmp (append tmp (list (pathway-heirarchy node pwlst))))
           (if (null? tmp)
@@ -93,9 +122,7 @@
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (findprotein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (find-protein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     )
       (list (append pw ls) pwlst) 
-  ) 
-
-)
+  )) 

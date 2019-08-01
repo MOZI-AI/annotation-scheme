@@ -1,6 +1,6 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
-;;; Copyright © 2019 tanksha
+;;; Copyright © 2019 Hedra Seid
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -18,10 +18,23 @@
 ;;; along with this software.  If not, see
 ;;; <http://www.gnu.org/licenses/>.
 
-(use-modules (srfi srfi-1)
-             (ice-9 match))
 
-(define (find-genes gene-list)
+(define-module (annotation main)
+    #:use-module (annotation util)
+    #:use-module (annotation gene-go)
+    #:use-module (annotation gene-pathway)
+    #:use-module (annotation biogrid)
+    #:use-module (annotation parser)
+    #:use-module (opencog)
+    #:use-module (opencog query)
+    #:use-module (opencog exec)
+    #:use-module (opencog bioscience)
+    #:use-module (json)
+    #:use-module (srfi srfi-1)
+    #:use-module (ice-9 match)
+)
+
+(define-public (find-genes gene-list)
   "Validate if given gene strings in GENE-LIST exist in the
 atomspace."
   (let ((unknown (filter (lambda (gene)
@@ -31,7 +44,7 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-(define (gene-info genes)
+(define-public (gene-info genes)
   "Add the name and description of gene nodes to the given list of GENES."
   (let ((info
          (map (lambda (gene)
@@ -40,19 +53,11 @@ atomspace."
               genes)))
     (ListLink (ConceptNode "main") info)))
 
-(define (mapSymbol gene-list)
+(define-public (mapSymbol gene-list)
   "Map gene symbols into GeneNodes."
   (map GeneNode gene-list))
 
-(define nodes (make-parameter '()))
-(define edges (make-parameter '()))
-(define atoms (make-parameter '()))
-(define genes (make-parameter '()))
-(define biogrid-genes (make-parameter '()))
-(define annotation (make-parameter ""))
-(define prev-annotation (make-parameter ""))
-
-(define (annotate-genes gene-list file-name annts-fns)
+(define-public (annotate-genes gene-list file-name annts-fns)
   (parameterize ( (nodes '()) 
                   (edges '()) 
                   (atoms '()) 

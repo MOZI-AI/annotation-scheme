@@ -1,6 +1,6 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
-;;; Copyright © 2019 tanksha
+;;; Copyright © 2019 Hedra Seid
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -26,10 +26,10 @@
     #:use-module (annotation biogrid)
     #:use-module (annotation parser)
     #:use-module (opencog)
-    #:use-module (json)
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (json)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
 )
@@ -44,33 +44,27 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-(define (gene-info genes)
+(define-public (gene-info genes)
   "Add the name and description of gene nodes to the given list of GENES."
   (let ((info
          (map (lambda (gene)
                 (list (ListLink (node-info (GeneNode gene))
                                 (ListLink (locate-node (GeneNode gene))))))
               genes)))
-    (ListLink info)))
+    (ListLink (ConceptNode "main") info)))
 
-(define (mapSymbol gene-list)
+(define-public (mapSymbol gene-list)
   "Map gene symbols into GeneNodes."
   (map GeneNode gene-list))
-
-(define nodes (make-parameter '()))
-(define edges (make-parameter '()))
-(define atoms (make-parameter '()))
-(define genes (make-parameter '()))
-(define pairs (make-parameter '()))
-(define annotation (make-parameter '()))
 
 (define-public (annotate-genes gene-list file-name annts-fns)
   (parameterize ( (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
                   (genes gene-list)
-                  (pairs '())
-                  (annotation '())
+                  (biogrid-genes '())
+                  (annotation "")
+                  (prev-annotation "")
               ) 
       (let* ([result (ListLink (force annts-fns))])
       (write-to-file result file-name)

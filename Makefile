@@ -294,8 +294,8 @@ SOURCES = \
     annotation/gene-go.scm \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
-    annotation/parser.scm \
     annotation/main.scm \
+    annotation/parser.scm \
     annotation.scm
 
 EXTRA_DIST = \

@@ -1,3 +1,23 @@
+;;; MOZI-AI Annotation Scheme
+;;; Copyright © 2019 Abdulrahman Semrie
+;;; Copyright © 2019 Hedra Seid
+;;;
+;;; This file is part of MOZI-AI Annotation Scheme
+;;;
+;;; MOZI-AI Annotation Scheme is free software; you can redistribute
+;;; it and/or modify it under the terms of the GNU General Public
+;;; License as published by the Free Software Foundation; either
+;;; version 3 of the License, or (at your option) any later version.
+;;;
+;;; This software is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;;; General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with this software.  If not, see
+;;; <http://www.gnu.org/licenses/>.
+
 (define-module (annotation gene-go)
     #:use-module (annotation functions)
     #:use-module (annotation util)
@@ -7,13 +27,13 @@
     #:use-module (opencog bioscience)
     #:export (gene-go-annotation)
 )
-(define* (gene-go-annotation gene_nodes namespace #:optional (parents 0))
+(define* (gene-go-annotation gene-nodes namespace #:optional (parents 0))
     (let (
     )
   (ListLink (ConceptNode "gene-go-annotation")
     (flatten (map (lambda (gene) 
       (find-go-term gene  (string-split namespace #\ ) parents)
   
-  ) gene_nodes)))
+  ) gene-nodes)))
   )
 )

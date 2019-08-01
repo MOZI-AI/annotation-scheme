@@ -1,3 +1,24 @@
+;;; MOZI-AI Annotation Scheme
+;;; Copyright © 2019 Abdulrahman Semrie
+;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2019 Enkusellasie Wondesen
+;;;
+;;; This file is part of MOZI-AI Annotation Scheme
+;;;
+;;; MOZI-AI Annotation Scheme is free software; you can redistribute
+;;; it and/or modify it under the terms of the GNU General Public
+;;; License as published by the Free Software Foundation; either
+;;; version 3 of the License, or (at your option) any later version.
+;;;
+;;; This software is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;;; General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with this software.  If not, see
+;;; <http://www.gnu.org/licenses/>.
+
 (define-module (annotation util)
 	#:use-module (opencog)
   #:use-module (opencog query)
@@ -10,9 +31,19 @@
   #:use-module (ice-9 textual-ports)
   #:use-module (ice-9 regex)
   #:use-module (srfi srfi-1)
+  #:use-module (ice-9 match)
   #:export (create-node
             create-edge)
 )
+
+;;Define the parameters needed for parsing and GGI
+(define-public nodes (make-parameter '()))
+(define-public edges (make-parameter '()))
+(define-public atoms (make-parameter '()))
+(define-public genes (make-parameter '()))
+(define-public biogrid-genes (make-parameter '()))
+(define-public annotation (make-parameter ""))
+(define-public prev-annotation (make-parameter ""))
 
 (define (get-name atom)
  (if (> (length atom) 0)
@@ -21,11 +52,9 @@
  )
 )
 
-(define* (create-node genes id name defn location annotation #:optional (subgroup ""))
- (if (member id genes)
- 	(make-node (make-node-info id name defn location subgroup "main") "nodes")
+
+(define* (create-node id name defn location annotation #:optional (subgroup ""))
     (make-node (make-node-info id name defn location subgroup annotation) "nodes")
- )
 )
 
 (define* (create-edge node1 node2 name annotation #:optional (pubmedId "") (subgroup ""))
@@ -100,7 +129,7 @@
 		 )
 		)
 	 )
-	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find_entrez node))))
+	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez node))))
 	 ('ConceptNode
 		(begin
 		 (if (string-contains (cog-name node) "SMP")
@@ -117,7 +146,7 @@
 )
 
 ;; Finds entrez_id of a gene
-(define (find_entrez gene)
+(define (find-entrez gene)
   (let ((entrez '()))
     (set! entrez (get-name
    (cog-outgoing-set
@@ -216,7 +245,7 @@
 
 ;; filter only Cell membrane and compartments
 
-(define (filter-loc node go)
+(define-public (filter-loc node go)
   (let ([loc (string-downcase (find-name go))])
   (if (or (and (not (string-contains loc "complex")) 
       (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
@@ -273,7 +302,21 @@
     )
 )
 
+(define-public (find-subgroup name) 
+    (let ((initial (string-split name #\:)))
+        (match initial
+            ((a b) a )
+            ((a)
+                (cond 
+                    ((string-prefix? "R-HSA" a) "Reactome")
+                    ((string-prefix? "SMP" a) "SMPDB")
+                    (else "Genes")
+                )
+            )
+        )
+    )
 
+)
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
 (define-public (flatten x)
   (cond ((null? x) '())

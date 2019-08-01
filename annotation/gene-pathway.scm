@@ -1,3 +1,23 @@
+;;; MOZI-AI Annotation Scheme
+;;; Copyright © 2019 Abdulrahman Semrie
+;;; Copyright © 2019 Hedra Seid
+;;;
+;;; This file is part of MOZI-AI Annotation Scheme
+;;;
+;;; MOZI-AI Annotation Scheme is free software; you can redistribute
+;;; it and/or modify it under the terms of the GNU General Public
+;;; License as published by the Free Software Foundation; either
+;;; version 3 of the License, or (at your option) any later version.
+;;;
+;;; This software is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;;; General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with this software.  If not, see
+;;; <http://www.gnu.org/licenses/>.
+
 (define-module (annotation gene-pathway)
       #:use-module (annotation functions)
       #:use-module (annotation util)
@@ -12,17 +32,18 @@
           [pwlst '()])
 
     (for-each (lambda (gene)
-    (for-each (lambda (pathw)
-        (if (equal? pathw "smpdb")
-            (set! result (append result (smpdb gene prot small_mol)))
-            )
-        (if (equal? pathw "reactome")
-            (begin
-            (let ([res (reactome gene prot small_mol pwlst)])
-              (set! result (append result (car res)))
-              (set! pwlst (append pwlst (cdr res)))
-            )))
-        )(string-split pathway #\ ))
+      (set! result (append result (node-info (GeneNode gene))))
+      (for-each (lambda (pathw)
+          (if (equal? pathw "smpdb")
+              (set! result (append result (smpdb gene prot small_mol)))
+              )
+          (if (equal? pathw "reactome")
+              (begin
+              (let ([res (reactome gene prot small_mol pwlst)])
+                (set! result (append result (car res)))
+                (set! pwlst (append pwlst (cdr res)))
+              )))
+          )(string-split pathway #\ ))
     ) gene_nodes)
  
   (ListLink result)
@@ -50,13 +71,13 @@
           (if (not (null? prots))
             (set! tmp (append tmp prots))
             (set! tmp (append tmp (node-info node)))))
-      )
+        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
         (if (null? tmp)
-            '()
-            tmp
-          )
+          '()
+          tmp
+        )
       )
-  ) pw)) )
+      ) pw)) )
 
 
   (if (equal? prot "True")
@@ -85,6 +106,7 @@
               (if (not (null? prots))
                 (set! tmp (append tmp prots))
                 (set! tmp (append tmp (node-info node)))))
+            (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
             )
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
@@ -103,6 +125,4 @@
     (set! pw (find-protein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     )
       (list (append pw ls) pwlst) 
-  ) 
-
-)
+  )) 

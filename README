@@ -1,3 +1,0 @@
-**Annotation Scheme**
-
-This project contains the scheme code that is used MOZI annotation service. It uses [opencog](https://github.com/opencog/opencog) platform to store and retrieve the relavant annotations for gene symbols.

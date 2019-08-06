@@ -1,5 +1,5 @@
 include guile.am
-
+AUTOMAKE_OPTIONS = foreign
 SOURCES = \
     annotation/util.scm  \
     annotation/functions.scm \

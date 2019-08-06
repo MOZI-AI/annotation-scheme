@@ -1,18 +1,49 @@
-(use-modules (srfi srfi-1))
-(use-modules (rnrs io ports))
-(use-modules (ice-9 popen))
-(use-modules (ice-9 optargs))
-(use-modules (ice-9 rdelim))
-(use-modules (ice-9 regex))
-(use-modules (ice-9 getopt-long))
-(use-modules (ice-9 eval-string))
-(use-modules (ice-9 receive))
-(use-modules (nyacc lalr))
-(use-modules (nyacc lex))
-(use-modules (nyacc parse))
+;;; MOZI-AI Annotation Scheme
+;;; Copyright © 2019 Abdulrahman Semrie
+;;;
+;;; This file is part of MOZI-AI Annotation Scheme
+;;;
+;;; MOZI-AI Annotation Scheme is free software; you can redistribute
+;;; it and/or modify it under the terms of the GNU General Public
+;;; License as published by the Free Software Foundation; either
+;;; version 3 of the License, or (at your option) any later version.
+;;;
+;;; This software is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;;; General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with this software.  If not, see
+;;; <http://www.gnu.org/licenses/>.
+
+(define-module (annotation parser)
+    #:use-module (annotation util)
+    #:use-module (annotation main)
+    #:use-module (nyacc lalr)
+    #:use-module (nyacc lex)
+    #:use-module (nyacc parse)
+    #:use-module (opencog)
+    #:use-module (opencog query)
+    #:use-module (opencog exec)
+    #:use-module (opencog bioscience)
+    #:use-module (json)
+    #:use-module (ice-9 optargs)
+    #:use-module (rnrs base)
+    #:use-module (rnrs exceptions)
+    #:use-module (ice-9 textual-ports)
+    #:use-module (ice-9 regex)
+    #:use-module (srfi srfi-1)
+    #:export (atomese-parser
+            handle-node
+            handle-eval-ln
+            handle-ln
+    )
+)
 
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation"))
-(define (handle-eval-ln  predicate lns)
+
+(define-public (handle-eval-ln predicate lns)
     (call/cc (lambda (k)
             (let* ()
                 (cond ([or (string=? predicate "expresses")
@@ -23,7 +54,8 @@
                             )
                         )
                     ((string=? predicate "has_name")
-                            (if (member (car lns) (atoms))
+                            (begin 
+                                (if (member (car lns) (atoms))
                                 (if (and (not (string-null? (prev-annotation)))
                                         (not (string=? (prev-annotation) (annotation)))
                                     )
@@ -46,27 +78,32 @@
                                     (atoms (append (list (car lns)) (atoms)))
                                 )
                             )
-                       '()
+                            '()
+                        )
                         
                     )
                     ((string=? predicate "has_definition")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
-                            (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
+                        (begin 
+                            (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
+                                (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
+                            )
+                            '()
                         )
-                        '()
                     )
 
                     ((string=? predicate "GO_namespace")
-                      (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))
-                            (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
-                        )
-                       '()
+                      (begin 
+                        (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))
+                                (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
+                            )
+                        '()
+                       )
                     )
 
                     ((string=? predicate "has_pubmedID")
                         (begin 
-                        (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
-                        '()
+                            (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
+                            '()
                         )
                     )
                     ((string=? predicate "has_location")
@@ -93,31 +130,29 @@
     )
 )
 
-(define handle-ln (lambda (node-a node-b link)
+(define-public (handle-ln node-a node-b link)
         (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
         '()
+)
+
+(define-public (handle-list-ln node)
+    (let ()
+            (cond [(string? node) (list node)]
+                    [else   (flatten node)]
+            )
+        
     )
 )
 
-(define handle-list-ln (lambda (node)
-        (let ()
-                (cond [(string? node) (list node)]
-                      [else   (flatten node)]
-                )
-            
-    )))
-
-(define handle-node 
-    (lambda (node)
-        (if (member node annts)
-            (begin 
-                (prev-annotation (annotation))
-                (annotation node)
-            )
-        )
-        node
-    )
- )
+(define-public (handle-node node)
+      (if (member node annts)
+          (begin 
+              (prev-annotation (annotation))
+              (annotation node)
+          )
+      )
+      node   
+)
 
 (define* (atomese-parser port #:optional (mode #f))
     (let* (
@@ -214,4 +249,7 @@
             )
         )
         (make-graph (nodes) (edges))
-)))
+        )
+    )
+
+)

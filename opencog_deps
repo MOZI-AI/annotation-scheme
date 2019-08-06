@@ -8,6 +8,12 @@
 (use-modules (opencog query))
 (use-modules (opencog exec))
 (use-modules (opencog bioscience))
+(use-modules
+    (annotation) (annotation main)
+    (annotation gene-go) (annotation biogrid) (annotation gene-pathway)
+    (annotation functions) (annotation util)
+    (annotation parser)
+)
 (use-modules (json))
 (use-modules (rnrs base))
 (use-modules (rnrs exceptions))

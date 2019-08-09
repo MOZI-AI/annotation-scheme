@@ -401,11 +401,35 @@
     )))
 )
 
+;; Find coding Gene for a given protein
+(define-public find-coding-gene
+  (lambda (protein)
+  (cog-outgoing-set (cog-execute! (BindLink
+    (VariableNode "$g")
+    (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+        (VariableNode "$g")
+        protein
+      )
+    )
+    (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+        (VariableNode "$g")
+        protein
+      )
+    )
+  )
+  )
+)))
+
 (define-public add-mol-info
   (lambda (mol path)
   (if (string-contains (cog-name path) "R-HSA")
     (ListLink
       (MemberLink mol path)
+      (find-coding-gene mol)
       (node-info mol)
       (ListLink 
         (add-loc (MemberLink mol path))
@@ -413,6 +437,7 @@
     )
     (ListLink
       (MemberLink mol path)
+      (find-coding-gene mol)
       (node-info mol)
       (ListLink (locate-node mol))
     )

@@ -339,7 +339,7 @@
             pw
           (VariableNode "$parentpw"))
         (ExecutionOutputLink
-          (GroundedSchemaNode "scm: check-pw")
+          (GroundedSchemaNode "scm: check-pathway")
           (ListLink
             pw
             (VariableNode "$parentpw")
@@ -354,7 +354,7 @@
         (VariableNode "$parentpw")
         pw)
       (ExecutionOutputLink
-        (GroundedSchemaNode "scm: check-pw")
+        (GroundedSchemaNode "scm: check-pathway")
         (ListLink
          (VariableNode "$parentpw")
          pw
@@ -366,7 +366,7 @@
   (append res-parent res-child)
 )))
 
-(define check-pw
+(define-public check-pathway
   (lambda (pw parent-pw lst)
     (if (and (member parent-pw (cog-outgoing-set lst)) (member pw (cog-outgoing-set lst)))
     (ListLink

@@ -429,7 +429,8 @@
   (if (string-contains (cog-name path) "R-HSA")
     (ListLink
       (MemberLink mol path)
-      (find-coding-gene mol)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol))
       (node-info mol)
       (ListLink 
         (add-loc (MemberLink mol path))
@@ -437,7 +438,8 @@
     )
     (ListLink
       (MemberLink mol path)
-      (find-coding-gene mol)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol))
       (node-info mol)
       (ListLink (locate-node mol))
     )

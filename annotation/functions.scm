@@ -620,7 +620,9 @@
                             (ListLink
                                 interaction
                                 (node-info (GeneNode a))
+                                (locate-node  (GeneNode a))
                                 (node-info (GeneNode b))
+                                (locate-node  (GeneNode b))
                                 prot-links
                             )
                         )
@@ -631,6 +633,7 @@
                             (ListLink
                                 interaction
                                 (node-info (GeneNode a))
+                                (locate-node  (GeneNode a))
                                 prot-links
                         ))
                     )
@@ -644,7 +647,6 @@
            )
         (ListLink)
 ))
-
 (define-public (generate-ppi-result gene-a prot-a )
         (ListLink
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))

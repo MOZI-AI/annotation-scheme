@@ -430,7 +430,9 @@
     (ListLink
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol))
+        (find-coding-gene mol)
+        '()
+        )
       (node-info mol)
       (ListLink 
         (add-loc (MemberLink mol path))

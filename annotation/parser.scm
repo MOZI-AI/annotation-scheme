@@ -53,7 +53,7 @@
                                 '()    
                             )
                         )
-                    ((string=? predicate "has_name")
+                    ((or (string=? predicate "has_name") (string=? predicate "GO_name"))
                             (begin 
                                 (if (member (car lns) (atoms))
                                 (if (and (not (string-null? (prev-annotation)))
@@ -82,7 +82,7 @@
                         )
                         
                     )
-                    ((string=? predicate "has_definition")
+                    ((or (string=? predicate "has_definition") (string=? predicate "GO_definition"))
                         (begin 
                             (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
                                 (node-info-defn-set! (node-data (car (nodes))) (cadr lns))

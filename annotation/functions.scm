@@ -35,7 +35,7 @@
 
       (cog-outgoing-set
        (cog-execute!
-        (GetLink
+        (BindLink
          (VariableNode "$def")
 
          (EvaluationLink
@@ -45,7 +45,14 @@
            (VariableNode "$def")
           )
          )
-        )
+          (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )       
       )
      )
     )
@@ -209,9 +216,16 @@
 ;; Finds the name of a GO term
 (define find-go-name
     (lambda(go)
-        (cog-execute! (GetLink
+        (cog-execute! (BindLink
             (VariableNode "$a")
             (EvaluationLink
+               (PredicateNode "GO_name")
+               (ListLink
+               go
+               (VariableNode "$a")
+              )
+            )
+              (EvaluationLink
                (PredicateNode "GO_name")
                (ListLink
                go
@@ -441,7 +455,9 @@
     (ListLink
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol))
+        (find-coding-gene mol)
+        '()
+      )
       (node-info mol)
       (ListLink (locate-node mol))
     )

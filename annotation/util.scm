@@ -83,18 +83,36 @@
 ;;Finds a name of any node (Except GO which has different structure)
 (define find-pathway-name
     (lambda(pw)
-			(cog-outgoing-set (cog-execute! (GetLink
-				(VariableNode "$a")
-				(EvaluationLink
-					(PredicateNode "has_name")
-					(ListLink
-						pw
-						(VariableNode "$a")
-					)
-				)
-			)	
-		))
-	)
+			(let
+        ([name '()])
+        (if (string-contains (cog-name pw) "Uniprot:")
+          (set! name 
+          (cog-outgoing-set (cog-execute! (GetLink
+            (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
+            (EvaluationLink
+              (PredicateNode "expresses")
+              (ListLink
+                (VariableNode "$a")
+                pw
+              )
+            )
+          ))))
+          (set! name 
+          (cog-outgoing-set (cog-execute! (GetLink
+            (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'ConceptNode)))
+            (EvaluationLink
+                (PredicateNode "has_name")
+                (ListLink
+                  pw
+                  (VariableNode "$a")
+                )
+              )
+            )	
+          ))))
+    name
+	))
 )
 
 (define-public (is-cellular-component? node-info)

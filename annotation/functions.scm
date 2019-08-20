@@ -29,35 +29,6 @@
     
 )
 
-;;finds go definition for parser function
-(define find-godef
-    (lambda (go)
-
-      (cog-outgoing-set
-       (cog-execute!
-        (BindLink
-         (VariableNode "$def")
-
-         (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-          (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-        )       
-      )
-     )
-    )
-)
-
 ;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
 (define find-parent
 
@@ -177,15 +148,8 @@
 ;; Add details about the GO term
 (define (go-info go)
   (list
-    (EvaluationLink (PredicateNode "has_name") 
-      (ListLink 
-        go 
-        (if (equal? (cog-outgoing-set (find-go-name go)) '() ) (ConceptNode "") (cog-outgoing-set (find-go-name go)))))
-      (EvaluationLink 
-        (PredicateNode "has_definition") 
-        (ListLink 
-          go 
-          (if (equal? (find-godef go) '()) (ConceptNode "") (find-godef go))))
+      (cog-outgoing-set (find-go-name go))
+      (cog-outgoing-set (find-godef go))
       (EvaluationLink 
         (PredicateNode "GO_namespace") 
         (ListLink 
@@ -235,6 +199,32 @@
            )
         )
     )
+)
+
+;;finds go definition for parser function
+(define find-godef
+    (lambda (go)
+       (cog-execute!
+        (BindLink
+         (VariableNode "$def")
+
+         (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+          (EvaluationLink
+          (PredicateNode "GO_definition")
+          (ListLink
+           go
+           (VariableNode "$def")
+          )
+         )
+        )       
+      )
+     )
 )
 
 (define-public (find-pathway-member gene db)

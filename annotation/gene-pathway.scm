@@ -70,8 +70,8 @@
         (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
           (if (not (null? prots))
             (set! tmp (append tmp prots))
-            (set! tmp (append tmp (node-info node)))))
-        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
+            (set! tmp (append tmp (node-info node))))))
+        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
         (if (null? tmp)
           '()
           tmp

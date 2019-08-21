@@ -29330,3 +29330,1031 @@
             )
          )
       )
+
+;;
+
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP5")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "APP")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "LTBP1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "PAPPA2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "APP")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "SPP1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "MBTPS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "MATN3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "C3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "CSF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "PLG")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "ANO8")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "MIA3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "LGALS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HSP90B1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "DNAJC3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "GAS6")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "LTBP1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "KRAS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "GRB2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "SHC1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "GRB2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "KRAS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IRS2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IRS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IRS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "INS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "INS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "INS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "GAS6")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "HSPA5")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "PDGFB")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "PFN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "CLU")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HSPA5")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "APP")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "ABCC4")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "PCYOX1L")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "TUBA4A")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "THBS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "PLG")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "VEGFA")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "VEGFA")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "SERPINE1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF2")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "ENDOD1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "APP")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "FN1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "TMX3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGSF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "SOCS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IDE")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "E2F1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP5")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGSF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "SOCS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IDE")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "E2F1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP5")))

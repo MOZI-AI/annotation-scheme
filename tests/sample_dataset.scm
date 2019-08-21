@@ -30358,3 +30358,262 @@
     (ListLink 
 	(GeneNode "IGFALS")
 	(GeneNode "IGFBP5")))
+;; Genes Entrez ID
+
+
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ANO8")
+	(ConceptNode "entrez:57719")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP4")
+	(ConceptNode "entrez:3487")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HSPA5")
+	(ConceptNode "entrez:3309")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PDGFB")
+	(ConceptNode "entrez:5155")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HSP90B1")
+	(ConceptNode "entrez:7184")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "CSF1")
+	(ConceptNode "entrez:1435")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFALS")
+	(ConceptNode "entrez:3483")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "CLU")
+	(ConceptNode "entrez:1191")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IDE")
+	(ConceptNode "entrez:3416")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SERPINE1")
+	(ConceptNode "entrez:5054")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SOX4")
+	(ConceptNode "entrez:6659")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MATN3")
+	(ConceptNode "entrez:4148")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "THBS1")
+	(ConceptNode "entrez:7057")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HNRNPL")
+	(ConceptNode "entrez:3191")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TF")
+	(ConceptNode "entrez:7018")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "C3")
+	(ConceptNode "entrez:718")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF2")
+	(ConceptNode "entrez:3481")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PCYOX1L")
+	(ConceptNode "entrez:78991")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF1R")
+	(ConceptNode "entrez:3480")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF1")
+	(ConceptNode "entrez:3479")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SHC1")
+	(ConceptNode "entrez:20416")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "LTBP1")
+	(ConceptNode "entrez:4052")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGSF1")
+	(ConceptNode "entrez:3547")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "DNAJC3")
+	(ConceptNode "entrez:5611")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP2")
+	(ConceptNode "entrez:3485")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP3")
+	(ConceptNode "entrez:3486")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "VEGFA")
+	(ConceptNode "entrez:7422")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP7")
+	(ConceptNode "entrez:3490")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MIA3")
+	(ConceptNode "entrez:375056")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP5")
+	(ConceptNode "entrez:3488")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TMX3")
+	(ConceptNode "entrez:54495")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TUBA4A")
+	(ConceptNode "entrez:316531")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "LGALS1")
+	(ConceptNode "entrez:16852")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "KRAS")
+	(ConceptNode "entrez:3845")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SOCS1")
+	(ConceptNode "entrez:8651")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "E2F1")
+	(ConceptNode "entrez:1869")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "FN1")
+	(ConceptNode "entrez:2335")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MBTPS1")
+	(ConceptNode "entrez:8720")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ENDOD1")
+	(ConceptNode "entrez:23052")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "APP")
+	(ConceptNode "entrez:351")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IRS1")
+	(ConceptNode "entrez:25467")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IRS2")
+	(ConceptNode "entrez:8660")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "INS")
+	(ConceptNode "entrez:3630")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PLG")
+	(ConceptNode "entrez:5340")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PFN1")
+	(ConceptNode "entrez:5216")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "GRB2")
+	(ConceptNode "entrez:81504")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SPP1")
+	(ConceptNode "entrez:6696")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ABCC4")
+	(ConceptNode "entrez:10257")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "NOV")
+	(ConceptNode "entrez:4856")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PAPPA2")
+	(ConceptNode "entrez:60676")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "GAS6")
+	(ConceptNode "entrez:2621")))
+

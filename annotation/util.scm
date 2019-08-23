@@ -238,7 +238,7 @@
 
 (define-public locate-node
   (lambda(node)
-      (cog-outgoing-set (cog-execute!
+      (let ([loc (cog-outgoing-set (cog-execute!
         (BindLink
         (VariableNode "$go")
         (AndLink
@@ -258,7 +258,28 @@
             (VariableNode "$go")
           )))
       ))
-    )
+      ])
+      (if (null? loc)
+      (set! loc 
+      (cog-outgoing-set (cog-execute!
+        (BindLink
+          (VariableNode "$loc")
+          (EvaluationLink
+              (PredicateNode "has_location")
+              (ListLink
+                node
+                (VariableNode "$loc")))
+          (EvaluationLink
+              (PredicateNode "has_location")
+              (ListLink
+                node
+                (VariableNode "$loc")))
+          )
+        )))
+      )
+      loc
+      )
+  )
 )
 
 ;; filter only Cell membrane and compartments

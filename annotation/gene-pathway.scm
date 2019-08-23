@@ -81,7 +81,7 @@
 
 
   (if (equal? prot "True")
-    (set! pw (find-protein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (append pw (find-protein (GeneNode gene) 0))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
   )
 
   (append pw ls)
@@ -122,7 +122,7 @@
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (find-protein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (append pw (find-protein (GeneNode gene) 1))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
     )
       (list (append pw ls) pwlst) 
   )) 

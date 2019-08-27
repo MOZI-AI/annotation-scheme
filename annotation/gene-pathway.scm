@@ -66,6 +66,7 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
       )
+      (set! tmp (append tmp (find-pathway-genes node)))
       (if (equal? prot "True")
         (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
           (if (not (null? prots))
@@ -101,6 +102,7 @@
             [tmp '()]
         )
           (set! pwlst (append pwlst (list node)))
+          (set! tmp (append tmp (find-pathway-genes node)))
           (if (equal? prot "True")
             (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
               (if (not (null? prots))
@@ -122,7 +124,7 @@
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 1))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (append pw (find-protein (GeneNode gene) 1))) 
     )
       (list (append pw ls) pwlst) 
   )) 

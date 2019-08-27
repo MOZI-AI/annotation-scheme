@@ -206,7 +206,7 @@
 (define-public (write-to-file result name)
  (let*
 	(
-		[file-name (string-append "/root/result/scheme/" name ".scm")]
+		[file-name (string-append "/root/result/" name "/" name ".scm")]
 	)
 	(call-with-output-file file-name
   	(lambda (p)

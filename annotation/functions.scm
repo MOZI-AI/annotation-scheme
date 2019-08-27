@@ -270,7 +270,37 @@
      )
   )
 )
-
+;; finds genes which codes the proteins in a given pathway 
+(define-public find-pathway-genes
+  (lambda (pathway)
+    (cog-outgoing-set (cog-execute! (BindLink
+      (VariableList 
+        (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
+        (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
+      (AndLink
+      (MemberLink
+        (VariableNode "$p")
+        pathway)
+      (EvaluationLink
+        (PredicateNode "expresses")
+          (ListLink
+            (VariableNode "$g")
+            (VariableNode "$p") )))
+      (ExecutionOutputLink
+      (GroundedSchemaNode "scm: add-pathway-genes")
+        (ListLink
+          pathway
+          (VariableNode "$g")
+        ))
+  )))
+))
+(define-public (add-pathway-genes pathway gene)
+  (ListLink
+        (MemberLink gene pathway)
+        (node-info gene)
+        (locate-node gene)
+  )
+)
 ;; Finds proteins a gene expresses
 (define-public find-protein
     (lambda (gene option)
@@ -666,8 +696,8 @@
       )
       (let ([output (find-pubmed-id var1 var2)])
          (ListLink
-            (MemberLink var1 path) 
-            (MemberLink var2 path)
+            ; (MemberLink var1 path) 
+            ; (MemberLink var2 path)
             (EvaluationLink
                 (PredicateNode "has_pubmedID")
                 (ListLink 

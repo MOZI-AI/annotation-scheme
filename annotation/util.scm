@@ -83,18 +83,36 @@
 ;;Finds a name of any node (Except GO which has different structure)
 (define find-pathway-name
     (lambda(pw)
-			(cog-outgoing-set (cog-execute! (GetLink
-				(VariableNode "$a")
-				(EvaluationLink
-					(PredicateNode "has_name")
-					(ListLink
-						pw
-						(VariableNode "$a")
-					)
-				)
-			)	
-		))
-	)
+			(let
+        ([name '()])
+        (if (string-contains (cog-name pw) "Uniprot:")
+          (set! name 
+          (cog-outgoing-set (cog-execute! (GetLink
+            (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
+            (EvaluationLink
+              (PredicateNode "expresses")
+              (ListLink
+                (VariableNode "$a")
+                pw
+              )
+            )
+          ))))
+          (set! name 
+          (cog-outgoing-set (cog-execute! (GetLink
+            (VariableList
+            (TypedVariable (VariableNode "$a") (Type 'ConceptNode)))
+            (EvaluationLink
+                (PredicateNode "has_name")
+                (ListLink
+                  pw
+                  (VariableNode "$a")
+                )
+              )
+            )	
+          ))))
+    name
+	))
 )
 
 (define-public (is-cellular-component? node-info)
@@ -220,7 +238,7 @@
 
 (define-public locate-node
   (lambda(node)
-      (cog-outgoing-set (cog-execute!
+      (let ([loc (cog-outgoing-set (cog-execute!
         (BindLink
         (VariableNode "$go")
         (AndLink
@@ -240,7 +258,28 @@
             (VariableNode "$go")
           )))
       ))
-    )
+      ])
+      (if (null? loc)
+      (set! loc 
+      (cog-outgoing-set (cog-execute!
+        (BindLink
+          (VariableNode "$loc")
+          (EvaluationLink
+              (PredicateNode "has_location")
+              (ListLink
+                node
+                (VariableNode "$loc")))
+          (EvaluationLink
+              (PredicateNode "has_location")
+              (ListLink
+                node
+                (VariableNode "$loc")))
+          )
+        )))
+      )
+      loc
+      )
+  )
 )
 
 ;; filter only Cell membrane and compartments

@@ -18432,5861 +18432,6 @@
 
 ;; Biogrid interaction of the genes
 
-(ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=19738201")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFALS")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFBP5")
-                  (GeneNode "IGFALS")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3483")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "APP")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "APP")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=21832049")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "Amyloid-beta precursor protein")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/351")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12902636")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "LTBP1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "LTBP1")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12962157")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "LTBP1")
-            (ConceptNode "Latent-transforming growth factor beta-binding protein 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "LTBP1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4052")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "PAPPA2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PAPPA2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11264294")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PAPPA2")
-            (ConceptNode "Pappalysin-2")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PAPPA2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/60676")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "APP")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "APP")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "Amyloid-beta precursor protein")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/351")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "SPP1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "SPP1")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10698186")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SPP1")
-            (ConceptNode "Osteopontin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SPP1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/6696")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP4")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9722589")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "Insulin-like growth factor-binding protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3487")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "MBTPS1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "MBTPS1")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "MBTPS1")
-            (ConceptNode "Membrane-bound transcription factor site-1 protease")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "MBTPS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8720")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8939990")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "MATN3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "MATN3")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=26186194")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28514442")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "MATN3")
-            (ConceptNode "Matrilin-3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "MATN3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4148")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFBP3")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11297622")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "C3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "C3")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27173435")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "C3")
-            (ConceptNode "Complement C3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "C3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/718")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFALS")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFBP3")
-                  (GeneNode "IGFALS")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9446566")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3483")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "CSF1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "CSF1")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "CSF1")
-            (ConceptNode "Macrophage colony-stimulating factor 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "CSF1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/1435")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFALS")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFALS")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9446566")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3483")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFALS")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFALS")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFALS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3483")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "PLG")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PLG")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9688635")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PLG")
-            (ConceptNode "Plasminogen")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PLG")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5340")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGFBP3")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9389554")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "ANO8")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "ANO8")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "ANO8")
-            (ConceptNode "Anoctamin-8")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "ANO8")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/57719")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "MIA3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "MIA3")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "MIA3")
-            (ConceptNode "Transport and Golgi organization protein 1 homolog")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "MIA3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/375056")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "LGALS1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "LGALS1")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=26344197")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "LGALS1")
-            (ConceptNode "Galectin-1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "LGALS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/16852")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "HSP90B1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "HSP90B1")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27684187")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HSP90B1")
-            (ConceptNode "Endoplasmin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HSP90B1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7184")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1733942")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=23750785")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12127836")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11344214")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "DNAJC3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "DNAJC3")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "DNAJC3")
-            (ConceptNode "DnaJ homolog subfamily C member 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "DNAJC3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5611")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "GAS6")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "GAS6")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "GAS6")
-            (ConceptNode "Growth arrest-specific protein 6")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "GAS6")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2621")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "TF")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11297622")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "LTBP1")
-         (ConceptNode "R-HSA-381426")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-381426")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "LTBP1")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12962157")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "LTBP1")
-            (ConceptNode "Latent-transforming growth factor beta-binding protein 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "LTBP1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4052")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1733942")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "KRAS")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "SOX4")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "KRAS")
-                  (GeneNode "SOX4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28628118")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "KRAS")
-            (ConceptNode "GTPase KRas")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "KRAS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3845")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOX4")
-            (ConceptNode "Transcription factor SOX-4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOX4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/6659")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGFBP4")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9722589")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "Insulin-like growth factor-binding protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3487")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "GRB2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "GRB2")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10022833")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "GRB2")
-            (ConceptNode "Growth factor receptor-bound protein 2")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "GRB2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/81504")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8939990")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9727029")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9389554")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "SHC1")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "SHC1")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=14764897")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=7559507")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=24051437")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=16113100")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8776723")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SHC1")
-            (ConceptNode "SHC-transforming protein 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SHC1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/20416")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "GRB2")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "GRB2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=18624398")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "GRB2")
-            (ConceptNode "Growth factor receptor-bound protein 2")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "GRB2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/81504")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "KRAS")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428933")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "KRAS")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27684187")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "KRAS")
-            (ConceptNode "GTPase KRas")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "KRAS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3845")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9389554")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8939990")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9727029")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1733942")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "IGFBP4")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9722589")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "Insulin-like growth factor-binding protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3487")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2404192")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9727029")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGFBP4")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9722589")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "Insulin-like growth factor-binding protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3487")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IRS2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IRS2")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12228220")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27507812")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IRS2")
-            (ConceptNode "Insulin receptor substrate 2")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IRS2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8660")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9389554")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8939990")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF1R")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IRS1")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IRS1")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8776723")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IRS1")
-            (ConceptNode "Insulin receptor substrate 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IRS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/25467")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1733942")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "IRS1")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-2428928")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IRS1")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12228220")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IRS1")
-            (ConceptNode "Insulin receptor substrate 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IRS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/25467")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "INS")
-         (ConceptNode "R-HSA-422085")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-422085")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "INS")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9388210")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "Insulin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3630")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "INS")
-         (ConceptNode "R-HSA-422085")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-422085")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "INS")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "Insulin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3630")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "INS")
-         (ConceptNode "R-HSA-422085")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-422085")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "INS")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29273204")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "Insulin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "INS")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3630")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "GAS6")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "GAS6")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "GAS6")
-            (ConceptNode "Growth arrest-specific protein 6")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "GAS6")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2621")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=19738201")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "HSPA5")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "HSPA5")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=22939629")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HSPA5")
-            (ConceptNode "Endoplasmic reticulum chaperone BiP")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HSPA5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3309")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "PDGFB")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PDGFB")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PDGFB")
-            (ConceptNode "Platelet-derived growth factor subunit B")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PDGFB")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5155")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "PFN1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "SOCS1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PFN1")
-                  (GeneNode "SOCS1")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=29991678")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PFN1")
-            (ConceptNode "Profilin-1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PFN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5216")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "Suppressor of cytokine signaling 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SOCS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/8651")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "CLU")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "CLU")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27684187")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "CLU")
-            (ConceptNode "Clusterin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "CLU")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/1191")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10084601")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IDE")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IDE")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=1733942")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "Insulin-degrading enzyme")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IDE")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3416")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "HSPA5")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "HSPA5")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27684187")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HSPA5")
-            (ConceptNode "Endoplasmic reticulum chaperone BiP")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HSPA5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3309")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "APP")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "APP")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=21832049")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "Amyloid-beta precursor protein")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/351")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12127836")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11344214")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "ABCC4")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "ABCC4")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "ABCC4")
-            (ConceptNode "Multidrug resistance-associated protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "ABCC4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/10257")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=23750785")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "PCYOX1L")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PCYOX1L")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PCYOX1L")
-            (ConceptNode "Prenylcysteine oxidase-like")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PCYOX1L")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/78991")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "TUBA4A")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGF1R")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "TUBA4A")
-                  (GeneNode "IGF1R")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=27684187")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TUBA4A")
-            (ConceptNode "Tubulin alpha-4A chain")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TUBA4A")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/316531")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "Insulin-like growth factor 1 receptor")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF1R")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3480")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP4")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP4")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9722589")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "Insulin-like growth factor-binding protein 4")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP4")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3487")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "TF")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11749962")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "THBS1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "THBS1")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=10698186")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "THBS1")
-            (ConceptNode "Thrombospondin-1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "THBS1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7057")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "PLG")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "PLG")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9688635")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "PLG")
-            (ConceptNode "Plasminogen")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "PLG")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5340")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "VEGFA")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "VEGFA")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12407018")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "VEGFA")
-            (ConceptNode "Vascular endothelial growth factor A")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "VEGFA")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7422")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "VEGFA")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "VEGFA")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=23976881")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "VEGFA")
-            (ConceptNode "Vascular endothelial growth factor A")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "VEGFA")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7422")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "SERPINE1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "SERPINE1")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9202242")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "SERPINE1")
-            (ConceptNode "Plasminogen activator inhibitor 1")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "SERPINE1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/5054")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP7")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP7")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=8939990")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "Insulin-like growth factor-binding protein 7")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP7")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3490")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "IGF2")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP5")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "IGF2")
-                  (GeneNode "IGFBP5")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=9497324")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "Insulin-like growth factor II")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGF2")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3481")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "Insulin-like growth factor-binding protein 5")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP5")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3488")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "ENDOD1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "ENDOD1")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "ENDOD1")
-            (ConceptNode "Endonuclease domain-containing 1 protein")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "ENDOD1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/23052")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "APP")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "APP")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "Amyloid-beta precursor protein")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "APP")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/351")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink
-         (GeneNode "FN1")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "NOV")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "FN1")
-                  (GeneNode "NOV")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=12902636")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "Fibronectin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "FN1")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/2335")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "NOV")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/4856")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "TMX3")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "HNRNPL")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "TMX3")
-                  (GeneNode "HNRNPL")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=28611215")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TMX3")
-            (ConceptNode "Protein disulfide-isomerase TMX3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TMX3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/54495")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "HNRNPL")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3191")
-         )
-      )
-   )
-   (ListLink
-      (MemberLink (stv 1 1)
-         (GeneNode "TF")
-         (ConceptNode "R-HSA-114608")
-      )
-      (MemberLink
-         (GeneNode "IGFBP3")
-         (ConceptNode "R-HSA-114608")
-      )
-      (EvaluationLink
-         (PredicateNode "has_pubmedID")
-         (ListLink
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                  (GeneNode "TF")
-                  (GeneNode "IGFBP3")
-               )
-            )
-            (ListLink
-               (ConceptNode "https://www.ncbi.nlm.nih.gov/pubmed/?term=11297622")
-            )
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "Serotransferrin")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "TF")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/7018")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_name")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "Insulin-like growth factor-binding protein 3")
-         )
-      )
-      (EvaluationLink
-         (PredicateNode "has_definition")
-         (ListLink
-            (GeneNode "IGFBP3")
-            (ConceptNode "https://www.ncbi.nlm.nih.gov/gene/3486")
-         )
-      )
-   )
 ;; IGF1 Biogird 
 
 (ListLink
@@ -29330,3 +23475,6595 @@
             )
          )
       )
+
+;;
+
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGSF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "SOCS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IDE")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "E2F1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP5")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP7")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP2")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "NOV")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOX4")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "SOCS1")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "TF")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGF1R")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGSF1")
+	(GeneNode "IGSF1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IDE")
+	(GeneNode "HNRNPL")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP5")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGF1R")
+	(GeneNode "SOCS1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "HNRNPL")
+	(GeneNode "IDE")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "E2F1")
+	(GeneNode "E2F1")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "TF")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFBP3")
+	(GeneNode "IGFALS")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP3")))
+(EvaluationLink
+    (PredicateNode "interacts_with")
+    (ListLink 
+	(GeneNode "IGFALS")
+	(GeneNode "IGFBP5")))
+   
+;; Genes Entrez ID
+
+
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ANO8")
+	(ConceptNode "entrez:57719")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP4")
+	(ConceptNode "entrez:3487")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HSPA5")
+	(ConceptNode "entrez:3309")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PDGFB")
+	(ConceptNode "entrez:5155")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HSP90B1")
+	(ConceptNode "entrez:7184")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "CSF1")
+	(ConceptNode "entrez:1435")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFALS")
+	(ConceptNode "entrez:3483")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "CLU")
+	(ConceptNode "entrez:1191")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IDE")
+	(ConceptNode "entrez:3416")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SERPINE1")
+	(ConceptNode "entrez:5054")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SOX4")
+	(ConceptNode "entrez:6659")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MATN3")
+	(ConceptNode "entrez:4148")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "THBS1")
+	(ConceptNode "entrez:7057")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "HNRNPL")
+	(ConceptNode "entrez:3191")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TF")
+	(ConceptNode "entrez:7018")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "C3")
+	(ConceptNode "entrez:718")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF2")
+	(ConceptNode "entrez:3481")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PCYOX1L")
+	(ConceptNode "entrez:78991")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF1R")
+	(ConceptNode "entrez:3480")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGF1")
+	(ConceptNode "entrez:3479")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SHC1")
+	(ConceptNode "entrez:20416")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "LTBP1")
+	(ConceptNode "entrez:4052")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGSF1")
+	(ConceptNode "entrez:3547")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "DNAJC3")
+	(ConceptNode "entrez:5611")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP2")
+	(ConceptNode "entrez:3485")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP3")
+	(ConceptNode "entrez:3486")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "VEGFA")
+	(ConceptNode "entrez:7422")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP7")
+	(ConceptNode "entrez:3490")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MIA3")
+	(ConceptNode "entrez:375056")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IGFBP5")
+	(ConceptNode "entrez:3488")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TMX3")
+	(ConceptNode "entrez:54495")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "TUBA4A")
+	(ConceptNode "entrez:316531")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "LGALS1")
+	(ConceptNode "entrez:16852")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "KRAS")
+	(ConceptNode "entrez:3845")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SOCS1")
+	(ConceptNode "entrez:8651")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "E2F1")
+	(ConceptNode "entrez:1869")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "FN1")
+	(ConceptNode "entrez:2335")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "MBTPS1")
+	(ConceptNode "entrez:8720")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ENDOD1")
+	(ConceptNode "entrez:23052")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "APP")
+	(ConceptNode "entrez:351")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IRS1")
+	(ConceptNode "entrez:25467")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "IRS2")
+	(ConceptNode "entrez:8660")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "INS")
+	(ConceptNode "entrez:3630")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PLG")
+	(ConceptNode "entrez:5340")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PFN1")
+	(ConceptNode "entrez:5216")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "GRB2")
+	(ConceptNode "entrez:81504")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "SPP1")
+	(ConceptNode "entrez:6696")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "ABCC4")
+	(ConceptNode "entrez:10257")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "NOV")
+	(ConceptNode "entrez:4856")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "PAPPA2")
+	(ConceptNode "entrez:60676")))
+    (EvaluationLink
+        (PredicateNode "has_entrez_id")
+        (ListLink 
+	(GeneNode "GAS6")
+	(ConceptNode "entrez:2621")))
+
+(ListLink
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FAM49B")
+            (ConceptNode "Protein FAM49B")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FAM49B")
+            (ConceptNode "entrez:51571")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGSF1")
+            (ConceptNode "Immunoglobulin superfamily member 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGSF1")
+            (ConceptNode "entrez:3547")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TAGLN2")
+            (ConceptNode "Transgelin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TAGLN2")
+            (ConceptNode "entrez:8407")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HGF")
+            (ConceptNode "Hepatocyte growth factor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HGF")
+            (ConceptNode "entrez:3082")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HGF")
+            (ConceptNode "Hepatocyte growth factor")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HGF")
+            (ConceptNode "entrez:24446")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MANF")
+            (ConceptNode "Mesencephalic astrocyte-derived neurotrophic factor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MANF")
+            (ConceptNode "entrez:7873")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP4")
+            (ConceptNode "Insulin-like growth factor-binding protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP4")
+            (ConceptNode "entrez:3487")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MSLN")
+            (ConceptNode "Mesothelin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MSLN")
+            (ConceptNode "entrez:10232")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MMRN1")
+            (ConceptNode "Multimerin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MMRN1")
+            (ConceptNode "entrez:22915")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FBN1")
+            (ConceptNode "Fibrillin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FBN1")
+            (ConceptNode "entrez:2200")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CDH2")
+            (ConceptNode "Cadherin-2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CDH2")
+            (ConceptNode "entrez:12558")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CDH2")
+            (ConceptNode "Cadherin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CDH2")
+            (ConceptNode "entrez:1000")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:8651")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:12703")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:252971")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CHID1")
+            (ConceptNode "Chitinase domain-containing protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CHID1")
+            (ConceptNode "entrez:66005")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP5")
+            (ConceptNode "Insulin-like growth factor-binding protein 5")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP5")
+            (ConceptNode "entrez:3488")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APLP2")
+            (ConceptNode "Amyloid-like protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APLP2")
+            (ConceptNode "entrez:334")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "entrez:15388")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "entrez:3191")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FGF23")
+            (ConceptNode "Fibroblast growth factor 23")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FGF23")
+            (ConceptNode "entrez:8074")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PECAM1")
+            (ConceptNode "Platelet endothelial cell adhesion molecule")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PECAM1")
+            (ConceptNode "entrez:5175")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOA1")
+            (ConceptNode "Apolipoprotein A-I")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOA1")
+            (ConceptNode "entrez:335")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOA1")
+            (ConceptNode "Apolipoprotein A-I")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOA1")
+            (ConceptNode "entrez:11806")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLK3")
+            (ConceptNode "Prostate-specific antigen")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLK3")
+            (ConceptNode "entrez:354")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP1")
+            (ConceptNode "Insulin-like growth factor-binding protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP1")
+            (ConceptNode "entrez:3484")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPP2")
+            (ConceptNode "Secreted phosphoprotein 24")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPP2")
+            (ConceptNode "entrez:6694")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SCG3")
+            (ConceptNode "Secretogranin-3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SCG3")
+            (ConceptNode "entrez:29106")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PDGFB")
+            (ConceptNode "Platelet-derived growth factor subunit B")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PDGFB")
+            (ConceptNode "entrez:5155")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PDGFA")
+            (ConceptNode "Platelet-derived growth factor subunit A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PDGFA")
+            (ConceptNode "entrez:5154")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "F5")
+            (ConceptNode "Coagulation factor V")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "F5")
+            (ConceptNode "entrez:2153")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOL1")
+            (ConceptNode "Apolipoprotein L1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOL1")
+            (ConceptNode "entrez:8542")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "EVA1A")
+            (ConceptNode "Protein eva-1 homolog A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "EVA1A")
+            (ConceptNode "entrez:84141")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CLEC3B")
+            (ConceptNode "Tetranectin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CLEC3B")
+            (ConceptNode "entrez:7123")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOH")
+            (ConceptNode "Beta-2-glycoprotein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOH")
+            (ConceptNode "entrez:350")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPP1")
+            (ConceptNode "Osteopontin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPP1")
+            (ConceptNode "entrez:25353")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPP1")
+            (ConceptNode "Osteopontin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPP1")
+            (ConceptNode "entrez:6696")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TEX264")
+            (ConceptNode "Testis-expressed protein 264")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TEX264")
+            (ConceptNode "entrez:51368")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CD63")
+            (ConceptNode "CD63 antigen")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CD63")
+            (ConceptNode "entrez:967")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINA4")
+            (ConceptNode "Kallistatin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINA4")
+            (ConceptNode "entrez:5267")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOOL")
+            (ConceptNode "MICOS complex subunit MIC27")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOOL")
+            (ConceptNode "entrez:139322")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FERMT3")
+            (ConceptNode "Fermitin family homolog 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FERMT3")
+            (ConceptNode "entrez:83706")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOE")
+            (ConceptNode "Apolipoprotein E")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOE")
+            (ConceptNode "entrez:348")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOS1")
+            (ConceptNode "Son of sevenless homolog 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOS1")
+            (ConceptNode "entrez:6654")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LHFPL2")
+            (ConceptNode "LHFPL tetraspan subfamily member 2 protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LHFPL2")
+            (ConceptNode "entrez:10184")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF1")
+            (ConceptNode "Insulin-like growth factor I")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF1")
+            (ConceptNode "entrez:3479")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "INS")
+            (ConceptNode "Insulin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "INS")
+            (ConceptNode "entrez:3630")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PLG")
+            (ConceptNode "Plasminogen")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PLG")
+            (ConceptNode "entrez:5340")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "Transcription factor E2F1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "entrez:13555")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "Transcription factor E2F1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "entrez:1869")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SDC2")
+            (ConceptNode "Syndecan-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SDC2")
+            (ConceptNode "entrez:6383")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APP")
+            (ConceptNode "Amyloid-beta precursor protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APP")
+            (ConceptNode "entrez:351")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PF4")
+            (ConceptNode "Platelet factor 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PF4")
+            (ConceptNode "entrez:5196")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "AFP")
+            (ConceptNode "Alpha-fetoprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "AFP")
+            (ConceptNode "entrez:174")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPCS1")
+            (ConceptNode "Signal peptidase complex subunit 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPCS1")
+            (ConceptNode "entrez:28972")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TGFB3")
+            (ConceptNode "Transforming growth factor beta-3 proprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TGFB3")
+            (ConceptNode "entrez:7043")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMC1")
+            (ConceptNode "Laminin subunit gamma-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMC1")
+            (ConceptNode "entrez:3915")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TGFB1")
+            (ConceptNode "Transforming growth factor beta-1 proprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TGFB1")
+            (ConceptNode "entrez:7040")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PCSK9")
+            (ConceptNode "Proprotein convertase subtilisin/kexin type 9")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PCSK9")
+            (ConceptNode "entrez:255738")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TGOLN2")
+            (ConceptNode "Trans-Golgi network integral membrane protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TGOLN2")
+            (ConceptNode "entrez:10618")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TGOLN2")
+            (ConceptNode "Trans-Golgi network integral membrane protein 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TGOLN2")
+            (ConceptNode "entrez:192152")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SCG2")
+            (ConceptNode "Secretogranin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SCG2")
+            (ConceptNode "entrez:7857")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "WFS1")
+            (ConceptNode "Wolframin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "WFS1")
+            (ConceptNode "entrez:83725")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "WFS1")
+            (ConceptNode "Wolframin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "WFS1")
+            (ConceptNode "entrez:7466")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "AMELX")
+            (ConceptNode "Amelogenin, X isoform")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "AMELX")
+            (ConceptNode "entrez:265")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOA2")
+            (ConceptNode "Apolipoprotein A-II")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOA2")
+            (ConceptNode "entrez:11807")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOA2")
+            (ConceptNode "Apolipoprotein A-II")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOA2")
+            (ConceptNode "entrez:336")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGSF1")
+            (ConceptNode "Immunoglobulin superfamily member 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGSF1")
+            (ConceptNode "entrez:3547")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN2")
+            (ConceptNode "Alpha-actinin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN2")
+            (ConceptNode "entrez:88")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN2")
+            (ConceptNode "Alpha-actinin-2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN2")
+            (ConceptNode "entrez:11472")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MBOAT4")
+            (ConceptNode "Ghrelin O-acyltransferase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MBOAT4")
+            (ConceptNode "entrez:619373")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF1R")
+            (ConceptNode "Insulin-like growth factor 1 receptor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF1R")
+            (ConceptNode "entrez:3480")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP6")
+            (ConceptNode "Insulin-like growth factor-binding protein 6")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP6")
+            (ConceptNode "entrez:3489")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ADAM10")
+            (ConceptNode "Disintegrin and metalloproteinase domain-containing protein 10")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ADAM10")
+            (ConceptNode "entrez:102")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SRGN")
+            (ConceptNode "Serglycin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SRGN")
+            (ConceptNode "entrez:5552")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TMEM132A")
+            (ConceptNode "Transmembrane protein 132A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TMEM132A")
+            (ConceptNode "entrez:54972")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOX4")
+            (ConceptNode "Transcription factor SOX-4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOX4")
+            (ConceptNode "entrez:6659")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN1")
+            (ConceptNode "Alpha-actinin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN1")
+            (ConceptNode "entrez:87")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN1")
+            (ConceptNode "Alpha-actinin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN1")
+            (ConceptNode "entrez:109711")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLK2")
+            (ConceptNode "Kallikrein-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLK2")
+            (ConceptNode "entrez:3817")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "Reticulocalbin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "entrez:5954")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "Reticulocalbin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "entrez:19672")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "Reticulocalbin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "RCN1")
+            (ConceptNode "entrez:362182")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TF")
+            (ConceptNode "Serotransferrin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TF")
+            (ConceptNode "entrez:7018")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FGB")
+            (ConceptNode "Fibrinogen beta chain")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FGB")
+            (ConceptNode "entrez:2244")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "Corticotropin-releasing factor receptor 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "entrez:12922")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "Corticotropin-releasing factor receptor 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "entrez:1395")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "Corticotropin-releasing factor receptor 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CRHR2")
+            (ConceptNode "entrez:64680")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FAM3C")
+            (ConceptNode "Protein FAM3C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FAM3C")
+            (ConceptNode "entrez:10447")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "DNAJC3")
+            (ConceptNode "DnaJ homolog subfamily C member 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "DNAJC3")
+            (ConceptNode "entrez:5611")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "DNAJC3")
+            (ConceptNode "DnaJ homolog subfamily C member 3")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "DNAJC3")
+            (ConceptNode "entrez:286770")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "Growth factor receptor-bound protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "entrez:2885")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "Growth factor receptor-bound protein 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "entrez:81504")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "Growth factor receptor-bound protein 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GRB2")
+            (ConceptNode "entrez:14784")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MMP2")
+            (ConceptNode "72 kDa type IV collagenase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MMP2")
+            (ConceptNode "entrez:4313")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FLNA")
+            (ConceptNode "Filamin-A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FLNA")
+            (ConceptNode "entrez:192176")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FLNA")
+            (ConceptNode "Filamin-A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FLNA")
+            (ConceptNode "entrez:2316")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "RARRES2")
+            (ConceptNode "Retinoic acid receptor responder protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "RARRES2")
+            (ConceptNode "entrez:5919")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "Calmodulin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "entrez:801")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "Calmodulin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "entrez:12313")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "Calmodulin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "entrez:24242")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "Calmodulin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALM1")
+            (ConceptNode "entrez:805")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HSP90B1")
+            (ConceptNode "Endoplasmin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HSP90B1")
+            (ConceptNode "entrez:22027")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HSP90B1")
+            (ConceptNode "Endoplasmin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HSP90B1")
+            (ConceptNode "entrez:7184")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFALS")
+            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFALS")
+            (ConceptNode "entrez:3483")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "Talin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "entrez:7094")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "Talin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "entrez:21894")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "Talin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TLN1")
+            (ConceptNode "entrez:313494")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "Tubulin alpha-4A chain")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "entrez:316531")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "Tubulin alpha-4A chain")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "entrez:7277")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "Tubulin alpha-4A chain")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TUBA4A")
+            (ConceptNode "entrez:22145")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PCSK1")
+            (ConceptNode "Neuroendocrine convertase 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PCSK1")
+            (ConceptNode "entrez:5122")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "C4A")
+            (ConceptNode "Complement C4-A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "C4A")
+            (ConceptNode "entrez:720")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPARC")
+            (ConceptNode "SPARC")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPARC")
+            (ConceptNode "entrez:6678")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PNPLA2")
+            (ConceptNode "Patatin-like phospholipase domain-containing protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PNPLA2")
+            (ConceptNode "entrez:57104")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FAM20C")
+            (ConceptNode "Extracellular serine/threonine protein kinase FAM20C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FAM20C")
+            (ConceptNode "entrez:56975")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TIMP3")
+            (ConceptNode "Metalloproteinase inhibitor 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TIMP3")
+            (ConceptNode "entrez:7078")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "OLA1")
+            (ConceptNode "Obg-like ATPase 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "OLA1")
+            (ConceptNode "entrez:852313")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "OLA1")
+            (ConceptNode "Obg-like ATPase 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "OLA1")
+            (ConceptNode "entrez:29789")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PROC")
+            (ConceptNode "Vitamin K-dependent protein C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PROC")
+            (ConceptNode "entrez:5624")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TNC")
+            (ConceptNode "Tenascin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TNC")
+            (ConceptNode "entrez:3371")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TNC")
+            (ConceptNode "Tenascin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TNC")
+            (ConceptNode "entrez:396440")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GH1")
+            (ConceptNode "Somatotropin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GH1")
+            (ConceptNode "entrez:2688")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLK1")
+            (ConceptNode "Kallikrein-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLK1")
+            (ConceptNode "entrez:3816")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VEGFA")
+            (ConceptNode "Vascular endothelial growth factor A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VEGFA")
+            (ConceptNode "entrez:7422")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF1")
+            (ConceptNode "Insulin-like growth factor I")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF1")
+            (ConceptNode "entrez:3479")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FGA")
+            (ConceptNode "Fibrinogen alpha chain")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FGA")
+            (ConceptNode "entrez:2243")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "UCN")
+            (ConceptNode "Urocortin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "UCN")
+            (ConceptNode "entrez:29151")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "UCN")
+            (ConceptNode "Urocortin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "UCN")
+            (ConceptNode "entrez:7349")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINF2")
+            (ConceptNode "Alpha-2-antiplasmin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINF2")
+            (ConceptNode "entrez:5345")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "BCHE")
+            (ConceptNode "Cholinesterase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "BCHE")
+            (ConceptNode "entrez:590")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PDIA6")
+            (ConceptNode "Protein disulfide-isomerase A6")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PDIA6")
+            (ConceptNode "entrez:286906")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PDIA6")
+            (ConceptNode "Protein disulfide-isomerase A6")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PDIA6")
+            (ConceptNode "entrez:10130")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "Cofilin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "entrez:29271")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "Cofilin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "entrez:12631")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "Cofilin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CFL1")
+            (ConceptNode "entrez:1072")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MIA3")
+            (ConceptNode "Transport and Golgi organization protein 1 homolog")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MIA3")
+            (ConceptNode "entrez:375056")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PCYOX1L")
+            (ConceptNode "Prenylcysteine oxidase-like")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PCYOX1L")
+            (ConceptNode "entrez:78991")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ITGA2B")
+            (ConceptNode "Integrin alpha-IIb")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ITGA2B")
+            (ConceptNode "entrez:3674")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPCS3")
+            (ConceptNode "Signal peptidase complex subunit 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPCS3")
+            (ConceptNode "entrez:60559")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SELENOP")
+            (ConceptNode "Selenoprotein P")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SELENOP")
+            (ConceptNode "entrez:6414")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CHRDL1")
+            (ConceptNode "Chordin-like protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CHRDL1")
+            (ConceptNode "entrez:91851")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "AMTN")
+            (ConceptNode "Amelotin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "AMTN")
+            (ConceptNode "entrez:401138")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CILP")
+            (ConceptNode "Cartilage intermediate layer protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CILP")
+            (ConceptNode "entrez:8483")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN4")
+            (ConceptNode "Alpha-actinin-4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN4")
+            (ConceptNode "entrez:81")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACTN4")
+            (ConceptNode "Alpha-actinin-4")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACTN4")
+            (ConceptNode "entrez:60595")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CSF1")
+            (ConceptNode "Macrophage colony-stimulating factor 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CSF1")
+            (ConceptNode "entrez:1435")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VWF")
+            (ConceptNode "von Willebrand factor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VWF")
+            (ConceptNode "entrez:7450")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PPBP")
+            (ConceptNode "Platelet basic protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PPBP")
+            (ConceptNode "entrez:5473")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MATN3")
+            (ConceptNode "Matrilin-3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MATN3")
+            (ConceptNode "entrez:4148")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PENK")
+            (ConceptNode "Proenkephalin-A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PENK")
+            (ConceptNode "entrez:5179")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PSAP")
+            (ConceptNode "Prosaposin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PSAP")
+            (ConceptNode "entrez:5660")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PSAP")
+            (ConceptNode "Prosaposin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PSAP")
+            (ConceptNode "entrez:25524")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MEPE")
+            (ConceptNode "Matrix extracellular phosphoglycoprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MEPE")
+            (ConceptNode "entrez:56955")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SEC11C")
+            (ConceptNode "Signal peptidase complex catalytic subunit SEC11C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SEC11C")
+            (ConceptNode "entrez:90701")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MGAT4A")
+            (ConceptNode "Alpha-1,3-mannosyl-glycoprotein 4-beta-N-acetylglucosaminyltransferase A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MGAT4A")
+            (ConceptNode "entrez:11320")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CD36")
+            (ConceptNode "Platelet glycoprotein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CD36")
+            (ConceptNode "entrez:948")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CD109")
+            (ConceptNode "CD109 antigen")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CD109")
+            (ConceptNode "entrez:135228")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CLU")
+            (ConceptNode "Clusterin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CLU")
+            (ConceptNode "entrez:12759")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CLU")
+            (ConceptNode "Clusterin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CLU")
+            (ConceptNode "entrez:1191")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "BMP4")
+            (ConceptNode "Bone morphogenetic protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "BMP4")
+            (ConceptNode "entrez:652")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINA10")
+            (ConceptNode "Protein Z-dependent protease inhibitor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINA10")
+            (ConceptNode "entrez:51156")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "F2")
+            (ConceptNode "Prothrombin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "F2")
+            (ConceptNode "entrez:2147")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MBTPS1")
+            (ConceptNode "Membrane-bound transcription factor site-1 protease")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MBTPS1")
+            (ConceptNode "entrez:8720")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "SHC-transforming protein 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "entrez:20416")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "SHC-transforming protein 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "entrez:85385")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "SHC-transforming protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SHC1")
+            (ConceptNode "entrez:6464")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "entrez:15388")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "Heterogeneous nuclear ribonucleoprotein L")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HNRNPL")
+            (ConceptNode "entrez:3191")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CAP1")
+            (ConceptNode "Adenylyl cyclase-associated protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CAP1")
+            (ConceptNode "entrez:10487")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CAP1")
+            (ConceptNode "Adenylyl cyclase-associated protein 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CAP1")
+            (ConceptNode "entrez:12331")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TMSB4X")
+            (ConceptNode "Thymosin beta-4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TMSB4X")
+            (ConceptNode "entrez:7114")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TMSB4X")
+            (ConceptNode "Thymosin beta-4")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TMSB4X")
+            (ConceptNode "entrez:19241")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "QSOX1")
+            (ConceptNode "Sulfhydryl oxidase 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "QSOX1")
+            (ConceptNode "entrez:5768")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ORM2")
+            (ConceptNode "Alpha-1-acid glycoprotein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ORM2")
+            (ConceptNode "entrez:5005")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ORM2")
+            (ConceptNode "Alpha-1-acid glycoprotein 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ORM2")
+            (ConceptNode "entrez:851064")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ENDOD1")
+            (ConceptNode "Endonuclease domain-containing 1 protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ENDOD1")
+            (ConceptNode "entrez:23052")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GHRL")
+            (ConceptNode "Appetite-regulating hormone")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GHRL")
+            (ConceptNode "entrez:51738")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPARCL1")
+            (ConceptNode "SPARC-like protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPARCL1")
+            (ConceptNode "entrez:8404")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LGALS1")
+            (ConceptNode "Galectin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LGALS1")
+            (ConceptNode "entrez:3956")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LGALS1")
+            (ConceptNode "Galectin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LGALS1")
+            (ConceptNode "entrez:16852")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ITGB3")
+            (ConceptNode "Integrin beta-3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ITGB3")
+            (ConceptNode "entrez:3690")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CP")
+            (ConceptNode "Ceruloplasmin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CP")
+            (ConceptNode "entrez:1356")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ABCC4")
+            (ConceptNode "Multidrug resistance-associated protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ABCC4")
+            (ConceptNode "entrez:10257")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PHACTR2")
+            (ConceptNode "Phosphatase and actin regulator 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PHACTR2")
+            (ConceptNode "entrez:9749")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "AMBN")
+            (ConceptNode "Ameloblastin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "AMBN")
+            (ConceptNode "entrez:258")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NRAS")
+            (ConceptNode "GTPase NRas")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NRAS")
+            (ConceptNode "entrez:4893")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NRAS")
+            (ConceptNode "GTPase NRas")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NRAS")
+            (ConceptNode "entrez:18176")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP2")
+            (ConceptNode "Insulin-like growth factor-binding protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP2")
+            (ConceptNode "entrez:3485")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "BMP15")
+            (ConceptNode "Bone morphogenetic protein 15")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "BMP15")
+            (ConceptNode "entrez:9210")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ANO8")
+            (ConceptNode "Anoctamin-8")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ANO8")
+            (ConceptNode "entrez:57719")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "Transcription factor E2F1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "entrez:13555")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "Transcription factor E2F1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "E2F1")
+            (ConceptNode "entrez:1869")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HRAS")
+            (ConceptNode "GTPase HRas")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HRAS")
+            (ConceptNode "entrez:15461")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HRAS")
+            (ConceptNode "GTPase HRas")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HRAS")
+            (ConceptNode "entrez:3265")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TGFB2")
+            (ConceptNode "Transforming growth factor beta-2 proprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TGFB2")
+            (ConceptNode "entrez:7042")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINC1")
+            (ConceptNode "Antithrombin-III")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINC1")
+            (ConceptNode "entrez:462")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HRG")
+            (ConceptNode "Histidine-rich glycoprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HRG")
+            (ConceptNode "entrez:3273")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "Fructose-bisphosphate aldolase A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "entrez:226")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "Fructose-bisphosphate aldolase A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "entrez:11674")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "Fructose-bisphosphate aldolase A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "entrez:24189")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "Fructose-bisphosphate aldolase A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALDOA")
+            (ConceptNode "entrez:100009055")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ECM1")
+            (ConceptNode "Extracellular matrix protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ECM1")
+            (ConceptNode "entrez:1893")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINA3")
+            (ConceptNode "Alpha-1-antichymotrypsin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINA3")
+            (ConceptNode "entrez:12")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MAGED2")
+            (ConceptNode "Melanoma-associated antigen D2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MAGED2")
+            (ConceptNode "entrez:10916")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PRSS23")
+            (ConceptNode "Serine protease 23")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PRSS23")
+            (ConceptNode "entrez:11098")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FSTL3")
+            (ConceptNode "Follistatin-related protein 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FSTL3")
+            (ConceptNode "entrez:10272")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "EGF")
+            (ConceptNode "Pro-epidermal growth factor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "EGF")
+            (ConceptNode "entrez:1950")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINA1")
+            (ConceptNode "Alpha-1-antitrypsin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINA1")
+            (ConceptNode "entrez:5265")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF2")
+            (ConceptNode "Insulin-like growth factor II")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF2")
+            (ConceptNode "entrez:3481")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF2")
+            (ConceptNode "Insulin-like growth factor II")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF2")
+            (ConceptNode "entrez:16002")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "WDR1")
+            (ConceptNode "WD repeat-containing protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "WDR1")
+            (ConceptNode "entrez:9948")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CDC37L1")
+            (ConceptNode "Hsp90 co-chaperone Cdc37-like 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CDC37L1")
+            (ConceptNode "entrez:55664")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "STC2")
+            (ConceptNode "Stanniocalcin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "STC2")
+            (ConceptNode "entrez:8614")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ISLR")
+            (ConceptNode "Immunoglobulin superfamily containing leucine-rich repeat protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ISLR")
+            (ConceptNode "entrez:3671")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IL6")
+            (ConceptNode "Interleukin-6")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IL6")
+            (ConceptNode "entrez:3569")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VEGFC")
+            (ConceptNode "Vascular endothelial growth factor C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VEGFC")
+            (ConceptNode "entrez:7424")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLK13")
+            (ConceptNode "Kallikrein-13")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLK13")
+            (ConceptNode "entrez:26085")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MXRA8")
+            (ConceptNode "Matrix remodeling-associated protein 8")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MXRA8")
+            (ConceptNode "entrez:54587")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "BPIFB2")
+            (ConceptNode "BPI fold-containing family B member 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "BPIFB2")
+            (ConceptNode "entrez:80341")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PRKCSH")
+            (ConceptNode "Glucosidase 2 subunit beta")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PRKCSH")
+            (ConceptNode "entrez:5589")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:8651")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:12703")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "Suppressor of cytokine signaling 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOCS1")
+            (ConceptNode "entrez:252971")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IDE")
+            (ConceptNode "Insulin-degrading enzyme")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IDE")
+            (ConceptNode "entrez:3416")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TTN")
+            (ConceptNode "Titin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TTN")
+            (ConceptNode "entrez:7273")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IDE")
+            (ConceptNode "Insulin-degrading enzyme")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IDE")
+            (ConceptNode "entrez:3416")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LEFTY2")
+            (ConceptNode "Left-right determination factor 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LEFTY2")
+            (ConceptNode "entrez:7044")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CFD")
+            (ConceptNode "Complement factor D")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CFD")
+            (ConceptNode "entrez:1675")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "F13A1")
+            (ConceptNode "Coagulation factor XIII A chain")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "F13A1")
+            (ConceptNode "entrez:2162")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VCAN")
+            (ConceptNode "Versican core protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VCAN")
+            (ConceptNode "entrez:1462")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HABP4")
+            (ConceptNode "Intracellular hyaluronan-binding protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HABP4")
+            (ConceptNode "entrez:22927")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CKAP4")
+            (ConceptNode "Cytoskeleton-associated protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CKAP4")
+            (ConceptNode "entrez:10970")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CKAP4")
+            (ConceptNode "Cytoskeleton-associated protein 4")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CKAP4")
+            (ConceptNode "entrez:362859")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "Signal peptidase complex subunit 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "entrez:293142")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "Signal peptidase complex subunit 2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "entrez:66624")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "Signal peptidase complex subunit 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SPCS2")
+            (ConceptNode "entrez:9789")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MMP1")
+            (ConceptNode "Interstitial collagenase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MMP1")
+            (ConceptNode "entrez:4312")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MFGE8")
+            (ConceptNode "Lactadherin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MFGE8")
+            (ConceptNode "entrez:4240")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LEP")
+            (ConceptNode "Leptin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LEP")
+            (ConceptNode "entrez:3952")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LEP")
+            (ConceptNode "Leptin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LEP")
+            (ConceptNode "entrez:16846")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP3")
+            (ConceptNode "Insulin-like growth factor-binding protein 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP3")
+            (ConceptNode "entrez:3486")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KTN1")
+            (ConceptNode "Kinectin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KTN1")
+            (ConceptNode "entrez:3895")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KTN1")
+            (ConceptNode "Kinectin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KTN1")
+            (ConceptNode "entrez:16709")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TF")
+            (ConceptNode "Serotransferrin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TF")
+            (ConceptNode "entrez:7018")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FSTL1")
+            (ConceptNode "Follistatin-related protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FSTL1")
+            (ConceptNode "entrez:11167")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SHISA5")
+            (ConceptNode "Protein shisa-5")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SHISA5")
+            (ConceptNode "entrez:51246")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VEGFD")
+            (ConceptNode "Vascular endothelial growth factor D")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VEGFD")
+            (ConceptNode "entrez:2277")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MELTF")
+            (ConceptNode "Melanotransferrin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MELTF")
+            (ConceptNode "entrez:4241")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CYR61")
+            (ConceptNode "Protein CYR61")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CYR61")
+            (ConceptNode "entrez:3491")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CYR61")
+            (ConceptNode "Protein CYR61")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CYR61")
+            (ConceptNode "entrez:16007")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ITIH3")
+            (ConceptNode "Inter-alpha-trypsin inhibitor heavy chain H3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ITIH3")
+            (ConceptNode "entrez:3699")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PCDH7")
+            (ConceptNode "Protocadherin-7")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PCDH7")
+            (ConceptNode "entrez:5099")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GZMH")
+            (ConceptNode "Granzyme H")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GZMH")
+            (ConceptNode "entrez:2999")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALU")
+            (ConceptNode "Calumenin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALU")
+            (ConceptNode "entrez:12321")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CALU")
+            (ConceptNode "Calumenin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CALU")
+            (ConceptNode "entrez:813")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SEC11A")
+            (ConceptNode "Signal peptidase complex catalytic subunit SEC11A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SEC11A")
+            (ConceptNode "entrez:65166")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SEC11A")
+            (ConceptNode "Signal peptidase complex catalytic subunit SEC11A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SEC11A")
+            (ConceptNode "entrez:23478")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "Insulin receptor substrate 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "entrez:25467")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "Insulin receptor substrate 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "entrez:2541245")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "Insulin receptor substrate 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IRS1")
+            (ConceptNode "entrez:3667")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "POTEKP")
+            (ConceptNode "Putative beta-actin-like protein 3")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "POTEKP")
+            (ConceptNode "entrez:440915")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ITIH2")
+            (ConceptNode "Inter-alpha-trypsin inhibitor heavy chain H2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ITIH2")
+            (ConceptNode "entrez:3698")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP7")
+            (ConceptNode "Insulin-like growth factor-binding protein 7")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP7")
+            (ConceptNode "entrez:29817")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP7")
+            (ConceptNode "Insulin-like growth factor-binding protein 7")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP7")
+            (ConceptNode "entrez:3490")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "Apolipoprotein B-100")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "entrez:54225")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "Apolipoprotein B-100")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "entrez:338")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "Apolipoprotein B-100")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOB")
+            (ConceptNode "entrez:238055")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "STXBP2")
+            (ConceptNode "Syntaxin-binding protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "STXBP2")
+            (ConceptNode "entrez:6813")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GAS6")
+            (ConceptNode "Growth arrest-specific protein 6")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GAS6")
+            (ConceptNode "entrez:2621")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TIMP1")
+            (ConceptNode "Metalloproteinase inhibitor 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TIMP1")
+            (ConceptNode "entrez:7076")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GCG")
+            (ConceptNode "Glucagon")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GCG")
+            (ConceptNode "entrez:2641")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CST3")
+            (ConceptNode "Cystatin-C")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CST3")
+            (ConceptNode "entrez:1471")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CST3")
+            (ConceptNode "Cystatin-C")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CST3")
+            (ConceptNode "entrez:13010")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GPC3")
+            (ConceptNode "Glypican-3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GPC3")
+            (ConceptNode "entrez:2719")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FUCA2")
+            (ConceptNode "Plasma alpha-L-fucosidase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FUCA2")
+            (ConceptNode "entrez:2519")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GOLM1")
+            (ConceptNode "Golgi membrane protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GOLM1")
+            (ConceptNode "entrez:51280")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "A1BG")
+            (ConceptNode "Alpha-1B-glycoprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "A1BG")
+            (ConceptNode "entrez:1")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PROS1")
+            (ConceptNode "Vitamin K-dependent protein S")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PROS1")
+            (ConceptNode "entrez:5627")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TOR4A")
+            (ConceptNode "Torsin-4A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TOR4A")
+            (ConceptNode "entrez:54863")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "Superoxide dismutase [Cu-Zn]")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "entrez:24786")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "Superoxide dismutase [Cu-Zn]")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "entrez:6647")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "Superoxide dismutase [Cu-Zn]")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SOD1")
+            (ConceptNode "entrez:20655")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LY6G6F")
+            (ConceptNode "Lymphocyte antigen 6 complex locus protein G6f")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LY6G6F")
+            (ConceptNode "entrez:259215")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ENAM")
+            (ConceptNode "Enamelin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ENAM")
+            (ConceptNode "entrez:10117")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KNG1")
+            (ConceptNode "Kininogen-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KNG1")
+            (ConceptNode "entrez:3827")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NUCB1")
+            (ConceptNode "Nucleobindin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NUCB1")
+            (ConceptNode "entrez:84595")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NUCB1")
+            (ConceptNode "Nucleobindin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NUCB1")
+            (ConceptNode "entrez:4924")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMP2")
+            (ConceptNode "Lysosome-associated membrane glycoprotein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMP2")
+            (ConceptNode "entrez:3920")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMB2")
+            (ConceptNode "Laminin subunit beta-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMB2")
+            (ConceptNode "entrez:3913")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMB2")
+            (ConceptNode "Laminin subunit beta-2")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMB2")
+            (ConceptNode "entrez:16779")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CTSG")
+            (ConceptNode "Cathepsin G")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CTSG")
+            (ConceptNode "entrez:1511")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "THBS1")
+            (ConceptNode "Thrombospondin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "THBS1")
+            (ConceptNode "entrez:7057")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "TMX3")
+            (ConceptNode "Protein disulfide-isomerase TMX3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "TMX3")
+            (ConceptNode "entrez:54495")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "P4HB")
+            (ConceptNode "Protein disulfide-isomerase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "P4HB")
+            (ConceptNode "entrez:5034")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PPIA")
+            (ConceptNode "Peptidyl-prolyl cis-trans isomerase A")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PPIA")
+            (ConceptNode "entrez:268373")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PPIA")
+            (ConceptNode "Peptidyl-prolyl cis-trans isomerase A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PPIA")
+            (ConceptNode "entrez:5478")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CD9")
+            (ConceptNode "CD9 antigen")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CD9")
+            (ConceptNode "entrez:928")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPINE1")
+            (ConceptNode "Plasminogen activator inhibitor 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPINE1")
+            (ConceptNode "entrez:5054")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "C3")
+            (ConceptNode "Complement C3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "C3")
+            (ConceptNode "entrez:718")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CYB5R1")
+            (ConceptNode "NADH-cytochrome b5 reductase 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CYB5R1")
+            (ConceptNode "entrez:51706")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VCL")
+            (ConceptNode "Vinculin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VCL")
+            (ConceptNode "entrez:22330")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VCL")
+            (ConceptNode "Vinculin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VCL")
+            (ConceptNode "entrez:7414")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "A2M")
+            (ConceptNode "Alpha-2-macroglobulin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "A2M")
+            (ConceptNode "entrez:232345")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "A2M")
+            (ConceptNode "Alpha-2-macroglobulin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "A2M")
+            (ConceptNode "entrez:2")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SELP")
+            (ConceptNode "P-selectin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SELP")
+            (ConceptNode "entrez:6403")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IRS2")
+            (ConceptNode "Insulin receptor substrate 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IRS2")
+            (ConceptNode "entrez:8660")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NOTUM")
+            (ConceptNode "Palmitoleoyl-protein carboxylesterase NOTUM")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NOTUM")
+            (ConceptNode "entrez:147111")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMB1")
+            (ConceptNode "Laminin subunit beta-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMB1")
+            (ConceptNode "entrez:3912")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LAMB1")
+            (ConceptNode "Laminin subunit beta-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LAMB1")
+            (ConceptNode "entrez:16777")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "RAB27B")
+            (ConceptNode "Ras-related protein Rab-27B")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "RAB27B")
+            (ConceptNode "entrez:5874")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP3")
+            (ConceptNode "Insulin-like growth factor-binding protein 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP3")
+            (ConceptNode "entrez:3486")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "GTPBP2")
+            (ConceptNode "GTP-binding protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "GTPBP2")
+            (ConceptNode "entrez:54676")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VGF")
+            (ConceptNode "Neurosecretory protein VGF")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VGF")
+            (ConceptNode "entrez:7425")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VGF")
+            (ConceptNode "Neurosecretory protein VGF")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VGF")
+            (ConceptNode "entrez:29461")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SYTL4")
+            (ConceptNode "Synaptotagmin-like protein 4")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SYTL4")
+            (ConceptNode "entrez:140594")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SYTL4")
+            (ConceptNode "Synaptotagmin-like protein 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SYTL4")
+            (ConceptNode "entrez:94121")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ANXA5")
+            (ConceptNode "Annexin A5")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ANXA5")
+            (ConceptNode "entrez:25673")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ANXA5")
+            (ConceptNode "Annexin A5")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ANXA5")
+            (ConceptNode "entrez:308")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VEGFB")
+            (ConceptNode "Vascular endothelial growth factor B")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VEGFB")
+            (ConceptNode "entrez:7423")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VTI1B")
+            (ConceptNode "Vesicle transport through interaction with t-SNAREs homolog 1B")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VTI1B")
+            (ConceptNode "entrez:10490")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VTI1B")
+            (ConceptNode "Vesicle transport through interaction with t-SNAREs homolog 1B")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VTI1B")
+            (ConceptNode "entrez:53612")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FAM20A")
+            (ConceptNode "Pseudokinase FAM20A")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FAM20A")
+            (ConceptNode "entrez:54757")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLF4")
+            (ConceptNode "Krueppel-like factor 4")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLF4")
+            (ConceptNode "entrez:16600")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KLF4")
+            (ConceptNode "Krueppel-like factor 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KLF4")
+            (ConceptNode "entrez:9314")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FGG")
+            (ConceptNode "Fibrinogen gamma chain")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FGG")
+            (ConceptNode "entrez:2266")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LGALS3BP")
+            (ConceptNode "Galectin-3-binding protein")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LGALS3BP")
+            (ConceptNode "entrez:19039")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LGALS3BP")
+            (ConceptNode "Galectin-3-binding protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LGALS3BP")
+            (ConceptNode "entrez:3959")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "NHLRC2")
+            (ConceptNode "NHL repeat-containing protein 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "NHLRC2")
+            (ConceptNode "entrez:374354")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "BRPF3")
+            (ConceptNode "Bromodomain and PHD finger-containing protein 3")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "BRPF3")
+            (ConceptNode "entrez:27154")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "AHSG")
+            (ConceptNode "Alpha-2-HS-glycoprotein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "AHSG")
+            (ConceptNode "entrez:197")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFBP5")
+            (ConceptNode "Insulin-like growth factor-binding protein 5")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFBP5")
+            (ConceptNode "entrez:3488")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PAPPA2")
+            (ConceptNode "Pappalysin-2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PAPPA2")
+            (ConceptNode "entrez:60676")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SCCPDH")
+            (ConceptNode "Saccharopine dehydrogenase-like oxidoreductase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SCCPDH")
+            (ConceptNode "entrez:51097")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGF1R")
+            (ConceptNode "Insulin-like growth factor 1 receptor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGF1R")
+            (ConceptNode "entrez:3480")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "F8")
+            (ConceptNode "Coagulation factor VIII")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "F8")
+            (ConceptNode "entrez:2157")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IRS4")
+            (ConceptNode "Insulin receptor substrate 4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IRS4")
+            (ConceptNode "entrez:8471")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HRC")
+            (ConceptNode "Sarcoplasmic reticulum histidine-rich calcium-binding protein")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HRC")
+            (ConceptNode "entrez:3270")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CHGB")
+            (ConceptNode "Secretogranin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CHGB")
+            (ConceptNode "entrez:1114")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "DMP1")
+            (ConceptNode "Dentin matrix acidic phosphoprotein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "DMP1")
+            (ConceptNode "entrez:1758")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "APOA5")
+            (ConceptNode "Apolipoprotein A-V")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "APOA5")
+            (ConceptNode "entrez:116519")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HSPA5")
+            (ConceptNode "Endoplasmic reticulum chaperone BiP")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HSPA5")
+            (ConceptNode "entrez:3309")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "HSPA5")
+            (ConceptNode "Endoplasmic reticulum chaperone BiP")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "HSPA5")
+            (ConceptNode "entrez:14828")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALB")
+            (ConceptNode "Serum albumin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALB")
+            (ConceptNode "entrez:280717")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ALB")
+            (ConceptNode "Serum albumin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ALB")
+            (ConceptNode "entrez:213")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ITIH4")
+            (ConceptNode "Inter-alpha-trypsin inhibitor heavy chain H4")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ITIH4")
+            (ConceptNode "entrez:3700")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PLA2G7")
+            (ConceptNode "Platelet-activating factor acetylhydrolase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PLA2G7")
+            (ConceptNode "entrez:7941")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ORM1")
+            (ConceptNode "Alpha-1-acid glycoprotein 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ORM1")
+            (ConceptNode "entrez:18405")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ORM1")
+            (ConceptNode "Alpha-1-acid glycoprotein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ORM1")
+            (ConceptNode "entrez:5004")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "CTSW")
+            (ConceptNode "Cathepsin W")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "CTSW")
+            (ConceptNode "entrez:1521")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPIND1")
+            (ConceptNode "Heparin cofactor 2")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPIND1")
+            (ConceptNode "entrez:3053")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "MEN1")
+            (ConceptNode "Menin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "MEN1")
+            (ConceptNode "entrez:4221")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "IGFALS")
+            (ConceptNode "Insulin-like growth factor-binding protein complex acid labile subunit")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "IGFALS")
+            (ConceptNode "entrez:3483")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "Profilin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "entrez:18643")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "Profilin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "entrez:5216")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "Profilin-1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PFN1")
+            (ConceptNode "entrez:513895")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "ACHE")
+            (ConceptNode "Acetylcholinesterase")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "ACHE")
+            (ConceptNode "entrez:43")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PAPPA")
+            (ConceptNode "Pappalysin-1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PAPPA")
+            (ConceptNode "entrez:5069")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PLEK")
+            (ConceptNode "Pleckstrin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PLEK")
+            (ConceptNode "entrez:5341")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "PLEK")
+            (ConceptNode "Pleckstrin")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "PLEK")
+            (ConceptNode "entrez:56193")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "VWA1")
+            (ConceptNode "von Willebrand factor A domain-containing protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "VWA1")
+            (ConceptNode "entrez:64856")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "KRAS")
+            (ConceptNode "GTPase KRas")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "KRAS")
+            (ConceptNode "entrez:3845")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "FN1")
+            (ConceptNode "Fibronectin")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "FN1")
+            (ConceptNode "entrez:2335")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LTBP1")
+            (ConceptNode "Latent-transforming growth factor beta-binding protein 1")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LTBP1")
+            (ConceptNode "entrez:4052")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "LTBP1")
+            (ConceptNode "Latent-transforming growth factor beta-binding protein 1")
+         )
+      )
+      (EvaluationLink
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "LTBP1")
+            (ConceptNode "entrez:268977")
+         )
+      )
+   )
+   (ListLink
+      (EvaluationLink
+         (PredicateNode "has_name")
+         (ListLink
+            (GeneNode "SERPING1")
+            (ConceptNode "Plasma protease C1 inhibitor")
+         )
+      )
+      (EvaluationLink (stv 1 1)
+         (PredicateNode "has_entrez_id")
+         (ListLink
+            (GeneNode "SERPING1")
+            (ConceptNode "entrez:710")
+         )
+      )
+   )
+)
+

@@ -66,12 +66,13 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
       )
+      (set! tmp (append tmp (find-pathway-genes node)))
       (if (equal? prot "True")
         (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
           (if (not (null? prots))
             (set! tmp (append tmp prots))
-            (set! tmp (append tmp (node-info node)))))
-        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
+            (set! tmp (append tmp (node-info node))))))
+        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
         (if (null? tmp)
           '()
           tmp
@@ -81,7 +82,7 @@
 
 
   (if (equal? prot "True")
-    (set! pw (find-protein (GeneNode gene) 0)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (append pw (find-protein (GeneNode gene) 0))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
   )
 
   (append pw ls)
@@ -101,13 +102,14 @@
             [tmp '()]
         )
           (set! pwlst (append pwlst (list node)))
+          (set! tmp (append tmp (find-pathway-genes node)))
           (if (equal? prot "True")
             (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
               (if (not (null? prots))
                 (set! tmp (append tmp prots))
                 (set! tmp (append tmp (node-info node)))))
-            (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
             )
+          (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
           )
@@ -122,7 +124,7 @@
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (find-protein (GeneNode gene) 1)) ;; when proteins are selected, genes should only be linked to proteins not to pathways
+    (set! pw (append pw (find-protein (GeneNode gene) 1))) 
     )
       (list (append pw ls) pwlst) 
   )) 

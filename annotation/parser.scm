@@ -33,6 +33,7 @@
     #:use-module (rnrs exceptions)
     #:use-module (ice-9 textual-ports)
     #:use-module (ice-9 regex)
+    #:use-module (ice-9 threads)
     #:use-module (srfi srfi-1)
     #:export (atomese-parser
             handle-node
@@ -48,13 +49,13 @@
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with")]
-                            (begin 
+                            (monitor  
                                 (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
-                                '()    
-                            )
+                                '()                
+                            )   
                         )
                     ((or (string=? predicate "has_name") (string=? predicate "GO_name"))
-                            (begin 
+                        (monitor  
                                 (if (member (car lns) (atoms))
                                 (if (and (not (string-null? (prev-annotation)))
                                         (not (string=? (prev-annotation) (annotation)))
@@ -83,7 +84,7 @@
                         
                     )
                     ((or (string=? predicate "has_definition") (string=? predicate "GO_definition"))
-                        (begin 
+                        (monitor  
                             (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
                                 (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
                             )
@@ -92,7 +93,7 @@
                     )
 
                     ((string=? predicate "GO_namespace")
-                      (begin 
+                      (monitor  
                         (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))
                                 (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
                             )
@@ -101,13 +102,13 @@
                     )
 
                     ((string=? predicate "has_pubmedID")
-                        (begin 
+                        (monitor  
                             (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
                             '()
                         )
                     )
                     ((string=? predicate "has_location")
-                        (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data            (car (nodes))))))
+                        (monitor  (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data            (car (nodes))))))
                         (let* ([info (node-data (car (nodes)))]
                                [old-loc (node-info-location info)]
                                [new-loc (cadr lns)]
@@ -120,7 +121,7 @@
                             )
                            '()
                         
-                        ))
+                        )))
                     )
                     (else (error (format #f "Unrecognized predicate ~a" predicate)))
                     
@@ -131,8 +132,10 @@
 )
 
 (define-public (handle-ln node-a node-b link)
-        (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
-        '()
+        (monitor 
+             (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
+            '()
+        )
 )
 
 (define-public (handle-list-ln node)
@@ -145,12 +148,12 @@
 )
 
 (define-public (handle-node node)
-      (if (member node annts)
+      (monitor (if (member node annts)
           (begin 
               (prev-annotation (annotation))
               (annotation node)
           )
-      )
+      ))
       node   
 )
 

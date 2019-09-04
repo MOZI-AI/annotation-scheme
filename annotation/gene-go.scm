@@ -25,15 +25,22 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (annotation parser)
     #:export (gene-go-annotation)
 )
 (define* (gene-go-annotation gene-nodes namespace #:optional (parents 0))
     (let (
-    )
-  (ListLink (ConceptNode "gene-go-annotation")
+        [result (ListLink (ConceptNode "gene-go-annotation")
     (flatten (map (lambda (gene) 
       (find-go-term gene  (string-split namespace #\ ) parents)
   
-  ) gene-nodes)))
+    ) gene-nodes)))]
+      )
+    (let (
+    	[res (ListLink result)]
+  		)
+    	(write-to-file res "gene-go.scm")
+    	(atomese-parser (format #f "~a" res))
+  	)
   )
 )

@@ -24,10 +24,11 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+	#:use-module (annotation parser)
+	#:use-module (ice-9 threads)
 )
 (define-public (biogrid-interaction-annotation gene-nodes interaction)
   (let ([result (list (ConceptNode "biogrid-interaction-annotation"))])
-	
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
 			(set! result (append result  (match-gene-interactors (GeneNode gene)  1) (find-protein-interactor (GeneNode gene) (Number 1))  (find-output-interactors (GeneNode gene))))
@@ -40,7 +41,10 @@
 		)
 	) gene-nodes)
 
-	(ListLink result)
-  )
-
-)
+	 (let (
+    	[res (ListLink result)]
+  		)
+    	(write-to-file res "biogrid.scm")
+    	(atomese-parser (format #f "~a" res))
+  	)
+))

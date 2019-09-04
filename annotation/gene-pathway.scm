@@ -25,12 +25,13 @@
       #:use-module (opencog query)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
+      #:use-module (annotation parser)
+      #:use-module (ice-9 threads)
 )
 
 (define-public (gene-pathway-annotation gene_nodes pathway prot small_mol)
     (let ([result (list (ConceptNode "gene-pathway-annotation"))]
           [pwlst '()])
-
     (for-each (lambda (gene)
       (set! result (append result (node-info (GeneNode gene))))
       (for-each (lambda (pathw)
@@ -46,7 +47,12 @@
           )(string-split pathway #\ ))
     ) gene_nodes)
  
-  (ListLink result)
+    (let (
+      [res (ListLink result)]
+    )
+      (write-to-file res "gene-pathway.scm")
+      (atomese-parser (format #f "~a" res))
+    )
 ))  
 
 
@@ -113,7 +119,7 @@
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
           )
-          (set! tmp (append tmp (list (pathway-heirarchy node pwlst))))
+          (set! tmp (append tmp (list (pathway-hierarchy node pwlst))))
           (if (null? tmp)
             '()
             tmp

@@ -29,7 +29,7 @@
       #:use-module (ice-9 threads)
 )
 
-(define-public (gene-pathway-annotation gene_nodes pathway prot small_mol)
+(define-public (gene-pathway-annotation gene_nodes pathway prot small_mol id)
     (let ([result (list (ConceptNode "gene-pathway-annotation"))]
           [pwlst '()])
     (for-each (lambda (gene)
@@ -50,8 +50,9 @@
     (let (
       [res (ListLink result)]
     )
-      (write-to-file res "gene-pathway.scm")
-      (atomese-parser (format #f "~a" res))
+      (write-to-file res id "gene-pathway")
+      ; (atomese-parser (format #f "~a" res))
+      res
     )
 ))  
 

@@ -28,7 +28,7 @@
     #:use-module (annotation parser)
     #:export (gene-go-annotation)
 )
-(define* (gene-go-annotation gene-nodes namespace #:optional (parents 0))
+(define* (gene-go-annotation gene-nodes namespace id #:optional (parents 0))
     (let (
         [result (ListLink (ConceptNode "gene-go-annotation")
     (flatten (map (lambda (gene) 
@@ -39,8 +39,9 @@
     (let (
     	[res (ListLink result)]
   		)
-    	(write-to-file res "gene-go.scm")
-    	(atomese-parser (format #f "~a" res))
+    	(write-to-file res id "gene-go")
+    	; (atomese-parser (format #f "~a" res))
+      res
   	)
   )
 )

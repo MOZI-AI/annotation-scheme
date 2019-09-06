@@ -22,5 +22,6 @@
 (use-modules (srfi srfi-98))
 
 (use-modules (ice-9 match))
+(use-modules (ice-9 threads))
 (use-modules (ice-9 ftw))
 (use-modules (srfi srfi-1))

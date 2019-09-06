@@ -46,14 +46,19 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-(define-public (gene-info genes)
+(define-public (gene-info genes id)
   "Add the name and description of gene nodes to the given list of GENES."
-  (let ((info
+  (let* ((info
          (map (lambda (gene)
                 (list (ListLink (node-info (GeneNode gene))
                                 (ListLink (locate-node (GeneNode gene))))))
-              genes)))
-   (atomese-parser (format #f "~a" (ListLink (ConceptNode "main") info)))
+              genes))
+              
+        (res (ListLink (ConceptNode "main") info))     
+        )
+        (write-to-file res id "main")
+        res
+   ;(atomese-parser (format #f "~a" (ListLink (ConceptNode "main") info)))
   )
 )
 
@@ -72,14 +77,15 @@ atomspace."
       (let-values (
         [result (force annts-fns)]
         )
-         (let (
-            (fn-nodes (flatten (map (lambda (graph) (graph-nodes graph)) result)))
-            (fn-edges (flatten (map (lambda (graph) (graph-edges graph)) result)))
-         )
-          (display fn-edges)(newline)
-           (scm->json-string (make-graph fn-nodes fn-edges))
-         )
-      ))
+        ;  (let* (
+        ;     (fn-nodes (flatten (map (lambda (graph) (graph-nodes graph)) result)))
+        ;     (fn-edges (flatten (map (lambda (graph) (graph-edges graph)) result)))
+        ;  )
+          
+        ;  )
+         (scm->json-string (atomese-parser (format #f "~a" result)))
+      )
+  )
 )
 
 

@@ -221,10 +221,10 @@
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))
 )
 
-(define-public (write-to-file result name)
+(define-public (write-to-file result id name)
  (let*
 	(
-		[file-name (string-append "/root/result/" name "/" name ".scm")]
+		[file-name (string-append "/root/result/" id "/" name ".scm")]
 	)
 	(call-with-output-file file-name
   	(lambda (p)

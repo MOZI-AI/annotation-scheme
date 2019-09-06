@@ -27,7 +27,7 @@
 	#:use-module (annotation parser)
 	#:use-module (ice-9 threads)
 )
-(define-public (biogrid-interaction-annotation gene-nodes interaction)
+(define-public (biogrid-interaction-annotation gene-nodes interaction id)
   (let ([result (list (ConceptNode "biogrid-interaction-annotation"))])
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
@@ -44,7 +44,8 @@
 	 (let (
     	[res (ListLink result)]
   		)
-    	(write-to-file res "biogrid.scm")
-    	(atomese-parser (format #f "~a" res))
+    	(write-to-file res id "biogrid")
+    	; (atomese-parser (format #f "~a" res))
+		res
   	)
 ))

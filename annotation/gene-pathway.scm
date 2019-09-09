@@ -25,21 +25,24 @@
       #:use-module (opencog query)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
+      #:export (gene-pathway-annotation)
 )
-
-(define-public (gene-pathway-annotation gene_nodes pathway prot small_mol)
+;; (list "cellular_component molecular_function biological_process" parent)
+(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) )
     (let ([result (list (ConceptNode "gene-pathway-annotation"))]
-          [pwlst '()])
+          [pwlst '()]
+          [go (if (string=? namespace "") (ListLink) 
+                (ListLink (ConceptNode namespace) (Number parents)))])
 
     (for-each (lambda (gene)
       (set! result (append result (node-info (GeneNode gene))))
       (for-each (lambda (pathw)
           (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene prot small_mol)))
+              (set! result (append result (smpdb gene prot small_mol go)))
               )
           (if (equal? pathw "reactome")
               (begin
-              (let ([res (reactome gene prot small_mol pwlst)])
+              (let ([res (reactome gene prot small_mol pwlst go)])
                 (set! result (append result (car res)))
                 (set! pwlst (append pwlst (cdr res)))
               )))
@@ -52,7 +55,7 @@
 
 ;; From SMPDB 
 
-(define (smpdb gene prot sm)
+(define (smpdb gene prot sm go)
   (let (
     [pw (find-pathway-member (GeneNode gene) "SMP")]
     [ls '()]
@@ -66,7 +69,7 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
       )
-      (set! tmp (append tmp (find-pathway-genes node)))
+      (set! tmp (append tmp (find-pathway-genes node go)))
       (if (equal? prot "True")
         (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
           (if (not (null? prots))
@@ -90,7 +93,7 @@
 
 ;; From reactome
 
-(define (reactome gene prot sm pwlst)
+(define (reactome gene prot sm pwlst go)
     (let (
       [pw (find-pathway-member (GeneNode gene) "R-HSA")]
       [ls '()]
@@ -102,7 +105,7 @@
             [tmp '()]
         )
           (set! pwlst (append pwlst (list node)))
-          (set! tmp (append tmp (find-pathway-genes node)))
+          (set! tmp (append tmp (find-pathway-genes node go)))
           (if (equal? prot "True")
             (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
               (if (not (null? prots))

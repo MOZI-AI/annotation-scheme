@@ -24,18 +24,21 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+		#:export (biogrid-interaction-annotation)
 )
-(define-public (biogrid-interaction-annotation gene-nodes interaction)
-  (let ([result (list (ConceptNode "biogrid-interaction-annotation"))])
+(define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0))
+  (let ([result (list (ConceptNode "biogrid-interaction-annotation"))]
+        [go (if (string=? namespace "") (ListLink) 
+                (ListLink (ConceptNode namespace) (Number parents)))])
 	
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-			(set! result (append result  (match-gene-interactors (GeneNode gene)  1) (find-protein-interactor (GeneNode gene) (Number 1))  (find-output-interactors (GeneNode gene))))
+			(set! result (append result  (match-gene-interactors (GeneNode gene)  1 go) (find-output-interactors (GeneNode gene) 1 go)))
 		)
 
 		(if (equal? interaction "Genes") 
 			(begin
-				(set! result (append result  (match-gene-interactors (GeneNode gene) 0) (find-output-interactors (GeneNode gene))))
+				(set! result (append result  (match-gene-interactors (GeneNode gene) 0 go) (find-output-interactors (GeneNode gene) 0 go)))
 			)
 		)
 	) gene-nodes)

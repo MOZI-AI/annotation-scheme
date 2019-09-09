@@ -30,8 +30,10 @@
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (json)
-    #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
+    #:use-module (ice-9 threads)
+    #:use-module (rnrs base)
+    #:use-module (ice-9 futures)
 )
 
 (define-public (find-genes gene-list)
@@ -44,19 +46,25 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-(define-public (gene-info genes)
+(define-public (gene-info genes id)
   "Add the name and description of gene nodes to the given list of GENES."
-  (let ((info
+  (let* ((info
          (map (lambda (gene)
                 (list (ListLink (node-info (GeneNode gene))
                                 (ListLink (locate-node (GeneNode gene))))))
-              genes)))
-    (ListLink (ConceptNode "main") info)))
+              genes))
+              
+        (res (ListLink (ConceptNode "main") info))     
+        )
+        (write-to-file res id "main")
+        res
+   ;(atomese-parser (format #f "~a" (ListLink (ConceptNode "main") info)))
+  )
+)
 
 (define-public (mapSymbol gene-list)
   "Map gene symbols into GeneNodes."
   (map GeneNode gene-list))
-
 (define-public (annotate-genes gene-list file-name annts-fns)
   (parameterize ( (nodes '()) 
                   (edges '()) 
@@ -65,13 +73,19 @@ atomspace."
                   (biogrid-genes '())
                   (annotation "")
                   (prev-annotation "")
-              ) 
-      (let* ([result (ListLink (force annts-fns))])
-      (write-to-file result file-name)
-      (scm->json-string (atomese-parser (format #f "~a" result)))
-    )
+              )
+      (let-values (
+        [result (force annts-fns)]
+        )
+        ;  (let* (
+        ;     (fn-nodes (flatten (map (lambda (graph) (graph-nodes graph)) result)))
+        ;     (fn-edges (flatten (map (lambda (graph) (graph-edges graph)) result)))
+        ;  )
+          
+        ;  )
+         (scm->json-string (atomese-parser (format #f "~a" result)))
+      )
   )
-
 )
 
 

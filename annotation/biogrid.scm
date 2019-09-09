@@ -24,6 +24,8 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+	#:use-module (annotation parser)
+	#:use-module (ice-9 threads)
 		#:export (biogrid-interaction-annotation)
 )
 (define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0))
@@ -43,7 +45,11 @@
 		)
 	) gene-nodes)
 
-	(ListLink result)
-  )
-
-)
+	 (let (
+    	[res (ListLink result)]
+  		)
+    	(write-to-file res id "biogrid")
+    	; (atomese-parser (format #f "~a" res))
+		res
+  	)
+))

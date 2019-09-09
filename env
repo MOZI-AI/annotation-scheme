@@ -1,6 +1,6 @@
 #!/bin/sh
-abs_top_srcdir="`cd "/opt" > /dev/null; pwd`"
-abs_top_builddir="`cd "/opt" > /dev/null; pwd`"
+abs_top_srcdir="`cd "/media/hedra/DATA/SIngularityNEt/annotation-scheme" > /dev/null; pwd`"
+abs_top_builddir="`cd "/media/hedra/DATA/SIngularityNEt/annotation-scheme" > /dev/null; pwd`"
 
 GUILE_LOAD_COMPILED_PATH="$abs_top_builddir${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
 GUILE_LOAD_PATH="$abs_top_builddir:$abs_top_srcdir${GUILE_LOAD_PATH:+:}:$GUILE_LOAD_PATH"

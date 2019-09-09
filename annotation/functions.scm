@@ -375,7 +375,7 @@
     )
 )
 ;; Find heirarchy of the reactome pathway
-(define-public pathway-heirarchy
+(define-public pathway-hierarchy
   (lambda (pw lst)
     (let ([res-parent
       (cog-outgoing-set (cog-execute! (BindLink

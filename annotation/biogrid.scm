@@ -28,7 +28,7 @@
 	#:use-module (ice-9 threads)
 		#:export (biogrid-interaction-annotation)
 )
-(define* (biogrid-interaction-annotation gene-nodes interaction id #:optional (namespace "") (parents 0))
+(define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0) (id ""))
   (let ([result (list (ConceptNode "biogrid-interaction-annotation"))]
         [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])

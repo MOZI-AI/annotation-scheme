@@ -665,7 +665,7 @@
                                 (locate-node  (GeneNode a))
                                 (node-info (GeneNode b))
                                 (locate-node  (GeneNode b))
-                                (if (not (null? go))
+                                (if (not (null? namespace))
                                 (ListLink
                                   (find-go-term a (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
                                   (find-go-term b (string-split (cog-name namespace) #\ ) (string->number (cog-name parent))))
@@ -685,7 +685,7 @@
                                 interaction
                                 (node-info (GeneNode a))
                                 (locate-node  (GeneNode a))
-                                (if (not (null? go))
+                                (if (not (null? namespace))
                                 (ListLink (find-go-term a (string-split (cog-name namespace) #\ ) (string->number (cog-name parent))))
                                 '()
                                 ))

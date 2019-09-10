@@ -77,12 +77,6 @@ atomspace."
       (let-values (
         [result (force annts-fns)]
         )
-        ;  (let* (
-        ;     (fn-nodes (flatten (map (lambda (graph) (graph-nodes graph)) result)))
-        ;     (fn-edges (flatten (map (lambda (graph) (graph-edges graph)) result)))
-        ;  )
-          
-        ;  )
          (scm->json-string (atomese-parser (format #f "~a" result)))
       )
   )

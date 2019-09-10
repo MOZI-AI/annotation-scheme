@@ -30,7 +30,7 @@
       #:export (gene-pathway-annotation)
 )
 ;; (list "cellular_component molecular_function biological_process" parent)
-(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) (id "") )
+(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) #:key (id "") )
     (let ([result (list (ConceptNode "gene-pathway-annotation"))]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 
@@ -55,7 +55,6 @@
       [res (ListLink result)]
     )
       (write-to-file res id "gene-pathway")
-      ; (atomese-parser (format #f "~a" res))
       res
     )
 ))  

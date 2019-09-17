@@ -740,13 +740,6 @@
   )
 )
 
-(define-public (generate-ppi-result gene-a prot-a )
-        (ListLink
-                (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
-                (node-info prot-a)
-        )
-)
-
 (define-public (generate-interactors path gene var1 var2)
   (if (and (not (string=? (cog-name var1) (cog-name var2)))
           (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))

@@ -29,7 +29,7 @@
 		#:export (biogrid-interaction-annotation)
 )
 (define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0) #:key (id ""))
-  (let ([result (list (ConceptNode "biogrid-interaction-annotation"))]
+  (let ([result '()]
         [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])
 	
@@ -46,7 +46,7 @@
 	) gene-nodes)
 
 	 (let (
-    	[res (ListLink result)]
+    	[res (ListLink (ConceptNode "biogrid-interaction-annotation") (ListLink result))]
   		)
     	(write-to-file res id "biogrid")
 		res

@@ -31,7 +31,7 @@
 )
 ;; (list "cellular_component molecular_function biological_process" parent)
 (define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) #:key (id "") )
-    (let ([result (list (ConceptNode "gene-pathway-annotation"))]
+    (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])
@@ -52,7 +52,7 @@
     ) gene_nodes)
  
     (let (
-      [res (ListLink result)]
+      [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
     )
       (write-to-file res id "gene-pathway")
       res

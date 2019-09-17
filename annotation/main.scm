@@ -71,6 +71,7 @@ atomspace."
                   (atoms '()) 
                   (genes gene-list)
                   (biogrid-genes '())
+                  (biogrid-pairs '())
                   (annotation "")
                   (prev-annotation "")
               )

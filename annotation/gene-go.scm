@@ -28,16 +28,14 @@
     #:use-module (annotation parser)
     #:export (gene-go-annotation)
 )
+
 (define* (gene-go-annotation gene-nodes namespace #:optional (parents 0) #:key (id ""))
     (let (
-        [result (ListLink (ConceptNode "gene-go-annotation")
-    (flatten (map (lambda (gene) 
-      (find-go-term gene  (string-split namespace #\ ) parents)
-  
-    ) gene-nodes)))]
-      )
+        [result (flatten (map (lambda (gene) 
+          (find-go-term gene  (string-split namespace #\ ) parents)) gene-nodes))]
+          )
     (let (
-    	[res (ListLink result)]
+    	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]
   		)
     	(write-to-file res id "gene-go")
       res

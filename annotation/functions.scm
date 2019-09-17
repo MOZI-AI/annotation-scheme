@@ -633,9 +633,10 @@
 ;; Grounded schema node to add info about matched variable nodes
 
 (define-public (generate-result gene-a gene-b prot go)
-    (if  
-     (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
-    ) 
+    (call/cc (lambda (k)
+          (if  
+            (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
+              )  
             (let* (
                   [output (find-pubmed-id gene-a gene-b)]
                   [res (flatten (map (lambda (x) 
@@ -647,7 +648,14 @@
                   [interaction (if (= 1 (string->number (cog-name prot))) (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output)
                                       (build-interaction gene-a gene-b output))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
-                  [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]  
+                  [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
+                  [pairs (find (lambda (x) (equal? (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
+                )
+                (if (null? interaction)
+                  (k (ListLink))
+                )
+                (if (not pairs)
+                  (biogrid-pairs (append (biogrid-pairs) (cons (cog-name gene-a) (cog-name gene-b))))
                 )
                 (match res
                     ((a b)
@@ -699,28 +707,39 @@
                         ))
                     )
                     (()
-                            (ListLink
+                        (if pairs
+                          (ListLink)
+                          (ListLink
                                 interaction
                             )
+                        )
                     )
                 )
            )
         (ListLink)
+      )
+    
+    )
+    
 ))
 
 (define-public (build-interaction interactor-1 interactor-2 pubmed)
-  (if (null? pubmed) 
-    (EvaluationLink 
-      (PredicateNode "interacts_with") 
-      (ListLink interactor-1 interactor-2))
-    (EvaluationLink
-      (PredicateNode "has_pubmedID")
-      (ListLink (EvaluationLink 
-                (PredicateNode "interacts_with") 
-                (ListLink interactor-1 interactor-2))  
-              pubmed))
+  (if (or (equal? (cog-type interactor-1) 'ListLink) (equal? (cog-type interactor-2) 'ListLink))
+    '()
+    (if (null? pubmed) 
+      (EvaluationLink 
+        (PredicateNode "interacts_with") 
+        (ListLink interactor-1 interactor-2))
+      (EvaluationLink
+        (PredicateNode "has_pubmedID")
+        (ListLink (EvaluationLink 
+                  (PredicateNode "interacts_with") 
+                  (ListLink interactor-1 interactor-2))  
+                pubmed))
+    )
   )
 )
+
 (define-public (generate-ppi-result gene-a prot-a )
         (ListLink
                 (EvaluationLink (PredicateNode "expresses") (ListLink gene-a prot-a))
@@ -732,22 +751,33 @@
   (if (and (not (string=? (cog-name var1) (cog-name var2)))
           (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
       )
-      (let ([output (find-pubmed-id var1 var2)])
-         (ListLink
-            (EvaluationLink
-                (PredicateNode "has_pubmedID")
-                (ListLink 
+      (let ([pairs (find (lambda (x) (equal? (cons (cog-name var1) (cog-name var2)))) (biogrid-pairs))]
+          )
+          (if pairs
+            (ListLink)
+            (let (
+              [output (find-pubmed-id var1 var2)]
+              )
+                (biogrid-pairs (append (biogrid-pairs) (cons (cog-name var1) (cog-name var2))))
+               (if (null? output) 
+                (EvaluationLink 
+                  (PredicateNode "interacts_with") 
+                  (ListLink var1 var2))
+                (EvaluationLink
+                  (PredicateNode "has_pubmedID")
+                  (ListLink 
                     (EvaluationLink 
                         (PredicateNode "interacts_with") 
                         (ListLink var1 var2))  
-                output)
+                          output)
+                        )
+                )
+              )
             )
-            (node-info var1)
-            (node-info var2)
-        )
-      )
-      (ListLink)
-  )
+          )
+        (ListLink)
+    )
+    
 )
 
 ;;                           

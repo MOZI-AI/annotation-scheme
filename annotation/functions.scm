@@ -39,7 +39,7 @@
         )
         (for-each (lambda (ns)
           (set! parents (append parents (cog-outgoing-set (cog-execute! (BindLink
-            (VariableNode "$a")
+            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (AndLink
               (InheritanceLink
                 atom
@@ -73,7 +73,7 @@
       (for-each (lambda (ns)
       
         (set! go-atoms (append go-atoms (cog-outgoing-set (cog-execute! (BindLink
-            (VariableNode "$a")
+            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (AndLink
               (MemberLink
                 gene
@@ -163,7 +163,7 @@
   (lambda (go)
     (cog-outgoing-set (cog-execute!
             (GetLink
-                (VariableNode "$v")
+                (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
                 (EvaluationLink 
                     (PredicateNode "GO_namespace")
                     (ListLink 
@@ -181,7 +181,7 @@
 (define find-go-name
     (lambda(go)
         (cog-execute! (BindLink
-            (VariableNode "$a")
+           (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (EvaluationLink
                (PredicateNode "GO_name")
                (ListLink
@@ -229,7 +229,7 @@
 
 (define-public (find-pathway-member gene db)
   (cog-outgoing-set (cog-execute! (BindLink
-      (VariableNode "$a")
+      (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
       (AndLink
         (EvaluationLink
           (GroundedPredicateNode "scm: filter-atoms")
@@ -319,21 +319,21 @@
     (lambda (gene option)
         (cog-outgoing-set (cog-execute! (BindLink
           (VariableList
-            (VariableNode "$a")
-            (VariableNode "$pw"))
+            (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
+            (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
            (AndLink
             (MemberLink
-             gene
-             (VariableNode "$pw"))
+              gene
+              (VariableNode "$pw"))
             (MemberLink
-            (VariableNode "$a")
-            (VariableNode "$pw"))
+              (VariableNode "$a")
+              (VariableNode "$pw"))
             (EvaluationLink
             (PredicateNode "expresses")
               (ListLink
                 gene
                 (VariableNode "$a") ))
-           )
+            )
         (ExecutionOutputLink
           (GroundedSchemaNode "scm: filter-pathway")
             (ListLink
@@ -343,7 +343,10 @@
               (Number option)
             )
         )
-        )))))
+      )
+    )
+  )
+))
 
 (define-public filter-pathway (lambda (gene prot pathway option)
   (if (and (string=? (find-prefix prot) "Uniprot") )
@@ -426,7 +429,7 @@
 ;; Finds molecules (proteins or chebi's) in a pathway 
 (define-public (find-mol path identifier)
   (cog-execute! (BindLink
-    (VariableNode "$a")
+    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
     (AndLink
       (EvaluationLink
         (GroundedPredicateNode "scm: filter-atoms")
@@ -452,7 +455,7 @@
 (define-public find-coding-gene
   (lambda (protein)
   (cog-outgoing-set (cog-execute! (BindLink
-    (VariableNode "$g")
+    (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
     (EvaluationLink
       (PredicateNode "expresses")
       (ListLink

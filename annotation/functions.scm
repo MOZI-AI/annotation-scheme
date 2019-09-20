@@ -658,7 +658,7 @@
                   (k (ListLink))
                 )
                 (if (not pairs)
-                  (biogrid-pairs (append (biogrid-pairs) (cons (cog-name gene-a) (cog-name gene-b))))
+                  (biogrid-pairs (append (biogrid-pairs) (list (cons (cog-name gene-a) (cog-name gene-b)))))
                 )
                 (match res
                     ((a b)

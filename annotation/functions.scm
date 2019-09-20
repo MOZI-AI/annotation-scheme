@@ -652,7 +652,7 @@
                                       (build-interaction gene-a gene-b output))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
                   [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
-                  [pairs (find (lambda (x) (equal? (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
+                  [pairs (find (lambda (x) (equal? x (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
                 )
                 (if (null? interaction)
                   (k (ListLink))

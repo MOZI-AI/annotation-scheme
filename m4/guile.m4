@@ -61,7 +61,7 @@
 #
 AC_DEFUN([GUILE_PKG],
  [PKG_PROG_PKG_CONFIG
-  _guile_versions_to_search="m4_default([$1], [2.0 1.8])"
+  _guile_versions_to_search="m4_default([$1], [2.9 2.2 2.0 1.8])"
   if test -n "$GUILE_EFFECTIVE_VERSION"; then
     _guile_tmp=""
     for v in $_guile_versions_to_search; do

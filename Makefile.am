@@ -8,14 +8,38 @@ SOURCES = \
     annotation/biogrid.scm \
     annotation/main.scm \
     annotation/parser.scm \
-    annotation.scm
+    annotation.scm 
+
+TESTS = \
+    tests/parser-tests.scm \
+    tests/util-tests.scm \
+    tests/main-tests.scm
+
+TEST_EXTENSIONS = .scm
+
+SCM_LOG_DRIVER = \
+    $(top_builddir)/env	\
+	$(GUILE) --no-auto-compile -e main	\
+	$(top_srcdir)/build-aux/test-driver.scm
+
 clean-go:
 	-$(RM) $(GOBJECTS)
 .PHONY: clean-go
 
-CLEANFILES = \
-  $(GOBJECTS)
+# Tell 'build-aux/test-driver.scm' to display only source file names,
+# not indivdual test names.
+AM_SCM_LOG_DRIVER_FLAGS = --brief=yes
 
-EXTRA_DIST = \
-    boostrap \
-    env.in
+AM_SCM_LOG_FLAGS = --no-auto-compile -L $(top_srcdir)
+
+AM_COLOR_TESTS=always
+
+CLEANFILES = \
+	$(GOBJECTS)	\
+	$(TESTS:tests/%.scm=%.log)	\
+	*.log *.tar.gz
+
+
+EXTRA_DIST =  $(SOURCES) \
+	          $(TESTS)	\
+              build-aux/test-driver.scm	

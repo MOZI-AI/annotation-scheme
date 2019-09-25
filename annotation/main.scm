@@ -58,13 +58,14 @@ atomspace."
         )
         (write-to-file res id "main")
         res
-   ;(atomese-parser (format #f "~a" (ListLink (ConceptNode "main") info)))
   )
 )
 
 (define-public (mapSymbol gene-list)
   "Map gene symbols into GeneNodes."
   (map GeneNode gene-list))
+
+
 (define-public (annotate-genes gene-list file-name annts-fns)
   (parameterize ( (nodes '()) 
                   (edges '()) 

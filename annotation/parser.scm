@@ -76,7 +76,7 @@
                                     
                                 )
                                 (begin 
-                                    (nodes (append (list (create-node (car lns) (cadr lns) "" "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
+                                    (nodes (append (list (create-node (car lns) (cadr lns) (build-desc-url (car lns)) "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
                                     (atoms (append (list (car lns)) (atoms)))
                                 )
                             )
@@ -85,12 +85,7 @@
                         
                     )
                     ((or (string=? predicate "has_definition") (string=? predicate "GO_definition"))
-                        (begin  
-                            (if (and (member (car lns) (atoms)) (string=? (car lns)     (node-info-id (node-data (car (nodes))))))
-                                (node-info-defn-set! (node-data (car (nodes))) (cadr lns))
-                            )
-                            '()
-                        )
+                        '()
                     )
 
                     ((string=? predicate "GO_namespace")
@@ -124,7 +119,7 @@
                         
                         )))
                     )
-                    (else (error (format #f "Unrecognized predicate ~a" predicate)))
+                    (else (error "Unrecognized predicate" predicate))
                     
                 )
             )

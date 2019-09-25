@@ -67,7 +67,6 @@
 (define-public (node-info node)
     (list
       (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
-      (EvaluationLink (PredicateNode "has_definition") (ListLink node (Concept (build-desc-url node))))
     )
 )
 
@@ -134,34 +133,16 @@
 
 
 (define-public (build-desc-url node)
- (let*
-	(
-		[atom-type (cog-type node)]
-		[description ""]
-	)
- 	(case atom-type
-	 ('MoleculeNode
-		(begin
-		 (if (equal? (car (string-split (cog-name node) #\:)) "ChEBI")
-			(set! description (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split (cog-name node) #\:))))
-	 		(set! description (string-append "https://www.uniprot.org/uniprot/" (cadr (string-split (cog-name node) #\:))))
-		 )
-		)
-	 )
-	 ('GeneNode (set! description (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez node))))
-	 ('ConceptNode
-		(begin
-		 (if (string-contains (cog-name node) "SMP")
-		 	(set! description (string-append "http://smpdb.ca/view/" (cog-name node)))
-		 )
-		 (if (string-contains (cog-name node) "R-HSA")
-		 	(set! description (string-append "http://www.reactome.org/content/detail/" (cog-name node)))
-		 )
-		)
-	 )
-	)
-	description
- )
+    (cond 
+        ((string-contains node "ChEBI") (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split node #\:))))
+        ((string-contains node "Uniprot") (string-append "https://www.uniprot.org/uniprot/" (cadr (string-split node #\:))))
+        ((string-contains node "GO") (string-append "http://amigo.geneontology.org/amigo/term/" node))
+        ((string-contains node "SMP") (string-append "http://smpdb.ca/view/" node))
+        ((string-contains node "R-HSA")
+          (string-append "http://www.reactome.org/content/detail/" node)
+        )
+        (else (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez (GeneNode node))))
+    )
 )
 
 ;; Finds entrez_id of a gene
@@ -225,15 +206,18 @@
 (define-public (write-to-file result id name)
  (let*
 	(
-		[file-name (string-append "/root/result/" id "/" name ".scm")]
+    [path (string-append "/root/result/" id)]
+		[file-name (string-append path "/" name ".scm")]
 	)
-	(call-with-output-file file-name
+  (if (file-exists? path)
+    (call-with-output-file file-name
   	(lambda (p)
 		(begin
 			(write result p)
 		)
-	)
-	)
+	  )
+	  )
+  )
  )
 )
 

@@ -84,10 +84,6 @@
                         )
                         
                     )
-                    ((or (string=? predicate "has_definition") (string=? predicate "GO_definition"))
-                        '()
-                    )
-
                     ((string=? predicate "GO_namespace")
                       (begin  
                         (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))

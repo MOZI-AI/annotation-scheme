@@ -39,13 +39,6 @@
                (GeneNode "IGFBP3")
             )
          )
-         (EvaluationLink
-            (PredicateNode "has_definition")
-            (ListLink
-               (MoleculeNode "Uniprot:P17936")
-               (ConceptNode "https://www.uniprot.org/uniprot/P17936")
-            )
-         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink

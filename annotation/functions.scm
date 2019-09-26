@@ -149,7 +149,6 @@
 (define (go-info go)
   (list
       (cog-outgoing-set (find-go-name go))
-      (cog-outgoing-set (find-godef go))
       (EvaluationLink 
         (PredicateNode "GO_namespace") 
         (ListLink 

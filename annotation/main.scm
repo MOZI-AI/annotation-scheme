@@ -79,7 +79,7 @@ atomspace."
       (let-values (
         [result (force annts-fns)]
         )
-         (scm->json-string (atomese-parser (format #f "~a" result)))
+         #t
       )
   )
 )

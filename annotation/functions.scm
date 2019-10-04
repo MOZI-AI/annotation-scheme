@@ -591,15 +591,17 @@
   (lambda (pw gene)
   (cog-outgoing-set (cog-execute! (BindLink
     (VariableList
-      (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
-      (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
-	    (TypedVariable (VariableNode "$p") (Type 'MoleculeNode)))
-    (AndLink
-      (MemberLink (VariableNode "$p") pw)
-      (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p")))
-      (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2"))) 
-      (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g2") gene))
-    )
+     (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
+     (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
+     (TypedVariable (VariableNode "$p1") (Type 'MoleculeNode))
+     (TypedVariable (VariableNode "$p2") (Type 'MoleculeNode)))
+   (AndLink
+     (MemberLink (VariableNode "$p1") pw)
+     (MemberLink (VariableNode "$p2") pw)
+     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p1")))
+     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g2") (VariableNode "$p2")))
+     (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2")))
+   )
   (ExecutionOutputLink
     (GroundedSchemaNode "scm: generate-interactors")
 		  (ListLink

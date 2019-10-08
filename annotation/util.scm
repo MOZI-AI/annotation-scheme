@@ -24,7 +24,6 @@
   #:use-module (opencog query)
   #:use-module (opencog exec)
   #:use-module (opencog bioscience)
-	#:use-module (json)
   #:use-module (ice-9 optargs)
   #:use-module (rnrs base)
   #:use-module (rnrs exceptions)

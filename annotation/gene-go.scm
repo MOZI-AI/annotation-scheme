@@ -25,7 +25,6 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (annotation parser)
     #:export (gene-go-annotation)
 )
 

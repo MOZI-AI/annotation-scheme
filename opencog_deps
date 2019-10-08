@@ -10,7 +10,6 @@
     (annotation) (annotation main)
     (annotation gene-go) (annotation biogrid) (annotation gene-pathway)
     (annotation functions) (annotation util)
-    (annotation parser)
 )
 (use-modules (json))
 (use-modules (rnrs base))

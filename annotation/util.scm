@@ -206,10 +206,16 @@
 (define-public (write-to-file result id name)
  (let*
 	(
-    [path (string-append "/root/result/" id)]
-		[file-name (string-append path "/" name ".scm")]
+    [top-dir (string-append "/root/result/")]
+    [result-dir (string-append top-dir id)]
+		[file-name (string-append result-dir "/" name ".scm")]
 	)
-  (if (file-exists? path)
+  (if (not (file-exists? top-dir))
+    (mkdir top-dir)
+  )
+  (if (not (file-exists? result-dir))
+    (mkdir result-dir)
+  )
     (call-with-output-file file-name
   	(lambda (p)
 		(begin
@@ -219,7 +225,6 @@
 	  )
   )
  )
-)
 
 (define-public locate-node
   (lambda(node)

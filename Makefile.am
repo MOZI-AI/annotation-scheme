@@ -7,7 +7,6 @@ SOURCES = \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
     annotation/main.scm \
-    annotation/parser.scm \
     annotation.scm 
 
 TESTS = \

@@ -24,7 +24,6 @@
     #:use-module (annotation gene-go)
     #:use-module (annotation gene-pathway)
     #:use-module (annotation biogrid)
-    #:use-module (annotation parser)
     #:use-module (opencog)
     #:use-module (opencog query)
     #:use-module (opencog exec)

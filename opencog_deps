@@ -11,7 +11,6 @@
     (annotation gene-go) (annotation biogrid) (annotation gene-pathway)
     (annotation functions) (annotation util)
 )
-(use-modules (json))
 (use-modules (rnrs base))
 (use-modules (rnrs exceptions))
 (use-modules (ice-9 textual-ports))

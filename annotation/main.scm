@@ -28,7 +28,6 @@
     #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (json)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
     #:use-module (rnrs base)

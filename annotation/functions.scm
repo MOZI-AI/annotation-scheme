@@ -588,7 +588,7 @@
 
 ;; Gene interactors for genes in the pathway
 (define-public pathway-gene-interactors 
-  (lambda (pw gene)
+  (lambda (pw)
   (cog-outgoing-set (cog-execute! (BindLink
     (VariableList
      (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
@@ -605,8 +605,7 @@
   (ExecutionOutputLink
     (GroundedSchemaNode "scm: generate-interactors")
 		  (ListLink
-      pw
-      gene
+        pw
         (VariableNode "$g1")
 		    (VariableNode "$g2")
 		  ))
@@ -744,18 +743,22 @@
   )
 )
 
-(define-public (generate-interactors path gene var1 var2)
-  (if (and (not (string=? (cog-name var1) (cog-name var2)))
-          (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
-      )
-      (let ([pairs (find (lambda (x) (equal? (cons (cog-name var1) (cog-name var2)))) (biogrid-pairs))]
+(define-public (generate-interactors path var1 var2)
+(call/cc (lambda (k) 
+      (if (not (string=? (cog-name var1) (cog-name var2)))
+      
+      (let ([pairs (find (lambda (x) (or (equal? (cons (cog-name var1) (cog-name var2)) x)
+                                          (equal? (cons (cog-name var2) (cog-name var1)) x)
+                                      )
+        
+                  ) (biogrid-pairs))]
           )
           (if pairs
-            (ListLink)
+            (k)
             (let (
               [output (find-pubmed-id var1 var2)]
               )
-                (biogrid-pairs (append (biogrid-pairs) (cons (cog-name var1) (cog-name var2))))
+                (biogrid-pairs (append (biogrid-pairs) (list (cons (cog-name var1) (cog-name var2)))))
                (if (null? output) 
                 (EvaluationLink 
                   (PredicateNode "interacts_with") 
@@ -772,9 +775,10 @@
               )
             )
           )
-        (ListLink)
+        (k)
     )
-    
+
+))    
 )
 
 ;;                           

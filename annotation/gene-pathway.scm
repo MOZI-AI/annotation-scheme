@@ -83,7 +83,7 @@
             (set! tmp (append tmp prots))
             (set! tmp (append tmp (node-info node))))))
       (if (= biogrid 1)  
-        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
+        (set! tmp (append tmp (pathway-gene-interactors node))))
         (if (null? tmp)
           '()
           tmp
@@ -121,7 +121,7 @@
                 (set! tmp (append tmp (node-info node)))))
             )
           (if (= biogrid 1)  
-            (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene)))))
+            (set! tmp (append tmp (pathway-gene-interactors node))))
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
           )

@@ -344,5 +344,6 @@
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
 (define-public (flatten x)
   (cond ((null? x) '())
+        ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
         (else (list x))))

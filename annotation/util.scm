@@ -205,8 +205,8 @@
 (define-public (write-to-file result id name)
  (let*
 	(
-    [top-dir (string-append "/root/result/")]
-    [result-dir (string-append top-dir id)]
+    [top-dir (getenv "RESULT_DIR")]
+    [result-dir (string-append top-dir "/" id)]
 		[file-name (string-append result-dir "/" name ".scm")]
 	)
   (if (not (file-exists? top-dir))

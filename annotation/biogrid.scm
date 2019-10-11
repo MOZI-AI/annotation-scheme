@@ -35,7 +35,8 @@
 	
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-			(set! result (append result  (match-gene-interactors (GeneNode gene)  1 go) (find-output-interactors (GeneNode gene) 1 go)))
+			(set! result (append result (match-gene-interactors (GeneNode gene) 0 go) 
+				(match-gene-interactors (GeneNode gene)  1 go) (find-output-interactors (GeneNode gene) 1 go)))
 		)
 
 		(if (equal? interaction "Genes") 

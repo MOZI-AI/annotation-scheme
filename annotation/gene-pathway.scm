@@ -30,7 +30,7 @@
       #:export (gene-pathway-annotation)
 )
 ;; (list "cellular_component molecular_function biological_process" parent)
-(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) (biogrid 1) #:key (id "") )
+(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0)  #:key (biogrid 1) (id "") )
     (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 

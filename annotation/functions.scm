@@ -588,23 +588,24 @@
 
 ;; Gene interactors for genes in the pathway
 (define-public pathway-gene-interactors 
-  (lambda (pw gene)
+  (lambda (pw)
   (cog-outgoing-set (cog-execute! (BindLink
     (VariableList
-      (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
-      (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
-	    (TypedVariable (VariableNode "$p") (Type 'MoleculeNode)))
-    (AndLink
-      (MemberLink (VariableNode "$p") pw)
-      (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p")))
-      (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2"))) 
-      (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g2") gene))
-    )
+     (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
+     (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
+     (TypedVariable (VariableNode "$p1") (Type 'MoleculeNode))
+     (TypedVariable (VariableNode "$p2") (Type 'MoleculeNode)))
+   (AndLink
+     (MemberLink (VariableNode "$p1") pw)
+     (MemberLink (VariableNode "$p2") pw)
+     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p1")))
+     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g2") (VariableNode "$p2")))
+     (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2")))
+   )
   (ExecutionOutputLink
     (GroundedSchemaNode "scm: generate-interactors")
 		  (ListLink
-      pw
-      gene
+        pw
         (VariableNode "$g1")
 		    (VariableNode "$g2")
 		  ))
@@ -647,8 +648,9 @@
                                         '()
                                     ) 
                     )  (list gene-a gene-b))) ]
-                  [interaction (if (= 1 (string->number (cog-name prot))) (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output)
-                                      (build-interaction gene-a gene-b output))]
+                  [interaction (if (= 1 (string->number (cog-name prot))) 
+                      (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output)
+                      (build-interaction gene-a gene-b output))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
                   [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
                   [pairs (find (lambda (x) (equal? x (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
@@ -666,8 +668,10 @@
                             (if (= 1 (string->number (cog-name prot)))
                               (ListLink
                                   interaction
+                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
                                   (node-info (find-protein-form (GeneNode a)))
                                   (locate-node  (find-protein-form (GeneNode a)))
+                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) (find-protein-form (GeneNode b))))
                                   (node-info (find-protein-form (GeneNode b)))
                                   (locate-node  (find-protein-form (GeneNode b)))
                               )
@@ -694,6 +698,7 @@
                             (if (= 1 (string->number (cog-name prot)))
                             (ListLink
                                 interaction
+                                (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
                                 (node-info (find-protein-form (GeneNode a)))
                                 (locate-node  (find-protein-form (GeneNode a))))
                             (ListLink
@@ -742,18 +747,22 @@
   )
 )
 
-(define-public (generate-interactors path gene var1 var2)
-  (if (and (not (string=? (cog-name var1) (cog-name var2)))
-          (not (or (string=? (cog-name gene) (cog-name var1))(string=? (cog-name gene) (cog-name var2))))
-      )
-      (let ([pairs (find (lambda (x) (equal? (cons (cog-name var1) (cog-name var2)))) (biogrid-pairs))]
+(define-public (generate-interactors path var1 var2)
+(call/cc (lambda (k) 
+      (if (not (string=? (cog-name var1) (cog-name var2)))
+      
+      (let ([pairs (find (lambda (x) (or (equal? (cons (cog-name var1) (cog-name var2)) x)
+                                          (equal? (cons (cog-name var2) (cog-name var1)) x)
+                                      )
+        
+                  ) (biogrid-pairs))]
           )
           (if pairs
-            (ListLink)
+            (k)
             (let (
               [output (find-pubmed-id var1 var2)]
               )
-                (biogrid-pairs (append (biogrid-pairs) (cons (cog-name var1) (cog-name var2))))
+                (biogrid-pairs (append (biogrid-pairs) (list (cons (cog-name var1) (cog-name var2)))))
                (if (null? output) 
                 (EvaluationLink 
                   (PredicateNode "interacts_with") 
@@ -770,9 +779,10 @@
               )
             )
           )
-        (ListLink)
+        (k)
     )
-    
+
+))    
 )
 
 ;;                           

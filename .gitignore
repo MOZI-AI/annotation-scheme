@@ -215,3 +215,5 @@ m4/lt~obsolete.m4
 *.log
 
 *.trs
+
+Makefile.in

@@ -29,7 +29,7 @@
       #:export (gene-pathway-annotation)
 )
 ;; (list "cellular_component molecular_function biological_process" parent)
-(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0) #:key (id "") )
+(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0)  #:key (biogrid 1) (id "") )
     (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 
@@ -39,11 +39,11 @@
       (set! result (append result (node-info (GeneNode gene))))
       (for-each (lambda (pathw)
           (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene prot small_mol go)))
+              (set! result (append result (smpdb gene prot small_mol go biogrid)))
               )
           (if (equal? pathw "reactome")
               (begin
-              (let ([res (reactome gene prot small_mol pwlst go)])
+              (let ([res (reactome gene prot small_mol pwlst go biogrid)])
                 (set! result (append result (car res)))
                 (set! pwlst (append pwlst (cdr res)))
               )))
@@ -61,7 +61,7 @@
 
 ;; From SMPDB 
 
-(define (smpdb gene prot sm go)
+(define (smpdb gene prot sm go biogrid)
   (let (
     [pw (find-pathway-member (GeneNode gene) "SMP")]
     [ls '()]
@@ -81,7 +81,8 @@
           (if (not (null? prots))
             (set! tmp (append tmp prots))
             (set! tmp (append tmp (node-info node))))))
-        (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
+      (if (= biogrid 1)  
+        (set! tmp (append tmp (pathway-gene-interactors node))))
         (if (null? tmp)
           '()
           tmp
@@ -99,7 +100,7 @@
 
 ;; From reactome
 
-(define (reactome gene prot sm pwlst go)
+(define (reactome gene prot sm pwlst go biogrid)
     (let (
       [pw (find-pathway-member (GeneNode gene) "R-HSA")]
       [ls '()]
@@ -118,7 +119,8 @@
                 (set! tmp (append tmp prots))
                 (set! tmp (append tmp (node-info node)))))
             )
-          (set! tmp (append tmp (pathway-gene-interactors node (GeneNode gene))))
+          (if (= biogrid 1)  
+            (set! tmp (append tmp (pathway-gene-interactors node))))
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
           )
@@ -128,7 +130,6 @@
             tmp
           )
         )
-
       )    
       pw)))
 

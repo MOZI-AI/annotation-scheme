@@ -39,7 +39,6 @@
 (define-public nodes (make-parameter '()))
 (define-public edges (make-parameter '()))
 (define-public atoms (make-parameter '()))
-(define-public genes (make-parameter '()))
 (define-public biogrid-genes (make-parameter '()))
 (define-public biogrid-pairs (make-parameter '()))
 (define-public annotation (make-parameter ""))
@@ -348,5 +347,6 @@
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
 (define-public (flatten x)
   (cond ((null? x) '())
+        ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
         (else (list x))))

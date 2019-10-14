@@ -66,11 +66,10 @@ atomspace."
   (map GeneNode gene-list))
 
 
-(define-public (annotate-genes gene-list file-name annts-fns)
+(define-public (annotate-genes file-name annts-fns)
   (parameterize ( (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
-                  (genes gene-list)
                   (biogrid-genes '())
                   (biogrid-pairs '())
                   (annotation "")

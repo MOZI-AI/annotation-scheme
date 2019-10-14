@@ -40,7 +40,6 @@
 (define-public nodes (make-parameter '()))
 (define-public edges (make-parameter '()))
 (define-public atoms (make-parameter '()))
-(define-public genes (make-parameter '()))
 (define-public biogrid-genes (make-parameter '()))
 (define-public biogrid-pairs (make-parameter '()))
 (define-public annotation (make-parameter ""))

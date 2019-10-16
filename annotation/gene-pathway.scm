@@ -26,11 +26,11 @@
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
       #:use-module (annotation parser)
-      #:use-module (ice-9 threads)
       #:export (gene-pathway-annotation)
 )
-;; (list "cellular_component molecular_function biological_process" parent)
-(define* (gene-pathway-annotation gene_nodes pathway prot small_mol #:optional (namespace "") (parents 0)  #:key (biogrid 1) (id "") )
+
+
+(define* (gene-pathway-annotation gene_nodes #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
     (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 
@@ -40,11 +40,11 @@
       (set! result (append result (node-info (GeneNode gene))))
       (for-each (lambda (pathw)
           (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene prot small_mol go biogrid)))
+              (set! result (append result (smpdb gene include_prot include_sm go biogrid)))
               )
           (if (equal? pathw "reactome")
               (begin
-              (let ([res (reactome gene prot small_mol pwlst go biogrid)])
+              (let ([res (reactome gene include_prot include_sm pwlst go biogrid)])
                 (set! result (append result (car res)))
                 (set! pwlst (append pwlst (cdr res)))
               )))
@@ -54,7 +54,7 @@
     (let (
       [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
     )
-      (write-to-file res id "gene-pathway")
+      (write-to-file res (id) "gene-pathway")
       res
     )
 ))  

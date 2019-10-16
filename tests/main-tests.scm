@@ -12,7 +12,11 @@
 ;;Mock the write-to-file function
 (define (write-to-file result id name) #t)
 
-(test-assert "annotate-genes" (string=? (annotate-genes "Dfaer" (delay (parallel (gene-go-annotation '("IGF1") "biological_process molecular_function cellular_component" 0 #:id "Dfaer")  (biogrid-interaction-annotation (list "IGF1" )  "Proteins" #:id "Dfaer")(gene-pathway-annotation (list "IGF1" )  "reactome"  "False"  "False" #:biogrid 1 #:id "Dfaer"))))))
+(define req "[{\"function_name\": \"gene-pathway-annotation\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"}, {\"filter\": \"include_prot\", \"value\": \"True\"}, {\"filter\": \"include_sm\", \"value\": \"False\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}, {\"function_name\": \"gene-go-annotation\", \"filters\": [{\"filter\": \"namespace\", \"value\": \"biological_process cellular_component molecular_function\"}, {\"filter\": \"parents\", \"value\": \"0\"}]}, {\"function_name\": \"biogrid-interaction-annotation\", \"filters\": [{\"filter\": \"interaction\", \"value\": \"Proteins\"}]}]")
+
+(test-equal "parse-request" 4 (length (parse-request req)))
+
+(test-assert "annotate-genes" (string? (annotate-genes (list "IGF1") "Dfaer" req)))
 
 (clear)
 (test-end "main")

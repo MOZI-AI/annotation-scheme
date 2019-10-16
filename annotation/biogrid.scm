@@ -25,10 +25,9 @@
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-	#:use-module (ice-9 threads)
-		#:export (biogrid-interaction-annotation)
+    #:export (biogrid-interaction-annotation)
 )
-(define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0) #:key (id ""))
+(define* (biogrid-interaction-annotation gene-nodes #:key (interaction "Proteins") (namespace "") (parents 0))
   (let ([result '()]
         [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])
@@ -49,7 +48,7 @@
 	 (let (
     	[res (ListLink (ConceptNode "biogrid-interaction-annotation") (ListLink result))]
   		)
-    	(write-to-file res id "biogrid")
+    	(write-to-file res (id) "biogrid")
 		res
   	)
 ))

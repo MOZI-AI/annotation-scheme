@@ -33,6 +33,7 @@
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
     #:use-module (rnrs base)
+    #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
 )
 
@@ -68,7 +69,7 @@ atomspace."
 
 (define-public (parse-request req)
     (let (
-        (table (json-string->scm req))
+        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
       (append (list (lambda () (gene-info (genes)))) (map (lambda (ht) 
     (let* (

@@ -649,7 +649,9 @@
                                     ) 
                     )  (list gene-a gene-b))) ]
                   [interaction (if (= 1 (string->number (cog-name prot))) 
-                      (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output)
+                      (ListLink
+                        (build-interaction gene-a gene-b output)
+                        (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output))
                       (build-interaction gene-a gene-b output))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
                   [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]

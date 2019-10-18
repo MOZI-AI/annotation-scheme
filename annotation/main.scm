@@ -67,31 +67,28 @@ atomspace."
   (map GeneNode gene-list))
 
 
-(define-public (parse-request req)
+(define-public (parse-request gene-list req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (append (list (lambda () (gene-info (genes)))) (map (lambda (ht) 
+      (append (list (lambda () (gene-info gene-list))) (map (lambda (ht) 
     (let* (
-        (func (hash-ref ht "function_name"))
+        (func-name (string->symbol (hash-ref ht "function_name")))
+        (func (variable-ref (module-variable (current-module) func-name)))
         (filters (hash-ref ht "filters"))
-        (args  (string-join (flatten (map (lambda (f)
-         (list (string-append "#:" (hash-ref f "filter"))  
+        (args  (flatten (map (lambda (f)
+         (list (eval-string (string-append "#:" (hash-ref f "filter"))) 
             (if (string->number (hash-ref f "value"))
+                (string->number (hash-ref f "value"))
                 (hash-ref f "value")
-                (string-append "\"" (hash-ref f "value") "\"")
             ))
-         ) filters)) " ")))
-         
-        (lambda () (eval-string (string-append "(" (hash-ref ht "function_name") " (genes) " args ")")))
-    )) table))
-    
-  )
+         ) filters))))
+        (lambda () (apply func gene-list args))
+    )) table)) )
 )
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ( (id file-name)
-                  (genes genes-list)
                   (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
@@ -101,7 +98,7 @@ atomspace."
                   (prev-annotation "")
               )
       (let* (
-        [fns (parse-request request)]
+        [fns (parse-request genes-list request)]
         [result (par-map (lambda (x) (x)) fns)]
         )
          (scm->json-string (atomese-parser (format #f "~a" result)))

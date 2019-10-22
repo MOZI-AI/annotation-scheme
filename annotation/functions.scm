@@ -649,7 +649,9 @@
                                     ) 
                     )  (list gene-a gene-b))) ]
                   [interaction (if (= 1 (string->number (cog-name prot))) 
-                      (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output)
+                      (ListLink
+                        (build-interaction gene-a gene-b output)
+                        (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output))
                       (build-interaction gene-a gene-b output))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
                   [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
@@ -669,9 +671,11 @@
                               (ListLink
                                   interaction
                                   (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
+                                  (node-info (GeneNode a))
                                   (node-info (find-protein-form (GeneNode a)))
                                   (locate-node  (find-protein-form (GeneNode a)))
                                   (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) (find-protein-form (GeneNode b))))
+                                  (node-info (GeneNode b))
                                   (node-info (find-protein-form (GeneNode b)))
                                   (locate-node  (find-protein-form (GeneNode b)))
                               )
@@ -699,6 +703,7 @@
                             (ListLink
                                 interaction
                                 (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
+                                (node-info (GeneNode a))
                                 (node-info (find-protein-form (GeneNode a)))
                                 (locate-node  (find-protein-form (GeneNode a))))
                             (ListLink

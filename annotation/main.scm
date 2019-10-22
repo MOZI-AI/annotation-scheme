@@ -31,6 +31,7 @@
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
     #:use-module (rnrs base)
+    #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
 )
 
@@ -44,7 +45,7 @@ atomspace."
       (() "0")
       (_ (string-append "1:" (string-join unknown ","))))))
 
-(define-public (gene-info genes id)
+(define-public (gene-info genes)
   "Add the name and description of gene nodes to the given list of GENES."
   (let* ((info
          (map (lambda (gene)
@@ -54,7 +55,7 @@ atomspace."
               
         (res (ListLink (ConceptNode "main") info))     
         )
-        (write-to-file res id "main")
+        (write-to-file res (id) "main")
         res
   )
 )
@@ -64,8 +65,29 @@ atomspace."
   (map GeneNode gene-list))
 
 
-(define-public (annotate-genes file-name annts-fns)
-  (parameterize ( (nodes '()) 
+(define-public (parse-request gene-list req)
+    (let (
+        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
+    )
+      (append (list (lambda () (gene-info gene-list))) (map (lambda (ht) 
+    (let* (
+        (func-name (string->symbol (hash-ref ht "function_name")))
+        (func (variable-ref (module-variable (current-module) func-name)))
+        (filters (hash-ref ht "filters"))
+        (args  (flatten (map (lambda (f)
+         (list (eval-string (string-append "#:" (hash-ref f "filter"))) 
+            (if (string->number (hash-ref f "value"))
+                (string->number (hash-ref f "value"))
+                (hash-ref f "value")
+            ))
+         ) filters))))
+        (lambda () (apply func gene-list args))
+    )) table)) )
+)
+
+(define-public (annotate-genes genes-list file-name request)
+  (parameterize ( (id file-name)
+                  (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
                   (biogrid-genes '())
@@ -73,8 +95,9 @@ atomspace."
                   (annotation "")
                   (prev-annotation "")
               )
-      (let-values (
-        [result (force annts-fns)]
+      (let* (
+        [fns (parse-request genes-list request)]
+        [result (par-map (lambda (x) (x)) fns)]
         )
          #t
       )

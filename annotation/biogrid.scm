@@ -27,15 +27,14 @@
 	#:use-module (ice-9 threads)
 	#:export (biogrid-interaction-annotation)
 )
-(define* (biogrid-interaction-annotation gene-nodes interaction #:optional (namespace "") (parents 0) #:key (id ""))
+(define* (biogrid-interaction-annotation gene-nodes #:key (interaction "Proteins") (namespace "") (parents 0))
   (let ([result '()]
         [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])
 	
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-			(set! result (append result (match-gene-interactors (GeneNode gene) 0 go) 
-				(match-gene-interactors (GeneNode gene)  1 go) (find-output-interactors (GeneNode gene) 1 go)))
+			(set! result (append result (match-gene-interactors (GeneNode gene) 1 go) (find-output-interactors (GeneNode gene) 1 go)))
 		)
 
 		(if (equal? interaction "Genes") 
@@ -48,7 +47,7 @@
 	 (let (
     	[res (ListLink (ConceptNode "biogrid-interaction-annotation") (ListLink result))]
   		)
-    	(write-to-file res id "biogrid")
+    	(write-to-file res (id) "biogrid")
 		res
   	)
 ))

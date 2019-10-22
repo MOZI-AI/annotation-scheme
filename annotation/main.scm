@@ -98,8 +98,8 @@ atomspace."
               )
       (let* (
         [fns (parse-request genes-list request)]
-        [(par-for-each (lambda (x) (x)) fns)]
         )
+        (par-for-each (lambda (x) (x)) fns)
          #t
       )
   )

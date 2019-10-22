@@ -33,6 +33,7 @@
     #:use-module (rnrs base)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
+    (use-modules (ice-9 threads))
 )
 
 (define-public (find-genes gene-list)

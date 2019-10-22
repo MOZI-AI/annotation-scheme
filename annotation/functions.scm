@@ -671,9 +671,11 @@
                               (ListLink
                                   interaction
                                   (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
+                                  (node-info (GeneNode a))
                                   (node-info (find-protein-form (GeneNode a)))
                                   (locate-node  (find-protein-form (GeneNode a)))
                                   (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) (find-protein-form (GeneNode b))))
+                                  (node-info (GeneNode b))
                                   (node-info (find-protein-form (GeneNode b)))
                                   (locate-node  (find-protein-form (GeneNode b)))
                               )
@@ -701,6 +703,7 @@
                             (ListLink
                                 interaction
                                 (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
+                                (node-info (GeneNode a))
                                 (node-info (find-protein-form (GeneNode a)))
                                 (locate-node  (find-protein-form (GeneNode a))))
                             (ListLink

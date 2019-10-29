@@ -45,7 +45,16 @@ atomspace."
                          gene-list)))
     (match unknown
       (() "0")
-      (_ (string-append "1:" (string-join unknown ","))))))
+      (_ 
+        (let (
+          (suggestions (flatten (map find-similar-gene unknown)))
+        )
+          (if (null? suggestions)
+            (string-append "1:" (string-join unknown ","))
+            (string-append "1:" (string-join unknown ",") "\nHere are some suggestions " (string-join suggestions ","))
+          )
+        )
+      ))))
 
 (define-public (gene-info genes)
   "Add the name and description of gene nodes to the given list of GENES."

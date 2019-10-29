@@ -18,5 +18,7 @@
 
 (test-assert "annotate-genes" (string? (annotate-genes (list "IGF1") "Dfaer" req)))
 
+(test-equal "find-genes" "1:" (substring (find-genes (list "IGF")) 0 2))
+
 (clear)
 (test-end "main")

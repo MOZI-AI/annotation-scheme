@@ -35,6 +35,7 @@
     #:use-module (rnrs base)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
+    #:use-module (srfi srfi-1)
 )
 
 (define-public (find-genes gene-list)
@@ -46,8 +47,10 @@ atomspace."
     (match unknown
       (() "0")
       (_ 
-        (let (
-          (suggestions (flatten (map (lambda (u) (cog-name (find-similar-gene u))) unknown)))
+        (let* (
+          (res (flatten (map find-similar-gene unknown)))
+          (suggestions (if (> (length res) 5) (map (lambda (u) (cog-name u)) (take res 5)) (map (lambda (u) (cog-name u)) res))
+             )
         )
           (if (null? suggestions)
             (string-append "1:" (string-join unknown ","))

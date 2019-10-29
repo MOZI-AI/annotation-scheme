@@ -199,26 +199,55 @@
     )
 )
 
+(define-public (filter-genes input-gene gene-name)
+  (if (regexp-match? (string-match (string-append (cog-name input-gene) ".+$") (cog-name gene-name)))
+      (stv 1 1)
+      (stv 0 0) 
+  )
+)
+
+(define-public (find-similar-gene gene-name)
+    (cog-outgoing-set 
+      (cog-execute! (BindLink
+        (TypedVariable (Variable "%x") (Type "GeneNode"))
+        (EvaluationLink
+          (GroundedPredicateNode "scm: filter-genes")
+          (ListLink
+              (Gene gene-name)
+              (VariableNode "%x")      
+          )
+        )
+        (VariableNode "%x")
+      ))
+    
+    )
+)
+
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))
 )
 
 (define-public (write-to-file result id name)
- (let*
-	(
-    [path (string-append "/root/result/" id)]
-		[file-name (string-append path "/" name ".scm")]
-	)
-  (if (file-exists? path)
-    (call-with-output-file file-name
-  	(lambda (p)
-		(begin
-			(write result p)
-		)
-	  )
-	  )
-  )
- )
+  (catch #t (lambda ()
+    (let*
+        (
+          [path (string-append "/root/result/" id)]
+          [file-name (string-append path "/" name ".scm")]
+        )
+        (if (not (file-exists? path))
+            (mkdir path)
+        )
+        (call-with-output-file file-name
+            (lambda (p)
+            (begin
+              (write result p)
+            ))
+          )
+  ))  
+  (lambda (key . parameters)
+      (format (current-error-port) "Cannot write scheme result files. ~a: ~a\n" key parameters)
+      #f
+    ))
 )
 
 (define-public locate-node
@@ -241,7 +270,8 @@
           (ListLink
             node
             (VariableNode "$go")
-          )))
+          ))
+          )
       ))
       ])
       (if (null? loc)

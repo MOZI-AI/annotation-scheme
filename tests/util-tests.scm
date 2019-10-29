@@ -9,7 +9,7 @@
 )
 
 (test-begin "util")
-
+(primitive-load "tests/sample_dataset.scm")
 (define entrez-link (EvaluationLink
         (PredicateNode "has_entrez_id")
         (ListLink 
@@ -24,6 +24,8 @@
 (test-assert "build-desc-prot"  (string=? "https://www.uniprot.org/uniprot/P4354" (build-desc-url "Uniprot:P4354")))
 
 (test-assert "build-desc-gene"  (string=? "https://www.ncbi.nlm.nih.gov/gene/3479" (build-desc-url "IGF1")))
+
+(test-assert "similar-genes" (= 11 (length (find-similar-gene "IGF"))))
 
 (clear)
 

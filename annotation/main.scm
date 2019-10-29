@@ -47,7 +47,7 @@ atomspace."
       (() "0")
       (_ 
         (let (
-          (suggestions (flatten (map find-similar-gene unknown)))
+          (suggestions (flatten (map (lambda (u) (cog-name (find-similar-gene u))) unknown)))
         )
           (if (null? suggestions)
             (string-append "1:" (string-join unknown ","))

@@ -59,7 +59,7 @@ atomspace."
         )
       ))))
 
-(define-public (gene-info genes)
+(define-public (gene-info genes file-name)
   "Add the name and description of gene nodes to the given list of GENES."
   (let* ((info
          (map (lambda (gene)
@@ -69,7 +69,7 @@ atomspace."
               
         (res (ListLink (ConceptNode "main") info))     
         )
-        (write-to-file res (id) "main")
+        (write-to-file res file-name "main")
         res
   )
 )
@@ -79,11 +79,11 @@ atomspace."
   (map GeneNode gene-list))
 
 
-(define-public (parse-request gene-list req)
+(define-public (parse-request gene-list file-name req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (append (list (lambda () (gene-info gene-list))) (map (lambda (ht) 
+      (append (list (lambda () (gene-info gene-list file-name))) (map (lambda (ht) 
     (let* (
         (func-name (string->symbol (hash-ref ht "function_name")))
         (func (variable-ref (module-variable (current-module) func-name)))
@@ -95,13 +95,12 @@ atomspace."
                 (hash-ref f "value")
             ))
          ) filters))))
-        (lambda () (apply func gene-list args))
+        (lambda () (apply func gene-list (append (list file-name) args)))
     )) table)) )
 )
 
 (define-public (annotate-genes genes-list file-name request)
-  (parameterize ( (id file-name)
-                  (nodes '()) 
+  (parameterize ( (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
                   (biogrid-genes '())
@@ -110,7 +109,7 @@ atomspace."
                   (prev-annotation "")
               )
       (let* (
-        [fns (parse-request genes-list request)]
+        [fns (parse-request genes-list file-name request)]
         [result (par-map (lambda (x) (x)) fns)]
         )
          (scm->json-string (atomese-parser (format #f "~a" result)))

@@ -34,6 +34,7 @@
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
      #:use-module (ice-9 threads)
+    #:use-module (srfi srfi-1)
 )
 
 (define-public (find-genes gene-list)
@@ -44,7 +45,18 @@ atomspace."
                          gene-list)))
     (match unknown
       (() "0")
-      (_ (string-append "1:" (string-join unknown ","))))))
+      (_ 
+        (let* (
+          (res (flatten (map find-similar-gene unknown)))
+          (suggestions (if (> (length res) 5) (map (lambda (u) (cog-name u)) (take res 5)) (map (lambda (u) (cog-name u)) res))
+             )
+        )
+          (if (null? suggestions)
+            (string-append "1:" (string-join unknown ","))
+            (string-append "1:" (string-join unknown ",") "\nHere are some suggestions " (string-join suggestions ","))
+          )
+        )
+      ))))
 
 (define-public (gene-info genes)
   "Add the name and description of gene nodes to the given list of GENES."

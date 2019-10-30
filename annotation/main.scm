@@ -35,6 +35,7 @@
     #:use-module (ice-9 futures)
      #:use-module (ice-9 threads)
     #:use-module (srfi srfi-1)
+    #:use-module (json)
 )
 
 (define-public (find-genes gene-list)

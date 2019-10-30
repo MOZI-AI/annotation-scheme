@@ -230,7 +230,8 @@
   (catch #t (lambda ()
     (let*
         (
-          [path (string-append "/root/result/" id)]
+          [env-path (getenv "RESULT_DIR")]
+          [path (if (not env-path) (string-append "/root/result/" id) env-path)]
           [file-name (string-append path "/" name ".scm")]
         )
         (if (not (file-exists? path))

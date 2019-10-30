@@ -79,7 +79,7 @@ atomspace."
   (map GeneNode gene-list))
 
 
-(define-public (parse-request gene-list req)
+(define-public (parse-request gene-list file-name req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
@@ -95,13 +95,12 @@ atomspace."
                 (hash-ref f "value")
             ))
          ) filters))))
-        (lambda () (apply func gene-list args))
+        (lambda () (apply func gene-list (append (list file-name) args)))
     )) table)) )
 )
 
 (define-public (annotate-genes genes-list file-name request)
-  (parameterize ( (id file-name)
-                  (nodes '()) 
+  (parameterize ( (nodes '()) 
                   (edges '()) 
                   (atoms '()) 
                   (biogrid-genes '())
@@ -110,7 +109,7 @@ atomspace."
                   (prev-annotation "")
               )
       (let* (
-        [fns (parse-request genes-list request)]
+        [fns (parse-request genes-list file-name request)]
         [result (par-map (lambda (x) (x)) fns)]
         )
          (scm->json-string (atomese-parser (format #f "~a" result)))

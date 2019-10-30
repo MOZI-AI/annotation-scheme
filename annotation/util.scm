@@ -37,7 +37,6 @@
 )
 
 ;;Define the parameters needed for parsing and GGI
-(define-public id (make-parameter ""))
 (define-public nodes (make-parameter '()))
 (define-public edges (make-parameter '()))
 (define-public atoms (make-parameter '()))

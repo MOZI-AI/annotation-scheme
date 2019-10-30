@@ -30,7 +30,7 @@
 )
 
 
-(define* (gene-pathway-annotation gene_nodes #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
+(define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
     (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink) 
@@ -54,7 +54,7 @@
     (let (
       [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
     )
-      (write-to-file res (id) "gene-pathway")
+      (write-to-file res file-name "gene-pathway")
       res
     )
 ))  

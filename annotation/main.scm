@@ -59,7 +59,7 @@ atomspace."
         )
       ))))
 
-(define-public (gene-info genes)
+(define-public (gene-info genes file-name)
   "Add the name and description of gene nodes to the given list of GENES."
   (let* ((info
          (map (lambda (gene)
@@ -69,7 +69,7 @@ atomspace."
               
         (res (ListLink (ConceptNode "main") info))     
         )
-        (write-to-file res (id) "main")
+        (write-to-file res file-name "main")
         res
   )
 )
@@ -83,7 +83,7 @@ atomspace."
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (append (list (lambda () (gene-info gene-list))) (map (lambda (ht) 
+      (append (list (lambda () (gene-info gene-list file-name))) (map (lambda (ht) 
     (let* (
         (func-name (string->symbol (hash-ref ht "function_name")))
         (func (variable-ref (module-variable (current-module) func-name)))

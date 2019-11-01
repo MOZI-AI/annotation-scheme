@@ -28,7 +28,7 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes #:key (namespace "biological_process molecular_function cellular_component") (parents 0))
+(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0))
     (let (
         [result (flatten (map (lambda (gene) 
           (find-go-term gene  (string-split namespace #\ ) parents)) gene-nodes))]
@@ -36,7 +36,7 @@
     (let (
     	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]
   		)
-    	(write-to-file res (id) "gene-go")
+    	(write-to-file res file-name "gene-go")
       res
   	)
   )

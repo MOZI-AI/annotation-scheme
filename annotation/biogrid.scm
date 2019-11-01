@@ -27,7 +27,7 @@
 	#:use-module (ice-9 threads)
 	#:export (biogrid-interaction-annotation)
 )
-(define* (biogrid-interaction-annotation gene-nodes #:key (interaction "Proteins") (namespace "") (parents 0))
+(define* (biogrid-interaction-annotation gene-nodes file-name #:key (interaction "Proteins") (namespace "") (parents 0))
   (let ([result '()]
         [go (if (string=? namespace "") (ListLink) 
                 (ListLink (ConceptNode namespace) (Number parents)))])
@@ -47,7 +47,7 @@
 	 (let (
     	[res (ListLink (ConceptNode "biogrid-interaction-annotation") (ListLink result))]
   		)
-    	(write-to-file res (id) "biogrid")
+    	(write-to-file res file-name "biogrid")
 		res
   	)
 ))

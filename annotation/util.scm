@@ -36,7 +36,6 @@
 )
 
 ;;Define the parameters needed for parsing and GGI
-(define-public id (make-parameter ""))
 (define-public nodes (make-parameter '()))
 (define-public edges (make-parameter '()))
 (define-public atoms (make-parameter '()))
@@ -230,7 +229,8 @@
   (catch #t (lambda ()
     (let*
         (
-          [path (string-append "/root/result/" id)]
+          [env-path (getenv "RESULT_DIR")]
+          [path (if (not env-path) (string-append "/root/result/" id) (string-append env-path "/" id))]
           [file-name (string-append path "/" name ".scm")]
         )
         (if (not (file-exists? path))
@@ -238,9 +238,8 @@
         )
         (call-with-output-file file-name
             (lambda (p)
-            (begin
               (write result p)
-            ))
+            )
           )
   ))  
   (lambda (key . parameters)

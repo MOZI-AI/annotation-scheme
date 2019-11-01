@@ -109,7 +109,7 @@ atomspace."
                   (prev-annotation "")
               )
       (let* (
-        [fns (parse-request genes-list request)]
+        [fns (parse-request genes-list file-name request)]
         )
         (par-for-each (lambda (x) (x)) fns)
          #t

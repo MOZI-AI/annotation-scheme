@@ -49,7 +49,8 @@
     (call/cc (lambda (k)
             (let* ()
                 (cond ([or (string=? predicate "expresses")
-                        (string=? predicate "interacts_with")]
+                        (string=? predicate "interacts_with") 
+                        (string=? predicate "inferred_interaction")]
                             (begin  
                                 (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
                                 '()                

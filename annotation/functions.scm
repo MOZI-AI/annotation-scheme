@@ -100,7 +100,7 @@
 
 ;;Add information for GO nodes
 (define-public (add-go-info child-atom parent-atom)
-  (if (and (equal? (cog-type child-atom) 'GeneNode)
+  (if (and (or (equal? (cog-type child-atom) 'GeneNode) (equal? (cog-type child-atom) 'MoleculeNode))
       (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO"))
     (ListLink  
       (MemberLink
@@ -126,7 +126,7 @@
 (define-public find-go-term 
   (lambda (g namespaces p)
       (let (
-        [res (find-memberln (GeneNode g) namespaces)]   
+        [res (find-memberln g namespaces)]   
       )
       (define parents (flatten (let loop (
         [i p]
@@ -141,10 +141,38 @@
       )
       )))
        (delete-duplicates parents)
-       (append (node-info (GeneNode g)) parents)
+       (append (node-info g) parents)
     )
 ))
 
+;; Finds go terms for a proteins coded by the given gene
+(define-public find-proteins-goterm
+  (lambda (gene namespace parent)
+  (let ([prot (find-protein-form gene)]
+       [annotation '()])
+  (if (equal? (find-memberln prot namespace) '())
+    (begin
+      (let ([goterms (flatten (map (lambda (ns)
+        (cog-outgoing-set (cog-execute! (BindLink
+        (TypedVariable (VariableNode "$g") (Type 'ConceptNode))
+        (AndLink (MemberLink gene (VariableNode "$g"))
+          (EvaluationLink (PredicateNode "GO_namespace") (ListLink (VariableNode "$g") (ConceptNode ns)))
+        )
+        (VariableNode "$g"))))
+      ) namespace))])
+      (set! annotation (map (lambda (go)
+            (MemberLink (stv 0.0 0.0) prot go)
+      )goterms))
+    ))
+    (set! annotation (find-go-term prot namespace parent))
+  )
+  (ListLink
+    annotation
+    (node-info prot)
+    (EvaluationLink (PredicateNode "expresses") (ListLink gene prot))
+  )
+  )
+))
 ;; Add details about the GO term
 (define (go-info go)
   (list
@@ -650,9 +678,9 @@
                     )  (list gene-a gene-b))) ]
                   [interaction (if (= 1 (string->number (cog-name prot))) 
                       (ListLink
-                        (build-interaction gene-a gene-b output)
-                        (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output))
-                      (build-interaction gene-a gene-b output))]
+                        (build-interaction gene-a gene-b output "interacts_with")
+                        (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output "inferred_interaction"))
+                      (build-interaction gene-a gene-b output "interacts_with"))]
                   [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
                   [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
                   [pairs (find (lambda (x) (equal? x (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
@@ -735,17 +763,17 @@
     
 ))
 
-(define-public (build-interaction interactor-1 interactor-2 pubmed)
+(define-public (build-interaction interactor-1 interactor-2 pubmed interaction_pred)
   (if (or (equal? (cog-type interactor-1) 'ListLink) (equal? (cog-type interactor-2) 'ListLink))
     '()
     (if (null? pubmed) 
       (EvaluationLink 
-        (PredicateNode "interacts_with") 
+        (PredicateNode interaction_pred) 
         (ListLink interactor-1 interactor-2))
       (EvaluationLink
         (PredicateNode "has_pubmedID")
         (ListLink (EvaluationLink 
-                  (PredicateNode "interacts_with") 
+                  (PredicateNode interaction_pred) 
                   (ListLink interactor-1 interactor-2))  
                 pubmed))
     )

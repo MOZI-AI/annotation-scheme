@@ -29,10 +29,10 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein 0))
+(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein "True"))
     (let (
         [result (flatten (map (lambda (gene) 
-          (if (= protein 1)
+          (if (equal? protein "True")
             (ListLink
               (find-go-term (GeneNode gene) (string-split namespace #\ ) parents)
               (find-proteins-goterm (GeneNode gene) (string-split namespace #\ ) parents)

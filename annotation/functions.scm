@@ -819,7 +819,7 @@
 )
 
 ;;                           
-(define (find-pubmed-id gene-a gene-b)
+(define-public (find-pubmed-id gene-a gene-b)
  (let ([pub (cog-outgoing-set (cog-execute!
      (GetLink
        (VariableNode "$pub")

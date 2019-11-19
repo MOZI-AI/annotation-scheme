@@ -45,7 +45,7 @@ atomspace."
                            (null? (cog-node 'GeneNode gene)))
                          gene-list)))
     (match unknown
-      (() "0")
+      (() (check-outdate-genes gene-list))
       (_ 
         (let* (
           (res (flatten (map find-similar-gene unknown)))

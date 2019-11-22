@@ -30,5 +30,7 @@
 
 (test-equal "find-genes" "0" (find-genes (list "IGF1" "TF")))
 
+(test-equal "delete-genes" #t (cog-delete-recursive (GeneNode "IGF")))
+
 (clear)
 (test-end "main")

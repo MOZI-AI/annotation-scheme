@@ -35,12 +35,19 @@
             )
             (DeleteLink
                 (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                     (Variable "$g")
-                     (Variable "$ggg")
-                  )
-               )
+                        (PredicateNode "interacts_with")
+                        (ListLink
+                            (Variable "$g")
+                            (Variable "$ggg")
+                        )
+                )
+                (EvaluationLink
+                        (PredicateNode "interacts_with")
+                        (ListLink
+                            (Variable "$ggg")
+                            (Variable "$g")
+                        )
+                )
             )
         )
     )

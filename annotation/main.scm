@@ -45,13 +45,14 @@ atomspace."
                            (null? (cog-node 'GeneNode gene)))
                          gene-list)))
     (match unknown
-      (() "0")
+      (() (check-outdate-genes gene-list))
       (_ 
         (let* (
           (res (flatten (map find-similar-gene unknown)))
           (suggestions (if (> (length res) 5) (map (lambda (u) (cog-name u)) (take res 5)) (map (lambda (u) (cog-name u)) res))
              )
         )
+        (map (lambda (g) (cog-delete-recursive (GeneNode g))) gene-list)
           (if (null? suggestions)
             (string-append "1:" (string-join unknown ","))
             (string-append "1:" (string-join unknown ",") "\nHere are some suggestions " (string-join suggestions ","))

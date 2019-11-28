@@ -222,6 +222,36 @@
     )
 )
 
+(define (find-current-symbol gene-list)
+  (let ((current (map (lambda (gene)  
+    (let ((cur (cog-outgoing-set 
+      (cog-execute! (BindLink
+        (TypedVariable (Variable "$g") (Type "GeneNode"))
+        (EvaluationLink
+          (PredicateNode "has_current_symbol")
+          (ListLink
+              (GeneNode gene)
+              (VariableNode "$g")      
+          )
+        )
+        (VariableNode "$g")
+      ))
+    )))
+    (if (equal? cur '()) '() (string-append gene "=>" (cog-name (car cur))))
+    )
+  )gene-list)))
+  (flatten current)  
+))
+
+(define-public (check-outdate-genes gene-list) 
+  (let ([symbol (find-current-symbol gene-list)])
+    (if (equal? symbol '())
+      "0"
+      (string-append "1:" "The following gene symbols are outdated, here are the current " (string-join symbol ","))
+    )
+  )
+)
+
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))
 )

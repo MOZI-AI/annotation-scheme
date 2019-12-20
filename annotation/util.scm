@@ -64,9 +64,12 @@
 ;; Find node name and description
 
 (define-public (node-info node)
+  (if (cog-node? node)
     (list
       (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
     )
+    (list (ListLink))
+  )
 )
 
 (define (node-name node)
@@ -133,13 +136,16 @@
 
 (define-public (build-desc-url node)
     (cond 
-        ((string-contains node "ChEBI") (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split node #\:))))
-        ((string-contains node "Uniprot") (string-append "https://www.uniprot.org/uniprot/" (cadr (string-split node #\:))))
-        ((string-contains node "GO") (string-append "http://amigo.geneontology.org/amigo/term/" node))
-        ((string-contains node "SMP") (string-append "http://smpdb.ca/view/" node))
-        ((string-contains node "R-HSA")
+        ((string-prefix? "ChEBI" node) (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split node #\:))))
+        ((string-prefix? "Uniprot" node) (string-append "https://www.uniprot.org/uniprot/" (cadr (string-split node #\:))))
+        ((string-prefix? "GO" node) (string-append "http://amigo.geneontology.org/amigo/term/" node))
+        ((string-prefix? "SMP" node) (string-append "http://smpdb.ca/view/" node))
+        ((string-prefix? "R-HSA" node)
           (string-append "http://www.reactome.org/content/detail/" node)
         )
+        ((string-prefix? "ENST" node) (string-append "http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=" node))
+        ((or (string-prefix? "NM_" node) (string-prefix? "NR_" node) (string-prefix? "NP_" node))
+          (string-append "https://www.ncbi.nlm.nih.gov/nuccore/" node))
         (else (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez (GeneNode node))))
     )
 )

@@ -50,7 +50,9 @@
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with") 
-                        (string=? predicate "inferred_interaction")]
+                        (string=? predicate "inferred_interaction")
+                        (string=? predicate "transcribes")
+                        (string=? predicate "translates")]
                             (begin  
                                 (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
                                 '()                

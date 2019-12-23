@@ -696,17 +696,21 @@
                         (begin 
                             (biogrid-genes (append (list a b) (biogrid-genes)))
                             (if (= 1 (string->number (cog-name prot)))
-                              (ListLink
+                              (let ([coding-prot-a (find-protein-form (GeneNode a))]
+                                    [coding-prot-b (find-protein-form (GeneNode b))])
+                              (if (or (equal? coding-prot-a (ListLink)) (equal? coding-prot-b (ListLink)))
+                                (ListLink)
+                                (ListLink
                                   interaction
-                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
+                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) coding-prot-a))
                                   (node-info (GeneNode a))
-                                  (node-info (find-protein-form (GeneNode a)))
-                                  (locate-node  (find-protein-form (GeneNode a)))
-                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) (find-protein-form (GeneNode b))))
+                                  (node-info coding-prot-a)
+                                  (locate-node coding-prot-a)
+                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) coding-prot-b))
                                   (node-info (GeneNode b))
-                                  (node-info (find-protein-form (GeneNode b)))
-                                  (locate-node  (find-protein-form (GeneNode b)))
-                              )
+                                  (node-info coding-prot-b)
+                                  (locate-node coding-prot-a))
+                              ))
                             (ListLink
                                 interaction
                                 (node-info (GeneNode a))
@@ -728,12 +732,16 @@
                         (begin 
                             (biogrid-genes (append (list a) (biogrid-genes)))
                             (if (= 1 (string->number (cog-name prot)))
-                            (ListLink
-                                interaction
-                                (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) (find-protein-form (GeneNode a))))
-                                (node-info (GeneNode a))
-                                (node-info (find-protein-form (GeneNode a)))
-                                (locate-node  (find-protein-form (GeneNode a))))
+                              (let ([coding-prot (find-protein-form (GeneNode a))])
+                              (if (equal? coding-prot (ListLink))
+                                (ListLink)
+                                (ListLink
+                                  interaction
+                                  (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) coding-prot))
+                                  (node-info (GeneNode a))
+                                  (node-info coding-prot)
+                                  (locate-node coding-prot))
+                              ))
                             (ListLink
                                 interaction
                                 (node-info (GeneNode a))
@@ -857,3 +865,82 @@
    ))
    pub
 ))
+(define-public (find-crna gene)
+  (cog-execute! (BindLink
+  (VariableList
+    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
+    (TypedVariable (Variable "$b") (TypeNode 'MoleculeNode)))
+    (AndLink
+      (EvaluationLink
+        (PredicateNode "transcribes")
+        (ListLink
+          gene
+          (VariableNode "$a")
+        )
+      )
+      (EvaluationLink
+        (PredicateNode "translates")
+        (ListLink
+          (VariableNode "$a")
+          (VariableNode "$b")
+        )
+      )
+    )
+    (ExecutionOutputLink
+      (GroundedSchemaNode "scm: filternc")
+        (ListLink 
+          gene
+          (VariableNode "$a")
+          (VariableNode "$b"))
+    )
+))
+)
+
+(define-public (find-ncrna gene)
+  (cog-execute! (BindLink
+    (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
+      (EvaluationLink
+        (PredicateNode "transcribes")
+        (ListLink
+          gene
+          (VariableNode "$a")
+        )
+      )
+      (ExecutionOutputLink
+        (GroundedSchemaNode "scm: filternc")
+		      (ListLink 
+            gene
+            (VariableNode "$a")
+            (ListLink))
+		  )
+))
+)
+
+;; filter non-coding RNA
+(define-public (filternc gene rna prot)
+  (if (equal? prot (ListLink))
+      (ListLink
+            (EvaluationLink
+              (PredicateNode "transcribes")
+              (ListLink
+                gene
+                rna)
+            )
+            (node-info rna)
+      )
+      (ListLink
+        (EvaluationLink
+          (PredicateNode "transcribes")
+            (ListLink
+                gene
+                rna))
+        (EvaluationLink
+          (PredicateNode "translates")
+            (ListLink
+                rna
+                prot))
+        (node-info rna)
+        (node-info prot)
+      )
+  )
+)

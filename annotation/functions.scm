@@ -796,14 +796,14 @@
                                           (equal? (cons (cog-name var2) (cog-name var1)) x)
                                       )
         
-                  ) (biogrid-pairs))]
+                  ) (biogrid-pairs-pathway))]
           )
           (if pairs
             (k)
             (let (
               [output (find-pubmed-id var1 var2)]
               )
-                (biogrid-pairs (append (biogrid-pairs) (list (cons (cog-name var1) (cog-name var2)))))
+                (biogrid-pairs-pathway (append (biogrid-pairs-pathway) (list (cons (cog-name var1) (cog-name var2)))))
                (if (null? output) 
                 (EvaluationLink 
                   (PredicateNode "interacts_with") 

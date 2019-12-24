@@ -42,6 +42,7 @@
 (define-public atoms (make-parameter '()))
 (define-public biogrid-genes (make-parameter '()))
 (define-public biogrid-pairs (make-parameter '()))
+(define-public biogrid-pairs-pathway (make-parameter '()))
 (define-public annotation (make-parameter ""))
 (define-public prev-annotation (make-parameter ""))
 

@@ -3,7 +3,6 @@
 (debug-enable 'backtrace)
 (read-enable 'positions)
 (use-modules (opencog))
-(use-modules (opencog query))
 (use-modules (opencog exec))
 (use-modules (opencog bioscience))
 (use-modules

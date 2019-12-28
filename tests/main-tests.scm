@@ -4,6 +4,8 @@
 	#:use-module (opencog)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation main)
+	#:use-module (annotation functions)
+	#:use-module (annotation util)
 )
 
 (test-begin "main")

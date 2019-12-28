@@ -13,9 +13,8 @@
 
 
 (test-begin "pathway")
-;;Load modules and test atomspace
-(primitive-load "opencog_deps")
-(primitive-load "tests/sample_dataset.scm")
+;; Load test atomspace
+(primitive-load-path "tests/sample_dataset.scm")
 
 (test-equal "pathway-interactors" 3 (length (pathway-gene-interactors  (ConceptNode "R-HSA-114608"))))
 

@@ -21,19 +21,18 @@
 
 (define-module (annotation util)
 	#:use-module (opencog)
-  #:use-module (opencog query)
-  #:use-module (opencog exec)
-  #:use-module (opencog bioscience)
+	#:use-module (opencog exec)
+	#:use-module (opencog bioscience)
 	#:use-module (json)
-  #:use-module (ice-9 optargs)
-  #:use-module (rnrs base)
-  #:use-module (rnrs exceptions)
-  #:use-module (ice-9 textual-ports)
-  #:use-module (ice-9 regex)
-  #:use-module (srfi srfi-1)
-  #:use-module (ice-9 match)
-  #:export (create-node
-            create-edge)
+	#:use-module (ice-9 optargs)
+;	#:use-module (rnrs base)
+	#:use-module (rnrs exceptions)
+	#:use-module (ice-9 textual-ports)
+	#:use-module (ice-9 regex)
+	#:use-module (srfi srfi-1)
+	#:use-module (ice-9 match)
+	#:export (create-node
+	          create-edge)
 )
 
 ;;Define the parameters needed for parsing and GGI

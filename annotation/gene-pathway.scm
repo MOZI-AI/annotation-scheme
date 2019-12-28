@@ -22,7 +22,6 @@
       #:use-module (annotation functions)
       #:use-module (annotation util)
       #:use-module (opencog)
-      #:use-module (opencog query)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
       #:use-module (annotation parser)
@@ -33,7 +32,7 @@
 (define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
     (let ([result '()]
           [pwlst '()]
-          [go (if (string=? namespace "") (ListLink) 
+          [go (if (string=? namespace "") (ListLink)
                 (ListLink (ConceptNode namespace) (Number parents)))])
 
     (for-each (lambda (gene)
@@ -50,17 +49,17 @@
               )))
           )(string-split pathway #\ ))
     ) gene_nodes)
- 
+
     (let (
       [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
     )
       (write-to-file res file-name "gene-pathway")
       res
     )
-))  
+))
 
 
-;; From SMPDB 
+;; From SMPDB
 
 (define (smpdb gene prot sm go biogrid)
   (let (
@@ -82,7 +81,7 @@
           (if (not (null? prots))
             (set! tmp (append tmp prots))
             (set! tmp (append tmp (node-info node))))))
-      (if (= biogrid 1)  
+      (if (= biogrid 1)
         (set! tmp (append tmp (pathway-gene-interactors node))))
         (if (null? tmp)
           '()
@@ -120,7 +119,7 @@
                 (set! tmp (append tmp prots))
                 (set! tmp (append tmp (node-info node)))))
             )
-          (if (= biogrid 1)  
+          (if (= biogrid 1)
             (set! tmp (append tmp (pathway-gene-interactors node))))
           (if (equal? sm "True")
             (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
@@ -131,11 +130,11 @@
             tmp
           )
         )
-      )    
+      )
       pw)))
 
     (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 1))) 
+    (set! pw (append pw (find-protein (GeneNode gene) 1)))
     )
-      (list (append pw ls) pwlst) 
-  )) 
+      (list (append pw ls) pwlst)
+  ))

@@ -3,7 +3,7 @@
 	#:use-module (ice-9 futures)
 	#:use-module (opencog)
 	#:use-module (opencog bioscience)
-	#:use-module (annotation)
+	#:use-module (annotation main)
 )
 
 (test-begin "main")

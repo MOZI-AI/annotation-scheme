@@ -9,7 +9,7 @@
 )
 
 (test-begin "util")
-(primitive-load "tests/sample_dataset.scm")
+(primitive-load-path "tests/sample_dataset.scm")
 (define entrez-link (EvaluationLink
         (PredicateNode "has_entrez_id")
         (ListLink 

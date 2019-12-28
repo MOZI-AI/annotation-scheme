@@ -1,13 +1,15 @@
 (define-module (tests main)
-    #:use-module (srfi srfi-64)
-    #:use-module (ice-9 futures)
+	#:use-module (srfi srfi-64)
+	#:use-module (ice-9 futures)
+	#:use-module (opencog)
+	#:use-module (opencog bioscience)
+	#:use-module (annotation)
 )
 
 (test-begin "main")
 
-;;Load modules and test atomspace
-(primitive-load "opencog_deps")
-(primitive-load "tests/sample_dataset.scm")
+;; Load test atomspace
+(primitive-load-path "tests/sample_dataset.scm")
 
 ;;Mock the write-to-file function
 (define-public (write-to-file result id name) #t)

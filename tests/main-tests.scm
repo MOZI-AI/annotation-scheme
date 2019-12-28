@@ -26,7 +26,7 @@
 
 (test-equal "protein-goterm" 86 (length (cog-outgoing-set (find-proteins-goterm (GeneNode "IGF1") namespace 0))))
 
-(primitive-load "annotation/pln_rule.scm")
+(primitive-load-path "annotation/pln_rule.scm")
 
 (test-equal "current_vs_prev_symbols" (ListLink) (find-protein-form (GeneNode "NOV")))
 

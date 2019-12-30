@@ -4,11 +4,14 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall])
 
-# GUILE_PKG([2.2])
+GUILE_PKG([3.2 3.0 2.9 2.2])
 GUILE_PROGS
 if test "x$GUILD" = "x"; then
    AC_MSG_ERROR(['guild' binary not found; please check your guile-2.x installation.])
 fi
+
+GUILE_SITE_DIR
+GUILE_SITE_GO_DIR
 
 GUILE_MODULE_AVAILABLE(HAVE_JSON, [(json)])
 if test "x$HAVE_JSON" = "xno"; then

@@ -267,7 +267,7 @@
     (let*
         (
           [env-path (getenv "RESULT_DIR")]
-          [path (if (not env-path) (string-append "/root/result/" id) (string-append env-path "/" id))]
+          [path (if (not env-path) (string-append "/tmp/result/" id) (string-append env-path "/" id))]
           [file-name (string-append path "/" name ".scm")]
         )
         (if (not (file-exists? path))

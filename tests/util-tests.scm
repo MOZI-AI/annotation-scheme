@@ -1,7 +1,6 @@
 (define-module (tests util-test)
     #:use-module (srfi srfi-64)
     #:use-module (opencog)
-    #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation util)

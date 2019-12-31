@@ -49,7 +49,7 @@
     )gene-list)
     ))
     (let (
-    	[res (ListLink (ConceptNode "rna-annotation") (ListLink rna))]
+    	[res (ListLink (ConceptNode "rna-annotation") rna)]
   		)
     	(write-to-file res file-name "mainRNA")
 		res

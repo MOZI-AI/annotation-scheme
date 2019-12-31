@@ -928,7 +928,7 @@
             )
             (node-info rna)
       )
-      (if (equal? (cog-name prot-switch) 1)
+      (if (equal? (cog-name prot-switch) "1")
         (ListLink
           (EvaluationLink
             (PredicateNode "transcribed_to")

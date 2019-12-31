@@ -86,21 +86,21 @@
 (define find-pathway-name
     (lambda(pw)
 			(let
-        ([name '()])
-        (if (string-contains (cog-name pw) "Uniprot:")
-          (set! name 
-          (cog-outgoing-set (cog-execute! (GetLink
-            (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-            (EvaluationLink
-              (PredicateNode "expresses")
-              (ListLink
-                (VariableNode "$a")
-                pw
+        ([name 
+        (if (or (string-contains (cog-name pw) "Uniprot:") (string-prefix? "ENST" (cog-name pw)))
+          (let ([predicate (if (string-prefix? "ENST" (cog-name pw)) "transcribed_to" "expresses")])
+            (cog-outgoing-set (cog-execute! (GetLink
+              (VariableList
+              (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
+              (EvaluationLink
+                (PredicateNode predicate)
+                (ListLink
+                  (VariableNode "$a")
+                  pw
+                )
               )
-            )
-          ))))
-          (set! name 
+            )))
+          )
           (cog-outgoing-set (cog-execute! (GetLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'ConceptNode)))
@@ -110,9 +110,9 @@
                   pw
                   (VariableNode "$a")
                 )
-              )
-            )	
-          ))))
+              )	
+          )))
+        )])
     name
 	))
 )
@@ -144,7 +144,7 @@
           (string-append "http://www.reactome.org/content/detail/" node)
         )
         ((string-prefix? "ENST" node) (string-append "http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=" node))
-        ((or (string-prefix? "NM_" node) (string-prefix? "NR_" node) (string-prefix? "NP_" node))
+        ((or (string-prefix? "NM_" node) (string-prefix? "NR_" node) (string-prefix? "NP_" node) (string-prefix? "YP_" node))
           (string-append "https://www.ncbi.nlm.nih.gov/nuccore/" node))
         (else (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez (GeneNode node))))
     )

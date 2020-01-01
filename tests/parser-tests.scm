@@ -1,14 +1,16 @@
-(define-module (tests parser-test)
-    #:use-module (srfi srfi-64)
-    #:use-module (opencog)
-    #:use-module (opencog exec)
-    #:use-module (opencog bioscience)
-    #:use-module (annotation gene-go)
-    #:use-module (annotation gene-pathway)
-    #:use-module (annotation biogrid)
-    #:use-module (annotation parser)
-    #:use-module (json)
+#! /usr/bin/env guile
+!#
 
+(use-modules
+	(srfi srfi-64)
+	(opencog)
+	(opencog exec)
+	(opencog bioscience)
+	(annotation gene-go)
+	(annotation gene-pathway)
+	(annotation biogrid)
+	(annotation parser)
+	(json)
 )
 
 (test-begin "parser")

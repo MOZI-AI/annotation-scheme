@@ -1,13 +1,16 @@
-(define-module (tests pathway-test)
-    #:use-module (srfi srfi-64)
-    #:use-module (opencog)
-    #:use-module (opencog exec)
-    #:use-module (opencog bioscience)
-    #:use-module (annotation gene-go)
-    #:use-module (annotation gene-pathway)
-    #:use-module (annotation biogrid)
-    #:use-module (annotation functions)
-    #:use-module (annotation util)
+#! /usr/bin/env guile
+!#
+
+(use-modules
+	(srfi srfi-64)
+	(opencog)
+	(opencog exec)
+	(opencog bioscience)
+	(annotation gene-go)
+	(annotation gene-pathway)
+	(annotation biogrid)
+	(annotation functions)
+	(annotation util)
 )
 
 

@@ -1,11 +1,14 @@
-(define-module (tests main)
-	#:use-module (srfi srfi-64)
-	#:use-module (ice-9 futures)
-	#:use-module (opencog)
-	#:use-module (opencog bioscience)
-	#:use-module (annotation main)
-	#:use-module (annotation functions)
-	#:use-module (annotation util)
+#! /usr/bin/env guile
+!#
+
+(use-modules
+	(srfi srfi-64)
+	(ice-9 futures)
+	(opencog)
+	(opencog bioscience)
+	(annotation main)
+	(annotation functions)
+	(annotation util)
 )
 
 (test-begin "main")

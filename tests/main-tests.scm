@@ -13,6 +13,7 @@
 
 (test-begin "main")
 
+(primitive-load-path "opencog_deps")
 ;; Load test atomspace
 (primitive-load-path "tests/sample_dataset.scm")
 

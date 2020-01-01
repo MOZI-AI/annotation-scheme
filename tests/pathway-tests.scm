@@ -16,7 +16,7 @@
 
 (test-begin "pathway")
 ;; Load test atomspace
-(primitive-load-path "tests/sample_dataset.scm")
+(primitive-load "../tests/sample_dataset.scm")
 
 (test-equal "pathway-interactors" 3 (length (pathway-gene-interactors  (ConceptNode "R-HSA-114608"))))
 

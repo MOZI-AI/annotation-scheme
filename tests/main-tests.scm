@@ -13,9 +13,8 @@
 
 (test-begin "main")
 
-(primitive-load-path "opencog_deps")
 ;; Load test atomspace
-(primitive-load-path "tests/sample_dataset.scm")
+(primitive-load "../tests/sample_dataset.scm")
 
 ;;Mock the write-to-file function
 (define-public (write-to-file result id name) #t)

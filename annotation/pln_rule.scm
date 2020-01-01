@@ -1,3 +1,9 @@
+(use-modules (opencog) (opencog exec))
+
+(use-functions (annotation functions)) ;;; for find-pubmed-id
+
+
+
 (define biogrid_interaction_rule
     (BindLink
         (VariableList

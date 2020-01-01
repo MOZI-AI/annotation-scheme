@@ -1,13 +1,17 @@
 (define-module (tests main)
-    #:use-module (srfi srfi-64)
-    #:use-module (ice-9 futures)
+	#:use-module (srfi srfi-64)
+	#:use-module (ice-9 futures)
+	#:use-module (opencog)
+	#:use-module (opencog bioscience)
+	#:use-module (annotation main)
+	#:use-module (annotation functions)
+	#:use-module (annotation util)
 )
 
 (test-begin "main")
 
-;;Load modules and test atomspace
-(primitive-load "opencog_deps")
-(primitive-load "tests/sample_dataset.scm")
+;; Load test atomspace
+(primitive-load-path "tests/sample_dataset.scm")
 
 ;;Mock the write-to-file function
 (define-public (write-to-file result id name) #t)
@@ -24,7 +28,7 @@
 
 (test-equal "protein-goterm" 86 (length (cog-outgoing-set (find-proteins-goterm (GeneNode "IGF1") namespace 0))))
 
-(primitive-load "annotation/pln_rule.scm")
+(primitive-load-path "annotation/pln_rule.scm")
 
 (test-equal "current_vs_prev_symbols" (ListLink) (find-protein-form (GeneNode "NOV")))
 

@@ -29,6 +29,5 @@ if test "x$HAVE_BIOSCI" = "xno"; then
 fi
 
 AC_CONFIG_FILES([Makefile])
-AC_CONFIG_FILES([env], [chmod +x env])
 
 AC_OUTPUT

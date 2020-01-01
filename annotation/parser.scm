@@ -42,7 +42,7 @@
     )
 )
 
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation"))
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
 
 (define-public (handle-eval-ln predicate lns)
     (call/cc (lambda (k)
@@ -50,8 +50,8 @@
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with") 
                         (string=? predicate "inferred_interaction")
-                        (string=? predicate "transcribes")
-                        (string=? predicate "translates")]
+                        (string=? predicate "transcribed_to")
+                        (string=? predicate "translated_to")]
                             (begin  
                                 (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
                                 '()                

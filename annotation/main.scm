@@ -36,7 +36,7 @@
     #:use-module (ice-9 futures)
     #:use-module (srfi srfi-1)
     #:use-module (annotation functions)
-    #:export (include-rna)
+    #:use-module (annotation rna)
 )
 
 (define-public (find-genes gene-list)
@@ -99,26 +99,6 @@ atomspace."
          ) filters))))
         (lambda () (apply func gene-list (append (list file-name) args)))
     )) table)) )
-)
-        
-;; Finds rna transcribes for the gene 
-(define* (include-rna gene-list file-name #:key (coding "True") (noncoding "True"))
-  (let* ((rna
-    (map (lambda (gene)
-    (ListLink
-      (if (equal? coding "True")
-        (list (cog-outgoing-set (find-crna (GeneNode gene)))))
-      (if (equal? noncoding "True")
-        (list (cog-outgoing-set (find-ncrna (GeneNode gene))))))
-    )gene-list)
-    ))
-    (let (
-    	[res (ListLink (ConceptNode "rna-annotation") (ListLink rna))]
-  		)
-    	(write-to-file res file-name "mainRNA")
-		res
-  	)
-  )
 )
 
 (define-public (annotate-genes genes-list file-name request)

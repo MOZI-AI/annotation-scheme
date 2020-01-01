@@ -863,21 +863,21 @@
    ))
    pub
 ))
-(define-public (find-crna gene)
+(define-public (find-crna gene protein)
   (cog-execute! (BindLink
   (VariableList
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
     (TypedVariable (Variable "$b") (TypeNode 'MoleculeNode)))
     (AndLink
       (EvaluationLink
-        (PredicateNode "transcribes")
+        (PredicateNode "transcribed_to")
         (ListLink
           gene
           (VariableNode "$a")
         )
       )
       (EvaluationLink
-        (PredicateNode "translates")
+        (PredicateNode "translated_to")
         (ListLink
           (VariableNode "$a")
           (VariableNode "$b")
@@ -889,7 +889,8 @@
         (ListLink 
           gene
           (VariableNode "$a")
-          (VariableNode "$b"))
+          (VariableNode "$b")
+          (Number protein))
     )
 ))
 )
@@ -898,7 +899,7 @@
   (cog-execute! (BindLink
     (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
       (EvaluationLink
-        (PredicateNode "transcribes")
+        (PredicateNode "transcribed_to")
         (ListLink
           gene
           (VariableNode "$a")
@@ -909,36 +910,47 @@
 		      (ListLink 
             gene
             (VariableNode "$a")
-            (ListLink))
+            (ListLink)
+            (Number 0))
 		  )
 ))
 )
 
 ;; filter non-coding RNA
-(define-public (filternc gene rna prot)
+(define-public (filternc gene rna prot prot-switch)
   (if (equal? prot (ListLink))
       (ListLink
             (EvaluationLink
-              (PredicateNode "transcribes")
+              (PredicateNode "transcribed_to")
               (ListLink
                 gene
                 rna)
             )
             (node-info rna)
       )
-      (ListLink
-        (EvaluationLink
-          (PredicateNode "transcribes")
-            (ListLink
-                gene
-                rna))
-        (EvaluationLink
-          (PredicateNode "translates")
-            (ListLink
-                rna
-                prot))
-        (node-info rna)
-        (node-info prot)
+      (if (equal? (cog-name prot-switch) "1")
+        (ListLink
+          (EvaluationLink
+            (PredicateNode "transcribed_to")
+              (ListLink
+                  gene
+                  rna))
+          (EvaluationLink
+            (PredicateNode "translated_to")
+              (ListLink
+                  rna
+                  prot))
+          (node-info rna)
+          (node-info prot)
+        )
+        (ListLink
+          (EvaluationLink
+            (PredicateNode "transcribed_to")
+              (ListLink
+                  gene
+                  rna))
+          (node-info rna)
+        )
       )
   )
 )

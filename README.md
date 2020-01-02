@@ -22,21 +22,17 @@ To build the project manually, make sure you have [Atomspace](https://github.com
         make install
     ~~~~
 
-    To run the tests you can use `make check` 
+    To run the tests you can use `make check`
 
 3. Test using a sample dataset
 
     3a. Open `guile` and import the modules
 
     ```
-    scheme@(guile-user)> (use-modules                    (annotation) (annotation main) 
-            (annotation gene-go) 
-            (annotation biogrid) 
-            (annotation gene-pathway)
-            (annotation functions) 
-            (annotation util)
-            (annotation parser)
-            (json))
+    scheme@(guile-user)> (use-modules
+            (annotation)
+            (annotation gene-go)
+            (annotation functions))
 
     ```
     3b. Load the sample dataset
@@ -49,6 +45,6 @@ To build the project manually, make sure you have [Atomspace](https://github.com
     3c. Run Gene-Go annotation for gene **IGF1**
 
     ```
-        scheme@(guile-user)> (gene-go-annotation '("IGF1") "biological_process molecular_function cellular_component" 0 #:id "")
+        scheme@(guile-user)> (gene-go-annotation (list "IGF1") "my-results-directory")
     ```
 

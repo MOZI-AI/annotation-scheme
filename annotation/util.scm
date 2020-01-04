@@ -177,31 +177,38 @@
 )
 
 ;;finds go name for parser function
-(define find-name
-    (lambda (atom)
-     (let*
-        (
-          [predicate (if (regexp-match? (string-match "GO:[0-9]+" (cog-name atom))) "GO_name" "has_name")]
-        )
-      (get-name
-       (cog-outgoing-set
-        (cog-execute!
-         (GetLink
-          (VariableNode "$name")
+(define (find-name GO-ATOM)
+"
+	find-name GO-ATOM
 
-          (EvaluationLink
-           (PredicateNode predicate)
-           (ListLink
-            atom
-            (VariableNode "$name")
-           )
-          )
-         )
-        )
-       )
-      )
-    )
-    )
+	Find the name of GO-ATOM. This assumes a structure of the following
+   form, holding the name in the second spot:
+
+         (Evaluation
+             (Predicate \"GO_name\")  ; or (Predicate \"has_name\")
+             (List
+                 GO-ATOM
+                 (Concept \"some name\")))
+
+   and then this returns the string \"some name\" if such a structure
+   exists. Otherwise, it returns the empty string.
+
+   The predicate (Predicate \"GO_name\") is used whenever GO-ATOM
+   has the form (Concept \"GO:nnnnn\") where \"nnnnn\" is a number.
+   Otherwise, (Predicate \"has_name\") is used.
+"
+	(define pred (Predicate
+		(if (regexp-match? (string-match "GO:[0-9]+" (cog-name GO-ATOM)))
+			"GO_name" "has_name")))
+
+	(define namli (find
+		(lambda (lili)
+			(any
+				(lambda (evli) (equal? pred (gar evli)))
+				(cog-incoming-by-type lili 'EvaluationLink)))
+		(cog-incoming-by-type GO-ATOM 'ListLink)))
+
+	(if (null? namli) "" (cog-name (gdr namli)))
 )
 
 (define-public (filter-genes input-gene gene-name)

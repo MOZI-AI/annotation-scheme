@@ -138,7 +138,6 @@
           ]
       )
       )))
-       (delete-duplicates parents)
        (append (node-info g) parents)
     )
 ))

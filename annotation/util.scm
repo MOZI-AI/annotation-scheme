@@ -208,7 +208,7 @@
 				(cog-incoming-by-type lili 'EvaluationLink)))
 		(cog-incoming-by-type GO-ATOM 'ListLink)))
 
-	(if (null? namli) "" (cog-name (gdr namli)))
+	(if namli (cog-name (gdr namli)) "")
 )
 
 (define-public (filter-genes input-gene gene-name)

@@ -11,7 +11,6 @@ if test "x$GUILD" = "x"; then
 fi
 
 GUILE_SITE_DIR
-GUILE_SITE_GO_DIR
 
 GUILE_MODULE_AVAILABLE(HAVE_JSON, [(json)])
 if test "x$HAVE_JSON" = "xno"; then

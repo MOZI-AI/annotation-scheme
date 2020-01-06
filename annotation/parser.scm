@@ -45,7 +45,6 @@
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
 
 (define-public (handle-eval-ln predicate lns)
-    (call/cc (lambda (k)
             (let* ()
                 (cond ([or (string=? predicate "expresses")
                         (string=? predicate "interacts_with") 
@@ -71,7 +70,7 @@
                                     )   
                                         ;;check if it is the same node and exit if it is
                                         (if (string=? (car node-group) (annotation))
-                                            (k '())
+                                            '()
                                         )
                                         (node-info-group-set! (node-data node)  (append node-group (list (annotation))))
                                     )
@@ -121,8 +120,6 @@
                     
                 )
             )
-    )
-    )
 )
 
 (define-public (handle-ln node-a node-b link)

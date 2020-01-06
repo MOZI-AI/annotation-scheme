@@ -349,17 +349,12 @@
   ))
 
 (define (is-compartment loc)
-  (let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
-      [res #f])
-    (for-each (lambda (comp)
-      (if (string-contains loc comp)
-        (set! res #t)
-      )) compartments)
-      (if res 
-        #t
-        #f
-      )
-  )
+	(any
+		(lambda (comp) (string-contains loc comp))
+		(list "vesicle" "photoreceptor" "plasma" "centriole"
+			"cytoplasm" "endosome" "golgi" "vacuole" "granule"
+			"endoplasmic" "mitochondri" "cytosol" "peroxisome"
+			"ribosomes" "lysosome" "nucle"))
 )
 
 ;; Add location of a gene/Molecule node in context of Reactome pathway

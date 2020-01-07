@@ -333,7 +333,7 @@
         (MemberLink gene pathway)
         (node-info gene)
         (locate-node gene)
-        (ListLink (ConceptNode "gene-go-annotation") (find-go-term (cog-name gene)  (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
+        (ListLink (ConceptNode "gene-go-annotation") (find-go-term gene  (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
         (ListLink (ConceptNode "gene-pathway-annotation"))
         )
   )))

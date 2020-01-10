@@ -884,7 +884,7 @@
       )
     )
     (ExecutionOutputLink
-      (GroundedSchemaNode "scm: filternc")
+      (GroundedSchemaNode "scm: filterprot")
         (ListLink 
           gene
           (VariableNode "$a")
@@ -894,6 +894,32 @@
 ))
 )
 
+(define-public (filterprot gene rna prot prot-switch)
+  (if (equal? (cog-name prot-switch) "1")
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "transcribed_to")
+          (ListLink
+              gene
+              rna))
+      (EvaluationLink
+        (PredicateNode "translated_to")
+          (ListLink
+              rna
+              prot))
+      (node-info rna)
+      (node-info prot)
+    )
+    (ListLink
+      (EvaluationLink
+        (PredicateNode "transcribed_to")
+          (ListLink
+              gene
+              rna))
+      (node-info rna)
+    )
+  )
+)
 (define-public (find-ncrna gene)
   (cog-execute! (BindLink
     (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
@@ -908,16 +934,14 @@
         (GroundedSchemaNode "scm: filternc")
 		      (ListLink 
             gene
-            (VariableNode "$a")
-            (ListLink)
-            (Number 0))
+            (VariableNode "$a"))
 		  )
 ))
 )
 
 ;; filter non-coding RNA
-(define-public (filternc gene rna prot prot-switch)
-  (if (equal? prot (ListLink))
+(define-public (filternc gene rna)
+  (if (not (string-prefix? "ENST" (cog-name rna)))
       (ListLink
             (EvaluationLink
               (PredicateNode "transcribed_to")
@@ -927,29 +951,6 @@
             )
             (node-info rna)
       )
-      (if (equal? (cog-name prot-switch) "1")
-        (ListLink
-          (EvaluationLink
-            (PredicateNode "transcribed_to")
-              (ListLink
-                  gene
-                  rna))
-          (EvaluationLink
-            (PredicateNode "translated_to")
-              (ListLink
-                  rna
-                  prot))
-          (node-info rna)
-          (node-info prot)
-        )
-        (ListLink
-          (EvaluationLink
-            (PredicateNode "transcribed_to")
-              (ListLink
-                  gene
-                  rna))
-          (node-info rna)
-        )
-      )
+    '()
   )
 )

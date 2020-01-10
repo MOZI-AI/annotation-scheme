@@ -28,7 +28,7 @@
 	#:export (include-rna)
 )
  
-(define* (include-rna gene-list file-name #:key (coding "True") (noncoding "True") (protein "True"))
+(define* (include-rna gene-list file-name #:key (coding "True") (noncoding "True") (protein 0))
 ;;; 
 ;;; The include-rna function finds coding and non-coding RNA forms of the gene-list. needs 4 arguments to do so.
 ;;; file-name -> where to write the output file
@@ -38,7 +38,7 @@
 
   (let* ((rna
     (map (lambda (gene)
-    (ListLink
+    (list
       (if (equal? coding "True")
         (cog-outgoing-set (find-crna (GeneNode gene) protein))
         '())
@@ -50,7 +50,8 @@
     (let (
     	[res (ListLink (ConceptNode "rna-annotation") rna)]
   		)
-    	(write-to-file res file-name "mainRNA")
+      (if (not (null? rna))
+    	  (write-to-file res file-name "mainRNA"))
 		res
   	)
   )

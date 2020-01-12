@@ -190,32 +190,50 @@
   )
 )
 
-;;finds go name for parser function
-(define find-name
-    (lambda (atom)
-     (let*
-        (
-          [predicate (if (regexp-match? (string-match "GO:[0-9]+" (cog-name atom))) "GO_name" "has_name")]
-        )
-      (get-name
-       (cog-outgoing-set
-        (cog-execute!
-         (GetLink
-          (VariableNode "$name")
+(define-public (run-query QUERY)
+"
+  Call (cog-execute! QUERY), return results, delete the SetLink.
+  This avoids a memory leak of SetLinks
+"
+	; Run the query
+	(define set-link (cog-execute! QUERY))
+	; Get the query results
+	(define results (cog-outgoing-set set-link))
+	; Delete the SetLink
+	(cog-delete set-link)
+	; Return the results.
+	results
+)
 
-          (EvaluationLink
-           (PredicateNode predicate)
-           (ListLink
-            atom
-            (VariableNode "$name")
-           )
-          )
-         )
-        )
-       )
-      )
-    )
-    )
+(define (find-name GO-ATOM)
+"
+	find-name GO-ATOM
+
+	Find the name of GO-ATOM. This assumes a structure of the following
+   form, holding the name in the second spot:
+
+         (Evaluation
+             (Predicate \"GO_name\")  ; or (Predicate \"has_name\")
+             (List
+                 GO-ATOM
+                 (Concept \"some name\")))
+   and then this returns the string \"some name\" if such a structure
+   exists. Otherwise, it returns the empty string.
+   The predicate (Predicate \"GO_name\") is used whenever GO-ATOM
+   has the form (Concept \"GO:nnnnn\") where \"nnnnn\" is a number.
+   Otherwise, (Predicate \"has_name\") is used.
+"
+  (define pname
+     (if (regexp-match?  (string-match "GO:[0-9]+" (cog-name GO-ATOM)))
+       "GO_name" "has_name"))
+
+  (get-name
+    (run-query
+     (GetLink
+      (Variable "$name")
+      (Evaluation
+        (Predicate pname)
+        (List GO-ATOM (Variable "$name"))))))
 )
 
 (define-public (filter-genes input-gene gene-name)

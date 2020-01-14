@@ -117,22 +117,36 @@
 	))
 )
 
-(define-public (is-cellular-component? node-info)
- (let*
-  (
-	 [response #f]
-  )
-  (for-each
-   (lambda (info)
-    (if (equal? (cog-name (cog-outgoing-atom info 0)) "GO_namespace")
-	 (set! response (if (equal? "cellular_component" (cog-name (cog-outgoing-atom (cog-outgoing-atom info 1) 1))) #t #f))
-    )
-   )
-  node-info)
-  response
- )
-)
+(define-public (is-cellular-component? ATOM-LIST)
+"
+  is-cellular-component? ATOM-LIST
 
+  Return #t if any of the atoms in ATOM-LIST have the form
+
+     (Evaluation
+         (Predicate \"GO_namespace\")
+         (List
+            (Concept \"foo\")
+            (Concept \"cellular_component\")))
+
+  where (Concept \"foo\") could be anything. Otherwise, return #f.
+"
+	(any
+		(lambda (info)
+			(and
+				(equal? (cog-name (gar info)) "GO_namespace")
+				(equal? "cellular_component" (cog-name (gddr info)))))
+		ATOM-LIST)
+
+	; XXX TODO:
+	; The code below might run faster, because it does a hash
+	; compare instead of a string compare.
+	;
+	; (define pnas (Predicate "GO_namespace"))
+	; (define celc (Concept "cellular_component"))
+	; (any (lambda (info) (and
+	;     (equal? pnas (gar info)) (equal? celc (gddr info)))) ATOM-LIST)
+)
 
 (define-public (build-desc-url node)
     (cond 
@@ -349,17 +363,12 @@
   ))
 
 (define (is-compartment loc)
-  (let([compartments (list "vesicle" "photoreceptor" "plasma" "centriole" "cytoplasm" "endosome" "golgi" "vacuole" "granule" "endoplasmic" "mitochondri" "cytosol" "peroxisome" "ribosomes" "lysosome" "nucle")]
-      [res #f])
-    (for-each (lambda (comp)
-      (if (string-contains loc comp)
-        (set! res #t)
-      )) compartments)
-      (if res 
-        #t
-        #f
-      )
-  )
+	(any
+		(lambda (comp) (string-contains loc comp))
+		(list "vesicle" "photoreceptor" "plasma" "centriole"
+			"cytoplasm" "endosome" "golgi" "vacuole" "granule"
+			"endoplasmic" "mitochondri" "cytosol" "peroxisome"
+			"ribosomes" "lysosome" "nucle"))
 )
 
 ;; Add location of a gene/Molecule node in context of Reactome pathway

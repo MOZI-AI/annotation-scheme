@@ -22,22 +22,20 @@ To build the project manually, make sure you have [Atomspace](https://github.com
         make install
     ~~~~
 
-    To run the tests you can use `make check` 
+    To run the tests you can use `make check`
 
 3. Test using a sample dataset
 
     3a. Open `guile` and import the modules
 
     ```
-    scheme@(guile-user)> (use-modules                    (annotation) (annotation main) 
-            (annotation gene-go) 
-            (annotation biogrid) 
+    scheme@(guile-user)> (use-modules
+            (annotation)
+            (annotation biogrid)
+            (annotation gene-go)
             (annotation gene-pathway)
             (annotation functions) 
-            (annotation util)
-            (annotation parser)
-            (annotation rna)
-            (json))
+            (annotation rna))
 
     ```
     3b. Load the sample dataset
@@ -110,6 +108,23 @@ To build the project manually, make sure you have [Atomspace](https://github.com
     ```
         scheme@(guile-user)> (include-rna (list "IGF1") "dir-name" #:coding "True" #:noncoding "True" #:protein 0)
 
+    ```
+        scheme@(guile-user)> (gene-go-annotation (list "IGF1") "my-go-dir")
+    ```
+    Re-run Gene-Go annotation with one parent:
+    ```
+        scheme@(guile-user)> (gene-go-annotation (list "IGF1") "my-go-dir" #:parents 1)
+    ```
+
+    3d. Simialry, run gene pathway annotation for gene **IGF1**
+
+    ```
+        scheme@(guile-user)> (gene-pathway-annotation (list "IGF1") "my-path-dir")
+    ```
+    3e. Simialry, run biogrid annotation for gene **IGF1**
+
+    ```
+        scheme@(guile-user)> (biogrid-interaction-annotation (list "IGF1") "my-grid-dir")
     ```
 
     With the default parameters set, One can also do RNA annotations as:

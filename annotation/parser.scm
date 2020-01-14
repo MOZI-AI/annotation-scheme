@@ -59,12 +59,12 @@
                     "inferred_interaction"
                     "transcribed_to"
                     "translated_to")
-                (set! *edges* (append (list (create-edge (cadr lns)
-                                                         (car lns)
-                                                         predicate
-                                                         (list *annotation*)
-                                                         "" predicate))
-                                      *edges*))
+                (set! *edges* (cons (create-edge (cadr lns)
+                                                 (car lns)
+                                                 predicate
+                                                 (list *annotation*)
+                                                 "" predicate)
+                                    *edges*))
                 '())
                ((or "has_name" "GO_name")
                 (if (member (car lns) *atoms*)
@@ -80,14 +80,14 @@
                                                 (append node-group (list *annotation*)))))
                     (begin
                       (set! *nodes*
-                            (append (list (create-node (car lns) (cadr lns)
-                                                       (build-desc-url (car lns))
-                                                       ""
-                                                       (list *annotation*)
-                                                       (find-subgroup (car lns))))
-                                    *nodes*))
+                            (cons (create-node (car lns) (cadr lns)
+                                               (build-desc-url (car lns))
+                                               ""
+                                               (list *annotation*)
+                                               (find-subgroup (car lns)))
+                                  *nodes*))
                       (set! *atoms*
-                            (append (list (car lns)) *atoms*))))
+                            (cons (car lns) *atoms*))))
                 '())
                ("GO_namespace"
                 (if (and (member (car lns) *atoms*)
@@ -112,7 +112,7 @@
                (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)
-  (set! *edges* (append (list (create-edge node-a node-b link (list *annotation*) "" link)) *edges*))
+  (set! *edges* (cons (create-edge node-a node-b link (list *annotation*) "" link) *edges*))
   '())
 
 (define-public (handle-list-ln node)

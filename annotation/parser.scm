@@ -56,16 +56,18 @@
                 '())
                ((or "has_name" "GO_name")
                 (if (member (car lns) *atoms*)
-                    (if (and (not (string-null? *prev-annotation*))
-                             (not (string=? *prev-annotation* *annotation*)))
-                        (let* ([node (car (filter (lambda (n) (string=? (node-info-id (node-data n)) (car lns)))
-                                                  *nodes*))]
-                               [node-group (node-info-group (node-data node))])
-                          ;;check if it is the same node and exit if it is
-                          (if (string=? (car node-group) *annotation*)
-                              '())
-                          (node-info-group-set! (node-data node)
-                                                (append node-group (list *annotation*)))))
+                    (when (and (not (string-null? *prev-annotation*))
+                               (not (string=? *prev-annotation* *annotation*)))
+                      (let* ([node (car (filter (lambda (n)
+                                                  (string=? (node-info-id (node-data n))
+                                                            (car lns)))
+                                                *nodes*))]
+                             [node-group (node-info-group (node-data node))])
+                        ;;check if it is the same node and exit if it is
+                        (when (string=? (car node-group) *annotation*)
+                          '())
+                        (node-info-group-set! (node-data node)
+                                              (append node-group (list *annotation*)))))
                     (begin
                       (set! *nodes*
                             (cons (create-node (car lns) (cadr lns)
@@ -86,17 +88,16 @@
                 (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
                 '())
                ("has_location"
-                (begin
-                  (if (and (member (car lns) *atoms*)
+                (when (and (member (car lns) *atoms*)
                            (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
                       (let* ([info (node-data (car *nodes*))]
                              [old-loc (node-info-location info)]
                              [new-loc (cadr lns)])
                         (if (string-null? old-loc)
                             (node-info-location-set! info new-loc)
-                            (if (not (string-contains old-loc new-loc))
-                                (node-info-location-set! info (string-append old-loc "," new-loc))))
-                        '()))))
+                            (unless (string-contains old-loc new-loc)
+                              (node-info-location-set! info (string-append old-loc "," new-loc))))
+                        '())))
                (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)

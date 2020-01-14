@@ -20,22 +20,10 @@
 
 (define-module (annotation parser)
     #:use-module (annotation util)
-    #:use-module (annotation main)
     #:use-module (nyacc lalr)
     #:use-module (nyacc lex)
     #:use-module (nyacc parse)
-    #:use-module (opencog)
-    #:use-module (opencog exec)
-    #:use-module (opencog bioscience)
     #:use-module (json)
-    #:use-module (ice-9 optargs)
-;    #:use-module (rnrs base)
-    #:use-module (rnrs exceptions)
-    #:use-module (ice-9 textual-ports)
-    #:use-module (ice-9 regex)
-    #:use-module (ice-9 threads)
-    #:use-module (srfi srfi-1)
-    #:use-module (ice-9 atomic)
     #:use-module (ice-9 match)
     #:export (atomese-parser
             handle-node

@@ -112,30 +112,18 @@
                (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)
-        (begin 
-             (set! *edges* (append (list (create-edge node-a node-b link (list *annotation*) "" link)) *edges*))
-            '()
-        )
-)
+  (set! *edges* (append (list (create-edge node-a node-b link (list *annotation*) "" link)) *edges*))
+  '())
 
 (define-public (handle-list-ln node)
-    (let ()
-            (cond [(string? node) (list node)]
-                    [else   (flatten node)]
-            )
-        
-    )
-)
+  (cond [(string? node) (list node)]
+        [else   (flatten node)]))
 
 (define-public (handle-node node)
-      (begin (if (member node annts)
-          (begin 
-              (set! *prev-annotation* *annotation*)
-              (set! *annotation* node)
-          )
-      ))
-      node   
-)
+  (when (member node annts)
+    (set! *prev-annotation* *annotation*)
+    (set! *annotation* node))
+  node)
 
 (define* (atomese-parser port #:optional (mode #f))
     (let* (

@@ -104,7 +104,7 @@
                       (let* ([info (node-data (car *nodes*))]
                              [old-loc (node-info-location info)]
                              [new-loc (cadr lns)])
-                        (if (string=? old-loc "")
+                        (if (string-null? old-loc)
                             (node-info-location-set! info new-loc)
                             (if (not (string-contains old-loc new-loc))
                                 (node-info-location-set! info (string-append old-loc "," new-loc))))

@@ -41,64 +41,64 @@
 (define *prev-annotation* "")
 
 (define-public (handle-eval-ln predicate lns)
-             (match predicate
-               ((or "expresses"
-                    "interacts_with"
-                    "inferred_interaction"
-                    "transcribed_to"
-                    "translated_to")
-                (set! *edges* (cons (create-edge (cadr lns)
-                                                 (car lns)
-                                                 predicate
-                                                 (list *annotation*)
-                                                 "" predicate)
-                                    *edges*))
-                '())
-               ((or "has_name" "GO_name")
-                (if (member (car lns) *atoms*)
-                    (when (and (not (string-null? *prev-annotation*))
-                               (not (string=? *prev-annotation* *annotation*)))
-                      (let* ([node (car (filter (lambda (n)
-                                                  (string=? (node-info-id (node-data n))
-                                                            (car lns)))
-                                                *nodes*))]
-                             [node-group (node-info-group (node-data node))])
-                        ;;check if it is the same node and exit if it is
-                        (when (string=? (car node-group) *annotation*)
-                          '())
-                        (node-info-group-set! (node-data node)
-                                              (append node-group (list *annotation*)))))
-                    (begin
-                      (set! *nodes*
-                            (cons (create-node (car lns) (cadr lns)
-                                               (build-desc-url (car lns))
-                                               ""
-                                               (list *annotation*)
-                                               (find-subgroup (car lns)))
-                                  *nodes*))
-                      (set! *atoms*
-                            (cons (car lns) *atoms*))))
-                '())
-               ("GO_namespace"
-                (if (and (member (car lns) *atoms*)
-                         (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
-                    (node-info-subgroup-set! (node-data (car *nodes*)) (cadr lns)))
-                '())
-               ("has_pubmedID"
-                (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
-                '())
-               ("has_location"
-                (when (and (member (car lns) *atoms*)
-                           (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
-                      (let* ([info (node-data (car *nodes*))]
-                             [old-loc (node-info-location info)]
-                             [new-loc (cadr lns)])
-                        (if (string-null? old-loc)
-                            (node-info-location-set! info new-loc)
-                            (unless (string-contains old-loc new-loc)
-                              (node-info-location-set! info (string-append old-loc "," new-loc))))
-                        '())))
-               (_ (error "Unrecognized predicate" predicate))))
+  (match predicate
+    ((or "expresses"
+         "interacts_with"
+         "inferred_interaction"
+         "transcribed_to"
+         "translated_to")
+     (set! *edges* (cons (create-edge (cadr lns)
+                                      (car lns)
+                                      predicate
+                                      (list *annotation*)
+                                      "" predicate)
+                         *edges*))
+     '())
+    ((or "has_name" "GO_name")
+     (if (member (car lns) *atoms*)
+         (when (and (not (string-null? *prev-annotation*))
+                    (not (string=? *prev-annotation* *annotation*)))
+           (let* ([node (car (filter (lambda (n)
+                                       (string=? (node-info-id (node-data n))
+                                                 (car lns)))
+                                     *nodes*))]
+                  [node-group (node-info-group (node-data node))])
+             ;;check if it is the same node and exit if it is
+             (when (string=? (car node-group) *annotation*)
+               '())
+             (node-info-group-set! (node-data node)
+                                   (append node-group (list *annotation*)))))
+         (begin
+           (set! *nodes*
+                 (cons (create-node (car lns) (cadr lns)
+                                    (build-desc-url (car lns))
+                                    ""
+                                    (list *annotation*)
+                                    (find-subgroup (car lns)))
+                       *nodes*))
+           (set! *atoms*
+                 (cons (car lns) *atoms*))))
+     '())
+    ("GO_namespace"
+     (if (and (member (car lns) *atoms*)
+              (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+         (node-info-subgroup-set! (node-data (car *nodes*)) (cadr lns)))
+     '())
+    ("has_pubmedID"
+     (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
+     '())
+    ("has_location"
+     (when (and (member (car lns) *atoms*)
+                (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+       (let* ([info (node-data (car *nodes*))]
+              [old-loc (node-info-location info)]
+              [new-loc (cadr lns)])
+         (if (string-null? old-loc)
+             (node-info-location-set! info new-loc)
+             (unless (string-contains old-loc new-loc)
+               (node-info-location-set! info (string-append old-loc "," new-loc))))
+         '())))
+    (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)
   (set! *edges* (cons (create-edge node-a node-b link (list *annotation*) "" link) *edges*))

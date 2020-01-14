@@ -35,15 +35,10 @@
 	          create-edge)
 )
 
-;;Define the parameters needed for parsing and GGI
-(define-public nodes (make-parameter '()))
-(define-public edges (make-parameter '()))
-(define-public atoms (make-parameter '()))
+;;Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter '()))
 (define-public biogrid-pairs (make-parameter '()))
 (define-public biogrid-pairs-pathway (make-parameter '()))
-(define-public annotation (make-parameter ""))
-(define-public prev-annotation (make-parameter ""))
 
 (define (get-name atom)
  (if (> (length atom) 0)

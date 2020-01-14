@@ -46,6 +46,12 @@
 
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
 
+(define *nodes* '())
+(define *edges* '())
+(define *atoms* '())
+(define *annotation* "")
+(define *prev-annotation* "")
+
 (define-public (handle-eval-ln predicate lns)
              (match predicate
                ((or "expresses"
@@ -53,47 +59,49 @@
                     "inferred_interaction"
                     "transcribed_to"
                     "translated_to")
-                (edges (append (list (create-edge (cadr lns)
-                                                  (car lns)
-                                                  predicate
-                                                  (list (annotation))
-                                                  "" predicate))
-                               (edges)))
+                (set! *edges* (append (list (create-edge (cadr lns)
+                                                         (car lns)
+                                                         predicate
+                                                         (list *annotation*)
+                                                         "" predicate))
+                                      *edges*))
                 '())
                ((or "has_name" "GO_name")
-                (if (member (car lns) (atoms))
-                    (if (and (not (string-null? (prev-annotation)))
-                             (not (string=? (prev-annotation) (annotation))))
+                (if (member (car lns) *atoms*)
+                    (if (and (not (string-null? *prev-annotation*))
+                             (not (string=? *prev-annotation* *annotation*)))
                         (let* ([node (car (filter (lambda (n) (string=? (node-info-id (node-data n)) (car lns)))
-                                                  (nodes)))]
+                                                  *nodes*))]
                                [node-group (node-info-group (node-data node))])
                           ;;check if it is the same node and exit if it is
-                          (if (string=? (car node-group) (annotation))
+                          (if (string=? (car node-group) *annotation*)
                               '())
                           (node-info-group-set! (node-data node)
-                                                (append node-group (list (annotation))))))
+                                                (append node-group (list *annotation*)))))
                     (begin
-                      (nodes (append (list (create-node (car lns) (cadr lns)
-                                                        (build-desc-url (car lns))
-                                                        ""
-                                                        (list (annotation))
-                                                        (find-subgroup (car lns))))
-                                     (nodes)))
-                      (atoms (append (list (car lns)) (atoms)))))
+                      (set! *nodes*
+                            (append (list (create-node (car lns) (cadr lns)
+                                                       (build-desc-url (car lns))
+                                                       ""
+                                                       (list *annotation*)
+                                                       (find-subgroup (car lns))))
+                                    *nodes*))
+                      (set! *atoms*
+                            (append (list (car lns)) *atoms*))))
                 '())
                ("GO_namespace"
-                (if (and (member (car lns) (atoms))
-                         (string=? (car lns) (node-info-id (node-data (car (nodes))))))
-                    (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns)))
+                (if (and (member (car lns) *atoms*)
+                         (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+                    (node-info-subgroup-set! (node-data (car *nodes*)) (cadr lns)))
                 '())
                ("has_pubmedID"
-                (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
+                (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
                 '())
                ("has_location"
                 (begin
-                  (if (and (member (car lns) (atoms))
-                           (string=? (car lns) (node-info-id (node-data (car (nodes))))))
-                      (let* ([info (node-data (car (nodes)))]
+                  (if (and (member (car lns) *atoms*)
+                           (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+                      (let* ([info (node-data (car *nodes*))]
                              [old-loc (node-info-location info)]
                              [new-loc (cadr lns)])
                         (if (string=? old-loc "")
@@ -105,7 +113,7 @@
 
 (define-public (handle-ln node-a node-b link)
         (begin 
-             (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
+             (set! *edges* (append (list (create-edge node-a node-b link (list *annotation*) "" link)) *edges*))
             '()
         )
 )
@@ -122,8 +130,8 @@
 (define-public (handle-node node)
       (begin (if (member node annts)
           (begin 
-              (prev-annotation (annotation))
-              (annotation node)
+              (set! *prev-annotation* *annotation*)
+              (set! *annotation* node)
           )
       ))
       node   
@@ -218,13 +226,13 @@
         [gen-lexer (make-lexer-generator mtab)]
         [raw-parser (make-lalr-parser mach)])
 
-    (begin 
-        (with-input-from-string port 
-                (lambda () (raw-parser (gen-lexer) #:debug mode)
-            )
-        )
-        (make-graph (nodes) (edges))
-        )
-    )
+      (begin
+        (set! *nodes* '())
+        (set! *edges* '())
+        (set! *atoms* '())
+        (set! *annotation* "")
+        (set! *prev-annotation* "")
 
-)
+        (with-input-from-string port 
+          (lambda () (raw-parser (gen-lexer) #:debug mode)))
+        (make-graph *nodes* *edges*))))

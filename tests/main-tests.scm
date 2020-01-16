@@ -14,8 +14,8 @@
 (test-begin "main")
 
 ;; Load test atomspace
-(primitive-load "../tests/sample_dataset.scm")
-(primitive-load "../annotation/pln_rule.scm")
+(primitive-load "tests/sample_dataset.scm")
+(primitive-load "annotation/pln_rule.scm")
 
 ;;Mock the write-to-file function
 (define-public (write-to-file result id name) #t)

@@ -65,6 +65,6 @@
 
 (test-assert "node-count" (= (length (graph-nodes (atomese-parser (format #f "~a" res)))) 2))
 
-(test-assert "edge-count" (= (length (graph-edges (atomese-parser (format #f "~a" res)))) 1))
+(test-assert "edge-count" (= (length (graph-edges (atomese-parser (format #f "~a" res)))) 3))
 
 (test-end "parser")

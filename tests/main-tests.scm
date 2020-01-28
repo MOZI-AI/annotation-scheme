@@ -6,11 +6,16 @@
 	#:use-module (annotation main)
 	#:use-module (annotation functions)
 	#:use-module (annotation util)
+    #:use-module (annotation gene-go)
+    #:use-module (annotation gene-pathway)
+    #:use-module (annotation biogrid)
+    #:use-module (annotation parser)
+	#:use-module (annotation rna)
+    #:use-module (json)
 )
 
 (test-begin "main")
 
-(primitive-load-path "opencog_deps")
 ;; Load test atomspace
 (primitive-load-path "tests/sample_dataset.scm")
 

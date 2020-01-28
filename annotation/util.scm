@@ -89,7 +89,7 @@
         ([name 
         (if (or (string-contains (cog-name pw) "Uniprot:") (string-prefix? "ENST" (cog-name pw)))
           (let ([predicate (if (string-prefix? "ENST" (cog-name pw)) "transcribed_to" "expresses")])
-            (cog-outgoing-set (cog-execute! (GetLink
+            (run-query (GetLink
               (VariableList
               (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
               (EvaluationLink
@@ -99,9 +99,9 @@
                   pw
                 )
               )
-            )))
+            ))
           )
-          (cog-outgoing-set (cog-execute! (GetLink
+          (run-query (GetLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'ConceptNode)))
             (EvaluationLink
@@ -111,7 +111,7 @@
                   (VariableNode "$a")
                 )
               )	
-          )))
+          ))
         )])
     name
 	))
@@ -168,8 +168,7 @@
 (define (find-entrez gene)
   (let ((entrez '()))
     (set! entrez (get-name
-   (cog-outgoing-set
-    (cog-execute!
+   (run-query
      (GetLink
        (VariableNode "$a")
        (EvaluationLink
@@ -180,7 +179,6 @@
         )
        )
     )
-   )
   )
   ))
    (if (equal? (length (string-split entrez #\:)) 1)
@@ -244,8 +242,7 @@
 )
 
 (define-public (find-similar-gene gene-name)
-    (cog-outgoing-set 
-      (cog-execute! (BindLink
+    (run-query (BindLink
         (TypedVariable (Variable "%x") (Type "GeneNode"))
         (EvaluationLink
           (GroundedPredicateNode "scm: filter-genes")
@@ -257,13 +254,11 @@
         (VariableNode "%x")
       ))
     
-    )
 )
 
 (define (find-current-symbol gene-list)
   (let ((current (map (lambda (gene)  
-    (let ((cur (cog-outgoing-set 
-      (cog-execute! (BindLink
+    (let ((cur (run-query (BindLink
         (TypedVariable (Variable "$g") (Type "GeneNode"))
         (EvaluationLink
           (PredicateNode "has_current_symbol")
@@ -274,7 +269,7 @@
         )
         (VariableNode "$g")
       ))
-    )))
+    ))
     (if (equal? cur '()) '() (string-append gene "=>" (cog-name (car cur))))
     )
   )gene-list)))
@@ -319,7 +314,7 @@
 
 (define-public locate-node
   (lambda(node)
-      (let ([loc (cog-outgoing-set (cog-execute!
+      (let ([loc (run-query
         (BindLink
         (VariableNode "$go")
         (AndLink
@@ -339,11 +334,11 @@
             (VariableNode "$go")
           ))
           )
-      ))
+      )
       ])
       (if (null? loc)
       (set! loc 
-      (cog-outgoing-set (cog-execute!
+      (run-query
         (BindLink
           (VariableNode "$loc")
           (EvaluationLink
@@ -357,7 +352,7 @@
                 node
                 (VariableNode "$loc")))
           )
-        )))
+        ))
       )
       loc
       )
@@ -394,7 +389,7 @@
 (define-public (add-loc node)
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
-      (cog-outgoing-set (cog-execute!
+      (run-query
         (BindLink
           (VariableNode "$loc")
           (AndLink
@@ -414,7 +409,6 @@
                 (VariableNode "$loc")))
           )
         )
-      )
     )
 )
 

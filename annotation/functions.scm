@@ -36,7 +36,7 @@
           [parents '()]
         )
         (for-each (lambda (ns)
-          (set! parents (append parents (cog-outgoing-set (cog-execute! (BindLink
+          (set! parents (append parents (run-query (BindLink
             (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (AndLink
               (InheritanceLink
@@ -56,7 +56,7 @@
                   atom
                   (VariableNode "$a")
                 ))
-        ))))) 
+        )))) 
         ) namespaces
       )
     parents  
@@ -70,7 +70,7 @@
 
       (for-each (lambda (ns)
       
-        (set! go-atoms (append go-atoms (cog-outgoing-set (cog-execute! (BindLink
+        (set! go-atoms (append go-atoms (run-query (BindLink
             (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (AndLink
               (MemberLink
@@ -90,7 +90,7 @@
                   gene
                   (VariableNode "$a")
                 ))
-          )))))
+          ))))
       ) namespaces)
           go-atoms
           ))
@@ -150,12 +150,12 @@
   (if (equal? (find-memberln prot namespace) '())
     (begin
       (let ([goterms (flatten (map (lambda (ns)
-        (cog-outgoing-set (cog-execute! (BindLink
+        (run-query (BindLink
         (TypedVariable (VariableNode "$g") (Type 'ConceptNode))
         (AndLink (MemberLink gene (VariableNode "$g"))
           (EvaluationLink (PredicateNode "GO_namespace") (ListLink (VariableNode "$g") (ConceptNode ns)))
         )
-        (VariableNode "$g"))))
+        (VariableNode "$g")))
       ) namespace))])
       (set! annotation (map (lambda (go)
             (MemberLink (stv 0.0 0.0) prot go)
@@ -173,7 +173,7 @@
 ;; Add details about the GO term
 (define (go-info go)
   (list
-      (cog-outgoing-set (find-go-name go))
+      (find-go-name go)
       (EvaluationLink 
         (PredicateNode "GO_namespace") 
         (ListLink 
@@ -185,7 +185,7 @@
 ;; Finds parents of a GO term ( of given namespace type) 
 (define find-GO-ns 
   (lambda (go)
-    (cog-outgoing-set (cog-execute!
+    (run-query
             (GetLink
                 (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
                 (EvaluationLink 
@@ -196,7 +196,7 @@
                     )
                  )
                 )
-    ))
+    )
   
   )
 )
@@ -204,7 +204,7 @@
 ;; Finds the name of a GO term
 (define find-go-name
     (lambda(go)
-        (cog-execute! (BindLink
+        (run-query (BindLink
            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
             (EvaluationLink
                (PredicateNode "GO_name")
@@ -228,7 +228,7 @@
 ;;finds go definition for parser function
 (define find-godef
     (lambda (go)
-       (cog-execute!
+       (run-query
         (BindLink
          (VariableNode "$def")
 
@@ -252,7 +252,7 @@
 )
 
 (define-public (find-pathway-member gene db)
-  (cog-outgoing-set (cog-execute! (BindLink
+  (run-query (BindLink
       (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
       (AndLink
         (EvaluationLink
@@ -272,7 +272,7 @@
                   gene
                   (VariableNode "$a")
                 ))
-    )))
+    ))
 )
 
 (define-public add-pathway-info 
@@ -297,7 +297,7 @@
 ;; finds genes which codes the proteins in a given pathway 
 (define-public find-pathway-genes
   (lambda (pathway go)
-    (cog-outgoing-set (cog-execute! (BindLink
+    (run-query (BindLink
       (VariableList 
         (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
         (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
@@ -317,7 +317,7 @@
           (VariableNode "$g")
           go
         ))
-  )))
+  ))
 ))
 (define-public (add-pathway-genes pathway gene go)
 (if (null? (cog-outgoing-set go))
@@ -341,7 +341,7 @@
 ;; Finds proteins a gene expresses
 (define-public find-protein
     (lambda (gene option)
-        (cog-outgoing-set (cog-execute! (BindLink
+        (run-query (BindLink
           (VariableList
             (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
             (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
@@ -368,7 +368,6 @@
             )
         )
       )
-    )
   )
 ))
 
@@ -407,7 +406,7 @@
 (define-public pathway-hierarchy
   (lambda (pw lst)
     (let ([res-parent
-      (cog-outgoing-set (cog-execute! (BindLink
+      (run-query (BindLink
         (VariableNode "$parentpw")
           (InheritanceLink
             pw
@@ -420,9 +419,9 @@
             (ListLink lst)
           )
         ))
-      ))
+      )
     ]
-    [res-child (cog-outgoing-set (cog-execute! (BindLink
+    [res-child (run-query (BindLink
       (VariableNode "$parentpw")
       (InheritanceLink
         (VariableNode "$parentpw")
@@ -435,7 +434,7 @@
          (ListLink lst)
         )
       ))
-    ))]
+    )]
   )
   (append res-parent res-child)
 )))
@@ -452,7 +451,7 @@
 
 ;; Finds molecules (proteins or chebi's) in a pathway 
 (define-public (find-mol path identifier)
-  (cog-execute! (BindLink
+  (run-query (BindLink
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
     (AndLink
       (EvaluationLink
@@ -478,7 +477,7 @@
 ;; Find coding Gene for a given protein
 (define-public find-coding-gene
   (lambda (protein)
-  (cog-outgoing-set (cog-execute! (BindLink
+  (run-query (BindLink
     (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
     (EvaluationLink
       (PredicateNode "expresses")
@@ -494,7 +493,6 @@
         protein
       )
     )
-  )
   )
 )))
 
@@ -537,7 +535,7 @@
 ;; Finds genes interacting with a given gene
 (define-public match-gene-interactors
     (lambda (gene prot go)
-        (cog-outgoing-set (cog-execute! (BindLink
+        (run-query (BindLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
               (ChoiceLink 
@@ -566,14 +564,13 @@
                   go
                 ))        
             )
-        )))	
+        ))
 )
 
 ;;; Finds output genes interacting eachother 
 (define-public find-output-interactors
     (lambda(gene prot go)
-        (cog-outgoing-set 
-          (cog-execute! (BindLink
+        (run-query (BindLink
           (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode))
             (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
@@ -608,13 +605,13 @@
                 (Number prot)
                 go
               ))
-        )))	
+        ))
 ))
 
 ;; Gene interactors for genes in the pathway
 (define-public pathway-gene-interactors 
   (lambda (pw)
-  (cog-outgoing-set (cog-execute! (BindLink
+  (run-query (BindLink
     (VariableList
      (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
      (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
@@ -635,12 +632,12 @@
 		    (VariableNode "$g2")
 		  ))
   ))
-)))
+))
 
 (define-public find-protein-form
   (lambda (gene)
   (let ([prot
-  (cog-outgoing-set (cog-execute! (BindLink
+  (run-query (BindLink
     (VariableList
       (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
       (TypedVariable (VariableNode "$b") (Type 'ConceptNode)))
@@ -650,7 +647,7 @@
       (EvaluationLink (PredicateNode "has_biogridID") (ListLink gene (VariableNode "$b")))
     )
     (VariableNode "$p")
-  )))])
+  ))])
   (if (not (null? prot))
     (car prot)
     (ListLink)
@@ -820,7 +817,7 @@
 
 ;;                           
 (define-public (find-pubmed-id gene-a gene-b)
- (let ([pub (cog-outgoing-set (cog-execute!
+ (let ([pub (run-query
      (GetLink
        (VariableNode "$pub")
        (EvaluationLink
@@ -836,9 +833,9 @@
            )
          )
 
-   )))])
+   ))])
    (if (null? pub)
-     (set! pub (cog-outgoing-set (cog-execute!
+     (set! pub (run-query
      (GetLink
        (VariableNode "$pub")
        (EvaluationLink
@@ -853,12 +850,12 @@
              (VariableNode "$pub")
            )
          )
-   )))
+   ))
    ))
    pub
 ))
 (define-public (find-crna gene protein)
-  (cog-execute! (BindLink
+  (run-query (BindLink
   (VariableList
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
     (TypedVariable (Variable "$b") (TypeNode 'MoleculeNode)))
@@ -890,7 +887,7 @@
 )
 
 (define-public (find-ncrna gene)
-  (cog-execute! (BindLink
+  (run-query (BindLink
     (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
       (EvaluationLink
         (PredicateNode "transcribed_to")

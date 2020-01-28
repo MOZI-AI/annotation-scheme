@@ -40,10 +40,10 @@
     (map (lambda (gene)
     (ListLink
       (if (equal? coding "True")
-        (cog-outgoing-set (find-crna (GeneNode gene) protein))
+        (find-crna (GeneNode gene) protein)
         '())
       (if (equal? noncoding "True")
-        (cog-outgoing-set (find-ncrna (GeneNode gene)))
+        (find-ncrna (GeneNode gene))
         '()))
     )gene-list)
     ))

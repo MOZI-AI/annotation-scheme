@@ -854,12 +854,10 @@
    ))
    pub
 ))
-(define-public (find-crna gene protein)
+;; Finds coding and non coding RNA for a given gene
+(define-public (find-rna gene coding noncoding protein)
   (run-query (BindLink
-  (VariableList
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-    (TypedVariable (Variable "$b") (TypeNode 'MoleculeNode)))
-    (AndLink
       (EvaluationLink
         (PredicateNode "transcribed_to")
         (ListLink
@@ -867,81 +865,64 @@
           (VariableNode "$a")
         )
       )
-      (EvaluationLink
-        (PredicateNode "translated_to")
-        (ListLink
-          (VariableNode "$a")
-          (VariableNode "$b")
-        )
-      )
-    )
     (ExecutionOutputLink
-      (GroundedSchemaNode "scm: filternc")
+      (GroundedSchemaNode "scm: filterbytype")
         (ListLink 
           gene
           (VariableNode "$a")
-          (VariableNode "$b")
+          (Concept coding)
+          (Concept noncoding)
           (Number protein))
     )
 ))
 )
 
-(define-public (find-ncrna gene)
-  (run-query (BindLink
-    (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
+(define-public (filterbytype gene rna cod ncod prot)
+  (ListLink 
+  (if (and (equal? (cog-name cod) "True") (string-prefix? "ENST" (cog-name rna)))
+    (list
       (EvaluationLink
         (PredicateNode "transcribed_to")
+          (ListLink
+              gene
+              rna))
+      (node-info rna)
+      (if (= (string->number (cog-name prot)) 1)
+        (list
+        (EvaluationLink
+          (PredicateNode "translated_to")
+            (ListLink
+                rna
+                (find-translates rna)))
+           (node-info (car (find-translates rna))))
+          '()
+      )
+    )
+    '()
+  )
+  (if (and (equal? (cog-name ncod) "True") (not (string-prefix? "ENST" (cog-name rna))))
+    (list
+      (EvaluationLink
+        (PredicateNode "transcribed_to")
+          (ListLink
+              gene
+              rna))
+      (node-info rna)
+    )
+    '()
+  )
+)
+)
+
+(define-public (find-translates rna)
+  (run-query (GetLink
+    (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
+      (EvaluationLink
+        (PredicateNode "translated_to")
         (ListLink
-          gene
+          rna
           (VariableNode "$a")
         )
       )
-      (ExecutionOutputLink
-        (GroundedSchemaNode "scm: filternc")
-		      (ListLink 
-            gene
-            (VariableNode "$a")
-            (ListLink)
-            (Number 0))
-		  )
 ))
-)
-
-;; filter non-coding RNA
-(define-public (filternc gene rna prot prot-switch)
-  (if (equal? prot (ListLink))
-      (ListLink
-            (EvaluationLink
-              (PredicateNode "transcribed_to")
-              (ListLink
-                gene
-                rna)
-            )
-            (node-info rna)
-      )
-      (if (equal? (cog-name prot-switch) "1")
-        (ListLink
-          (EvaluationLink
-            (PredicateNode "transcribed_to")
-              (ListLink
-                  gene
-                  rna))
-          (EvaluationLink
-            (PredicateNode "translated_to")
-              (ListLink
-                  rna
-                  prot))
-          (node-info rna)
-          (node-info prot)
-        )
-        (ListLink
-          (EvaluationLink
-            (PredicateNode "transcribed_to")
-              (ListLink
-                  gene
-                  rna))
-          (node-info rna)
-        )
-      )
-  )
 )

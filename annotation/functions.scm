@@ -294,9 +294,12 @@
      )
   )
 )
-;; finds genes which codes the proteins in a given pathway 
+;; finds genes which codes the proteins in a given pathway and does cross annotation:
+;; if go, annotate each member genes of a pathway for its GO terms
+;; if rna, annotate each member genes of a pathway for its RNA transcribes
+;; if prot, include the proteins inwhich the RNA translates to
 (define-public find-pathway-genes
-  (lambda (pathway go)
+  (lambda (pathway go rna prot)
     (run-query (BindLink
       (VariableList 
         (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
@@ -316,27 +319,44 @@
           pathway
           (VariableNode "$g")
           go
+          rna
+          (ConceptNode prot)
         ))
   ))
 ))
-(define-public (add-pathway-genes pathway gene go)
-(if (null? (cog-outgoing-set go))
+(define-public (add-pathway-genes pathway gene go rna prot)
+(if (and (null? (cog-outgoing-set go)) (null? (cog-outgoing-set rna)))
   (ListLink
         (MemberLink gene pathway)
         (node-info gene)
         (locate-node gene)
   )
-  (begin
-  (let ([namespace (car (cog-outgoing-set go))]
-        [parent (cadr (cog-outgoing-set go))])
   (ListLink
-        (MemberLink gene pathway)
-        (node-info gene)
-        (locate-node gene)
-        (ListLink (ConceptNode "gene-go-annotation") (find-go-term gene  (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
-        (ListLink (ConceptNode "gene-pathway-annotation"))
-        )
-  )))
+    (MemberLink gene pathway)
+      (node-info gene)
+      (locate-node gene)
+  (if (not (null? (cog-outgoing-set go)))
+    (let ([namespace (car (cog-outgoing-set go))]
+          [parent (cadr (cog-outgoing-set go))])
+      (ListLink (ConceptNode "gene-go-annotation") (find-go-term gene  (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
+      (ListLink (ConceptNode "gene-pathway-annotation")))
+    )
+    '()
+  )
+  (if (not (null? (cog-outgoing-set rna)))
+    (let ([crna (car (cog-outgoing-set rna))]
+          [ncrna (cadr (cog-outgoing-set rna))]
+          [protein (if (equal? (cog-name prot) "True") 1 0)])
+      (let ([rnaresult  (find-rna gene (cog-name crna) (cog-name ncrna) protein)])
+      (if (not (null? rnaresult))
+        (ListLink (ConceptNode "rna-annotation") rnaresult
+        (ListLink (ConceptNode "gene-pathway-annotation")))
+        '()
+      ))
+    )
+    '()
+  )
+  )
 ))
 ;; Finds proteins a gene expresses
 (define-public find-protein

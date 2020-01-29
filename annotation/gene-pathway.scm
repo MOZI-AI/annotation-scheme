@@ -29,21 +29,22 @@
 )
 
 
-(define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
+(define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1) (coding #f) (noncoding #f))
     (let ([result '()]
           [pwlst '()]
           [go (if (string=? namespace "") (ListLink)
-                (ListLink (ConceptNode namespace) (Number parents)))])
+                (ListLink (ConceptNode namespace) (Number parents)))]
+          [rna (ListLink (list (if coding (ConceptNode coding) '()) (if noncoding (ConceptNode noncoding) '())))])
 
     (for-each (lambda (gene)
       (set! result (append result (node-info (GeneNode gene))))
       (for-each (lambda (pathw)
           (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene include_prot include_sm go biogrid)))
+              (set! result (append result (smpdb gene include_prot include_sm go biogrid rna)))
               )
           (if (equal? pathw "reactome")
               (begin
-              (let ([res (reactome gene include_prot include_sm pwlst go biogrid)])
+              (let ([res (reactome gene include_prot include_sm pwlst go biogrid rna)])
                 (set! result (append result (car res)))
                 (set! pwlst (append pwlst (cdr res)))
               )))
@@ -61,7 +62,7 @@
 
 ;; From SMPDB
 
-(define (smpdb gene prot sm go biogrid)
+(define (smpdb gene prot sm go biogrid rna)
   (let (
     [pw (find-pathway-member (GeneNode gene) "SMP")]
     [ls '()]
@@ -75,7 +76,7 @@
       (if (equal? sm "True")
           (set! tmp (append tmp (find-mol node "ChEBI")))
       )
-      (set! tmp (append tmp (find-pathway-genes node go)))
+      (set! tmp (append tmp (find-pathway-genes node go rna prot)))
       (if (equal? prot "True")
         (let ([prots (find-mol node "Uniprot")])
           (if (not (null? prots))
@@ -100,7 +101,7 @@
 
 ;; From reactome
 
-(define (reactome gene prot sm pwlst go biogrid)
+(define (reactome gene prot sm pwlst go biogrid rna)
     (let (
       [pw (find-pathway-member (GeneNode gene) "R-HSA")]
       [ls '()]
@@ -112,7 +113,7 @@
             [tmp '()]
         )
           (set! pwlst (append pwlst (list node)))
-          (set! tmp (append tmp (find-pathway-genes node go)))
+          (set! tmp (append tmp (find-pathway-genes node go rna prot)))
           (if (equal? prot "True")
             (let ([prots (find-mol node "Uniprot")])
               (if (not (null? prots))

@@ -629,7 +629,7 @@
 ))
 
 ;; Gene interactors for genes in the pathway
-(define-public pathway-gene-interactors 
+(define do-pathway-gene-interactors
   (lambda (pw)
   (run-query (BindLink
     (VariableList
@@ -653,6 +653,14 @@
 		  ))
   ))
 ))
+
+;; Cache previous results, so that they are not recomputed again,
+;; if the results are already known. Note that this functin accounts
+;; for about 60% of the total execution time of `gene-pathway-annotation`
+;; so any caching at all is a win. In a test of 681 genes, this offers
+;; a 3x speedup in run time.
+(define-public pathway-gene-interactors
+	(make-afunc-cache do-pathway-gene-interactors))
 
 (define-public find-protein-form
   (lambda (gene)

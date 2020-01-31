@@ -1,5 +1,6 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
+;;; Copyright © 2020 Ricardo Wurmus
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -19,22 +20,11 @@
 
 (define-module (annotation parser)
     #:use-module (annotation util)
-    #:use-module (annotation main)
     #:use-module (nyacc lalr)
     #:use-module (nyacc lex)
     #:use-module (nyacc parse)
-    #:use-module (opencog)
-    #:use-module (opencog exec)
-    #:use-module (opencog bioscience)
     #:use-module (json)
-    #:use-module (ice-9 optargs)
-;    #:use-module (rnrs base)
-    #:use-module (rnrs exceptions)
-    #:use-module (ice-9 textual-ports)
-    #:use-module (ice-9 regex)
-    #:use-module (ice-9 threads)
-    #:use-module (srfi srfi-1)
-    #:use-module (ice-9 atomic)
+    #:use-module (ice-9 match)
     #:export (atomese-parser
             handle-node
             handle-eval-ln
@@ -44,109 +34,85 @@
 
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
 
-(define-public (handle-eval-ln predicate lns)
-            (let* ()
-                (cond ([or (string=? predicate "expresses")
-                        (string=? predicate "interacts_with") 
-                        (string=? predicate "inferred_interaction")
-                        (string=? predicate "transcribed_to")
-                        (string=? predicate "translated_to")]
-                            (begin  
-                                (edges (append (list (create-edge (cadr lns) (car lns) predicate (list (annotation)) "" predicate)) (edges)))
-                                '()                
-                            )   
-                        )
-                    ((or (string=? predicate "has_name") (string=? predicate "GO_name"))
-                        (begin  
-                                (if (member (car lns) (atoms))
-                                (if (and (not (string-null? (prev-annotation)))
-                                        (not (string=? (prev-annotation) (annotation)))
-                                    )
-                                     (let* (
-                                        [node (car (filter (lambda (n) 
-                                            (string=? (node-info-id (node-data n)) (car lns))
-                                        ) (nodes)))]
-                                        [node-group (node-info-group (node-data node))]
-                                    )   
-                                        ;;check if it is the same node and exit if it is
-                                        (if (string=? (car node-group) (annotation))
-                                            '()
-                                        )
-                                        (node-info-group-set! (node-data node)  (append node-group (list (annotation))))
-                                    )
-                                    
-                                )
-                                (begin 
-                                    (nodes (append (list (create-node (car lns) (cadr lns) (build-desc-url (car lns)) "" (list (annotation)) (find-subgroup (car lns)))) (nodes)))
-                                    (atoms (append (list (car lns)) (atoms)))
-                                )
-                            )
-                            '()
-                        )
-                        
-                    )
-                    ((string=? predicate "GO_namespace")
-                      (begin  
-                        (if (and (member (car lns) (atoms)) (string=? (car lns)                   (node-info-id (node-data (car (nodes))))))
-                                (node-info-subgroup-set! (node-data (car (nodes))) (cadr lns))
-                            )
-                        '()
-                       )
-                    )
+(define *nodes* '())
+(define *edges* '())
+(define *atoms* '())
+(define *annotation* "")
+(define *prev-annotation* "")
 
-                    ((string=? predicate "has_pubmedID")
-                        (begin  
-                            (edge-info-pubid-set! (edge-data (car (edges))) (string-join lns ","))
-                            '()
-                        )
-                    )
-                    ((string=? predicate "has_location")
-                        (begin  (if (and (member (car lns) (atoms)) (string=? (car lns) (node-info-id (node-data (car (nodes))))))
-                        (let* ([info (node-data (car (nodes)))]
-                               [old-loc (node-info-location info)]
-                               [new-loc (cadr lns)]
-                            )
-                            (if (string=? old-loc "")
-                                (node-info-location-set! info new-loc)
-                                (if (not (string-contains old-loc new-loc))
-                                    (node-info-location-set! info (string-append old-loc "," new-loc))
-                                )
-                            )
-                           '()
-                        
-                        )))
-                    )
-                    (else (error "Unrecognized predicate" predicate))
-                    
-                )
-            )
-)
+(define-public (handle-eval-ln predicate lns)
+  (match predicate
+    ((or "expresses"
+         "interacts_with"
+         "inferred_interaction"
+         "transcribed_to"
+         "translated_to")
+     (set! *edges* (cons (create-edge (cadr lns)
+                                      (car lns)
+                                      predicate
+                                      (list *annotation*)
+                                      "" predicate)
+                         *edges*))
+     '())
+    ((or "has_name" "GO_name")
+     (if (member (car lns) *atoms*)
+         (when (and (not (string-null? *prev-annotation*))
+                    (not (string=? *prev-annotation* *annotation*)))
+           (let* ([node (car (filter (lambda (n)
+                                       (string=? (node-info-id (node-data n))
+                                                 (car lns)))
+                                     *nodes*))]
+                  [node-group (node-info-group (node-data node))])
+             ;;check if it is the same node and exit if it is
+             (when (string=? (car node-group) *annotation*)
+               '())
+             (node-info-group-set! (node-data node)
+                                   (append node-group (list *annotation*)))))
+         (begin
+           (set! *nodes*
+                 (cons (create-node (car lns) (cadr lns)
+                                    (build-desc-url (car lns))
+                                    ""
+                                    (list *annotation*)
+                                    (find-subgroup (car lns)))
+                       *nodes*))
+           (set! *atoms*
+                 (cons (car lns) *atoms*))))
+     '())
+    ("GO_namespace"
+     (if (and (member (car lns) *atoms*)
+              (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+         (node-info-subgroup-set! (node-data (car *nodes*)) (cadr lns)))
+     '())
+    ("has_pubmedID"
+     (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
+     '())
+    ("has_location"
+     (when (and (member (car lns) *atoms*)
+                (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
+       (let* ([info (node-data (car *nodes*))]
+              [old-loc (node-info-location info)]
+              [new-loc (cadr lns)])
+         (if (string-null? old-loc)
+             (node-info-location-set! info new-loc)
+             (unless (string-contains old-loc new-loc)
+               (node-info-location-set! info (string-append old-loc "," new-loc))))
+         '())))
+    (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)
-        (begin 
-             (edges (append (list (create-edge node-a node-b link (list (annotation)) "" link)) (edges)))
-            '()
-        )
-)
+  (set! *edges* (cons (create-edge node-a node-b link (list *annotation*) "" link) *edges*))
+  '())
 
 (define-public (handle-list-ln node)
-    (let ()
-            (cond [(string? node) (list node)]
-                    [else   (flatten node)]
-            )
-        
-    )
-)
+  (cond [(string? node) (list node)]
+        [else   (flatten node)]))
 
 (define-public (handle-node node)
-      (begin (if (member node annts)
-          (begin 
-              (prev-annotation (annotation))
-              (annotation node)
-          )
-      ))
-      node   
-)
+  (when (member node annts)
+    (set! *prev-annotation* *annotation*)
+    (set! *annotation* node))
+  node)
 
 (define* (atomese-parser port #:optional (mode #f))
     (let* (
@@ -237,13 +203,13 @@
         [gen-lexer (make-lexer-generator mtab)]
         [raw-parser (make-lalr-parser mach)])
 
-    (begin 
-        (with-input-from-string port 
-                (lambda () (raw-parser (gen-lexer) #:debug mode)
-            )
-        )
-        (make-graph (nodes) (edges))
-        )
-    )
+      (begin
+        (set! *nodes* '())
+        (set! *edges* '())
+        (set! *atoms* '())
+        (set! *annotation* "")
+        (set! *prev-annotation* "")
 
-)
+        (with-input-from-string port 
+          (lambda () (raw-parser (gen-lexer) #:debug mode)))
+        (make-graph *nodes* *edges*))))

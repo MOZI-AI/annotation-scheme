@@ -102,15 +102,9 @@ atomspace."
 )
 
 (define-public (annotate-genes genes-list file-name request)
-  (parameterize ( (nodes '()) 
-                  (edges '()) 
-                  (atoms '()) 
-                  (biogrid-genes '())
-                  (biogrid-pairs '())
-                  (biogrid-pairs-pathway '())
-                  (annotation "")
-                  (prev-annotation "")
-              )
+  (parameterize ((biogrid-genes '())
+                 (biogrid-pairs '())
+                 (biogrid-pairs-pathway '()))
       (let* (
         [fns (parse-request genes-list file-name request)]
         [result (par-map (lambda (x) (x)) fns)]

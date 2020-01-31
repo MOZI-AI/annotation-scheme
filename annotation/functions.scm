@@ -554,7 +554,7 @@
 
 ;; Finds genes interacting with a given gene
 (define-public match-gene-interactors
-    (lambda (gene prot go)
+    (lambda (gene prot go rna)
         (run-query (BindLink
             (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
@@ -582,6 +582,7 @@
                   (VariableNode "$a")
                   (Number prot)
                   go
+                  rna
                 ))        
             )
         ))
@@ -589,7 +590,7 @@
 
 ;;; Finds output genes interacting eachother 
 (define-public find-output-interactors
-    (lambda(gene prot go)
+    (lambda(gene prot go rna)
         (run-query (BindLink
           (VariableList
             (TypedVariable (VariableNode "$a") (Type 'GeneNode))
@@ -624,6 +625,7 @@
                 (VariableNode "$b")
                 (Number prot)
                 go
+                rna
               ))
         ))
 ))
@@ -685,7 +687,7 @@
 
 ;; Grounded schema node to add info about matched variable nodes
 
-(define-public (generate-result gene-a gene-b prot go)
+(define-public (generate-result gene-a gene-b prot go rna) 
     (if  
       (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
         )  
@@ -705,6 +707,8 @@
             [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
             [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
             [pairs (find (lambda (x) (equal? x (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
+            [crna (if (not (null? (cog-outgoing-set rna))) (car (cog-outgoing-set rna)))]
+            [ncrna (if (not (null? (cog-outgoing-set rna))) (cadr (cog-outgoing-set rna)))]
           )
           (if (null? interaction)
             (ListLink)
@@ -715,6 +719,16 @@
           (match res
               ((a b)
                   (begin 
+                  (let ([go-cross-annotation (if (null? namespace) '() 
+                        (ListLink (ConceptNode "gene-go-annotation")
+                        (map (lambda (gene) (find-go-term (GeneNode gene) (string-split (cog-name namespace) #\ ) (string->number (cog-name parent))))(list a b))
+                        (ListLink (ConceptNode "biogrid-interaction-annotation")))
+                        )]
+                        [rna-cross-annotation (if (null? (cog-outgoing-set rna)) '() 
+                        (ListLink (ConceptNode "rna-annotation") 
+                        (map (lambda (gene) (find-rna (GeneNode gene) (cog-name crna) (cog-name ncrna) (cog-name prot))) (list a b))
+                        (ListLink (ConceptNode "biogrid-interaction-annotation")))
+                        )])
                       (biogrid-genes (append (list a b) (biogrid-genes)))
                       (if (= 1 (string->number (cog-name prot)))
                         (let ([coding-prot-a (find-protein-form (GeneNode a))]
@@ -730,7 +744,10 @@
                             (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode b) coding-prot-b))
                             (node-info (GeneNode b))
                             (node-info coding-prot-b)
-                            (locate-node coding-prot-a))
+                            (locate-node coding-prot-a)
+                            go-cross-annotation
+                            rna-cross-annotation
+                          )
                         ))
                       (ListLink
                           interaction
@@ -738,19 +755,25 @@
                           (locate-node  (GeneNode a))
                           (node-info (GeneNode b))
                           (locate-node  (GeneNode b))
-                          (if (not (null? namespace))
-                          (ListLink
-                            (ConceptNode "gene-go-annotation")
-                            (find-go-term (GeneNode a) (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
-                            (find-go-term (GeneNode b) (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
-                            (ListLink (ConceptNode "biogrid-interaction-annotation"))
-                            )
-                            '() )
+                          go-cross-annotation
+                          rna-cross-annotation 
                       )
-                  ))
+                    )
+                  )
+                  )
               )
               ((a)
                   (begin 
+                  (let ([go-cross-annotation (if (null? namespace) '() 
+                        (ListLink (ConceptNode "gene-go-annotation") 
+                        (find-go-term (GeneNode a) (string-split (cog-name namespace) #\ ) (string->number (cog-name parent))) 
+                        (ListLink (ConceptNode "biogrid-interaction-annotation")))
+                        )]
+                        [rna-cross-annotation (if (null? (cog-outgoing-set rna)) '() 
+                        (ListLink (ConceptNode "rna-annotation")
+                        (find-rna (GeneNode a) (cog-name crna) (cog-name ncrna) (cog-name prot))
+                        (ListLink (ConceptNode "biogrid-interaction-annotation")))
+                        )])
                       (biogrid-genes (append (list a) (biogrid-genes)))
                       (if (= 1 (string->number (cog-name prot)))
                         (let ([coding-prot (find-protein-form (GeneNode a))])
@@ -761,19 +784,21 @@
                             (EvaluationLink (PredicateNode "expresses") (ListLink (GeneNode a) coding-prot))
                             (node-info (GeneNode a))
                             (node-info coding-prot)
-                            (locate-node coding-prot))
+                            (locate-node coding-prot)
+                            go-cross-annotation
+                            rna-cross-annotation 
+                            )
                         ))
                       (ListLink
                           interaction
                           (node-info (GeneNode a))
                           (locate-node  (GeneNode a))
-                          (if (not (null? namespace))
-                          (ListLink (ConceptNode "gene-go-annotation") (find-go-term (GeneNode a) (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
-                          (ListLink (ConceptNode "biogrid-interaction-annotation"))
-                          )
-                          '()
-                          ))
-                  ))
+                          go-cross-annotation
+                          rna-cross-annotation
+                      )
+                      )
+                  )
+                )
               )
               (()
                   (if pairs

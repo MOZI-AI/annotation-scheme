@@ -26,19 +26,20 @@
 	#:use-module (annotation parser)
 	#:export (biogrid-interaction-annotation)
 )
-(define* (biogrid-interaction-annotation gene-nodes file-name #:key (interaction "Proteins") (namespace "") (parents 0))
+(define* (biogrid-interaction-annotation gene-nodes file-name #:key (interaction "Proteins") (namespace "") (parents 0) (coding #f) (noncoding #f))
   (let ([result '()]
         [go (if (string=? namespace "") (ListLink) 
-                (ListLink (ConceptNode namespace) (Number parents)))])
+                (ListLink (ConceptNode namespace) (Number parents)))]
+		[rna (ListLink (list (if coding (ConceptNode coding) '()) (if noncoding (ConceptNode noncoding) '())))])
 	
 	(for-each (lambda (gene)
 		(if (equal? interaction "Proteins")
-			(set! result (append result (match-gene-interactors (GeneNode gene) 1 go) (find-output-interactors (GeneNode gene) 1 go)))
+			(set! result (append result (match-gene-interactors (GeneNode gene) 1 go rna) (find-output-interactors (GeneNode gene) 1 go rna)))
 		)
 
 		(if (equal? interaction "Genes") 
 			(begin
-				(set! result (append result  (match-gene-interactors (GeneNode gene) 0 go) (find-output-interactors (GeneNode gene) 0 go)))
+				(set! result (append result rna (match-gene-interactors (GeneNode gene) 0 go rna) (find-output-interactors (GeneNode gene) 0 go rna)))
 			)
 		)
 	) gene-nodes)

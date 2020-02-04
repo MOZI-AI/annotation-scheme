@@ -1,6 +1,7 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2020 Ricardo Wurmus
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
 ;;; MOZI-AI Annotation Scheme is free software; you can redistribute
@@ -27,41 +28,28 @@
     #:use-module (ice-9 match)
 )
 
-;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
-(define find-parent
-
-  (lambda (node namespaces)
-        (let (
-          [atom (cog-outgoing-atom node 1)]
-          [parents '()]
-        )
-        (for-each (lambda (ns)
-          (set! parents (append parents (run-query (BindLink
-            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (AndLink
-              (InheritanceLink
-                atom
-                (VariableNode "$a"))
-              (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
-            )
-          (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-go-info")
-                (ListLink
-                  atom
-                  (VariableNode "$a")
-                ))
-        )))) 
-        ) namespaces
-      )
-    parents  
-  )
-))
+(define (find-parent node namespaces)
+  "Given an atom and list of namespaces find the parents of that atom
+in the specified namespaces."
+  (let ([atom (cog-outgoing-atom node 1)])
+    (append-map (lambda (ns)
+                  (run-query (BindLink
+                              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
+                              (AndLink
+                               (InheritanceLink
+                                atom
+                                (VariableNode "$a"))
+                               (EvaluationLink
+                                (PredicateNode "GO_namespace")
+                                (ListLink
+                                 (VariableNode "$a")
+                                 (ConceptNode ns))))
+                              (ExecutionOutputLink
+                               (GroundedSchemaNode "scm: add-go-info")
+                               (ListLink
+                                atom
+                                (VariableNode "$a"))))))
+                namespaces)))
 
 ;;Finds Go terms of a gene
 (define find-memberln 

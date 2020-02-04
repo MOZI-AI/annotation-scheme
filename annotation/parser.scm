@@ -101,8 +101,9 @@
     (_ (error "Unrecognized predicate" predicate))))
 
 (define-public (handle-ln node-a node-b link)
-  (set! *edges* (cons (create-edge node-a node-b link (list *annotation*) "" link) *edges*))
-  '())
+  (set! *edges*
+        (cons (create-edge node-a node-b link (list *annotation*) "" link)
+              *edges*)))
 
 (define-public (handle-list-ln node)
   (cond [(string? node) (list node)]

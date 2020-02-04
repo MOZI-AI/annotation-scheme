@@ -240,25 +240,14 @@ in the specified namespaces."
     ))
 )
 
-(define-public add-pathway-info 
-  (lambda (gene pathway)
-     (let ([res '()])
-      (if  (string-contains (cog-name pathway) "R-HSA")
-        (set! res (ListLink 
-            (MemberLink gene pathway)
-            (node-info pathway)
-        ))
-     )
-     (if (string-contains (cog-name pathway) "SMP")
-        (set! res (ListLink 
-            (MemberLink gene pathway)
-            (node-info pathway)
-        ))
-     )
-     res
-     )
-  )
-)
+(define-public (add-pathway-info gene pathway)
+  (if (or (string-contains (cog-name pathway) "R-HSA")
+          (string-contains (cog-name pathway) "SMP"))
+      (ListLink
+       (MemberLink gene pathway)
+       (node-info pathway))
+      #f))
+
 ;; finds genes which codes the proteins in a given pathway and does cross annotation:
 ;; if go, annotate each member genes of a pathway for its GO terms
 ;; if rna, annotate each member genes of a pathway for its RNA transcribes

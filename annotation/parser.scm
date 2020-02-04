@@ -33,7 +33,7 @@
 (define *annotation* "")
 (define *prev-annotation* "")
 
-(define-public (handle-eval-ln predicate lns)
+(define (handle-eval-ln predicate lns)
   (match predicate
     ((or "expresses"
          "interacts_with"
@@ -93,16 +93,16 @@
          '())))
     (_ (error "Unrecognized predicate" predicate))))
 
-(define-public (handle-ln node-a node-b link)
+(define (handle-ln node-a node-b link)
   (set! *edges*
         (cons (create-edge node-a node-b link (list *annotation*) "" link)
               *edges*)))
 
-(define-public (handle-list-ln node)
+(define (handle-list-ln node)
   (cond [(string? node) (list node)]
         [else   (flatten node)]))
 
-(define-public (handle-node node)
+(define (handle-node node)
   (when (member node annts)
     (set! *prev-annotation* *annotation*)
     (set! *annotation* node))

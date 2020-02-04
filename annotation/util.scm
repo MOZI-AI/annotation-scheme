@@ -161,29 +161,20 @@
     )
 )
 
-;; Finds entrez_id of a gene
 (define (find-entrez gene)
-  (let ((entrez '()))
-    (set! entrez (get-name
-   (run-query
-     (GetLink
-       (VariableNode "$a")
-       (EvaluationLink
-        (PredicateNode "has_entrez_id")
-        (ListLink
-         gene
-         (VariableNode "$a")
-        )
-       )
-    )
-  )
-  ))
-   (if (equal? (length (string-split entrez #\:)) 1)
-       entrez
-       (cadr  (string-split entrez #\:))
-   )
-  )
-)
+  "Find the entrez_id of a gene."
+  (let ((entrez (get-name
+                  (run-query
+                   (GetLink
+                    (VariableNode "$a")
+                    (EvaluationLink
+                     (PredicateNode "has_entrez_id")
+                     (ListLink
+                      gene
+                      (VariableNode "$a"))))))))
+    (match (string-split entrez #\:)
+      ((single) single)
+      ((first second . rest) second))))
 
 (define-public (run-query QUERY)
 "

@@ -5,11 +5,10 @@
     #:use-module (opencog bioscience)
     #:use-module (annotation gene-go)
     #:use-module (annotation gene-pathway)
+    #:use-module (annotation graph)
     #:use-module (annotation biogrid)
     #:use-module (annotation parser)
-    #:use-module (json)
-
-)
+    #:use-module (json))
 
 (test-begin "parser")
 

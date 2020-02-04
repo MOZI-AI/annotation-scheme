@@ -7,6 +7,7 @@ SOURCES = \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
     annotation/main.scm \
+    annotation/graph.scm \
     annotation/parser.scm \
     annotation/rna.scm \
     annotation.scm 

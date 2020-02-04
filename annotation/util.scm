@@ -2,6 +2,7 @@
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
 ;;; Copyright © 2019 Enkusellasie Wondesen
+;;; Copyright © 2020 Ricardo Wurmus
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -24,6 +25,7 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (json)
+    #:use-module (annotation graph)
 	#:use-module (ice-9 optargs)
 ;	#:use-module (rnrs base)
 	#:use-module (rnrs exceptions)

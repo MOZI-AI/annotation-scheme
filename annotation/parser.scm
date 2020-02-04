@@ -19,11 +19,11 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation parser)
-    #:use-module (annotation util)
-    #:use-module (json)
-    #:use-module (ice-9 match)
-    #:export (atomese->graph
-              atomese-parser))
+  #:use-module (annotation graph)
+  #:use-module (annotation util)
+  #:use-module (ice-9 match)
+  #:export (atomese->graph
+            atomese-parser))
 
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
 

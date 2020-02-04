@@ -300,52 +300,39 @@
     ))
 )
 
-(define-public locate-node
-  (lambda(node)
-      (let ([loc (run-query
-        (BindLink
-        (VariableNode "$go")
-        (AndLink
-          (MemberLink 
-            node
-            (VariableNode "$go"))
-          (EvaluationLink
-            (PredicateNode "GO_namespace")
-            (ListLink
-              (VariableNode "$go")
-              (ConceptNode "cellular_component")))
-        )
-        (ExecutionOutputLink
-        (GroundedSchemaNode "scm: filter-loc")
-          (ListLink
-            node
-            (VariableNode "$go")
-          ))
-          )
-      )
-      ])
-      (if (null? loc)
-      (set! loc 
-      (run-query
-        (BindLink
+(define-public (locate-node node)
+  (let ([loc (run-query
+              (BindLink
+               (VariableNode "$go")
+               (AndLink
+                (MemberLink 
+                 node
+                 (VariableNode "$go"))
+                (EvaluationLink
+                 (PredicateNode "GO_namespace")
+                 (ListLink
+                  (VariableNode "$go")
+                  (ConceptNode "cellular_component"))))
+               (ExecutionOutputLink
+                (GroundedSchemaNode "scm: filter-loc")
+                (ListLink
+                 node
+                 (VariableNode "$go")))))])
+    (if (null? loc)
+        (run-query
+         (BindLink
           (VariableNode "$loc")
           (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                node
-                (VariableNode "$loc")))
+           (PredicateNode "has_location")
+           (ListLink
+            node
+            (VariableNode "$loc")))
           (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                node
-                (VariableNode "$loc")))
-          )
-        ))
-      )
-      loc
-      )
-  )
-)
+           (PredicateNode "has_location")
+           (ListLink
+            node
+            (VariableNode "$loc")))))
+        loc)))
 
 ;; filter only Cell membrane and compartments
 

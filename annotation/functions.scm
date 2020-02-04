@@ -51,38 +51,26 @@ in the specified namespaces."
                                 (VariableNode "$a"))))))
                 namespaces)))
 
-;;Finds Go terms of a gene
-(define find-memberln 
-  (lambda (gene namespaces)
-    (let ([go-atoms '()])
-
-      (for-each (lambda (ns)
-      
-        (set! go-atoms (append go-atoms (run-query (BindLink
-            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (AndLink
-              (MemberLink
-                gene
-                (VariableNode "$a"))
-                (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
-            ) 
-           (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-go-info")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                ))
-          ))))
-      ) namespaces)
-          go-atoms
-          ))
-)
+(define (find-memberln gene namespaces)
+  "Find GO terms of a gene."
+  (append-map (lambda (ns)
+                (run-query (BindLink
+                            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
+                            (AndLink
+                             (MemberLink
+                              gene
+                              (VariableNode "$a"))
+                             (EvaluationLink
+                              (PredicateNode "GO_namespace")
+                              (ListLink
+                               (VariableNode "$a")
+                               (ConceptNode ns)))) 
+                            (ExecutionOutputLink
+                             (GroundedSchemaNode "scm: add-go-info")
+                             (ListLink
+                              gene
+                              (VariableNode "$a"))))))
+              namespaces))
 
 ;;Add information for GO nodes
 (define-public (add-go-info child-atom parent-atom)

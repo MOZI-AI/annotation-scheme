@@ -143,17 +143,17 @@ in the specified namespaces."
      (node-info prot)
      (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot)))))
-;; Add details about the GO term
+
 (define (go-info go)
+  "Add details about the GO term."
+  (define GO-ns (find-GO-ns go))
   (list
-      (find-go-name go)
-      (EvaluationLink 
-        (PredicateNode "GO_namespace") 
-        (ListLink 
-          go 
-          (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
-  )
-)
+   (find-go-name go)
+   (EvaluationLink 
+    (PredicateNode "GO_namespace") 
+    (ListLink 
+     go
+     (if (null? GO-ns) (ConceptNode "") GO-ns)))))
 
 ;; Finds parents of a GO term ( of given namespace type) 
 (define find-GO-ns 

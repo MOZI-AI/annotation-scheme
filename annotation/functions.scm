@@ -824,43 +824,33 @@ in the specified namespaces."
 
 ;;                           
 (define-public (find-pubmed-id gene-a gene-b)
- (let ([pub (run-query
-     (GetLink
-       (VariableNode "$pub")
-       (EvaluationLink
+  (let ([pub (run-query
+              (GetLink
+               (VariableNode "$pub")
+               (EvaluationLink
+                (PredicateNode "has_pubmedID")
+                (ListLink
+                 (EvaluationLink 
+                  (PredicateNode "interacts_with") 
+                  (ListLink
+                   gene-a
+                   gene-b))
+                 (VariableNode "$pub")))))])
+    (if (null? pub)
+        (run-query
+         (GetLink
+          (VariableNode "$pub")
+          (EvaluationLink
            (PredicateNode "has_pubmedID")
            (ListLink
             (EvaluationLink 
-                (PredicateNode "interacts_with") 
-                  (ListLink
-                    gene-a
-                    gene-b
-                  ))
-            (VariableNode "$pub")
-           )
-         )
+             (PredicateNode "interacts_with") 
+             (ListLink
+              gene-b
+              gene-a))
+            (VariableNode "$pub")))))
+        pub)))
 
-   ))])
-   (if (null? pub)
-     (set! pub (run-query
-     (GetLink
-       (VariableNode "$pub")
-       (EvaluationLink
-           (PredicateNode "has_pubmedID")
-           (ListLink
-             (EvaluationLink 
-                (PredicateNode "interacts_with") 
-                  (ListLink
-                    gene-b
-                    gene-a
-                  ))
-             (VariableNode "$pub")
-           )
-         )
-   ))
-   ))
-   pub
-))
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
   (run-query (BindLink

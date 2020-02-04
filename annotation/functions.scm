@@ -72,29 +72,26 @@ in the specified namespaces."
                               (VariableNode "$a"))))))
               namespaces))
 
-;;Add information for GO nodes
 (define-public (add-go-info child-atom parent-atom)
-  (if (and (or (equal? (cog-type child-atom) 'GeneNode) (equal? (cog-type child-atom) 'MoleculeNode))
-      (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO"))
-    (ListLink  
-      (MemberLink
-          child-atom
-          parent-atom
-      )
-      (go-info parent-atom)
-    )
-    (begin
-      (if (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO")
-        (ListLink 
-            (InheritanceLink
-              child-atom
-              parent-atom
-          )
-          (go-info parent-atom)
-        )
-    ))
-  )
-)
+  "Add information for GO nodes"
+  (define parent-is-go?
+    (match (string-split (cog-name parent-atom) #\:)
+      (("GO" . rest) #t)
+      (_ #f)))
+  (if parent-is-go?
+      (if (member (cog-type child-atom)
+                  '(GeneNode MoleculeNode))
+          (ListLink
+           (MemberLink
+            child-atom
+            parent-atom)
+           (go-info parent-atom))
+          (ListLink
+           (InheritanceLink
+            child-atom
+            parent-atom)
+           (go-info parent-atom)))
+      #f))
 
 ;;the main function to find the go terms for a gene with a specification of the parents
 (define-public find-go-term 

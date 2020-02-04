@@ -85,7 +85,7 @@
          (node-info-subgroup-set! (node-data (car *nodes*)) (cadr lns)))
      '())
     ("has_pubmedID"
-     (edge-info-pubid-set! (edge-data (car *edges*)) (string-join lns ","))
+     (edge-info-pubid-set! (edge-data (car *edges*)) (string-join (flatten lns) ","))
      '())
     ("has_location"
      (when (and (member (car lns) *atoms*)

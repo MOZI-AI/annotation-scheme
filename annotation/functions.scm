@@ -155,24 +155,16 @@ in the specified namespaces."
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
 
-;; Finds parents of a GO term ( of given namespace type) 
-(define find-GO-ns 
-  (lambda (go)
-    (run-query
-            (GetLink
-                (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
-                (EvaluationLink 
-                    (PredicateNode "GO_namespace")
-                    (ListLink 
-                      go
-                      (VariableNode "$v")
-                    )
-                 )
-                )
-    )
-  
-  )
-)
+(define (find-GO-ns go)
+  "Find parents of a GO term (of given namespace type)."
+  (run-query
+   (GetLink
+    (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
+    (EvaluationLink
+     (PredicateNode "GO_namespace")
+     (ListLink
+      go
+      (VariableNode "$v"))))))
 
 ;; Finds the name of a GO term
 (define find-go-name

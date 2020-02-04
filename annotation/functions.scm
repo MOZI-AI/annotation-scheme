@@ -115,34 +115,34 @@ in the specified namespaces."
     )
 ))
 
-;; Finds go terms for a proteins coded by the given gene
-(define-public find-proteins-goterm
-  (lambda (gene namespace parent)
-  (let ([prot (find-protein-form gene)]
-       [annotation '()])
-  (if (equal? (find-memberln prot namespace) '())
-    (begin
-      (let ([goterms (flatten (map (lambda (ns)
-        (run-query (BindLink
-        (TypedVariable (VariableNode "$g") (Type 'ConceptNode))
-        (AndLink (MemberLink gene (VariableNode "$g"))
-          (EvaluationLink (PredicateNode "GO_namespace") (ListLink (VariableNode "$g") (ConceptNode ns)))
-        )
-        (VariableNode "$g")))
-      ) namespace))])
-      (set! annotation (map (lambda (go)
-            (MemberLink (stv 0.0 0.0) prot go)
-      )goterms))
-    ))
-    (set! annotation (find-go-term prot namespace parent))
-  )
-  (ListLink
-    annotation
-    (node-info prot)
-    (EvaluationLink (PredicateNode "expresses") (ListLink gene prot))
-  )
-  )
-))
+(define-public (find-proteins-goterm gene namespace parent)
+  "Find GO terms for proteins coded by the given gene."
+  (let* ([prot (find-protein-form gene)]
+         [annotation
+          (if (null? (find-memberln prot namespace))
+              (let ([goterms
+                     (append-map
+                      (lambda (ns)
+                        (run-query (BindLink
+                                    (TypedVariable (VariableNode "$g")
+                                                   (Type 'ConceptNode))
+                                    (AndLink (MemberLink gene (VariableNode "$g"))
+                                             (EvaluationLink
+                                              (PredicateNode "GO_namespace")
+                                              (ListLink
+                                               (VariableNode "$g")
+                                               (ConceptNode ns))))
+                                    (VariableNode "$g"))))
+                      namespace)])
+                (map (lambda (go)
+                       (MemberLink (stv 0.0 0.0) prot go))
+                     goterms))
+              (find-go-term prot namespace parent))])
+    (ListLink
+     annotation
+     (node-info prot)
+     (EvaluationLink (PredicateNode "expresses")
+                     (ListLink gene prot)))))
 ;; Add details about the GO term
 (define (go-info go)
   (list

@@ -96,42 +96,28 @@
             ls)))
 
 ;; From reactome
-
 (define (reactome gene prot sm pwlst go biogrid rna)
-    (let (
-      [pw (find-pathway-member (GeneNode gene) "R-HSA")]
-      [ls '()]
-      )
+  (let* ([prot? (string=? prot "True")]
+         [sm? (string=? sm "True")]
+         [pw (find-pathway-member (GeneNode gene) "R-HSA")]
+         [ls (append-map (lambda (path)
+                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
+                             (set! pwlst (append pwlst (list node)))
 
-      (set! ls (flatten (map (lambda (path)
-        (let (
-            [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
-            [tmp '()]
-        )
-          (set! pwlst (append pwlst (list node)))
-          (set! tmp (append tmp (find-pathway-genes node go rna prot)))
-          (if (equal? prot "True")
-            (let ([prots (find-mol node "Uniprot")])
-              (if (not (null? prots))
-                (set! tmp (append tmp prots))
-                (set! tmp (append tmp (node-info node)))))
-            )
-          (if (= biogrid 1)
-            (set! tmp (append tmp (pathway-gene-interactors node))))
-          (if (equal? sm "True")
-            (set! tmp (append tmp (find-mol node "ChEBI")))
-          )
-          (set! tmp (append tmp (list (pathway-hierarchy node pwlst))))
-          (if (null? tmp)
-            '()
-            tmp
-          )
-        )
-      )
-      pw)))
-
-    (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 1)))
-    )
-      (list (append pw ls) pwlst)
-  ))
+                             (append
+                              (find-pathway-genes node go rna prot)
+                              (if prot?
+                                  (let ([prots (find-mol node "Uniprot")])
+                                    (if (null? prots)
+                                        (node-info node)
+                                        prots)))
+                              (if (= biogrid 1)
+                                  (pathway-gene-interactors node)
+                                  '())
+                              (if sm? (find-mol node "ChEBI") '())
+                              (list (pathway-hierarchy node pwlst)))))
+                         pw)])
+    (list (append pw
+                  (if prot? (find-protein (GeneNode gene) 1) '())
+                  ls)
+          pwlst)))

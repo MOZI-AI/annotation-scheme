@@ -166,29 +166,20 @@ in the specified namespaces."
       go
       (VariableNode "$v"))))))
 
-;; Finds the name of a GO term
-(define find-go-name
-    (lambda(go)
-        (run-query (BindLink
-           (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (EvaluationLink
-               (PredicateNode "GO_name")
-               (ListLink
-               go
-               (VariableNode "$a")
-              )
-            )
+(define (find-go-name go)
+  "Find the name of a GO term."
+  (run-query (BindLink
+              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
               (EvaluationLink
                (PredicateNode "GO_name")
                (ListLink
-               go
-               (VariableNode "$a")
-              )
-            )
-           )
-        )
-    )
-)
+                go
+                (VariableNode "$a")))
+              (EvaluationLink
+               (PredicateNode "GO_name")
+               (ListLink
+                go
+                (VariableNode "$a"))))))
 
 ;;finds go definition for parser function
 (define find-godef

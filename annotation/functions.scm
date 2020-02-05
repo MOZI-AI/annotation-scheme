@@ -292,38 +292,33 @@ translates to."
   )
   )
 ))
-;; Finds proteins a gene expresses
-(define-public find-protein
-    (lambda (gene option)
-        (run-query (BindLink
-          (VariableList
-            (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-            (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
-           (AndLink
-            (MemberLink
-              gene
-              (VariableNode "$pw"))
-            (MemberLink
-              (VariableNode "$a")
-              (VariableNode "$pw"))
-            (EvaluationLink
-            (PredicateNode "expresses")
-              (ListLink
-                gene
-                (VariableNode "$a") ))
-            )
-        (ExecutionOutputLink
-          (GroundedSchemaNode "scm: filter-pathway")
-            (ListLink
-              gene
-              (VariableNode "$a")
-              (VariableNode "$pw")
-              (Number option)
-            )
-        )
-      )
-  )
-))
+
+(define-public (find-protein gene option)
+  "Find the proteins a gene expresses."
+  (run-query
+   (BindLink
+    (VariableList
+     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
+     (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
+    (AndLink
+     (MemberLink
+      gene
+      (VariableNode "$pw"))
+     (MemberLink
+      (VariableNode "$a")
+      (VariableNode "$pw"))
+     (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+       gene
+       (VariableNode "$a"))))
+    (ExecutionOutputLink
+     (GroundedSchemaNode "scm: filter-pathway")
+     (ListLink
+      gene
+      (VariableNode "$a")
+      (VariableNode "$pw")
+      (Number option))))))
 
 (define-public filter-pathway (lambda (gene prot pathway option)
   (if (and (string=? (find-prefix prot) "Uniprot") )

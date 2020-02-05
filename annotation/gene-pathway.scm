@@ -44,6 +44,8 @@
                                   coding
                                   noncoding)
   (let* ([pwlst '()]
+         [prot? (string=? include_prot "True")]
+         [sm? (string=? include_sm "True")]
          [pathways (string-split pathway #\space)]
          [go (if (string-null? namespace)
                  (ListLink)
@@ -56,9 +58,9 @@
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene include_prot include_sm go biogrid rna))
+                                        (smpdb gene prot? sm? go biogrid rna))
                                        ("reactome"
-                                        (match (reactome gene include_prot include_sm pwlst go biogrid rna)
+                                        (match (reactome gene prot? sm? pwlst go biogrid rna)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))
@@ -70,15 +72,13 @@
     res))
 
 ;; From SMPDB
-(define (smpdb gene prot sm go biogrid rna)
-  (let* ([prot? (string=? prot "True")]
-         [sm? (string=? sm "True")]
-         [pw (find-pathway-member (GeneNode gene) "SMP")]
+(define (smpdb gene prot? sm? go biogrid rna)
+  (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
                              (append
                               (if sm? (find-mol node "ChEBI") '())
-                              (find-pathway-genes node go rna prot)
+                              (find-pathway-genes node go rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
                                     (if (null? prots)
@@ -96,16 +96,14 @@
             ls)))
 
 ;; From reactome
-(define (reactome gene prot sm pwlst go biogrid rna)
-  (let* ([prot? (string=? prot "True")]
-         [sm? (string=? sm "True")]
-         [pw (find-pathway-member (GeneNode gene) "R-HSA")]
+(define (reactome gene prot? sm? pwlst go biogrid rna)
+  (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
                              (set! pwlst (append pwlst (list node)))
 
                              (append
-                              (find-pathway-genes node go rna prot)
+                              (find-pathway-genes node go rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
                                     (if (null? prots)

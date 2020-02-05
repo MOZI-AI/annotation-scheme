@@ -248,36 +248,35 @@ in the specified namespaces."
        (node-info pathway))
       #f))
 
-;; finds genes which codes the proteins in a given pathway and does cross annotation:
-;; if go, annotate each member genes of a pathway for its GO terms
-;; if rna, annotate each member genes of a pathway for its RNA transcribes
-;; if prot, include the proteins inwhich the RNA translates to
-(define-public find-pathway-genes
-  (lambda (pathway go rna prot)
-    (run-query (BindLink
-      (VariableList 
-        (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-        (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
-      (AndLink
-      (MemberLink
-        (VariableNode "$p")
-        pathway)
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            (VariableNode "$g")
-            (VariableNode "$p") )))
-      (ExecutionOutputLink
-      (GroundedSchemaNode "scm: add-pathway-genes")
-        (ListLink
-          pathway
-          (VariableNode "$g")
-          go
-          rna
-          (ConceptNode prot)
-        ))
-  ))
-))
+(define-public (find-pathway-genes pathway go rna prot?)
+  "Find genes which code the proteins in a given pathway.  Perform
+cross-annotation: if go, annotate each member genes of a pathway for
+its GO terms; if rna, annotate each member genes of a pathway for its
+RNA transcribes; if prot?, include the proteins in which the RNA
+translates to."
+  (run-query
+   (BindLink
+    (VariableList 
+     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
+     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
+    (AndLink
+     (MemberLink
+      (VariableNode "$p")
+      pathway)
+     (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+       (VariableNode "$g")
+       (VariableNode "$p") )))
+    (ExecutionOutputLink
+     (GroundedSchemaNode "scm: add-pathway-genes")
+     (ListLink
+      pathway
+      (VariableNode "$g")
+      go
+      rna
+      (ConceptNode (if prot? "True" "False")))))))
+
 (define-public (add-pathway-genes pathway gene go rna prot)
 (if (and (null? (cog-outgoing-set go)) (null? (cog-outgoing-set rna)))
   (ListLink

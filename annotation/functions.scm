@@ -280,7 +280,7 @@ translates to."
   (if (not (null? (cog-outgoing-set rna)))
     (let ([crna (car (cog-outgoing-set rna))]
           [ncrna (cadr (cog-outgoing-set rna))]
-          [protein (if (equal? (cog-name prot) "True") 1 0)])
+          [protein (if (string=? (cog-name prot) "True") 1 0)])
       (let ([rnaresult  (find-rna gene (cog-name crna) (cog-name ncrna) protein)])
       (if (not (null? rnaresult))
         (ListLink (ConceptNode "rna-annotation") rnaresult
@@ -841,40 +841,35 @@ translates to."
 
 (define-public (filterbytype gene rna cod ncod prot)
   (ListLink 
-  (if (and (equal? (cog-name cod) "True") (string-prefix? "ENST" (cog-name rna)))
-    (list
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-          (ListLink
-              gene
-              rna))
-      (node-info rna)
-      (if (= (string->number (cog-name prot)) 1)
-        (list
+   (if (and (string=? (cog-name cod) "True")
+            (string-prefix? "ENST" (cog-name rna)))
+       (list
         (EvaluationLink
-          (PredicateNode "translated_to")
-            (ListLink
-                rna
-                (find-translates rna)))
-           (node-info (car (find-translates rna))))
-          '()
-      )
-    )
-    '()
-  )
-  (if (and (equal? (cog-name ncod) "True") (not (string-prefix? "ENST" (cog-name rna))))
-    (list
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-          (ListLink
-              gene
-              rna))
-      (node-info rna)
-    )
-    '()
-  )
-)
-)
+         (PredicateNode "transcribed_to")
+         (ListLink
+          gene
+          rna))
+        (node-info rna)
+        (if (= (string->number (cog-name prot)) 1)
+            (list
+             (EvaluationLink
+              (PredicateNode "translated_to")
+              (ListLink
+               rna
+               (find-translates rna)))
+             (node-info (car (find-translates rna))))
+            '()))
+       '())
+   (if (and (string=? (cog-name ncod) "True")
+            (not (string-prefix? "ENST" (cog-name rna))))
+       (list
+        (EvaluationLink
+         (PredicateNode "transcribed_to")
+         (ListLink
+          gene
+          rna))
+        (node-info rna))
+       '())))
 
 (define-public (find-translates rna)
   (run-query (GetLink

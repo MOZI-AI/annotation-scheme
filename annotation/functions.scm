@@ -181,31 +181,21 @@ in the specified namespaces."
                 go
                 (VariableNode "$a"))))))
 
-;;finds go definition for parser function
-(define find-godef
-    (lambda (go)
-       (run-query
-        (BindLink
-         (VariableNode "$def")
-
-         (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-          (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-        )       
-      )
-     )
-)
+(define (find-godef go)
+  "Find go definition for parser function."
+  (run-query
+   (BindLink
+    (VariableNode "$def")
+    (EvaluationLink
+     (PredicateNode "GO_definition")
+     (ListLink
+      go
+      (VariableNode "$def")))
+    (EvaluationLink
+     (PredicateNode "GO_definition")
+     (ListLink
+      go
+      (VariableNode "$def"))))))
 
 (define-public (find-pathway-member gene db)
   (run-query (BindLink

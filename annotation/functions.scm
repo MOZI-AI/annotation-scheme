@@ -350,42 +350,33 @@ translates to."
     ((name) name)
     ((name . rest) name)))
 
-;; Find heirarchy of the reactome pathway
-(define-public pathway-hierarchy
-  (lambda (pw lst)
-    (let ([res-parent
-      (run-query (BindLink
-        (VariableNode "$parentpw")
-          (InheritanceLink
-            pw
-          (VariableNode "$parentpw"))
-        (ExecutionOutputLink
-          (GroundedSchemaNode "scm: check-pathway")
-          (ListLink
-            pw
-            (VariableNode "$parentpw")
-            (ListLink lst)
-          )
-        ))
-      )
-    ]
-    [res-child (run-query (BindLink
-      (VariableNode "$parentpw")
-      (InheritanceLink
-        (VariableNode "$parentpw")
-        pw)
-      (ExecutionOutputLink
-        (GroundedSchemaNode "scm: check-pathway")
-        (ListLink
-         (VariableNode "$parentpw")
-         pw
-         (ListLink lst)
-        )
-      ))
-    )]
-  )
-  (append res-parent res-child)
-)))
+(define-public (pathway-hierarchy pw lst)
+  "Find hierarchy of the reactome pathway."
+  (let ([res-parent
+         (run-query (BindLink
+                     (VariableNode "$parentpw")
+                     (InheritanceLink
+                      pw
+                      (VariableNode "$parentpw"))
+                     (ExecutionOutputLink
+                      (GroundedSchemaNode "scm: check-pathway")
+                      (ListLink
+                       pw
+                       (VariableNode "$parentpw")
+                       (ListLink lst)))))]
+        [res-child
+         (run-query (BindLink
+                     (VariableNode "$parentpw")
+                     (InheritanceLink
+                      (VariableNode "$parentpw")
+                      pw)
+                     (ExecutionOutputLink
+                      (GroundedSchemaNode "scm: check-pathway")
+                      (ListLink
+                       (VariableNode "$parentpw")
+                       pw
+                       (ListLink lst)))))])
+    (append res-parent res-child)))
 
 (define-public check-pathway
   (lambda (pw parent-pw lst)

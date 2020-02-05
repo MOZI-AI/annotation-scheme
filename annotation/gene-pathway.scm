@@ -69,45 +69,31 @@
     (write-to-file res file-name "gene-pathway")
     res))
 
-
 ;; From SMPDB
-
 (define (smpdb gene prot sm go biogrid rna)
-  (let (
-    [pw (find-pathway-member (GeneNode gene) "SMP")]
-    [ls '()]
-  )
-
-  (set! ls (flatten (map (lambda (path)
-      (let (
-        [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
-        [tmp '()]
-      )
-      (if (equal? sm "True")
-          (set! tmp (append tmp (find-mol node "ChEBI")))
-      )
-      (set! tmp (append tmp (find-pathway-genes node go rna prot)))
-      (if (equal? prot "True")
-        (let ([prots (find-mol node "Uniprot")])
-          (if (not (null? prots))
-            (set! tmp (append tmp prots))
-            (set! tmp (append tmp (node-info node))))))
-      (if (= biogrid 1)
-        (set! tmp (append tmp (pathway-gene-interactors node))))
-        (if (null? tmp)
-          '()
-          tmp
-        )
-      )
-      ) pw)) )
-
-
-  (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 0))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-  )
-
-  (append pw ls)
-))
+  (let* ([prot? (string=? prot "True")]
+         [sm? (string=? sm "True")]
+         [pw (find-pathway-member (GeneNode gene) "SMP")]
+         [ls (append-map (lambda (path)
+                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
+                             (append
+                              (if sm? (find-mol node "ChEBI") '())
+                              (find-pathway-genes node go rna prot)
+                              (if prot?
+                                  (let ([prots (find-mol node "Uniprot")])
+                                    (if (null? prots)
+                                        (node-info node)
+                                        prots))
+                                  '())
+                              (if (= biogrid 1)
+                                  (pathway-gene-interactors node)
+                                  '()))))
+                         pw)])
+    (append pw
+            ;; when proteins are selected, genes should only be linked to
+            ;; proteins not to pathways
+            (if prot? (find-protein (GeneNode gene) 0) '())
+            ls)))
 
 ;; From reactome
 

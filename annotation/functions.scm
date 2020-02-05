@@ -346,11 +346,10 @@ translates to."
 )))
 
 (define (find-prefix node)
-  (if (equal? (length (string-split (cog-name node) #\:)) 1)
-        (cog-name node)
-        (car  (string-split (cog-name node) #\:))
-    )
-)
+  (match (string-split (cog-name node) #\:)
+    ((name) name)
+    ((name . rest) name)))
+
 ;; Find heirarchy of the reactome pathway
 (define-public pathway-hierarchy
   (lambda (pw lst)

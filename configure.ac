@@ -17,11 +17,6 @@ if test "x$HAVE_JSON" = "xno"; then
 	AC_MSG_ERROR([The (json) module is needed. See https://github.com/aconchillo/guile-json for details.])
 fi
 
-GUILE_MODULE_AVAILABLE(HAVE_NYACC, [(nyacc lalr)])
-if test "x$HAVE_NYACC" = "xno"; then
-	AC_MSG_ERROR([The (nyacc) module is needed. Download from http://download.savannah.nongnu.org/releases/nyacc/.])
-fi
-
 GUILE_MODULE_AVAILABLE(HAVE_BIOSCI, [(opencog bioscience)])
 if test "x$HAVE_BIOSCI" = "xno"; then
 	AC_MSG_ERROR([The (opencog bioscience) module is needed. See https://github.com/opencog/agi-bio for details.])

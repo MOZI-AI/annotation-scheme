@@ -23,6 +23,7 @@
     #:use-module (annotation util)
     #:use-module (annotation gene-go)
     #:use-module (annotation gene-pathway)
+    #:use-module (annotation graph)
     #:use-module (annotation biogrid)
     #:use-module (annotation parser)
     #:use-module (opencog)
@@ -105,11 +106,7 @@ atomspace."
   (parameterize ((biogrid-genes '())
                  (biogrid-pairs '())
                  (biogrid-pairs-pathway '()))
-      (let* (
-        [fns (parse-request genes-list file-name request)]
-        [result (par-map (lambda (x) (x)) fns)]
-        )
-         (scm->json-string (atomese-parser (format #f "~a" result)))
-      )
-  )
-)
+    (let* ([fns (parse-request genes-list file-name request)]
+           [result (par-map (lambda (x) (x)) fns)] )
+      (scm->json-string
+       (atomese-graph->scm (atomese-parser (format #f "~a" result)))))))

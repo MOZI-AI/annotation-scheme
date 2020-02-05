@@ -1,6 +1,7 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2020 Ricardo Wurmus
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -25,39 +26,48 @@
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
       #:use-module (annotation parser)
-      #:export (gene-pathway-annotation)
-)
+      #:use-module (srfi srfi-1)
+      #:use-module (ice-9 match)
+      #:export (gene-pathway-annotation))
 
-
-(define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1) (coding #f) (noncoding #f))
-    (let ([result '()]
-          [pwlst '()]
-          [go (if (string=? namespace "") (ListLink)
-                (ListLink (ConceptNode namespace) (Number parents)))]
-          [rna (ListLink (list (if coding (ConceptNode coding) '()) (if noncoding (ConceptNode noncoding) '())))])
-
-    (for-each (lambda (gene)
-      (set! result (append result (node-info (GeneNode gene))))
-      (for-each (lambda (pathw)
-          (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene include_prot include_sm go biogrid rna)))
-              )
-          (if (equal? pathw "reactome")
-              (begin
-              (let ([res (reactome gene include_prot include_sm pwlst go biogrid rna)])
-                (set! result (append result (car res)))
-                (set! pwlst (append pwlst (cdr res)))
-              )))
-          )(string-split pathway #\ ))
-    ) gene_nodes)
-
-    (let (
-      [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
-    )
-      (write-to-file res file-name "gene-pathway")
-      res
-    )
-))
+;; TODO: would be better to use a list for the "pathway" argument
+;; instead of splitting a string.
+;; TODO: don't use the string "True" for include_prot and include_sm.
+(define* (gene-pathway-annotation gene-nodes file-name
+                                  #:key
+                                  (pathway "reactome")
+                                  (include_prot "True")
+                                  (include_sm "True")
+                                  (namespace "")
+                                  (parents 0)
+                                  (biogrid 1)
+                                  coding
+                                  noncoding)
+  (let* ([pwlst '()]
+         [pathways (string-split pathway #\space)]
+         [go (if (string-null? namespace)
+                 (ListLink)
+                 (ListLink (ConceptNode namespace) (Number parents)))]
+         [rna (ListLink (list (if coding (ConceptNode coding) '())
+                              (if noncoding (ConceptNode noncoding) '())))]
+         [result
+          (append-map (lambda (gene)
+                        (append 
+                         (node-info (GeneNode gene))
+                         (append-map (match-lambda
+                                       ("smpdb"
+                                        (smpdb gene include_prot include_sm go biogrid rna))
+                                       ("reactome"
+                                        (match (reactome gene include_prot include_sm pwlst go biogrid rna)
+                                          ((first . rest)
+                                           (set! pwlst (append pwlst rest))
+                                           first))))
+                                     pathways)))
+                      gene-nodes)]
+         [res (ListLink (ConceptNode "gene-pathway-annotation")
+                        (ListLink result))])
+    (write-to-file res file-name "gene-pathway")
+    res))
 
 
 ;; From SMPDB

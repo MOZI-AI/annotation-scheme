@@ -7,8 +7,7 @@
     #:use-module (annotation gene-pathway)
     #:use-module (annotation graph)
     #:use-module (annotation biogrid)
-    #:use-module (annotation parser)
-    #:use-module (json))
+    #:use-module (annotation parser))
 
 (test-begin "parser")
 

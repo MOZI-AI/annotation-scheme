@@ -388,7 +388,7 @@
       (run-query
         (BindLink
           (VariableNode "$loc")
-          (AndLink
+          (ContextLink
             (MemberLink 
               child
               parent)

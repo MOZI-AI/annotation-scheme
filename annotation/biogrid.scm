@@ -1,6 +1,7 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2020 Ricardo Wurmus
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -17,6 +18,7 @@
 ;;; You should have received a copy of the GNU General Public License
 ;;; along with this software.  If not, see
 ;;; <http://www.gnu.org/licenses/>.
+
 (define-module (annotation biogrid)
 	#:use-module (annotation functions)
 	#:use-module (annotation util)
@@ -24,30 +26,34 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-	#:export (biogrid-interaction-annotation)
-)
-(define* (biogrid-interaction-annotation gene-nodes file-name #:key (interaction "Proteins") (namespace "") (parents 0) (coding #f) (noncoding #f))
-  (let ([result '()]
-        [go (if (string=? namespace "") (ListLink) 
-                (ListLink (ConceptNode namespace) (Number parents)))]
-		[rna (ListLink (list (if coding (ConceptNode coding) '()) (if noncoding (ConceptNode noncoding) '())))])
-	
-	(for-each (lambda (gene)
-		(if (equal? interaction "Proteins")
-			(set! result (append result (match-gene-interactors (GeneNode gene) 1 go rna) (find-output-interactors (GeneNode gene) 1 go rna)))
-		)
+    #:use-module (ice-9 match)
+    #:use-module (srfi srfi-1)
+	#:export (biogrid-interaction-annotation))
 
-		(if (equal? interaction "Genes") 
-			(begin
-				(set! result (append result rna (match-gene-interactors (GeneNode gene) 0 go rna) (find-output-interactors (GeneNode gene) 0 go rna)))
-			)
-		)
-	) gene-nodes)
-
-	 (let (
-    	[res (ListLink (ConceptNode "biogrid-interaction-annotation") (ListLink result))]
-  		)
-    	(write-to-file res file-name "biogrid")
-		res
-  	)
-))
+(define* (biogrid-interaction-annotation gene-nodes file-name
+                                         #:key
+                                         (interaction "Proteins")
+                                         (namespace "")
+                                         (parents 0)
+                                         coding
+                                         noncoding)
+  (let* ([go (if (string-null? namespace)
+                 (ListLink) 
+                 (ListLink (ConceptNode namespace) (Number parents)))]
+		 [rna (ListLink (list (if coding (ConceptNode coding) '())
+                              (if noncoding (ConceptNode noncoding) '())))]
+         [result
+          (append-map (lambda (gene)
+                        (match interaction
+                          ("Proteins"
+                           (append (match-gene-interactors (GeneNode gene) 1 go rna)
+                                   (find-output-interactors (GeneNode gene) 1 go rna)))
+                          ("Genes"
+                           (append rna
+                                   (match-gene-interactors (GeneNode gene) 0 go rna)
+                                   (find-output-interactors (GeneNode gene) 0 go rna)))))
+                      gene-nodes)]
+         [res (ListLink (ConceptNode "biogrid-interaction-annotation")
+                        (ListLink result))])
+    (write-to-file res file-name "biogrid")
+	res))

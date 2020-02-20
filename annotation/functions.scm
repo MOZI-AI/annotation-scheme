@@ -1,6 +1,7 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2020 Ricardo Wurmus
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
 ;;; MOZI-AI Annotation Scheme is free software; you can redistribute
@@ -27,98 +28,70 @@
     #:use-module (ice-9 match)
 )
 
-;;Given an atom and list of namespaces finds the parents of that atom in the specified namespaces
-(define find-parent
+(define (find-parent node namespaces)
+  "Given an atom and list of namespaces find the parents of that atom
+in the specified namespaces."
+  (let ([atom (cog-outgoing-atom node 1)])
+    (append-map (lambda (ns)
+                  (run-query (BindLink
+                              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
+                              (AndLink
+                               (InheritanceLink
+                                atom
+                                (VariableNode "$a"))
+                               (EvaluationLink
+                                (PredicateNode "GO_namespace")
+                                (ListLink
+                                 (VariableNode "$a")
+                                 (ConceptNode ns))))
+                              (ExecutionOutputLink
+                               (GroundedSchemaNode "scm: add-go-info")
+                               (ListLink
+                                atom
+                                (VariableNode "$a"))))))
+                namespaces)))
 
-  (lambda (node namespaces)
-        (let (
-          [atom (cog-outgoing-atom node 1)]
-          [parents '()]
-        )
-        (for-each (lambda (ns)
-          (set! parents (append parents (run-query (BindLink
-            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (AndLink
-              (InheritanceLink
-                atom
-                (VariableNode "$a"))
-              (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
-            )
-          (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-go-info")
-                (ListLink
-                  atom
-                  (VariableNode "$a")
-                ))
-        )))) 
-        ) namespaces
-      )
-    parents  
-  )
-))
+(define (find-memberln gene namespaces)
+  "Find GO terms of a gene."
+  (append-map (lambda (ns)
+                (run-query (BindLink
+                            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
+                            (AndLink
+                             (MemberLink
+                              gene
+                              (VariableNode "$a"))
+                             (EvaluationLink
+                              (PredicateNode "GO_namespace")
+                              (ListLink
+                               (VariableNode "$a")
+                               (ConceptNode ns)))) 
+                            (ExecutionOutputLink
+                             (GroundedSchemaNode "scm: add-go-info")
+                             (ListLink
+                              gene
+                              (VariableNode "$a"))))))
+              namespaces))
 
-;;Finds Go terms of a gene
-(define find-memberln 
-  (lambda (gene namespaces)
-    (let ([go-atoms '()])
-
-      (for-each (lambda (ns)
-      
-        (set! go-atoms (append go-atoms (run-query (BindLink
-            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (AndLink
-              (MemberLink
-                gene
-                (VariableNode "$a"))
-                (EvaluationLink
-                (PredicateNode "GO_namespace")
-                (ListLink
-                  (VariableNode "$a")
-                  (ConceptNode ns)
-                )
-              )
-            ) 
-           (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-go-info")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                ))
-          ))))
-      ) namespaces)
-          go-atoms
-          ))
-)
-
-;;Add information for GO nodes
 (define-public (add-go-info child-atom parent-atom)
-  (if (and (or (equal? (cog-type child-atom) 'GeneNode) (equal? (cog-type child-atom) 'MoleculeNode))
-      (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO"))
-    (ListLink  
-      (MemberLink
-          child-atom
-          parent-atom
-      )
-      (go-info parent-atom)
-    )
-    (begin
-      (if (equal? (list-ref (string-split (cog-name parent-atom) #\:) 0) "GO")
-        (ListLink 
-            (InheritanceLink
-              child-atom
-              parent-atom
-          )
-          (go-info parent-atom)
-        )
-    ))
-  )
-)
+  "Add information for GO nodes"
+  (define parent-is-go?
+    (match (string-split (cog-name parent-atom) #\:)
+      (("GO" . rest) #t)
+      (_ #f)))
+  (if parent-is-go?
+      (if (member (cog-type child-atom)
+                  '(GeneNode MoleculeNode))
+          (ListLink
+           (MemberLink
+            child-atom
+            parent-atom)
+           (go-info parent-atom))
+          (ListLink
+           (InheritanceLink
+            child-atom
+            parent-atom)
+           (go-info parent-atom)))
+      #f))
 
 ;;the main function to find the go terms for a gene with a specification of the parents
 (define-public find-go-term 
@@ -142,114 +115,87 @@
     )
 ))
 
-;; Finds go terms for a proteins coded by the given gene
-(define-public find-proteins-goterm
-  (lambda (gene namespace parent)
-  (let ([prot (find-protein-form gene)]
-       [annotation '()])
-  (if (equal? (find-memberln prot namespace) '())
-    (begin
-      (let ([goterms (flatten (map (lambda (ns)
-        (run-query (BindLink
-        (TypedVariable (VariableNode "$g") (Type 'ConceptNode))
-        (AndLink (MemberLink gene (VariableNode "$g"))
-          (EvaluationLink (PredicateNode "GO_namespace") (ListLink (VariableNode "$g") (ConceptNode ns)))
-        )
-        (VariableNode "$g")))
-      ) namespace))])
-      (set! annotation (map (lambda (go)
-            (MemberLink (stv 0.0 0.0) prot go)
-      )goterms))
-    ))
-    (set! annotation (find-go-term prot namespace parent))
-  )
-  (ListLink
-    annotation
-    (node-info prot)
-    (EvaluationLink (PredicateNode "expresses") (ListLink gene prot))
-  )
-  )
-))
-;; Add details about the GO term
+(define-public (find-proteins-goterm gene namespace parent)
+  "Find GO terms for proteins coded by the given gene."
+  (let* ([prot (find-protein-form gene)]
+         [annotation
+          (if (null? (find-memberln prot namespace))
+              (let ([goterms
+                     (append-map
+                      (lambda (ns)
+                        (run-query (BindLink
+                                    (TypedVariable (VariableNode "$g")
+                                                   (Type 'ConceptNode))
+                                    (AndLink (MemberLink gene (VariableNode "$g"))
+                                             (EvaluationLink
+                                              (PredicateNode "GO_namespace")
+                                              (ListLink
+                                               (VariableNode "$g")
+                                               (ConceptNode ns))))
+                                    (VariableNode "$g"))))
+                      namespace)])
+                (map (lambda (go)
+                       (MemberLink (stv 0.0 0.0) prot go))
+                     goterms))
+              (find-go-term prot namespace parent))])
+    (ListLink
+     annotation
+     (node-info prot)
+     (EvaluationLink (PredicateNode "expresses")
+                     (ListLink gene prot)))))
+
 (define (go-info go)
+  "Add details about the GO term."
+  (define GO-ns (find-GO-ns go))
   (list
-      (find-go-name go)
-      (EvaluationLink 
-        (PredicateNode "GO_namespace") 
-        (ListLink 
-          go 
-          (if (equal? (find-GO-ns go) '()) (ConceptNode "") (find-GO-ns go))))
-  )
-)
+   (find-go-name go)
+   (EvaluationLink 
+    (PredicateNode "GO_namespace") 
+    (ListLink 
+     go
+     (if (null? GO-ns) (ConceptNode "") GO-ns)))))
 
-;; Finds parents of a GO term ( of given namespace type) 
-(define find-GO-ns 
-  (lambda (go)
-    (run-query
-            (GetLink
-                (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
-                (EvaluationLink 
-                    (PredicateNode "GO_namespace")
-                    (ListLink 
-                      go
-                      (VariableNode "$v")
-                    )
-                 )
-                )
-    )
-  
-  )
-)
+(define (find-GO-ns go)
+  "Find parents of a GO term (of given namespace type)."
+  (run-query
+   (GetLink
+    (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
+    (EvaluationLink
+     (PredicateNode "GO_namespace")
+     (ListLink
+      go
+      (VariableNode "$v"))))))
 
-;; Finds the name of a GO term
-(define find-go-name
-    (lambda(go)
-        (run-query (BindLink
-           (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-            (EvaluationLink
-               (PredicateNode "GO_name")
-               (ListLink
-               go
-               (VariableNode "$a")
-              )
-            )
+(define (find-go-name go)
+  "Find the name of a GO term."
+  (run-query (BindLink
+              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
               (EvaluationLink
                (PredicateNode "GO_name")
                (ListLink
-               go
-               (VariableNode "$a")
-              )
-            )
-           )
-        )
-    )
-)
+                go
+                (VariableNode "$a")))
+              (EvaluationLink
+               (PredicateNode "GO_name")
+               (ListLink
+                go
+                (VariableNode "$a"))))))
 
-;;finds go definition for parser function
-(define find-godef
-    (lambda (go)
-       (run-query
-        (BindLink
-         (VariableNode "$def")
-
-         (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-          (EvaluationLink
-          (PredicateNode "GO_definition")
-          (ListLink
-           go
-           (VariableNode "$def")
-          )
-         )
-        )       
-      )
-     )
-)
+(define (find-godef go)
+  "Find go definition for parser function."
+  (run-query
+   (BindLink
+    (VariableNode "$def")
+    (EvaluationLink
+     (PredicateNode "GO_definition")
+     (ListLink
+      go
+      (VariableNode "$def")))
+    (EvaluationLink
+     (PredicateNode "GO_definition")
+     (ListLink
+      go
+      (VariableNode "$def"))))))
 
 (define-public (find-pathway-member gene db)
   (run-query (BindLink
@@ -275,121 +221,102 @@
     ))
 )
 
-(define-public add-pathway-info 
-  (lambda (gene pathway)
-     (let ([res '()])
-      (if  (string-contains (cog-name pathway) "R-HSA")
-        (set! res (ListLink 
-            (MemberLink gene pathway)
-            (node-info pathway)
-        ))
-     )
-     (if (string-contains (cog-name pathway) "SMP")
-        (set! res (ListLink 
-            (MemberLink gene pathway)
-            (node-info pathway)
-        ))
-     )
-     res
-     )
-  )
-)
-;; finds genes which codes the proteins in a given pathway and does cross annotation:
-;; if go, annotate each member genes of a pathway for its GO terms
-;; if rna, annotate each member genes of a pathway for its RNA transcribes
-;; if prot, include the proteins inwhich the RNA translates to
-(define-public find-pathway-genes
-  (lambda (pathway go rna prot)
-    (run-query (BindLink
-      (VariableList 
-        (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-        (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
-      (AndLink
-      (MemberLink
-        (VariableNode "$p")
-        pathway)
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            (VariableNode "$g")
-            (VariableNode "$p") )))
-      (ExecutionOutputLink
-      (GroundedSchemaNode "scm: add-pathway-genes")
-        (ListLink
-          pathway
-          (VariableNode "$g")
-          go
-          rna
-          (ConceptNode prot)
-        ))
-  ))
-))
+(define-public (add-pathway-info gene pathway)
+  (if (or (string-contains (cog-name pathway) "R-HSA")
+          (string-contains (cog-name pathway) "SMP"))
+      (ListLink
+       (MemberLink gene pathway)
+       (node-info pathway))
+      #f))
+
+(define-public (find-pathway-genes pathway go rna prot?)
+  "Find genes which code the proteins in a given pathway.  Perform
+cross-annotation: if go, annotate each member genes of a pathway for
+its GO terms; if rna, annotate each member genes of a pathway for its
+RNA transcribes; if prot?, include the proteins in which the RNA
+translates to."
+  (run-query
+   (BindLink
+    (VariableList 
+     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
+     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
+    (AndLink
+     (MemberLink
+      (VariableNode "$p")
+      pathway)
+     (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+       (VariableNode "$g")
+       (VariableNode "$p") )))
+    (ExecutionOutputLink
+     (GroundedSchemaNode "scm: add-pathway-genes")
+     (ListLink
+      pathway
+      (VariableNode "$g")
+      go
+      rna
+      (ConceptNode (if prot? "True" "False")))))))
+
 (define-public (add-pathway-genes pathway gene go rna prot)
-(if (and (null? (cog-outgoing-set go)) (null? (cog-outgoing-set rna)))
-  (ListLink
-        (MemberLink gene pathway)
-        (node-info gene)
-        (locate-node gene)
-  )
-  (ListLink
-    (MemberLink gene pathway)
-      (node-info gene)
-      (locate-node gene)
-  (if (not (null? (cog-outgoing-set go)))
-    (let ([namespace (car (cog-outgoing-set go))]
-          [parent (cadr (cog-outgoing-set go))])
-      (ListLink (ConceptNode "gene-go-annotation") (find-go-term gene  (string-split (cog-name namespace) #\ ) (string->number (cog-name parent)))
-      (ListLink (ConceptNode "gene-pathway-annotation")))
-    )
-    '()
-  )
-  (if (not (null? (cog-outgoing-set rna)))
-    (let ([crna (car (cog-outgoing-set rna))]
-          [ncrna (cadr (cog-outgoing-set rna))]
-          [protein (if (equal? (cog-name prot) "True") 1 0)])
-      (let ([rnaresult  (find-rna gene (cog-name crna) (cog-name ncrna) protein)])
-      (if (not (null? rnaresult))
-        (ListLink (ConceptNode "rna-annotation") rnaresult
-        (ListLink (ConceptNode "gene-pathway-annotation")))
-        '()
-      ))
-    )
-    '()
-  )
-  )
-))
-;; Finds proteins a gene expresses
-(define-public find-protein
-    (lambda (gene option)
-        (run-query (BindLink
-          (VariableList
-            (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-            (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
-           (AndLink
-            (MemberLink
-              gene
-              (VariableNode "$pw"))
-            (MemberLink
-              (VariableNode "$a")
-              (VariableNode "$pw"))
-            (EvaluationLink
-            (PredicateNode "expresses")
-              (ListLink
-                gene
-                (VariableNode "$a") ))
-            )
-        (ExecutionOutputLink
-          (GroundedSchemaNode "scm: filter-pathway")
-            (ListLink
-              gene
-              (VariableNode "$a")
-              (VariableNode "$pw")
-              (Number option)
-            )
-        )
-      )
-  )
-))
+  (let ((go-set (cog-outgoing-set go))
+        (rna-set (cog-outgoing-set rna)))
+    (if (and (null? go-set) (null? rna-set))
+        (ListLink
+         (MemberLink gene pathway)
+         (node-info gene)
+         (locate-node gene))
+        (ListLink
+         (MemberLink gene pathway)
+         (node-info gene)
+         (locate-node gene)
+         (match go-set
+           ((namespace parent . _)
+            (ListLink (ConceptNode "gene-go-annotation")
+                      (find-go-term gene
+                                    (string-split (cog-name namespace) #\space)
+                                    (string->number (cog-name parent)))
+                      (ListLink (ConceptNode "gene-pathway-annotation"))))
+           (_ '()))
+         (match rna-set
+           ((crna ncrna . _)
+            (let* ([protein (if (string=? (cog-name prot) "True") 1 0)]
+                   [rnaresult (find-rna gene
+                                        (cog-name crna)
+                                        (cog-name ncrna)
+                                        protein)])
+              (if (null? rnaresult)
+                  '()
+                  (ListLink (ConceptNode "rna-annotation") rnaresult
+                            (ListLink (ConceptNode "gene-pathway-annotation"))))))
+           (_ '()))))))
+
+(define-public (find-protein gene option)
+  "Find the proteins a gene expresses."
+  (run-query
+   (BindLink
+    (VariableList
+     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
+     (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
+    (AndLink
+     (MemberLink
+      gene
+      (VariableNode "$pw"))
+     (MemberLink
+      (VariableNode "$a")
+      (VariableNode "$pw"))
+     (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+       gene
+       (VariableNode "$a"))))
+    (ExecutionOutputLink
+     (GroundedSchemaNode "scm: filter-pathway")
+     (ListLink
+      gene
+      (VariableNode "$a")
+      (VariableNode "$pw")
+      (Number option))))))
 
 (define-public filter-pathway (lambda (gene prot pathway option)
   (if (and (string=? (find-prefix prot) "Uniprot") )
@@ -417,47 +344,37 @@
 )))
 
 (define (find-prefix node)
-  (if (equal? (length (string-split (cog-name node) #\:)) 1)
-        (cog-name node)
-        (car  (string-split (cog-name node) #\:))
-    )
-)
-;; Find heirarchy of the reactome pathway
-(define-public pathway-hierarchy
-  (lambda (pw lst)
-    (let ([res-parent
-      (run-query (BindLink
-        (VariableNode "$parentpw")
-          (InheritanceLink
-            pw
-          (VariableNode "$parentpw"))
-        (ExecutionOutputLink
-          (GroundedSchemaNode "scm: check-pathway")
-          (ListLink
-            pw
-            (VariableNode "$parentpw")
-            (ListLink lst)
-          )
-        ))
-      )
-    ]
-    [res-child (run-query (BindLink
-      (VariableNode "$parentpw")
-      (InheritanceLink
-        (VariableNode "$parentpw")
-        pw)
-      (ExecutionOutputLink
-        (GroundedSchemaNode "scm: check-pathway")
-        (ListLink
-         (VariableNode "$parentpw")
-         pw
-         (ListLink lst)
-        )
-      ))
-    )]
-  )
-  (append res-parent res-child)
-)))
+  (match (string-split (cog-name node) #\:)
+    ((name) name)
+    ((name . rest) name)))
+
+(define-public (pathway-hierarchy pw lst)
+  "Find hierarchy of the reactome pathway."
+  (let ([res-parent
+         (run-query (BindLink
+                     (VariableNode "$parentpw")
+                     (InheritanceLink
+                      pw
+                      (VariableNode "$parentpw"))
+                     (ExecutionOutputLink
+                      (GroundedSchemaNode "scm: check-pathway")
+                      (ListLink
+                       pw
+                       (VariableNode "$parentpw")
+                       (ListLink lst)))))]
+        [res-child
+         (run-query (BindLink
+                     (VariableNode "$parentpw")
+                     (InheritanceLink
+                      (VariableNode "$parentpw")
+                      pw)
+                     (ExecutionOutputLink
+                      (GroundedSchemaNode "scm: check-pathway")
+                      (ListLink
+                       (VariableNode "$parentpw")
+                       pw
+                       (ListLink lst)))))])
+    (append res-parent res-child)))
 
 (define-public check-pathway
   (lambda (pw parent-pw lst)
@@ -870,43 +787,33 @@
 
 ;;                           
 (define-public (find-pubmed-id gene-a gene-b)
- (let ([pub (run-query
-     (GetLink
-       (VariableNode "$pub")
-       (EvaluationLink
+  (let ([pub (run-query
+              (GetLink
+               (VariableNode "$pub")
+               (EvaluationLink
+                (PredicateNode "has_pubmedID")
+                (ListLink
+                 (EvaluationLink 
+                  (PredicateNode "interacts_with") 
+                  (ListLink
+                   gene-a
+                   gene-b))
+                 (VariableNode "$pub")))))])
+    (if (null? pub)
+        (run-query
+         (GetLink
+          (VariableNode "$pub")
+          (EvaluationLink
            (PredicateNode "has_pubmedID")
            (ListLink
             (EvaluationLink 
-                (PredicateNode "interacts_with") 
-                  (ListLink
-                    gene-a
-                    gene-b
-                  ))
-            (VariableNode "$pub")
-           )
-         )
+             (PredicateNode "interacts_with") 
+             (ListLink
+              gene-b
+              gene-a))
+            (VariableNode "$pub")))))
+        pub)))
 
-   ))])
-   (if (null? pub)
-     (set! pub (run-query
-     (GetLink
-       (VariableNode "$pub")
-       (EvaluationLink
-           (PredicateNode "has_pubmedID")
-           (ListLink
-             (EvaluationLink 
-                (PredicateNode "interacts_with") 
-                  (ListLink
-                    gene-b
-                    gene-a
-                  ))
-             (VariableNode "$pub")
-           )
-         )
-   ))
-   ))
-   pub
-))
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
   (run-query (BindLink
@@ -932,40 +839,35 @@
 
 (define-public (filterbytype gene rna cod ncod prot)
   (ListLink 
-  (if (and (equal? (cog-name cod) "True") (string-prefix? "ENST" (cog-name rna)))
-    (list
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-          (ListLink
-              gene
-              rna))
-      (node-info rna)
-      (if (= (string->number (cog-name prot)) 1)
-        (list
+   (if (and (string=? (cog-name cod) "True")
+            (string-prefix? "ENST" (cog-name rna)))
+       (list
         (EvaluationLink
-          (PredicateNode "translated_to")
-            (ListLink
-                rna
-                (find-translates rna)))
-           (node-info (car (find-translates rna))))
-          '()
-      )
-    )
-    '()
-  )
-  (if (and (equal? (cog-name ncod) "True") (not (string-prefix? "ENST" (cog-name rna))))
-    (list
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-          (ListLink
-              gene
-              rna))
-      (node-info rna)
-    )
-    '()
-  )
-)
-)
+         (PredicateNode "transcribed_to")
+         (ListLink
+          gene
+          rna))
+        (node-info rna)
+        (if (= (string->number (cog-name prot)) 1)
+            (list
+             (EvaluationLink
+              (PredicateNode "translated_to")
+              (ListLink
+               rna
+               (find-translates rna)))
+             (node-info (car (find-translates rna))))
+            '()))
+       '())
+   (if (and (string=? (cog-name ncod) "True")
+            (not (string-prefix? "ENST" (cog-name rna))))
+       (list
+        (EvaluationLink
+         (PredicateNode "transcribed_to")
+         (ListLink
+          gene
+          rna))
+        (node-info rna))
+       '())))
 
 (define-public (find-translates rna)
   (run-query (GetLink

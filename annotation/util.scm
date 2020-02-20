@@ -160,29 +160,20 @@
     )
 )
 
-;; Finds entrez_id of a gene
 (define (find-entrez gene)
-  (let ((entrez '()))
-    (set! entrez (get-name
-   (run-query
-     (GetLink
-       (VariableNode "$a")
-       (EvaluationLink
-        (PredicateNode "has_entrez_id")
-        (ListLink
-         gene
-         (VariableNode "$a")
-        )
-       )
-    )
-  )
-  ))
-   (if (equal? (length (string-split entrez #\:)) 1)
-       entrez
-       (cadr  (string-split entrez #\:))
-   )
-  )
-)
+  "Find the entrez_id of a gene."
+  (let ((entrez (get-name
+                  (run-query
+                   (GetLink
+                    (VariableNode "$a")
+                    (EvaluationLink
+                     (PredicateNode "has_entrez_id")
+                     (ListLink
+                      gene
+                      (VariableNode "$a"))))))))
+    (match (string-split entrez #\:)
+      ((single) single)
+      ((first second . rest) second))))
 
 (define-public (run-query QUERY)
 "
@@ -308,52 +299,39 @@
     ))
 )
 
-(define-public locate-node
-  (lambda(node)
-      (let ([loc (run-query
-        (BindLink
-        (VariableNode "$go")
-        (AndLink
-          (MemberLink 
-            node
-            (VariableNode "$go"))
-          (EvaluationLink
-            (PredicateNode "GO_namespace")
-            (ListLink
-              (VariableNode "$go")
-              (ConceptNode "cellular_component")))
-        )
-        (ExecutionOutputLink
-        (GroundedSchemaNode "scm: filter-loc")
-          (ListLink
-            node
-            (VariableNode "$go")
-          ))
-          )
-      )
-      ])
-      (if (null? loc)
-      (set! loc 
-      (run-query
-        (BindLink
+(define-public (locate-node node)
+  (let ([loc (run-query
+              (BindLink
+               (VariableNode "$go")
+               (AndLink
+                (MemberLink 
+                 node
+                 (VariableNode "$go"))
+                (EvaluationLink
+                 (PredicateNode "GO_namespace")
+                 (ListLink
+                  (VariableNode "$go")
+                  (ConceptNode "cellular_component"))))
+               (ExecutionOutputLink
+                (GroundedSchemaNode "scm: filter-loc")
+                (ListLink
+                 node
+                 (VariableNode "$go")))))])
+    (if (null? loc)
+        (run-query
+         (BindLink
           (VariableNode "$loc")
           (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                node
-                (VariableNode "$loc")))
+           (PredicateNode "has_location")
+           (ListLink
+            node
+            (VariableNode "$loc")))
           (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                node
-                (VariableNode "$loc")))
-          )
-        ))
-      )
-      loc
-      )
-  )
-)
+           (PredicateNode "has_location")
+           (ListLink
+            node
+            (VariableNode "$loc")))))
+        loc)))
 
 ;; filter only Cell membrane and compartments
 

@@ -40,6 +40,8 @@
     #:use-module (annotation rna)
 )
 
+(define annotation-functions '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "include-rna"))
+
 (define-public (find-genes gene-list)
   "Validate if given gene strings in GENE-LIST exist in the
 atomspace."
@@ -86,20 +88,26 @@ atomspace."
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (append (list (lambda () (gene-info gene-list file-name))) (map (lambda (ht) 
-    (let* (
-        (func-name (string->symbol (hash-ref ht "function_name")))
-        (func (variable-ref (module-variable (current-module) func-name)))
-        (filters (hash-ref ht "filters"))
-        (args  (flatten (map (lambda (f)
-         (list (eval-string (string-append "#:" (hash-ref f "filter"))) 
-            (if (string->number (hash-ref f "value"))
-                (string->number (hash-ref f "value"))
-                (hash-ref f "value")
-            ))
-         ) filters))))
-        (lambda () (apply func gene-list (append (list file-name) args)))
-    )) table)) )
+      (flatten (append (list (lambda () (gene-info gene-list file-name))) (map (lambda (ht) 
+        (if (member (hash-ref ht "function_name") annotation-functions)
+            (let* (
+                (func-name (string->symbol (hash-ref ht "function_name")))
+                (func (variable-ref (module-variable (current-module) func-name)))
+                (filters (hash-ref ht "filters"))
+                (args  (flatten (map (lambda (f)
+                (list (with-input-from-string (string-append "#:" (hash-ref f "filter")) read) 
+                    (if (string->number (hash-ref f "value"))
+                        (string->number (hash-ref f "value"))
+                        (hash-ref f "value")
+                    ))
+                ) filters))))
+                (lambda () (apply func gene-list (append (list file-name) args)))
+                
+              )
+
+            '()
+        )
+    ) table)) ))
 )
 
 (define-public (annotate-genes genes-list file-name request)

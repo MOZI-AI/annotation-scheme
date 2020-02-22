@@ -58,25 +58,24 @@
 )
 
 ;; Find node name and description
+(define (xnode-info node)
+	(define (node-name node)
+		(let ([lst (find-pathway-name node)])
+				(if (null? lst) (ConceptNode "N/A") (car lst))))
 
+	(if (cog-node? node)
+		(EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+		(ListLink))
+)
+
+; Cache results of xnode-info for performance.
+(define memoize-node-info (make-afunc-cache xnode-info))
+
+; Wrap the results in a list. Is this really neeeded?
 (define-public (node-info node)
-  (if (cog-node? node)
-    (list
-      (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
-    )
-    (list (ListLink))
-  )
-)
+"node-info -- Find node name and description"
+	(list (memoize-node-info node)))
 
-(define (node-name node)
-	(let
-		( [lst (find-pathway-name node)])
-			(if (null? lst)
-				(ConceptNode "N/A")
-				(car lst)
-			)
-	)
-)
 
 ;;Finds a name of any node (Except GO which has different structure)
 (define find-pathway-name

@@ -354,7 +354,7 @@ translates to."
 	(filter
 		(lambda (inhlink)
 			(and (member (gar inhlink) lst) (member (gdr inhlink) lst)))
-		(get-incoming-by-type pw 'InheritanceLink)))
+		(cog-incoming-by-type pw 'InheritanceLink)))
 
 
 (define-public (find-mol path identifier)

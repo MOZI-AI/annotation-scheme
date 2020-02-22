@@ -352,24 +352,22 @@ translates to."
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
    (define parents (run-query
-      (Get (VariableNode "$parentpw")
-         (Inheritance pw (Variable "$parentpw")))))
+      (Get (Variable "$parentpw") (Inheritance pw (Variable "$parentpw")))))
 
    (define childs (run-query
-      (Get (VariableNode "$childpw")
-         (Inheritance (Variable "$childpw") pw))))
-
-   (define (check-pathway pw parent-pw lst)
-      (if (and (member parent-pw lst) (member pw lst))
-         (Inheritance pw parent-pw)))
+      (Get (Variable "$childpw") (Inheritance (Variable "$childpw") pw))))
 
    (define res-parent
-       (map (lambda (parent-pw) (check-pathway pw parent-pw lst)) parents))
+      (filter-map (lambda (parent-pw)
+            (if (member parent-pw lst) (Inheritance pw parent-pw) #f))
+         parents))
 
    (define res-child
-      (map (lambda (child-pw) (check-pathway child-pw pw lst)) childs)]
+      (filter-map (lambda (child-pw)
+            (if (member child-pw lst) (Inheritance child-pw pw) #f))
+         childs))
 
-   (append res-parent res-child)))
+   (append res-parent res-child))
 
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"

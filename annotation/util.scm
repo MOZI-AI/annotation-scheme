@@ -299,7 +299,7 @@
     ))
 )
 
-(define-public (locate-node node)
+(define (do-locate-node node)
   (let ([loc (run-query
               (BindLink
                (VariableNode "$go")
@@ -332,6 +332,8 @@
             node
             (VariableNode "$loc")))))
         loc)))
+
+(define-public locate-node (make-afunc-cache do-locate-node))
 
 ;; filter only Cell membrane and compartments
 

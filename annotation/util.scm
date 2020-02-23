@@ -58,7 +58,7 @@
 )
 
 ;; Find node name and description
-(define (xnode-info node)
+(define (do-get-node-info node)
 	(define (node-name node)
 		(let ([lst (find-pathway-name node)])
 				(if (null? lst) (ConceptNode "N/A") (car lst))))
@@ -69,11 +69,11 @@
 )
 
 ; Cache results of xnode-info for performance.
-(define memoize-node-info (make-afunc-cache xnode-info))
+(define memoize-node-info (make-afunc-cache do-get-node-info))
 
 ; Wrap the results in a list. Is this really neeeded?
 (define-public (node-info node)
-"node-info -- Find node name and description"
+"node-info -- Find node name and description (whats a node??) "
 	(list (memoize-node-info node)))
 
 

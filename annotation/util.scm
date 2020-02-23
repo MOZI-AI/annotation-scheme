@@ -190,7 +190,7 @@
 	results
 )
 
-(define (xfind-name GO-ATOM)
+(define (do-find-name GO-ATOM)
 "
 	find-name GO-ATOM
 
@@ -223,7 +223,7 @@
 
 ; A memoized version of `xfind-name`, improves performance considerably
 ; on repeated searches.
-(define find-name (make-afunc-cache xfind-name))
+(define find-name (make-afunc-cache do-find-name))
 
 (define-public (filter-genes input-gene gene-name)
   (if (regexp-match? (string-match (string-append (cog-name input-gene) ".+$") (cog-name gene-name)))

@@ -349,45 +349,28 @@ translates to."
     ((name . rest) name)))
 
 (define-public (pathway-hierarchy pw lst)
-  "Find hierarchy of the reactome pathway."
-  (let ([res-parent
-         (run-query (BindLink
-                     (VariableNode "$parentpw")
-                     (InheritanceLink
-                      pw
-                      (VariableNode "$parentpw"))
-                     (ExecutionOutputLink
-                      (GroundedSchemaNode "scm: check-pathway")
-                      (ListLink
-                       pw
-                       (VariableNode "$parentpw")
-                       (ListLink lst)))))]
-        [res-child
-         (run-query (BindLink
-                     (VariableNode "$parentpw")
-                     (InheritanceLink
-                      (VariableNode "$parentpw")
-                      pw)
-                     (ExecutionOutputLink
-                      (GroundedSchemaNode "scm: check-pathway")
-                      (ListLink
-                       (VariableNode "$parentpw")
-                       pw
-                       (ListLink lst)))))])
-    (append res-parent res-child)))
+" pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
-(define-public check-pathway
-  (lambda (pw parent-pw lst)
-    (if (and (member parent-pw (cog-outgoing-set lst)) (member pw (cog-outgoing-set lst)))
-    (ListLink
-      (InheritanceLink
-      pw
-      parent-pw)
-    ))
-))
+   (define parents (run-query
+      (Get (Variable "$parentpw") (Inheritance pw (Variable "$parentpw")))))
 
-;; Finds molecules (proteins or chebi's) in a pathway 
+   (define childs (run-query
+      (Get (Variable "$childpw") (Inheritance (Variable "$childpw") pw))))
+
+   (define res-parent
+      (filter-map (lambda (parent-pw)
+            (if (member parent-pw lst) (Inheritance pw parent-pw) #f))
+         parents))
+
+   (define res-child
+      (filter-map (lambda (child-pw)
+            (if (member child-pw lst) (Inheritance child-pw pw) #f))
+         childs))
+
+   (append res-parent res-child))
+
 (define-public (find-mol path identifier)
+" Finds molecules (proteins or chebi's) in a pathway"
   (run-query (BindLink
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
     (AndLink

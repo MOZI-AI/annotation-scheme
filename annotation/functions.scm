@@ -351,23 +351,11 @@ translates to."
 (define-public (pathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
-   (define parents (run-query
-      (Get (Variable "$parentpw") (Inheritance pw (Variable "$parentpw")))))
+	(filter
+		(lambda (inhlink)
+			(and (member (gar inhlink) lst) (member (gdr inhlink) lst)))
+		(cog-incoming-by-type pw 'InheritanceLink)))
 
-   (define childs (run-query
-      (Get (Variable "$childpw") (Inheritance (Variable "$childpw") pw))))
-
-   (define res-parent
-      (filter-map (lambda (parent-pw)
-            (if (member parent-pw lst) (Inheritance pw parent-pw) #f))
-         parents))
-
-   (define res-child
-      (filter-map (lambda (child-pw)
-            (if (member child-pw lst) (Inheritance child-pw pw) #f))
-         childs))
-
-   (append res-parent res-child))
 
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"

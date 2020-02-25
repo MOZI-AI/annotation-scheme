@@ -39,7 +39,7 @@
 ;;Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter '()))
 (define-public biogrid-pairs (make-parameter '()))
-(define-public biogrid-pairs-pathway (make-parameter '()))
+(define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 
 (define (get-name atom)
  (if (> (length atom) 0)

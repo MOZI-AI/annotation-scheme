@@ -721,39 +721,22 @@ translates to."
 )
 
 (define-public (generate-interactors path var1 var2)
-      (if (not (string=? (cog-name var1) (cog-name var2)))
-      
-      (let ([pairs (find (lambda (x) (or (equal? (cons (cog-name var1) (cog-name var2)) x)
-                                          (equal? (cons (cog-name var2) (cog-name var1)) x)
-                                      )
-        
-                  ) (biogrid-pairs-pathway))]
-          )
-          (if pairs
-            '()
-            (let (
-              [output (find-pubmed-id var1 var2)]
-              )
-                (biogrid-pairs-pathway (append (biogrid-pairs-pathway) (list (cons (cog-name var1) (cog-name var2)))))
-               (if (null? output) 
-                (EvaluationLink 
-                  (PredicateNode "interacts_with") 
-                  (ListLink var1 var2))
-                (EvaluationLink
-                  (PredicateNode "has_pubmedID")
-                  (ListLink 
-                    (EvaluationLink 
-                        (PredicateNode "interacts_with") 
-                        (ListLink var1 var2))  
-                          output)
-                        )
-                )
-              )
-            )
-          )
-        '()
-    )
-
+	; (biogrid-reported-pathways) is a cache of the intercations that have
+	; already been handled. Defined in util.scm and cleared in main.scm.
+	(if (or (equal? var1 var2)
+			((biogrid-reported-pathways) (Set var1 var2))) '()
+		(let ([output (find-pubmed-id var1 var2)])
+			(if (null? output)
+				(EvaluationLink
+					(PredicateNode "interacts_with")
+					(ListLink var1 var2))
+				(EvaluationLink
+					(PredicateNode "has_pubmedID")
+					(ListLink
+						(EvaluationLink
+							(PredicateNode "interacts_with")
+							(ListLink var1 var2))
+						output)))))
 )
 
 ;;                           

@@ -113,7 +113,7 @@ atomspace."
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((biogrid-genes '())
                  (biogrid-pairs '())
-                 (biogrid-pairs-pathway '()))
+                 (biogrid-reported-pathways (make-atom-set)))
     (let* ([fns (parse-request genes-list file-name request)]
            [result (par-map (lambda (x) (x)) fns)] )
       (scm->json-string

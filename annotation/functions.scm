@@ -595,6 +595,8 @@ translates to."
             [pairs (find (lambda (x) (equal? x (cons (cog-name gene-a) (cog-name gene-b)))) (biogrid-pairs))]
             [crna  (if (= 0 (cog-arity rna)) '() (gar rna))]
             [ncrna (if (= 0 (cog-arity rna)) '() (gadr rna))]
+            [crna-name (cog-name crna)]
+            [ncrna-name (cog-name ncrna)]
           )
           (if (not pairs)
             (biogrid-pairs (append (biogrid-pairs) (list (cons (cog-name gene-a) (cog-name gene-b)))))
@@ -619,8 +621,8 @@ translates to."
                     (if (null? (cog-outgoing-set rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a (cog-name crna) (cog-name ncrna) prot-name)
-                          (find-rna gene-b (cog-name crna) (cog-name ncrna) prot-name)
+                          (find-rna gene-a crna-name ncrna-name prot-name)
+                          (find-rna gene-b crna-name ncrna-name prot-name)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if (= 1 (string->number prot-name))
@@ -672,7 +674,7 @@ translates to."
                      (if (= 0 (cog-arity rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x (cog-name crna) (cog-name ncrna) prot-name)
+                           (find-rna gene-x crna-name ncrna-name prot-name)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if (= 1 (string->number prot-name))

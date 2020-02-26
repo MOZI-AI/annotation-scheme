@@ -582,12 +582,14 @@ translates to."
 		(ListLink)
 		(let* (
             [prot-name  (cog-name prot)]
+            [is-one  (= 1 (string->number prot-name))]
+
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
             [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
 
 				[output (find-pubmed-id gene-a gene-b)]
-            [interaction (if (= 1 (string->number prot-name))
+            [interaction (if is-one
                 (ListLink
                   (build-interaction gene-a gene-b output "interacts_with")
                   (build-interaction
@@ -622,14 +624,14 @@ translates to."
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
-                    (if (null? (cog-outgoing-set rna)) '()
+                    (if (= 0 (cog-arity rna)) '()
                        (List
                           (Concept "rna-annotation")
                           (find-rna gene-a crna-name ncrna-name prot-name)
                           (find-rna gene-b crna-name ncrna-name prot-name)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
-                      (if (= 1 (string->number prot-name))
+                      (if is-one
                         (let ([coding-prot-a (find-protein-form gene-a)]
                               [coding-prot-b (find-protein-form gene-b)])
                         (if (or (equal? coding-prot-a (ListLink))
@@ -681,7 +683,7 @@ translates to."
                            (find-rna gene-x crna-name ncrna-name prot-name)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
-                 (if (= 1 (string->number prot-name))
+                 (if is-one
                     (let ([coding-prot (find-protein-form gene-x)])
                        (if (equal? coding-prot (ListLink))
                           (ListLink)

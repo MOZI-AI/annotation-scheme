@@ -581,22 +581,28 @@ translates to."
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
+            [prot-name  (cog-name prot)]
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
             [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
+
 				[output (find-pubmed-id gene-a gene-b)]
-            [interaction (if (= 1 (string->number (cog-name prot)))
+            [interaction (if (= 1 (string->number prot-name))
                 (ListLink
                   (build-interaction gene-a gene-b output "interacts_with")
-                  (build-interaction (find-protein-form gene-a) (find-protein-form gene-b) output "inferred_interaction"))
+                  (build-interaction
+                     (find-protein-form gene-a)
+                     (find-protein-form gene-b)
+                     output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
-            [namespace (if (null? (cog-outgoing-set go)) '() (car (cog-outgoing-set go)))]
-            [parent (if (null? (cog-outgoing-set go)) '() (cadr (cog-outgoing-set go)))]
-            [crna  (if (= 0 (cog-arity rna)) '() (gar rna))]
-            [ncrna (if (= 0 (cog-arity rna)) '() (gadr rna))]
+
+            [namespace (if (= 0 (cog-arity go)) '() (gar go))]
+            [parent    (if (= 0 (cog-arity go)) '() (gadr go))]
+
+            [crna      (if (= 0 (cog-arity rna)) '() (gar rna))]
+            [ncrna     (if (= 0 (cog-arity rna)) '() (gadr rna))]
             [crna-name (cog-name crna)]
             [ncrna-name (cog-name ncrna)]
-            [prot-name  (cog-name prot)]
           )
 
           ;; Neither gene has been done yet.

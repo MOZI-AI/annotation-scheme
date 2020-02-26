@@ -576,10 +576,11 @@ translates to."
 ;; Grounded schema node to add info about matched variable nodes
 
 (define-public (generate-result gene-a gene-b prot go rna) 
-    (if  
-      (and (not (equal? (cog-type gene-a) 'VariableNode)) (not (equal? (cog-type gene-b) 'VariableNode))
-        )  
-      (let* (
+	(if
+		(or (equal? (cog-type gene-a) 'VariableNode)
+		    (equal? (cog-type gene-b) 'VariableNode))
+		(ListLink)
+		(let* (
             [output (find-pubmed-id gene-a gene-b)]
             [res (flatten (map (lambda (x) 
                               (if (not (member (cog-name x) (biogrid-genes)))
@@ -698,7 +699,6 @@ translates to."
               )
           )
       )
-  (ListLink)
 )
     
 )

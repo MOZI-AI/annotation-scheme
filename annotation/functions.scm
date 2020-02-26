@@ -721,7 +721,7 @@ translates to."
 )
 
 (define-public (generate-interactors path var1 var2)
-	; (biogrid-reported-pathways) is a cache of the intercations that have
+	; (biogrid-reported-pathways) is a cache of the interactions that have
 	; already been handled. Defined in util.scm and cleared in main.scm.
 	(if (or (equal? var1 var2)
 			((biogrid-reported-pathways) (Set var1 var2))) '()

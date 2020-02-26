@@ -545,8 +545,8 @@ translates to."
 ))
 
 ;; Cache previous results, so that they are not recomputed again,
-;; if the results are already known. Note that this functin accounts
-;; for about 60% of the total execution time of `gene-pathway-annotation`
+;; if the results are already known. Note that this function accounts
+;; for about 60% of the total execution time of `gene-pathway-annotation`,
 ;; so any caching at all is a win. In a test of 681 genes, this offers
 ;; a 3x speedup in run time.
 (define-public pathway-gene-interactors
@@ -584,6 +584,10 @@ translates to."
   `rna` may be either an empty ListLink, or may have one, or two
       ConceptNodes in it. If it has two, then first one is the coding RNA,
       and the second one is the non-coding RNA.
+
+      XXX FIXME: these ConceptNodes are used to indicate whether or
+      not the coding or non-coding interactions should be done.
+      The are just set to (ConceptNode "True") to indicate this.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)

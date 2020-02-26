@@ -573,23 +573,28 @@ translates to."
   ))
 )
 
-;; Grounded schema node to add info about matched variable nodes
-
 (define-public (generate-result gene-a gene-b prot go rna)
+"
+  generate-result -- add info about matched variable nodes
+
+  `prot` is either (NumberNode 0) or (NumberNode 1)
+      which is used to indicate whether or not protein interactions
+      should be computed.
+"
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
-            [prot-name  (cog-name prot)]
-            [is-one  (= 1 (string->number prot-name))]
+            [do-prot-str  (cog-name prot)]
+            [do-protein  (= 1 (string->number do-prot-str))]
 
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
             [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
 
 				[output (find-pubmed-id gene-a gene-b)]
-            [interaction (if is-one
+            [interaction (if do-protein
                 (ListLink
                   (build-interaction gene-a gene-b output "interacts_with")
                   (build-interaction
@@ -627,11 +632,11 @@ translates to."
                     (if (= 0 (cog-arity rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name prot-name)
-                          (find-rna gene-b crna-name ncrna-name prot-name)
+                          (find-rna gene-a crna-name ncrna-name do-prot-str)
+                          (find-rna gene-b crna-name ncrna-name do-prot-str)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
-                      (if is-one
+                      (if do-protein
                         (let ([coding-prot-a (find-protein-form gene-a)]
                               [coding-prot-b (find-protein-form gene-b)])
                         (if (or (equal? coding-prot-a (ListLink))
@@ -680,10 +685,10 @@ translates to."
                      (if (= 0 (cog-arity rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name prot-name)
+                           (find-rna gene-x crna-name ncrna-name do-prot-str)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
-                 (if is-one
+                 (if do-protein
                     (let ([coding-prot (find-protein-form gene-x)])
                        (if (equal? coding-prot (ListLink))
                           (ListLink)

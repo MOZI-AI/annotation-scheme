@@ -580,6 +580,10 @@ translates to."
   `prot` is either (NumberNode 0) or (NumberNode 1)
       which is used to indicate whether or not protein interactions
       should be computed.
+
+  `rna` may be either an empty ListLink, or may have one, or two
+      ConceptNodes in it. If it has two, then first one is the coding RNA,
+      and the second one is the non-coding RNA.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
@@ -603,13 +607,13 @@ translates to."
                      output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
 
-            [namespace (if (= 0 (cog-arity go)) '() (gar go))]
-            [parent    (if (= 0 (cog-arity go)) '() (gadr go))]
+            [namespace (gar go)]
+            [parent    (gdr go)]
 
-            [crna      (if (= 0 (cog-arity rna)) '() (gar rna))]
-            [ncrna     (if (= 0 (cog-arity rna)) '() (gadr rna))]
-            [crna-name (cog-name crna)]
-            [ncrna-name (cog-name ncrna)]
+            [crna      (gar rna)]   ; coding RNA
+            [ncrna     (gdr rna)]   ; non-coding RNA
+            [crna-name  (if (null? crna)  "" (cog-name crna))]
+            [ncrna-name (if (null? ncrna) "" (cog-name ncrna))]
           )
 
           ;; Neither gene has been done yet.

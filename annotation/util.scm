@@ -24,7 +24,7 @@
 	#:use-module (opencog)
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
-  #:use-module (annotation graph)
+	#:use-module (annotation graph)
 	#:use-module (ice-9 optargs)
 ;	#:use-module (rnrs base)
 	#:use-module (rnrs exceptions)
@@ -38,7 +38,7 @@
 
 ;;Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
-(define-public biogrid-pairs (make-parameter '()))
+(define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-pairs-pathway (make-parameter '()))
 
 (define (get-name atom)

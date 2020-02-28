@@ -28,7 +28,13 @@
     #:export (gene-go-annotation)
 )
 
+(include-file "instrumentation.scm")
+
+(define-public gene-go-anno-ctr (accum-time "gene-go-anno"))
+(define-public gene-go-write-ctr (accum-time "gene-go-write"))
+
 (define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein "True"))
+(gene-go-anno-ctr #:enter? #t)
     (let (
         [result (flatten (map (lambda (gene) 
           (if (equal? protein "True")
@@ -40,10 +46,13 @@
           )
           )gene-nodes))]
           )
+(gene-go-anno-ctr #:enter? #f)
+(gene-go-write-ctr #:enter? #t)
     (let (
     	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]
   		)
     	(write-to-file res file-name "gene-go")
+(gene-go-write-ctr #:enter? #f)
       res
   	)
   )

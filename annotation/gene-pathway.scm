@@ -30,6 +30,13 @@
       #:use-module (ice-9 match)
       #:export (gene-pathway-annotation))
 
+(include-file "instrumentatino.scm")
+
+(define-public gene-path-anno-ctr (accum-time "gene-path-anno"))
+(define-public gene-path-write-ctr (accum-time "gene-path-write"))
+(define-public reactome-ctr (accum-time "reactome"))
+(define-public smpdb-ctr (accum-time "smpdb"))
+
 ;; TODO: would be better to use a list for the "pathway" argument
 ;; instead of splitting a string.
 ;; TODO: don't use the string "True" for include_prot and include_sm.
@@ -43,6 +50,8 @@
                                   (biogrid 1)
                                   coding
                                   noncoding)
+
+(gene-path-anno-ctr #:enter? #t)
   (let* ([pwlst '()]
          [prot? (string=? include_prot "True")]
          [sm? (string=? include_sm "True")]
@@ -68,11 +77,15 @@
                       gene-nodes)]
          [res (ListLink (ConceptNode "gene-pathway-annotation")
                         (ListLink result))])
+(gene-path-anno-ctr #:enter? #f)
+(gene-path-write-ctr #:enter? #t)
     (write-to-file res file-name "gene-pathway")
+(gene-path-write-ctr #:enter? #f)
     res))
 
 ;; From SMPDB
 (define (smpdb gene prot? sm? go biogrid rna)
+(smpdb-ctr #:enter? #t)
   (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
@@ -89,6 +102,7 @@
                                   (pathway-gene-interactors node)
                                   '()))))
                          pw)])
+(smpdb-ctr #:enter? #f)
     (append pw
             ;; when proteins are selected, genes should only be linked to
             ;; proteins not to pathways
@@ -97,6 +111,7 @@
 
 ;; From reactome
 (define (reactome gene prot? sm? pwlst go biogrid rna)
+(reactome-ctr #:enter? #t)
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
@@ -115,6 +130,7 @@
                               (if sm? (find-mol node "ChEBI") '())
                               (list (pathway-hierarchy node pwlst)))))
                          pw)])
+(reactome-ctr #:enter? #f)
     (list (append pw
                   (if prot? (find-protein (GeneNode gene) 1) '())
                   ls)

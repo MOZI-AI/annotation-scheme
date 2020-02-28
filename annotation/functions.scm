@@ -111,7 +111,7 @@ in the specified namespaces."
           ]
       )
       )))
-       (append (node-info g) parents)
+       (cons (node-info g) parents)
     )
 ))
 

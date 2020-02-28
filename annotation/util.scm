@@ -36,6 +36,12 @@
 	          create-edge)
 )
 
+(include-file "instrumentation.scm")
+
+(define-public find-name-ctr (accum-time "find-name"))
+(define-public locate-node-ctr (accum-time "locate-node"))
+(define-public add-loc-ctr (accum-time "add-loc"))
+
 ;;Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
@@ -189,7 +195,13 @@
 	results
 )
 
-(define (do-find-name GO-ATOM)
+(define (do-find-name a)
+  (find-name-ctr #:enter? #t)
+  (let ((rv (xdo-find-name a)))
+  (find-name-ctr #:enter? #f)
+  rv))
+
+(define (xdo-find-name GO-ATOM)
 "
 	find-name GO-ATOM
 
@@ -302,7 +314,13 @@
     ))
 )
 
-(define (do-locate-node node)
+(define (do-locate-node a)
+   (locate-node-ctr #:enter? #t)
+   (let ((rv (xdo-locate-node a)))
+   (locate-node-ctr #:enter? #f)
+   rv))
+
+(define (xdo-locate-node node)
   (let ([loc (run-query
               (BindLink
                (VariableNode "$go")
@@ -365,7 +383,13 @@
 
 ;; Add location of a gene/Molecule node in context of Reactome pathway
 
-(define-public (add-loc node)
+(define-public (add-loc a)
+   (add-loc-ctr #:enter? #t)
+   (let ((rv (xadd-loc a)))
+   (add-loc-ctr #:enter? #f)
+   rv))
+
+(define-public (xadd-loc node)
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
       (run-query

@@ -8,7 +8,7 @@ jobs:
             - checkout
             - run:
                 name: Compiling
-                command: autoreconf -vif && ./configure && make 
+                command: autoreconf -vif && ./configure GUILE=$(which guile) && make 
             - run:
                 name: Running Tests
                 command: make check

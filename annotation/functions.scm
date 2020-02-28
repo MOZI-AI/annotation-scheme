@@ -28,7 +28,36 @@
     #:use-module (ice-9 match)
 )
 
-(define (find-parent node namespaces)
+(include-file "instrumentation.scm")
+
+(define-public find-pathway-genes-ctr (accum-time "find-pathway-genes"))
+(define-public add-pathway-genes-ctr (accum-time "add-pathway-genes"))
+(define-public find-go-term-ctr (accum-time "find-go-term"))
+(define-public find-memberln-ctr (accum-time "find-memberln"))
+(define-public add-go-info-ctr (accum-time "add-go-info"))
+(define-public find-parent-ctr (accum-time "find-parent"))
+
+(define-public match-gene-interactors-ctr (accum-time "match-gene-interactors"))
+(define-public find-output-interactors-ctr (accum-time "find-output-interactors"))
+
+(define-public find-pathway-member-ctr (accum-time "find-pathway-member"))
+(define-public pathway-gene-interactors-ctr (accum-time "pathway-gene-interactors"))
+(define-public generate-result-ctr (accum-time "generate-result"))
+(define-public generate-interactors-ctr (accum-time "generate-interactors"))
+(define-public build-interaction-ctr (accum-time "build-interaction"))
+(define-public pathway-hierarchy-ctr (accum-time "pathway-hierarchy"))
+(define-public find-protein-ctr (accum-time "find-protein"))
+(define-public find-protein-form-ctr (accum-time "find-protein-form"))
+(define-public find-mol-ctr (accum-time "find-mol"))
+(define-public find-pubmed-id-ctr (accum-time "find-pubmed-id"))
+
+(define (find-parent a b)
+  (find-parent-ctr #:enter? #t)
+  (let ((rv (xfind-parent a b)))
+  (find-parent-ctr #:enter? #f)
+  rv))
+
+(define (xfind-parent node namespaces)
   "Given an atom and list of namespaces find the parents of that atom
 in the specified namespaces."
   (let ([atom (cog-outgoing-atom node 1)])
@@ -51,7 +80,14 @@ in the specified namespaces."
                                 (VariableNode "$a"))))))
                 namespaces)))
 
-(define (find-memberln gene namespaces)
+
+(define-public (find-memberln a b)
+  (find-memberln-ctr #:enter? #t)
+  (let ((rv (xfind-memberln a b)))
+  (find-memberln-ctr #:enter? #f)
+  rv))
+
+(define (xfind-memberln gene namespaces)
   "Find GO terms of a gene."
   (append-map (lambda (ns)
                 (run-query (BindLink
@@ -72,7 +108,13 @@ in the specified namespaces."
                               (VariableNode "$a"))))))
               namespaces))
 
-(define-public (add-go-info child-atom parent-atom)
+(define-public (add-go-info a b)
+  (add-go-info-ctr #:enter? #t)
+  (let ((rv (xadd-go-info a b)))
+  (add-go-info-ctr #:enter? #f)
+  rv))
+
+(define-public (xadd-go-info child-atom parent-atom)
   "Add information for GO nodes"
   (define parent-is-go?
     (match (string-split (cog-name parent-atom) #\:)
@@ -93,8 +135,14 @@ in the specified namespaces."
            (go-info parent-atom)))
       #f))
 
+(define-public (find-go-term a b c)
+  (find-go-term-ctr #:enter? #t)
+  (let ((rv (xfind-go-term a b c)))
+  (find-go-term-ctr #:enter? #f)
+  rv))
+
 ;;the main function to find the go terms for a gene with a specification of the parents
-(define-public find-go-term 
+(define-public xfind-go-term
   (lambda (g namespaces p)
       (let (
         [res (find-memberln g namespaces)]   
@@ -197,11 +245,18 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
-(define-public (find-pathway-member gene db)
+(define-public (find-pathway-member a b)
+  (find-pathway-member-ctr #:enter? #t)
+  (let ((rv (xfind-pathway-member a b)))
+  (find-pathway-member-ctr #:enter? #f)
+  rv))
+
+(define-public (xfind-pathway-member gene db)
   (run-query (BindLink
       (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
       (AndLink
         (EvaluationLink
+;; FIXME it would be faster to just use srfi-1 filter here... OK?
           (GroundedPredicateNode "scm: filter-atoms")
           (ListLink 
             (VariableNode "$a")
@@ -229,7 +284,13 @@ in the specified namespaces."
        (node-info pathway))
       #f))
 
-(define-public (find-pathway-genes pathway go rna prot?)
+(define-public (find-pathway-genes a b c d)
+  (find-pathway-genes-ctr #:enter? #t)
+  (let ((rv (xfind-pathway-genes a b c d)))
+  (find-pathway-genes-ctr #:enter? #f)
+  rv))
+
+(define-public (xfind-pathway-genes pathway go rna prot?)
   "Find genes which code the proteins in a given pathway.  Perform
 cross-annotation: if go, annotate each member genes of a pathway for
 its GO terms; if rna, annotate each member genes of a pathway for its
@@ -258,7 +319,13 @@ translates to."
       rna
       (ConceptNode (if prot? "True" "False")))))))
 
-(define-public (add-pathway-genes pathway gene go rna prot)
+(define-public (add-pathway-genes a b c d e)
+  (add-pathway-genes-ctr #:enter? #t)
+  (let ((rv (xadd-pathway-genes a b c d e)))
+  (add-pathway-genes-ctr #:enter? #f)
+  rv))
+
+(define-public (xadd-pathway-genes pathway gene go rna prot)
   (let ((go-set (cog-outgoing-set go))
         (rna-set (cog-outgoing-set rna)))
     (if (and (null? go-set) (null? rna-set))
@@ -291,7 +358,14 @@ translates to."
                             (ListLink (ConceptNode "gene-pathway-annotation"))))))
            (_ '()))))))
 
-(define-public (find-protein gene option)
+
+(define-public (find-protein a b)
+  (find-protein-ctr #:enter? #t)
+  (let ((rv (xfind-protein a b)))
+  (find-protein-ctr #:enter? #f)
+  rv))
+
+(define-public (xfind-protein gene option)
   "Find the proteins a gene expresses."
   (run-query
    (BindLink
@@ -348,7 +422,13 @@ translates to."
     ((name) name)
     ((name . rest) name)))
 
-(define-public (pathway-hierarchy pw lst)
+(define-public (pathway-hierarchy a b)
+  (pathway-hierarchy-ctr #:enter? #t)
+  (let ((rv (xpathway-hierarchy a b)))
+  (pathway-hierarchy-ctr #:enter? #f)
+  rv))
+
+(define-public (xpathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
 	(filter
@@ -357,7 +437,13 @@ translates to."
 		(cog-incoming-by-type pw 'InheritanceLink)))
 
 
-(define-public (find-mol path identifier)
+(define-public (find-mol a b)
+  (find-mol-ctr #:enter? #t)
+  (let ((rv (xfind-mol a b)))
+  (find-mol-ctr #:enter? #f)
+  rv))
+
+(define-public (xfind-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
   (run-query (BindLink
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
@@ -439,9 +525,14 @@ translates to."
   )
 ) 
 
+(define-public (match-gene-interactors a b c)
+  (match-gene-interactors-ctr #:enter? #t)
+  (let ((rv (xmatch-gene-interactors a b c)))
+  (match-gene-interactors-ctr #:enter? #f)
+  rv))
 
 ;; Finds genes interacting with a given gene
-(define-public match-gene-interactors
+(define-public xmatch-gene-interactors
     (lambda (gene prot go rna)
         (run-query (BindLink
             (VariableList
@@ -476,8 +567,14 @@ translates to."
         ))
 )
 
+(define-public (find-output-interactors a b c)
+  (find-output-interactors-ctr #:enter? #t)
+  (let ((rv (xfind-output-interactors a b c)))
+  (find-output-interactors-ctr #:enter? #f)
+  rv))
+
 ;;; Finds output genes interacting eachother 
-(define-public find-output-interactors
+(define-public xfind-output-interactors
     (lambda(gene prot go rna)
         (run-query (BindLink
           (VariableList
@@ -518,8 +615,14 @@ translates to."
         ))
 ))
 
+(define (do-pathway-gene-interactors a)
+  (pathway-gene-interactors-ctr #:enter? #t)
+  (let ((rv (xdo-pathway-gene-interactors a)))
+  (pathway-gene-interactors-ctr #:enter? #f)
+  rv))
+
 ;; Gene interactors for genes in the pathway
-(define do-pathway-gene-interactors
+(define xdo-pathway-gene-interactors
   (lambda (pw)
   (run-query (BindLink
     (VariableList
@@ -552,7 +655,13 @@ translates to."
 (define-public pathway-gene-interactors
 	(make-afunc-cache do-pathway-gene-interactors))
 
-(define-public find-protein-form
+(define-public (find-protein-form a)
+  (find-protein-form-ctr #:enter? #t)
+  (let ((rv (xfind-protein-form a)))
+  (find-protein-form-ctr #:enter? #f)
+  rv))
+
+(define-public xfind-protein-form
   (lambda (gene)
   (let ([prot
   (run-query (BindLink
@@ -573,7 +682,13 @@ translates to."
   ))
 )
 
-(define-public (generate-result gene-a gene-b prot go rna)
+(define-public (generate-result a b c d e)
+  (generate-result-ctr #:enter? #t)
+  (let ((rv (xgenerate-result a b c d e)))
+  (generate-result-ctr #:enter? #f)
+  rv))
+
+(define-public (xgenerate-result gene-a gene-b prot go rna)
 "
   generate-result -- add info about matched variable nodes
 
@@ -724,7 +839,13 @@ translates to."
    )
 )
 
-(define-public (build-interaction interactor-1 interactor-2 pubmed interaction_pred)
+(define-public (build-interaction a b c d)
+  (build-interaction-ctr #:enter? #t)
+  (let ((rv (xbuild-interaction a b c d)))
+  (build-interaction-ctr #:enter? #f)
+  rv))
+
+(define-public (xbuild-interaction interactor-1 interactor-2 pubmed interaction_pred)
   (if (or (equal? (cog-type interactor-1) 'ListLink) (equal? (cog-type interactor-2) 'ListLink))
     '()
     (if (null? pubmed) 
@@ -741,7 +862,13 @@ translates to."
   )
 )
 
-(define-public (generate-interactors path var1 var2)
+(define-public (generate-interactors a b c)
+  (generate-interactors-ctr #:enter? #t)
+  (let ((rv (xgenerate-interactors a b c)))
+  (generate-interactors-ctr #:enter? #f)
+  rv))
+
+(define-public (xgenerate-interactors path var1 var2)
 	; (biogrid-reported-pathways) is a cache of the interactions that have
 	; already been handled. Defined in util.scm and cleared in main.scm.
 	(if (or (equal? var1 var2)
@@ -760,8 +887,14 @@ translates to."
 						output)))))
 )
 
+(define-public (find-pubmed-id a)
+  (find-pubmed-id-ctr #:enter? #t)
+  (let ((rv (xfind-pubmed-id a)))
+  (find-pubmed-id-ctr #:enter? #f)
+  rv))
+
 ;;                           
-(define-public (find-pubmed-id gene-a gene-b)
+(define-public (xfind-pubmed-id gene-a gene-b)
   (let ([pub (run-query
               (GetLink
                (VariableNode "$pub")

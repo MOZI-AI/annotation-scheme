@@ -30,6 +30,11 @@
     #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
+(include-file "instrumentation.scm")
+
+(define biogrid-ctr (accum-time "biogrid-anno"))
+(define biowrite-ctr (accum-time "biogrid-write"))
+
 (define* (biogrid-interaction-annotation gene-nodes file-name
                                          #:key
                                          (interaction "Proteins")
@@ -37,6 +42,7 @@
                                          (parents 0)
                                          coding
                                          noncoding)
+(biogrid-ctr #:enter? #t)
   (let* ([go (if (string-null? namespace)
                  (ListLink) 
                  (ListLink (ConceptNode namespace) (Number parents)))]
@@ -55,5 +61,8 @@
                       gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])
+(biogrid-ctr #:enter? #f)
+(biowrite-ctr #:enter? #t)
     (write-to-file res file-name "biogrid")
+(biowrite-ctr #:enter? #f)
 	res))

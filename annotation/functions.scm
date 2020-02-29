@@ -659,7 +659,7 @@ translates to."
                             (Evaluation (Predicate "expresses") (List gene-b coding-prot-b))
                             (node-info gene-b)
                             (node-info coding-prot-b)
-                            (locate-node coding-prot-a)
+                            (locate-node coding-prot-b)
                             go-cross-annotation
                             rna-cross-annotation
                           )

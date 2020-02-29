@@ -760,9 +760,16 @@ translates to."
 						output)))))
 )
 
-;;                           
-(define-public (find-pubmed-id gene-a gene-b)
-  (let ([pub (run-query
+;; ------------------------------------------------------
+(define (do-find-pubmed-id gene-set)
+"
+  This is expecting a (SetLink (Gene \"a\") (Gene \"b\"))
+  as the argument.
+"
+   (let* (
+      [gene-a (gar gene-set)]
+      [gene-b (gdr gene-set)]
+      [pub (run-query
               (GetLink
                (VariableNode "$pub")
                (EvaluationLink
@@ -789,6 +796,14 @@ translates to."
             (VariableNode "$pub")))))
         pub)))
 
+(define cache-find-pubmed-id
+	(make-afunc-cache do-find-pubmed-id))
+
+; Memoized version of above, for performance.
+(define-public (find-pubmed-id gene-a gene-b)
+	(cache-find-pubmed-id (Set gene-a gene-b)))
+
+;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
   (run-query (BindLink

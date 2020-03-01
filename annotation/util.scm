@@ -57,7 +57,7 @@
    (make-edge (make-edge-info node2 node1 name pubmedId subgroup annotation) "edges")
 )
 
-;; Find node name and description. See below.
+;; Find node name and description. See `node-info` below for documentation.
 (define (do-get-node-info node)
 	(define (node-name node)
 		(let ([lst (find-pathway-name node)])

@@ -57,7 +57,7 @@
    (make-edge (make-edge-info node2 node1 name pubmedId subgroup annotation) "edges")
 )
 
-;; Find node name and description
+;; Find node name and description. See `node-info` below for documentation.
 (define (do-get-node-info node)
 	(define (node-name node)
 		(let ([lst (find-pathway-name node)])
@@ -68,13 +68,18 @@
 		(ListLink))
 )
 
-; Cache results of xnode-info for performance.
+; Cache results of do-get-node-info for performance.
 (define memoize-node-info (make-afunc-cache do-get-node-info))
 
-; Wrap the results in a list. Is this really neeeded?
-(define-public (node-info node)
-"node-info -- Find node name and description (whats a node??) "
-	(list (memoize-node-info node)))
+(define-public (node-info ENTITY)
+"
+  node-info ENTITY -- Find the name and description of an entity.
+
+  An entity can be any kind of conceptual object, such as a gene, protein,
+  small molecule, RNA, GeneOntology (GO) term, cellular location, etc.
+  Here, ENTITY is an AtomSpace Atom that encodes such an object.
+"
+	(memoize-node-info ENTITY))
 
 
 ;;Finds a name of any node (Except GO which has different structure)

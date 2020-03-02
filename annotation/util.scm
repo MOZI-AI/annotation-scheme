@@ -79,7 +79,7 @@
   small molecule, RNA, GeneOntology (GO) term, cellular location, etc.
   Here, ENTITY is an AtomSpace Atom that encodes such an object.
 "
-	(memoize-node-info ENTITY))
+	(list (memoize-node-info ENTITY)))
 
 
 ;;Finds a name of any node (Except GO which has different structure)

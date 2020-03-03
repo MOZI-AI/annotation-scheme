@@ -32,7 +32,7 @@
     #:use-module (json)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
-;    #:use-module (rnrs base)
+    #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
     #:use-module (srfi srfi-1)

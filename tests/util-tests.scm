@@ -1,7 +1,6 @@
 (define-module (tests util-test)
     #:use-module (srfi srfi-64)
     #:use-module (opencog)
-    #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation util)
@@ -9,7 +8,7 @@
 )
 
 (test-begin "util")
-(primitive-load "tests/sample_dataset.scm")
+(primitive-load-path "tests/sample_dataset.scm")
 (define entrez-link (EvaluationLink
         (PredicateNode "has_entrez_id")
         (ListLink 

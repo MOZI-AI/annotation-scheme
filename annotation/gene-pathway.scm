@@ -1,6 +1,7 @@
 ;;; MOZI-AI Annotation Scheme
 ;;; Copyright © 2019 Abdulrahman Semrie
 ;;; Copyright © 2019 Hedra Seid
+;;; Copyright © 2020 Ricardo Wurmus
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -22,120 +23,99 @@
       #:use-module (annotation functions)
       #:use-module (annotation util)
       #:use-module (opencog)
-      #:use-module (opencog query)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
-      #:use-module (ice-9 threads)
-      #:export (gene-pathway-annotation)
-)
+      #:use-module (annotation parser)
+      #:use-module (srfi srfi-1)
+      #:use-module (ice-9 match)
+      #:export (gene-pathway-annotation))
 
+;; TODO: would be better to use a list for the "pathway" argument
+;; instead of splitting a string.
+;; TODO: don't use the string "True" for include_prot and include_sm.
+(define* (gene-pathway-annotation gene-nodes file-name
+                                  #:key
+                                  (pathway "reactome")
+                                  (include_prot "True")
+                                  (include_sm "True")
+                                  (namespace "")
+                                  (parents 0)
+                                  (biogrid 1)
+                                  coding
+                                  noncoding)
+  (let* ([pwlst '()]
+         [prot? (string=? include_prot "True")]
+         [sm? (string=? include_sm "True")]
+         [pathways (string-split pathway #\space)]
+         [go (if (string-null? namespace)
+                 (ListLink)
+                 (ListLink (ConceptNode namespace) (Number parents)))]
+         [rna (ListLink (list (if coding (ConceptNode coding) '())
+                              (if noncoding (ConceptNode noncoding) '())))]
+         [result
+          (append-map (lambda (gene)
+                        (append 
+                         (node-info (GeneNode gene))
+                         (append-map (match-lambda
+                                       ("smpdb"
+                                        (smpdb gene prot? sm? go biogrid rna))
+                                       ("reactome"
+                                        (match (reactome gene prot? sm? pwlst go biogrid rna)
+                                          ((first . rest)
+                                           (set! pwlst (append pwlst rest))
+                                           first))))
+                                     pathways)))
+                      gene-nodes)]
+         [res (ListLink (ConceptNode "gene-pathway-annotation")
+                        (ListLink result))])
+    (write-to-file res file-name "gene-pathway")
+    res))
 
-(define* (gene-pathway-annotation gene_nodes file-name #:key (pathway "reactome") (include_prot "True") (include_sm "True") (namespace "") (parents 0)  (biogrid 1))
-    (let ([result '()]
-          [pwlst '()]
-          [go (if (string=? namespace "") (ListLink) 
-                (ListLink (ConceptNode namespace) (Number parents)))])
-
-    (for-each (lambda (gene)
-      (set! result (append result (node-info (GeneNode gene))))
-      (for-each (lambda (pathw)
-          (if (equal? pathw "smpdb")
-              (set! result (append result (smpdb gene include_prot include_sm go biogrid)))
-              )
-          (if (equal? pathw "reactome")
-              (begin
-              (let ([res (reactome gene include_prot include_sm pwlst go biogrid)])
-                (set! result (append result (car res)))
-                (set! pwlst (append pwlst (cdr res)))
-              )))
-          )(string-split pathway #\ ))
-    ) gene_nodes)
- 
-    (let (
-      [res (ListLink (ConceptNode "gene-pathway-annotation") (ListLink result))]
-    )
-      (write-to-file res file-name "gene-pathway")
-      res
-    )
-))  
-
-
-;; From SMPDB 
-
-(define (smpdb gene prot sm go biogrid)
-  (let (
-    [pw (find-pathway-member (GeneNode gene) "SMP")]
-    [ls '()]
-  )
-
-  (set! ls (flatten (map (lambda (path)
-      (let (
-        [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
-        [tmp '()]
-      )
-      (if (equal? sm "True")
-          (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
-      )
-      (set! tmp (append tmp (find-pathway-genes node go)))
-      (if (equal? prot "True")
-        (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
-          (if (not (null? prots))
-            (set! tmp (append tmp prots))
-            (set! tmp (append tmp (node-info node))))))
-      (if (= biogrid 1)  
-        (set! tmp (append tmp (pathway-gene-interactors node))))
-        (if (null? tmp)
-          '()
-          tmp
-        )
-      )
-      ) pw)) )
-
-
-  (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 0))) ;; when proteins are selected, genes should only be linked to proteins not to pathways
-  )
-
-  (append pw ls)
-))
+;; From SMPDB
+(define (smpdb gene prot? sm? go biogrid rna)
+  (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
+         [ls (append-map (lambda (path)
+                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
+                             (append
+                              (if sm? (find-mol node "ChEBI") '())
+                              (find-pathway-genes node go rna prot?)
+                              (if prot?
+                                  (let ([prots (find-mol node "Uniprot")])
+                                    (if (null? prots)
+                                        (node-info node)
+                                        prots))
+                                  '())
+                              (if (= biogrid 1)
+                                  (pathway-gene-interactors node)
+                                  '()))))
+                         pw)])
+    (append pw
+            ;; when proteins are selected, genes should only be linked to
+            ;; proteins not to pathways
+            (if prot? (find-protein (GeneNode gene) 0) '())
+            ls)))
 
 ;; From reactome
+(define (reactome gene prot? sm? pwlst go biogrid rna)
+  (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
+         [ls (append-map (lambda (path)
+                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
+                             (set! pwlst (append pwlst (list node)))
 
-(define (reactome gene prot sm pwlst go biogrid)
-    (let (
-      [pw (find-pathway-member (GeneNode gene) "R-HSA")]
-      [ls '()]
-      )
-
-      (set! ls (flatten (map (lambda (path)
-        (let (
-            [node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)]
-            [tmp '()]
-        )
-          (set! pwlst (append pwlst (list node)))
-          (set! tmp (append tmp (find-pathway-genes node go)))
-          (if (equal? prot "True")
-            (let ([prots (cog-outgoing-set (find-mol node "Uniprot"))])
-              (if (not (null? prots))
-                (set! tmp (append tmp prots))
-                (set! tmp (append tmp (node-info node)))))
-            )
-          (if (= biogrid 1)  
-            (set! tmp (append tmp (pathway-gene-interactors node))))
-          (if (equal? sm "True")
-            (set! tmp (append tmp (cog-outgoing-set (find-mol node "ChEBI"))))
-          )
-          (set! tmp (append tmp (list (pathway-hierarchy node pwlst))))
-          (if (null? tmp)
-            '()
-            tmp
-          )
-        )
-      )    
-      pw)))
-
-    (if (equal? prot "True")
-    (set! pw (append pw (find-protein (GeneNode gene) 1))) 
-    )
-      (list (append pw ls) pwlst) 
-  )) 
+                             (append
+                              (find-pathway-genes node go rna prot?)
+                              (if prot?
+                                  (let ([prots (find-mol node "Uniprot")])
+                                    (if (null? prots)
+                                        (node-info node)
+                                        prots)))
+                              (if (= biogrid 1)
+                                  (pathway-gene-interactors node)
+                                  '())
+                              (if sm? (find-mol node "ChEBI") '())
+                              (list (pathway-hierarchy node pwlst)))))
+                         pw)])
+    (list (append pw
+                  (if prot? (find-protein (GeneNode gene) 1) '())
+                  ls)
+          pwlst)))

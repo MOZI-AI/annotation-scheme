@@ -1,7 +1,6 @@
 (define-module (tests pathway-test)
     #:use-module (srfi srfi-64)
     #:use-module (opencog)
-    #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation gene-go)
@@ -13,9 +12,8 @@
 
 
 (test-begin "pathway")
-;;Load modules and test atomspace
-(primitive-load "opencog_deps")
-(primitive-load "tests/sample_dataset.scm")
+;; Load test atomspace
+(primitive-load-path "tests/sample_dataset.scm")
 
 (test-equal "pathway-interactors" 3 (length (pathway-gene-interactors  (ConceptNode "R-HSA-114608"))))
 

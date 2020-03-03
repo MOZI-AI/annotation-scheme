@@ -1,16 +1,13 @@
 (define-module (tests parser-test)
     #:use-module (srfi srfi-64)
     #:use-module (opencog)
-    #:use-module (opencog query)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation gene-go)
     #:use-module (annotation gene-pathway)
+    #:use-module (annotation graph)
     #:use-module (annotation biogrid)
-    #:use-module (annotation parser)
-    #:use-module (json)
-
-)
+    #:use-module (annotation parser))
 
 (test-begin "parser")
 
@@ -39,6 +36,13 @@
                (GeneNode "IGFBP3")
             )
          )
+         (EvaluationLink
+            (PredicateNode "has_name")
+            (ListLink
+               (MoleculeNode "Uniprot:P05019")
+               (GeneNode "IGF1")
+            )
+         )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
@@ -56,5 +60,9 @@
 ))
 
 (test-assert "atomese-parser"  (graph? (atomese-parser (format #f "~a" res))))
+
+(test-assert "node-count" (= (length (graph-nodes (atomese-parser (format #f "~a" res)))) 2))
+
+(test-assert "edge-count" (= (length (graph-edges (atomese-parser (format #f "~a" res)))) 1))
 
 (test-end "parser")

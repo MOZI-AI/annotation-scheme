@@ -2,15 +2,9 @@ FROM xabush/annotation-scheme:0.1
 MAINTAINER Abdulrahman Semrie
 
 WORKDIR $HOME
-RUN git clone https://git.savannah.nongnu.org/git/nyacc.git && \
-    cd nyacc && \
-    ./configure && \
-    make && \
-    make install
-
-WORKDIR $HOME
-RUN git clone https://github.com/Habush/guile-json.git && \
+RUN git clone https://github.com/aconchillo/guile-json && \
     cd guile-json && \
+    git reset --hard 1.2.0 && \
     autoreconf -vif && \
     ./configure  && \
     make && \

@@ -7,6 +7,9 @@ SOURCES = \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
     annotation/main.scm \
+    annotation/graph.scm \
+    annotation/parser.scm \
+    annotation/rna.scm \
     annotation.scm 
 
 TESTS = \
@@ -18,7 +21,7 @@ TESTS = \
 TEST_EXTENSIONS = .scm
 
 SCM_LOG_DRIVER = \
-    $(top_builddir)/env	\
+	$(top_builddir)/env	\
 	$(GUILE) --no-auto-compile -e main	\
 	$(top_srcdir)/build-aux/test-driver.scm
 
@@ -34,12 +37,13 @@ AM_SCM_LOG_FLAGS = --no-auto-compile -L $(top_srcdir)
 
 AM_COLOR_TESTS=always
 
-CLEANFILES = \
+CLEANFILES += \
 	$(GOBJECTS)	\
 	$(TESTS:tests/%.scm=%.log)	\
-	*.log *.tar.gz
+	*.log
 
 
-EXTRA_DIST =  $(SOURCES) \
-	          $(TESTS)	\
-              build-aux/test-driver.scm	
+EXTRA_DIST = \
+	$(SOURCES) \
+	$(TESTS)	\
+	build-aux/test-driver.scm

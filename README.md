@@ -1,4 +1,6 @@
-**Annotation Scheme**
+# Annotation Scheme
+
+[![CircleCI](https://circleci.com/gh/mozi-ai/annotation-scheme.svg?style=svg)](https://circleci.com/gh/mozi-ai/annotation-scheme)
 
 This project contains the scheme code that is used by MOZI annotation service. It annotates Human Gene Symbols using three databases (GO, Reactome & Biogrid). It uses the [Atomspace](https://github.com/opencog/atomspace) to store the knoweldge in a hypergraph and uses the [Pattern Matcher](https://wiki.opencog.org/w/The_Pattern_Matcher) to retrieve relevant information for requested genes.
 

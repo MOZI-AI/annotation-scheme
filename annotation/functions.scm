@@ -28,7 +28,7 @@
     #:use-module (ice-9 match)
 )
 
-(include-file "instrumentation.scm")
+(include-from-path "annotation/instrumentation.scm")
 
 (define-public find-pathway-genes-ctr (accum-time "find-pathway-genes"))
 (define-public add-pathway-genes-ctr (accum-time "add-pathway-genes"))
@@ -525,9 +525,9 @@ translates to."
   )
 ) 
 
-(define-public (match-gene-interactors a b c)
+(define-public (match-gene-interactors a b c d)
   (match-gene-interactors-ctr #:enter? #t)
-  (let ((rv (xmatch-gene-interactors a b c)))
+  (let ((rv (xmatch-gene-interactors a b c d)))
   (match-gene-interactors-ctr #:enter? #f)
   rv))
 
@@ -567,9 +567,9 @@ translates to."
         ))
 )
 
-(define-public (find-output-interactors a b c)
+(define-public (find-output-interactors a b c d)
   (find-output-interactors-ctr #:enter? #t)
-  (let ((rv (xfind-output-interactors a b c)))
+  (let ((rv (xfind-output-interactors a b c d)))
   (find-output-interactors-ctr #:enter? #f)
   rv))
 

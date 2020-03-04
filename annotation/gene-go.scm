@@ -28,7 +28,7 @@
     #:export (gene-go-annotation)
 )
 
-(include "instrumentation.scm")
+(include-from-path "annotation/instrumentation.scm")
 
 (define-public gene-go-anno-ctr (accum-time "gene-go-anno"))
 (define-public gene-go-write-ctr (accum-time "gene-go-write"))

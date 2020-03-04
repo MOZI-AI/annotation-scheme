@@ -36,7 +36,7 @@
 	          create-edge)
 )
 
-(include "instrumentation.scm")
+(include-from-path "annotation/instrumentation.scm")
 
 (define-public find-name-ctr (accum-time "find-name"))
 (define-public locate-node-ctr (accum-time "locate-node"))

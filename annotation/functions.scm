@@ -440,40 +440,22 @@ translates to."
 ) 
 
 
-;; Finds genes interacting with a given gene
-(define-public match-gene-interactors
-    (lambda (gene prot go rna)
-        (run-query (BindLink
-            (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-              (ChoiceLink 
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                  gene
-                  (VariableNode "$a")
-                  )
-                )
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                   (VariableNode "$a")
-                   gene
-                  )
-                )       
-             )
-            
-            (ExecutionOutputLink
-              (GroundedSchemaNode "scm: generate-result")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                  (Number prot)
-                  go
-                  rna
-                ))        
-            )
-        ))
+(define-public (match-gene-interactors gene prot go rna)
+"
+  match-gene-interactors - Finds genes interacting with a given gene
+"
+	(map
+		(lambda (act-gene)
+			(generate-result gene act-gene (Number prot) go rna))
+
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode)))
+					(Choice
+						(Evaluation (Predicate "interacts_with")
+							(List gene (Variable "$a")))
+						(Evaluation (Predicate "interacts_with")
+							(List (Variable "$a") gene))))))
 )
 
 ;;; Finds output genes interacting eachother 

@@ -1,6 +1,7 @@
 include guile.am
 AUTOMAKE_OPTIONS = foreign
 SOURCES = \
+    annotation/instrumentation.scm \
     annotation/util.scm  \
     annotation/functions.scm \
     annotation/gene-go.scm \

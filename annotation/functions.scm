@@ -545,7 +545,8 @@ translates to."
   ))
 )
 
-(define-public (generate-result gene-a gene-b do-protein namespaces num-parents rna)
+(define-public (generate-result gene-a gene-b do-protein namespaces num-parents
+                                coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
 
@@ -556,13 +557,8 @@ translates to."
 
   `num-parents` should be a number.
 
-  `rna` may be either an empty ListLink, or may have one, or two
-      ConceptNodes in it. If it has two, then first one is the coding RNA,
-      and the second one is the non-coding RNA.
-
-      XXX FIXME: these ConceptNodes are used to indicate whether or
-      not the coding or non-coding interactions should be done.
-      The are just set to (ConceptNode "True") to indicate this.
+  `coding-rna` should be either null or the string "True".
+  `non-coding-rna` should be either null or the string "True".
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
@@ -584,11 +580,6 @@ translates to."
                      (find-protein-form gene-b)
                      output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
-
-            [crna      (gar rna)]   ; coding RNA
-            [ncrna     (gdr rna)]   ; non-coding RNA
-            [crna-name  (if (null? crna)  "" (cog-name crna))]
-            [ncrna-name (if (null? ncrna) "" (cog-name ncrna))]
           )
 
           ;; Neither gene has been done yet.
@@ -604,11 +595,11 @@ translates to."
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
-                    (if (= 0 (cog-arity rna)) '()
+                    (if (not (and coding-rna non-coding-rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name do-prot-str)
-                          (find-rna gene-b crna-name ncrna-name do-prot-str)
+                          (find-rna gene-a coding-rna non-coding-rna do-prot-str)
+                          (find-rna gene-b coding-rna non-coding-rna do-prot-str)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if do-protein
@@ -655,10 +646,10 @@ translates to."
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation
-                     (if (= 0 (cog-arity rna)) '()
+                     (if (not (and coding-rna non-coding-rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name do-prot-str)
+                           (find-rna gene-x coding-rna non-coding-rna do-prot-str)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if do-protein

@@ -46,12 +46,12 @@
           (append-map (lambda (gene)
                         (match interaction
                           ("Proteins"
-                           (append (match-gene-interactors (GeneNode gene) 1 go rna)
-                                   (find-output-interactors (GeneNode gene) 1 go rna)))
+                           (append (match-gene-interactors (GeneNode gene) #t go rna)
+                                   (find-output-interactors (GeneNode gene) #t go rna)))
                           ("Genes"
                            (append rna
-                                   (match-gene-interactors (GeneNode gene) 0 go rna)
-                                   (find-output-interactors (GeneNode gene) 0 go rna)))))
+                                   (match-gene-interactors (GeneNode gene) #f go rna)
+                                   (find-output-interactors (GeneNode gene) #f go rna)))))
                       gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])

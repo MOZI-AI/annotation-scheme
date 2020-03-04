@@ -440,13 +440,15 @@ translates to."
 ) 
 
 
-(define-public (match-gene-interactors gene prot go rna)
+(define-public (match-gene-interactors gene do-protein go rna)
 "
   match-gene-interactors - Finds genes interacting with a given gene
+
+  If do-protein is #t then protein interactions are included.
 "
 	(map
 		(lambda (act-gene)
-			(generate-result gene act-gene (Number prot) go rna))
+			(generate-result gene act-gene do-protein go rna))
 
 		(run-query (Get
 			(VariableList
@@ -458,16 +460,18 @@ translates to."
 							(List (Variable "$a") gene))))))
 )
 
-(define-public (find-output-interactors gene prot go rna)
+(define-public (find-output-interactors gene do-protein go rna)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
   This finds a triangular relationship, between the given gene, and
   two others, such that all three interact with one-another.
+
+  If do-protein is #t then protein interactions are included.
 "
 	(map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) (Number prot) go rna))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein go rna))
 
 		(run-query (Get
 			(VariableList
@@ -541,13 +545,11 @@ translates to."
   ))
 )
 
-(define-public (generate-result gene-a gene-b prot go rna)
+(define-public (generate-result gene-a gene-b do-protein go rna)
 "
   generate-result -- add info about matched variable nodes
 
-  `prot` is either (NumberNode 0) or (NumberNode 1)
-      which is used to indicate whether or not protein interactions
-      should be computed.
+  `prot` should be #t  for protein interactions to be computed.
 
   `rna` may be either an empty ListLink, or may have one, or two
       ConceptNodes in it. If it has two, then first one is the coding RNA,
@@ -562,8 +564,7 @@ translates to."
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
-            [do-prot-str  (cog-name prot)]
-            [do-protein  (= 1 (string->number do-prot-str))]
+            [do-prot-str  (if do-protein "1" "0")]
 
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]

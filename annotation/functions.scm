@@ -806,10 +806,11 @@ translates to."
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
+	(define do-coding (string=? coding "True"))
+	(define do-noncoding (string=? noncoding "True"))
 	(map
 		(lambda (transcribe)
-			(filterbytype gene transcribe coding noncoding (Number protein)))
-
+			(filterbytype gene transcribe do-coding do-noncoding (Number protein)))
 		(run-query (Get
 			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 			(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
@@ -817,8 +818,7 @@ translates to."
 
 (define-public (filterbytype gene rna cod ncod prot)
   (ListLink 
-   (if (and (string=? cod "True")
-            (string-prefix? "ENST" (cog-name rna)))
+   (if (and cod (string-prefix? "ENST" (cog-name rna)))
        (list
         (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna)
@@ -832,8 +832,7 @@ translates to."
              (node-info (car (find-translates rna))))
             '()))
        '())
-   (if (and (string=? ncod "True")
-            (not (string-prefix? "ENST" (cog-name rna))))
+   (if (and ncod (not (string-prefix? "ENST" (cog-name rna))))
        (list
         (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna))

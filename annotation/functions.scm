@@ -280,11 +280,11 @@ translates to."
            (_ '()))
          (match rna-set
            ((crna ncrna . _)
-            (let* ([protein (if (string=? (cog-name prot) "True") 1 0)]
+            (let* ([do-protein (string=? (cog-name prot) "True")]
                    [rnaresult (find-rna gene
                                         (cog-name crna)
                                         (cog-name ncrna)
-                                        protein)])
+                                        do-protein)])
               (if (null? rnaresult)
                   '()
                   (ListLink (ConceptNode "rna-annotation") rnaresult
@@ -640,8 +640,8 @@ translates to."
                     (if (= 0 (cog-arity rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name do-prot-str)
-                          (find-rna gene-b crna-name ncrna-name do-prot-str)
+                          (find-rna gene-a crna-name ncrna-name do-protein)
+                          (find-rna gene-b crna-name ncrna-name do-protein)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if do-protein
@@ -693,7 +693,7 @@ translates to."
                      (if (= 0 (cog-arity rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name do-prot-str)
+                           (find-rna gene-x crna-name ncrna-name do-protein)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if do-protein
@@ -805,30 +805,27 @@ translates to."
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
-(define-public (find-rna gene coding noncoding protein)
+(define-public (find-rna gene coding noncoding do-protein)
 	(define do-coding (string=? coding "True"))
 	(define do-noncoding (string=? noncoding "True"))
 	(map
 		(lambda (transcribe)
-			(filterbytype gene transcribe do-coding do-noncoding (Number protein)))
+			(filterbytype gene transcribe do-coding do-noncoding do-protein))
 		(run-query (Get
 			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 			(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
 )
 
-(define-public (filterbytype gene rna cod ncod prot)
-  (ListLink 
+(define (filterbytype gene rna cod ncod do-prot)
+  (ListLink
    (if (and cod (string-prefix? "ENST" (cog-name rna)))
        (list
         (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna)
-        (if (= (string->number (cog-name prot)) 1)
+        (if do-prot
             (list
-             (EvaluationLink
-              (PredicateNode "translated_to")
-              (ListLink
-               rna
-               (find-translates rna)))
+             (Evaluation (Predicate "translated_to")
+                (ListLink rna (find-translates rna)))
              (node-info (car (find-translates rna))))
             '()))
        '())

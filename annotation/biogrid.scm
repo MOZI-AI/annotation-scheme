@@ -30,7 +30,7 @@
     #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(include-file "instrumentation.scm")
+(include-from-path "annotation/instrumentation.scm")
 
 (define biogrid-ctr (accum-time "biogrid-anno"))
 (define biowrite-ctr (accum-time "biogrid-write"))

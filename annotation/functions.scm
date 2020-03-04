@@ -123,7 +123,7 @@ in the specified namespaces."
               (let ([goterms
                      (append-map
                       (lambda (ns)
-                        (run-query (BindLink
+                        (run-query (Get
                                     (TypedVariable (VariableNode "$g")
                                                    (Type 'ConceptNode))
                                     (AndLink (MemberLink gene (VariableNode "$g"))
@@ -131,8 +131,7 @@ in the specified namespaces."
                                               (PredicateNode "GO_namespace")
                                               (ListLink
                                                (VariableNode "$g")
-                                               (ConceptNode ns))))
-                                    (VariableNode "$g"))))
+                                               (Concept ns)))))))
                       namespace)])
                 (map (lambda (go)
                        (MemberLink (stv 0.0 0.0) prot go))

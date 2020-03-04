@@ -808,7 +808,7 @@ translates to."
 (define-public (find-rna gene coding noncoding protein)
 	(map
 		(lambda (transcribe)
-			(filterbytype gene transcribe (Concept coding) (Concept noncoding) (Number protein)))
+			(filterbytype gene transcribe coding noncoding (Number protein)))
 
 		(run-query (Get
 			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
@@ -817,14 +817,10 @@ translates to."
 
 (define-public (filterbytype gene rna cod ncod prot)
   (ListLink 
-   (if (and (string=? (cog-name cod) "True")
+   (if (and (string=? cod "True")
             (string-prefix? "ENST" (cog-name rna)))
        (list
-        (EvaluationLink
-         (PredicateNode "transcribed_to")
-         (ListLink
-          gene
-          rna))
+        (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna)
         (if (= (string->number (cog-name prot)) 1)
             (list
@@ -836,14 +832,10 @@ translates to."
              (node-info (car (find-translates rna))))
             '()))
        '())
-   (if (and (string=? (cog-name ncod) "True")
+   (if (and (string=? ncod "True")
             (not (string-prefix? "ENST" (cog-name rna))))
        (list
-        (EvaluationLink
-         (PredicateNode "transcribed_to")
-         (ListLink
-          gene
-          rna))
+        (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna))
        '())))
 

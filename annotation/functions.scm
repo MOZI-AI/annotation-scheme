@@ -888,7 +888,13 @@ translates to."
 )
 
 ;; ------------------------------------------------------
-(define (do-find-pubmed-id gene-set)
+(define (do-find-pubmed-id a)
+  (find-pubmed-id-ctr #:enter? #t)
+  (let ((rv (xdo-find-pubmed-id a)))
+  (find-pubmed-id-ctr #:enter? #f)
+  rv))
+
+(define (xdo-find-pubmed-id gene-set)
 "
   This is expecting a (SetLink (Gene \"a\") (Gene \"b\"))
   as the argument.
@@ -927,14 +933,8 @@ translates to."
 	(make-afunc-cache do-find-pubmed-id))
 
 ; Memoized version of above, for performance.
-(define-public (xfind-pubmed-id gene-a gene-b)
+(define-public (find-pubmed-id gene-a gene-b)
 	(cache-find-pubmed-id (Set gene-a gene-b)))
-
-(define-public (find-pubmed-id a)
-  (find-pubmed-id-ctr #:enter? #t)
-  (let ((rv (xfind-pubmed-id a)))
-  (find-pubmed-id-ctr #:enter? #f)
-  rv))
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene

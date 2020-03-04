@@ -458,47 +458,33 @@ translates to."
 							(List (Variable "$a") gene))))))
 )
 
-;;; Finds output genes interacting eachother 
-(define-public find-output-interactors
-    (lambda(gene prot go rna)
-        (run-query (BindLink
-          (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode))
-            (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
+(define-public (find-output-interactors gene prot go rna)
+"
+  find-output-interactors -- Finds output genes interacting with each-other
 
-          (And  
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               gene
-               (VariableNode "$a")
-              ))
+  This finds a triangular relationship, between the given gene, and
+  two others, such that all three interact with one-another.
+"
+	(map
+		(lambda (gene-pair)
+			(generate-result (gar gene-pair) (gdr gene-pair) (Number prot) go rna))
 
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-            ))
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode))
+				(TypedVariable (Variable "$b") (Type 'GeneNode)))
 
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                gene
-               (VariableNode "$b")
-              ))
-          )
-          (ExecutionOutputLink
-            (GroundedSchemaNode "scm: generate-result")
-              (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-                (Number prot)
-                go
-                rna
-              ))
-        ))
-))
+			(And
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$a")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "$a") (Variable "$b")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$b")))
+			))))
+)
 
 ;; Gene interactors for genes in the pathway
 (define do-pathway-gene-interactors

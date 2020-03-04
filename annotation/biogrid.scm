@@ -32,8 +32,8 @@
 
 (include-from-path "annotation/instrumentation.scm")
 
-(define biogrid-ctr (accum-time "biogrid-anno"))
-(define biowrite-ctr (accum-time "biogrid-write"))
+(define-public biogrid-ctr (accum-time "biogrid-anno"))
+(define-public biowrite-ctr (accum-time "biogrid-write"))
 
 (define* (biogrid-interaction-annotation gene-nodes file-name
                                          #:key

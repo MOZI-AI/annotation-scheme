@@ -11,6 +11,7 @@ SOURCES = \
     annotation/graph.scm \
     annotation/parser.scm \
     annotation/rna.scm \
+    annotation/report.scm \
     annotation.scm 
 
 TESTS = \

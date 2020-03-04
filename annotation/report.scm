@@ -1,5 +1,5 @@
 
-(define (report)
+(define-public (report)
 " Print profile report... "
 
 	; top-level stuff
@@ -20,7 +20,6 @@
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
 	(pathway-hierarchy-ctr #:report? #t)
-	(check-pathway-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
 	(find-mol-ctr #:report? #t)
 	(find-go-term-ctr #:report? #t)

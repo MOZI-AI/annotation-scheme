@@ -37,22 +37,22 @@
                                          (parents 0)
                                          coding
                                          noncoding)
-  (let* ([go (if (string-null? namespace)
-                 (ListLink) 
-                 (ListLink (ConceptNode namespace) (Number parents)))]
-		 [rna (ListLink (list (if coding (ConceptNode coding) '())
+	(define namespaces
+		(if (null? namespace) '() (string-split namespace #\ )))
+
+  (let* ([rna (ListLink (list (if coding (ConceptNode coding) '())
                               (if noncoding (ConceptNode noncoding) '())))]
          [result
           (append-map (lambda (gene)
-                        (match interaction
-                          ("Proteins"
-                           (append (match-gene-interactors (GeneNode gene) #t go rna)
-                                   (find-output-interactors (GeneNode gene) #t go rna)))
-                          ("Genes"
-                           (append rna
-                                   (match-gene-interactors (GeneNode gene) #f go rna)
-                                   (find-output-interactors (GeneNode gene) #f go rna)))))
-                      gene-nodes)]
+            (match interaction
+              ("Proteins"
+               (append (match-gene-interactors (GeneNode gene) #t namespaces parents rna)
+                       (find-output-interactors (GeneNode gene) #t namespaces parents rna)))
+              ("Genes"
+               (append rna
+                       (match-gene-interactors (GeneNode gene) #f namespaces parents rna)
+                       (find-output-interactors (GeneNode gene) #f namespaces parents rna)))))
+          gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])
     (write-to-file res file-name "biogrid")

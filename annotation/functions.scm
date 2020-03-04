@@ -440,7 +440,7 @@ translates to."
 ) 
 
 
-(define-public (match-gene-interactors gene do-protein go rna)
+(define-public (match-gene-interactors gene do-protein namespace parents rna)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
@@ -448,7 +448,7 @@ translates to."
 "
 	(map
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein go rna))
+			(generate-result gene act-gene do-protein namespace parents rna))
 
 		(run-query (Get
 			(VariableList
@@ -460,7 +460,7 @@ translates to."
 							(List (Variable "$a") gene))))))
 )
 
-(define-public (find-output-interactors gene do-protein go rna)
+(define-public (find-output-interactors gene do-protein namespace parents rna)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -471,7 +471,7 @@ translates to."
 "
 	(map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein go rna))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents rna))
 
 		(run-query (Get
 			(VariableList
@@ -545,11 +545,16 @@ translates to."
   ))
 )
 
-(define-public (generate-result gene-a gene-b do-protein go rna)
+(define-public (generate-result gene-a gene-b do-protein namespaces num-parents rna)
 "
   generate-result -- add info about matched variable nodes
 
   `prot` should be #t  for protein interactions to be computed.
+
+  `namespaces` should be a scheme list of strings (possibly an empty list),
+     each string a namespace name.
+
+  `num-parents` should be a number.
 
   `rna` may be either an empty ListLink, or may have one, or two
       ConceptNodes in it. If it has two, then first one is the coding RNA,
@@ -580,9 +585,6 @@ translates to."
                      output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
 
-            [namespace (gar go)]
-            [parent    (gdr go)]
-
             [crna      (gar rna)]   ; coding RNA
             [ncrna     (gdr rna)]   ; non-coding RNA
             [crna-name  (if (null? crna)  "" (cog-name crna))]
@@ -594,15 +596,11 @@ translates to."
               ((and (not already-done-a) (not already-done-b))
               (let (
                  [go-cross-annotation
-                    (if (null? namespace) '()
+                    (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
-                           (find-go-term gene-b
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-a namespaces num-parents)
+                           (find-go-term gene-b namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
@@ -650,12 +648,10 @@ translates to."
               (let* (
                   [gene-x (if already-done-a gene-b gene-a)]
                   [go-cross-annotation
-                     (if (null? namespace) '()
+                     (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-x
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-x namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation

@@ -50,6 +50,7 @@
 (define-public find-protein-form-ctr (accum-time "find-protein-form"))
 (define-public find-mol-ctr (accum-time "find-mol"))
 (define-public find-pubmed-id-ctr (accum-time "find-pubmed-id"))
+(define-public find-rna-ctr (accum-time "find-rna"))
 
 (define (find-parent a b)
   (find-parent-ctr #:enter? #t)
@@ -938,7 +939,13 @@ translates to."
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
-(define-public (find-rna gene coding noncoding protein)
+(define (find-rna a b c d)
+  (find-parent-ctr #:enter? #t)
+  (let ((rv (xfind-rna a b c d)))
+  (find-parent-ctr #:enter? #f)
+  rv))
+
+(define-public (xfind-rna gene coding noncoding protein)
   (run-query (BindLink
     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
       (EvaluationLink

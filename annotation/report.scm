@@ -34,6 +34,7 @@
 	; common to grid and path
 	(find-name-ctr #:report? #t)
 	(find-pubmed-id-ctr #:report? #t)
+	(find-rna-ctr #:report? #t)
 	
 	; ???
 	(find-memberln-ctr #:report? #t)

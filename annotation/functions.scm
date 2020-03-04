@@ -159,7 +159,7 @@ in the specified namespaces."
           ]
       )
       )))
-       (append (node-info g) parents)
+       (cons (node-info g) parents)
     )
 ))
 
@@ -774,7 +774,7 @@ translates to."
                             (Evaluation (Predicate "expresses") (List gene-b coding-prot-b))
                             (node-info gene-b)
                             (node-info coding-prot-b)
-                            (locate-node coding-prot-a)
+                            (locate-node coding-prot-b)
                             go-cross-annotation
                             rna-cross-annotation
                           )
@@ -887,15 +887,16 @@ translates to."
 						output)))))
 )
 
-(define-public (find-pubmed-id a)
-  (find-pubmed-id-ctr #:enter? #t)
-  (let ((rv (xfind-pubmed-id a)))
-  (find-pubmed-id-ctr #:enter? #f)
-  rv))
-
-;;                           
-(define-public (xfind-pubmed-id gene-a gene-b)
-  (let ([pub (run-query
+;; ------------------------------------------------------
+(define (do-find-pubmed-id gene-set)
+"
+  This is expecting a (SetLink (Gene \"a\") (Gene \"b\"))
+  as the argument.
+"
+   (let* (
+      [gene-a (gar gene-set)]
+      [gene-b (gdr gene-set)]
+      [pub (run-query
               (GetLink
                (VariableNode "$pub")
                (EvaluationLink
@@ -922,6 +923,20 @@ translates to."
             (VariableNode "$pub")))))
         pub)))
 
+(define cache-find-pubmed-id
+	(make-afunc-cache do-find-pubmed-id))
+
+; Memoized version of above, for performance.
+(define-public (xfind-pubmed-id gene-a gene-b)
+	(cache-find-pubmed-id (Set gene-a gene-b)))
+
+(define-public (find-pubmed-id a)
+  (find-pubmed-id-ctr #:enter? #t)
+  (let ((rv (xfind-pubmed-id a)))
+  (find-pubmed-id-ctr #:enter? #f)
+  rv))
+
+;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
   (run-query (BindLink

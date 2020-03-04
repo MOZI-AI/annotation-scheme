@@ -806,25 +806,13 @@ translates to."
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna gene coding noncoding protein)
-  (run-query (BindLink
-    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-        (ListLink
-          gene
-          (VariableNode "$a")
-        )
-      )
-    (ExecutionOutputLink
-      (GroundedSchemaNode "scm: filterbytype")
-        (ListLink 
-          gene
-          (VariableNode "$a")
-          (Concept coding)
-          (Concept noncoding)
-          (Number protein))
-    )
-))
+	(map
+		(lambda (transcribe)
+			(filterbytype gene transcribe (Concept coding) (Concept noncoding) (Number protein)))
+
+		(run-query (Get
+			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+			(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
 )
 
 (define-public (filterbytype gene rna cod ncod prot)

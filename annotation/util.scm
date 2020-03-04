@@ -36,7 +36,7 @@
 	          create-edge)
 )
 
-(include-file "instrumentation.scm")
+(include "instrumentation.scm")
 
 (define-public find-name-ctr (accum-time "find-name"))
 (define-public locate-node-ctr (accum-time "locate-node"))

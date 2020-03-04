@@ -30,7 +30,7 @@
       #:use-module (ice-9 match)
       #:export (gene-pathway-annotation))
 
-(include-file "instrumentatino.scm")
+(include "instrumentation.scm")
 
 (define-public gene-path-anno-ctr (accum-time "gene-path-anno"))
 (define-public gene-path-write-ctr (accum-time "gene-path-write"))

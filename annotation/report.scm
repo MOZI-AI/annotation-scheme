@@ -18,6 +18,7 @@
 	(pathway-hierarchy-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
 	(add-loc-ctr #:report? #t)
+	(find-rna-ctr #:report? #t)
 
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
@@ -37,7 +38,6 @@
 	(generate-result-ctr #:report? #t)
 	(build-interaction-ctr #:report? #t)
 	(find-pubmed-id-ctr #:report? #t)
-	(find-rna-ctr #:report? #t)
 	
 	; common to grid and GO
 	(format #t "\nCommon biogrid/GO functions\n")

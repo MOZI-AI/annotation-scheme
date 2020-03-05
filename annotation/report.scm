@@ -12,21 +12,21 @@
 
 	(find-pathway-genes-ctr #:report? #t)
 	(add-pathway-genes-ctr #:report? #t)
+	(find-mol-ctr #:report? #t)
+
 	(find-pathway-member-ctr #:report? #t)
 	(pathway-hierarchy-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
-	(find-mol-ctr #:report? #t)
 	(add-loc-ctr #:report? #t)
 
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
 	
-	; go stuff
-	(format #t "\nGO functions\n")
-	(gene-go-anno-ctr #:report? #t)
-	(gene-go-write-ctr #:report? #t)
-	(find-go-term-ctr #:report? #t)
-	(add-go-info-ctr #:report? #t)
+	; common to grid and path
+	(format #t "\nCommon biogrid/pathway functions\n")
+	(find-name-ctr #:report? #t)
+	(locate-node-ctr #:report? #t)
+	(find-parent-ctr #:report? #t)
 
 	; grid stuff
 	(format #t "\nBiogrid functions\n")
@@ -36,14 +36,18 @@
 	(find-output-interactors-ctr #:report? #t)
 	(generate-result-ctr #:report? #t)
 	(build-interaction-ctr #:report? #t)
-	(find-memberln-ctr #:report? #t)
-	(find-protein-form-ctr #:report? #t)
 	(find-pubmed-id-ctr #:report? #t)
 	(find-rna-ctr #:report? #t)
 	
-	; common to grid and path
-	(format #t "\nCommon functions\n")
-	(find-name-ctr #:report? #t)
-	(locate-node-ctr #:report? #t)
-	(find-parent-ctr #:report? #t)
+	; common to grid and GO
+	(format #t "\nCommon biogrid/GO functions\n")
+	(find-memberln-ctr #:report? #t)
+	(find-protein-form-ctr #:report? #t)
+
+	; go stuff
+	(format #t "\nGO functions\n")
+	(gene-go-anno-ctr #:report? #t)
+	(gene-go-write-ctr #:report? #t)
+	(find-go-term-ctr #:report? #t)
+	(add-go-info-ctr #:report? #t)
 )

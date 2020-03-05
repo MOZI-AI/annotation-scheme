@@ -440,7 +440,7 @@ translates to."
 ) 
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-conding)
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 

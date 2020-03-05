@@ -3,7 +3,7 @@
 " Print profile report... "
 
 	; Pathway stuff.
-	(format #t "Pathway functions\n")
+	(format #t "\nPathway functions\n")
 	(gene-path-anno-ctr #:report? #t)
 	(gene-path-write-ctr #:report? #t)
 

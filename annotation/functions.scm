@@ -172,7 +172,7 @@ in the specified namespaces."
               (let ([goterms
                      (append-map
                       (lambda (ns)
-                        (run-query (BindLink
+                        (run-query (Get
                                     (TypedVariable (VariableNode "$g")
                                                    (Type 'ConceptNode))
                                     (AndLink (MemberLink gene (VariableNode "$g"))
@@ -180,8 +180,7 @@ in the specified namespaces."
                                               (PredicateNode "GO_namespace")
                                               (ListLink
                                                (VariableNode "$g")
-                                               (ConceptNode ns))))
-                                    (VariableNode "$g"))))
+                                               (Concept ns)))))))
                       namespace)])
                 (map (lambda (go)
                        (MemberLink (stv 0.0 0.0) prot go))
@@ -348,11 +347,11 @@ translates to."
            (_ '()))
          (match rna-set
            ((crna ncrna . _)
-            (let* ([protein (if (string=? (cog-name prot) "True") 1 0)]
+            (let* ([do-protein (string=? (cog-name prot) "True")]
                    [rnaresult (find-rna gene
                                         (cog-name crna)
                                         (cog-name ncrna)
-                                        protein)])
+                                        do-protein)])
               (if (null? rnaresult)
                   '()
                   (ListLink (ConceptNode "rna-annotation") rnaresult
@@ -756,8 +755,8 @@ translates to."
                     (if (= 0 (cog-arity rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name do-prot-str)
-                          (find-rna gene-b crna-name ncrna-name do-prot-str)
+                          (find-rna gene-a crna-name ncrna-name do-protein)
+                          (find-rna gene-b crna-name ncrna-name do-protein)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if do-protein
@@ -809,7 +808,7 @@ translates to."
                      (if (= 0 (cog-arity rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name do-prot-str)
+                           (find-rna gene-x crna-name ncrna-name do-protein)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if do-protein
@@ -939,63 +938,39 @@ translates to."
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
-(define (find-rna a b c d)
+(define-public (find-rna a b c d)
   (find-parent-ctr #:enter? #t)
   (let ((rv (xfind-rna a b c d)))
   (find-parent-ctr #:enter? #f)
   rv))
 
-(define-public (xfind-rna gene coding noncoding protein)
-  (run-query (BindLink
-    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-      (EvaluationLink
-        (PredicateNode "transcribed_to")
-        (ListLink
-          gene
-          (VariableNode "$a")
-        )
-      )
-    (ExecutionOutputLink
-      (GroundedSchemaNode "scm: filterbytype")
-        (ListLink 
-          gene
-          (VariableNode "$a")
-          (Concept coding)
-          (Concept noncoding)
-          (Number protein))
-    )
-))
+(define (xfind-rna gene coding noncoding do-protein)
+	(define do-coding (string=? coding "True"))
+	(define do-noncoding (string=? noncoding "True"))
+	(map
+		(lambda (transcribe)
+			(filterbytype gene transcribe do-coding do-noncoding do-protein))
+		(run-query (Get
+			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+			(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
 )
 
-(define-public (filterbytype gene rna cod ncod prot)
-  (ListLink 
-   (if (and (string=? (cog-name cod) "True")
-            (string-prefix? "ENST" (cog-name rna)))
+(define (filterbytype gene rna cod ncod do-prot)
+  (ListLink
+   (if (and cod (string-prefix? "ENST" (cog-name rna)))
        (list
-        (EvaluationLink
-         (PredicateNode "transcribed_to")
-         (ListLink
-          gene
-          rna))
+        (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna)
-        (if (= (string->number (cog-name prot)) 1)
+        (if do-prot
             (list
-             (EvaluationLink
-              (PredicateNode "translated_to")
-              (ListLink
-               rna
-               (find-translates rna)))
+             (Evaluation (Predicate "translated_to")
+                (ListLink rna (find-translates rna)))
              (node-info (car (find-translates rna))))
             '()))
        '())
-   (if (and (string=? (cog-name ncod) "True")
-            (not (string-prefix? "ENST" (cog-name rna))))
+   (if (and ncod (not (string-prefix? "ENST" (cog-name rna))))
        (list
-        (EvaluationLink
-         (PredicateNode "transcribed_to")
-         (ListLink
-          gene
-          rna))
+        (Evaluation (Predicate "transcribed_to") (List gene rna))
         (node-info rna))
        '())))
 

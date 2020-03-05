@@ -440,7 +440,7 @@ translates to."
 ) 
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents rna)
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-conding)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
@@ -448,7 +448,7 @@ translates to."
 "
 	(map
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents rna))
+			(generate-result gene act-gene do-protein namespace parents coding noncoding))
 
 		(run-query (Get
 			(VariableList
@@ -460,7 +460,7 @@ translates to."
 							(List (Variable "$a") gene))))))
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents rna)
+(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -471,7 +471,7 @@ translates to."
 "
 	(map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents rna))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding noncoding))
 
 		(run-query (Get
 			(VariableList

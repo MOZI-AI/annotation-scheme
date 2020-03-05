@@ -40,6 +40,8 @@
     #:use-module (annotation rna)
 )
 
+(include-from-path "annotation/report.scm")
+
 (define annotation-functions '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "include-rna"))
 
 (define-public (find-genes gene-list)

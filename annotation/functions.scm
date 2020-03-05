@@ -939,9 +939,9 @@ translates to."
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 (define-public (find-rna a b c d)
-  (find-parent-ctr #:enter? #t)
+  (find-rna-ctr #:enter? #t)
   (let ((rv (xfind-rna a b c d)))
-  (find-parent-ctr #:enter? #f)
+  (find-rna-ctr #:enter? #f)
   rv))
 
 (define (xfind-rna gene coding noncoding do-protein)

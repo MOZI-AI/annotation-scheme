@@ -552,7 +552,7 @@ translates to."
 (define-public pathway-gene-interactors
 	(make-afunc-cache do-pathway-gene-interactors))
 
-(define-public (do-find-protein-form gene)
+(define (do-find-protein-form gene)
 	(let ([prot
 		(run-query (Bind
 			(VariableList
@@ -571,7 +571,7 @@ translates to."
 ;; for about 85% of the total execution time of `biogrid-interaction-annotation`,
 ;; so any caching at all is a win. In a test of 681 genes, this offers
 ;; a ??? speedup in run time.
-(define find-protein-form
+(define-public find-protein-form
 	(make-afunc-cache do-find-protein-form))
 
 (define-public (generate-result gene-a gene-b prot go rna)

@@ -448,7 +448,7 @@ translates to."
 "
 	(map
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding noncoding))
+			(generate-result gene act-gene do-protein namespace parents coding non-coding))
 
 		(run-query (Get
 			(VariableList
@@ -471,7 +471,7 @@ translates to."
 "
 	(map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding noncoding))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
 
 		(run-query (Get
 			(VariableList

@@ -18,7 +18,6 @@
 	(pathway-hierarchy-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
 	(add-loc-ctr #:report? #t)
-	(find-rna-ctr #:report? #t)
 
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
@@ -27,6 +26,7 @@
 	(format #t "\nCommon biogrid/pathway functions\n")
 	(find-name-ctr #:report? #t)
 	(locate-node-ctr #:report? #t)
+	(find-rna-ctr #:report? #t)
 	(find-parent-ctr #:report? #t)
 
 	; grid stuff

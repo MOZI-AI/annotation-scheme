@@ -15,6 +15,9 @@
 	(find-pathway-member-ctr #:report? #t)
 	(pathway-hierarchy-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
+	(find-mol-ctr #:report? #t)
+	(add-loc-ctr #:report? #t)
+
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
 	
@@ -40,9 +43,7 @@
 	
 	; common to grid and path
 	(format #t "\nCommon functions\n")
-	(find-mol-ctr #:report? #t)
 	(find-name-ctr #:report? #t)
 	(locate-node-ctr #:report? #t)
-	(add-loc-ctr #:report? #t)
 	(find-parent-ctr #:report? #t)
 )

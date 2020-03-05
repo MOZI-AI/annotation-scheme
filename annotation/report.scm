@@ -13,10 +13,10 @@
 	(find-pathway-genes-ctr #:report? #t)
 	(add-pathway-genes-ctr #:report? #t)
 	(find-pathway-member-ctr #:report? #t)
-	(pathway-gene-interactors-ctr #:report? #t)
-	(generate-interactors-ctr #:report? #t)
 	(pathway-hierarchy-ctr #:report? #t)
 	(find-protein-ctr #:report? #t)
+	(pathway-gene-interactors-ctr #:report? #t)
+	(generate-interactors-ctr #:report? #t)
 	
 	; go stuff
 	(format #t "\nGO functions\n")

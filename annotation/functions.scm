@@ -35,6 +35,7 @@
 (define-public find-go-term-ctr (accum-time "find-go-term"))
 (define-public find-memberln-ctr (accum-time "find-memberln"))
 (define-public add-go-info-ctr (accum-time "add-go-info"))
+(define-public go-info-ctr (accum-time "go-info"))
 (define-public find-parent-ctr (accum-time "find-parent"))
 
 (define-public match-gene-interactors-ctr (accum-time "match-gene-interactors"))
@@ -195,7 +196,7 @@ in the specified namespaces."
      (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot)))))
 
-(define (go-info go)
+(define (xgo-info go)
   "Add details about the GO term."
   (define GO-ns (find-GO-ns go))
   (list
@@ -205,6 +206,12 @@ in the specified namespaces."
     (ListLink 
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
+
+(define (go-info a b)
+  (go-info-ctr #:enter? #t)
+  (let ((rv (xgo-info a b)))
+  (go-info-ctr #:enter? #f)
+  rv))
 
 (define (find-GO-ns go)
   "Find parents of a GO term (of given namespace type)."

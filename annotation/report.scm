@@ -55,6 +55,7 @@
 	(gene-go-write-ctr #:report? #t)
 	(find-go-term-ctr #:report? #t)
 	(add-go-info-ctr #:report? #t)
+	(go-info-ctr #:report? #t)
 
 	*unspecified*
 )

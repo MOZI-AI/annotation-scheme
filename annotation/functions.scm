@@ -491,9 +491,9 @@ translates to."
   )
 )))
 
-(define-public (find-coding-gene a b)
+(define-public (find-coding-gene a)
   (find-coding-gene-ctr #:enter? #t)
-  (let ((rv (xfind-coding-gene a b)))
+  (let ((rv (xfind-coding-gene a)))
   (find-coding-gene-ctr #:enter? #f)
   rv))
 

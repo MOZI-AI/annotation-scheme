@@ -967,9 +967,9 @@ translates to."
 		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 		(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
 
-(define (do-get-rna a b c d)
+(define (do-get-rna a)
   (do-get-rna-ctr #:enter? #t)
-  (let ((rv (xdo-get-rna a b c d)))
+  (let ((rv (xdo-get-rna a)))
   (do-get-rna-ctr #:enter? #f)
   rv))
 

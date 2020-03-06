@@ -196,6 +196,10 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
+(define-public (filter-atoms atom identifier)
+	(if (string-contains (cog-name atom) (cog-name identifier))
+		(cog-new-stv 1 1) (cog-new-stv 0 1)))
+
 (define-public (find-pathway-member gene db)
   (run-query (BindLink
       (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))

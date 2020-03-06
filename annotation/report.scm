@@ -41,6 +41,7 @@
 	(generate-result-ctr #:report? #t)
 	(build-interaction-ctr #:report? #t)
 	(find-pubmed-id-ctr #:report? #t)
+	(do-find-pubmed-id-ctr #:report? #t)
 	
 	; common to grid and GO
 	(format #t "\nCommon biogrid/GO functions\n")

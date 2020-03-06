@@ -230,7 +230,7 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define-public (add-pathway-genes pathway gene namespace-list num-parents
+(define (add-pathway-genes pathway gene namespace-list num-parents
                 coding-rna non-coding-rna do-protein)
 
 	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
@@ -252,6 +252,18 @@ in the specified namespaces."
 					(List (Concept "rna-annotation") rnaresult
 						(List (Concept "gene-pathway-annotation")))))))
 )
+
+(define (get-pathway-genes pathway)
+	(run-query
+		(Bind
+			(VariableList
+				(TypedVariable (Variable "$p") (Type 'MoleculeNode))
+				(TypedVariable (Variable "$g") (Type 'GeneNode)))
+			(And
+				(Member (Variable "$p") pathway)
+				(Evaluation (Predicate "expresses")
+					(List (Variable "$g") (Variable "$p"))))
+			(Variable "$g"))))
 
 (define-public (find-pathway-genes pathway go rna do-protein)
 "
@@ -276,16 +288,7 @@ in the specified namespaces."
 		(lambda (gene)
 			(add-pathway-genes pathway gene namespace-list num-parents
 				coding-rna non-coding-rna do-protien))
-		(run-query
-			(Bind
-				(VariableList
-					(TypedVariable (Variable "$p") (Type 'MoleculeNode))
-					(TypedVariable (Variable "$g") (Type 'GeneNode)))
-				(And
-					(Member (Variable "$p") pathway)
-					(Evaluation (Predicate "expresses")
-						(List (Variable "$g") (Variable "$p"))))
-				(Variable "$g"))))
+		(get-pathway-genes pathway))
 )
 
 ; --------------------------------------------------------

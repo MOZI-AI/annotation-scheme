@@ -228,34 +228,7 @@ in the specified namespaces."
        (node-info pathway))
       #f))
 
-(define-public (find-pathway-genes pathway go rna prot?)
-  "Find genes which code the proteins in a given pathway.  Perform
-cross-annotation: if go, annotate each member genes of a pathway for
-its GO terms; if rna, annotate each member genes of a pathway for its
-RNA transcribes; if prot?, include the proteins in which the RNA
-translates to."
-  (run-query
-   (BindLink
-    (VariableList 
-     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
-    (AndLink
-     (MemberLink
-      (VariableNode "$p")
-      pathway)
-     (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-       (VariableNode "$g")
-       (VariableNode "$p") )))
-    (ExecutionOutputLink
-     (GroundedSchemaNode "scm: add-pathway-genes")
-     (ListLink
-      pathway
-      (VariableNode "$g")
-      go
-      rna
-      (ConceptNode (if prot? "True" "False")))))))
+; --------------------------------------------------------
 
 (define-public (add-pathway-genes pathway gene go rna prot)
   (let ((go-set (cog-outgoing-set go))
@@ -289,6 +262,38 @@ translates to."
                   (ListLink (ConceptNode "rna-annotation") rnaresult
                             (ListLink (ConceptNode "gene-pathway-annotation"))))))
            (_ '()))))))
+
+
+(define-public (find-pathway-genes pathway go rna prot?)
+  "Find genes which code the proteins in a given pathway.  Perform
+cross-annotation: if go, annotate each member genes of a pathway for
+its GO terms; if rna, annotate each member genes of a pathway for its
+RNA transcribes; if prot?, include the proteins in which the RNA
+translates to."
+  (run-query
+   (BindLink
+    (VariableList
+     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
+     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
+    (AndLink
+     (MemberLink
+      (VariableNode "$p")
+      pathway)
+     (EvaluationLink
+      (PredicateNode "expresses")
+      (ListLink
+       (VariableNode "$g")
+       (VariableNode "$p") )))
+    (ExecutionOutputLink
+     (GroundedSchemaNode "scm: add-pathway-genes")
+     (ListLink
+      pathway
+      (VariableNode "$g")
+      go
+      rna
+      (ConceptNode (if prot? "True" "False")))))))
+
+; --------------------------------------------------------
 
 (define-public (find-protein gene option)
   "Find the proteins a gene expresses."

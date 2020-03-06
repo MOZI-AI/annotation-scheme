@@ -381,17 +381,13 @@ translates to."
   )
 )
 
-(define-public filter-atoms
-  (lambda (atom identifier)
-    (if (string-contains (cog-name atom) (cog-name identifier))
-        (cog-new-stv 1 1)
-        (cog-new-stv 0 1)
-    )
-  )
-)
+(define-public (filter-atoms atom identifier)
+	(if (string-contains (cog-name atom) (cog-name identifier))
+		(cog-new-stv 1 1) (cog-new-stv 0 1)))
 
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
+	(define cid (Concept identifier))
 	(map
 		(lambda (mol) (add-mol-info mol path))
 		(run-query (Get
@@ -399,7 +395,7 @@ translates to."
 			(And
 				(Evaluation
 					(GroundedPredicate "scm: filter-atoms")
-					(List (Variable "$a") (Concept identifier)))
+					(List (Variable "$a") cid))
 				(Member (Variable "$a") path)))))
 )
 

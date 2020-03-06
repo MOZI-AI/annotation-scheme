@@ -385,15 +385,18 @@ translates to."
   )
 )
 
+(define (do-get-mol path)
+	(run-query (Get
+		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(Member (Variable "$a") path))))
+
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
 	(filter-map
 		(lambda (mol)
 			(if (string-contains (cog-name mol) identifier)
 				(add-mol-info mol path) #f))
-		(run-query (Get
-			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
-			(Member (Variable "$a") path))))
+		(do-get-mol path))
 )
 
 ;; Find coding Gene for a given protein

@@ -961,11 +961,13 @@ translates to."
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
-(define-public (find-rna a b c d)
-  (find-rna-ctr #:enter? #t)
-  (let ((rv (xfind-rna a b c d)))
-  (find-rna-ctr #:enter? #f)
-  rv))
+(define (do-get-rna gene)
+	(run-query (Get
+		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
+
+(define cache-get-rna
+	(make-afunc-cache do-get-rna))
 
 (define (xfind-rna gene coding noncoding do-protein)
 	(define do-coding (string=? coding "True"))
@@ -973,10 +975,16 @@ translates to."
 	(map
 		(lambda (transcribe)
 			(filterbytype gene transcribe do-coding do-noncoding do-protein))
-		(run-query (Get
-			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
-			(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
+		(cache-get-rna gene))
 )
+
+(define-public (find-rna a b c d)
+  (find-rna-ctr #:enter? #t)
+  (let ((rv (xfind-rna a b c d)))
+  (find-rna-ctr #:enter? #f)
+  rv))
+
+;; ------------------------------------------------------
 
 (define (filterbytype gene rna cod ncod do-prot)
   (ListLink
@@ -997,15 +1005,11 @@ translates to."
         (node-info rna))
        '())))
 
-(define-public (find-translates rna)
-  (run-query (GetLink
-    (TypedVariable (VariableNode "$a") (TypeNode 'MoleculeNode))
-      (EvaluationLink
-        (PredicateNode "translated_to")
-        (ListLink
-          rna
-          (VariableNode "$a")
-        )
-      )
-))
-)
+(define (do-find-translates rna)
+	(run-query (Get
+		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(Evaluation (Predicate "translated_to")
+			(List rna (Variable "$a"))))))
+
+(define-public find-translates
+	(make-afunc-cache do-find-translates))

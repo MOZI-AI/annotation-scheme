@@ -270,28 +270,21 @@ cross-annotation: if go, annotate each member genes of a pathway for
 its GO terms; if rna, annotate each member genes of a pathway for its
 RNA transcribes; if prot?, include the proteins in which the RNA
 translates to."
-  (run-query
-   (BindLink
-    (VariableList
-     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
-    (AndLink
-     (MemberLink
-      (VariableNode "$p")
-      pathway)
-     (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-       (VariableNode "$g")
-       (VariableNode "$p") )))
-    (ExecutionOutputLink
-     (GroundedSchemaNode "scm: add-pathway-genes")
-     (ListLink
-      pathway
-      (VariableNode "$g")
-      go
-      rna
-      (ConceptNode (if prot? "True" "False")))))))
+	(map
+		(lambda (gene)
+			(add-pathway-genes pathway gene go rna
+				(ConceptNode (if prot? "True" "False"))))
+		(run-query
+			(Bind
+				(VariableList
+					(TypedVariable (Variable "$p") (Type 'MoleculeNode))
+					(TypedVariable (Variable "$g") (Type 'GeneNode)))
+				(And
+					(Member (Variable "$p") pathway)
+					(Evaluation (Predicate "expresses")
+						(List (Variable "$g") (Variable "$p"))))
+				(Variable "$g"))))
+)
 
 ; --------------------------------------------------------
 

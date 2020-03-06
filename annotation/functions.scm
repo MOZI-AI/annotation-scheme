@@ -207,9 +207,9 @@ in the specified namespaces."
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
 
-(define (go-info a b)
+(define (go-info a)
   (go-info-ctr #:enter? #t)
-  (let ((rv (xgo-info a b)))
+  (let ((rv (xgo-info a)))
   (go-info-ctr #:enter? #f)
   rv))
 

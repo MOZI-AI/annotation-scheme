@@ -41,6 +41,8 @@
 (define-public find-name-ctr (accum-time "find-name"))
 (define-public locate-node-ctr (accum-time "locate-node"))
 (define-public add-loc-ctr (accum-time "add-loc"))
+(define-public node-info-ctr (accum-time "node-info"))
+(define-public do-get-node-info-ctr (accum-time "do-get-node-info"))
 
 ;;Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
@@ -64,7 +66,7 @@
 )
 
 ;; Find node name and description. See `node-info` below for documentation.
-(define (do-get-node-info node)
+(define (xdo-get-node-info node)
 	(define (node-name node)
 		(let ([lst (find-pathway-name node)])
 				(if (null? lst) (ConceptNode "N/A") (car lst))))
@@ -74,10 +76,16 @@
 		(ListLink))
 )
 
+(define (do-get-node-info a)
+  (do-get-node-info-ctr #:enter? #t)
+  (let ((rv (xdo-get-node-info a)))
+  (do-get-node-info-ctr #:enter? #f)
+  rv))
+
 ; Cache results of do-get-node-info for performance.
 (define memoize-node-info (make-afunc-cache do-get-node-info))
 
-(define-public (node-info ENTITY)
+(define (xnode-info ENTITY)
 "
   node-info ENTITY -- Find the name and description of an entity.
 
@@ -87,6 +95,11 @@
 "
 	(list (memoize-node-info ENTITY)))
 
+(define-public (node-info a)
+  (node-info-ctr #:enter? #t)
+  (let ((rv (xnode-info a)))
+  (node-info-ctr #:enter? #f)
+  rv))
 
 ;;Finds a name of any node (Except GO which has different structure)
 (define find-pathway-name

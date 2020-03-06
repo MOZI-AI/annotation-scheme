@@ -28,6 +28,8 @@
 	(locate-node-ctr #:report? #t)
 	(find-rna-ctr #:report? #t)
 	(find-coding-gene-ctr #:report? #t)
+	(find-node-info-ctr #:report? #t)
+	(find-do-get-node-info-ctr #:report? #t)
 	(find-parent-ctr #:report? #t)
 
 	; grid stuff

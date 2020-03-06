@@ -385,8 +385,8 @@ translates to."
 " Finds molecules (proteins or chebi's) in a pathway"
 	(filter-map
 		(lambda (mol)
-			(if (string-contains (cog-name mol) identifier))
-				(add-mol-info mol path) #f)
+			(if (string-contains (cog-name mol) identifier)
+				(add-mol-info mol path) #f))
 		(run-query (Get
 			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 			(Member (Variable "$a") path))))

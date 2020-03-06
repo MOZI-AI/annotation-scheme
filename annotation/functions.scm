@@ -381,27 +381,18 @@ translates to."
     )))
 )
 
-;; Find coding Gene for a given protein
-(define-public find-coding-gene
-  (lambda (protein)
-  (run-query (BindLink
-    (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-  )
-)))
+(define-public (find-coding-gene protein)
+"
+  Find coding Gene for a given protein
+"
+	(define evlnk
+		(Evaluation (Predicate "expresses")
+			(List (Variable "$g") protein)))
+
+	(run-query (Bind
+		(TypedVariable (Variable "$g") (Type 'GeneNode))
+		evlnk evlnk))
+)
 
 (define-public add-mol-info
   (lambda (mol path)

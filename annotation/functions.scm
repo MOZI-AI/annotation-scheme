@@ -230,9 +230,8 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define-public (add-pathway-genes pathway gene go rna do-protein)
-  (let ((go-set (cog-outgoing-set go))
-        (rna-set (cog-outgoing-set rna)))
+(define-public (add-pathway-genes pathway gene go coding-rna non-coding-rna do-protein)
+  (let ((go-set (cog-outgoing-set go)))
     (if (and (null? go-set) (null? rna-set))
         (ListLink
          (MemberLink gene pathway)
@@ -250,28 +249,32 @@ in the specified namespaces."
                                     (string->number (cog-name parent)))
                       (ListLink (ConceptNode "gene-pathway-annotation"))))
            (_ '()))
-         (match rna-set
-           ((crna ncrna . _)
-            (let* ([rnaresult (find-rna gene
-                                        (cog-name crna)
-                                        (cog-name ncrna)
-                                        do-protein)])
+         (if (or (null? coding-rna) (null? non-coding-rna)) '()
+            (let* ([rnaresult
+                      (find-rna gene coding-rna non-coding-rna do-protein)])
               (if (null? rnaresult)
                   '()
                   (ListLink (ConceptNode "rna-annotation") rnaresult
                             (ListLink (ConceptNode "gene-pathway-annotation"))))))
-           (_ '()))))))
+     ))))
 
 
 (define-public (find-pathway-genes pathway go rna do-protein)
-  "Find genes which code the proteins in a given pathway.  Perform
-cross-annotation: if go, annotate each member genes of a pathway for
-its GO terms; if rna, annotate each member genes of a pathway for its
-RNA transcribes; if prot?, include the proteins in which the RNA
-translates to."
+"
+  Find genes which code the proteins in a given pathway.  Perform
+  cross-annotation: if go, annotate each member genes of a pathway for
+  its GO terms; if rna, annotate each member genes of a pathway for its
+  RNA transcribes; if prot?, include the proteins in which the RNA
+  translates to.
+"
+	(define crna (gar rna))
+	(define ncrna (gdr rna))
+	(define coding-rna (cog-name crna))
+	(define non-coding-rna (cog-name ncrna))
+
 	(map
 		(lambda (gene)
-			(add-pathway-genes pathway gene go rna do-protien))
+			(add-pathway-genes pathway gene go coding-rna non-coding-rna do-protien))
 		(run-query
 			(Bind
 				(VariableList

@@ -356,6 +356,31 @@ translates to."
 		(cog-incoming-by-type pw 'InheritanceLink)))
 
 
+(define (add-mol-info mol path)
+  (if (string-contains (cog-name path) "R-HSA")
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+        )
+      (node-info mol)
+      (ListLink
+        (add-loc (MemberLink mol path))
+      )
+    )
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+      )
+      (node-info mol)
+      (ListLink (locate-node mol))
+    )
+  )
+)
+
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
   (run-query (BindLink
@@ -402,32 +427,6 @@ translates to."
     )
   )
 )))
-
-(define-public add-mol-info
-  (lambda (mol path)
-  (if (string-contains (cog-name path) "R-HSA")
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-        )
-      (node-info mol)
-      (ListLink 
-        (add-loc (MemberLink mol path))
-      )
-    )
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-      )
-      (node-info mol)
-      (ListLink (locate-node mol))
-    )
-  )
-))
 
 (define-public filter-atoms
   (lambda (atom identifier)

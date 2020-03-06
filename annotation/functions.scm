@@ -381,7 +381,9 @@ translates to."
     )))
 )
 
-(define-public (find-coding-gene protein)
+; ------------------------------------
+
+(define (do-find-coding-gene protein)
 "
   Find coding Gene for a given protein
 "
@@ -393,6 +395,11 @@ translates to."
 		(TypedVariable (Variable "$g") (Type 'GeneNode))
 		evlnk evlnk))
 )
+
+(define-public find-coding-gene
+	(make-afunc-cache do-find-coding-gene))
+
+; ------------------------------------
 
 (define-public add-mol-info
   (lambda (mol path)

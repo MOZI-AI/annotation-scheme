@@ -143,7 +143,7 @@ in the specified namespaces."
      (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot)))))
 
-(define (go-info go)
+(define (do-go-info go)
   "Add details about the GO term."
   (define GO-ns (find-GO-ns go))
   (list
@@ -153,6 +153,10 @@ in the specified namespaces."
     (ListLink 
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
+
+; Cache the results; this includes the caching of two distinct
+; BindLinks/GetLinks: one in `find-GO-ns` and one in `find-go-name`.
+(define go-info (make-afunc-cache do-go-info))
 
 (define (find-GO-ns go)
   "Find parents of a GO term (of given namespace type)."

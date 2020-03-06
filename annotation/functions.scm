@@ -390,13 +390,16 @@ translates to."
 		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 		(Member (Variable "$a") path))))
 
+(define cache-get-mol
+	(make-afunc-cache do-get-mol))
+
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
 	(filter-map
 		(lambda (mol)
 			(if (string-contains (cog-name mol) identifier)
 				(add-mol-info mol path) #f))
-		(do-get-mol path))
+		(cache-get-mol path))
 )
 
 ;; Find coding Gene for a given protein

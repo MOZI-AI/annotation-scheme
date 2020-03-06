@@ -954,9 +954,9 @@ translates to."
 (define (xfind-pubmed-id gene-a gene-b)
 	(cache-find-pubmed-id (Set gene-a gene-b)))
 
-(define-public (find-pubmed-id a)
+(define-public (find-pubmed-id a b)
   (find-pubmed-id-ctr #:enter? #t)
-  (let ((rv (xfind-pubmed-id a)))
+  (let ((rv (xfind-pubmed-id a b)))
   (find-pubmed-id-ctr #:enter? #f)
   rv))
 

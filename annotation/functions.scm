@@ -381,22 +381,15 @@ translates to."
   )
 )
 
-(define-public (filter-atoms atom identifier)
-	(if (string-contains (cog-name atom) (cog-name identifier))
-		(cog-new-stv 1 1) (cog-new-stv 0 1)))
-
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
-	(define cid (Concept identifier))
-	(map
-		(lambda (mol) (add-mol-info mol path))
+	(filter-map
+		(lambda (mol)
+			(if (string-contains (cog-name mol) identifier))
+				(add-mol-info mol path) #f)
 		(run-query (Get
 			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
-			(And
-				(Evaluation
-					(GroundedPredicate "scm: filter-atoms")
-					(List (Variable "$a") cid))
-				(Member (Variable "$a") path)))))
+			(Member (Variable "$a") path))))
 )
 
 ;; Find coding Gene for a given protein

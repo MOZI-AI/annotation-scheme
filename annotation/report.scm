@@ -27,6 +27,7 @@
 	(find-name-ctr #:report? #t)
 	(locate-node-ctr #:report? #t)
 	(find-rna-ctr #:report? #t)
+	(do-get-rna-ctr #:report? #t)
 	(find-coding-gene-ctr #:report? #t)
 	(node-info-ctr #:report? #t)
 	(do-get-node-info-ctr #:report? #t)

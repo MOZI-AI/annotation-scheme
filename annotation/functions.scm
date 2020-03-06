@@ -52,6 +52,7 @@
 (define-public find-pubmed-id-ctr (accum-time "find-pubmed-id"))
 (define-public do-find-pubmed-id-ctr (accum-time "do-find-pubmed-id"))
 (define-public find-rna-ctr (accum-time "find-rna"))
+(define-public do-get-rna-ctr (accum-time "do-get-rna"))
 (define-public find-coding-gene-ctr (accum-time "find-coding-gene"))
 
 (define (find-parent a b)
@@ -961,10 +962,16 @@ translates to."
 
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
-(define (do-get-rna gene)
+(define (xdo-get-rna gene)
 	(run-query (Get
 		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 		(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
+
+(define (do-get-rna a b c d)
+  (do-get-rna-ctr #:enter? #t)
+  (let ((rv (xdo-get-rna a b c d)))
+  (do-get-rna-ctr #:enter? #f)
+  rv))
 
 (define cache-get-rna
 	(make-afunc-cache do-get-rna))

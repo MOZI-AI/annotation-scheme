@@ -230,34 +230,28 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define-public (add-pathway-genes pathway gene go coding-rna non-coding-rna do-protein)
-  (let ((go-set (cog-outgoing-set go)))
-    (if (and (null? go-set) (null? rna-set))
-        (ListLink
-         (MemberLink gene pathway)
-         (node-info gene)
-         (locate-node gene))
-        (ListLink
-         (MemberLink gene pathway)
-         (node-info gene)
-         (locate-node gene)
-         (match go-set
-           ((namespace parent . _)
-            (ListLink (ConceptNode "gene-go-annotation")
-                      (find-go-term gene
-                                    (string-split (cog-name namespace) #\space)
-                                    (string->number (cog-name parent)))
-                      (ListLink (ConceptNode "gene-pathway-annotation"))))
-           (_ '()))
-         (if (or (null? coding-rna) (null? non-coding-rna)) '()
-            (let* ([rnaresult
-                      (find-rna gene coding-rna non-coding-rna do-protein)])
-              (if (null? rnaresult)
-                  '()
-                  (ListLink (ConceptNode "rna-annotation") rnaresult
-                            (ListLink (ConceptNode "gene-pathway-annotation"))))))
-     ))))
+(define-public (add-pathway-genes pathway gene namespace-list num-parents
+                coding-rna non-coding-rna do-protein)
 
+	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
+
+	(List
+		(Member gene pathway)
+		(node-info gene)
+		(locate-node gene)
+		(if no-ns '()
+			(List
+				(Concept "gene-go-annotation")
+				(find-go-term gene namespace-list num-parents)
+				(List (Concept "gene-pathway-annotation"))))
+		(if no-rna '()
+			(let* ([rnaresult
+						(find-rna gene coding-rna non-coding-rna do-protein)])
+				(if (null? rnaresult) '()
+					(List (Concept "rna-annotation") rnaresult
+						(List (Concept "gene-pathway-annotation")))))))
+)
 
 (define-public (find-pathway-genes pathway go rna do-protein)
 "
@@ -267,6 +261,12 @@ in the specified namespaces."
   RNA transcribes; if prot?, include the proteins in which the RNA
   translates to.
 "
+	(define namespaces (gar go))
+	(define parent (gdr go))
+	(define namespace-list
+		(string-split (cog-name namespace) #\space))
+	(define num-parents (string->number (cog-name parent)))
+
 	(define crna (gar rna))
 	(define ncrna (gdr rna))
 	(define coding-rna (cog-name crna))
@@ -274,7 +274,8 @@ in the specified namespaces."
 
 	(map
 		(lambda (gene)
-			(add-pathway-genes pathway gene go coding-rna non-coding-rna do-protien))
+			(add-pathway-genes pathway gene namespace-list num-parents
+				coding-rna non-coding-rna do-protien))
 		(run-query
 			(Bind
 				(VariableList

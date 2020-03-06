@@ -381,29 +381,26 @@ translates to."
   )
 )
 
+(define-public filter-atoms
+  (lambda (atom identifier)
+    (if (string-contains (cog-name atom) (cog-name identifier))
+        (cog-new-stv 1 1)
+        (cog-new-stv 0 1)
+    )
+  )
+)
+
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
-  (run-query (BindLink
-    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-    (AndLink
-      (EvaluationLink
-        (GroundedPredicateNode "scm: filter-atoms")
-        (ListLink
-          (VariableNode "$a")
-          (ConceptNode identifier)
-        )
-      )
-       (MemberLink
-       (VariableNode "$a")
-       path)
-    )
-    (ExecutionOutputLink
-      (GroundedSchemaNode "scm: add-mol-info")
-      (ListLink
-        (VariableNode "$a")
-        path
-      )
-    )))
+	(map
+		(lambda (mol) (add-mol-info mol path))
+		(run-query (Get
+			(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+			(And
+				(Evaluation
+					(GroundedPredicate "scm: filter-atoms")
+					(List (Variable "$a") (Concept identifier)))
+				(Member (Variable "$a") path)))))
 )
 
 ;; Find coding Gene for a given protein
@@ -427,15 +424,6 @@ translates to."
     )
   )
 )))
-
-(define-public filter-atoms
-  (lambda (atom identifier)
-    (if (string-contains (cog-name atom) (cog-name identifier))
-        (cog-new-stv 1 1)
-        (cog-new-stv 0 0) 
-    )
-  )
-) 
 
 
 ;; Finds genes interacting with a given gene

@@ -51,6 +51,7 @@
 (define-public find-mol-ctr (accum-time "find-mol"))
 (define-public find-pubmed-id-ctr (accum-time "find-pubmed-id"))
 (define-public find-rna-ctr (accum-time "find-rna"))
+(define-public find-coding-gene-ctr (accum-time "find-coding-gene"))
 
 (define (find-parent a b)
   (find-parent-ctr #:enter? #t)
@@ -469,7 +470,7 @@ translates to."
 )
 
 ;; Find coding Gene for a given protein
-(define-public find-coding-gene
+(define xfind-coding-gene
   (lambda (protein)
   (run-query (BindLink
     (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
@@ -489,6 +490,12 @@ translates to."
     )
   )
 )))
+
+(define-public (find-coding-gene a b)
+  (find-coding-gene-ctr #:enter? #t)
+  (let ((rv (xfind-coding-gene a b)))
+  (find-coding-gene-ctr #:enter? #f)
+  rv))
 
 (define-public add-mol-info
   (lambda (mol path)

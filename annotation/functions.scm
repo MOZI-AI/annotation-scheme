@@ -551,26 +551,34 @@ translates to."
 (define-public pathway-gene-interactors
 	(make-afunc-cache do-pathway-gene-interactors))
 
-(define-public find-protein-form
-  (lambda (gene)
-  (let ([prot
-  (run-query (BindLink
-    (VariableList
-      (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-      (TypedVariable (VariableNode "$b") (Type 'ConceptNode)))
-    (AndLink
-      (EvaluationLink (PredicateNode "expresses") (ListLink gene (VariableNode "$p")))
-      (EvaluationLink (PredicateNode "has_biogridID") (ListLink (VariableNode "$p") (VariableNode "$b")))
-      (EvaluationLink (PredicateNode "has_biogridID") (ListLink gene (VariableNode "$b")))
-    )
-    (VariableNode "$p")
-  ))])
-  (if (not (null? prot))
-    (car prot)
-    (ListLink)
-  )
-  ))
+;; ---------------------------------
+
+(define (do-find-protein-form gene)
+	(let ([prot
+		(run-query (Bind
+			(VariableList
+				(TypedVariable (Variable "$p") (Type 'MoleculeNode))
+				(TypedVariable (Variable "$b") (Type 'ConceptNode)))
+			(And
+				(Evaluation (Predicate "expresses") (List gene (Variable "$p")))
+				(Evaluation (Predicate "has_biogridID") (List (Variable "$p") (Variable "$b")))
+				(Evaluation (Predicate "has_biogridID") (List gene (Variable "$b"))))
+			(VariableNode "$p")))])
+		(if (not (null? prot)) (car prot) (ListLink)))
 )
+
+;; Cache previous results, so that they are not recomputed again,
+;; if the results are already known. Note that this function accounts
+;; for about 85% of the total execution time of `biogrid-interaction-annotation`,
+;; so any caching at all is a win. In a test of 681 genes, there is a
+;; cache hit 99 out of 100 times (that is, 100 times fewer calls to
+;; do-find-protein-form) resulting in a 400x speedup for this function(!)
+;; and a grand-total 9x speedup for `biogrid-interaction-annotation`.
+;; Wow.
+(define-public find-protein-form
+	(make-afunc-cache do-find-protein-form))
+
+;; ---------------------------------
 
 (define-public (generate-result gene-a gene-b prot go rna)
 "

@@ -253,7 +253,7 @@ in the specified namespaces."
 						(List (Concept "gene-pathway-annotation")))))))
 )
 
-(define (get-pathway-genes pathway)
+(define (do-get-pathway-genes pathway)
 	(run-query
 		(Bind
 			(VariableList
@@ -265,6 +265,8 @@ in the specified namespaces."
 					(List (Variable "$g") (Variable "$p"))))
 			(Variable "$g"))))
 
+(define get-pathway-genes (make-afunc-cache do-get-pathway-genes))
+
 (define-public (find-pathway-genes pathway go rna do-protein)
 "
   Find genes which code the proteins in a given pathway.  Perform
@@ -273,6 +275,7 @@ in the specified namespaces."
   RNA transcribes; if prot?, include the proteins in which the RNA
   translates to.
 "
+
 	(define namespaces (gar go))
 	(define parent (gdr go))
 	(define namespace-list

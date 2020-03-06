@@ -230,7 +230,7 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define-public (add-pathway-genes pathway gene go rna prot)
+(define-public (add-pathway-genes pathway gene go rna do-protein)
   (let ((go-set (cog-outgoing-set go))
         (rna-set (cog-outgoing-set rna)))
     (if (and (null? go-set) (null? rna-set))
@@ -252,8 +252,7 @@ in the specified namespaces."
            (_ '()))
          (match rna-set
            ((crna ncrna . _)
-            (let* ([do-protein (string=? (cog-name prot) "True")]
-                   [rnaresult (find-rna gene
+            (let* ([rnaresult (find-rna gene
                                         (cog-name crna)
                                         (cog-name ncrna)
                                         do-protein)])
@@ -264,7 +263,7 @@ in the specified namespaces."
            (_ '()))))))
 
 
-(define-public (find-pathway-genes pathway go rna prot?)
+(define-public (find-pathway-genes pathway go rna do-protein)
   "Find genes which code the proteins in a given pathway.  Perform
 cross-annotation: if go, annotate each member genes of a pathway for
 its GO terms; if rna, annotate each member genes of a pathway for its
@@ -272,8 +271,7 @@ RNA transcribes; if prot?, include the proteins in which the RNA
 translates to."
 	(map
 		(lambda (gene)
-			(add-pathway-genes pathway gene go rna
-				(ConceptNode (if prot? "True" "False"))))
+			(add-pathway-genes pathway gene go rna do-protien))
 		(run-query
 			(Bind
 				(VariableList

@@ -406,27 +406,25 @@ translates to."
 		(cache-get-mol path))
 )
 
-;; Find coding Gene for a given protein
+; ------------------------------------
+
+(define (do-find-coding-gene protein)
+"
+  Find coding Gene for a given protein
+"
+	(define evlnk
+		(Evaluation (Predicate "expresses")
+			(List (Variable "$g") protein)))
+
+	(run-query (Bind
+		(TypedVariable (Variable "$g") (Type 'GeneNode))
+		evlnk evlnk))
+)
+
 (define-public find-coding-gene
-  (lambda (protein)
-  (run-query (BindLink
-    (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-  )
-)))
+	(make-afunc-cache do-find-coding-gene))
+
+; ------------------------------------
 
 
 (define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)

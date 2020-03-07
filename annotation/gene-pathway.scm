@@ -66,7 +66,7 @@
     (write-to-file res file-name "gene-pathway")
     res))
 
-(define (smpdb gene prot? sm? go biogrid namespaces num-parents coding-rna non-coding-rna)
+(define (smpdb gene prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
 "
   From SMPDB
 "

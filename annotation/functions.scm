@@ -36,6 +36,7 @@
 (define-public find-memberln-ctr (accum-time "find-memberln"))
 (define-public add-go-info-ctr (accum-time "add-go-info"))
 (define-public go-info-ctr (accum-time "go-info"))
+(define-public do-go-info-ctr (accum-time "do-go-info"))
 (define-public find-parent-ctr (accum-time "find-parent"))
 
 (define-public match-gene-interactors-ctr (accum-time "match-gene-interactors"))
@@ -50,6 +51,7 @@
 (define-public find-protein-ctr (accum-time "find-protein"))
 (define-public find-protein-form-ctr (accum-time "find-protein-form"))
 (define-public find-mol-ctr (accum-time "find-mol"))
+(define-public do-get-mol-ctr (accum-time "do-get-mol"))
 (define-public find-pubmed-id-ctr (accum-time "find-pubmed-id"))
 (define-public do-find-pubmed-id-ctr (accum-time "do-find-pubmed-id"))
 (define-public find-rna-ctr (accum-time "find-rna"))
@@ -196,7 +198,7 @@ in the specified namespaces."
      (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot)))))
 
-(define (do-go-info go)
+(define (xdo-go-info go)
   "Add details about the GO term."
   (define GO-ns (find-GO-ns go))
   (list
@@ -206,6 +208,12 @@ in the specified namespaces."
     (ListLink 
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
+
+(define (do-go-info a)
+  (do-go-info-ctr #:enter? #t)
+  (let ((rv (xdo-go-info a)))
+  (do-go-info-ctr #:enter? #f)
+  rv))
 
 ; Cache the results; this includes the caching of two distinct
 ; BindLinks/GetLinks: one in `find-GO-ns` and one in `find-go-name`.
@@ -440,7 +448,7 @@ translates to."
     ((name) name)
     ((name . rest) name)))
 
-(define-public (xpathway-hierarchy pw lst)
+(define (xpathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
 	(filter
@@ -456,10 +464,16 @@ translates to."
   rv))
 
 ; ------------------------------------
-(define (do-get-mol path)
+(define (xdo-get-mol path)
 	(run-query (Get
 		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
 		(Member (Variable "$a") path))))
+
+(define-public (do-get-mol a)
+  (get-mol-ctr #:enter? #t)
+  (let ((rv (xdo-get-mol a)))
+  (get-mol-ctr #:enter? #f)
+  rv))
 
 (define cache-get-mol
 	(make-afunc-cache do-get-mol))
@@ -529,7 +543,6 @@ translates to."
 )
 
 ; ------------------------------------
-
 
 (define (xmatch-gene-interactors gene do-protein namespace parents coding non-coding)
 "

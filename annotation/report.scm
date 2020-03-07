@@ -13,6 +13,7 @@
 	(find-pathway-genes-ctr #:report? #t)
 	(add-pathway-genes-ctr #:report? #t)
 	(find-mol-ctr #:report? #t)
+	(do-get-mol-ctr #:report? #t)
 
 	(find-pathway-member-ctr #:report? #t)
 	(pathway-hierarchy-ctr #:report? #t)
@@ -56,6 +57,7 @@
 	(find-go-term-ctr #:report? #t)
 	(add-go-info-ctr #:report? #t)
 	(go-info-ctr #:report? #t)
+	(do-go-info-ctr #:report? #t)
 
 	*unspecified*
 )

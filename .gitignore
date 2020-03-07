@@ -217,3 +217,8 @@ m4/lt~obsolete.m4
 *.trs
 
 Makefile.in
+build-aux/install-sh
+
+build-aux/missing
+
+Makefile

@@ -196,6 +196,10 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
+(define-public (filter-atoms atom identifier)
+	(if (string-contains (cog-name atom) (cog-name identifier))
+		(cog-new-stv 1 1) (cog-new-stv 0 1)))
+
 (define-public (find-pathway-member gene db)
   (run-query (BindLink
       (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
@@ -356,29 +360,46 @@ translates to."
 		(cog-incoming-by-type pw 'InheritanceLink)))
 
 
+(define (add-mol-info mol path)
+  (if (string-contains (cog-name path) "R-HSA")
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+        )
+      (node-info mol)
+      (ListLink
+        (add-loc (MemberLink mol path))
+      )
+    )
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+      )
+      (node-info mol)
+      (ListLink (locate-node mol))
+    )
+  )
+)
+
+(define (do-get-mol path)
+	(run-query (Get
+		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(Member (Variable "$a") path))))
+
+(define cache-get-mol
+	(make-afunc-cache do-get-mol))
+
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
-  (run-query (BindLink
-    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-    (AndLink
-      (EvaluationLink
-        (GroundedPredicateNode "scm: filter-atoms")
-        (ListLink
-          (VariableNode "$a")
-          (ConceptNode identifier)
-        )
-      )
-       (MemberLink
-       (VariableNode "$a")
-       path)
-    )
-    (ExecutionOutputLink
-      (GroundedSchemaNode "scm: add-mol-info")
-      (ListLink
-        (VariableNode "$a")
-        path
-      )
-    )))
+	(filter-map
+		(lambda (mol)
+			(if (string-contains (cog-name mol) identifier)
+				(add-mol-info mol path) #f))
+		(cache-get-mol path))
 )
 
 ;; Find coding Gene for a given protein
@@ -402,41 +423,6 @@ translates to."
     )
   )
 )))
-
-(define-public add-mol-info
-  (lambda (mol path)
-  (if (string-contains (cog-name path) "R-HSA")
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-        )
-      (node-info mol)
-      (ListLink 
-        (add-loc (MemberLink mol path))
-      )
-    )
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-      )
-      (node-info mol)
-      (ListLink (locate-node mol))
-    )
-  )
-))
-
-(define-public filter-atoms
-  (lambda (atom identifier)
-    (if (string-contains (cog-name atom) (cog-name identifier))
-        (cog-new-stv 1 1)
-        (cog-new-stv 0 0) 
-    )
-  )
-) 
 
 
 (define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)

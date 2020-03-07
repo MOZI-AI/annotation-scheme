@@ -196,7 +196,7 @@ in the specified namespaces."
      (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot)))))
 
-(define (xgo-info go)
+(define (do-go-info go)
   "Add details about the GO term."
   (define GO-ns (find-GO-ns go))
   (list
@@ -206,6 +206,10 @@ in the specified namespaces."
     (ListLink 
      go
      (if (null? GO-ns) (ConceptNode "") GO-ns)))))
+
+; Cache the results; this includes the caching of two distinct
+; BindLinks/GetLinks: one in `find-GO-ns` and one in `find-go-name`.
+(define xgo-info (make-afunc-cache do-go-info))
 
 (define (go-info a)
   (go-info-ctr #:enter? #t)
@@ -255,13 +259,11 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
-(define-public (find-pathway-member a b)
-  (find-pathway-member-ctr #:enter? #t)
-  (let ((rv (xfind-pathway-member a b)))
-  (find-pathway-member-ctr #:enter? #f)
-  rv))
+(define-public (filter-atoms atom identifier)
+	(if (string-contains (cog-name atom) (cog-name identifier))
+		(cog-new-stv 1 1) (cog-new-stv 0 1)))
 
-(define-public (xfind-pathway-member gene db)
+(define (xfind-pathway-member gene db)
   (run-query (BindLink
       (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
       (AndLink
@@ -285,6 +287,12 @@ in the specified namespaces."
                 ))
     ))
 )
+
+(define-public (find-pathway-member a b)
+  (find-pathway-member-ctr #:enter? #t)
+  (let ((rv (xfind-pathway-member a b)))
+  (find-pathway-member-ctr #:enter? #f)
+  rv))
 
 (define-public (add-pathway-info gene pathway)
   (if (or (string-contains (cog-name pathway) "R-HSA")
@@ -432,12 +440,6 @@ translates to."
     ((name) name)
     ((name . rest) name)))
 
-(define-public (pathway-hierarchy a b)
-  (pathway-hierarchy-ctr #:enter? #t)
-  (let ((rv (xpathway-hierarchy a b)))
-  (pathway-hierarchy-ctr #:enter? #f)
-  rv))
-
 (define-public (xpathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."
 
@@ -447,58 +449,53 @@ translates to."
 		(cog-incoming-by-type pw 'InheritanceLink)))
 
 
+(define-public (pathway-hierarchy a b)
+  (pathway-hierarchy-ctr #:enter? #t)
+  (let ((rv (xpathway-hierarchy a b)))
+  (pathway-hierarchy-ctr #:enter? #f)
+  rv))
+
+; ------------------------------------
+(define (do-get-mol path)
+	(run-query (Get
+		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(Member (Variable "$a") path))))
+
+(define cache-get-mol
+	(make-afunc-cache do-get-mol))
+
+(define (xfind-mol path identifier)
+" Finds molecules (proteins or chebi's) in a pathway"
+	(filter-map
+		(lambda (mol)
+			(if (string-contains (cog-name mol) identifier)
+				(add-mol-info mol path) #f))
+		(cache-get-mol path))
+)
+
 (define-public (find-mol a b)
   (find-mol-ctr #:enter? #t)
   (let ((rv (xfind-mol a b)))
   (find-mol-ctr #:enter? #f)
   rv))
 
-(define-public (xfind-mol path identifier)
-" Finds molecules (proteins or chebi's) in a pathway"
-  (run-query (BindLink
-    (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-    (AndLink
-      (EvaluationLink
-        (GroundedPredicateNode "scm: filter-atoms")
-        (ListLink
-          (VariableNode "$a")
-          (ConceptNode identifier)
-        )
-      )
-       (MemberLink
-       (VariableNode "$a")
-       path)
-    )
-    (ExecutionOutputLink
-      (GroundedSchemaNode "scm: add-mol-info")
-      (ListLink
-        (VariableNode "$a")
-        path
-      )
-    )))
+; ------------------------------------
+
+(define (do-find-coding-gene protein)
+"
+  Find coding Gene for a given protein
+"
+	(define evlnk
+		(Evaluation (Predicate "expresses")
+			(List (Variable "$g") protein)))
+
+	(run-query (Bind
+		(TypedVariable (Variable "$g") (Type 'GeneNode))
+		evlnk evlnk))
 )
 
-;; Find coding Gene for a given protein
 (define xfind-coding-gene
-  (lambda (protein)
-  (run-query (BindLink
-    (TypedVariable (Variable "$g") (TypeNode 'GeneNode))
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-    (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-        (VariableNode "$g")
-        protein
-      )
-    )
-  )
-)))
+	(make-afunc-cache do-find-coding-gene))
 
 (define-public (find-coding-gene a)
   (find-coding-gene-ctr #:enter? #t)
@@ -506,8 +503,7 @@ translates to."
   (find-coding-gene-ctr #:enter? #f)
   rv))
 
-(define-public add-mol-info
-  (lambda (mol path)
+(define (add-mol-info mol path)
   (if (string-contains (cog-name path) "R-HSA")
     (ListLink
       (MemberLink mol path)
@@ -516,7 +512,7 @@ translates to."
         '()
         )
       (node-info mol)
-      (ListLink 
+      (ListLink
         (add-loc (MemberLink mol path))
       )
     )
@@ -530,106 +526,74 @@ translates to."
       (ListLink (locate-node mol))
     )
   )
-))
+)
 
-(define-public filter-atoms
-  (lambda (atom identifier)
-    (if (string-contains (cog-name atom) (cog-name identifier))
-        (cog-new-stv 1 1)
-        (cog-new-stv 0 0) 
-    )
-  )
-) 
+; ------------------------------------
 
-(define-public (match-gene-interactors a b c d)
+
+(define (xmatch-gene-interactors gene do-protein namespace parents coding non-coding)
+"
+  match-gene-interactors - Finds genes interacting with a given gene
+
+  If do-protein is #t then protein interactions are included.
+"
+	(map
+		(lambda (act-gene)
+			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode)))
+					(Choice
+						(Evaluation (Predicate "interacts_with")
+							(List gene (Variable "$a")))
+						(Evaluation (Predicate "interacts_with")
+							(List (Variable "$a") gene))))))
+)
+
+(define-public (match-gene-interactors a b c d e f)
   (match-gene-interactors-ctr #:enter? #t)
-  (let ((rv (xmatch-gene-interactors a b c d)))
+  (let ((rv (xmatch-gene-interactors a b c d e f)))
   (match-gene-interactors-ctr #:enter? #f)
   rv))
 
-;; Finds genes interacting with a given gene
-(define-public xmatch-gene-interactors
-    (lambda (gene prot go rna)
-        (run-query (BindLink
-            (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-              (ChoiceLink 
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                  gene
-                  (VariableNode "$a")
-                  )
-                )
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                   (VariableNode "$a")
-                   gene
-                  )
-                )       
-             )
-            
-            (ExecutionOutputLink
-              (GroundedSchemaNode "scm: generate-result")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                  (Number prot)
-                  go
-                  rna
-                ))        
-            )
-        ))
+(define (xfind-output-interactors gene do-protein namespace parents coding non-coding)
+"
+  find-output-interactors -- Finds output genes interacting with each-other
+
+  This finds a triangular relationship, between the given gene, and
+  two others, such that all three interact with one-another.
+
+  If do-protein is #t then protein interactions are included.
+"
+	(map
+		(lambda (gene-pair)
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode))
+				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+
+			(And
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$a")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "$a") (Variable "$b")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$b")))
+			))))
 )
 
-(define-public (find-output-interactors a b c d)
+(define-public (find-output-interactors a b c d e f)
   (find-output-interactors-ctr #:enter? #t)
-  (let ((rv (xfind-output-interactors a b c d)))
+  (let ((rv (xfind-output-interactors a b c d e f)))
   (find-output-interactors-ctr #:enter? #f)
   rv))
 
-;;; Finds output genes interacting eachother 
-(define-public xfind-output-interactors
-    (lambda(gene prot go rna)
-        (run-query (BindLink
-          (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode))
-            (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
-
-          (And  
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               gene
-               (VariableNode "$a")
-              ))
-
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-            ))
-
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                gene
-               (VariableNode "$b")
-              ))
-          )
-          (ExecutionOutputLink
-            (GroundedSchemaNode "scm: generate-result")
-              (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-                (Number prot)
-                go
-                rna
-              ))
-        ))
-))
+;; ------------------------------------------------------
 
 (define (do-pathway-gene-interactors a)
   (pathway-gene-interactors-ctr #:enter? #t)
@@ -706,36 +670,26 @@ translates to."
 
 ;; ---------------------------------
 
-(define-public (generate-result a b c d e)
-  (generate-result-ctr #:enter? #t)
-  (let ((rv (xgenerate-result a b c d e)))
-  (generate-result-ctr #:enter? #f)
-  rv))
-
-(define (xgenerate-result gene-a gene-b prot go rna)
+(define (xgenerate-result gene-a gene-b do-protein namespaces num-parents
+                                coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
 
-  `prot` is either (NumberNode 0) or (NumberNode 1)
-      which is used to indicate whether or not protein interactions
-      should be computed.
+  `prot` should be #t  for protein interactions to be computed.
 
-  `rna` may be either an empty ListLink, or may have one, or two
-      ConceptNodes in it. If it has two, then first one is the coding RNA,
-      and the second one is the non-coding RNA.
+  `namespaces` should be a scheme list of strings (possibly an empty list),
+     each string a namespace name.
 
-      XXX FIXME: these ConceptNodes are used to indicate whether or
-      not the coding or non-coding interactions should be done.
-      The are just set to (ConceptNode "True") to indicate this.
+  `num-parents` should be a number.
+
+  `coding-rna` should be either null or the string "True".
+  `non-coding-rna` should be either null or the string "True".
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
-            [do-prot-str  (cog-name prot)]
-            [do-protein  (= 1 (string->number do-prot-str))]
-
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
             [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
@@ -749,14 +703,6 @@ translates to."
                      (find-protein-form gene-b)
                      output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
-
-            [namespace (gar go)]
-            [parent    (gdr go)]
-
-            [crna      (gar rna)]   ; coding RNA
-            [ncrna     (gdr rna)]   ; non-coding RNA
-            [crna-name  (if (null? crna)  "" (cog-name crna))]
-            [ncrna-name (if (null? ncrna) "" (cog-name ncrna))]
           )
 
           ;; Neither gene has been done yet.
@@ -764,23 +710,19 @@ translates to."
               ((and (not already-done-a) (not already-done-b))
               (let (
                  [go-cross-annotation
-                    (if (null? namespace) '()
+                    (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
-                           (find-go-term gene-b
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-a namespaces num-parents)
+                           (find-go-term gene-b namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
-                    (if (= 0 (cog-arity rna)) '()
+                    (if (not (and coding-rna non-coding-rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name do-protein)
-                          (find-rna gene-b crna-name ncrna-name do-protein)
+                          (find-rna gene-a coding-rna non-coding-rna do-protein)
+                          (find-rna gene-b coding-rna non-coding-rna do-protein)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if do-protein
@@ -820,19 +762,17 @@ translates to."
               (let* (
                   [gene-x (if already-done-a gene-b gene-a)]
                   [go-cross-annotation
-                     (if (null? namespace) '()
+                     (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-x
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-x namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation
-                     (if (= 0 (cog-arity rna)) '()
+                     (if (not (and coding-rna non-coding-rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name do-protein)
+                           (find-rna gene-x coding-rna non-coding-rna do-protein)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if do-protein
@@ -863,13 +803,15 @@ translates to."
    )
 )
 
-(define-public (build-interaction a b c d)
-  (build-interaction-ctr #:enter? #t)
-  (let ((rv (xbuild-interaction a b c d)))
-  (build-interaction-ctr #:enter? #f)
+(define-public (generate-result a b c d e f g)
+  (generate-result-ctr #:enter? #t)
+  (let ((rv (xgenerate-result a b c d e f g)))
+  (generate-result-ctr #:enter? #f)
   rv))
 
-(define-public (xbuild-interaction interactor-1 interactor-2 pubmed interaction_pred)
+;; ------------------------------------------------------
+
+(define (xbuild-interaction interactor-1 interactor-2 pubmed interaction_pred)
   (if (or (equal? (cog-type interactor-1) 'ListLink) (equal? (cog-type interactor-2) 'ListLink))
     '()
     (if (null? pubmed) 
@@ -886,13 +828,13 @@ translates to."
   )
 )
 
-(define-public (generate-interactors a b c)
-  (generate-interactors-ctr #:enter? #t)
-  (let ((rv (xgenerate-interactors a b c)))
-  (generate-interactors-ctr #:enter? #f)
+(define-public (build-interaction a b c d)
+  (build-interaction-ctr #:enter? #t)
+  (let ((rv (xbuild-interaction a b c d)))
+  (build-interaction-ctr #:enter? #f)
   rv))
 
-(define-public (xgenerate-interactors path var1 var2)
+(define (xgenerate-interactors path var1 var2)
 	; (biogrid-reported-pathways) is a cache of the interactions that have
 	; already been handled. Defined in util.scm and cleared in main.scm.
 	(if (or (equal? var1 var2)
@@ -910,6 +852,12 @@ translates to."
 							(ListLink var1 var2))
 						output)))))
 )
+
+(define-public (generate-interactors a b c)
+  (generate-interactors-ctr #:enter? #t)
+  (let ((rv (xgenerate-interactors a b c)))
+  (generate-interactors-ctr #:enter? #f)
+  rv))
 
 ;; ------------------------------------------------------
 

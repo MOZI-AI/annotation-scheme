@@ -470,9 +470,9 @@ translates to."
 		(Member (Variable "$a") path))))
 
 (define-public (do-get-mol a)
-  (get-mol-ctr #:enter? #t)
+  (do-get-mol-ctr #:enter? #t)
   (let ((rv (xdo-get-mol a)))
-  (get-mol-ctr #:enter? #f)
+  (do-get-mol-ctr #:enter? #f)
   rv))
 
 (define cache-get-mol

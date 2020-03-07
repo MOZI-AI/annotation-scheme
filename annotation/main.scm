@@ -116,7 +116,7 @@ atomspace."
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set)))
     (let* ([fns (parse-request genes-list file-name request)]
-           [result (par-map (lambda (x) (x)) fns)] )
+           [result (map (lambda (x) (x)) fns)] )
       
-      (format #t "Done annotating ~a genes" (length genes-list))
+      (format #t "Done annotating ~a genes\n" (length genes-list))
       )))

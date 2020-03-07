@@ -267,26 +267,22 @@ in the specified namespaces."
 
 (define get-pathway-genes (make-afunc-cache do-get-pathway-genes))
 
-(define-public (find-pathway-genes pathway go rna do-protein)
+(define-public (find-pathway-genes pathway namespace-list num-parents
+                  coding-rna non-coding-rna do-protein)
 "
   Find genes which code the proteins in a given pathway.  Perform
-  cross-annotation: if go, annotate each member genes of a pathway for
-  its GO terms; if rna, annotate each member genes of a pathway for its
-  RNA transcribes; if prot?, include the proteins in which the RNA
-  translates to.
+  cross-annotation. If there is a list of namespaces, then annotate
+  each member genes of a pathway for its GO terms. If both
+  rna flags are true, annotate each member genes of a pathway for its
+  RNA transcribes. If do-protein is true, include the proteins in which the
+  RNA translates to.
+
+  'namespace-list' should be a list of string names of namespaces.
+  'num-parents' should be a non-negative integer.
+  'coding-rna' should be either the empty list, or the string "True"
+  'non-coding-rna' should be either the empty list, or the string "True"
+  'do-protein' should be either #f or #t.
 "
-
-	(define namespaces (gar go))
-	(define parent (gdr go))
-	(define namespace-list
-		(string-split (cog-name namespace) #\space))
-	(define num-parents (string->number (cog-name parent)))
-
-	(define crna (gar rna))
-	(define ncrna (gdr rna))
-	(define coding-rna (cog-name crna))
-	(define non-coding-rna (cog-name ncrna))
-
 	(map
 		(lambda (gene)
 			(add-pathway-genes pathway gene namespace-list num-parents

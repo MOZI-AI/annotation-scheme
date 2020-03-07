@@ -71,14 +71,28 @@
     (write-to-file res file-name "gene-pathway")
     res))
 
-;; From SMPDB
 (define (smpdb gene prot? sm? go biogrid rna)
+"
+  From SMPDB
+"
+	(define namespaces (gar go))
+	(define parent (gdr go))
+	(define namespace-list
+		(string-split (cog-name namespace) #\space))
+	(define num-parents (string->number (cog-name parent)))
+
+	(define crna (gar rna))
+	(define ncrna (gdr rna))
+	(define coding-rna (cog-name crna))
+	(define non-coding-rna (cog-name ncrna))
+
   (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
                              (append
                               (if sm? (find-mol node "ChEBI") '())
-                              (find-pathway-genes node go rna prot?)
+                              (find-pathway-genes node namespace-list num-parents
+                                      coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
                                     (if (null? prots)
@@ -95,15 +109,29 @@
             (if prot? (find-protein (GeneNode gene) 0) '())
             ls)))
 
-;; From reactome
 (define (reactome gene prot? sm? pwlst go biogrid rna)
+"
+  From reactome
+"
+	(define namespaces (gar go))
+	(define parent (gdr go))
+	(define namespace-list
+		(string-split (cog-name namespace) #\space))
+	(define num-parents (string->number (cog-name parent)))
+
+	(define crna (gar rna))
+	(define ncrna (gdr rna))
+	(define coding-rna (cog-name crna))
+	(define non-coding-rna (cog-name ncrna))
+
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
                              (set! pwlst (append pwlst (list node)))
 
                              (append
-                              (find-pathway-genes node go rna prot?)
+                              (find-pathway-genes node namespace-list num-parents
+                                      coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
                                     (if (null? prots)

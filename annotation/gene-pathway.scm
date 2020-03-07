@@ -47,20 +47,15 @@
          [prot? (string=? include_prot "True")]
          [sm? (string=? include_sm "True")]
          [pathways (string-split pathway #\space)]
-         [go (if (string-null? namespace)
-                 (ListLink)
-                 (ListLink (ConceptNode namespace) (Number parents)))]
-         [rna (ListLink (list (if coding (ConceptNode coding) '())
-                              (if noncoding (ConceptNode noncoding) '())))]
          [result
           (append-map (lambda (gene)
                         (append 
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene prot? sm? go biogrid rna))
+                                        (smpdb gene prot? sm? namespace parents biogrid coding noncoding))
                                        ("reactome"
-                                        (match (reactome gene prot? sm? pwlst go biogrid rna)
+                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid coding noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))
@@ -71,20 +66,11 @@
     (write-to-file res file-name "gene-pathway")
     res))
 
-(define (smpdb gene prot? sm? go biogrid rna)
+(define (smpdb gene prot? sm? go biogrid namespaces num-parents coding-rna non-coding-rna)
 "
   From SMPDB
 "
-	(define namespaces (gar go))
-	(define parent (gdr go))
-	(define namespace-list
-		(string-split (cog-name namespaces) #\space))
-	(define num-parents (string->number (cog-name parent)))
-
-	(define crna (gar rna))
-	(define ncrna (gdr rna))
-	(define coding-rna (cog-name crna))
-	(define non-coding-rna (cog-name ncrna))
+	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
          [ls (append-map (lambda (path)
@@ -109,20 +95,11 @@
             (if prot? (find-protein (GeneNode gene) 0) '())
             ls)))
 
-(define (reactome gene prot? sm? pwlst go biogrid rna)
+(define (reactome gene prot? sm? pwlst namespaces num-parents biogrid coding-rna non-coding-rna)
 "
   From reactome
 "
-	(define namespaces (gar go))
-	(define parent (gdr go))
-	(define namespace-list
-		(string-split (cog-name namespaces) #\space))
-	(define num-parents (string->number (cog-name parent)))
-
-	(define crna (gar rna))
-	(define ncrna (gdr rna))
-	(define coding-rna (cog-name crna))
-	(define non-coding-rna (cog-name ncrna))
+	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [ls (append-map (lambda (path)

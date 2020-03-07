@@ -286,7 +286,7 @@ in the specified namespaces."
 	(map
 		(lambda (gene)
 			(add-pathway-genes pathway gene namespace-list num-parents
-				coding-rna non-coding-rna do-protien))
+				coding-rna non-coding-rna do-protein))
 		(get-pathway-genes pathway))
 )
 

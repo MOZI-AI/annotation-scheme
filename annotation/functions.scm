@@ -439,83 +439,57 @@ translates to."
 ) 
 
 
-;; Finds genes interacting with a given gene
-(define-public match-gene-interactors
-    (lambda (gene prot go rna)
-        (run-query (BindLink
-            (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-              (ChoiceLink 
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                  gene
-                  (VariableNode "$a")
-                  )
-                )
-                (EvaluationLink
-                  (PredicateNode "interacts_with")
-                  (ListLink
-                   (VariableNode "$a")
-                   gene
-                  )
-                )       
-             )
-            
-            (ExecutionOutputLink
-              (GroundedSchemaNode "scm: generate-result")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                  (Number prot)
-                  go
-                  rna
-                ))        
-            )
-        ))
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
+"
+  match-gene-interactors - Finds genes interacting with a given gene
+
+  If do-protein is #t then protein interactions are included.
+"
+	(map
+		(lambda (act-gene)
+			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode)))
+					(Choice
+						(Evaluation (Predicate "interacts_with")
+							(List gene (Variable "$a")))
+						(Evaluation (Predicate "interacts_with")
+							(List (Variable "$a") gene))))))
 )
 
-;;; Finds output genes interacting eachother 
-(define-public find-output-interactors
-    (lambda(gene prot go rna)
-        (run-query (BindLink
-          (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'GeneNode))
-            (TypedVariable (VariableNode "$b") (Type 'GeneNode)))
+(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
+"
+  find-output-interactors -- Finds output genes interacting with each-other
 
-          (And  
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-               gene
-               (VariableNode "$a")
-              ))
+  This finds a triangular relationship, between the given gene, and
+  two others, such that all three interact with one-another.
 
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-            ))
+  If do-protein is #t then protein interactions are included.
+"
+	(map
+		(lambda (gene-pair)
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
 
-            (EvaluationLink
-               (PredicateNode "interacts_with")
-               (ListLink
-                gene
-               (VariableNode "$b")
-              ))
-          )
-          (ExecutionOutputLink
-            (GroundedSchemaNode "scm: generate-result")
-              (ListLink
-                (VariableNode "$a")
-                (VariableNode "$b")
-                (Number prot)
-                go
-                rna
-              ))
-        ))
-))
+		(run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode))
+				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+
+			(And
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$a")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List (Variable "$a") (Variable "$b")))
+
+				(Evaluation (Predicate "interacts_with")
+					(List gene (Variable "$b")))
+			))))
+)
+
+;; ------------------------------------------------------
 
 ;; Gene interactors for genes in the pathway
 (define do-pathway-gene-interactors
@@ -580,30 +554,26 @@ translates to."
 
 ;; ---------------------------------
 
-(define-public (generate-result gene-a gene-b prot go rna)
+(define-public (generate-result gene-a gene-b do-protein namespaces num-parents
+                                coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
 
-  `prot` is either (NumberNode 0) or (NumberNode 1)
-      which is used to indicate whether or not protein interactions
-      should be computed.
+  `prot` should be #t  for protein interactions to be computed.
 
-  `rna` may be either an empty ListLink, or may have one, or two
-      ConceptNodes in it. If it has two, then first one is the coding RNA,
-      and the second one is the non-coding RNA.
+  `namespaces` should be a scheme list of strings (possibly an empty list),
+     each string a namespace name.
 
-      XXX FIXME: these ConceptNodes are used to indicate whether or
-      not the coding or non-coding interactions should be done.
-      The are just set to (ConceptNode "True") to indicate this.
+  `num-parents` should be a number.
+
+  `coding-rna` should be either null or the string "True".
+  `non-coding-rna` should be either null or the string "True".
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
-            [do-prot-str  (cog-name prot)]
-            [do-protein  (= 1 (string->number do-prot-str))]
-
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
             [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
@@ -617,14 +587,6 @@ translates to."
                      (find-protein-form gene-b)
                      output "inferred_interaction"))
                 (build-interaction gene-a gene-b output "interacts_with"))]
-
-            [namespace (gar go)]
-            [parent    (gdr go)]
-
-            [crna      (gar rna)]   ; coding RNA
-            [ncrna     (gdr rna)]   ; non-coding RNA
-            [crna-name  (if (null? crna)  "" (cog-name crna))]
-            [ncrna-name (if (null? ncrna) "" (cog-name ncrna))]
           )
 
           ;; Neither gene has been done yet.
@@ -632,23 +594,19 @@ translates to."
               ((and (not already-done-a) (not already-done-b))
               (let (
                  [go-cross-annotation
-                    (if (null? namespace) '()
+                    (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
-                           (find-go-term gene-b
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-a namespaces num-parents)
+                           (find-go-term gene-b namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
-                    (if (= 0 (cog-arity rna)) '()
+                    (if (not (and coding-rna non-coding-rna)) '()
                        (List
                           (Concept "rna-annotation")
-                          (find-rna gene-a crna-name ncrna-name do-protein)
-                          (find-rna gene-b crna-name ncrna-name do-protein)
+                          (find-rna gene-a coding-rna non-coding-rna do-protein)
+                          (find-rna gene-b coding-rna non-coding-rna do-protein)
                           (List (Concept "biogrid-interaction-annotation")))
                    )])
                       (if do-protein
@@ -688,19 +646,17 @@ translates to."
               (let* (
                   [gene-x (if already-done-a gene-b gene-a)]
                   [go-cross-annotation
-                     (if (null? namespace) '()
+                     (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-x
-                              (string-split (cog-name namespace) #\ )
-                              (string->number (cog-name parent)))
+                           (find-go-term gene-x namespaces num-parents)
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation
-                     (if (= 0 (cog-arity rna)) '()
+                     (if (not (and coding-rna non-coding-rna)) '()
                         (List
                            (Concept "rna-annotation")
-                           (find-rna gene-x crna-name ncrna-name do-protein)
+                           (find-rna gene-x coding-rna non-coding-rna do-protein)
                            (List (Concept "biogrid-interaction-annotation")))
                     )])
                  (if do-protein
@@ -730,6 +686,8 @@ translates to."
       )
    )
 )
+
+;; ------------------------------------------------------
 
 (define-public (build-interaction interactor-1 interactor-2 pubmed interaction_pred)
   (if (or (equal? (cog-type interactor-1) 'ListLink) (equal? (cog-type interactor-2) 'ListLink))

@@ -78,7 +78,7 @@
 	(define namespaces (gar go))
 	(define parent (gdr go))
 	(define namespace-list
-		(string-split (cog-name namespace) #\space))
+		(string-split (cog-name namespaces) #\space))
 	(define num-parents (string->number (cog-name parent)))
 
 	(define crna (gar rna))
@@ -116,7 +116,7 @@
 	(define namespaces (gar go))
 	(define parent (gdr go))
 	(define namespace-list
-		(string-split (cog-name namespace) #\space))
+		(string-split (cog-name namespaces) #\space))
 	(define num-parents (string->number (cog-name parent)))
 
 	(define crna (gar rna))

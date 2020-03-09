@@ -236,67 +236,69 @@ in the specified namespaces."
        (node-info pathway))
       #f))
 
-(define-public (find-pathway-genes pathway go rna prot?)
-  "Find genes which code the proteins in a given pathway.  Perform
-cross-annotation: if go, annotate each member genes of a pathway for
-its GO terms; if rna, annotate each member genes of a pathway for its
-RNA transcribes; if prot?, include the proteins in which the RNA
-translates to."
-  (run-query
-   (BindLink
-    (VariableList 
-     (TypedVariable (VariableNode "$p") (Type 'MoleculeNode))
-     (TypedVariable (VariableNode "$g") (Type 'GeneNode)))
-    (AndLink
-     (MemberLink
-      (VariableNode "$p")
-      pathway)
-     (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-       (VariableNode "$g")
-       (VariableNode "$p") )))
-    (ExecutionOutputLink
-     (GroundedSchemaNode "scm: add-pathway-genes")
-     (ListLink
-      pathway
-      (VariableNode "$g")
-      go
-      rna
-      (ConceptNode (if prot? "True" "False")))))))
+; --------------------------------------------------------
 
-(define-public (add-pathway-genes pathway gene go rna prot)
-  (let ((go-set (cog-outgoing-set go))
-        (rna-set (cog-outgoing-set rna)))
-    (if (and (null? go-set) (null? rna-set))
-        (ListLink
-         (MemberLink gene pathway)
-         (node-info gene)
-         (locate-node gene))
-        (ListLink
-         (MemberLink gene pathway)
-         (node-info gene)
-         (locate-node gene)
-         (match go-set
-           ((namespace parent . _)
-            (ListLink (ConceptNode "gene-go-annotation")
-                      (find-go-term gene
-                                    (string-split (cog-name namespace) #\space)
-                                    (string->number (cog-name parent)))
-                      (ListLink (ConceptNode "gene-pathway-annotation"))))
-           (_ '()))
-         (match rna-set
-           ((crna ncrna . _)
-            (let* ([do-protein (string=? (cog-name prot) "True")]
-                   [rnaresult (find-rna gene
-                                        (cog-name crna)
-                                        (cog-name ncrna)
-                                        do-protein)])
-              (if (null? rnaresult)
-                  '()
-                  (ListLink (ConceptNode "rna-annotation") rnaresult
-                            (ListLink (ConceptNode "gene-pathway-annotation"))))))
-           (_ '()))))))
+(define (add-pathway-genes pathway gene namespace-list num-parents
+                coding-rna non-coding-rna do-protein)
+
+	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
+
+	(List
+		(Member gene pathway)
+		(node-info gene)
+		(locate-node gene)
+		(if no-ns '()
+			(List
+				(Concept "gene-go-annotation")
+				(find-go-term gene namespace-list num-parents)
+				(List (Concept "gene-pathway-annotation"))))
+		(if no-rna '()
+			(let* ([rnaresult
+						(find-rna gene coding-rna non-coding-rna do-protein)])
+				(if (null? rnaresult) '()
+					(List (Concept "rna-annotation") rnaresult
+						(List (Concept "gene-pathway-annotation")))))))
+)
+
+(define (do-get-pathway-genes pathway)
+	(run-query
+		(Bind
+			(VariableList
+				(TypedVariable (Variable "$p") (Type 'MoleculeNode))
+				(TypedVariable (Variable "$g") (Type 'GeneNode)))
+			(And
+				(Member (Variable "$p") pathway)
+				(Evaluation (Predicate "expresses")
+					(List (Variable "$g") (Variable "$p"))))
+			(Variable "$g"))))
+
+(define get-pathway-genes (make-afunc-cache do-get-pathway-genes))
+
+(define-public (find-pathway-genes pathway namespace-list num-parents
+                  coding-rna non-coding-rna do-protein)
+"
+  Find genes which code the proteins in a given pathway.  Perform
+  cross-annotation. If there is a list of namespaces, then annotate
+  each member genes of a pathway for its GO terms. If both
+  rna flags are true, annotate each member genes of a pathway for its
+  RNA transcribes. If do-protein is true, include the proteins in which the
+  RNA translates to.
+
+  'namespace-list' should be a list of string names of namespaces.
+  'num-parents' should be a non-negative integer.
+  'coding-rna' should be either the empty list, or the string "True"
+  'non-coding-rna' should be either the empty list, or the string "True"
+  'do-protein' should be either #f or #t.
+"
+	(map
+		(lambda (gene)
+			(add-pathway-genes pathway gene namespace-list num-parents
+				coding-rna non-coding-rna do-protein))
+		(get-pathway-genes pathway))
+)
+
+; --------------------------------------------------------
 
 (define-public (find-protein gene option)
   "Find the proteins a gene expresses."

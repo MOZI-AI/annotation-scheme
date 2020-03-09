@@ -35,23 +35,24 @@
   file-name -> where to write the output file
   coding -> when True, includes the coding RNA's
   coding -> when True with protein True, includes the coding RNA's
-            and crosponding coding proteins
+            and corresponding coding proteins.
   non-coding -> when True includes the non-coding RNA's
+  protein -> scheme number, 0 or 1.
 "
   ; Convert string flags to scheme booleans
   (define do-coding (string=? coding "True"))
   (define do-noncoding (string=? noncoding "True"))
+  (define do-protein (= protein 1))
 
-  (let* ((rna
+  (let ((rna
     (map (lambda (gene)
-      (find-rna (GeneNode gene) do-coding do-noncoding protein)
-    )gene-list)
-    ))
+      (find-rna (GeneNode gene) do-coding do-noncoding do-protein))
+      gene-list)))
     (let (
     	[res (ListLink (ConceptNode "rna-annotation") rna)]
   		)
     	(write-to-file res file-name "mainRNA")
 		res
-  	)
+  	 )
   )
 )

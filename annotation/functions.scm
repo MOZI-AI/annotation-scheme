@@ -769,9 +769,12 @@ in the specified namespaces."
 (define cache-get-rna
 	(make-afunc-cache do-get-rna))
 
-(define-public (find-rna gene coding noncoding do-protein)
-	(define do-coding (string=? coding "True"))
-	(define do-noncoding (string=? noncoding "True"))
+(define-public (find-rna gene do-coding do-noncoding do-protein)
+"
+  find-rna GENE do-coding do-noncoding do-protein
+  GENE should be a GeneNode
+  do-coding do-noncoding do-protein should be #t or #f
+"
 	(map
 		(lambda (transcribe)
 			(filterbytype gene transcribe do-coding do-noncoding do-protein))

@@ -358,7 +358,7 @@ in the specified namespaces."
 (define (do-get-pathway-genes a)
   (do-get-pathway-genes-ctr #:enter? #t)
   (let ((rv (xdo-get-pathway-genes a)))
-  (find-pathway-genes-ctr #:enter? #f)
+  (do-get-pathway-genes-ctr #:enter? #f)
   rv))
 
 (define xget-pathway-genes (make-afunc-cache do-get-pathway-genes))

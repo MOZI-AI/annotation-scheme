@@ -102,39 +102,24 @@
   rv))
 
 ;;Finds a name of any node (Except GO which has different structure)
-(define find-pathway-name
-    (lambda(pw)
-			(let
-        ([name 
-        (if (or (string-contains (cog-name pw) "Uniprot:") (string-prefix? "ENST" (cog-name pw)))
-          (let ([predicate (if (string-prefix? "ENST" (cog-name pw)) "transcribed_to" "expresses")])
-            (run-query (GetLink
-              (VariableList
-              (TypedVariable (VariableNode "$a") (Type 'GeneNode)))
-              (EvaluationLink
-                (PredicateNode predicate)
-                (ListLink
-                  (VariableNode "$a")
-                  pw
-                )
-              )
-            ))
-          )
-          (run-query (GetLink
-            (VariableList
-            (TypedVariable (VariableNode "$a") (Type 'ConceptNode)))
-            (EvaluationLink
-                (PredicateNode "has_name")
-                (ListLink
-                  pw
-                  (VariableNode "$a")
-                )
-              )	
-          ))
-        )])
-    name
-	))
+(define (do-find-pathway-name pw)
+	(define is-enst (string-prefix? "ENST" (cog-name pw)))
+   (if (or is-enst (string-contains (cog-name pw) "Uniprot:"))
+      (let ([predicate (if is-enst "transcribed_to" "expresses")])
+        (run-query (Get
+           (VariableList
+           (TypedVariable (Variable "$a") (Type 'GeneNode)))
+           (Evaluation (Predicate predicate)
+              (List (Variable "$a") pw)))))
+      (run-query (Get
+         (VariableList
+         (TypedVariable (Variable "$a") (Type 'ConceptNode)))
+         (Evaluation (Predicate "has_name")
+            (List pw (Variable "$a"))))))
 )
+
+(define find-pathway-name
+	(make-afunc-cache do-find-pathway-name))
 
 (define-public (is-cellular-component? ATOM-LIST)
 "

@@ -11,6 +11,7 @@
 	(reactome-ctr #:report? #t)
 
 	(find-pathway-genes-ctr #:report? #t)
+	(do-get-pathway-genes-ctr #:report? #t)
 	(add-pathway-genes-ctr #:report? #t)
 	(find-mol-ctr #:report? #t)
 	(do-get-mol-ctr #:report? #t)

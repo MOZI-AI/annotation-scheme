@@ -31,6 +31,7 @@
 (include-from-path "annotation/instrumentation.scm")
 
 (define-public find-pathway-genes-ctr (accum-time "find-pathway-genes"))
+(define-public do-get-pathway-genes-ctr (accum-time "do-get-pathway-genes"))
 (define-public add-pathway-genes-ctr (accum-time "add-pathway-genes"))
 (define-public find-go-term-ctr (accum-time "find-go-term"))
 (define-public find-memberln-ctr (accum-time "find-memberln"))
@@ -341,7 +342,7 @@ in the specified namespaces."
   (add-pathway-genes-ctr #:enter? #f)
   rv))
 
-(define (do-get-pathway-genes pathway)
+(define (xdo-get-pathway-genes pathway)
 	(run-query
 		(Bind
 			(VariableList
@@ -352,6 +353,12 @@ in the specified namespaces."
 				(Evaluation (Predicate "expresses")
 					(List (Variable "$g") (Variable "$p"))))
 			(Variable "$g"))))
+
+(define (do-get-pathway-genes a b c d e f)
+  (do-get-pathway-genes-ctr #:enter? #t)
+  (let ((rv (xdo-get-pathway-genes a b c d e f)))
+  (find-pathway-genes-ctr #:enter? #f)
+  rv))
 
 (define get-pathway-genes (make-afunc-cache do-get-pathway-genes))
 

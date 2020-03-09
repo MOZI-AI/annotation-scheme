@@ -239,9 +239,9 @@ in the specified namespaces."
 ; --------------------------------------------------------
 
 (define (add-pathway-genes pathway gene namespace-list num-parents
-                coding-rna non-coding-rna do-protein)
+                do-coding-rna do-non-coding-rna do-protein)
 
-	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
 	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
 
 	(List
@@ -255,7 +255,7 @@ in the specified namespaces."
 				(List (Concept "gene-pathway-annotation"))))
 		(if no-rna '()
 			(let* ([rnaresult
-						(find-rna gene coding-rna non-coding-rna do-protein)])
+						(find-rna gene do-coding-rna do-non-coding-rna do-protein)])
 				(if (null? rnaresult) '()
 					(List (Concept "rna-annotation") rnaresult
 						(List (Concept "gene-pathway-annotation")))))))

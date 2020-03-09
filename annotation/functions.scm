@@ -287,8 +287,8 @@ in the specified namespaces."
 
   'namespace-list' should be a list of string names of namespaces.
   'num-parents' should be a non-negative integer.
-  'coding-rna' should be either the empty list, or the string "True"
-  'non-coding-rna' should be either the empty list, or the string "True"
+  'coding-rna' should be either #f or #t.
+  'non-coding-rna' should be either #f or #t.
   'do-protein' should be either #f or #t.
 "
 	(map
@@ -556,8 +556,8 @@ in the specified namespaces."
 
   `num-parents` should be a number.
 
-  `coding-rna` should be either null or the string "True".
-  `non-coding-rna` should be either null or the string "True".
+  `coding-rna` should be either #f or #t.
+  `non-coding-rna` should be either #f or #t.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)

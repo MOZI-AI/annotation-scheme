@@ -27,18 +27,24 @@
 	#:use-module (annotation parser)
 	#:export (include-rna)
 )
- 
+
 (define* (include-rna gene-list file-name #:key (coding "True") (noncoding "True") (protein 1))
-;;; 
-;;; The include-rna function finds coding and non-coding RNA forms of the gene-list. needs 4 arguments to do so.
-;;; file-name -> where to write the output file
-;;; coding -> when True, includes the coding RNA's
-;;; coding -> when True with protein True, includes the coding RNA's and crosponding coding proteins 
-;;; non-coding -> when True includes the non-coding RNA's 
+"
+  The include-rna function finds coding and non-coding RNA forms of
+  the gene-list. Needs 4 arguments:
+  file-name -> where to write the output file
+  coding -> when True, includes the coding RNA's
+  coding -> when True with protein True, includes the coding RNA's
+            and crosponding coding proteins
+  non-coding -> when True includes the non-coding RNA's
+"
+  ; Convert string flags to scheme booleans
+  (define do-coding (string=? coding "True"))
+  (define do-noncoding (string=? noncoding "True"))
 
   (let* ((rna
     (map (lambda (gene)
-      (find-rna (GeneNode gene) coding noncoding protein)
+      (find-rna (GeneNode gene) do-coding do-noncoding protein)
     )gene-list)
     ))
     (let (

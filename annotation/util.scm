@@ -70,7 +70,7 @@
 )
 
 ; Cache results of do-get-node-info for performance.
-(define memoize-node-info (make-afunc-cache do-get-node-info))
+(define memoize-node-info (memoize-function-call do-get-node-info))
 
 (define-public (node-info ENTITY)
 "
@@ -101,7 +101,7 @@
 )
 
 (define find-pathway-name
-	(make-afunc-cache do-find-pathway-name))
+	(memoize-function-call do-find-pathway-name))
 
 (define-public (is-cellular-component? ATOM-LIST)
 "
@@ -165,6 +165,8 @@
       ((single) single)
       ((first second . rest) second))))
 
+; ----------------------------------------------------
+
 (define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
@@ -189,6 +191,16 @@
 			(run-query QUERY))
 	)
 )
+
+; ----------------------------------------------------
+
+(define-public (memoize-function-call FUNC)
+	(define mtx (make-mutex))
+	(define cache (make-afunc-cache FUNC))
+	(lambda (ATOM) (with-mutex mtx (cache ATOM)))
+)
+
+; ----------------------------------------------------
 
 (define (do-find-name GO-ATOM)
 "
@@ -223,7 +235,7 @@
 
 ; A memoized version of `xfind-name`, improves performance considerably
 ; on repeated searches.
-(define find-name (make-afunc-cache do-find-name))
+(define find-name (memoize-function-call do-find-name))
 
 (define-public (filter-genes input-gene gene-name)
   (if (regexp-match? (string-match (string-append (cog-name input-gene) ".+$") (cog-name gene-name)))
@@ -344,7 +356,7 @@
             (VariableNode "$loc")))))
         loc)))
 
-(define-public locate-node (make-afunc-cache do-locate-node))
+(define-public locate-node (memoize-function-call do-locate-node))
 
 ;; filter only Cell membrane and compartments
 

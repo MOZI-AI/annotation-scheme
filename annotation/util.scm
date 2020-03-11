@@ -32,6 +32,7 @@
 	#:use-module (ice-9 regex)
 	#:use-module (srfi srfi-1)
 	#:use-module (ice-9 match)
+	#:use-module (ice-9 threads)
 	#:export (create-node
 	          create-edge)
 )
@@ -164,6 +165,7 @@
       ((single) single)
       ((first second . rest) second))))
 
+(define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
   Call (cog-execute! QUERY), return results, delete the SetLink.
@@ -171,12 +173,21 @@
 "
 	; Run the query
 	(define set-link (cog-execute! QUERY))
-	; Get the query results
-	(define results (cog-outgoing-set set-link))
-	; Delete the SetLink
-	(cog-delete set-link)
-	; Return the results.
-	results
+
+	(lock-mutex run-query-mtx)
+	(if (cog-atom? set-link)
+		; Get the query results
+		(let ((results (cog-outgoing-set set-link)))
+			; Delete the SetLink
+			(cog-delete set-link)
+			(unlock-mutex run-query-mtx)
+			; Return the results.
+			results)
+		; Try again
+		(begin
+			(unlock-mutex run-query-mtx)
+			(run-query QUERY))
+	)
 )
 
 (define (do-find-name GO-ATOM)

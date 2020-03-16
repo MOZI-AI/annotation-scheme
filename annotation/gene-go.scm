@@ -40,7 +40,7 @@
           )gene-nodes))]
           )
     (let (
-    	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]
+    	[res (List result)]
   		)
     	(write-to-file res file-name "gene-go")
       res

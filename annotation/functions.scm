@@ -257,7 +257,7 @@ in the specified namespaces."
 			(let* ([rnaresult
 						(find-rna gene coding-rna non-coding-rna do-protein)])
 				(if (null? rnaresult) '()
-					(List (Concept "rna-annotation") rnaresult
+					(List  rnaresult
 						(List (Concept "gene-pathway-annotation")))))))
 )
 
@@ -586,18 +586,16 @@ in the specified namespaces."
                  [go-cross-annotation
                     (if (null? namespaces) '()
                         (List
-                           (Concept "gene-go-annotation")
                            (find-go-term gene-a namespaces num-parents)
                            (find-go-term gene-b namespaces num-parents)
-                           (List (Concept "biogrid-interaction-annotation")))
+                        )
                     )]
                  [rna-cross-annotation
                     (if (not (and coding-rna non-coding-rna)) '()
                        (List
-                          (Concept "rna-annotation")
                           (find-rna gene-a coding-rna non-coding-rna do-protein)
                           (find-rna gene-b coding-rna non-coding-rna do-protein)
-                          (List (Concept "biogrid-interaction-annotation")))
+                          )
                    )])
                       (if do-protein
                         (let ([coding-prot-a (find-protein-form gene-a)]
@@ -638,16 +636,15 @@ in the specified namespaces."
                   [go-cross-annotation
                      (if (null? namespaces) '()
                         (List
-                           (Concept "gene-go-annotation")
                            (find-go-term gene-x namespaces num-parents)
-                           (List (Concept "biogrid-interaction-annotation")))
+                        )
                      )]
                   [rna-cross-annotation
                      (if (not (and coding-rna non-coding-rna)) '()
                         (List
-                           (Concept "rna-annotation")
+                           
                            (find-rna gene-x coding-rna non-coding-rna do-protein)
-                           (List (Concept "biogrid-interaction-annotation")))
+                           )
                     )])
                  (if do-protein
                     (let ([coding-prot (find-protein-form gene-x)])

@@ -57,7 +57,6 @@
                        (find-output-interactors (GeneNode gene)
                             #f namespaces parents coding noncoding)))))
           gene-nodes)]
-         [res (ListLink (ConceptNode "biogrid-interaction-annotation")
-                        (ListLink result))])
+         [res (List result)])
     (write-to-file res file-name "biogrid")
 	res))

@@ -61,8 +61,7 @@
                                            first))))
                                      pathways)))
                       gene-nodes)]
-         [res (ListLink (ConceptNode "gene-pathway-annotation")
-                        (ListLink result))])
+         [res (List result)])
     (write-to-file res file-name "gene-pathway")
     res))
 

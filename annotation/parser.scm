@@ -155,11 +155,11 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser port #:optional mode)
+(define* (atomese-parser expr)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph port)
+  (atomese->graph expr)
   (make-graph *nodes* *edges*))

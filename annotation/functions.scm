@@ -481,31 +481,44 @@ in the specified namespaces."
 
 ;; ------------------------------------------------------
 
-;; Gene interactors for genes in the pathway
-(define do-pathway-gene-interactors
-  (lambda (pw)
-  (run-query (BindLink
-    (VariableList
-     (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
-     (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
-     (TypedVariable (VariableNode "$p1") (Type 'MoleculeNode))
-     (TypedVariable (VariableNode "$p2") (Type 'MoleculeNode)))
-   (AndLink
-     (MemberLink (VariableNode "$p1") pw)
-     (MemberLink (VariableNode "$p2") pw)
-     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p1")))
-     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g2") (VariableNode "$p2")))
-     (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2")))
-   )
-  (ExecutionOutputLink
-    (GroundedSchemaNode "scm: generate-interactors")
-		  (ListLink
-        pw
-        (VariableNode "$g1")
-		    (VariableNode "$g2")
-		  ))
-  ))
-))
+(define (do-pathway-gene-interactors pw)
+"
+  Gene interactors for genes in the pathway.
+
+  This finds all pentagons, where two proteins appear on the same
+  pathway, the genes expressing those proteins are known, and the
+  two genes are interacting. That is,
+
+    pathway <--is-in-- protein-1 <--expresses-- gene-1
+    pathway <--is-in-- protein-2 <--expresses-- gene-2
+    gene-1 <--interacts--> gene-2
+"
+   ; Find all interaction
+   (define gene-pentagons
+      (run-query (Get
+         (VariableList
+            (TypedVariable (Variable "$g1") (Type 'GeneNode))
+            (TypedVariable (Variable "$g2") (Type 'GeneNode))
+            (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
+            (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+         (And
+            (Member (Variable "$p1") pw)
+            (Member (Variable "$p2") pw)
+            (Evaluation (Predicate "expresses")
+               (List (Variable "$g1") (Variable "$p1")))
+            (Evaluation (Predicate "expresses")
+               (List (Variable "$g2") (Variable "$p2")))
+            (Evaluation (Predicate "interacts_with")
+               (List (Variable "$g1") (Variable "$g2")))))))
+
+   (map
+      (lambda (gene-path)
+         (define g1 (gar gene-path))
+         (define g2 (gdr gene-path))
+         (cog-delete gene-path) ; get rid of unused ListLink
+         (generate-interactors pw g1 g2))
+      gene-pentagons)
+)
 
 ;; Cache previous results, so that they are not recomputed again,
 ;; if the results are already known. Note that this function accounts
@@ -696,7 +709,7 @@ in the specified namespaces."
   )
 )
 
-(define-public (generate-interactors path var1 var2)
+(define (generate-interactors path var1 var2)
 	; (biogrid-reported-pathways) is a cache of the interactions that have
 	; already been handled. Defined in util.scm and cleared in main.scm.
 	(if (or (equal? var1 var2)

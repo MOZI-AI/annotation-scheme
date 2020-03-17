@@ -436,8 +436,9 @@ in the specified namespaces."
   If do-protein is #t then protein interactions are included.
 "
 	(map
-		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+		(lambda (act-gene) (ListLink
+			(generate-result gene act-gene do-protein
+				namespace parents coding non-coding)))
 
 		(run-query (Get
 			(VariableList
@@ -459,8 +460,8 @@ in the specified namespaces."
   If do-protein is #t then protein interactions are included.
 "
 	(map
-		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+		(lambda (gene-pair) (ListLink
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding)))
 
 		(run-query (Get
 			(VariableList
@@ -544,7 +545,7 @@ in the specified namespaces."
 
 ;; ---------------------------------
 
-(define-public (generate-result gene-a gene-b do-protein namespaces num-parents
+(define (generate-result gene-a gene-b do-protein namespaces num-parents
                                 coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
@@ -562,7 +563,7 @@ in the specified namespaces."
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
 		    (equal? (cog-type gene-b) 'VariableNode))
-		(ListLink)
+		'()
 		(let* (
 				[already-done-a ((biogrid-genes) gene-a)]
 				[already-done-b ((biogrid-genes) gene-b)]
@@ -604,8 +605,8 @@ in the specified namespaces."
                               [coding-prot-b (find-protein-form gene-b)])
                         (if (or (equal? coding-prot-a (ListLink))
                                 (equal? coding-prot-b (ListLink)))
-                          (ListLink)
-                          (ListLink
+                          '()
+                          (list
                             interaction
                             (Evaluation (Predicate "expresses") (List gene-a coding-prot-a))
                             (node-info gene-a)
@@ -619,7 +620,7 @@ in the specified namespaces."
                             rna-cross-annotation
                           )
                         ))
-                      (ListLink
+                      (list
                           interaction
                           (node-info gene-a)
                           (locate-node gene-a)
@@ -652,8 +653,8 @@ in the specified namespaces."
                  (if do-protein
                     (let ([coding-prot (find-protein-form gene-x)])
                        (if (equal? coding-prot (ListLink))
-                          (ListLink)
-                          (ListLink
+                          '()
+                          (list
                             interaction
                             (Evaluation (Predicate "expresses") (List gene-x coding-prot))
                             (node-info gene-x)
@@ -662,7 +663,7 @@ in the specified namespaces."
                             go-cross-annotation
                             rna-cross-annotation)
                     ))
-                    (ListLink
+                    (list
                        interaction
                        (node-info gene-x)
                        (locate-node  gene-x)
@@ -671,7 +672,7 @@ in the specified namespaces."
                 )))
 
               ;;; Both of the genes have been done.
-              (else (if already-done-pair (ListLink) (ListLink interaction)))
+              (else (if already-done-pair '() (list interaction)))
           )
       )
    )

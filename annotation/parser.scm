@@ -161,7 +161,5 @@ graph by mutating global variables."
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph
-   (with-input-from-string port
-     read))
+  (atomese->graph port)
   (make-graph *nodes* *edges*))

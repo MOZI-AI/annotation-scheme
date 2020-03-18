@@ -43,6 +43,10 @@
                                   (biogrid 1)
                                   coding
                                   noncoding)
+
+  (define do-coding (string=? coding "True"))
+  (define do-noncoding (string=? noncoding "True"))
+
   (let* ([pwlst '()]
          [prot? (string=? include_prot "True")]
          [sm? (string=? include_sm "True")]
@@ -53,9 +57,9 @@
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene prot? sm? namespace parents biogrid coding noncoding))
+                                        (smpdb gene prot? sm? namespace parents biogrid do-coding do-noncoding))
                                        ("reactome"
-                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid coding noncoding)
+                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid do-coding do-noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))

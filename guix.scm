@@ -41,7 +41,7 @@
    `(("agi-bio" ,agi-bio)
      ("atomspace" ,atomspace)
      ("guile" ,guile-2.2)
-     ("guile-json" ,guile-json-1)))
+     ("guile-json" ,guile-json-3)))
   (home-page "https://github.com/MOZI-AI/annotation-scheme")
   (synopsis "Human Gene annotation service backend")
   (description "This project contains the Scheme code that is used

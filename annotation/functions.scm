@@ -93,20 +93,22 @@
   specification of the parents.
   namespaces should be a list of strings.
 "
-   (define res (find-memberln g namespaces))
-
-   (define parents (flatten (let loop (
-        [i p]
-        [ls res]
-        [acc '()]
-      )
+   (define (loop i ls acc)
       (cond 
         [(= i 0) (append ls acc)]
         [(null? ls) acc]
-        [else (cons (loop (- i 1)  (find-parent (car (cog-outgoing-set (car ls))) namespaces) (append ls acc)) (loop i (cdr ls) '()))
-          ]
+        [else (cons
+           (loop
+              (- i 1)
+              (find-parent (gar (car ls)) namespaces)
+              (append ls acc))
+           (loop i (cdr ls) '()))]
       )
-      )))
+   )
+
+   (define res (find-memberln g namespaces))
+   (define parents (flatten (loop p res '())))
+
    (cons (node-info g) parents)
 )
 

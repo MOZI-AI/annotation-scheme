@@ -309,22 +309,22 @@ in the specified namespaces."
 
    (define pathway-name (cog-name pathway))
 
-   (if (and (string=? (find-prefix prot) "Uniprot"))
+   (if (not (and (string=? (find-prefix prot) "Uniprot"))) #f
       (cond
          ((and
             (equal? option 0)
             (string-contains pathway-name "SMP"))
-            (list
+            (List
                (Evaluation (Predicate "expresses") (List gene prot))
                (node-info pathway)))
          ((and
             (equal? option 1)
             (string-contains pathway-name "R-HSA"))
-            (list
+            (List
                (Evaluation (Predicate "expresses") (List gene prot))
                (node-info pathway)
                (List (add-loc (Member gene pathway)))))
-   ))
+      ))
 )
 
 (define-public (find-protein gene option)
@@ -347,12 +347,12 @@ in the specified namespaces."
             (Evaluation
                (Predicate "expresses")
                (List gene (Variable "$prot")))))))
-   (map
+   (filter-map
       (lambda (prot-path)
          (define prot (gar prot-path))
          (define path (gdr prot-path))
          (cog-delete prot-path) ; delete excess pointless ListLink
-         (ListLink (filter-pathway gene prot path option)))
+         (filter-pathway gene prot path option))
       prot-path-list)
 )
 

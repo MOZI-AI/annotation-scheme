@@ -28,6 +28,24 @@
     #:use-module (ice-9 match)
 )
 
+(define-public (add-go-info child-atom parent-atom)
+"
+   Add information for GO nodes
+"
+   (define parent-is-go?
+      (match (string-split (cog-name parent-atom) #\:)
+         (("GO" . rest) #t)
+         (_ #f)))
+   (if parent-is-go?
+      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
+         (ListLink
+            (Member child-atom parent-atom)
+            (go-info parent-atom))
+         (ListLink
+           (Inheritance child-atom parent-atom)
+           (go-info parent-atom)))
+      #f))
+
 (define (find-parent node namespaces)
 "
   Given an atom and list of namespaces, find the parents of that atom
@@ -63,27 +81,11 @@
             (List gene (Variable "$a"))))))
      namespaces))
 
-(define-public (add-go-info child-atom parent-atom)
+(define-public (find-go-term g namespaces p)
 "
-   Add information for GO nodes
+  The main function to find the go terms for a gene with a
+  specification of the parents
 "
-   (define parent-is-go?
-      (match (string-split (cog-name parent-atom) #\:)
-         (("GO" . rest) #t)
-         (_ #f)))
-   (if parent-is-go?
-      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
-         (ListLink
-            (Member child-atom parent-atom)
-            (go-info parent-atom))
-         (ListLink
-           (Inheritance child-atom parent-atom)
-           (go-info parent-atom)))
-      #f))
-
-;;the main function to find the go terms for a gene with a specification of the parents
-(define-public find-go-term 
-  (lambda (g namespaces p)
       (let (
         [res (find-memberln g namespaces)]   
       )
@@ -101,7 +103,7 @@
       )))
        (cons (node-info g) parents)
     )
-))
+)
 
 (define-public (find-proteins-goterm gene namespace parent)
   "Find GO terms for proteins coded by the given gene."

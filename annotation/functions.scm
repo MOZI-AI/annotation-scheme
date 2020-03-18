@@ -324,6 +324,7 @@ in the specified namespaces."
                (Evaluation (Predicate "expresses") (List gene prot))
                (node-info pathway)
                (List (add-loc (Member gene pathway)))))
+         (else #f)
       ))
 )
 

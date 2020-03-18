@@ -100,23 +100,27 @@ in the specified namespaces."
   `namespaces` should be a list of strings.
   `num-parents` should be a number, the number of parents to look up.
 "
-   (define (loop i ls acc)
-      (cond 
-        [(= i 0) (append ls acc)]
-        [(null? ls) acc]
-        [else (cons
-           (loop
-              (- i 1)
-              (find-parent (gar (car ls)) namespaces)
-              (append ls acc))
-           (loop i (cdr ls) '()))]
-      )
-   )
 
+   ;; Return a list of the parents of things in `lst`.
+   (define (find-parents lst)
+      (append-map!
+         (lambda (item) (find-parent (gar item) namespaces))
+         lst))
+
+   ;; depth-recursive loop. Look for parents of parents, etc.
+   ;; up to depth `i`.
+   (define (loop i lis acc)
+      (define next-acc (append lis acc))
+      (if (= i 0) next-acc
+         (loop (- i 1) (find-parents lis) next-acc)))
+
+   ; res is a list of .. what, exactly ???
    (define res (find-memberln g namespaces))
-   (define parents (flatten (loop num-parents res '())))
 
-   (cons (node-info g) parents)
+   ;; I don't think the flatten is needed any more, but whatever.
+   (define all-parents (flatten (loop num-parents res '())))
+
+   (cons (node-info g) all-parents)
 )
 
 (define-public (find-proteins-goterm gene namespace parent)

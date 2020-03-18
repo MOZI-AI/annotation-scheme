@@ -200,9 +200,19 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
+; --------------------------------------------------------
+
 (define-public (filter-atoms atom identifier)
 	(if (string-contains (cog-name atom) (cog-name identifier))
 		(cog-new-stv 1 1) (cog-new-stv 0 1)))
+
+(define-public (add-pathway-info gene pathway)
+  (if (or (string-contains (cog-name pathway) "R-HSA")
+          (string-contains (cog-name pathway) "SMP"))
+      (ListLink
+       (MemberLink gene pathway)
+       (node-info pathway))
+      #f))
 
 (define-public (find-pathway-member gene db)
   (run-query (BindLink
@@ -227,14 +237,6 @@ in the specified namespaces."
                 ))
     ))
 )
-
-(define-public (add-pathway-info gene pathway)
-  (if (or (string-contains (cog-name pathway) "R-HSA")
-          (string-contains (cog-name pathway) "SMP"))
-      (ListLink
-       (MemberLink gene pathway)
-       (node-info pathway))
-      #f))
 
 ; --------------------------------------------------------
 

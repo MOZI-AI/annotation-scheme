@@ -51,7 +51,7 @@
       +       (let ((rv (xfind-parent a b)))
       +       (find-parent-ctr #:enter? #f)
       +       rv))
-      +       
+      +
       +(define xfind-parent
 
    See issue https://github.com/MOZI-AI/annotation-scheme/issues/98
@@ -64,7 +64,7 @@
 		(lambda* (#:key (enter? #f) (report? #f))
 			(if report?
 				(if (< 0 calls)
-					(format #t 
+					(format #t
 						"Time: ~9f secs. calls: ~A avg: ~8,1f usec/call for ~A\n"
 						(* 1.0e-9 elapsed)
 						calls

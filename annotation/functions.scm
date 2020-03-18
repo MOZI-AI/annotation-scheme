@@ -305,20 +305,20 @@ in the specified namespaces."
       ((name) name)
       ((name . rest) name)))
 
-(define-public (filter-pathway gene prot pathway option)
+(define (filter-pathway gene prot pathway option)
 
    (if (and (string=? (find-prefix prot) "Uniprot") )
       (cond
          ((and
             (string-contains (cog-name pathway) "SMP")
-            (equal? option (Number "0")))
+            (equal? option 0))
             (List
                (Evaluation
                   (Predicate "expresses")
                   (List gene prot))
                (node-info pathway)))
          ((and
-            (equal? option (Number "1"))
+            (equal? option 1)
             (string-contains (cog-name pathway) "R-HSA"))
             (List
                (Evaluation
@@ -329,31 +329,33 @@ in the specified namespaces."
    )))
 
 (define-public (find-protein gene option)
-  "Find the proteins a gene expresses."
-  (run-query
-   (BindLink
-    (VariableList
-     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-     (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
-    (AndLink
-     (MemberLink
-      gene
-      (VariableNode "$pw"))
-     (MemberLink
-      (VariableNode "$a")
-      (VariableNode "$pw"))
-     (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-       gene
-       (VariableNode "$a"))))
-    (ExecutionOutputLink
-     (GroundedSchemaNode "scm: filter-pathway")
-     (ListLink
-      gene
-      (VariableNode "$a")
-      (VariableNode "$pw")
-      (Number option))))))
+"
+  Find the proteins a gene expresses, where both the gene and
+  the protein are on the same pathway. These from a triangle:
+
+    gene <--is-in-- pathway
+    prot <--is-in-- pathway
+    prot <--expresses-- gene
+"
+   (define prot-path-list
+      (run-query (Get
+         (VariableList
+            (TypedVariable (Variable "$prot") (Type 'MoleculeNode))
+            (TypedVariable (Variable "$pway") (Type 'ConceptNode)))
+         (And
+            (Member gene (Variable "$pway"))
+            (Member (Variable "$prot") (Variable "$pway"))
+            (Evaluation
+               (Predicate "expresses")
+               (List gene (Variable "$prot")))))))
+   (map
+      (lambda (prot-path)
+         (define prot (gar prot-path))
+         (define path (gdr prot-path))
+         (cog-delete prot-path) ; delete excess pointless ListLink
+         (filter-pathway gene prot path option))
+      prot-path-list)
+)
 
 (define-public (pathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."

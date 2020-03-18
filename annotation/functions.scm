@@ -300,6 +300,34 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
+(define (find-prefix node)
+   (match (string-split (cog-name node) #\:)
+      ((name) name)
+      ((name . rest) name)))
+
+(define-public (filter-pathway gene prot pathway option)
+
+   (if (and (string=? (find-prefix prot) "Uniprot") )
+      (cond
+         ((and
+            (string-contains (cog-name pathway) "SMP")
+            (equal? option (Number "0")))
+            (List
+               (Evaluation
+                  (Predicate "expresses")
+                  (List gene prot))
+               (node-info pathway)))
+         ((and
+            (equal? option (Number "1"))
+            (string-contains (cog-name pathway) "R-HSA"))
+            (List
+               (Evaluation
+                  (Predicate "expresses")
+                  (List gene prot))
+               (node-info pathway)
+               (List (add-loc (Member gene pathway)))))
+   )))
+
 (define-public (find-protein gene option)
   "Find the proteins a gene expresses."
   (run-query
@@ -326,36 +354,6 @@ in the specified namespaces."
       (VariableNode "$a")
       (VariableNode "$pw")
       (Number option))))))
-
-(define-public filter-pathway (lambda (gene prot pathway option)
-  (if (and (string=? (find-prefix prot) "Uniprot") )
-    (cond ((and (string-contains (cog-name pathway) "SMP") (equal? option (Number "0")))
-    (ListLink
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            gene
-            prot ))
-    (node-info pathway)
-    ))
-    ((and (equal? option (Number "1")) (string-contains (cog-name pathway) "R-HSA"))
-    (ListLink
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            gene
-            prot ))
-      (node-info pathway)
-      (ListLink 
-        (add-loc (MemberLink gene pathway))
-      )
-    )))
-)))
-
-(define (find-prefix node)
-  (match (string-split (cog-name node) #\:)
-    ((name) name)
-    ((name . rest) name)))
 
 (define-public (pathway-hierarchy pw lst)
 " pathway-hierarchy -- Find hierarchy of the reactome pathway."

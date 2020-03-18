@@ -28,7 +28,7 @@
     #:use-module (ice-9 match)
 )
 
-(define-public (add-go-info child-atom parent-atom)
+(define (add-go-info child-atom parent-atom)
 "
    Add information for GO nodes
 "
@@ -49,21 +49,25 @@
 (define (find-parent node namespaces)
 "
   Given an atom and list of namespaces, find the parents of that atom
-  in the specified namespaces.
+  in the specified namespaces. The namespaces must be a list of strings.
 "
    (define atom (gdr node))
 
-   (append-map (lambda (ns)
-      (run-query (Bind
-         (TypedVariable (Variable "$a") (Type 'ConceptNode))
-         (And
-            (Inheritance atom (Variable "$a"))
-            (Evaluation (Predicate "GO_namespace")
-                (List (Variable "$a") (Concept ns))))
-         (ExecutionOutput
-            (GroundedSchema "scm: add-go-info")
-            (List atom (Variable "$a"))))))
-      namespaces)))
+   (define (add-go-for-ns ns-name)
+
+      (define list-of-things
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Inheritance atom (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+      (filter-map
+         (lambda (thing) (add-go-info atom thing))
+         list-of-things))
+
+   (append-map add-go-for-ns namespaces)
+)
 
 (define (find-memberln gene namespaces)
 "

@@ -59,6 +59,7 @@
 (define-public find-rna-ctr (accum-time "find-rna"))
 (define-public do-get-rna-ctr (accum-time "do-get-rna"))
 (define-public find-coding-gene-ctr (accum-time "find-coding-gene"))
+(define-public do-find-coding-gene-ctr (accum-time "do-find-coding-gene"))
 
 (define (find-parent a b)
   (find-parent-ctr #:enter? #t)
@@ -329,7 +330,7 @@ in the specified namespaces."
 						(List (Concept "gene-pathway-annotation")))))))
 )
 
-(define-public (add-pathway-genes a b c d e f g)
+(define (add-pathway-genes a b c d e f g)
   (add-pathway-genes-ctr #:enter? #t)
   (let ((rv (xadd-pathway-genes a b c d e f g)))
   (add-pathway-genes-ctr #:enter? #f)
@@ -505,7 +506,7 @@ in the specified namespaces."
 
 ; ------------------------------------
 
-(define (do-find-coding-gene protein)
+(define (xdo-find-coding-gene protein)
 "
   Find coding Gene for a given protein
 "
@@ -517,6 +518,12 @@ in the specified namespaces."
 		(TypedVariable (Variable "$g") (Type 'GeneNode))
 		evlnk evlnk))
 )
+
+(define (do-find-coding-gene a)
+  (do-find-coding-gene-ctr #:enter? #t)
+  (let ((rv (xdo-find-coding-gene a)))
+  (do-find-coding-gene-ctr #:enter? #f)
+  rv))
 
 (define xfind-coding-gene
 	(make-afunc-cache do-find-coding-gene))

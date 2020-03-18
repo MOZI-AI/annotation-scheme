@@ -24,7 +24,7 @@
 
 	(pathway-gene-interactors-ctr #:report? #t)
 	(generate-interactors-ctr #:report? #t)
-	
+
 	; common to grid and path
 	(format #t "\nCommon biogrid/pathway functions\n")
 	(find-name-ctr #:report? #t)
@@ -32,6 +32,7 @@
 	(find-rna-ctr #:report? #t)
 	(do-get-rna-ctr #:report? #t)
 	(find-coding-gene-ctr #:report? #t)
+	(do-find-coding-gene-ctr #:report? #t)
 	(node-info-ctr #:report? #t)
 	(do-get-node-info-ctr #:report? #t)
 	(find-parent-ctr #:report? #t)
@@ -46,7 +47,7 @@
 	(build-interaction-ctr #:report? #t)
 	(find-pubmed-id-ctr #:report? #t)
 	(do-find-pubmed-id-ctr #:report? #t)
-	
+
 	; common to grid and GO
 	(format #t "\nCommon biogrid/GO functions\n")
 	(find-memberln-ctr #:report? #t)

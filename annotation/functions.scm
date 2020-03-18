@@ -29,67 +29,55 @@
 )
 
 (define (find-parent node namespaces)
-  "Given an atom and list of namespaces find the parents of that atom
-in the specified namespaces."
-  (let ([atom (cog-outgoing-atom node 1)])
-    (append-map (lambda (ns)
-                  (run-query (BindLink
-                              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                              (AndLink
-                               (InheritanceLink
-                                atom
-                                (VariableNode "$a"))
-                               (EvaluationLink
-                                (PredicateNode "GO_namespace")
-                                (ListLink
-                                 (VariableNode "$a")
-                                 (ConceptNode ns))))
-                              (ExecutionOutputLink
-                               (GroundedSchemaNode "scm: add-go-info")
-                               (ListLink
-                                atom
-                                (VariableNode "$a"))))))
-                namespaces)))
+"
+  Given an atom and list of namespaces, find the parents of that atom
+  in the specified namespaces.
+"
+   (define atom (gdr node))
+
+   (append-map (lambda (ns)
+      (run-query (Bind
+         (TypedVariable (Variable "$a") (Type 'ConceptNode))
+         (And
+            (Inheritance atom (Variable "$a"))
+            (Evaluation (Predicate "GO_namespace")
+                (List (Variable "$a") (Concept ns))))
+         (ExecutionOutput
+            (GroundedSchema "scm: add-go-info")
+            (List atom (Variable "$a"))))))
+      namespaces)))
 
 (define (find-memberln gene namespaces)
-  "Find GO terms of a gene."
+"
+  Find GO terms of a gene.
+"
   (append-map (lambda (ns)
-                (run-query (BindLink
-                            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                            (AndLink
-                             (MemberLink
-                              gene
-                              (VariableNode "$a"))
-                             (EvaluationLink
-                              (PredicateNode "GO_namespace")
-                              (ListLink
-                               (VariableNode "$a")
-                               (ConceptNode ns)))) 
-                            (ExecutionOutputLink
-                             (GroundedSchemaNode "scm: add-go-info")
-                             (ListLink
-                              gene
-                              (VariableNode "$a"))))))
-              namespaces))
+     (run-query (Bind
+        (TypedVariable (Variable "$a") (Type 'ConceptNode))
+        (And
+           (Member gene (Variable "$a"))
+           (Evaluation (Predicate "GO_namespace")
+              (List (Variable "$a") (Concept ns))))
+        (ExecutionOutput
+            (GroundedSchema "scm: add-go-info")
+            (List gene (Variable "$a"))))))
+     namespaces))
 
 (define-public (add-go-info child-atom parent-atom)
-  "Add information for GO nodes"
-  (define parent-is-go?
-    (match (string-split (cog-name parent-atom) #\:)
-      (("GO" . rest) #t)
-      (_ #f)))
-  (if parent-is-go?
-      (if (member (cog-type child-atom)
-                  '(GeneNode MoleculeNode))
-          (ListLink
-           (MemberLink
-            child-atom
-            parent-atom)
-           (go-info parent-atom))
-          (ListLink
-           (InheritanceLink
-            child-atom
-            parent-atom)
+"
+   Add information for GO nodes
+"
+   (define parent-is-go?
+      (match (string-split (cog-name parent-atom) #\:)
+         (("GO" . rest) #t)
+         (_ #f)))
+   (if parent-is-go?
+      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
+         (ListLink
+            (Member child-atom parent-atom)
+            (go-info parent-atom))
+         (ListLink
+           (Inheritance child-atom parent-atom)
            (go-info parent-atom)))
       #f))
 

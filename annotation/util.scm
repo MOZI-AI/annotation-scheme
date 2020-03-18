@@ -179,6 +179,8 @@
 	results
 )
 
+; --------------------------------------------------------
+
 (define (do-find-name GO-ATOM)
 "
 	find-name GO-ATOM
@@ -210,31 +212,24 @@
         (List GO-ATOM (Variable "$name"))))))
 )
 
-; A memoized version of `xfind-name`, improves performance considerably
+; A memoized version of `do-find-name`, improves performance considerably
 ; on repeated searches.
 (define find-name (make-afunc-cache do-find-name))
 
-(define-public (filter-genes input-gene gene-name)
-  (if (regexp-match? (string-match (string-append (cog-name input-gene) ".+$") (cog-name gene-name)))
-      (stv 1 1)
-      (stv 0 0) 
-  )
-)
+; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-    (run-query (BindLink
-        (TypedVariable (Variable "%x") (Type "GeneNode"))
-        (EvaluationLink
-          (GroundedPredicateNode "scm: filter-genes")
-          (ListLink
-              (Gene gene-name)
-              (VariableNode "%x")      
-          )
-        )
-        (VariableNode "%x")
-      ))
-    
+   (filter
+      (lambda (some-gene)
+         (regexp-match? (string-match
+            (string-append (cog-name some-gene) ".+$")
+            gene-name)))
+
+      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
+      (cog-get-atoms 'GeneNode))
 )
+
+; --------------------------------------------------------
 
 (define (find-current-symbol gene-list)
   (let ((current (map (lambda (gene)  

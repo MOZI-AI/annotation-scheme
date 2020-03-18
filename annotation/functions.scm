@@ -103,8 +103,9 @@
             (if item (find-parent (gar item) namespaces) '()))
          lst))
 
-   ;; depth-recursive loop. Look for parents of parents, etc.
-   ;; up to depth `i`.
+   ;; breadth-first, depth-recursive loop. This gets all parents
+   ;; at depth `i` (thus, it's breadth-first) and then recurses
+   ;; to the next depth.
    (define (loop i lis acc)
       (define next-acc (append lis acc))
       (if (= i 0) next-acc

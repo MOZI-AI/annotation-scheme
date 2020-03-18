@@ -87,22 +87,15 @@
                (Evaluation (Predicate "GO_namespace")
                    (List (Variable "$a") (Concept ns-name)))))))
 
-      (filter-map
-         (lambda (thing) (add-go-info gene thing))
-         list-of-things))
-
-   (append-map add-go-member-ns namespaces)
-)
-
 (define-public (find-go-term g namespaces p)
 "
   The main function to find the go terms for a gene with a
-  specification of the parents
+  specification of the parents.
+  namespaces should be a list of strings.
 "
-      (let (
-        [res (find-memberln g namespaces)]   
-      )
-      (define parents (flatten (let loop (
+   (define res (find-memberln g namespaces))
+
+   (define parents (flatten (let loop (
         [i p]
         [ls res]
         [acc '()]
@@ -114,8 +107,7 @@
           ]
       )
       )))
-       (cons (node-info g) parents)
-    )
+   (cons (node-info g) parents)
 )
 
 (define-public (find-proteins-goterm gene namespace parent)

@@ -161,5 +161,5 @@ graph by mutating global variables."
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph expr)
+  (for-each atomese->graph expr)
   (make-graph *nodes* *edges*))

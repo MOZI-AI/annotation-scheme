@@ -55,6 +55,7 @@
 
    (define (add-go-for-ns ns-name)
 
+      ;; XXX what is a "thing"?
       (define list-of-things
          (run-query (Get
             (TypedVariable (Variable "$a") (Type 'ConceptNode))
@@ -62,6 +63,7 @@
                (Inheritance atom (Variable "$a"))
                (Evaluation (Predicate "GO_namespace")
                    (List (Variable "$a") (Concept ns-name)))))))
+
       (filter-map
          (lambda (thing) (add-go-info atom thing))
          list-of-things))
@@ -71,19 +73,26 @@
 
 (define (find-memberln gene namespaces)
 "
-  Find GO terms of a gene.
+  Find GO terms of a gene.  `gene` must be a GeneNode and `namespaces`
+  must be a list of strings.
 "
-  (append-map (lambda (ns)
-     (run-query (Bind
-        (TypedVariable (Variable "$a") (Type 'ConceptNode))
-        (And
-           (Member gene (Variable "$a"))
-           (Evaluation (Predicate "GO_namespace")
-              (List (Variable "$a") (Concept ns))))
-        (ExecutionOutput
-            (GroundedSchema "scm: add-go-info")
-            (List gene (Variable "$a"))))))
-     namespaces))
+   (define (add-go-member-ns ns-name)
+
+      ;; XXX what is a "thing"?
+      (define list-of-things
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Member gene (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info gene thing))
+         list-of-things))
+
+   (append-map add-go-member-ns namespaces)
+)
 
 (define-public (find-go-term g namespaces p)
 "

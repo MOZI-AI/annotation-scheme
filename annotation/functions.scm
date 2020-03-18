@@ -98,7 +98,9 @@
    ;; Return a list of the parents of things in `lst`.
    (define (find-parents lst)
       (append-map
-         (lambda (item) (find-parent (gar item) namespaces))
+         (lambda (item)
+            ; Something is sending us a stray #f for soe reason...
+            (if item (find-parent (gar item) namespaces) '()))
          lst))
 
    ;; depth-recursive loop. Look for parents of parents, etc.

@@ -97,7 +97,7 @@
 
    ;; Return a list of the parents of things in `lst`.
    (define (find-parents lst)
-      (append-map!
+      (append-map
          (lambda (item) (find-parent (gar item) namespaces))
          lst))
 

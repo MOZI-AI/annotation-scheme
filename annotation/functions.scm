@@ -269,34 +269,7 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
-(define-public (filter-atoms atom identifier)
-	(if (string-contains (cog-name atom) (cog-name identifier))
-		(cog-new-stv 1 1) (cog-new-stv 0 1)))
-
-(define (xfind-pathway-member gene db)
-  (run-query (BindLink
-      (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-      (AndLink
-        (EvaluationLink
-;; FIXME it would be faster to just use srfi-1 filter here... OK?
-          (GroundedPredicateNode "scm: filter-atoms")
-          (ListLink 
-            (VariableNode "$a")
-            (ConceptNode db)
-          )
-         )
-        (MemberLink
-          gene
-          (VariableNode "$a"))
-      )
-      (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-pathway-info")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                ))
-    ))
-)
+; --------------------------------------------------------
 
 (define-public (find-pathway-member a b)
   (find-pathway-member-ctr #:enter? #t)
@@ -304,20 +277,39 @@ in the specified namespaces."
   (find-pathway-member-ctr #:enter? #f)
   rv))
 
-(define-public (add-pathway-info gene pathway)
-  (if (or (string-contains (cog-name pathway) "R-HSA")
-          (string-contains (cog-name pathway) "SMP"))
-      (ListLink
-       (MemberLink gene pathway)
-       (node-info pathway))
-      #f))
+(define (xfind-pathway-member gene identifier)
+"
+  Do something fun and entertaining.
+"
+   (define (add-pathway-info gene pathway)
+      (define pathway-name (cog-name pathway))
+
+      (if (or (string-contains pathway-name "R-HSA")
+              (string-contains pathway-name "SMP"))
+         (List
+            (Member gene pathway)
+            (node-info pathway))
+         #f))
+
+   (define pathway-list
+      (run-query (Get
+         (TypedVariable (Variable "$pway") (Type 'ConceptNode))
+         (Member gene (Variable "$pway")))))
+
+   (filter-map
+      (lambda (pathway)
+         (if (string-contains (cog-name pathway) identifier)
+            (add-pathway-info gene pathway)
+            #f))
+      pathway-list)
+)
 
 ; --------------------------------------------------------
 
 (define (xadd-pathway-genes pathway gene namespace-list num-parents
-                coding-rna non-coding-rna do-protein)
+                do-coding-rna do-non-coding-rna do-protein)
 
-	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
 	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
 
 	(List
@@ -331,7 +323,7 @@ in the specified namespaces."
 				(List (Concept "gene-pathway-annotation"))))
 		(if no-rna '()
 			(let* ([rnaresult
-						(find-rna gene coding-rna non-coding-rna do-protein)])
+						(find-rna gene do-coding-rna do-non-coding-rna do-protein)])
 				(if (null? rnaresult) '()
 					(List (Concept "rna-annotation") rnaresult
 						(List (Concept "gene-pathway-annotation")))))))
@@ -381,8 +373,8 @@ in the specified namespaces."
 
   'namespace-list' should be a list of string names of namespaces.
   'num-parents' should be a non-negative integer.
-  'coding-rna' should be either the empty list, or the string "True"
-  'non-coding-rna' should be either the empty list, or the string "True"
+  'coding-rna' should be either #f or #t.
+  'non-coding-rna' should be either #f or #t.
   'do-protein' should be either #f or #t.
 "
 	(map
@@ -400,6 +392,33 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
+(define (filter-pathway gene prot pathway option)
+
+   (define (find-prefix node)
+      (match (string-split (cog-name node) #\:)
+         ((name) name)
+         ((name . rest) name)))
+
+   (define pathway-name (cog-name pathway))
+
+   (if (not (and (string=? (find-prefix prot) "Uniprot"))) #f
+      (cond
+         ((and
+            (equal? option 0)
+            (string-contains pathway-name "SMP"))
+            (List
+               (Evaluation (Predicate "expresses") (List gene prot))
+               (node-info pathway)))
+         ((and
+            (equal? option 1)
+            (string-contains pathway-name "R-HSA"))
+            (List
+               (Evaluation (Predicate "expresses") (List gene prot))
+               (node-info pathway)
+               (List (add-loc (Member gene pathway)))))
+         (else #f)
+      ))
+)
 
 (define-public (find-protein a b)
   (find-protein-ctr #:enter? #t)
@@ -407,66 +426,41 @@ in the specified namespaces."
   (find-protein-ctr #:enter? #f)
   rv))
 
-(define-public (xfind-protein gene option)
-  "Find the proteins a gene expresses."
-  (run-query
-   (BindLink
-    (VariableList
-     (TypedVariable (Variable "$a") (TypeNode 'MoleculeNode))
-     (TypedVariable (Variable "$pw") (TypeNode 'ConceptNode)))
-    (AndLink
-     (MemberLink
-      gene
-      (VariableNode "$pw"))
-     (MemberLink
-      (VariableNode "$a")
-      (VariableNode "$pw"))
-     (EvaluationLink
-      (PredicateNode "expresses")
-      (ListLink
-       gene
-       (VariableNode "$a"))))
-    (ExecutionOutputLink
-     (GroundedSchemaNode "scm: filter-pathway")
-     (ListLink
-      gene
-      (VariableNode "$a")
-      (VariableNode "$pw")
-      (Number option))))))
+(define (xfind-protein gene option)
+"
+  Find the proteins a gene expresses, where both the gene and
+  the protein are on the same pathway. These from a triangle:
 
-(define-public filter-pathway (lambda (gene prot pathway option)
-  (if (and (string=? (find-prefix prot) "Uniprot") )
-    (cond ((and (string-contains (cog-name pathway) "SMP") (equal? option (Number "0")))
-    (ListLink
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            gene
-            prot ))
-    (node-info pathway)
-    ))
-    ((and (equal? option (Number "1")) (string-contains (cog-name pathway) "R-HSA"))
-    (ListLink
-      (EvaluationLink
-        (PredicateNode "expresses")
-          (ListLink
-            gene
-            prot ))
-      (node-info pathway)
-      (ListLink 
-        (add-loc (MemberLink gene pathway))
-      )
-    )))
-)))
+    gene <--is-in-- pathway
+    prot <--is-in-- pathway
+    prot <--expresses-- gene
+"
+   (define prot-path-list
+      (run-query (Get
+         (VariableList
+            (TypedVariable (Variable "$prot") (Type 'MoleculeNode))
+            (TypedVariable (Variable "$pway") (Type 'ConceptNode)))
+         (And
+            (Member gene (Variable "$pway"))
+            (Member (Variable "$prot") (Variable "$pway"))
+            (Evaluation
+               (Predicate "expresses")
+               (List gene (Variable "$prot")))))))
+   (filter-map
+      (lambda (prot-path)
+         (define prot (gar prot-path))
+         (define path (gdr prot-path))
+         (cog-delete prot-path) ; delete excess pointless ListLink
+         (filter-pathway gene prot path option))
+      prot-path-list)
+)
 
-(define (find-prefix node)
-  (match (string-split (cog-name node) #\:)
-    ((name) name)
-    ((name . rest) name)))
+; --------------------------------------------------------
 
 (define (xpathway-hierarchy pw lst)
-" pathway-hierarchy -- Find hierarchy of the reactome pathway."
-
+"
+  pathway-hierarchy -- Find hierarchy of the reactome pathway.
+"
 	(filter
 		(lambda (inhlink)
 			(and (member (gar inhlink) lst) (member (gdr inhlink) lst)))
@@ -624,37 +618,75 @@ in the specified namespaces."
 
 ;; ------------------------------------------------------
 
+(define-public (generate-interactors a b c)
+  (generate-interactors-ctr #:enter? #t)
+  (let ((rv (xgenerate-interactors a b c)))
+  (generate-interactors-ctr #:enter? #f)
+  rv))
+
+(define (xgenerate-interactors path var1 var2)
+	; (biogrid-reported-pathways) is a cache of the interactions that have
+	; already been handled. Defined in util.scm and cleared in main.scm.
+	(if (or (equal? var1 var2)
+			((biogrid-reported-pathways) (Set var1 var2))) #f
+		(let ([output (find-pubmed-id var1 var2)])
+			(if (null? output)
+				(EvaluationLink
+					(PredicateNode "interacts_with")
+					(ListLink var1 var2))
+				(EvaluationLink
+					(PredicateNode "has_pubmedID")
+					(ListLink
+						(EvaluationLink
+							(PredicateNode "interacts_with")
+							(ListLink var1 var2))
+						output)))))
+)
+
 (define (do-pathway-gene-interactors a)
   (pathway-gene-interactors-ctr #:enter? #t)
   (let ((rv (xdo-pathway-gene-interactors a)))
   (pathway-gene-interactors-ctr #:enter? #f)
   rv))
 
-;; Gene interactors for genes in the pathway
-(define xdo-pathway-gene-interactors
-  (lambda (pw)
-  (run-query (BindLink
-    (VariableList
-     (TypedVariable (VariableNode "$g1") (Type 'GeneNode))
-     (TypedVariable (VariableNode "$g2") (Type 'GeneNode))
-     (TypedVariable (VariableNode "$p1") (Type 'MoleculeNode))
-     (TypedVariable (VariableNode "$p2") (Type 'MoleculeNode)))
-   (AndLink
-     (MemberLink (VariableNode "$p1") pw)
-     (MemberLink (VariableNode "$p2") pw)
-     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g1") (VariableNode "$p1")))
-     (EvaluationLink (PredicateNode "expresses") (ListLink (VariableNode "$g2") (VariableNode "$p2")))
-     (EvaluationLink (PredicateNode "interacts_with") (ListLink (VariableNode "$g1") (VariableNode "$g2")))
-   )
-  (ExecutionOutputLink
-    (GroundedSchemaNode "scm: generate-interactors")
-		  (ListLink
-        pw
-        (VariableNode "$g1")
-		    (VariableNode "$g2")
-		  ))
-  ))
-))
+(define (xdo-pathway-gene-interactors pw)
+"
+  Gene interactors for genes in the pathway.
+
+  This finds all pentagons, where two proteins appear on the same
+  pathway, the genes expressing those proteins are known, and the
+  two genes are interacting. That is,
+
+    pathway <--is-in-- protein-1 <--expresses-- gene-1
+    pathway <--is-in-- protein-2 <--expresses-- gene-2
+    gene-1 <--interacts--> gene-2
+"
+   ; Find all interaction
+   (define gene-pentagons
+      (run-query (Get
+         (VariableList
+            (TypedVariable (Variable "$g1") (Type 'GeneNode))
+            (TypedVariable (Variable "$g2") (Type 'GeneNode))
+            (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
+            (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+         (And
+            (Member (Variable "$p1") pw)
+            (Member (Variable "$p2") pw)
+            (Evaluation (Predicate "expresses")
+               (List (Variable "$g1") (Variable "$p1")))
+            (Evaluation (Predicate "expresses")
+               (List (Variable "$g2") (Variable "$p2")))
+            (Evaluation (Predicate "interacts_with")
+               (List (Variable "$g1") (Variable "$g2")))))))
+
+   (filter-map
+      (lambda (gene-path)
+         (define g1 (gar gene-path))
+         (define g2 (gdr gene-path))
+         (cog-delete gene-path) ; get rid of unused ListLink
+         (generate-interactors pw g1 g2))
+      gene-pentagons)
+)
 
 ;; Cache previous results, so that they are not recomputed again,
 ;; if the results are already known. Note that this function accounts
@@ -711,8 +743,8 @@ in the specified namespaces."
 
   `num-parents` should be a number.
 
-  `coding-rna` should be either null or the string "True".
-  `non-coding-rna` should be either null or the string "True".
+  `coding-rna` should be either #f or #t.
+  `non-coding-rna` should be either #f or #t.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
@@ -863,31 +895,6 @@ in the specified namespaces."
   (build-interaction-ctr #:enter? #f)
   rv))
 
-(define (xgenerate-interactors path var1 var2)
-	; (biogrid-reported-pathways) is a cache of the interactions that have
-	; already been handled. Defined in util.scm and cleared in main.scm.
-	(if (or (equal? var1 var2)
-			((biogrid-reported-pathways) (Set var1 var2))) '()
-		(let ([output (find-pubmed-id var1 var2)])
-			(if (null? output)
-				(EvaluationLink
-					(PredicateNode "interacts_with")
-					(ListLink var1 var2))
-				(EvaluationLink
-					(PredicateNode "has_pubmedID")
-					(ListLink
-						(EvaluationLink
-							(PredicateNode "interacts_with")
-							(ListLink var1 var2))
-						output)))))
-)
-
-(define-public (generate-interactors a b c)
-  (generate-interactors-ctr #:enter? #t)
-  (let ((rv (xgenerate-interactors a b c)))
-  (generate-interactors-ctr #:enter? #f)
-  rv))
-
 ;; ------------------------------------------------------
 
 (define (xdo-find-pubmed-id gene-set)
@@ -960,9 +967,12 @@ in the specified namespaces."
 (define cache-get-rna
 	(make-afunc-cache do-get-rna))
 
-(define (xfind-rna gene coding noncoding do-protein)
-	(define do-coding (string=? coding "True"))
-	(define do-noncoding (string=? noncoding "True"))
+(define (xfind-rna gene do-coding do-noncoding do-protein)
+"
+  find-rna GENE do-coding do-noncoding do-protein
+  GENE should be a GeneNode
+  do-coding do-noncoding do-protein should be #t or #f
+"
 	(map
 		(lambda (transcribe)
 			(filterbytype gene transcribe do-coding do-noncoding do-protein))

@@ -324,64 +324,6 @@
     ))
 )
 
-(define (do-locate-node a)
-   (locate-node-ctr #:enter? #t)
-   (let ((rv (xdo-locate-node a)))
-   (locate-node-ctr #:enter? #f)
-   rv))
-
-(define (xdo-locate-node node)
-  (let ([loc (run-query
-              (BindLink
-               (VariableNode "$go")
-               (AndLink
-                (MemberLink 
-                 node
-                 (VariableNode "$go"))
-                (EvaluationLink
-                 (PredicateNode "GO_namespace")
-                 (ListLink
-                  (VariableNode "$go")
-                  (ConceptNode "cellular_component"))))
-               (ExecutionOutputLink
-                (GroundedSchemaNode "scm: filter-loc")
-                (ListLink
-                 node
-                 (VariableNode "$go")))))])
-    (if (null? loc)
-        (run-query
-         (BindLink
-          (VariableNode "$loc")
-          (EvaluationLink
-           (PredicateNode "has_location")
-           (ListLink
-            node
-            (VariableNode "$loc")))
-          (EvaluationLink
-           (PredicateNode "has_location")
-           (ListLink
-            node
-            (VariableNode "$loc")))))
-        loc)))
-
-(define-public locate-node (make-afunc-cache do-locate-node))
-
-;; filter only Cell membrane and compartments
-
-(define-public (filter-loc node go)
-  (let ([loc (string-downcase (find-name go))])
-  (if (or (and (not (string-contains loc "complex")) 
-      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
-        (EvaluationLink
-          (PredicateNode "has_location")
-          (ListLink
-            node
-            (ConceptNode loc)
-          )
-        )
-  )
-  ))
-
 (define (is-compartment loc)
 	(any
 		(lambda (comp) (string-contains loc comp))
@@ -391,7 +333,56 @@
 			"ribosomes" "lysosome" "nucle"))
 )
 
-;; Add location of a gene/Molecule node in context of Reactome pathway
+(define (filter-loc node go)
+"
+  filter only Cell membrane and compartments
+
+  Return either the location or #f
+"
+  (define loc (string-downcase (find-name go)))
+
+  (if (or (and (not (string-contains loc "complex"))
+      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc)))
+          (is-compartment loc))
+      (Evaluation
+        (Predicate "has_location")
+        (ListLink node (Concept loc)))
+      #f)
+)
+
+(define (do-locate-node a)
+   (locate-node-ctr #:enter? #t)
+   (let ((rv (xdo-locate-node a)))
+   (locate-node-ctr #:enter? #f)
+   rv))
+
+(define (xdo-locate-node node)
+  (define go-list (run-query
+    (Get
+       (Variable "$go")
+       (And
+         (Member node (Variable "$go"))
+         (Evaluation
+           (Predicate "GO_namespace")
+           (List (Variable "$go") (Concept "cellular_component")))
+        ))))
+
+  (define loc-list
+    (filter-map (lambda (go) (filter-loc node go)) go-list))
+
+  (if (not (null? loc-list)) loc-list
+    (run-query
+      (Bind
+        (Variable "$loc")
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$loc")))
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$loc"))))))
+)
+
+(define-public locate-node (make-afunc-cache do-locate-node))
 
 (define-public (add-loc a)
    (add-loc-ctr #:enter? #t)
@@ -400,6 +391,9 @@
    rv))
 
 (define-public (xadd-loc node)
+"
+  Add location of a gene/Molecule node in context of Reactome pathway
+"
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
       (run-query

@@ -51,6 +51,9 @@
                                   coding
                                   noncoding)
 
+  (define do-coding (string=? coding "True"))
+  (define do-noncoding (string=? noncoding "True"))
+
 (gene-path-anno-ctr #:enter? #t)
   (let* ([pwlst '()]
          [prot? (string=? include_prot "True")]
@@ -62,9 +65,9 @@
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene prot? sm? namespace parents biogrid coding noncoding))
+                                        (smpdb gene prot? sm? namespace parents biogrid do-coding do-noncoding))
                                        ("reactome"
-                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid coding noncoding)
+                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid do-coding do-noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))
@@ -128,7 +131,9 @@
                                   (let ([prots (find-mol node "Uniprot")])
                                     (if (null? prots)
                                         (node-info node)
-                                        prots)))
+                                        prots))
+                                '()
+                              )
                               (if (= biogrid 1)
                                   (pathway-gene-interactors node)
                                   '())

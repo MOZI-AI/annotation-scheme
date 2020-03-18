@@ -46,8 +46,8 @@
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
 
-  (let* ([rna (ListLink (list (if coding (ConceptNode coding) '())
-                              (if noncoding (ConceptNode noncoding) '())))]
+  (let* ([rna (list (if coding (ConceptNode coding) '())
+                              (if noncoding (ConceptNode noncoding) '()))]
          [result
           (append-map (lambda (gene)
             (match interaction

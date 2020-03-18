@@ -200,41 +200,34 @@ in the specified namespaces."
       go
       (VariableNode "$def"))))))
 
-(define-public (filter-atoms atom identifier)
-	(if (string-contains (cog-name atom) (cog-name identifier))
-		(cog-new-stv 1 1) (cog-new-stv 0 1)))
+; --------------------------------------------------------
 
-(define-public (find-pathway-member gene db)
-  (run-query (BindLink
-      (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-      (AndLink
-        (EvaluationLink
-          (GroundedPredicateNode "scm: filter-atoms")
-          (ListLink 
-            (VariableNode "$a")
-            (ConceptNode db)
-          )
-         )
-        (MemberLink
-          gene
-          (VariableNode "$a"))
-      )
-      (ExecutionOutputLink
-              (GroundedSchemaNode "scm: add-pathway-info")
-                (ListLink
-                  gene
-                  (VariableNode "$a")
-                ))
-    ))
+(define-public (find-pathway-member gene identifier)
+"
+  Do something fun and entertaining.
+"
+   (define (add-pathway-info gene pathway)
+      (define pathway-name (cog-name pathway))
+
+      (if (or (string-contains pathway-name "R-HSA")
+              (string-contains pathway-name "SMP"))
+         (List
+            (Member gene pathway)
+            (node-info pathway))
+         #f))
+
+   (define pathway-list
+      (run-query (Get
+         (TypedVariable (Variable "$pway") (Type 'ConceptNode))
+         (Member gene (Variable "$pway")))))
+
+   (filter-map
+      (lambda (pathway)
+         (if (string-contains (cog-name pathway) identifier)
+            (add-pathway-info gene pathway)
+            #f))
+      pathway-list)
 )
-
-(define-public (add-pathway-info gene pathway)
-  (if (or (string-contains (cog-name pathway) "R-HSA")
-          (string-contains (cog-name pathway) "SMP"))
-      (ListLink
-       (MemberLink gene pathway)
-       (node-info pathway))
-      #f))
 
 ; --------------------------------------------------------
 

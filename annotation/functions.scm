@@ -239,9 +239,9 @@ in the specified namespaces."
 ; --------------------------------------------------------
 
 (define (add-pathway-genes pathway gene namespace-list num-parents
-                coding-rna non-coding-rna do-protein)
+                do-coding-rna do-non-coding-rna do-protein)
 
-	(define no-rna (or (null? coding-rna) (null? non-coding-rna)))
+	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
 	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
 
 	(List
@@ -255,7 +255,7 @@ in the specified namespaces."
 				(List (Concept "gene-pathway-annotation"))))
 		(if no-rna '()
 			(let* ([rnaresult
-						(find-rna gene coding-rna non-coding-rna do-protein)])
+						(find-rna gene do-coding-rna do-non-coding-rna do-protein)])
 				(if (null? rnaresult) '()
 					(List (Concept "rna-annotation") rnaresult
 						(List (Concept "gene-pathway-annotation")))))))
@@ -287,8 +287,8 @@ in the specified namespaces."
 
   'namespace-list' should be a list of string names of namespaces.
   'num-parents' should be a non-negative integer.
-  'coding-rna' should be either the empty list, or the string "True"
-  'non-coding-rna' should be either the empty list, or the string "True"
+  'coding-rna' should be either #f or #t.
+  'non-coding-rna' should be either #f or #t.
   'do-protein' should be either #f or #t.
 "
 	(map
@@ -556,8 +556,8 @@ in the specified namespaces."
 
   `num-parents` should be a number.
 
-  `coding-rna` should be either null or the string "True".
-  `non-coding-rna` should be either null or the string "True".
+  `coding-rna` should be either #f or #t.
+  `non-coding-rna` should be either #f or #t.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
@@ -769,9 +769,12 @@ in the specified namespaces."
 (define cache-get-rna
 	(make-afunc-cache do-get-rna))
 
-(define-public (find-rna gene coding noncoding do-protein)
-	(define do-coding (string=? coding "True"))
-	(define do-noncoding (string=? noncoding "True"))
+(define-public (find-rna gene do-coding do-noncoding do-protein)
+"
+  find-rna GENE do-coding do-noncoding do-protein
+  GENE should be a GeneNode
+  do-coding do-noncoding do-protein should be #t or #f
+"
 	(map
 		(lambda (transcribe)
 			(filterbytype gene transcribe do-coding do-noncoding do-protein))

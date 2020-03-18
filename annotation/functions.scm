@@ -87,11 +87,12 @@
                (Evaluation (Predicate "GO_namespace")
                    (List (Variable "$a") (Concept ns-name)))))))
 
-(define-public (find-go-term g namespaces p)
+(define-public (find-go-term g namespaces num-parents)
 "
   The main function to find the go terms for a gene with a
   specification of the parents.
-  namespaces should be a list of strings.
+  `namespaces` should be a list of strings.
+  `num-parents` should be a number, the number of parents to look up.
 "
    (define (loop i ls acc)
       (cond 
@@ -107,7 +108,7 @@
    )
 
    (define res (find-memberln g namespaces))
-   (define parents (flatten (loop p res '())))
+   (define parents (flatten (loop num-parents res '())))
 
    (cons (node-info g) parents)
 )

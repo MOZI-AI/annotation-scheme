@@ -202,10 +202,6 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define-public (filter-atoms atom identifier)
-	(if (string-contains (cog-name atom) (cog-name identifier))
-		(cog-new-stv 1 1) (cog-new-stv 0 1)))
-
 (define (add-pathway-info gene pathway)
    (define pathway-name (cog-name pathway))
 
@@ -216,18 +212,18 @@ in the specified namespaces."
          (node-info pathway))
       #f))
 
-(define-public (find-pathway-member gene db)
+(define-public (find-pathway-member gene identifier)
+
    (define pathway-list
       (run-query (Get
          (TypedVariable (Variable "$a") (Type 'ConceptNode))
-         (And
-            (Evaluation
-               (GroundedPredicate "scm: filter-atoms")
-               (List (Variable "$a") (Concept db)))
-            (Member gene (Variable "$a"))))))
+         (Member gene (Variable "$a")))))
 
    (filter-map
-      (lambda (pathway) (add-pathway-info gene pathway))
+      (lambda (pathway)
+         (if (string-contains (cog-name pathway) identifier)
+            (add-pathway-info gene pathway)
+            #f))
       pathway-list)
 )
 

@@ -202,22 +202,24 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define (add-pathway-info gene pathway)
-   (define pathway-name (cog-name pathway))
-
-   (if (or (string-contains pathway-name "R-HSA")
-           (string-contains pathway-name "SMP"))
-      (List
-         (Member gene pathway)
-         (node-info pathway))
-      #f))
-
 (define-public (find-pathway-member gene identifier)
+"
+  Do something fun and entertaining.
+"
+   (define (add-pathway-info gene pathway)
+      (define pathway-name (cog-name pathway))
+
+      (if (or (string-contains pathway-name "R-HSA")
+              (string-contains pathway-name "SMP"))
+         (List
+            (Member gene pathway)
+            (node-info pathway))
+         #f))
 
    (define pathway-list
       (run-query (Get
-         (TypedVariable (Variable "$a") (Type 'ConceptNode))
-         (Member gene (Variable "$a")))))
+         (TypedVariable (Variable "$pway") (Type 'ConceptNode))
+         (Member gene (Variable "$pway")))))
 
    (filter-map
       (lambda (pathway)

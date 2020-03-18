@@ -300,33 +300,32 @@ in the specified namespaces."
 
 ; --------------------------------------------------------
 
-(define (find-prefix node)
-   (match (string-split (cog-name node) #\:)
-      ((name) name)
-      ((name . rest) name)))
-
 (define (filter-pathway gene prot pathway option)
 
-   (if (and (string=? (find-prefix prot) "Uniprot") )
+   (define (find-prefix node)
+      (match (string-split (cog-name node) #\:)
+         ((name) name)
+         ((name . rest) name)))
+
+   (define pathway-name (cog-name pathway))
+
+   (if (and (string=? (find-prefix prot) "Uniprot"))
       (cond
          ((and
-            (string-contains (cog-name pathway) "SMP")
-            (equal? option 0))
-            (List
-               (Evaluation
-                  (Predicate "expresses")
-                  (List gene prot))
+            (equal? option 0)
+            (string-contains pathway-name "SMP"))
+            (list
+               (Evaluation (Predicate "expresses") (List gene prot))
                (node-info pathway)))
          ((and
             (equal? option 1)
-            (string-contains (cog-name pathway) "R-HSA"))
-            (List
-               (Evaluation
-                  (Predicate "expresses")
-                  (List gene prot))
+            (string-contains pathway-name "R-HSA"))
+            (list
+               (Evaluation (Predicate "expresses") (List gene prot))
                (node-info pathway)
                (List (add-loc (Member gene pathway)))))
-   )))
+   ))
+)
 
 (define-public (find-protein gene option)
 "
@@ -353,13 +352,16 @@ in the specified namespaces."
          (define prot (gar prot-path))
          (define path (gdr prot-path))
          (cog-delete prot-path) ; delete excess pointless ListLink
-         (filter-pathway gene prot path option))
+         (ListLink (filter-pathway gene prot path option)))
       prot-path-list)
 )
 
-(define-public (pathway-hierarchy pw lst)
-" pathway-hierarchy -- Find hierarchy of the reactome pathway."
+; --------------------------------------------------------
 
+(define-public (pathway-hierarchy pw lst)
+"
+  pathway-hierarchy -- Find hierarchy of the reactome pathway.
+"
 	(filter
 		(lambda (inhlink)
 			(and (member (gar inhlink) lst) (member (gdr inhlink) lst)))

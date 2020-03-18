@@ -219,11 +219,10 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
+   (define pattern (string-append gene-name ".+$"))
    (filter
       (lambda (some-gene)
-         (regexp-match? (string-match
-            (string-append (cog-name some-gene) ".+$")
-            gene-name)))
+         (regexp-match? (string-match pattern (cog-name some-gene))))
 
       ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
       (cog-get-atoms 'GeneNode))

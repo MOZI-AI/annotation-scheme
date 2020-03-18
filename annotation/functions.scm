@@ -93,13 +93,15 @@ in the specified namespaces."
            (go-info parent-atom)))
       #f))
 
-;;the main function to find the go terms for a gene with a specification of the parents
-(define-public find-go-term 
-  (lambda (g namespaces p)
-      (let (
-        [res (find-memberln g namespaces)]   
-      )
-      (define parents (flatten (let loop (
+(define-public (find-go-term g namespaces p)
+"
+  The main function to find the go terms for a gene with a
+  specification of the parents.
+  namespaces should be a list of strings.
+"
+   (define res (find-memberln g namespaces))
+
+   (define parents (flatten (let loop (
         [i p]
         [ls res]
         [acc '()]
@@ -111,9 +113,8 @@ in the specified namespaces."
           ]
       )
       )))
-       (cons (node-info g) parents)
-    )
-))
+   (cons (node-info g) parents)
+)
 
 (define-public (find-proteins-goterm gene namespace parent)
   "Find GO terms for proteins coded by the given gene."

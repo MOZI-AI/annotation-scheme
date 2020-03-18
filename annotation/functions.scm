@@ -485,7 +485,7 @@ in the specified namespaces."
 	; (biogrid-reported-pathways) is a cache of the interactions that have
 	; already been handled. Defined in util.scm and cleared in main.scm.
 	(if (or (equal? var1 var2)
-			((biogrid-reported-pathways) (Set var1 var2))) '()
+			((biogrid-reported-pathways) (Set var1 var2))) #f
 		(let ([output (find-pubmed-id var1 var2)])
 			(if (null? output)
 				(EvaluationLink
@@ -530,7 +530,7 @@ in the specified namespaces."
             (Evaluation (Predicate "interacts_with")
                (List (Variable "$g1") (Variable "$g2")))))))
 
-   (map
+   (filter-map
       (lambda (gene-path)
          (define g1 (gar gene-path))
          (define g2 (gdr gene-path))

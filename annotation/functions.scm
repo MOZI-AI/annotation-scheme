@@ -481,6 +481,25 @@ in the specified namespaces."
 
 ;; ------------------------------------------------------
 
+(define (generate-interactors path var1 var2)
+	; (biogrid-reported-pathways) is a cache of the interactions that have
+	; already been handled. Defined in util.scm and cleared in main.scm.
+	(if (or (equal? var1 var2)
+			((biogrid-reported-pathways) (Set var1 var2))) '()
+		(let ([output (find-pubmed-id var1 var2)])
+			(if (null? output)
+				(EvaluationLink
+					(PredicateNode "interacts_with")
+					(ListLink var1 var2))
+				(EvaluationLink
+					(PredicateNode "has_pubmedID")
+					(ListLink
+						(EvaluationLink
+							(PredicateNode "interacts_with")
+							(ListLink var1 var2))
+						output)))))
+)
+
 (define (do-pathway-gene-interactors pw)
 "
   Gene interactors for genes in the pathway.
@@ -707,25 +726,6 @@ in the specified namespaces."
                 pubmed))
     )
   )
-)
-
-(define (generate-interactors path var1 var2)
-	; (biogrid-reported-pathways) is a cache of the interactions that have
-	; already been handled. Defined in util.scm and cleared in main.scm.
-	(if (or (equal? var1 var2)
-			((biogrid-reported-pathways) (Set var1 var2))) '()
-		(let ([output (find-pubmed-id var1 var2)])
-			(if (null? output)
-				(EvaluationLink
-					(PredicateNode "interacts_with")
-					(ListLink var1 var2))
-				(EvaluationLink
-					(PredicateNode "has_pubmedID")
-					(ListLink
-						(EvaluationLink
-							(PredicateNode "interacts_with")
-							(ListLink var1 var2))
-						output)))))
 )
 
 ;; ------------------------------------------------------

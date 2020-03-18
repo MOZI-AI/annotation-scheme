@@ -207,11 +207,13 @@ in the specified namespaces."
 		(cog-new-stv 1 1) (cog-new-stv 0 1)))
 
 (define-public (add-pathway-info gene pathway)
-  (if (or (string-contains (cog-name pathway) "R-HSA")
-          (string-contains (cog-name pathway) "SMP"))
-      (ListLink
-       (MemberLink gene pathway)
-       (node-info pathway))
+   (define pathway-name (cog-name pathway))
+
+   (if (or (string-contains pathway-name "R-HSA")
+           (string-contains pathway-name "SMP"))
+      (List
+         (Member gene pathway)
+         (node-info pathway))
       #f))
 
 (define-public (find-pathway-member gene db)

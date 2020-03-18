@@ -475,6 +475,32 @@ in the specified namespaces."
   rv))
 
 ; ------------------------------------
+
+(define (add-mol-info mol path)
+  (if (string-contains (cog-name path) "R-HSA")
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+        )
+      (node-info mol)
+      (ListLink
+        (add-loc (MemberLink mol path))
+      )
+    )
+    (ListLink
+      (MemberLink mol path)
+      (if (string-contains (cog-name mol) "Uniprot")
+        (find-coding-gene mol)
+        '()
+      )
+      (node-info mol)
+      (ListLink (locate-node mol))
+    )
+  )
+)
+
 (define (xdo-get-mol path)
 	(run-query (Get
 		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
@@ -533,31 +559,6 @@ in the specified namespaces."
   (let ((rv (xfind-coding-gene a)))
   (find-coding-gene-ctr #:enter? #f)
   rv))
-
-(define (add-mol-info mol path)
-  (if (string-contains (cog-name path) "R-HSA")
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-        )
-      (node-info mol)
-      (ListLink
-        (add-loc (MemberLink mol path))
-      )
-    )
-    (ListLink
-      (MemberLink mol path)
-      (if (string-contains (cog-name mol) "Uniprot")
-        (find-coding-gene mol)
-        '()
-      )
-      (node-info mol)
-      (ListLink (locate-node mol))
-    )
-  )
-)
 
 ; ------------------------------------
 

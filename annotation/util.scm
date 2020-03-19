@@ -37,7 +37,29 @@
 	          create-edge)
 )
 
-;;Define the parameters needed for GGI
+; ----------------------------------------------------
+
+(define-public (memoize-function-call FUNC)
+"
+  memoize-function-call - Thread-safe function caching.
+
+  This defines a cache for the function FUNC, assumed to be a function
+  taking a single Stom as input, and returning any output. The cache
+  records (memoizes) the return value returned by FUNC, and if it is
+  called a secnd time, or more, the cached value is returned. This can
+  save large amounts of time if FUNC is expensive.
+
+  This differs from ordinary caching/memoizing utilities as it provides
+  special handling for Atom arguments.
+"
+	(define mtx (make-mutex))
+	(define cache (make-afunc-cache FUNC))
+	(lambda (ATOM) (with-mutex mtx (cache ATOM)))
+)
+
+; ----------------------------------------------------
+
+;; Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
@@ -190,26 +212,6 @@
 			(unlock-mutex run-query-mtx)
 			(run-query QUERY))
 	)
-)
-
-; ----------------------------------------------------
-
-(define-public (memoize-function-call FUNC)
-"
-  memoize-function-call - Thread-safe function caching.
-
-  This defines a cache for the function FUNC, assumed to be a function
-  taking a single Stom as input, and returning any output. The cache
-  records (memoizes) the return value returned by FUNC, and if it is
-  called a secnd time, or more, the cached value is returned. This can
-  save large amounts of time if FUNC is expensive.
-
-  This differs from ordinary caching/memoizing utilities as it provides
-  special handling for Atom arguments.
-"
-	(define mtx (make-mutex))
-	(define cache (make-afunc-cache FUNC))
-	(lambda (ATOM) (with-mutex mtx (cache ATOM)))
 )
 
 ; ----------------------------------------------------

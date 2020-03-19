@@ -19,10 +19,10 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation functions)
-    #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (annotation util)
 ;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)

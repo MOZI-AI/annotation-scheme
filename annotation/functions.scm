@@ -19,10 +19,10 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation functions)
-    #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (annotation util)
 ;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
@@ -156,7 +156,7 @@ in the specified namespaces."
 
 ; Cache the results; this includes the caching of two distinct
 ; BindLinks/GetLinks: one in `find-GO-ns` and one in `find-go-name`.
-(define go-info (make-afunc-cache do-go-info))
+(define go-info (memoize-function-call do-go-info))
 
 (define (find-GO-ns go)
   "Find parents of a GO term (of given namespace type)."
@@ -266,7 +266,7 @@ in the specified namespaces."
 					(List (Variable "$g") (Variable "$p"))))
 			(Variable "$g"))))
 
-(define get-pathway-genes (make-afunc-cache do-get-pathway-genes))
+(define get-pathway-genes (memoize-function-call do-get-pathway-genes))
 
 (define-public (find-pathway-genes pathway namespace-list num-parents
                   coding-rna non-coding-rna do-protein)
@@ -393,7 +393,7 @@ in the specified namespaces."
 		(Member (Variable "$a") path))))
 
 (define cache-get-mol
-	(make-afunc-cache do-get-mol))
+	(memoize-function-call do-get-mol))
 
 (define-public (find-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
@@ -420,7 +420,7 @@ in the specified namespaces."
 )
 
 (define-public find-coding-gene
-	(make-afunc-cache do-find-coding-gene))
+	(memoize-function-call do-find-coding-gene))
 
 ; ------------------------------------
 
@@ -541,7 +541,7 @@ in the specified namespaces."
 ;; so any caching at all is a win. In a test of 681 genes, this offers
 ;; a 3x speedup in run time.
 (define-public pathway-gene-interactors
-	(make-afunc-cache do-pathway-gene-interactors))
+	(memoize-function-call do-pathway-gene-interactors))
 
 ;; ---------------------------------
 
@@ -568,7 +568,7 @@ in the specified namespaces."
 ;; and a grand-total 9x speedup for `biogrid-interaction-annotation`.
 ;; Wow.
 (define-public find-protein-form
-	(make-afunc-cache do-find-protein-form))
+	(memoize-function-call do-find-protein-form))
 
 ;; ---------------------------------
 
@@ -761,7 +761,7 @@ in the specified namespaces."
         pub)))
 
 (define cache-find-pubmed-id
-	(make-afunc-cache do-find-pubmed-id))
+	(memoize-function-call do-find-pubmed-id))
 
 ; Memoized version of above, for performance.
 (define-public (find-pubmed-id gene-a gene-b)
@@ -776,7 +776,7 @@ in the specified namespaces."
 		(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
 
 (define cache-get-rna
-	(make-afunc-cache do-get-rna))
+	(memoize-function-call do-get-rna))
 
 (define-public (find-rna gene do-coding do-noncoding do-protein)
 "
@@ -816,4 +816,4 @@ in the specified namespaces."
 			(List rna (Variable "$a"))))))
 
 (define-public find-translates
-	(make-afunc-cache do-find-translates))
+	(memoize-function-call do-find-translates))

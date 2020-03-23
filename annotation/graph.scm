@@ -24,6 +24,7 @@
   #:use-module (rnrs records syntactic)
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1)
+  #:use-module (srfi srfi-43)
   #:export (make-node-info
             node-info?
             node-info-id
@@ -106,8 +107,8 @@
   (define thing->scm
     (match-lambda
       ((? graph? thing)
-       `(("nodes" . ,(map thing->scm (graph-nodes thing)))
-         ("edges" . ,(map thing->scm (graph-edges thing)))))
+       `(("nodes" . ,(list->vector (map thing->scm (graph-nodes thing))))
+         ("edges" . ,(list->vector (map thing->scm (graph-edges thing))))))
       ((? result? thing)
        `(("text"  . ,(thing->scm (result-text thing)))
          ("graph" . ,(thing->scm (result-graph thing)))))
@@ -120,7 +121,7 @@
          ("name"     . ,(thing->scm (edge-info-name thing)))
          ("pubmedId" . ,(thing->scm (edge-info-pubid thing)))
          ("subgroup" . ,(thing->scm (edge-info-subgroup thing)))
-         ("group"    . ,(thing->scm (edge-info-group thing)))))
+         ("group"    . ,(list->vector (thing->scm (edge-info-group thing))))))
       ((? node? thing)
        `(("data"  . ,(thing->scm (node-data thing)))
          ("group" . ,(thing->scm (node-group thing)))))
@@ -130,6 +131,6 @@
          ("definition" . ,(thing->scm (node-info-defn thing)))
          ("location"   . ,(thing->scm (node-info-location thing)))
          ("subgroup"   . ,(thing->scm (node-info-subgroup thing)))
-         ("group"      . ,(thing->scm (node-info-group thing)))))
+         ("group"      . ,(list->vector (thing->scm (node-info-group thing))))))
       (anything anything)))
   (thing->scm graph))

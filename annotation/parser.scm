@@ -153,7 +153,7 @@ graph by mutating global variables."
 
       ;; This shouldn't happen
       (unknown (pk 'unknown unknown #false))))
-  (for-each expr->graph expr))
+  (expr->graph expr))
 
 (define* (atomese-parser port #:optional mode)
   (set! *nodes* '())

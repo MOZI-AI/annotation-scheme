@@ -120,3 +120,5 @@ atomspace."
       
       (format #t "Done annotating ~a genes\n" (length genes-list))
       )))
+
+          (scm->json-string (atomese-graph->scm super-graph)))))

@@ -32,11 +32,34 @@
 	#:use-module (ice-9 regex)
 	#:use-module (srfi srfi-1)
 	#:use-module (ice-9 match)
+	#:use-module (ice-9 threads)
 	#:export (create-node
 	          create-edge)
 )
 
-;;Define the parameters needed for GGI
+; ----------------------------------------------------
+
+(define-public (memoize-function-call FUNC)
+"
+  memoize-function-call - Thread-safe function caching.
+
+  This defines a cache for the function FUNC, assumed to be a function
+  taking a single Stom as input, and returning any output. The cache
+  records (memoizes) the return value returned by FUNC, and if it is
+  called a secnd time, or more, the cached value is returned. This can
+  save large amounts of time if FUNC is expensive.
+
+  This differs from ordinary caching/memoizing utilities as it provides
+  special handling for Atom arguments.
+"
+	(define mtx (make-mutex))
+	(define cache (make-afunc-cache FUNC))
+	(lambda (ATOM) (with-mutex mtx (cache ATOM)))
+)
+
+; ----------------------------------------------------
+
+;; Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
@@ -69,7 +92,7 @@
 )
 
 ; Cache results of do-get-node-info for performance.
-(define memoize-node-info (make-afunc-cache do-get-node-info))
+(define memoize-node-info (memoize-function-call do-get-node-info))
 
 (define-public (node-info ENTITY)
 "
@@ -100,7 +123,7 @@
 )
 
 (define find-pathway-name
-	(make-afunc-cache do-find-pathway-name))
+	(memoize-function-call do-find-pathway-name))
 
 (define-public (is-cellular-component? ATOM-LIST)
 "
@@ -164,6 +187,9 @@
       ((single) single)
       ((first second . rest) second))))
 
+; ----------------------------------------------------
+
+(define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
   Call (cog-execute! QUERY), return results, delete the SetLink.
@@ -171,13 +197,24 @@
 "
 	; Run the query
 	(define set-link (cog-execute! QUERY))
-	; Get the query results
-	(define results (cog-outgoing-set set-link))
-	; Delete the SetLink
-	(cog-delete set-link)
-	; Return the results.
-	results
+
+	(lock-mutex run-query-mtx)
+	(if (cog-atom? set-link)
+		; Get the query results
+		(let ((results (cog-outgoing-set set-link)))
+			; Delete the SetLink
+			(cog-delete set-link)
+			(unlock-mutex run-query-mtx)
+			; Return the results.
+			results)
+		; Try again
+		(begin
+			(unlock-mutex run-query-mtx)
+			(run-query QUERY))
+	)
 )
+
+; --------------------------------------------------------
 
 (define (do-find-name GO-ATOM)
 "
@@ -210,31 +247,23 @@
         (List GO-ATOM (Variable "$name"))))))
 )
 
-; A memoized version of `xfind-name`, improves performance considerably
+; A memoized version of `do-find-name`, improves performance considerably
 ; on repeated searches.
-(define find-name (make-afunc-cache do-find-name))
+(define find-name (memoize-function-call do-find-name))
 
-(define-public (filter-genes input-gene gene-name)
-  (if (regexp-match? (string-match (string-append (cog-name input-gene) ".+$") (cog-name gene-name)))
-      (stv 1 1)
-      (stv 0 0) 
-  )
-)
+; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-    (run-query (BindLink
-        (TypedVariable (Variable "%x") (Type "GeneNode"))
-        (EvaluationLink
-          (GroundedPredicateNode "scm: filter-genes")
-          (ListLink
-              (Gene gene-name)
-              (VariableNode "%x")      
-          )
-        )
-        (VariableNode "%x")
-      ))
-    
+   (define pattern (string-append gene-name ".+$"))
+   (filter
+      (lambda (some-gene)
+         (regexp-match? (string-match pattern (cog-name some-gene))))
+
+      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
+      (cog-get-atoms 'GeneNode))
 )
+
+; --------------------------------------------------------
 
 (define (find-current-symbol gene-list)
   (let ((current (map (lambda (gene)  
@@ -299,58 +328,6 @@
     ))
 )
 
-(define (do-locate-node node)
-  (let ([loc (run-query
-              (BindLink
-               (VariableNode "$go")
-               (AndLink
-                (MemberLink 
-                 node
-                 (VariableNode "$go"))
-                (EvaluationLink
-                 (PredicateNode "GO_namespace")
-                 (ListLink
-                  (VariableNode "$go")
-                  (ConceptNode "cellular_component"))))
-               (ExecutionOutputLink
-                (GroundedSchemaNode "scm: filter-loc")
-                (ListLink
-                 node
-                 (VariableNode "$go")))))])
-    (if (null? loc)
-        (run-query
-         (BindLink
-          (VariableNode "$loc")
-          (EvaluationLink
-           (PredicateNode "has_location")
-           (ListLink
-            node
-            (VariableNode "$loc")))
-          (EvaluationLink
-           (PredicateNode "has_location")
-           (ListLink
-            node
-            (VariableNode "$loc")))))
-        loc)))
-
-(define-public locate-node (make-afunc-cache do-locate-node))
-
-;; filter only Cell membrane and compartments
-
-(define-public (filter-loc node go)
-  (let ([loc (string-downcase (find-name go))])
-  (if (or (and (not (string-contains loc "complex")) 
-      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc))) (is-compartment loc))
-        (EvaluationLink
-          (PredicateNode "has_location")
-          (ListLink
-            node
-            (ConceptNode loc)
-          )
-        )
-  )
-  ))
-
 (define (is-compartment loc)
 	(any
 		(lambda (comp) (string-contains loc comp))
@@ -360,9 +337,55 @@
 			"ribosomes" "lysosome" "nucle"))
 )
 
-;; Add location of a gene/Molecule node in context of Reactome pathway
+(define (filter-loc node go)
+"
+  filter only Cell membrane and compartments
+
+  Return either the location or #f
+"
+  (define loc (string-downcase (find-name go)))
+
+  (if (or (and (not (string-contains loc "complex"))
+      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc)))
+          (is-compartment loc))
+      (Evaluation
+        (Predicate "has_location")
+        (ListLink node (Concept loc)))
+      #f)
+)
+
+(define (do-locate-node node)
+  (define go-list (run-query
+    (Get
+       (Variable "$go")
+       (And
+         (Member node (Variable "$go"))
+         (Evaluation
+           (Predicate "GO_namespace")
+           (List (Variable "$go") (Concept "cellular_component")))
+        ))))
+
+  (define loc-list
+    (filter-map (lambda (go) (filter-loc node go)) go-list))
+
+  (if (not (null? loc-list)) loc-list
+    (run-query
+      (Bind
+        (Variable "$loc")
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$loc")))
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$loc"))))))
+)
+
+(define-public locate-node (make-afunc-cache do-locate-node))
 
 (define-public (add-loc node)
+"
+  Add location of a gene/Molecule node in context of Reactome pathway
+"
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
       (run-query

@@ -55,8 +55,8 @@
 
    (define (add-go-for-ns ns-name)
 
-      ;; XXX what is a "thing"?
-      (define list-of-things
+      ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
+      (define go-list
          (run-query (Get
             (TypedVariable (Variable "$a") (Type 'ConceptNode))
             (And
@@ -66,7 +66,7 @@
 
       (filter-map
          (lambda (thing) (add-go-info atom thing))
-         list-of-things))
+         go-list))
 
    (append-map add-go-for-ns namespaces)
 )
@@ -78,8 +78,8 @@
 "
    (define (add-go-member-ns ns-name)
 
-      ;; XXX what is a "thing"?
-      (define list-of-things
+      ;;list of go atoms that this gene is a member of
+      (define go-list
          (run-query (Get
             (TypedVariable (Variable "$a") (Type 'ConceptNode))
             (And
@@ -87,7 +87,14 @@
                (Evaluation (Predicate "GO_namespace")
                    (List (Variable "$a") (Concept ns-name)))))))
 
-(define-public (find-go-term g namespaces num-parents)
+      (filter-map
+         (lambda (thing) (add-go-info gene thing))
+         go-list))
+
+   (append-map add-go-member-ns namespaces)
+)
+
+(define-public (find-go-term g namespaces p)
 "
   The main function to find the go terms for a gene with a
   specification of the parents.

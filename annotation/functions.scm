@@ -117,11 +117,11 @@ in the specified namespaces."
       (if (= i 0) next-acc
          (loop (- i 1) (find-parents lis) next-acc)))
 
-   ; res is a list of .. what, exactly ???
+   ; res is list of the GO terms directly related to 
+   ; the input gene (g) that are members of the input namespaces
    (define res (find-memberln g namespaces))
 
-   ;; I don't think the flatten is needed any more, but whatever.
-   (define all-parents (flatten (loop num-parents res '())))
+   (define all-parents (loop num-parents res '()))
 
    (cons (node-info g) all-parents)
 )

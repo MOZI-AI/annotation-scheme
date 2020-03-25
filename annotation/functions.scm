@@ -28,74 +28,77 @@
     #:use-module (ice-9 match)
 )
 
-(define (find-parent node namespaces)
-  "Given an atom and list of namespaces find the parents of that atom
-in the specified namespaces."
-  (let ([atom (cog-outgoing-atom node 1)])
-    (append-map (lambda (ns)
-                  (run-query (BindLink
-                              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                              (AndLink
-                               (InheritanceLink
-                                atom
-                                (VariableNode "$a"))
-                               (EvaluationLink
-                                (PredicateNode "GO_namespace")
-                                (ListLink
-                                 (VariableNode "$a")
-                                 (ConceptNode ns))))
-                              (ExecutionOutputLink
-                               (GroundedSchemaNode "scm: add-go-info")
-                               (ListLink
-                                atom
-                                (VariableNode "$a"))))))
-                namespaces)))
-
-(define (find-memberln gene namespaces)
-  "Find GO terms of a gene."
-  (append-map (lambda (ns)
-                (run-query (BindLink
-                            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                            (AndLink
-                             (MemberLink
-                              gene
-                              (VariableNode "$a"))
-                             (EvaluationLink
-                              (PredicateNode "GO_namespace")
-                              (ListLink
-                               (VariableNode "$a")
-                               (ConceptNode ns)))) 
-                            (ExecutionOutputLink
-                             (GroundedSchemaNode "scm: add-go-info")
-                             (ListLink
-                              gene
-                              (VariableNode "$a"))))))
-              namespaces))
-
-(define-public (add-go-info child-atom parent-atom)
-  "Add information for GO nodes"
-  (define parent-is-go?
-    (match (string-split (cog-name parent-atom) #\:)
-      (("GO" . rest) #t)
-      (_ #f)))
-  (if parent-is-go?
-      (if (member (cog-type child-atom)
-                  '(GeneNode MoleculeNode))
-          (ListLink
-           (MemberLink
-            child-atom
-            parent-atom)
-           (go-info parent-atom))
-          (ListLink
-           (InheritanceLink
-            child-atom
-            parent-atom)
+(define (add-go-info child-atom parent-atom)
+"
+   Add information for GO nodes
+"
+   (define parent-is-go?
+      (match (string-split (cog-name parent-atom) #\:)
+         (("GO" . rest) #t)
+         (_ #f)))
+   (if parent-is-go?
+      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
+         (ListLink
+            (Member child-atom parent-atom)
+            (go-info parent-atom))
+         (ListLink
+           (Inheritance child-atom parent-atom)
            (go-info parent-atom)))
       #f))
 
-;;the main function to find the go terms for a gene with a specification of the parents
-(define-public find-go-term 
-  (lambda (g namespaces p)
+(define (find-parent node namespaces)
+"
+  Given an atom and list of namespaces, find the parents of that atom
+  in the specified namespaces. The namespaces must be a list of strings.
+"
+   (define atom (gdr node))
+
+   (define (add-go-for-ns ns-name)
+
+      ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
+      (define go-list
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Inheritance atom (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info atom thing))
+         go-list))
+
+   (append-map add-go-for-ns namespaces)
+)
+
+(define (find-memberln gene namespaces)
+"
+  Find GO terms of a gene.  `gene` must be a GeneNode and `namespaces`
+  must be a list of strings.
+"
+   (define (add-go-member-ns ns-name)
+
+      ;;list of go atoms that this gene is a member of
+      (define go-list
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Member gene (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info gene thing))
+         go-list))
+
+   (append-map add-go-member-ns namespaces)
+)
+
+(define-public (find-go-term g namespaces p)
+"
+  The main function to find the go terms for a gene with a
+  specification of the parents
+"
       (let (
         [res (find-memberln g namespaces)]   
       )
@@ -113,7 +116,7 @@ in the specified namespaces."
       )))
        (cons (node-info g) parents)
     )
-))
+)
 
 (define-public (find-proteins-goterm gene namespace parent)
   "Find GO terms for proteins coded by the given gene."

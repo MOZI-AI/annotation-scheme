@@ -118,6 +118,11 @@ atomspace."
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set)))
     (let* ([fns (parse-request genes-list file-name request)]
-           [result (par-map (lambda (x) (x)) fns)] )
-      (scm->json-string
-       (atomese-graph->scm (atomese-parser (format #f "~a" result)))))))
+           [result (par-map (lambda (x) (x)) fns)] 
+           [graphs (map (lambda (res) (atomese-parser (format #f "~a" res))) result)]
+           [super-graph (make-graph (append-map (lambda (graph) (graph-nodes graph)) graphs)
+                                    (append-map (lambda (graph) (graph-edges graph)) graphs)
+                                )]
+           )
+
+          (scm->json-string (atomese-graph->scm super-graph)))))

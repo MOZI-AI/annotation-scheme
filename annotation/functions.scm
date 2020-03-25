@@ -19,10 +19,10 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation functions)
-    #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (annotation util)
 ;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
@@ -61,62 +61,23 @@
 (define-public find-coding-gene-ctr (accum-time "find-coding-gene"))
 (define-public do-find-coding-gene-ctr (accum-time "do-find-coding-gene"))
 
-(define (find-parent a b)
-  (find-parent-ctr #:enter? #t)
-  (let ((rv (xfind-parent a b)))
-  (find-parent-ctr #:enter? #f)
-  rv))
-
-(define (xfind-parent node namespaces)
-  "Given an atom and list of namespaces find the parents of that atom
-in the specified namespaces."
-  (let ([atom (cog-outgoing-atom node 1)])
-    (append-map (lambda (ns)
-                  (run-query (BindLink
-                              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                              (AndLink
-                               (InheritanceLink
-                                atom
-                                (VariableNode "$a"))
-                               (EvaluationLink
-                                (PredicateNode "GO_namespace")
-                                (ListLink
-                                 (VariableNode "$a")
-                                 (ConceptNode ns))))
-                              (ExecutionOutputLink
-                               (GroundedSchemaNode "scm: add-go-info")
-                               (ListLink
-                                atom
-                                (VariableNode "$a"))))))
-                namespaces)))
-
-
-(define-public (find-memberln a b)
-  (find-memberln-ctr #:enter? #t)
-  (let ((rv (xfind-memberln a b)))
-  (find-memberln-ctr #:enter? #f)
-  rv))
-
-(define (xfind-memberln gene namespaces)
-  "Find GO terms of a gene."
-  (append-map (lambda (ns)
-                (run-query (BindLink
-                            (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-                            (AndLink
-                             (MemberLink
-                              gene
-                              (VariableNode "$a"))
-                             (EvaluationLink
-                              (PredicateNode "GO_namespace")
-                              (ListLink
-                               (VariableNode "$a")
-                               (ConceptNode ns)))) 
-                            (ExecutionOutputLink
-                             (GroundedSchemaNode "scm: add-go-info")
-                             (ListLink
-                              gene
-                              (VariableNode "$a"))))))
-              namespaces))
+(define (xadd-go-info child-atom parent-atom)
+"
+   Add information for GO nodes
+"
+   (define parent-is-go?
+      (match (string-split (cog-name parent-atom) #\:)
+         (("GO" . rest) #t)
+         (_ #f)))
+   (if parent-is-go?
+      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
+         (ListLink
+            (Member child-atom parent-atom)
+            (go-info parent-atom))
+         (ListLink
+           (Inheritance child-atom parent-atom)
+           (go-info parent-atom)))
+      #f))
 
 (define-public (add-go-info a b)
   (add-go-info-ctr #:enter? #t)
@@ -124,54 +85,104 @@ in the specified namespaces."
   (add-go-info-ctr #:enter? #f)
   rv))
 
-(define-public (xadd-go-info child-atom parent-atom)
-  "Add information for GO nodes"
-  (define parent-is-go?
-    (match (string-split (cog-name parent-atom) #\:)
-      (("GO" . rest) #t)
-      (_ #f)))
-  (if parent-is-go?
-      (if (member (cog-type child-atom)
-                  '(GeneNode MoleculeNode))
-          (ListLink
-           (MemberLink
-            child-atom
-            parent-atom)
-           (go-info parent-atom))
-          (ListLink
-           (InheritanceLink
-            child-atom
-            parent-atom)
-           (go-info parent-atom)))
-      #f))
+(define (xfind-parent node namespaces)
+"
+  Given an atom and list of namespaces, find the parents of that atom
+  in the specified namespaces. The namespaces must be a list of strings.
+"
+   (define atom (gdr node))
+
+   (define (add-go-for-ns ns-name)
+
+      ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
+      (define go-list
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Inheritance atom (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info atom thing))
+         go-list))
+
+   (append-map add-go-for-ns namespaces)
+)
+
+(define (find-parent a b)
+  (find-parent-ctr #:enter? #t)
+  (let ((rv (xfind-parent a b)))
+  (find-parent-ctr #:enter? #f)
+  rv))
+
+(define (xfind-memberln gene namespaces)
+"
+  Find GO terms of a gene.  `gene` must be a GeneNode and `namespaces`
+  must be a list of strings.
+"
+   (define (add-go-member-ns ns-name)
+
+      ;;list of go atoms that this gene is a member of
+      (define go-list
+         (run-query (Get
+            (TypedVariable (Variable "$a") (Type 'ConceptNode))
+            (And
+               (Member gene (Variable "$a"))
+               (Evaluation (Predicate "GO_namespace")
+                   (List (Variable "$a") (Concept ns-name)))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info gene thing))
+         go-list))
+
+   (append-map add-go-member-ns namespaces)
+)
+
+(define-public (find-memberln a b)
+  (find-memberln-ctr #:enter? #t)
+  (let ((rv (xfind-memberln a b)))
+  (find-memberln-ctr #:enter? #f)
+  rv))
+
+(define (xfind-go-term g namespaces num-parents)
+"
+  The main function to find the go terms for a gene with a
+  specification of the parents.
+  `namespaces` should be a list of strings.
+  `num-parents` should be a number, the number of parents to look up.
+"
+
+   ;; Return a list of the parents of things in `lst`.
+   (define (find-parents lst)
+      (append-map
+         (lambda (item)
+            ; Something is sending us a stray #f for soe reason...
+            (if item (find-parent (gar item) namespaces) '()))
+         lst))
+
+   ;; breadth-first, depth-recursive loop. This gets all parents
+   ;; at depth `i` (thus, it's breadth-first) and then recurses
+   ;; to the next depth.
+   (define (loop i lis acc)
+      (define next-acc (append lis acc))
+      (if (= i 0) next-acc
+         (loop (- i 1) (find-parents lis) next-acc)))
+
+   ; res is list of the GO terms directly related to 
+   ; the input gene (g) that are members of the input namespaces
+   (define res (find-memberln g namespaces))
+
+   (define all-parents (loop num-parents res '()))
+
+   (cons (node-info g) all-parents)
+)
 
 (define-public (find-go-term a b c)
   (find-go-term-ctr #:enter? #t)
   (let ((rv (xfind-go-term a b c)))
   (find-go-term-ctr #:enter? #f)
   rv))
-
-;;the main function to find the go terms for a gene with a specification of the parents
-(define-public xfind-go-term
-  (lambda (g namespaces p)
-      (let (
-        [res (find-memberln g namespaces)]   
-      )
-      (define parents (flatten (let loop (
-        [i p]
-        [ls res]
-        [acc '()]
-      )
-      (cond 
-        [(= i 0) (append ls acc)]
-        [(null? ls) acc]
-        [else (cons (loop (- i 1)  (find-parent (car (cog-outgoing-set (car ls))) namespaces) (append ls acc)) (loop i (cdr ls) '()))
-          ]
-      )
-      )))
-       (cons (node-info g) parents)
-    )
-))
 
 (define-public (find-proteins-goterm gene namespace parent)
   "Find GO terms for proteins coded by the given gene."
@@ -220,7 +231,7 @@ in the specified namespaces."
 
 ; Cache the results; this includes the caching of two distinct
 ; BindLinks/GetLinks: one in `find-GO-ns` and one in `find-go-name`.
-(define xgo-info (make-afunc-cache do-go-info))
+(define xgo-info (memoize-function-call do-go-info))
 
 (define (go-info a)
   (go-info-ctr #:enter? #t)
@@ -354,7 +365,7 @@ in the specified namespaces."
   (do-get-pathway-genes-ctr #:enter? #f)
   rv))
 
-(define xget-pathway-genes (make-afunc-cache do-get-pathway-genes))
+(define xget-pathway-genes (memoize-function-call do-get-pathway-genes))
 
 (define (get-pathway-genes a)
   (get-pathway-genes-ctr #:enter? #t)
@@ -513,7 +524,7 @@ in the specified namespaces."
   rv))
 
 (define cache-get-mol
-	(make-afunc-cache do-get-mol))
+	(memoize-function-call do-get-mol))
 
 (define (xfind-mol path identifier)
 " Finds molecules (proteins or chebi's) in a pathway"
@@ -552,7 +563,7 @@ in the specified namespaces."
   rv))
 
 (define xfind-coding-gene
-	(make-afunc-cache do-find-coding-gene))
+	(memoize-function-call do-find-coding-gene))
 
 (define-public (find-coding-gene a)
   (find-coding-gene-ctr #:enter? #t)
@@ -702,7 +713,7 @@ in the specified namespaces."
 ;; so any caching at all is a win. In a test of 681 genes, this offers
 ;; a 3x speedup in run time.
 (define-public pathway-gene-interactors
-	(make-afunc-cache do-pathway-gene-interactors))
+	(memoize-function-call do-pathway-gene-interactors))
 
 ;; ---------------------------------
 
@@ -735,7 +746,7 @@ in the specified namespaces."
 ;; and a grand-total 9x speedup for `biogrid-interaction-annotation`.
 ;; Wow.
 (define-public find-protein-form
-	(make-afunc-cache do-find-protein-form))
+	(memoize-function-call do-find-protein-form))
 
 ;; ---------------------------------
 
@@ -947,7 +958,7 @@ in the specified namespaces."
   rv))
 
 (define cache-find-pubmed-id
-	(make-afunc-cache do-find-pubmed-id))
+	(memoize-function-call do-find-pubmed-id))
 
 ; Memoized version of above, for performance.
 (define (xfind-pubmed-id gene-a gene-b)
@@ -973,7 +984,7 @@ in the specified namespaces."
   rv))
 
 (define cache-get-rna
-	(make-afunc-cache do-get-rna))
+	(memoize-function-call do-get-rna))
 
 (define (xfind-rna gene do-coding do-noncoding do-protein)
 "
@@ -1021,4 +1032,4 @@ in the specified namespaces."
 			(List rna (Variable "$a"))))))
 
 (define-public find-translates
-	(make-afunc-cache do-find-translates))
+	(memoize-function-call do-find-translates))

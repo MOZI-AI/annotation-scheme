@@ -94,28 +94,37 @@
    (append-map add-go-member-ns namespaces)
 )
 
-(define-public (find-go-term g namespaces p)
+(define-public (find-go-term g namespaces num-parents)
 "
   The main function to find the go terms for a gene with a
-  specification of the parents
+  specification of the parents.
+  `namespaces` should be a list of strings.
+  `num-parents` should be a number, the number of parents to look up.
 "
-      (let (
-        [res (find-memberln g namespaces)]   
-      )
-      (define parents (flatten (let loop (
-        [i p]
-        [ls res]
-        [acc '()]
-      )
-      (cond 
-        [(= i 0) (append ls acc)]
-        [(null? ls) acc]
-        [else (cons (loop (- i 1)  (find-parent (car (cog-outgoing-set (car ls))) namespaces) (append ls acc)) (loop i (cdr ls) '()))
-          ]
-      )
-      )))
-       (cons (node-info g) parents)
-    )
+
+   ;; Return a list of the parents of things in `lst`.
+   (define (find-parents lst)
+      (append-map
+         (lambda (item)
+            ; Something is sending us a stray #f for soe reason...
+            (if item (find-parent (gar item) namespaces) '()))
+         lst))
+
+   ;; breadth-first, depth-recursive loop. This gets all parents
+   ;; at depth `i` (thus, it's breadth-first) and then recurses
+   ;; to the next depth.
+   (define (loop i lis acc)
+      (define next-acc (append lis acc))
+      (if (= i 0) next-acc
+         (loop (- i 1) (find-parents lis) next-acc)))
+
+   ; res is list of the GO terms directly related to 
+   ; the input gene (g) that are members of the input namespaces
+   (define res (find-memberln g namespaces))
+
+   (define all-parents (loop num-parents res '()))
+
+   (cons (node-info g) all-parents)
 )
 
 (define-public (find-proteins-goterm gene namespace parent)

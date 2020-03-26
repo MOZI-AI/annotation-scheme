@@ -30,7 +30,7 @@
 ;;This is because the function name `unknown-function` is not in the list `annotation-functions`
 (test-equal "validate-functions" 1 (length (parse-request (list "IGF1") "Dfaer" invalid-req)))
 
-(test-assert "annotate-genes" (string? (annotate-genes (list "IGF1") "Dfaer" req)))
+(test-equal "annotate-genes" #t ((lambda () (annotate-genes (list "IGF1") "Dfaer" req) (file-exists? "/tmp/result/Dfaer/Dfaer.json"))))
 
 (test-equal "find-genes" "1:" (substring (find-genes (list "IGF")) 0 2))
 

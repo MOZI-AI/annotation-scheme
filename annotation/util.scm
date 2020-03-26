@@ -34,7 +34,8 @@
 	#:use-module (ice-9 match)
 	#:use-module (ice-9 threads)
 	#:export (create-node
-	          create-edge)
+	          create-edge
+            write-to-file)
 )
 
 ; ----------------------------------------------------
@@ -291,7 +292,7 @@
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))
 )
 
-(define-public (write-to-file result id name)
+(define* (write-to-file result id name #:optional (ext ".scm"))
   (catch #t (lambda ()
     (let*
         (
@@ -304,7 +305,7 @@
               (string-append "/tmp/result/" id)
             )
             (string-append env-path "/" id))]
-          [file-name (string-append path "/" name ".scm")]
+          [file-name (string-append path "/" name ext)]
         )
         (if (not (file-exists? path))
             (mkdir path)

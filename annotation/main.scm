@@ -45,8 +45,10 @@
 (define annotation-functions '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "include-rna"))
 
 (define-public (find-genes gene-list)
-  "Validate if given gene strings in GENE-LIST exist in the
-atomspace."
+"
+   find-genes GENE-LIST
+   Validate if given gene strings in GENE-LIST exist in the atomspace.
+"
   (let ((unknown (filter (lambda (gene)
                            (null? (cog-node 'GeneNode gene)))
                          gene-list)))
@@ -54,7 +56,7 @@ atomspace."
       (() (check-outdate-genes gene-list))
       (_ 
         (let* (
-          (res (flatten (map find-similar-gene unknown)))
+          (res (append-map find-similar-gene unknown))
           (suggestions (if (> (length res) 5) (map (lambda (u) (cog-name u)) (take res 5)) (map (lambda (u) (cog-name u)) res))
              )
         )

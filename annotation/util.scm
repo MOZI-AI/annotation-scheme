@@ -291,24 +291,17 @@
 ; --------------------------------------------------------
 
 (define (find-current-symbol gene-list)
-  (let ((current (map (lambda (gene)  
-    (let ((cur (run-query (BindLink
-        (TypedVariable (Variable "$g") (Type "GeneNode"))
-        (EvaluationLink
-          (PredicateNode "has_current_symbol")
-          (ListLink
-              (GeneNode gene)
-              (VariableNode "$g")      
-          )
-        )
-        (VariableNode "$g")
-      ))
-    ))
-    (if (equal? cur '()) '() (string-append gene "=>" (cog-name (car cur))))
-    )
-  )gene-list)))
-  (flatten current)  
-))
+   (filter-map
+      (lambda (gene)
+         (define cur (run-query (BindLink
+            (TypedVariable (Variable "$g") (Type "GeneNode"))
+            (Evaluation
+               (Predicate "has_current_symbol")
+               (ListLink (Gene gene) (Variable "$g")))
+            (VariableNode "$g"))))
+         (if (null? cur) #f (string-append gene "=>" (cog-name (car cur)))))
+      gene-list)
+)
 
 (define-public (check-outdate-genes gene-list) 
   (let ([symbol (find-current-symbol gene-list)])

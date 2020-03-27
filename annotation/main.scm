@@ -125,4 +125,4 @@
                                 )]
            )
 
-          (scm->json-string (atomese-graph->scm super-graph)))))
+          (write-to-file (scm->json-string (atomese-graph->scm super-graph)) file-name file-name ".json"))))

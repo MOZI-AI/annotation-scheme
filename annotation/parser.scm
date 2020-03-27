@@ -151,6 +151,10 @@ graph by mutating global variables."
       (((or 'And 'AndLink 'Or 'OrLink) . links)
        (map expr->graph links))
 
+      ;; SetLink
+      (((or 'List 'SetLink) . children)
+       (map expr->graph children))
+
       ;; This shouldn't happen
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))

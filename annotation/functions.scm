@@ -450,11 +450,8 @@
 		(run-query (Get
 			(VariableList
 				(TypedVariable (Variable "$a") (Type 'GeneNode)))
-					(Choice
 						(Evaluation (Predicate "interacts_with")
-							(List gene (Variable "$a")))
-						(Evaluation (Predicate "interacts_with")
-							(List (Variable "$a") gene))))))
+							(SetLink gene (Variable "$a"))))))
 )
 
 (define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
@@ -477,13 +474,13 @@
 
 			(And
 				(Evaluation (Predicate "interacts_with")
-					(List gene (Variable "$a")))
+					(SetLink gene (Variable "$a")))
 
 				(Evaluation (Predicate "interacts_with")
-					(List (Variable "$a") (Variable "$b")))
+					(SetLink (Variable "$a") (Variable "$b")))
 
 				(Evaluation (Predicate "interacts_with")
-					(List gene (Variable "$b")))
+					(SetLink gene (Variable "$b")))
 			))))
 )
 
@@ -498,13 +495,13 @@
 			(if (null? output)
 				(EvaluationLink
 					(PredicateNode "interacts_with")
-					(ListLink var1 var2))
+					(SetLink var1 var2))
 				(EvaluationLink
 					(PredicateNode "has_pubmedID")
 					(ListLink
 						(EvaluationLink
 							(PredicateNode "interacts_with")
-							(ListLink var1 var2))
+							(SetLink var1 var2))
 						output)))))
 )
 
@@ -536,7 +533,7 @@
             (Evaluation (Predicate "expresses")
                (List (Variable "$g2") (Variable "$p2")))
             (Evaluation (Predicate "interacts_with")
-               (List (Variable "$g1") (Variable "$g2")))))))
+               (SetLink (Variable "$g1") (Variable "$g2")))))))
 
    (filter-map
       (lambda (gene-path)
@@ -722,12 +719,12 @@
     (if (null? pubmed) 
       (EvaluationLink 
         (PredicateNode interaction_pred) 
-        (ListLink interactor-1 interactor-2))
+        (SetLink interactor-1 interactor-2))
       (EvaluationLink
         (PredicateNode "has_pubmedID")
         (ListLink (EvaluationLink 
                   (PredicateNode interaction_pred) 
-                  (ListLink interactor-1 interactor-2))  
+                  (SetLink interactor-1 interactor-2))  
                 pubmed))
     )
   )
@@ -741,33 +738,20 @@
 "
    (let* (
       [gene-a (gar gene-set)]
-      [gene-b (gdr gene-set)]
-      [pub (run-query
-              (GetLink
-               (VariableNode "$pub")
+      [gene-b (gdr gene-set)])
+      (run-query
+         (GetLink
+            (VariableNode "$pub")
                (EvaluationLink
                 (PredicateNode "has_pubmedID")
                 (ListLink
                  (EvaluationLink 
                   (PredicateNode "interacts_with") 
-                  (ListLink
+                  (SetLink
                    gene-a
                    gene-b))
-                 (VariableNode "$pub")))))])
-    (if (null? pub)
-        (run-query
-         (GetLink
-          (VariableNode "$pub")
-          (EvaluationLink
-           (PredicateNode "has_pubmedID")
-           (ListLink
-            (EvaluationLink 
-             (PredicateNode "interacts_with") 
-             (ListLink
-              gene-b
-              gene-a))
-            (VariableNode "$pub")))))
-        pub)))
+                 (VariableNode "$pub")))))
+   ))
 
 (define cache-find-pubmed-id
 	(memoize-function-call do-find-pubmed-id))

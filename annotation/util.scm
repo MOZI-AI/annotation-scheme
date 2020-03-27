@@ -35,7 +35,8 @@
 	#:use-module (ice-9 threads)
 	#:export (create-node
 	          create-edge
-            write-to-file)
+            write-to-file
+            get-file-path)
 )
 
 ; ----------------------------------------------------
@@ -293,7 +294,19 @@
 )
 
 (define* (write-to-file result id name #:optional (ext ".scm"))
-  (catch #t (lambda ()
+    (let*
+        (
+          [file-name (get-file-path id name ext)]
+        )
+        (call-with-output-file file-name
+            (lambda (p)
+              (write result p)
+            )
+          )
+  ))
+
+(define* (get-file-path id name #:optional (ext ".scm"))
+    (catch #t (lambda ()
     (let*
         (
           [env-path (getenv "RESULT_DIR")]
@@ -310,16 +323,13 @@
         (if (not (file-exists? path))
             (mkdir path)
         )
-        (call-with-output-file file-name
-            (lambda (p)
-              (write result p)
-            )
-          )
+        file-name
   ))  
   (lambda (key . parameters)
       (format (current-error-port) "Cannot write scheme result files. ~a: ~a\n" key parameters)
       #f
     ))
+
 )
 
 (define (is-compartment loc)

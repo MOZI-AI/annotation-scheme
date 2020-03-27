@@ -123,4 +123,6 @@
       (format #t "Done annotating ~a genes\n" (length genes-list))
       )))
 
-          (write-to-file (scm->json-string (atomese-graph->scm super-graph)) file-name file-name ".json"))))
+          (call-with-output-file (get-file-path file-name file-name ".json")
+                          (lambda (p) (scm->json (atomese-graph->scm super-graph) p))
+                 ))))

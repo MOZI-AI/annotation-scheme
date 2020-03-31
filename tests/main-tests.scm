@@ -36,7 +36,7 @@
 
 (define namespace (list "biological_process" "molecular_function" "cellular_component"))
 
-(test-equal "protein-goterm" 86 (length (cog-outgoing-set (find-proteins-goterm (GeneNode "IGF1") namespace 0))))
+(test-equal "protein-goterm" 14 (length (find-proteins-goterm (GeneNode "IGF1") namespace 0)))
 
 
 (test-equal "current_vs_prev_symbols" (ListLink) (find-protein-form (GeneNode "NOV")))

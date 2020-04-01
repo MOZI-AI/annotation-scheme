@@ -8,6 +8,7 @@ SOURCES = \
     annotation/biogrid.scm \
     annotation/main.scm \
     annotation/graph.scm \
+    annotation/gene-record.scm \
     annotation/parser.scm \
     annotation/rna.scm \
     annotation.scm 

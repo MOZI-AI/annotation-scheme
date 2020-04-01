@@ -129,9 +129,14 @@
 
 (define-public (find-proteins-goterm gene namespace parent)
   "Find GO terms for proteins coded by the given gene."
-  (let* ([prot (find-protein-form gene)]
-         [annotation
-          (if (null? (find-memberln prot namespace))
+  (let* ([prots (find-proteins gene)])
+    
+    (if (null? prots)
+      '()
+      (let (
+         [annotations
+          (append-map (lambda (prot) 
+            (if (null? (find-memberln prot namespace))
               (let ([goterms
                      (append-map
                       (lambda (ns)
@@ -145,15 +150,26 @@
                                                (VariableNode "$g")
                                                (Concept ns)))))))
                       namespace)])
-                (map (lambda (go)
-                       (MemberLink (stv 0.0 0.0) prot go))
-                     goterms))
-              (find-go-term prot namespace parent))])
-    (ListLink
-     annotation
-     (node-info prot)
-     (EvaluationLink (PredicateNode "expresses")
-                     (ListLink gene prot)))))
+                (list
+                  (map (lambda (go)
+                       (MemberLink prot go))
+                     goterms)
+                  (node-info prot)
+                  (EvaluationLink (PredicateNode "expresses")
+                     (ListLink gene prot))
+                ))
+
+               (list
+                  (find-go-term prot namespace parent)
+                  (EvaluationLink (PredicateNode "expresses")
+                     (ListLink gene prot))
+               ))) prots)
+          ])
+          
+          annotations
+          )
+    
+    )))
 
 (define (do-go-info go)
   "Add details about the GO term."
@@ -583,6 +599,20 @@
 	(memoize-function-call do-find-protein-form))
 
 ;; ---------------------------------
+
+;;Return all proteins expressed by a gene
+(define (do-find-proteins gene)
+   (run-query (Bind
+      (VariableList
+         (TypedVariable (Variable "$p") (Type 'MoleculeNode)))
+      (Evaluation (Predicate "expresses") (List gene (Variable "$p")))
+      (VariableNode "$p")))
+)
+
+(define-public find-proteins
+   (memoize-function-call do-find-proteins)
+)
+
 
 (define-public (generate-result gene-a gene-b do-protein namespaces num-parents
                                 coding-rna non-coding-rna)

@@ -23,7 +23,7 @@
     #:use-module (ice-9 match)
     #:export (make-gene
               make-gene-info 
-              gene-rec->json-str
+              gene-record->scm
     )
 )
 
@@ -40,17 +40,18 @@
     )
 )
 
-(define (gene-rec->json-str record)
-    (define gene-record->scm
-        (match-lambda 
+(define (gene-record->scm record)
+    (define record->scm
+        (match-lambda
             ((? gene? rec)
-                `((,(gene-name rec) . ,(gene-record->scm (gene-data rec))))
+                `((,(gene-name rec) . ,(record->scm (gene-data rec))))
             )
             ((? gene-info? rec)
                 `(("current" . ,(gene-info-current rec))
                   ("similar" . ,(list->vector (gene-info-similar rec))))
             )
+            (anything anything)
         )
     )
-    (gene-record->scm record)
+    (record->scm record)
 )

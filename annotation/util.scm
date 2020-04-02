@@ -257,39 +257,29 @@
 
 (define-public (find-similar-gene gene-name)
    (define pattern (string-append gene-name ".+$"))
-   (filter-map
+   (let ([res (filter-map
       (lambda (some-gene)
         (if (regexp-match? (string-match pattern (cog-name some-gene)))
             (cog-name some-gene)
             #f
         ))
       ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
-      (cog-get-atoms 'GeneNode))
-)
+      (cog-get-atoms 'GeneNode))])
+      
+      (if (> (length res) 5) 
+        (take res 5)
+        res
+  )))
 
 ; --------------------------------------------------------
 
-(define (find-current-symbol gene-list)
-   (filter-map
-      (lambda (gene)
-         (define cur (run-query (BindLink
+(define-public (find-current-symbol gene)
+   (run-query (BindLink
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))
             (VariableNode "$g"))))
-         (if (null? cur) #f (string-append gene "=>" (cog-name (car cur)))))
-      gene-list)
-)
-
-(define-public (check-outdate-genes gene-list) 
-  (let ([symbol (find-current-symbol gene-list)])
-    (if (equal? symbol '())
-      "0"
-      (string-append "1:" "The following gene symbols are outdated, here are the current " (string-join symbol ","))
-    )
-  )
-)
 
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))

@@ -274,12 +274,13 @@
 ; --------------------------------------------------------
 
 (define-public (find-current-symbol gene)
-   (run-query (BindLink
+   (map (lambda (g) (cog-name g)) (run-query (BindLink
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))
             (VariableNode "$g"))))
+)
 
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))

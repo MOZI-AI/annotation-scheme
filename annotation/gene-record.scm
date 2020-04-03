@@ -29,7 +29,8 @@
 
 (define-record-type gene
     (fields name 
-            (mutable data)
+            current
+            similar
     )
 )
 
@@ -44,11 +45,10 @@
     (define record->scm
         (match-lambda
             ((? gene? rec)
-                `((,(gene-name rec) . ,(record->scm (gene-data rec))))
-            )
-            ((? gene-info? rec)
-                `(("current" . ,(gene-info-current rec))
-                  ("similar" . ,(list->vector (gene-info-similar rec))))
+                `(("symbol" . ,(gene-name rec))
+                  ("current" . ,(gene-current rec))
+                  ("similar" . ,(list->vector (gene-similar rec)))
+                )
             )
             (anything anything)
         )

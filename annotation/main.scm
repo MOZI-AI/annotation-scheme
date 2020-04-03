@@ -50,11 +50,11 @@
 "
   (let* ((records (filter-map (lambda (g)
                     (if (null? (cog-node 'GeneNode g))
-                        (make-gene g (make-gene-info "" (find-similar-gene g)))
+                        (make-gene g  "" (find-similar-gene g))
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f
-                            (make-gene g (make-gene-info (car curr) '()))
+                            (make-gene g (car curr) '())
                           )
                         )
                     )

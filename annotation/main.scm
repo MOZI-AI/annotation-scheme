@@ -24,6 +24,7 @@
     #:use-module (annotation gene-go)
     #:use-module (annotation gene-pathway)
     #:use-module (annotation graph)
+    #:use-module (annotation gene-record)
     #:use-module (annotation biogrid)
     #:use-module (annotation parser)
     #:use-module (opencog)
@@ -47,24 +48,23 @@
    find-genes GENE-LIST
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
-  (let ((unknown (filter (lambda (gene)
-                           (null? (cog-node 'GeneNode gene)))
-                         gene-list)))
-    (match unknown
-      (() (check-outdate-genes gene-list))
-      (_ 
-        (let* (
-          (res (append-map find-similar-gene unknown))
-          (suggestions (if (> (length res) 5) (map (lambda (u) (cog-name u)) (take res 5)) (map (lambda (u) (cog-name u)) res))
-             )
+  (let* ((records (filter-map (lambda (g)
+                    (if (null? (cog-node 'GeneNode g))
+                        (make-gene g  "" (find-similar-gene g))
+                        (let* ([curr (find-current-symbol g)])
+                          (if (null? curr)
+                            #f
+                            (make-gene g (car curr) '())
+                          )
+                        )
+                    )
+                ) gene-list))
         )
-        (map (lambda (g) (cog-delete-recursive (GeneNode g))) gene-list)
-          (if (null? suggestions)
-            (string-append "1:" (string-join unknown ","))
-            (string-append "1:" (string-join unknown ",") "\nHere are some suggestions " (string-join suggestions ","))
-          )
-        )
-      ))))
+        (if (null? records)
+          "[]"
+          (scm->json-string (list->vector (map gene-record->scm records)))
+        )  
+      ))
 
 (define-public (gene-info genes file-name)
   "Add the name and description of gene nodes to the given list of GENES."

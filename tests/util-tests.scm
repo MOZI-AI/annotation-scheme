@@ -24,7 +24,7 @@
 
 (test-assert "build-desc-gene"  (string=? "https://www.ncbi.nlm.nih.gov/gene/3479" (build-desc-url "IGF1")))
 
-(test-assert "similar-genes" (= 11 (length (find-similar-gene "IGF"))))
+(test-assert "similar-genes" (= 5 (length (find-similar-gene "IGF"))))
 
 (clear)
 

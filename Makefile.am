@@ -17,7 +17,8 @@ TESTS = \
     tests/parser-tests.scm \
     tests/util-tests.scm \
     tests/pathway-tests.scm \
-    tests/main-tests.scm
+    tests/main-tests.scm \
+    tests/string-tests.scm
 
 TEST_EXTENSIONS = .scm
 

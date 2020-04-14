@@ -26,6 +26,7 @@
 ;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
+    #:export (find-ggi find-ppi find-output-interactions)
 )
 
 (define (add-go-info child-atom parent-atom)
@@ -840,3 +841,73 @@
 
 (define-public find-translates
 	(memoize-function-call do-find-translates))
+
+
+;;Different modes of interactions
+
+(define all-interactions '("binding" "reaction" "inhibition" "activation" ))
+
+(define-public (do-find-ggi input-set)
+   (append-map (lambda (interaction)
+      (run-query (Get (EvaluationLink 
+            (PredicateNode (cog-name interaction))
+            (SetLink
+               (gar input-set)
+               (Variable "$x")
+            )
+         )
+         ))
+   ) (cog-outgoing-set (gdr input-set)))
+
+)
+
+(define cache-find-ggi
+   (memoize-function-call do-find-ggi)
+)
+
+
+(define* (find-ggi gene #:optional (interactions #f))
+   ;;Find Genes that interact with the input gene. Optionally specify a filter list of the interactions
+   (let (
+      [atoms (if interactions (map (lambda (e) (Concept e)) interactions) 
+               (map (lambda (e) (Concept e)) all-interactions))]
+   )
+      (cache-find-ggi (Set gene atoms))
+   )
+)
+
+(define* (find-ppi gene #:optional (interactions #f))
+      (let* (
+         [proteins (find-proteins gene)]
+         )
+         (append-map (lambda (prot) (find-ggi prot interactions)) proteins)
+      )
+)
+
+(define* (find-output-interactions gene #:optional (interactions #f))
+
+   (define (get-output-interactors intrs)
+      (append-map (lambda (intr)
+         (run-query (Get
+			(VariableList
+				(TypedVariable (Variable "$a") (Type 'GeneNode))
+				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+
+			(And
+				(Evaluation (Predicate intr)
+					(SetLink gene (Variable "$a")))
+
+				(Evaluation (Predicate intr)
+					(SetLink (Variable "$a") (Variable "$b")))
+
+				(Evaluation (Predicate intr)
+					(SetLink gene (Variable "$b")))
+			)))
+      ) intrs)
+   )
+   (if interactions 
+      (get-output-interactors interactions)
+      (get-output-interactors all-interactions)
+   
+   )
+)

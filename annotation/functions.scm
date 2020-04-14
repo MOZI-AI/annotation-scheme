@@ -121,10 +121,43 @@
    ; res is list of the GO terms directly related to 
    ; the input gene (g) that are members of the input namespaces
    (define res (find-memberln g namespaces))
-
+   (define go-regulates (append-map (lambda (go) (find-go-regulates go)) res))
    (define all-parents (loop num-parents res '()))
 
-   (cons (node-info g) all-parents)
+   (append (node-info g) all-parents go-regulates)
+)
+
+(define regulates-rln '("GO_regulates" "GO_positively_regulates" "GO_negatively_regulates"))
+
+(define-public (find-go-regulates go-term)
+   (define (find-regulates regulates-ls)
+      (append-map (lambda (reg) (run-query (Bind 
+            (Evaluation
+               (Predicate reg)
+               (ListLink
+                  go-term
+                  (Variable "$go")
+               )
+            )
+
+            (Evaluation
+               (Predicate reg)
+               (ListLink
+                  go-term
+                  (Variable "$go")
+               )
+            )
+
+         ))) regulates-ls)
+   )
+
+   (let (
+      [go-terms (find-regulates regulates-rln)]
+   ) 
+      (append go-terms (append-map (lambda (go)
+       (go-info (gddr go))) 
+         go-terms))
+   )
 )
 
 (define-public (find-proteins-goterm gene namespace parent)

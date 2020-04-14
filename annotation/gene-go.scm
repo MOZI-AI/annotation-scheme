@@ -38,7 +38,7 @@
             )
             (find-go-term (GeneNode gene) (string-split namespace #\ ) parents)
           )
-          )gene-nodes))]
+          ) gene-nodes))]
           )
     (let (
     	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]

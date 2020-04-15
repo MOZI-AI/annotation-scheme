@@ -11,9 +11,11 @@
 
 ;;Load test atomspace
 (primitive-load-path "tests/go_plus_sample.scm")
-
+(primitive-load-path "tests/go_plus_chebi_sample.scm")
 
 (test-equal "go-regulates" 3 (length (find-go-regulates (ConceptNode "GO:1903896"))))
+
+(test-equal "chebi-go-plus" 3 (length (find-mol-go-plus (MoleculeNode "ChEBI:15776"))))
 
 (clear)
 (test-end "GO")

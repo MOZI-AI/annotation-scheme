@@ -127,7 +127,7 @@
    (append (node-info g) all-parents go-regulates)
 )
 
-(define regulates-rln '("GO_regulates" "GO_positively_regulates" "GO_negatively_regulates"))
+(define regulates-rln '("GO_regulates" "GO_positively_regulates" "GO_negatively_regulates" "has_part"))
 
 (define-public (find-go-regulates go-term)
    (define (find-regulates regulates-ls)
@@ -413,6 +413,43 @@
 
 ; --------------------------------------------------------
 
+(define chebi-rlns '("has_part" "has_role"))
+
+(define (do-find-mol-go-plus mol)
+   (let* (
+      [chebis (append-map (lambda (rln)
+         (run-query (Bind 
+                        (TypedVariable (Variable "$mol") (Type 'MoleculeNode))
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink
+                              mol
+                              (Variable "$mol")
+                           )
+                        )
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink
+                              mol
+                              (Variable "$mol")
+                           )
+                        )))
+      )  chebi-rlns)]
+
+      [parents (run-query (Bind 
+             (TypedVariable (Variable "$par") (Type 'ConceptNode))
+             (Inheritance mol (Variable "$par"))
+             (Inheritance mol (Variable "$par"))))]) 
+
+      (append chebis parents)
+   )
+
+)
+
+(define-public find-mol-go-plus
+   (memoize-function-call do-find-mol-go-plus)
+)
+
 (define-public (pathway-hierarchy pw lst)
 "
   pathway-hierarchy -- Find hierarchy of the reactome pathway.
@@ -429,7 +466,7 @@
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
         (find-coding-gene mol)
-        '()
+        (find-mol-go-plus mol)
         )
       (node-info mol)
       (ListLink
@@ -440,7 +477,7 @@
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
         (find-coding-gene mol)
-        '()
+        (find-mol-go-plus mol)
       )
       (node-info mol)
       (ListLink (locate-node mol))

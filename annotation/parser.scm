@@ -19,6 +19,8 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation parser)
+  #:use-module (opencog)
+  #:use-module (opencog exec)
   #:use-module (annotation graph)
   #:use-module (annotation util)
   #:use-module (ice-9 match)
@@ -112,48 +114,36 @@
   "Recursively traverse the Atomese expression EXPR and build up a
 graph by mutating global variables."
   (define (expr->graph thing)
-    (match thing
+    (match (cog-type thing)
       ;; nodes
-      (((or 'Predicate 'PredicateNode
-             'Gene 'GeneNode
-             'Molecule 'MoleculeNode)
-        (? string? something)) something)
-      (((or 'Concept 'ConceptNode)
-        (? string? something))
-       (handle-node something))
-      (((or 'Variable 'VariableNode)
-        (? string? anything))
-       #false) ; ignore
+      ((or 'PredicateNode
+             'GeneNode
+             'MoleculeNode) (cog-name thing)) 
+      ('ConceptNode
+       (handle-node (cog-name thing)))
+      ('VariableNode
+       #f) ; ignore
 
       ;; member links
-      ((or ((or 'Member 'MemberLink) ('stv _ _) node1 node2)
-           ((or 'Member 'MemberLink) node1 node2))
-       (handle-ln (expr->graph node1)
-                  (expr->graph node2)
+      ('MemberLink
+       (handle-ln (expr->graph (gar thing))
+                  (expr->graph (gdr thing))
                   "annotates"))
 
       ;; inheritance links
-      ((or ((or 'Inheritance 'InheritanceLink) ('stv _ _) node1 node2)
-           ((or 'Inheritance 'InheritanceLink) node1 node2))
-       (handle-ln (expr->graph node1)
-                  (expr->graph node2)
+      ('InheritanceLink
+       (handle-ln (expr->graph (gar thing))
+                  (expr->graph (gdr thing))
                   "child_of"))
 
       ;; eval links
-      ((or ((or 'Evaluation 'EvaluationLink) ('stv _ _) node1 list-link)
-           ((or 'Evaluation 'EvaluationLink) node1 list-link))
-       (handle-eval-ln (expr->graph node1)
-                       (expr->graph list-link)))
+      ('EvaluationLink
+       (handle-eval-ln (expr->graph (gar thing))
+                       (expr->graph (gdr thing))))
 
       ;; lists
-      (((or 'List 'ListLink) . children)
-       (map expr->graph children))
-      (((or 'And 'AndLink 'Or 'OrLink) . links)
-       (map expr->graph links))
-
-      ;; SetLink
-      (((or 'List 'SetLink) . children)
-       (map expr->graph children))
+      ((or 'ListLink 'SetLink 'AndLink OrLink)
+       (map expr->graph (cog-outgoing-set thing)))
 
       ;; This shouldn't happen
       (unknown (pk 'unknown unknown #false))))
@@ -165,7 +155,5 @@ graph by mutating global variables."
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph
-   (with-input-from-string port
-     read))
+  (atomese->graph port)
   (make-graph *nodes* *edges*))

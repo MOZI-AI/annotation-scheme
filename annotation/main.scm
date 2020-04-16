@@ -119,7 +119,7 @@
                  (biogrid-reported-pathways (make-atom-set)))
     (let* ([fns (parse-request genes-list file-name request)]
            [result (par-map (lambda (x) (x)) fns)] 
-           [graphs (map (lambda (res) (atomese-parser (format #f "~a" res))) result)]
+           [graphs (map (lambda (res) (atomese-parser res)) result)]
            [super-graph (make-graph (append-map (lambda (graph) (graph-nodes graph)) graphs)
                                     (append-map (lambda (graph) (graph-edges graph)) graphs)
                                 )]

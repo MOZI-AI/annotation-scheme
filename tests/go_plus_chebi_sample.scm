@@ -5,7 +5,7 @@
 		 (ConceptNode "cephalosporin C")))
 (InheritanceLink 
 	 (MoleculeNode "ChEBI:15776")
-	 (MoleculeNode "ChEBI:23066"))
+	 (ConceptNode "ChEBI:23066"))
 (InheritanceLink 
 	 (MoleculeNode "ChEBI:15776")
 	 (ConceptNode "GOCHE:76946"))
@@ -13,4 +13,4 @@
 	 (PredicateNode "has_role")
 	 (ListLink 
 		 (MoleculeNode "ChEBI:15776")
-		 (MoleculeNode "ChEBI:76946")))
+		 (ConceptNode "ChEBI:76946")))

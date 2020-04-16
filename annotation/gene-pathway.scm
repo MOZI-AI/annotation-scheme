@@ -41,6 +41,8 @@
                                   (namespace "")
                                   (parents 0)
                                   (biogrid 1)
+                                  (regulates #t) 
+                                  (part-of #t)
                                   coding
                                   noncoding)
 
@@ -57,9 +59,9 @@
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene prot? sm? namespace parents biogrid do-coding do-noncoding))
+                                        (smpdb gene prot? sm? namespace parents regulates part-of biogrid do-coding do-noncoding))
                                        ("reactome"
-                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid do-coding do-noncoding)
+                                        (match (reactome gene prot? sm? pwlst namespace parents regulates part-of biogrid do-coding do-noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))
@@ -70,7 +72,7 @@
     (write-to-file res file-name "gene-pathway")
     res))
 
-(define (smpdb gene prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (smpdb gene prot? sm? namespaces num-parents regulates part-of biogrid coding-rna non-coding-rna)
 "
   From SMPDB
 "
@@ -82,6 +84,7 @@
                              (append
                               (if sm? (find-mol node "ChEBI") '())
                               (find-pathway-genes node namespace-list num-parents
+                                      regulates part-of
                                       coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
@@ -99,7 +102,7 @@
             (if prot? (find-protein (GeneNode gene) 0) '())
             ls)))
 
-(define (reactome gene prot? sm? pwlst namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (reactome gene prot? sm? pwlst namespaces num-parents regulates part-of biogrid coding-rna non-coding-rna)
 "
   From reactome
 "
@@ -112,6 +115,7 @@
 
                              (append
                               (find-pathway-genes node namespace-list num-parents
+                                      regulates part-of
                                       coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])

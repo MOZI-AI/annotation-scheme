@@ -23,9 +23,9 @@
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation util)
-;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
+    #:export (find-go-plus)
 )
 
 (define (add-go-info child-atom parent-atom)
@@ -94,7 +94,7 @@
    (append-map add-go-member-ns namespaces)
 )
 
-(define-public (find-go-term g namespaces num-parents)
+(define-public (find-go-term g namespaces num-parents regulates part-of)
 "
   The main function to find the go terms for a gene with a
   specification of the parents.
@@ -121,46 +121,114 @@
    ; res is list of the GO terms directly related to 
    ; the input gene (g) that are members of the input namespaces
    (define res (find-memberln g namespaces))
-   (define go-regulates (append-map (lambda (go) (find-go-regulates go)) res))
+   (define go-regulates (append-map (lambda (go) (find-go-plus go regulates part-of)) res))
    (define all-parents (loop num-parents res '()))
 
    (append (node-info g) all-parents go-regulates)
 )
 
-(define regulates-rln '("GO_regulates" "GO_positively_regulates" "GO_negatively_regulates" "has_part"))
+(define regulates-rln (List (Concept "GO_regulates") (Concept "GO_positively_regulates") (Concept "GO_negatively_regulates")))
 
-(define-public (find-go-regulates go-term)
-   (define (find-regulates regulates-ls)
-      (append-map (lambda (reg) (run-query (Bind 
+(define (do-find-regulates input-atom)
+      (append (append-map (lambda (reg) (run-query (Bind 
             (Evaluation
-               (Predicate reg)
+               (Predicate (cog-name reg))
                (ListLink
-                  go-term
+                  (gar input-atom)
                   (Variable "$go")
                )
             )
 
             (Evaluation
-               (Predicate reg)
+               (Predicate (cog-name reg))
                (ListLink
-                  go-term
+                  (gar input-atom)
                   (Variable "$go")
                )
             )
 
-         ))) regulates-ls)
+         ))) (cog-outgoing-set (gdr input-atom)))
+
+         (append-map (lambda (reg) (run-query (Bind 
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (Variable "$go")
+                  (gar input-atom)
+               )
+            )
+
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (Variable "$go")
+                  (gar input-atom)
+               )
+            )
+
+         ))) (cog-outgoing-set (gdr input-atom))))
    )
 
+(define find-go-regulates (memoize-function-call do-find-regulates))
+
+(define (do-find-part-of go-term)
+   (append
+      (run-query (Bind
+         (Evaluation
+            (Predicate "has_part")
+            (List
+               go-term
+               (Variable "$go")
+            )
+         )
+         (Evaluation
+            (Predicate "has_part")
+            (List
+               go-term
+               (Variable "$go")
+            )
+         )
+      ))
+      (run-query
+         (Bind
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (Variable "$go")
+                  go-term
+               )
+            )
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (Variable "$go")
+                  go-term
+               )
+            )
+         )
+      
+      ))
+)
+
+(define find-part-of (memoize-function-call do-find-part-of))
+
+(define* (find-go-plus go-term #:optional (regulates #t) (part_of #t))
+   (define (find-go-plus-info ln)
+      (if (equal? go-term (gadr ln))
+           (go-info (gddr ln))
+           (go-info (gadr ln))
+       )
+   )
    (let (
-      [go-terms (find-regulates regulates-rln)]
+      [go-reg-terms (if regulates (find-go-regulates (Set go-term regulates-rln)) '())]
+      [go-part-terms (if part_of (find-part-of go-term) '())]
    ) 
-      (append go-terms (append-map (lambda (go)
-       (go-info (gddr go))) 
-         go-terms))
+      (append go-reg-terms go-part-terms (append-map find-go-plus-info go-reg-terms) 
+         (append-map find-go-plus-info go-part-terms))
    )
 )
 
-(define-public (find-proteins-goterm gene namespace parent)
+(define-public (find-proteins-goterm gene namespace parent regulates part-of)
   "Find GO terms for proteins coded by the given gene."
   (let* ([prots (find-proteins gene)])
     
@@ -193,7 +261,7 @@
                 ))
 
                (list
-                  (find-go-term prot namespace parent)
+                  (find-go-term prot namespace parent regulates part-of)
                   (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot))
                ))) prots)
@@ -292,7 +360,7 @@
 
 ; --------------------------------------------------------
 
-(define (add-pathway-genes pathway gene namespace-list num-parents
+(define (add-pathway-genes pathway gene namespace-list num-parents regulates part-of
                 do-coding-rna do-non-coding-rna do-protein)
 
 	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
@@ -305,7 +373,7 @@
 		(if no-ns '()
 			(List
 				(Concept "gene-go-annotation")
-				(find-go-term gene namespace-list num-parents)
+				(find-go-term gene namespace-list num-parents regulates part-of)
 				(List (Concept "gene-pathway-annotation"))))
 		(if no-rna '()
 			(let* ([rnaresult
@@ -329,7 +397,7 @@
 
 (define get-pathway-genes (memoize-function-call do-get-pathway-genes))
 
-(define-public (find-pathway-genes pathway namespace-list num-parents
+(define-public (find-pathway-genes pathway namespace-list num-parents regulates part-of
                   coding-rna non-coding-rna do-protein)
 "
   Find genes which code the proteins in a given pathway.  Perform
@@ -347,7 +415,8 @@
 "
 	(map
 		(lambda (gene)
-			(add-pathway-genes pathway gene namespace-list num-parents
+			(add-pathway-genes pathway gene namespace-list num-parents 
+            regulates part-of
 				coding-rna non-coding-rna do-protein))
 		(get-pathway-genes pathway))
 )
@@ -419,7 +488,6 @@
    (let* (
       [chebis (append-map (lambda (rln)
          (run-query (Bind 
-                        (TypedVariable (Variable "$mol") (Type 'MoleculeNode))
                         (Evaluation
                            (Predicate rln)
                            (ListLink
@@ -523,7 +591,7 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
+(define-public (match-gene-interactors gene do-protein namespace parents regulates part-of coding non-coding)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
@@ -531,7 +599,7 @@
 "
 	(map
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+			(generate-result gene act-gene do-protein namespace parents regulates part-of coding non-coding))
 
 		(run-query (Get
 			(VariableList
@@ -540,7 +608,7 @@
 							(SetLink gene (Variable "$a"))))))
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
+(define-public (find-output-interactors gene do-protein namespace parents regulates part-of coding non-coding)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -551,7 +619,7 @@
 "
 	(map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents regulates part-of coding non-coding))
 
 		(run-query (Get
 			(VariableList
@@ -681,7 +749,7 @@
 )
 
 
-(define-public (generate-result gene-a gene-b do-protein namespaces num-parents
+(define-public (generate-result gene-a gene-b do-protein namespaces num-parents regulates part-of
                                 coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
@@ -724,8 +792,8 @@
                     (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a namespaces num-parents)
-                           (find-go-term gene-b namespaces num-parents)
+                           (find-go-term gene-a namespaces num-parents regulates part-of)
+                           (find-go-term gene-b namespaces num-parents regulates part-of)
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
@@ -776,7 +844,7 @@
                      (if (null? namespaces) '()
                         (List
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-x namespaces num-parents)
+                           (find-go-term gene-x namespaces num-parents regulates part-of)
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation

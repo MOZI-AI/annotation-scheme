@@ -89,7 +89,10 @@
 				(if (null? lst) (ConceptNode "N/A") (car lst))))
 
 	(if (cog-node? node)
-		(EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+    (list
+      (find-organism node)
+		  (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+    )
 		(ListLink))
 )
 
@@ -98,7 +101,7 @@
 
 (define-public (node-info ENTITY)
 "
-  node-info ENTITY -- Find the name and description of an entity.
+  node-info ENTITY -- Find the name,description and organism of an entity.
 
   An entity can be any kind of conceptual object, such as a gene, protein,
   small molecule, RNA, GeneOntology (GO) term, cellular location, etc.
@@ -429,3 +432,28 @@
         ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
         (else (list x))))
+
+(define (do-find-organism gene)
+"
+  finds the organism(from human or virus etc ..) of a node
+  node can be GeneNode or MoleculeNode
+"
+  (run-query 
+    (Bind
+      (VariableList
+				(TypedVariable (Variable "$org") (Type 'ConceptNode))
+				(TypedVariable (Variable "$name") (Type 'ConceptNode)))
+      (AndLink
+        (Evaluation (Predicate "from_organism") (List gene (Variable "$org")))
+        (Evaluation (Predicate "has_name") (List (Variable "$org") (VariableNode "$name")))
+      )
+      (list
+        (Evaluation (Predicate "from_organism") (List gene (Variable "$org")))
+        (Evaluation (Predicate "has_name") (List (Variable "$org") (VariableNode "$name"))))
+  ))
+)
+; Cache results of do-find-organism for performance.
+(define cache-find-organism (memoize-function-call do-find-organism)) 
+
+(define-public (find-organism gene)
+   (list (cache-find-organism gene)))

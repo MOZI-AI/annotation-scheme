@@ -453,7 +453,7 @@
   ))
 )
 ; Cache results of do-find-organism for performance.
-(define memoize-find-organism (memoize-function-call do-find-organism)) 
+(define cache-find-organism (memoize-function-call do-find-organism)) 
 
 (define-public (find-organism gene)
-   (list (memoize-find-organism gene)))
+   (list (cache-find-organism gene)))

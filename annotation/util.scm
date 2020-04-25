@@ -26,13 +26,11 @@
 	#:use-module (opencog bioscience)
 	#:use-module (annotation graph)
 	#:use-module (ice-9 optargs)
-;	#:use-module (rnrs base)
 	#:use-module (rnrs exceptions)
 	#:use-module (ice-9 textual-ports)
 	#:use-module (ice-9 regex)
 	#:use-module (srfi srfi-1)
 	#:use-module (ice-9 match)
-	#:use-module (ice-9 threads)
 	#:export (create-node
 	          create-edge
             write-to-file
@@ -54,9 +52,8 @@
   This differs from ordinary caching/memoizing utilities as it provides
   special handling for Atom arguments.
 "
-	(define mtx (make-mutex))
 	(define cache (make-afunc-cache FUNC))
-	(lambda (ATOM) (with-mutex mtx (cache ATOM)))
+	(lambda (ATOM) (cache ATOM))
 )
 
 ; ----------------------------------------------------

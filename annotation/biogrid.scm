@@ -35,8 +35,8 @@
                                          (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
-                                         coding
-                                         noncoding)
+                                         (coding #f)
+                                         (noncoding #f))
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
 

@@ -28,15 +28,16 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein "True") (regulates #t) (part-of #t))
+(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") 
+    (parents 0) (protein "True") (regulates #t) (part-of #t) (bi-dir #t))
     (let (
         [result (flatten (map (lambda (gene) 
           (if (equal? protein "True")
             (ListLink
-              (find-go-term (GeneNode gene) (string-split namespace #\ ) parents regulates part-of)
-              (find-proteins-goterm (GeneNode gene) (string-split namespace #\ ) parents regulates part-of)
+              (find-go-term (GeneNode gene) (string-split namespace #\ ) parents regulates part-of bi-dir)
+              (find-proteins-goterm (GeneNode gene) (string-split namespace #\ ) parents regulates part-of bi-dir)
             )
-            (find-go-term (GeneNode gene) (string-split namespace #\ ) parents regulates part-of)
+            (find-go-term (GeneNode gene) (string-split namespace #\ ) parents regulates part-of bi-dir)
           )
           ) gene-nodes))]
           )

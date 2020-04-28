@@ -28,7 +28,7 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna gene-list file-name #:key (coding "True") (noncoding "True") (protein 1))
+(define* (include-rna gene-list file-name #:key (coding #t) (noncoding #t) (protein 1))
 "
   The include-rna function finds coding and non-coding RNA forms of
   the gene-list. Needs 4 arguments:
@@ -39,21 +39,14 @@
   non-coding -> when True includes the non-coding RNA's
   protein -> scheme number, 0 or 1.
 "
-	; Convert string flags to scheme booleans
-	(define do-coding (string=? coding "True"))
-	(define do-noncoding (string=? noncoding "True"))
 	(define do-protein (= protein 1))
 
-  (let* ((rna
-    (map (lambda (gene)
-      (find-rna (GeneNode gene) coding noncoding protein)
-    )gene-list)
-    ))
-    (let (
-    	[res (List rna)]
-  		)
-    	(write-to-file res file-name "mainRNA")
-		res
-  	)
-  )
+	(let ((rna (map (lambda (gene)
+				(find-rna (GeneNode gene) coding noncoding do-protein))
+				gene-list)))
+		(let ([res (ListLink (ConceptNode "rna-annotation") rna)])
+			(write-to-file res file-name "mainRNA")
+			res
+		)
+	)
 )

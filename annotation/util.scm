@@ -454,3 +454,11 @@
 
 (define-public (find-organism gene)
    (list (cache-find-organism gene)))
+
+
+(define-public (str->tv s)
+  (if (string=? "True")
+      #t
+      #f
+  )
+)

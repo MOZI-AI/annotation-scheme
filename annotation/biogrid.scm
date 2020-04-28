@@ -35,13 +35,13 @@
                                          (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
-                                         coding
-                                         noncoding)
+                                         (coding #f)
+                                         (noncoding #f))
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
 
-  (let* ([rna (list (if coding (ConceptNode coding) '())
-                              (if noncoding (ConceptNode noncoding) '()))]
+  (let* ([rna (list (if coding (ConceptNode "coding") '())
+                              (if noncoding (ConceptNode "noncoding") '()))]
          [result
           (append-map (lambda (gene)
             (match interaction

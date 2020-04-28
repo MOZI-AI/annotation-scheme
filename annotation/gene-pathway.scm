@@ -32,24 +32,18 @@
 
 ;; TODO: would be better to use a list for the "pathway" argument
 ;; instead of splitting a string.
-;; TODO: don't use the string "True" for include_prot and include_sm.
 (define* (gene-pathway-annotation gene-nodes file-name
                                   #:key
                                   (pathway "reactome")
-                                  (include_prot "True")
-                                  (include_sm "True")
+                                  (include_prot #t)
+                                  (include_sm #t)
                                   (namespace "")
                                   (parents 0)
                                   (biogrid 1)
-                                  coding
-                                  noncoding)
-
-  (define do-coding (string=? coding "True"))
-  (define do-noncoding (string=? noncoding "True"))
+                                  (coding #f)
+                                  (noncoding #f))
 
   (let* ([pwlst '()]
-         [prot? (string=? include_prot "True")]
-         [sm? (string=? include_sm "True")]
          [pathways (string-split pathway #\space)]
          [result
           (append-map (lambda (gene)
@@ -57,9 +51,9 @@
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene prot? sm? namespace parents biogrid do-coding do-noncoding))
+                                        (smpdb gene include_prot include_sm namespace parents biogrid coding noncoding))
                                        ("reactome"
-                                        (match (reactome gene prot? sm? pwlst namespace parents biogrid do-coding do-noncoding)
+                                        (match (reactome gene include_prot include_sm pwlst namespace parents biogrid coding noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))

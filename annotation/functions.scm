@@ -659,13 +659,16 @@
                            (List (Concept "biogrid-interaction-annotation")))
                     )]
                  [rna-cross-annotation
-                    (if (not (and coding-rna non-coding-rna)) '()
+                    (if (or coding-rna non-coding-rna)
                        (List
                           (Concept "rna-annotation")
                           (find-rna gene-a coding-rna non-coding-rna do-protein)
                           (find-rna gene-b coding-rna non-coding-rna do-protein)
                           (List (Concept "biogrid-interaction-annotation")))
-                   )])
+                        '()     
+                     )
+                          
+                     ])
                       (if do-protein
                         (let ([coding-prot-a (find-protein-form gene-a)]
                               [coding-prot-b (find-protein-form gene-b)])
@@ -710,11 +713,12 @@
                            (List (Concept "biogrid-interaction-annotation")))
                      )]
                   [rna-cross-annotation
-                     (if (not (and coding-rna non-coding-rna)) '()
+                     (if (or coding-rna non-coding-rna)
                         (List
                            (Concept "rna-annotation")
                            (find-rna gene-x coding-rna non-coding-rna do-protein)
                            (List (Concept "biogrid-interaction-annotation")))
+                        '()
                     )])
                  (if do-protein
                     (let ([coding-prot (find-protein-form gene-x)])

@@ -40,8 +40,8 @@
                                   (namespace "")
                                   (parents 0)
                                   (biogrid 1)
-                                  coding
-                                  noncoding)
+                                  (coding #f)
+                                  (noncoding #f))
 
   (let* ([pwlst '()]
          [pathways (string-split pathway #\space)]

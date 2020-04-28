@@ -429,3 +429,16 @@
         ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
         (else (list x))))
+
+;; helper function to convert stvs to scheme boolean values
+(define-public (stv->scm tv)
+  (= 1 (cog-tv-mean tv))
+)
+
+;; helper function to conver scheme boolean vals to stvs
+(define-public (scm->stv val)
+    (if val
+        (SimpleTruthValue 1 0)
+        (SimpleTruthValue 0 0)
+    )
+)

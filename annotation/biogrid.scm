@@ -35,6 +35,7 @@
                                          (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
+                                         (regulates #t) (part-of #t) (bi-dir #t)
                                          coding
                                          noncoding)
 	(define namespaces
@@ -47,15 +48,15 @@
             (match interaction
               ("Proteins"
                (append (match-gene-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)
+                            #t namespaces parents regulates part-of bi-dir coding noncoding)
                        (find-output-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)))
+                            #t namespaces parents regulates part-of bi-dir coding noncoding)))
               ("Genes"
                (append rna
                        (match-gene-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)
+                            #f namespaces parents regulates part-of bi-dir coding noncoding)
                        (find-output-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)))))
+                            #f namespaces parents regulates part-of bi-dir coding noncoding)))))
           gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])

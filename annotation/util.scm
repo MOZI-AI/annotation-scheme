@@ -457,7 +457,7 @@
 
 
 (define-public (str->tv s)
-  (if (string=? "True")
+  (if (string=? "True" s)
       #t
       #f
   )

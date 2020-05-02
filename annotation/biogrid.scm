@@ -36,7 +36,9 @@
                                          (namespace "")
                                          (parents 0)
                                          (coding #f)
-                                         (noncoding #f))
+                                         (noncoding #f)
+                                         (covid #t)
+                                         )
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
 
@@ -45,14 +47,14 @@
             (match interaction
               ("Proteins"
                (append (match-gene-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)
+                            #t namespaces parents coding noncoding covid)
                        (find-output-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)))
+                            #t namespaces parents coding noncoding covid)))
               ("Genes"
                (append (match-gene-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)
+                            #f namespaces parents coding noncoding covid)
                        (find-output-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)))))
+                            #f namespaces parents coding noncoding covid)))))
           gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])

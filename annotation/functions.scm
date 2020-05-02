@@ -453,24 +453,51 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding covid)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
-		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+   (if covid 
+      (map
+         (lambda (act-gene)
+            (generate-result gene act-gene do-protein namespace parents coding non-coding))
 
-		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode)))
-						(Evaluation (Predicate "interacts_with")
-							(SetLink gene (Variable "$a"))))))
+         (run-query (Get
+            (VariableList
+               (TypedVariable (Variable "$a") (Type 'GeneNode)))
+                  (Evaluation 
+                     (Predicate "interacts_with")
+                     (SetLink gene (Variable "$a")))
+               )))
+
+      (map
+         (lambda (act-gene)
+            (generate-result gene act-gene do-protein namespace parents coding non-coding))
+
+         (run-query (Get
+            (VariableList
+               (TypedVariable (Variable "$a") (Type 'GeneNode)))
+                     (And
+                        (Not 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 gene
+                                 (ConceptNode "TaxonomyID:2697049")
+                              )
+                        ))
+
+                        (Evaluation 
+                           (Predicate "interacts_with")
+                           (SetLink gene (Variable "$a")))
+                     ))))
+   
+   )
+	
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
+(define-public (find-output-interactors gene do-protein namespace parents coding non-coding covid)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -479,25 +506,55 @@
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
-		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+   (if covid
+      (map
+         (lambda (gene-pair)
+            (generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
 
-		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode))
-				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+         (run-query (Get
+            (VariableList
+               (TypedVariable (Variable "$a") (Type 'GeneNode))
+               (TypedVariable (Variable "$b") (Type 'GeneNode)))
 
-			(And
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$a")))
+            (And
+               (Evaluation (Predicate "interacts_with")
+                  (SetLink gene (Variable "$a")))
 
-				(Evaluation (Predicate "interacts_with")
-					(SetLink (Variable "$a") (Variable "$b")))
+               (Evaluation (Predicate "interacts_with")
+                  (SetLink (Variable "$a") (Variable "$b")))
 
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$b")))
-			))))
+               (Evaluation (Predicate "interacts_with")
+                  (SetLink gene (Variable "$b")))
+            ))))  
+
+         (map
+            (lambda (gene-pair)
+               (generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+
+            (run-query (Get
+               (VariableList
+                  (TypedVariable (Variable "$a") (Type 'GeneNode))
+                  (TypedVariable (Variable "$b") (Type 'GeneNode)))
+
+               (And
+                  (Not 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 gene
+                                 (ConceptNode "TaxonomyID:2697049")
+                              )
+                        ))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink gene (Variable "$a")))
+
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink (Variable "$a") (Variable "$b")))
+
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink gene (Variable "$b")))
+               )))) 
+   
+   )
 )
 
 ;; ------------------------------------------------------

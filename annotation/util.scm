@@ -462,3 +462,17 @@
       #f
   )
 )
+
+(define-public (find-module name modules)
+  "
+  Return the reference to an object in the list of modules with the specified name
+  "
+    (let (
+        [var  (any (lambda (mod) (module-variable (resolve-module mod) (string->symbol name))) modules)]
+    )
+        (if var 
+            (variable-ref var)
+            #f
+        )
+    )
+)

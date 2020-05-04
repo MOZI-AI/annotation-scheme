@@ -41,7 +41,7 @@
     #:use-module (annotation rna)
 )
 
-(define annotation-functions '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "include-rna"))
+(define mods '((annotation biogrid) (annotation gene-pathway) (annotation gene-go) (annotation rna) (annotation string)))
 
 (define-public (find-genes gene-list)
 "
@@ -90,33 +90,36 @@
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (flatten (append (list (lambda () (gene-info gene-list file-name))) (vector->list (vector-map (lambda (i elm) 
-        (if (member (assoc-ref elm "function_name") annotation-functions)
-            (let* (
-                (func-name (string->symbol (assoc-ref elm "function_name")))
-                (func (variable-ref (module-variable (current-module) func-name)))
-                (filters (assoc-ref elm "filters"))
-                (args  (flatten (vector->list (vector-map (lambda (index f)
-                    (let* (
-                      (filter (assoc-ref f "filter"))
-                      (val (assoc-ref f "value")))
-                      (list (with-input-from-string (string-append "#:" filter) read) 
-                        (if (string->number val)
-                            (string->number val)
-                            (if (or (string=? val "True") (string=? val "False"))
-                              (str->tv val)
-                              val
-                            )
-                        ))
-                    )
-                ) filters))))
+      (flatten (append (list (lambda () (gene-info gene-list file-name))) (vector->list (vector-map (lambda (i elm)
+        (let  (
+            (func (find-module (assoc-ref elm "function_name") mods))
+          )
+            (if func 
+                (let* (                
+                  (filters (assoc-ref elm "filters"))
+                  (args  (flatten (vector->list (vector-map (lambda (index f)
+                      (let* (
+                        (filter (assoc-ref f "filter"))
+                        (val (assoc-ref f "value")))
+                        (list (with-input-from-string (string-append "#:" filter) read) 
+                          (if (string->number val)
+                              (string->number val)
+                              (if (or (string=? val "True") (string=? val "False"))
+                                (str->tv val)
+                                val
+                              )
+                          ))
+                      )
+                  ) filters))))
+                  )
+                  (lambda () (apply func gene-list (append (list file-name) args)))
+                  
                 )
-                (lambda () (apply func gene-list (append (list file-name) args)))
-                
-              )
-
-            '()
-        )
+                '()
+            )
+        
+        ) 
+        
     ) table))))
 ))
 

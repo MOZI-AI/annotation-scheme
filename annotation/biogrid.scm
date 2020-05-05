@@ -26,8 +26,8 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-    #:use-module (ice-9 match)
-    #:use-module (srfi srfi-1)
+     #:use-module (ice-9 match)
+     #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
 (define* (biogrid-interaction-annotation gene-nodes file-name

@@ -34,8 +34,8 @@
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
-    #:use-module (ice-9 threads)
-    #:use-module (json)
+    #:use-module (fibers)
+    #:use-module (fibers channels)
     #:use-module (srfi srfi-1)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
@@ -66,19 +66,13 @@
         )  
       ))
 
-(define-public (gene-info genes file-name)
+(define-public (gene-info genes chan)
   "Add the name and description of gene nodes to the given list of GENES."
-  (let* ((info
-         (map (lambda (gene)
-                (list (ListLink (node-info (GeneNode gene))
-                                (ListLink (locate-node (GeneNode gene))))))
-              genes))
-              
-        (res (ListLink (ConceptNode "main") info))     
-        )
-        (write-to-file res file-name "main")
-        res
-  )
+
+  (for-each (lambda (gene)
+                (put-message chan (node-info (GeneNode gene)))
+                (put-message chan (locate-node (GeneNode gene)))
+            ) genes)
 )
 
 (define-public (mapSymbol gene-list)
@@ -86,11 +80,11 @@
   (map GeneNode gene-list))
 
 
-(define-public (parse-request gene-list file-name req)
+(define-public (parse-request req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (flatten (append (list (lambda () (gene-info gene-list file-name))) (vector->list (vector-map (lambda (i elm)
+      (vector->list (vector-map (lambda (i elm)
         (let  (
             (func (find-module (assoc-ref elm "function_name") mods))
           )
@@ -112,7 +106,7 @@
                       )
                   ) filters))))
                   )
-                  (lambda () (apply func gene-list (append (list file-name) args)))
+                  (cons func args)
                   
                 )
                 '()
@@ -120,14 +114,14 @@
         
         ) 
         
-    ) table))))
+    ) table))
 ))
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set)))
-    (let* ([fns (parse-request genes-list file-name request)]
+    (let* ([fns (parse-request request)]
            [result (map (lambda (x) (x)) fns)] 
            [graphs (map (lambda (res) (atomese-parser res)) result)]
            [super-graph (make-graph (append-map (lambda (graph) (graph-nodes graph)) graphs)

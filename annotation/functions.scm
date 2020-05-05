@@ -464,21 +464,20 @@
             (generate-result gene act-gene do-protein namespace parents coding non-coding))
 
          (run-query (Get
-            (VariableList
-               (TypedVariable (Variable "$a") (Type 'GeneNode)))
-                  (Evaluation 
+                  (And 
+                     (Evaluation 
                      (Predicate "interacts_with")
                      (SetLink gene (Variable "$a")))
-                  (map (lambda (org)
-                     (Absent 
-                        (Evaluation (Predicate "from_organism")
-                           (List 
-                              (Variable "$a")
-                              (ConceptNode (string-append "TaxonomyID:" org))
+                     (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
                            )
                         )
-                     )
-                  ) orgs)
+                     ) orgs))
                ))
             )
 )
@@ -500,27 +499,28 @@
             (VariableList
                (TypedVariable (Variable "$a") (Type 'GeneNode))
                (TypedVariable (Variable "$b") (Type 'GeneNode)))
-
-            (And
-               (Evaluation (Predicate "interacts_with")
+               (And 
+                  (Evaluation (Predicate "interacts_with")
                   (SetLink gene (Variable "$a")))
 
-               (Evaluation (Predicate "interacts_with")
-                  (SetLink (Variable "$a") (Variable "$b")))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink (Variable "$a") (Variable "$b")))
 
-               (Evaluation (Predicate "interacts_with")
-                  (SetLink gene (Variable "$b")))
-               (map (lambda (org)
-                     (Absent 
-                        (Evaluation (Predicate "from_organism")
-                           (List 
-                              (Variable "$a")
-                              (ConceptNode (string-append "TaxonomyID:" org))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink gene (Variable "$b")))
+                  (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
                            )
                         )
-                     )
-                  ) orgs))
-            )))  
+                     ) orgs)
+               
+               )
+         )))  
 )
 
 ;; ------------------------------------------------------

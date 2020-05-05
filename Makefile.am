@@ -3,9 +3,11 @@ AUTOMAKE_OPTIONS = foreign
 SOURCES = \
     annotation/util.scm  \
     annotation/functions.scm \
+    annotation/string-helpers.scm \
     annotation/gene-go.scm \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
+    annotation/string.scm \
     annotation/main.scm \
     annotation/graph.scm \
     annotation/gene-record.scm \

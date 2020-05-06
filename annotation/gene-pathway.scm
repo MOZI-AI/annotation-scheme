@@ -37,7 +37,7 @@
                                   (pathway "reactome")
                                   (include_prot #t)
                                   (include_sm #t)
-                                  (namespace "")
+                                  (namespace #f)
                                   (parents 0)
                                   (biogrid 1)
                                   (coding #f)
@@ -45,15 +45,16 @@
 
   (let* ([pwlst '()]
          [pathways (string-split pathway #\space)]
+         [namespaces (if namespace (string-split namespace #\space) '())]
          [result
           (append-map (lambda (gene)
                         (append 
                          (node-info (GeneNode gene))
                          (append-map (match-lambda
                                        ("smpdb"
-                                        (smpdb gene include_prot include_sm namespace parents biogrid coding noncoding))
+                                        (smpdb gene include_prot include_sm namespaces parents biogrid coding noncoding))
                                        ("reactome"
-                                        (match (reactome gene include_prot include_sm pwlst namespace parents biogrid coding noncoding)
+                                        (match (reactome gene include_prot include_sm pwlst namespaces parents biogrid coding noncoding)
                                           ((first . rest)
                                            (set! pwlst (append pwlst rest))
                                            first))))
@@ -68,14 +69,14 @@
 "
   From SMPDB
 "
-	(define namespace-list (string-split namespaces #\space))
+
 
   (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
          [ls (append-map (lambda (path)
                            (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
                              (append
                               (if sm? (find-mol node "ChEBI") '())
-                              (find-pathway-genes node namespace-list num-parents
+                              (find-pathway-genes node namespaces num-parents
                                       coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])
@@ -97,7 +98,6 @@
 "
   From reactome
 "
-	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [ls (append-map (lambda (path)
@@ -105,7 +105,7 @@
                              (set! pwlst (append pwlst (list node)))
 
                              (append
-                              (find-pathway-genes node namespace-list num-parents
+                              (find-pathway-genes node namespaces num-parents
                                       coding-rna non-coding-rna prot?)
                               (if prot?
                                   (let ([prots (find-mol node "Uniprot")])

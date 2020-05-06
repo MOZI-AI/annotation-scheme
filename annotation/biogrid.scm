@@ -33,12 +33,12 @@
 (define* (biogrid-interaction-annotation gene-nodes file-name
                                          #:key
                                          (interaction "Proteins")
-                                         (namespace "")
+                                         (namespace #f)
                                          (parents 0)
                                          (coding #f)
                                          (noncoding #f))
 	(define namespaces
-		(if (null? namespace) '() (string-split namespace #\ )))
+		(if namespace (string-split namespace #\ ) '() ))
 
   (let* ([result
           (append-map (lambda (gene)

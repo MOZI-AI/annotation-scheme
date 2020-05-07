@@ -453,7 +453,7 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding orgs)
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding exclude-orgs)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
@@ -477,12 +477,12 @@
                               )
                            )
                         )
-                     ) orgs))
+                     ) exclude-orgs))
                ))
             )
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents coding non-coding orgs)
+(define-public (find-output-interactors gene do-protein namespace parents coding non-coding exclude-orgs)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -517,7 +517,7 @@
                               )
                            )
                         )
-                     ) orgs)
+                     ) exclude-orgs)
                
                )
          )))  

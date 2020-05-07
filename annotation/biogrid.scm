@@ -36,23 +36,28 @@
                                          (namespace #f)
                                          (parents 0)
                                          (coding #f)
-                                         (noncoding #f))
+                                         (noncoding #f)
+                                         (exclude-orgs #f)
+                                         )
 	(define namespaces
 		(if namespace (string-split namespace #\ ) '() ))
 
-  (let* ([result
+  (let* (
+       [exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '())]
+       [result
           (append-map (lambda (gene)
             (match interaction
               ("Proteins"
                (append (match-gene-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)
+                            #t namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                            #t namespaces parents coding noncoding)))
+                            #t namespaces parents coding noncoding exclude-taxonomies)))
               ("Genes"
                (append (match-gene-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)
+                            #f namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding)))))
+                            #f namespaces parents coding noncoding exclude-taxonomies))
+               )))
           gene-nodes)]
          [res (ListLink (ConceptNode "biogrid-interaction-annotation")
                         (ListLink result))])

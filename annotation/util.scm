@@ -87,9 +87,9 @@
 				(if (null? lst) (ConceptNode "N/A") (car lst))))
 
 	(if (cog-node? node)
-    (list
+    (append
       (find-organism node)
-		  (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node)))
+		  (list (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node))))
     )
 		(ListLink))
 )

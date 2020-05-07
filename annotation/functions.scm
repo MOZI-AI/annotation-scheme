@@ -453,24 +453,36 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
+(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding exclude-orgs)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
-		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+      (map
+         (lambda (act-gene)
+            (generate-result gene act-gene do-protein namespace parents coding non-coding))
 
-		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode)))
-						(Evaluation (Predicate "interacts_with")
-							(SetLink gene (Variable "$a"))))))
+         (run-query (Get
+                  (And 
+                     (Evaluation 
+                     (Predicate "interacts_with")
+                     (SetLink gene (Variable "$a")))
+                     (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
+                           )
+                        )
+                     ) exclude-orgs))
+               ))
+            )
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
+(define-public (find-output-interactors gene do-protein namespace parents coding non-coding exclude-orgs)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -479,25 +491,36 @@
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
-		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+      (map
+         (lambda (gene-pair)
+            (generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
 
-		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode))
-				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+         (run-query (Get
+            (VariableList
+               (TypedVariable (Variable "$a") (Type 'GeneNode))
+               (TypedVariable (Variable "$b") (Type 'GeneNode)))
+               (And 
+                  (Evaluation (Predicate "interacts_with")
+                  (SetLink gene (Variable "$a")))
 
-			(And
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$a")))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink (Variable "$a") (Variable "$b")))
 
-				(Evaluation (Predicate "interacts_with")
-					(SetLink (Variable "$a") (Variable "$b")))
-
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$b")))
-			))))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink gene (Variable "$b")))
+                  (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
+                           )
+                        )
+                     ) exclude-orgs)
+               
+               )
+         )))  
 )
 
 ;; ------------------------------------------------------

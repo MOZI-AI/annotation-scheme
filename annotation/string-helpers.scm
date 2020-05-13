@@ -56,7 +56,7 @@
 )
 
 
-(define-public (find-interaction gene chan interactions proteins namespace parents 
+(define-public (find-interaction gene chans interactions proteins namespace parents 
                coding non-coding)
    ;;Find Genes that interact with the input gene. Optionally specify a filter list of the interactions
    ;;If proteins option is true do a Protein-Protein interaction
@@ -69,20 +69,20 @@
             [proteins (find-proteins gene)]
         )
          (for-each (lambda (res)
-            (put-message chan res)
-            (do-cross-annotation res chan proteins namespace parents coding non-coding)
+            (send-message res chans)
+            (do-cross-annotation res chans proteins namespace parents coding non-coding)
          )        
-            (append-map (lambda (prot) (cache-find-ggi (Set prot atoms))) proteins))
+            (append-map (lambda (prot) (cache-find-ggi (Set prot (List atoms)))) proteins))
         )
         (for-each (lambda (res)
-         (put-message chan res)
-         (do-cross-annotation res chan proteins namespace parents coding non-coding)
-        ) (cache-find-ggi (Set gene atoms)))
+         (send-message res chans)
+         (do-cross-annotation res chans proteins namespace parents coding non-coding)
+        ) (cache-find-ggi (Set gene (List atoms))))
       )  
    )
 )
 
-(define-public (find-output-interactions gene chan interactions proteins namespace parents 
+(define-public (find-output-interactions gene chans interactions proteins namespace parents 
                coding non-coding)
 
    (define (get-output-interactors intrs)
@@ -109,12 +109,12 @@
    )
 
    (for-each (lambda (res)
-         (put-message chan res)
-         (do-cross-annotation res chan proteins namespace parents coding non-coding)
+         (send-message res chans)
+         (do-cross-annotation res chans proteins namespace parents coding non-coding)
    ) (get-output-interactors interactions))
 )
 
-(define (do-cross-annotation link out-chan protein namespace num-parent coding non-coding)
+(define (do-cross-annotation link out-chans protein namespace num-parent coding non-coding)
     "
      do-cross-annotation -- add info about matched variable nodes
     `namespaces` should be a scheme list of strings (possibly an empty list),
@@ -128,16 +128,30 @@
     (let* (
         [gene-a (gadr link)]
         [gene-b (gddr link)]
+        [already-done-a ((biogrid-genes) gene-a)]
+        [already-done-b ((biogrid-genes) gene-b)]
     )
+        
+        (if (not already-done-a)
+            (send-message (node-info gene-a) out-chans)
+        )
+
+        (if (not already-done-b)
+            (send-message (node-info gene-b) out-chans)
+        )
+        
+        
         ;;go-cross annotation
         (if namespace
-            (put-message out-chan (find-go-term gene-a namespace num-parent))
-            (put-message out-chan (find-go-term gene-b namespace num-parent))
+            (begin 
+               (send-message (find-go-term gene-a namespace num-parent) out-chans)
+               (send-message (find-go-term gene-b namespace num-parent) out-chans)
+            )
 
         )
 
         (if (or coding non-coding)
         
-            (put-message out-chan (find-rna gene-a coding non-coding protein))
+            (send-message (find-rna gene-a coding non-coding protein) out-chans)
         )
-    ))
+   ))

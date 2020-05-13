@@ -13,6 +13,7 @@ SOURCES = \
     annotation/gene-record.scm \
     annotation/parser.scm \
     annotation/rna.scm \
+    annotation/writer.scm \
     annotation.scm 
 
 TESTS = \

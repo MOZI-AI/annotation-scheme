@@ -22,10 +22,11 @@
     #:use-module (opencog bioscience)
     #:use-module (annotation string-helpers)
     #:use-module (srfi srfi-1)
+    #:use-module (fibers channels)
     #:export (string-annotation)
 )
 
-(define* (string-annotation genes chan #:key 
+(define* (string-annotation genes chans #:key 
                                         (proteins #f) 
                                         (interactions #f)
                                         (namespace "")
@@ -33,8 +34,12 @@
                                         (coding #f)
                                         (noncoding #f)
                                     )
+    
+    (define namespaces (if (string-null? namespace) 
+                            #f 
+                            (string-split namespace #\space)))
     (for-each (lambda (gene) 
-        (find-interaction (GeneNode gene) chan proteins interactions namespace parents coding noncoding)
-        (find-output-interactions gene chan proteins interactions namespace parents coding noncoding)
+        (find-interaction (GeneNode gene) chans interactions proteins namespaces parents coding noncoding)
+        (find-output-interactions (GeneNode gene) chans interactions proteins namespaces parents coding noncoding)
     ) genes)
 )

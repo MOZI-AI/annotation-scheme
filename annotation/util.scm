@@ -25,11 +25,13 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation graph)
+  #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)
 	#:use-module (ice-9 textual-ports)
 	#:use-module (ice-9 regex)
 	#:use-module (srfi srfi-1)
+  #:use-module (ice-9 threads)
 	#:use-module (ice-9 match)
 	#:export (create-node
 	          create-edge
@@ -475,4 +477,8 @@
             #f
         )
     )
+)
+
+(define-public (send-message message channels)
+  (for-each (lambda (chan) (put-message chan message))  channels)
 )

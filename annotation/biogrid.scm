@@ -30,7 +30,8 @@
      #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(define* (biogrid-interaction-annotation gene-nodes file-name
+(define* (biogrid-interaction-annotation gene-nodes
+                                         parser-chan writer-chan
                                          #:key
                                          (interaction "Proteins")
                                          (namespace "")
@@ -39,21 +40,24 @@
                                          (noncoding #f))
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
+     
+     (send-message (Concept "biogrid-interaction-annotation") (list parser-chan writer-chan))
 
-  (let* ([result
-          (append-map (lambda (gene)
+     (for-each (lambda (gene)
             (match interaction
               ("Proteins"
-               (append (match-gene-interactors (GeneNode gene)
+               (begin (match-gene-interactors (GeneNode gene)
+                           (list parser-chan writer-chan)
                             #t namespaces parents coding noncoding)
                        (find-output-interactors (GeneNode gene)
+                             (list parser-chan writer-chan)
                             #t namespaces parents coding noncoding)))
               ("Genes"
-               (append (match-gene-interactors (GeneNode gene)
+               (begin (match-gene-interactors (GeneNode gene)
+                              (list parser-chan writer-chan) 
                             #f namespaces parents coding noncoding)
                        (find-output-interactors (GeneNode gene)
+                             (list parser-chan writer-chan)
                             #f namespaces parents coding noncoding)))))
-          gene-nodes)]
-         [res (List result)])
-    (write-to-file res file-name "biogrid")
-	res))
+          gene-nodes)
+)

@@ -26,6 +26,9 @@
     #:use-module (annotation graph)
     #:use-module (annotation gene-record)
     #:use-module (annotation biogrid)
+    #:use-module (annotation string)
+    #:use-module (annotation writer)
+    #:use-module (annotation parser)
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
@@ -66,12 +69,12 @@
         )  
       ))
 
-(define-public (gene-info genes chan)
+(define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."
 
   (for-each (lambda (gene)
-                (put-message chan (node-info (GeneNode gene)))
-                (put-message chan (locate-node (GeneNode gene)))
+                (send-message (node-info (GeneNode gene)) chans)
+                (send-message (locate-node (GeneNode gene)) chans)
             ) genes)
 )
 
@@ -121,14 +124,25 @@
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set)))
-    (let* ([fns (parse-request request)]
-           [result (map (lambda (x) (x)) fns)] 
-           [graphs (map (lambda (res) (atomese-parser res)) result)]
-           [super-graph (make-graph (append-map (lambda (graph) (graph-nodes graph)) graphs)
-                                    (append-map (lambda (graph) (graph-edges graph)) graphs)
-                                )]
-           )
+    
+    (run-fibers (lambda ()
+      (let* (
+           [parser-chan (make-channel)]
+           [writer-chan (make-channel)]
+           [functions (parse-request request)]
+           [parser-port (open-file (get-file-path file-name file-name ".json") "w")]
+           [writer-port (open-file (get-file-path file-name "result") "w")]
+         )
+           
+          (spawn-fiber (lambda () (output-to-file writer-chan writer-port)))
 
-          (call-with-output-file (get-file-path file-name file-name ".json")
-                          (lambda (p) (scm->json (atomese-graph->scm super-graph) p))
-                 ))))
+          (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
+
+           (for-each (lambda (fn) (apply (car fn) genes-list parser-chan writer-chan (cdr fn))) functions)
+
+           (send-message 'eof (list writer-chan parser-chan))
+      )
+    
+    ) #:drain? #t)
+  )
+)

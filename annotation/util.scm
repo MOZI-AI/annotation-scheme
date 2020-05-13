@@ -480,5 +480,10 @@
 )
 
 (define-public (send-message message channels)
-  (for-each (lambda (chan) (put-message chan message))  channels)
+  (if (list? message)
+    (for-each (lambda (msg) (send-message msg channels)) message)
+    (for-each (lambda (chan) (put-message chan message))  channels)
+  )
+
+
 )

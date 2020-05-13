@@ -39,10 +39,10 @@
          (_ #f)))
    (if parent-is-go?
       (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
-         (ListLink
+         (list
             (Member child-atom parent-atom)
             (go-info parent-atom))
-         (ListLink
+         (list
            (Inheritance child-atom parent-atom)
            (go-info parent-atom)))
       #f))
@@ -454,15 +454,15 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents coding non-coding)
+(define-public (match-gene-interactors gene chans do-protein namespace parents coding non-coding)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
+	(for-each
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents coding non-coding))
+			(generate-result gene act-gene chans do-protein namespace parents coding non-coding))
 
 		(run-query (Get
 			(VariableList
@@ -471,7 +471,7 @@
 							(SetLink gene (Variable "$a"))))))
 )
 
-(define-public (find-output-interactors gene do-protein namespace parents coding non-coding)
+(define-public (find-output-interactors gene chans do-protein namespace parents coding non-coding)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -480,9 +480,9 @@
 
   If do-protein is #t then protein interactions are included.
 "
-	(map
+	(for-each
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents coding non-coding))
+			(generate-result (gar gene-pair) (gdr gene-pair) chans do-protein namespace parents coding non-coding))
 
 		(run-query (Get
 			(VariableList
@@ -612,7 +612,7 @@
 )
 
 
-(define-public (generate-result gene-a gene-b do-protein namespaces num-parents
+(define-public (generate-result gene-a gene-b chans do-protein namespaces num-parents
                                 coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
@@ -638,7 +638,7 @@
 
 				[output (find-pubmed-id gene-a gene-b)]
             [interaction (if do-protein
-                (ListLink
+                (list
                   (build-interaction gene-a gene-b output "interacts_with")
                   (build-interaction
                      (find-protein-form gene-a)
@@ -653,17 +653,19 @@
               (let (
                  [go-cross-annotation
                     (if (null? namespaces) '()
-                        (List
+                        (list
+                           (Concept "gene-go-annotation")
                            (find-go-term gene-a namespaces num-parents)
                            (find-go-term gene-b namespaces num-parents)
-                        )
+                           (Concept "biogrid-interaction-annotation"))
                     )]
                  [rna-cross-annotation
                     (if (or coding-rna non-coding-rna)
-                       (List
+                       (list
+                          (Concept "rna-annotation")
                           (find-rna gene-a coding-rna non-coding-rna do-protein)
                           (find-rna gene-b coding-rna non-coding-rna do-protein)
-                          (List (Concept "biogrid-interaction-annotation")))
+                          (Concept "biogrid-interaction-annotation"))
                         '()     
                      )
                           
@@ -671,10 +673,9 @@
                       (if do-protein
                         (let ([coding-prot-a (find-protein-form gene-a)]
                               [coding-prot-b (find-protein-form gene-b)])
-                        (if (or (equal? coding-prot-a (ListLink))
-                                (equal? coding-prot-b (ListLink)))
-                          (ListLink)
-                          (ListLink
+                        (if (not (or (equal? coding-prot-a (ListLink))
+                                (equal? coding-prot-b (ListLink))))
+                          (send-message (list
                             interaction
                             (Evaluation (Predicate "expresses") (List gene-a coding-prot-a))
                             (node-info gene-a)
@@ -686,9 +687,9 @@
                             (locate-node coding-prot-b)
                             go-cross-annotation
                             rna-cross-annotation
-                          )
+                          ) chans)
                         ))
-                      (ListLink
+                      (send-message (list
                           interaction
                           (node-info gene-a)
                           (locate-node gene-a)
@@ -696,7 +697,7 @@
                           (locate-node gene-b)
                           go-cross-annotation
                           rna-cross-annotation
-                      )
+                      ) chans)
                     )
                   ))
 
@@ -706,41 +707,41 @@
                   [gene-x (if already-done-a gene-b gene-a)]
                   [go-cross-annotation
                      (if (null? namespaces) '()
-                        (List
+                        (list
+                           (Concept "gene-go-annotation")
                            (find-go-term gene-x namespaces num-parents)
-                        )
+                           (Concept "biogrid-interaction-annotation"))
                      )]
                   [rna-cross-annotation
                      (if (or coding-rna non-coding-rna)
-                        (List
-                           
+                        (list
+                           (Concept "rna-annotation")
                            (find-rna gene-x coding-rna non-coding-rna do-protein)
-                           (List (Concept "biogrid-interaction-annotation")))
+                           (Concept "biogrid-interaction-annotation"))
                         '()
                     )])
                  (if do-protein
                     (let ([coding-prot (find-protein-form gene-x)])
-                       (if (equal? coding-prot (ListLink))
-                          (ListLink)
-                          (ListLink
+                       (if (not (equal? coding-prot (ListLink)))
+                          (send-message (list
                             interaction
                             (Evaluation (Predicate "expresses") (List gene-x coding-prot))
                             (node-info gene-x)
                             (node-info coding-prot)
                             (locate-node coding-prot)
                             go-cross-annotation
-                            rna-cross-annotation)
+                            rna-cross-annotation) chans)
                     ))
-                    (ListLink
+                    (send-message (list
                        interaction
                        (node-info gene-x)
                        (locate-node  gene-x)
                        go-cross-annotation
-                       rna-cross-annotation)
+                       rna-cross-annotation) chans)
                 )))
 
               ;;; Both of the genes have been done.
-              (else (if already-done-pair (ListLink) (ListLink interaction)))
+              (else (if (not already-done-pair)  (send-message interaction chans)))
           )
       )
    )

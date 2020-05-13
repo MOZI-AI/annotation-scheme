@@ -21,9 +21,12 @@
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (ice-9 suspendable-ports)
     #:use-module (ice-9 textual-ports)
     #:use-module (fibers channels)
 )
+
+(install-suspendable-ports!)
 
 (define-public (output-to-file chan port)
     (let loop (

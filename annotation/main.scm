@@ -40,6 +40,7 @@
     #:use-module (fibers)
     #:use-module (fibers channels)
     #:use-module (srfi srfi-1)
+    #:use-module (json)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
 )
@@ -138,7 +139,7 @@
 
           (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
 
-           (for-each (lambda (fn) (apply (car fn) genes-list parser-chan writer-chan (cdr fn))) functions)
+           (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
 
            (send-message 'eof (list writer-chan parser-chan))
       )

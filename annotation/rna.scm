@@ -28,7 +28,7 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna gene-list parser-chan writer-chan #:key (coding #t) (noncoding #t) (protein 1))
+(define* (include-rna gene-list chans #:key (coding #t) (noncoding #t) (protein 1))
 "
   The include-rna function finds coding and non-coding RNA forms of
   the gene-list. Needs 4 arguments:
@@ -39,7 +39,6 @@
   protein -> scheme number, 0 or 1.
 "
 	(define do-protein (= protein 1))
-	(define chans (list parser-chan writer-chan))
 
 	(send-message (Concept "rna-annotation") chans)
 

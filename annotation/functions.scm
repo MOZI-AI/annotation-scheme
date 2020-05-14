@@ -95,7 +95,7 @@
    (append-map add-go-member-ns namespaces)
 )
 
-(define-public (find-go-term g namespaces p)
+(define-public (find-go-term g namespaces num-parents)
 "
   The main function to find the go terms for a gene with a
   specification of the parents.

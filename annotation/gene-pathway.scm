@@ -33,7 +33,7 @@
 ;; TODO: would be better to use a list for the "pathway" argument
 ;; instead of splitting a string.
 (define* (gene-pathway-annotation gene-nodes 
-                                  parser-chan writer-chan
+                                  chans
                                   #:key
                                   (pathway "reactome")
                                   (include_prot #t)
@@ -44,7 +44,6 @@
                                   (coding #f)
                                   (noncoding #f))
 
-  (define chans (list parser-chan writer-chan))
 
   (let* (
          [pathways (string-split pathway #\space)])

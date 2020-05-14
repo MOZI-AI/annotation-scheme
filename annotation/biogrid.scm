@@ -31,7 +31,7 @@
 	#:export (biogrid-interaction-annotation))
 
 (define* (biogrid-interaction-annotation gene-nodes
-                                         parser-chan writer-chan
+                                         chans
                                          #:key
                                          (interaction "Proteins")
                                          (namespace "")
@@ -41,23 +41,23 @@
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
      
-     (send-message (Concept "biogrid-interaction-annotation") (list parser-chan writer-chan))
+     (send-message (Concept "biogrid-interaction-annotation") chans)
 
      (for-each (lambda (gene)
             (match interaction
               ("Proteins"
                (begin (match-gene-interactors (GeneNode gene)
-                           (list parser-chan writer-chan)
+                           chans
                             #t namespaces parents coding noncoding)
                        (find-output-interactors (GeneNode gene)
-                             (list parser-chan writer-chan)
+                             chans
                             #t namespaces parents coding noncoding)))
               ("Genes"
                (begin (match-gene-interactors (GeneNode gene)
-                              (list parser-chan writer-chan) 
+                              chans 
                             #f namespaces parents coding noncoding)
                        (find-output-interactors (GeneNode gene)
-                             (list parser-chan writer-chan)
+                             chans
                             #f namespaces parents coding noncoding)))))
           gene-nodes)
 )

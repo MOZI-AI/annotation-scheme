@@ -27,18 +27,18 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes parser-chan writer-chan #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein #t))
+(define* (gene-go-annotation gene-nodes chans #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein #t))
     
-    (send-message (Concept "gene-go-annotation") (list parser-chan writer-chan))
+    (send-message (Concept "gene-go-annotation") chans)
     (for-each (lambda (gene) 
           (if protein
               (begin 
-                (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) (list parser-chan writer-chan))
+                (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)
 
-                (send-message (find-proteins-goterm (GeneNode gene) (string-split namespace #\space) parents) (list parser-chan writer-chan))
+                (send-message (find-proteins-goterm (GeneNode gene) (string-split namespace #\space) parents) chans)
               )
               
-              (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) (list parser-chan writer-chan))
+              (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)
             )
           ) gene-nodes)
 )

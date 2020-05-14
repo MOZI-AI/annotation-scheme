@@ -28,11 +28,10 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna gene-list file-name #:key (coding #t) (noncoding #t) (protein 1))
+(define* (include-rna gene-list parser-chan writer-chan #:key (coding #t) (noncoding #t) (protein 1))
 "
   The include-rna function finds coding and non-coding RNA forms of
   the gene-list. Needs 4 arguments:
-  file-name -> where to write the output file
   coding -> when True, includes the coding RNA's
   coding -> when True with protein True, includes the coding RNA's
             and corresponding coding proteins.
@@ -40,13 +39,11 @@
   protein -> scheme number, 0 or 1.
 "
 	(define do-protein (= protein 1))
+	(define chans (list parser-chan writer-chan))
 
-	(let ((rna (map (lambda (gene)
+	(send-message (Concept "rna-annotation") chans)
+
+	(for-each (lambda (gene)
 				(find-rna (GeneNode gene) coding noncoding do-protein))
-				gene-list)))
-		(let ([res (ListLink (ConceptNode "rna-annotation") rna)])
-			(write-to-file res file-name "mainRNA")
-			res
-		)
-	)
+				gene-list)
 )

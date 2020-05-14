@@ -233,29 +233,19 @@
 
 (define-public (find-pathway-member gene identifier)
 "
-  Do something fun and entertaining.
+  Find the pathway members of a gene
 "
-   (define (add-pathway-info gene pathway)
-      (define pathway-name (cog-name pathway))
-
-      (if (or (string-contains pathway-name "R-HSA")
-              (string-contains pathway-name "SMP"))
-         (List
-            (Member gene pathway)
-            (node-info pathway))
-         #f))
 
    (define pathway-list
       (run-query (Get
          (TypedVariable (Variable "$pway") (Type 'ConceptNode))
          (Member gene (Variable "$pway")))))
 
-   (filter-map
+   (filter
       (lambda (pathway)
-         (if (string-contains (cog-name pathway) identifier)
-            (add-pathway-info gene pathway)
-            #f))
-      pathway-list)
+         (string-contains (cog-name pathway) identifier))
+       pathway-list)
+
 )
 
 ; --------------------------------------------------------
@@ -266,21 +256,22 @@
 	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
 	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
 
-	(List
-		(Member gene pathway)
-		(node-info gene)
-		(locate-node gene)
+	(append
+		(list 
+         (Member gene pathway)
+         (node-info gene)
+         (locate-node gene))
 		(if no-ns '()
-			(List
+			(list
 				(Concept "gene-go-annotation")
 				(find-go-term gene namespace-list num-parents)
-				(List (Concept "gene-pathway-annotation"))))
+				(Concept "gene-pathway-annotation")))
 		(if no-rna '()
 			(let* ([rnaresult
 						(find-rna gene do-coding-rna do-non-coding-rna do-protein)])
 				(if (null? rnaresult) '()
-					(List  rnaresult
-						(List (Concept "gene-pathway-annotation")))))))
+					(list (Concept "rna-annotation") rnaresult
+						(Concept "gene-pathway-annotation"))))))
 )
 
 (define (do-get-pathway-genes pathway)

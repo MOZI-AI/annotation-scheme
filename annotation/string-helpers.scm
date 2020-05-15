@@ -31,11 +31,15 @@
 
 ;;Different modes of interactions
 
-(define all-interactions '("binding" "reaction" "inhibition" "activation"))
+(define all-interactions '("binding" "reaction" "inhibition" "activation", "expression", "catalysis", "ptmod"))
+
+(define symmetric-interactions '("binding", "reaction"))
 
 (define-public (do-find-ggi input-set)
    (append-map (lambda (interaction)
-      (run-query (Bind (Evaluation 
+      (if (member interaction symmetric-interactions)
+         ;;symmetric - Use SetLink
+         (run-query (Bind (Evaluation 
             (Predicate (cog-name interaction))
             (Set
                (gar input-set)
@@ -47,6 +51,20 @@
             (Set (gar input-set) (Variable "$x"))
          )
          ))
+         ;;not symmetric - Use ListLink
+         (run-query (Bind (Evaluation 
+            (Predicate (cog-name interaction))
+            (List
+               (gar input-set)
+               (Variable "$x")
+            )
+         )
+         (Evaluation
+            (Predicate (cog-name interaction))
+            (List (gar input-set) (Variable "$x"))
+         )
+         ))
+      )
    ) (cog-outgoing-set (gdr input-set)))
 
 )

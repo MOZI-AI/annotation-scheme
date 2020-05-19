@@ -31,45 +31,46 @@
 
 ;;Different modes of interactions
 
-(define all-interactions '("binding" "reaction" "inhibition" "activation", "expression", "catalysis", "ptmod"))
+(define all-interactions '("binding" "reaction" "inhibition" "activation" "expression" "catalysis" "ptmod"))
 
-(define symmetric-interactions '("binding", "reaction"))
+(define symmetric-interactions '("binding" "reaction"))
 
 (define-public (do-find-ggi input-set)
    (append-map (lambda (interaction)
-      (if (member interaction symmetric-interactions)
+      (if (member (cog-name interaction) symmetric-interactions)
          ;;symmetric - Use SetLink
-         (run-query (Bind (Evaluation 
-            (Predicate (cog-name interaction))
-            (Set
-               (gar input-set)
-               (Variable "$x")
+         (run-query (Bind 
+            (Evaluation 
+               (Predicate (cog-name interaction))
+               (Set
+                  (gar input-set)
+                  (Variable "$x")
+               )
             )
-         )
-         (Evaluation
-            (Predicate (cog-name interaction))
-            (Set (gar input-set) (Variable "$x"))
-         )
+            (Evaluation
+               (Predicate (cog-name interaction))
+               (Set (gar input-set) (Variable "$x"))
+            )
          ))
          ;;not symmetric - Use ListLink
-         (run-query (Bind (Evaluation 
-            (Predicate (cog-name interaction))
-            (List
-               (gar input-set)
-               (Variable "$x")
+         (run-query (Bind 
+            (Evaluation 
+               (Predicate (cog-name interaction))
+               (List
+                  (gar input-set)
+                  (Variable "$x")
+               ))
+            (Evaluation
+               (Predicate (cog-name interaction))
+               (List (gar input-set) (Variable "$x"))
             )
-         )
-         (Evaluation
-            (Predicate (cog-name interaction))
-            (List (gar input-set) (Variable "$x"))
-         )
          ))
       )
    ) (cog-outgoing-set (gdr input-set)))
 
 )
 
-(define cache-find-ggi
+(define-public cache-find-ggi
    (memoize-function-call do-find-ggi)
 )
 
@@ -100,8 +101,7 @@
    )
 )
 
-(define-public (find-output-interactions gene chans interactions proteins namespace parents 
-               coding non-coding)
+(define-public (find-output-interactions gene chans interactions proteins namespace parents coding non-coding)
 
    (define (get-output-interactors intrs)
       (append-map (lambda (intr)
@@ -173,3 +173,128 @@
             (send-message (find-rna gene-a coding non-coding protein) out-chans)
         )
    ))
+
+
+
+(define (do-find-pathway-gene-interactors pathway)
+   (append-map (lambda (intr)
+      (if (member intr symmetric-interactions)
+         (run-query 
+            (Bind 
+               (VariableList
+                  (TypedVariable (Variable "$g1") (Type 'GeneNode))
+                  (TypedVariable (Variable "$g2") (Type 'GeneNode)))
+
+               (And 
+                  (Member (Variable "$g1") pathway)
+                  (Member (Variable "$g2") pathway)
+                  (Evaluation (Predicate intr)
+                     (Set 
+                        (Variable "$g1")
+                        (Variable "$g2")
+                     )
+                  )
+               )
+
+               (Evaluation (Predicate intr)
+                     (Set 
+                        (Variable "$g1")
+                        (Variable "$g2")
+                     )
+                  )
+            )
+         )
+         (run-query 
+            (Get 
+               (VariableList
+                  (TypedVariable (Variable "$g1") (Type 'GeneNode))
+                  (TypedVariable (Variable "$g2") (Type 'GeneNode)))
+
+               (And 
+                  (Member (Variable "$g1") pathway)
+                  (Member (Variable "$g2") pathway)
+                  (Evaluation (Predicate intr)
+                     (List 
+                        (Variable "$g1")
+                        (Variable "$g2")
+                     )
+                  )
+               )
+
+               (Evaluation (Predicate intr)
+                     (List 
+                        (Variable "$g1")
+                        (Variable "$g2")
+                     )
+               )
+            )
+         )
+      )
+   
+   ) all-interactions)
+)
+
+(define cache-pathway-gene-interactors (memoize-function-call do-find-pathway-gene-interactors))
+
+(define-public (find-pathway-gene-interactors pathway) (cache-pathway-gene-interactors pathway))
+
+(define (do-find-pathway-protein-interactors pathway)
+   (append-map (lambda (intr)
+      (if (member intr symmetric-interactions)
+         (run-query 
+            (Bind 
+               (VariableList
+                  (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
+                  (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+
+               (And 
+                  (Member (Variable "$p1") pathway)
+                  (Member (Variable "$p2") pathway)
+                  (Evaluation (Predicate intr)
+                     (Set 
+                        (Variable "$p1")
+                        (Variable "$p2")
+                     )
+                  )
+               )
+               (Evaluation (Predicate intr)
+                     (Set 
+                        (Variable "$p1")
+                        (Variable "$p2")
+                     )
+                  )
+            )
+         )
+         (run-query 
+            (Get 
+               (VariableList
+                  (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
+                  (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+
+               (And 
+                  (Member (Variable "$p1") pathway)
+                  (Member (Variable "$p2") pathway)
+                  
+                  (Evaluation (Predicate intr)
+                     (List 
+                        (Variable "$p1")
+                        (Variable "$p2")
+                     )
+                  )      
+               )
+               (Evaluation (Predicate intr)
+                  (List 
+                     (Variable "$p1")
+                     (Variable "$p2")
+                  )
+               )
+            )
+         )
+      )
+   
+   ) all-interactions)
+)
+
+(define cache-pathway-protein-interactors (memoize-function-call do-find-pathway-protein-interactors))
+
+(define-public (find-pathway-protein-interactors pathway) (cache-pathway-protein-interactors pathway))

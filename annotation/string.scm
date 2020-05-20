@@ -39,7 +39,7 @@
                             #f 
                             (string-split namespace #\space)))
     (for-each (lambda (gene) 
-        (find-interaction (GeneNode gene) chans interactions proteins namespaces parents coding noncoding)
-        (find-output-interactions (GeneNode gene) chans interactions proteins namespaces parents coding noncoding)
+        (find-interaction (GeneNode gene) chans interactions protein namespaces parents coding noncoding)
+        (find-output-interactions (GeneNode gene) chans interactions protein namespaces parents coding noncoding)
     ) genes)
 )

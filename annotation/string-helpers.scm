@@ -163,15 +163,18 @@
         ;;go-cross annotation
         (if namespace
             (begin 
+               (send-message (Concept "gene-go-annotation") out-chans)
                (send-message (find-go-term gene-a namespace num-parent) out-chans)
                (send-message (find-go-term gene-b namespace num-parent) out-chans)
+               (send-message (Concept "string-annotation") out-chans)
             )
 
         )
 
         (if (or coding non-coding)
-        
+            (send-message (Concept "rna-annotation") out-chans)
             (send-message (find-rna gene-a coding non-coding protein) out-chans)
+            (send-message (Concept "string-annotation") out-chans)
         )
    ))
 

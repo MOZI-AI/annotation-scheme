@@ -40,7 +40,7 @@
                                   (include_sm #t)
                                   (namespace "")
                                   (parents 0)
-                                  (biogrid 0)
+                                  (string #f)
                                   (coding #f)
                                   (noncoding #f))
 
@@ -54,16 +54,16 @@
                         (for-each (lambda (pathway) 
                         
                           (if (string=? pathway "smpdb")
-                             (smpdb gene chans include_prot include_sm namespace parents biogrid coding noncoding)
+                             (smpdb gene chans include_prot include_sm namespace parents string coding noncoding)
                           )
                           (if (string=? pathway "reactome")
-                              (reactome gene chans include_prot include_sm namespace parents biogrid coding noncoding)
+                              (reactome gene chans include_prot include_sm namespace parents string coding noncoding)
                           )) pathways))
                     gene-nodes)              
     
   ))
 
-(define (smpdb gene chans prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (smpdb gene chans prot? sm? namespaces num-parents string coding-rna non-coding-rna)
 "
   From SMPDB
 "
@@ -85,7 +85,7 @@
                         (if (null? prots)
                             (send-message prots chans))))
                   
-                  (if (= biogrid 1)
+                  (if string
                       (send-message (pathway-gene-interactors path) chans)))  pw)
 
           (if prot? 
@@ -94,7 +94,7 @@
     )
 )
 
-(define (reactome gene chans prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (reactome gene chans prot? sm? namespaces num-parents string coding-rna non-coding-rna)
 "
   From reactome
 "
@@ -118,7 +118,7 @@
                             (if (null? prots)
                                 (send-message prots chans)))
                       )
-                      (if (= biogrid 1)
+                      (if string
                           (send-message (pathway-gene-interactors path) chans )
                       )
 

@@ -38,6 +38,8 @@
     (define namespaces (if (string-null? namespace) 
                             #f 
                             (string-split namespace #\space)))
+                            
+    (send-message (Concept "string-annotation") chans)
     (for-each (lambda (gene) 
         (find-interaction (GeneNode gene) chans interactions protein namespaces parents coding noncoding)
         (find-output-interactions (GeneNode gene) chans interactions protein namespaces parents coding noncoding)

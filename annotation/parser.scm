@@ -32,7 +32,7 @@
             atomese-parser))
 
 (install-suspendable-ports!)
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation"))
 
 (define *nodes* '())
 (define *edges* '())
@@ -50,6 +50,7 @@
          "from_organism"
          "binding" "reaction" "inhibition" "activation"
          "expression" "catalysis" "ptmod")
+
      (set! *edges* (cons (create-edge (cadr lns)
                                       (car lns)
                                       predicate

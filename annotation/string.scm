@@ -27,7 +27,7 @@
 )
 
 (define* (string-annotation genes chans #:key 
-                                        (proteins #f) 
+                                        (protein #f) 
                                         (interactions #f)
                                         (namespace "")
                                         (parents 0)

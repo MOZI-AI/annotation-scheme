@@ -126,7 +126,7 @@
       )) intrs)
    )
 
-   (let ([output-interactors (if interaction (get-output-interactors interactions) (get-output-interactors all-interactions))])
+   (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
       (for-each (lambda (res)
          (send-message res chans)
          (do-cross-annotation res chans proteins namespace parents coding non-coding)) output-interactors)

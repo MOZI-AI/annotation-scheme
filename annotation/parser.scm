@@ -48,7 +48,8 @@
          "transcribed_to"
          "translated_to"
          "from_organism"
-         "binding")
+         "binding" "reaction" "inhibition" "activation"
+         "expression" "catalysis" "ptmod")
      (set! *edges* (cons (create-edge (cadr lns)
                                       (car lns)
                                       predicate

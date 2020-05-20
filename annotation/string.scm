@@ -40,9 +40,11 @@
                             #f 
                             (string-split namespace #\space)))
 
+    (define interaction-lst (if interactions (string-split interactions #\space) #f))
+
     (send-message (Concept "string-annotation") chans)
     (for-each (lambda (gene) 
-        (find-interaction (GeneNode gene) chans interactions protein namespaces parents coding noncoding)
-        (find-output-interactions (GeneNode gene) chans interactions protein namespaces parents coding noncoding)
+        (find-interaction (GeneNode gene) chans interaction-lst protein namespaces parents coding noncoding)
+        (find-output-interactions (GeneNode gene) chans interaction-lst protein namespaces parents coding noncoding)
     ) genes)
 )

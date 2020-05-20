@@ -172,9 +172,11 @@
         )
 
         (if (or coding non-coding)
-            (send-message (Concept "rna-annotation") out-chans)
-            (send-message (find-rna gene-a coding non-coding protein) out-chans)
-            (send-message (Concept "string-annotation") out-chans)
+            (begin 
+               (send-message (Concept "rna-annotation") out-chans)
+               (send-message (find-rna gene-a coding non-coding protein) out-chans)
+               (send-message (Concept "string-annotation") out-chans)
+            )
         )
    ))
 

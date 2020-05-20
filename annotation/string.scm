@@ -20,6 +20,7 @@
 (define-module (annotation string)
     #:use-module (opencog)
     #:use-module (opencog bioscience)
+    #:use-module (annotation util)
     #:use-module (annotation string-helpers)
     #:use-module (srfi srfi-1)
     #:use-module (fibers channels)
@@ -38,7 +39,7 @@
     (define namespaces (if (string-null? namespace) 
                             #f 
                             (string-split namespace #\space)))
-                            
+
     (send-message (Concept "string-annotation") chans)
     (for-each (lambda (gene) 
         (find-interaction (GeneNode gene) chans interactions protein namespaces parents coding noncoding)

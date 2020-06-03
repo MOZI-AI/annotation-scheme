@@ -189,7 +189,7 @@
 (define (find-GO-ns go)
   "Find parents of a GO term (of given namespace type)."
   (run-query
-   (GetLink
+   (Get
     (TypedVariable (Variable "$v") (TypeNode 'ConceptNode))
     (EvaluationLink
      (PredicateNode "GO_namespace")
@@ -199,7 +199,7 @@
 
 (define (find-go-name go)
   "Find the name of a GO term."
-  (run-query (BindLink
+  (run-query (Bind
               (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
               (EvaluationLink
                (PredicateNode "GO_name")
@@ -215,7 +215,7 @@
 (define (find-godef go)
   "Find go definition for parser function."
   (run-query
-   (BindLink
+   (Bind
     (VariableNode "$def")
     (EvaluationLink
      (PredicateNode "GO_definition")
@@ -800,7 +800,7 @@
       [gene-a (gar gene-set)]
       [gene-b (gdr gene-set)])
       (run-query
-         (GetLink
+         (Get
             (VariableNode "$pub")
                (EvaluationLink
                 (PredicateNode "has_pubmedID")

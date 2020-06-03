@@ -32,6 +32,7 @@
 	#:use-module (srfi srfi-1)
 	#:use-module (ice-9 match)
   #:use-module (ice-9 threads)
+  #:use-module (web socket client)
 	#:export (create-node
 	          create-edge
             write-to-file
@@ -63,6 +64,9 @@
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
+(define-public ws (make-parameter '()))
+;------------------------------------------------
+;Define websocket to connect to atomspace server
 
 (define (get-name atom)
  (if (> (length atom) 0)
@@ -179,7 +183,7 @@
   "Find the entrez_id of a gene."
   (let ((entrez (get-name
                   (run-query
-                   (GetLink
+                   (Get
                     (VariableNode "$a")
                     (EvaluationLink
                      (PredicateNode "has_entrez_id")
@@ -193,28 +197,55 @@
 ; ----------------------------------------------------
 
 (define run-query-mtx (make-mutex))
+; (define-public (run-query QUERY)
+; "
+;   Call (cog-execute! QUERY), return results, delete the SetLink.
+;   This avoids a memory leak of SetLinks
+; "
+; 	; Run the query
+; 	(define set-link (cog-execute! QUERY))
+
+; 	(lock-mutex run-query-mtx)
+; 	(if (cog-atom? set-link)
+; 		; Get the query results
+; 		(let ((results (cog-outgoing-set set-link)))
+; 			; Delete the SetLink
+; 			(cog-delete set-link)
+; 			(unlock-mutex run-query-mtx)
+; 			; Return the results.
+; 			results)
+; 		; Try again
+; 		(begin
+; 			(unlock-mutex run-query-mtx)
+; 			(run-query QUERY))
+; 	)
+; )
+
+
+(define (receive) 
+    (let loop (
+        (msg (websocket-receive (ws)))
+        (res '())
+    )
+        (if (string=? msg "eof")
+            res
+            (loop  (websocket-receive (ws)) (append res (list (eval-string msg))))
+        )
+))
+
 (define-public (run-query QUERY)
 "
   Call (cog-execute! QUERY), return results, delete the SetLink.
   This avoids a memory leak of SetLinks
 "
-	; Run the query
-	(define set-link (cog-execute! QUERY))
+  (let (
+  )
+    ; Send the query to AtomSpace server
+    (websocket-send (ws) (format #f "~a" QUERY))
 
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
+    ;;Receive result
+    (receive)
+  )
 )
 
 ; --------------------------------------------------------
@@ -243,7 +274,7 @@
 
   (get-name
     (run-query
-     (GetLink
+     (Get
       (Variable "$name")
       (Evaluation
         (Predicate pname)
@@ -275,7 +306,7 @@
 ; --------------------------------------------------------
 
 (define-public (find-current-symbol gene)
-   (map (lambda (g) (cog-name g)) (run-query (BindLink
+   (map (lambda (g) (cog-name g)) (run-query (Bind
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (Evaluation
                (Predicate "has_current_symbol")
@@ -387,7 +418,7 @@
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
       (run-query
-        (BindLink
+        (Bind
           (VariableNode "$loc")
           (ContextLink
             (MemberLink 

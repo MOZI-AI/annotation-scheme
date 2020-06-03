@@ -33,6 +33,7 @@
     #:use-module (json)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
+    #:use-module (web socket client)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
@@ -126,7 +127,9 @@
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set)))
+                 (biogrid-reported-pathways (make-atom-set))
+                 (ws (make-websocket "ws://localhost:9001/asp1"))
+                 )
     (let* ([fns (parse-request genes-list file-name request)]
            [result (map (lambda (x) (x)) fns)] 
            [graphs (map (lambda (res) (atomese-parser res)) result)]
@@ -137,4 +140,6 @@
 
           (call-with-output-file (get-file-path file-name file-name ".json")
                           (lambda (p) (scm->json (atomese-graph->scm super-graph) p))
-                 ))))
+                 )))
+  (clear)                 
+)

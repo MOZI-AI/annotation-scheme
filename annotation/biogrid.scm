@@ -34,7 +34,7 @@
                                          chans
                                          #:key
                                          (interaction "Proteins")
-                                         (namespace "")
+                                         (namespace #f)
                                          (parents 0)
                                          (coding #f)
                                          (noncoding #f)

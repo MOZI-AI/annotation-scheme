@@ -67,7 +67,6 @@
 "
   From SMPDB
 "
-	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "SMP")])
 
@@ -98,7 +97,6 @@
 "
   From reactome
 "
-	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
          [pwlst '()]

@@ -34,6 +34,7 @@
     #:use-module (opencog bioscience)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
+    #:use-module (web socket client)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
     #:use-module (web socket client)

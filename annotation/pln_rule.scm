@@ -3,7 +3,7 @@
 (use-modules (annotation functions)) ;;; for find-pubmed-id
 
 (define biogrid_interaction_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -57,7 +57,7 @@
     )
 )
 (define member_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -86,7 +86,7 @@
     )
 )
 (define expresses_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -121,7 +121,7 @@
     )
 )
 (define location_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -157,7 +157,7 @@
     )
 )
 (define name_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -193,7 +193,7 @@
     )
 )
 (define biogird_id_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))
@@ -229,7 +229,7 @@
     )
 )
 (define entrez_id_rule
-    (BindLink
+    (Bind
         (VariableList
             (TypedVariable (Variable "$g") (Type "GeneNode"))
             (TypedVariable (Variable "$gg") (Type "GeneNode"))

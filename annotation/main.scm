@@ -36,6 +36,7 @@
     #:use-module (ice-9 threads)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
+    #:use-module (web socket client)
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
@@ -124,7 +125,9 @@
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set)))
+                 (biogrid-reported-pathways (make-atom-set))
+                 (ws (make-websocket "ws://host.docker.internal:9001/prod-atom"))
+                 )
     
     (run-fibers (lambda ()
       (let* (
@@ -142,6 +145,7 @@
            (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
 
            (send-message 'eof (list writer-chan parser-chan))
+           (clear) ;;clear the current temporary atomspace
       )
     
     ) #:drain? #t)

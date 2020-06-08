@@ -37,10 +37,13 @@
                                          (namespace "")
                                          (parents 0)
                                          (coding #f)
-                                         (noncoding #f))
+                                         (noncoding #f)
+                                         (exclude-orgs #f)
+                                         )
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
      
+     (define exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '()))
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
      (for-each (lambda (gene)
@@ -48,16 +51,16 @@
               ("Proteins"
                (begin (match-gene-interactors (GeneNode gene)
                            chans
-                            #t namespaces parents coding noncoding)
+                            #t namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
                              chans
-                            #t namespaces parents coding noncoding)))
+                            #t namespaces parents coding noncoding exclude-taxonomies)))
               ("Genes"
                (begin (match-gene-interactors (GeneNode gene)
                               chans 
-                            #f namespaces parents coding noncoding)
+                            #f namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
                              chans
-                            #f namespaces parents coding noncoding)))))
+                            #f namespaces parents coding noncoding exclude-taxonomies)))))
           gene-nodes)
 )

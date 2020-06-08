@@ -445,7 +445,7 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene chans do-protein namespace parents coding non-coding)
+(define-public (match-gene-interactors gene chans do-protein namespace parents coding non-coding exclude-orgs)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
@@ -456,13 +456,25 @@
 			(generate-result gene act-gene chans do-protein namespace parents coding non-coding))
 
 		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode)))
-						(Evaluation (Predicate "interacts_with")
-							(SetLink gene (Variable "$a"))))))
+                  (And 
+                     (Evaluation 
+                     (Predicate "interacts_with")
+                     (SetLink gene (Variable "$a")))
+                     (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
+                           )
+                        )
+                     ) exclude-orgs))
+               ))
+      )
 )
 
-(define-public (find-output-interactors gene chans do-protein namespace parents coding non-coding)
+(define-public (find-output-interactors gene chans do-protein namespace parents coding non-coding exclude-orgs)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -476,20 +488,31 @@
 			(generate-result (gar gene-pair) (gdr gene-pair) chans do-protein namespace parents coding non-coding))
 
 		(run-query (Get
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode))
-				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+            (VariableList
+               (TypedVariable (Variable "$a") (Type 'GeneNode))
+               (TypedVariable (Variable "$b") (Type 'GeneNode)))
+               (And 
+                  (Evaluation (Predicate "interacts_with")
+                  (SetLink gene (Variable "$a")))
 
-			(And
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$a")))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink (Variable "$a") (Variable "$b")))
 
-				(Evaluation (Predicate "interacts_with")
-					(SetLink (Variable "$a") (Variable "$b")))
-
-				(Evaluation (Predicate "interacts_with")
-					(SetLink gene (Variable "$b")))
-			))))
+                  (Evaluation (Predicate "interacts_with")
+                     (SetLink gene (Variable "$b")))
+                  (map (lambda (org)
+                        (Absent 
+                           (Evaluation (Predicate "from_organism")
+                              (List 
+                                 (Variable "$a")
+                                 (ConceptNode (string-append "TaxonomyID:" org))
+                              )
+                           )
+                        )
+                     ) exclude-orgs)
+               
+               )
+         )))
 )
 
 ;; ------------------------------------------------------

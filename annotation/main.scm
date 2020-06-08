@@ -128,7 +128,7 @@
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
-                 (ws (make-websocket "ws://localhost:9001/asp1"))
+                 (ws (make-websocket "ws://46.4.115.181:9001/prod-atm"))
                  )
     (let* ([fns (parse-request genes-list file-name request)]
            [result (map (lambda (x) (x)) fns)] 

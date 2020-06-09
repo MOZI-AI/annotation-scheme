@@ -42,6 +42,46 @@
 )
 
 ; ----------------------------------------------------
+;Define Parameters
+(define-public biogrid-genes (make-parameter (make-atom-set)))
+(define-public biogrid-pairs (make-parameter (make-atom-set)))
+(define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
+(define-public ws '())
+(define-public sock-url "ws://host.docker.internal:9001/prod-atom")
+
+; ----------------------------------------------------
+;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
+(define-public cache-list '())
+
+(define (atom-hash ATOM SZ)
+	(catch #t
+		(lambda() (modulo (cog-handle ATOM) SZ))
+		(lambda (key . args) 0)))
+
+(define (atom-assoc ATOM ALIST)
+	(find (lambda (pr) (equal? ATOM (car pr))) ALIST))
+
+(define-public (make-afunc-cache AFUNC)
+"
+  make-afunc-cache AFUNC -- Return a caching version of AFUNC.
+  Here, AFUNC is a function that takes a single atom as an argument,
+  and returns some scheme object associated with that atom.
+  This returns a function that returns the same values that AFUNC would
+  return, for the same argument; but if a cached value is available,
+  then that is returned, instead of calling AFUNC a second time.  This
+  is useful whenever AFUNC is cpu-intensive, taking a long time to
+  compute.  In order for the cache to be valid, the value of AFUNC must
+  not depend on side-effects, because it will be called at most once.
+"
+  (define cache (make-hash-table))
+  (set! cache-list (append (list cache) cache-list))
+	(lambda (ITEM)
+		(define val (hashx-ref atom-hash atom-assoc cache ITEM))
+		(if val val
+			(let ((fv (AFUNC ITEM)))
+				(hashx-set! atom-hash atom-assoc cache ITEM fv)
+				fv)))
+)
 
 (define-public (memoize-function-call FUNC)
 "
@@ -61,6 +101,43 @@
 )
 
 ; ----------------------------------------------------
+
+
+(define (receive websock) 
+    (let loop (
+        (msg (websocket-receive websock))
+        (res '())
+    )
+        (if (string=? msg "eof")
+            res
+            (loop  (websocket-receive websock) (append res (list (eval-string msg))))
+        )
+))
+
+(define-public (run-query QUERY)
+"
+  Call (cog-execute! QUERY), return results, delete the SetLink.
+  This avoids a memory leak of SetLinks
+"
+  (let (
+    [websock (if (and (websocket? ws) (websocket-open? ws)) 
+                  ws 
+                  (begin 
+                    (set! ws (make-websocket sock-url))
+                    ws
+                  ))]
+  )
+    ; Send the query to AtomSpace server
+    (websocket-send websock (format #f "~a" QUERY))
+
+    ;;Receive result
+    (receive websock)
+  )
+)
+
+; --------------------------------------------------------
+
+
 
 ;; Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
@@ -190,61 +267,6 @@
     (match (string-split entrez #\:)
       ((single) single)
       ((first second . rest) second))))
-
-; ----------------------------------------------------
-
-(define run-query-mtx (make-mutex))
-; (define-public (run-query QUERY)
-; "
-;   Call (cog-execute! QUERY), return results, delete the SetLink.
-;   This avoids a memory leak of SetLinks
-; "
-; 	; Run the query
-; 	(define set-link (cog-execute! QUERY))
-
-; 	(lock-mutex run-query-mtx)
-; 	(if (cog-atom? set-link)
-; 		; Get the query results
-; 		(let ((results (cog-outgoing-set set-link)))
-; 			; Delete the SetLink
-; 			(cog-delete set-link)
-; 			(unlock-mutex run-query-mtx)
-; 			; Return the results.
-; 			results)
-; 		; Try again
-; 		(begin
-; 			(unlock-mutex run-query-mtx)
-; 			(run-query QUERY))
-; 	)
-; )
-
-
-(define (receive) 
-    (let loop (
-        (msg (websocket-receive (ws)))
-        (res '())
-    )
-        (if (string=? msg "eof")
-            res
-            (loop  (websocket-receive (ws)) (append res (list (eval-string msg))))
-        )
-))
-
-(define-public (run-query QUERY)
-"
-  Call (cog-execute! QUERY), return results, delete the SetLink.
-  This avoids a memory leak of SetLinks
-"
-  (let ()
-    ; Send the query to AtomSpace server
-    (websocket-send (ws) (format #f "~a" QUERY))
-
-    ;;Receive result
-    (receive)
-  )
-)
-
-; --------------------------------------------------------
 
 (define (do-find-name GO-ATOM)
 "
@@ -510,6 +532,10 @@
     (for-each (lambda (msg) (send-message msg channels)) message)
     (for-each (lambda (chan) (put-message chan message))  channels)
   )
+)
 
-
+(define-public (clear-atomspace) 
+      (clear)
+      (for-each hash-clear! cache-list)
+      (set! cache-list '())
 )

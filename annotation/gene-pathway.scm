@@ -78,7 +78,7 @@
                   (if sm? 
                     (send-message (find-mol path "ChEBI") chans))
 
-                  (send-message (find-pathway-genes path namespace-list num-parents coding-rna non-coding-rna prot?) chans)
+                  (send-message (find-pathway-genes path namespaces num-parents coding-rna non-coding-rna prot?) chans)
                   (if prot?
                       (let ([prots (find-mol path "Uniprot")])
                         (if (null? prots)
@@ -109,7 +109,7 @@
                         (set! pwlst (append pwlst (list path)))
 
                       (send-message
-                        (find-pathway-genes path namespace-list num-parents
+                        (find-pathway-genes path namespaces num-parents
                               coding-rna non-coding-rna prot?) chans)
                       (if prot?
                           (let ([prots (find-mol path"Uniprot")])

@@ -47,7 +47,7 @@
             ((? gene? rec)
                 `(("symbol" . ,(gene-name rec))
                   ("current" . ,(gene-current rec))
-                  ("similar" . ,(list->vector (gene-similar rec)))
+                  ("similar" . ,(gene-similar rec))
                 )
             )
             (anything anything)

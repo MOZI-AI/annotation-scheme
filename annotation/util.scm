@@ -34,7 +34,10 @@
   #:use-module (ice-9 threads)
 	#:use-module (ice-9 match)
   #:use-module (ice-9 threads)
+  #:use-module (json)
+  #:use-module (ice-9 iconv)
   #:use-module (web socket client)
+  #:use-module (web client)
 	#:export (create-node
 	          create-edge
             write-to-file
@@ -48,7 +51,7 @@
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 (define-public ws '())
 (define-public sock-url "ws://host.docker.internal:9001/prod-atom")
-
+(define-public req-url "http://host.docker.internal:9001/atomspaces/prod-atom")
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -116,8 +119,7 @@
 
 (define-public (run-query QUERY)
 "
-  Call (cog-execute! QUERY), return results, delete the SetLink.
-  This avoids a memory leak of SetLinks
+ Execute the pattern on a remote AtomSpace and return the result
 "
   (let (
     [websock (if (and (websocket? ws) (websocket-open? ws)) 
@@ -257,16 +259,22 @@
   "Find the entrez_id of a gene."
   (let ((entrez (get-name
                   (run-query
-                   (Get
-                    (VariableNode "$a")
-                    (EvaluationLink
-                     (PredicateNode "has_entrez_id")
-                     (ListLink
-                      gene
-                      (VariableNode "$a"))))))))
+                    (Get
+                      (EvaluationLink (PredicateNode "has_entrez_id")
+                      (ListLink
+                          gene
+                          (VariableNode "$a"))))
+                    )
+                  )
+          )
+    )
     (match (string-split entrez #\:)
       ((single) single)
-      ((first second . rest) second))))
+      ((first second . rest) second))
+      
+  )
+      
+)
 
 (define (do-find-name GO-ATOM)
 "
@@ -306,20 +314,10 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-   (define pattern (string-append gene-name ".+$"))
-   (let ([res (filter-map
-      (lambda (some-gene)
-        (if (regexp-match? (string-match pattern (cog-name some-gene)))
-            (cog-name some-gene)
-            #f
-        ))
-      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
-      (cog-get-atoms 'GeneNode))])
-      
-      (if (> (length res) 5) 
-        (take res 5)
-        res
-  )))
+   (define-values (_ bv) (http-get (string-append req-url "/similar" "?type=GeneNode&name=" gene-name)))
+
+   (assoc-ref (json-string->scm (bytevector->string bv "utf-8")) "similar")  
+)
 
 ; --------------------------------------------------------
 

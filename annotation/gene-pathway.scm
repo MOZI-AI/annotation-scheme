@@ -46,20 +46,23 @@
 
 
   (let* (
+         [namespace-list (if (string-null? namespace) '() (string-split namespace #\space))]
          [pathways (string-split pathway #\space)])
 
-        (send-message (ConceptNode "gene-pathway-annotation") chans)
+        (if (not (null? pathways))
+          (send-message (ConceptNode "gene-pathway-annotation") chans)
 
-        (for-each (lambda (gene)
-                        (for-each (lambda (pathway) 
-                        
-                          (if (string=? pathway "smpdb")
-                             (smpdb gene chans include_prot include_sm namespace parents string coding noncoding)
-                          )
-                          (if (string=? pathway "reactome")
-                              (reactome gene chans include_prot include_sm namespace parents string coding noncoding)
-                          )) pathways))
-                    gene-nodes)              
+          (for-each (lambda (gene)
+                          (for-each (lambda (pathway) 
+                          
+                            (if (string=? pathway "smpdb")
+                              (smpdb gene chans include_prot include_sm namespace-list parents string coding noncoding)
+                            )
+                            (if (string=? pathway "reactome")
+                                (reactome gene chans include_prot include_sm namespace-list parents string coding noncoding)
+                            )) pathways))
+                      gene-nodes)
+        )              
     
   ))
 

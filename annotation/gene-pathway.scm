@@ -38,7 +38,7 @@
                                   (pathway "reactome")
                                   (include_prot #t)
                                   (include_sm #t)
-                                  (namespace "")
+                                  (namespace #f)
                                   (parents 0)
                                   (string #f)
                                   (coding #f)
@@ -46,7 +46,7 @@
 
 
   (let* (
-         [namespace-list (if (string-null? namespace) '() (string-split namespace #\space))]
+         [namespace-list (if namepsace (string-split namespace #\space) '())]
          [pathways (string-split pathway #\space)])
 
         (if (not (null? pathways))

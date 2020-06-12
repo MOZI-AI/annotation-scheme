@@ -41,7 +41,7 @@
                                          (exclude-orgs #f)
                                          )
 	(define namespaces
-		(if (null? namespace) '() (string-split namespace #\ )))
+		(if (namespace) (string-split namespace #\ ) '()))
      
      (define exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '()))
      (send-message (Concept "biogrid-interaction-annotation") chans)

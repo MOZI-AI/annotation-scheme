@@ -45,7 +45,7 @@
                                   (noncoding #f))
 
   (define namespaces (if (string-null? namespace) 
-                            #f 
+                            '()
                             (string-split namespace #\space)))
 
   (let* (

@@ -41,7 +41,7 @@
                                          (exclude-orgs #f)
                                          )
 	(define namespaces (if (string-null? namespace) 
-                            #f 
+                            '() 
                             (string-split namespace #\space)))
      
      (define exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '()))

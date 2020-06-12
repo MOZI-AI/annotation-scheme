@@ -161,7 +161,7 @@
         
         
         ;;go-cross annotation
-        (if namespace
+        (if (not (null? namespace))
             (begin 
                (send-message (Concept "gene-go-annotation") out-chans)
                (send-message (find-go-term gene-a namespace num-parent) out-chans)

@@ -37,7 +37,7 @@
                                     )
     
     (define namespaces (if (string-null? namespace) 
-                            #f 
+                           '()
                             (string-split namespace #\space)))
 
     (define interaction-lst (if interactions (string-split interactions #\space) #f))

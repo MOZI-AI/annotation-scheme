@@ -323,7 +323,7 @@
 
 (define-public (find-current-symbol gene)
    (map (lambda (g) (cog-name g)) (run-query (Bind
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))

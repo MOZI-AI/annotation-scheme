@@ -5,9 +5,9 @@
 (define biogrid_interaction_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$ggg") (Type "GeneNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$ggg") (Type 'GeneNode))
         ) 
         (And
             (EvaluationLink
@@ -59,9 +59,9 @@
 (define member_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$c") (Type "ConceptNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$c") (Type 'ConceptNode))
         ) 
         (And
             (EvaluationLink
@@ -88,9 +88,9 @@
 (define expresses_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$m") (Type "MoleculeNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$m") (Type 'MoleculeNode))
         ) 
         (And
             (EvaluationLink
@@ -123,9 +123,9 @@
 (define location_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$l") (Type "ConceptNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$l") (Type 'ConceptNode))
         ) 
         (And
             (EvaluationLink
@@ -159,9 +159,9 @@
 (define name_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$n") (Type "ConceptNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$n") (Type 'ConceptNode))
         ) 
         (And
             (EvaluationLink
@@ -195,9 +195,9 @@
 (define biogird_id_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$b") (Type "ConceptNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$b") (Type 'ConceptNode))
         ) 
         (And
             (EvaluationLink
@@ -231,9 +231,9 @@
 (define entrez_id_rule
     (Bind
         (VariableList
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
-            (TypedVariable (Variable "$gg") (Type "GeneNode"))
-            (TypedVariable (Variable "$e") (Type "ConceptNode"))
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
+            (TypedVariable (Variable "$gg") (Type 'GeneNode))
+            (TypedVariable (Variable "$e") (Type 'ConceptNode))
         ) 
         (And
             (EvaluationLink

@@ -34,14 +34,15 @@
                                          chans
                                          #:key
                                          (interaction "Proteins")
-                                         (namespace #f)
+                                         (namespace "")
                                          (parents 0)
                                          (coding #f)
                                          (noncoding #f)
                                          (exclude-orgs #f)
                                          )
-	(define namespaces
-		(if (namespace) (string-split namespace #\ ) '()))
+	(define namespaces (if (string-null? namespace) 
+                            #f 
+                            (string-split namespace #\space)))
      
      (define exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '()))
      (send-message (Concept "biogrid-interaction-annotation") chans)

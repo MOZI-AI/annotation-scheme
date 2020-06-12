@@ -38,15 +38,17 @@
                                   (pathway "reactome")
                                   (include_prot #t)
                                   (include_sm #t)
-                                  (namespace #f)
+                                  (namespace "")
                                   (parents 0)
                                   (string #f)
                                   (coding #f)
                                   (noncoding #f))
 
+  (define namespaces (if (string-null? namespace) 
+                            #f 
+                            (string-split namespace #\space)))
 
   (let* (
-         [namespace-list (if namepsace (string-split namespace #\space) '())]
          [pathways (string-split pathway #\space)])
 
         (if (not (null? pathways))
@@ -56,10 +58,10 @@
                           (for-each (lambda (pathway) 
                           
                             (if (string=? pathway "smpdb")
-                              (smpdb gene chans include_prot include_sm namespace-list parents string coding noncoding)
+                              (smpdb gene chans include_prot include_sm namespaces parents string coding noncoding)
                             )
                             (if (string=? pathway "reactome")
-                                (reactome gene chans include_prot include_sm namespace-list parents string coding noncoding)
+                                (reactome gene chans include_prot include_sm namespaces parents string coding noncoding)
                             )) pathways))
                       gene-nodes)
         )              

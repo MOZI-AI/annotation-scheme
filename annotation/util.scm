@@ -50,8 +50,6 @@
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 (define-public ws '())
-(define-public sock-url "ws://host.docker.internal:9001/prod-atom")
-(define-public req-url "http://host.docker.internal:9001/atomspaces/prod-atom")
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -105,6 +103,8 @@
 
 ; ----------------------------------------------------
 
+(define sock-url (format #f "ws://~a:9001/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
+(define req-url (format #f "http://~a:9001/atomspaces/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
 
 (define (receive websock) 
     (let loop (

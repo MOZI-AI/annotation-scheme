@@ -25,7 +25,6 @@
       #:use-module (opencog)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
-      #:use-module (annotation parser)
       #:use-module (srfi srfi-1)
       #:use-module (ice-9 match)
       #:export (gene-pathway-annotation))

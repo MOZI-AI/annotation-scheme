@@ -139,6 +139,7 @@
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
+                 (ws (make-websocket sock-url))
                  )
     
     (run-fibers (lambda ()
@@ -158,6 +159,8 @@
 
            (send-message 'eof (list writer-chan parser-chan))
            (clear-atomspace)
+
+           (close-websocket (ws))
       )
     
     ) #:drain? #t)

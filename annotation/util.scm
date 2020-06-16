@@ -49,7 +49,10 @@
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
-(define-public ws '())
+(define-public ws (make-parameter '()))
+
+(define-public sock-url (format #f "ws://~a:9001/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
+(define req-url (format #f "http://~a:9001/atomspaces/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -103,17 +106,14 @@
 
 ; ----------------------------------------------------
 
-(define sock-url (format #f "ws://~a:9001/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
-(define req-url (format #f "http://~a:9001/atomspaces/~a" (getenv "ATOM_SERVER") (getenv "ATOM_ID")))
-
-(define (receive websock) 
+(define (receive) 
     (let loop (
-        (msg (websocket-receive websock))
+        (msg (websocket-receive (ws)))
         (res '())
     )
         (if (string=? msg "eof")
             res
-            (loop  (websocket-receive websock) (append res (list (eval-string msg))))
+            (loop  (websocket-receive (ws)) (append res (list (eval-string msg))))
         )
 ))
 
@@ -121,19 +121,12 @@
 "
  Execute the pattern on a remote AtomSpace and return the result
 "
-  (let (
-    [websock (if (and (websocket? ws) (websocket-open? ws)) 
-                  ws 
-                  (begin 
-                    (set! ws (make-websocket sock-url))
-                    ws
-                  ))]
-  )
+  (let ()
     ; Send the query to AtomSpace server
-    (websocket-send websock (format #f "~a" QUERY))
+    (websocket-send (ws) (format #f "~a" QUERY))
 
     ;;Receive result
-    (receive websock)
+    (receive)
   )
 )
 

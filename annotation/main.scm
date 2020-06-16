@@ -53,8 +53,11 @@
 "
    find-genes GENE-LIST
    Validate if given gene strings in GENE-LIST exist in the atomspace.
-"
-  (let* ((records (filter-map (lambda (g)
+" 
+  (parameterize (
+      (ws (make-websocket sock-url)))
+
+     (let* ((records (filter-map (lambda (g)
                     (let (
                       [gene-name (run-query (Get 
                               (Evaluation 
@@ -82,7 +85,11 @@
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records)))
         )  
-      ))
+    )
+
+    (close-websocket (ws))
+  )
+)
 
 (define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."

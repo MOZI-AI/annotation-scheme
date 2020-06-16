@@ -81,13 +81,12 @@
                     )
                 ) gene-list))
         )
+        (close-websocket (ws))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records)))
         )  
     )
-
-    (close-websocket (ws))
   )
 )
 
@@ -111,7 +110,7 @@
     )
       (vector->list (vector-map (lambda (i elm)
         (let  (
-            (func (find-module (assoc-ref elm "function_name") mods))
+            (func (find-module (assoc-ref elm "functionName") mods))
           )
             (if func 
                 (let* (                

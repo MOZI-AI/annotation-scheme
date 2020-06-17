@@ -108,7 +108,7 @@
       (append-map
          (lambda (item)
             ; Something is sending us a stray #f for soe reason...
-            (if item (find-parent (gar (flatten item)) namespaces) '()))
+            (if item (find-parent (car (flatten item)) namespaces) '()))
          lst))
 
    ;; breadth-first, depth-recursive loop. This gets all parents

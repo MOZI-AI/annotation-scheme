@@ -106,28 +106,29 @@
 
 ; ----------------------------------------------------
 
-(define (receive) 
-    (let loop (
-        (msg (websocket-receive (ws)))
-        (res '())
-    )
-        (if (string=? msg "eof")
-            res
-            (loop  (websocket-receive (ws)) (append res (list (eval-string msg))))
-        )
-))
-
+(define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
- Execute the pattern on a remote AtomSpace and return the result
+  Call (cog-execute! QUERY), return results, delete the SetLink.
+  This avoids a memory leak of SetLinks
 "
-  (let ()
-    ; Send the query to AtomSpace server
-    (websocket-send (ws) (format #f "~a" QUERY))
+	; Run the query
+	(define set-link (cog-execute! QUERY))
 
-    ;;Receive result
-    (receive)
-  )
+	(lock-mutex run-query-mtx)
+	(if (cog-atom? set-link)
+		; Get the query results
+		(let ((results (cog-outgoing-set set-link)))
+			; Delete the SetLink
+			(cog-delete set-link)
+			(unlock-mutex run-query-mtx)
+			; Return the results.
+			results)
+		; Try again
+		(begin
+			(unlock-mutex run-query-mtx)
+			(run-query QUERY))
+	)
 )
 
 ; --------------------------------------------------------

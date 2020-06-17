@@ -145,7 +145,6 @@
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
-                 (ws (make-websocket sock-url))
                  )
     
     (run-fibers (lambda ()
@@ -161,12 +160,9 @@
 
           (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
 
-           (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
+          (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
 
            (send-message 'eof (list writer-chan parser-chan))
-           (clear-atomspace)
-
-           (close-websocket (ws))
       )
     
     ) #:drain? #t)

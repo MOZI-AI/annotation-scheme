@@ -142,7 +142,7 @@
 
           (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
 
-           (send-message 'eof (list writer-chan parser-chan))
+          (send-message 'eof (list writer-chan parser-chan))
       )
     
     ) #:drain? #t)

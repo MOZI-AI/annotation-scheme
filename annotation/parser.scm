@@ -158,7 +158,7 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser in-chan port #:optional mode)
+(define* (atomese-parser in-chan port)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())

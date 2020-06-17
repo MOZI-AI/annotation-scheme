@@ -34,10 +34,8 @@
     #:use-module (opencog bioscience)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
-    #:use-module (web socket client)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
-    #:use-module (web socket client)
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
@@ -53,23 +51,9 @@
 "
    find-genes GENE-LIST
    Validate if given gene strings in GENE-LIST exist in the atomspace.
-" 
-  (parameterize (
-      (ws (make-websocket sock-url)))
-
-     (let* ((records (filter-map (lambda (g)
-                    (let (
-                      [gene-name (run-query (Get 
-                              (Evaluation 
-                                (Predicate "has_name")
-                                (List 
-                                  (Gene g)
-                                  (Variable "$a")
-                                ) 
-                               )
-                        ))]
-                    )
-                      (if (null? gene-name)
+"
+  (let* ((records (filter-map (lambda (g)
+                    (if (null? (cog-node 'GeneNode g))
                         (make-gene g  "" (find-similar-gene g))
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
@@ -78,17 +62,13 @@
                           )
                         )
                     )
-                    )
                 ) gene-list))
         )
-        (close-websocket (ws))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records)))
         )  
-    )
-  )
-)
+      ))
 
 (define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."

@@ -36,8 +36,6 @@
   #:use-module (ice-9 threads)
   #:use-module (json)
   #:use-module (ice-9 iconv)
-  #:use-module (web socket client)
-  #:use-module (web client)
 	#:export (create-node
 	          create-edge
             write-to-file
@@ -308,10 +306,20 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-   (define-values (_ bv) (http-get (string-append req-url "/similar" "?type=GeneNode&name=" gene-name)))
-
-   (assoc-ref (json-string->scm (bytevector->string bv "utf-8")) "similar")  
-)
+   (define pattern (string-append gene-name ".+$"))
+   (let ([res (filter-map
+      (lambda (some-gene)
+        (if (regexp-match? (string-match pattern (cog-name some-gene)))
+            (cog-name some-gene)
+            #f
+        ))
+      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
+      (cog-get-atoms 'GeneNode))])
+      
+      (if (> (length res) 5) 
+        (take res 5)
+        res
+  )))
 
 ; --------------------------------------------------------
 

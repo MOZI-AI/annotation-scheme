@@ -27,11 +27,6 @@ if test "x$HAVE_FIBERS" = "xno"; then
 	AC_MSG_ERROR([The fibers library is needed. See https://github.com/wingo/fibers for details])
 fi
 
-GUILE_MODULE_AVAILABLE(HAVE_SOCKETS, [(web socket client)])
-if test "x$HAVE_SOCKETS" = "xno"; then
-	AC_MSG_ERROR([The guile-websocket library is needed. See https://git.dthompson.us/guile-websocket.git for details])
-fi
-
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([env], [chmod +x env])
 

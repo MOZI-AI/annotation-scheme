@@ -118,7 +118,7 @@
                         (find-pathway-genes path namespaces num-parents
                               coding-rna non-coding-rna prot?) chans)
                       (if prot?
-                          (let ([prots (find-mol path"Uniprot")])
+                          (let ([prots (find-mol path "Uniprot")])
                             (if (null? prots)
                                 (send-message prots chans)))
                       )
@@ -126,7 +126,7 @@
                           (send-message (pathway-gene-interactors path) chans )
                       )
 
-                      (if sm? (send-message (find-mol path"ChEBI") chans))
+                      (if sm? (send-message (find-mol path "ChEBI") chans))
 
                       (send-message (pathway-hierarchy path pwlst) chans)) pw)
 

@@ -51,18 +51,20 @@
          [pathways (string-split pathway #\space)])
 
         (if (not (null? pathways))
-          (send-message (ConceptNode "gene-pathway-annotation") chans)
+          (begin 
+            (send-message (ConceptNode "gene-pathway-annotation") chans)
 
-          (for-each (lambda (gene)
-                          (for-each (lambda (pathway) 
-                          
-                            (if (string=? pathway "smpdb")
-                              (smpdb gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
-                            )
-                            (if (string=? pathway "reactome")
-                                (reactome gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
-                            )) pathways))
-                      gene-nodes)
+            (for-each (lambda (gene)
+                            (for-each (lambda (pathway) 
+                            
+                              (if (string=? pathway "smpdb")
+                                (smpdb gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
+                              )
+                              (if (string=? pathway "reactome")
+                                  (reactome gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
+                              )) pathways))
+                        gene-nodes)
+          )
         )              
     
   ))

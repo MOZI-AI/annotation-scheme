@@ -38,13 +38,13 @@
                                          (parents 0)
                                          (coding #f)
                                          (noncoding #f)
-                                         (exclude-orgs #f)
+                                         (exclude-orgs "")
                                          )
 	(define namespaces (if (string-null? namespace) 
                             '() 
                             (string-split namespace #\space)))
      
-     (define exclude-taxonomies (if exclude-orgs (list (number->string exclude-orgs)) '()))
+     (define exclude-taxonomies (if (string-null? exclude-orgs) '() (list (number->string exclude-orgs))))
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
      (for-each (lambda (gene)

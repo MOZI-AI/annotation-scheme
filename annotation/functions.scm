@@ -461,7 +461,7 @@
                         (Predicate "interacts_with")
                         (SetLink gene (Variable "$a")))
                      (map (lambda (org)
-                        (Present 
+                        (Absent 
                            (Evaluation (Predicate "from_organism")
                               (List 
                                  (Variable "$a")

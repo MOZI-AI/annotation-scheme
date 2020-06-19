@@ -458,14 +458,14 @@
 		(run-query (Get
                   (And 
                      (Evaluation 
-                     (Predicate "interacts_with")
-                     (SetLink gene (Variable "$a")))
+                        (Predicate "interacts_with")
+                        (SetLink gene (Variable "$a")))
                      (map (lambda (org)
-                        (Absent 
+                        (Present 
                            (Evaluation (Predicate "from_organism")
                               (List 
                                  (Variable "$a")
-                                 (ConceptNode (string-append "ncbi:" org))
+                                 (ConceptNode (string-append "ncbi:" (number->string org)))
                               )
                            )
                         )
@@ -505,7 +505,7 @@
                            (Evaluation (Predicate "from_organism")
                               (List 
                                  (Variable "$a")
-                                 (ConceptNode (string-append "TaxonomyID:" org))
+                                 (ConceptNode (string-append "ncbi:" (number->string org)))
                               )
                            )
                         )

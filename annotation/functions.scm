@@ -465,7 +465,7 @@
                            (Evaluation (Predicate "from_organism")
                               (List 
                                  (Variable "$a")
-                                 (ConceptNode (string-append "ncbi:" (number->string org)))
+                                 (ConceptNode (string-append "ncbi:" org))
                               )
                            )
                         )
@@ -505,7 +505,7 @@
                            (Evaluation (Predicate "from_organism")
                               (List 
                                  (Variable "$a")
-                                 (ConceptNode (string-append "ncbi:" (number->string org)))
+                                 (ConceptNode (string-append "ncbi:" org))
                               )
                            )
                         )

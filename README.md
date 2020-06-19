@@ -10,7 +10,7 @@ To build the project manually, make sure you have the following dependencies ins
 
  - [Atomspace](https://github.com/opencog/atomspace)
  - [agi-bio](https://github.com/opencog/agi-bio)
- - [fibers](https://github.com/wingo/fibers)
+ - [fibers](https://github.com/Habush/fibers)
  - [guile-json, version 1.x](https://github.com/aconchillo/guile-json)
 
 1. Clone the project.

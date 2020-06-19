@@ -44,7 +44,7 @@
                             '() 
                             (string-split namespace #\space)))
      
-     (define exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '()))
+     (define exclude-taxonomies (if exclude-orgs (list exclude-orgs) '()))
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
      (for-each (lambda (gene)

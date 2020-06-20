@@ -501,14 +501,25 @@
                   (Evaluation (Predicate "interacts_with")
                      (SetLink gene (Variable "$b")))
                   (map (lambda (org)
-                        (Absent 
-                           (Evaluation (Predicate "from_organism")
-                              (List 
-                                 (Variable "$a")
-                                 (ConceptNode (string-append "ncbi:" org))
+                        (And 
+                           (Absent 
+                              (Evaluation (Predicate "from_organism")
+                                 (List 
+                                    (Variable "$a")
+                                    (ConceptNode (string-append "ncbi:" org))
+                                 )
+                              )
+                           )
+                           (Absent 
+                              (Evaluation (Predicate "from_organism")
+                                 (List 
+                                    (Variable "$b")
+                                    (ConceptNode (string-append "ncbi:" org))
+                                 )
                               )
                            )
                         )
+                        
                      ) exclude-orgs)
                
                )

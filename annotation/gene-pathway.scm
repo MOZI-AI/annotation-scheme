@@ -22,6 +22,7 @@
 (define-module (annotation gene-pathway)
       #:use-module (annotation functions)
       #:use-module (annotation util)
+      #:use-module (annotation string-helpers)
       #:use-module (opencog)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
@@ -40,6 +41,7 @@
                                   (namespace "")
                                   (parents 0)
                                   (biogrid #f)
+                                  (string #f)
                                   (coding #f)
                                   (noncoding #f))
 
@@ -58,10 +60,10 @@
                             (for-each (lambda (pathway) 
                             
                               (if (string=? pathway "smpdb")
-                                (smpdb gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
+                                (smpdb gene chans include_prot include_sm namespaces parents biogrid string coding noncoding)
                               )
                               (if (string=? pathway "reactome")
-                                  (reactome gene chans include_prot include_sm namespaces parents biogrid coding noncoding)
+                                  (reactome gene chans include_prot include_sm namespaces parents biogrid string coding noncoding)
                               )) pathways))
                         gene-nodes)
           )
@@ -69,7 +71,7 @@
     
   ))
 
-(define (smpdb gene chans prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (smpdb gene chans prot? sm? namespaces num-parents biogrid string coding-rna non-coding-rna)
 "
   From SMPDB
 "
@@ -91,7 +93,12 @@
                             (send-message prots chans))))
                   
                   (if biogrid
-                      (send-message (pathway-gene-interactors path) chans)))  pw)
+                      (send-message (pathway-gene-interactors path) chans))
+                      
+                  (if string 
+                      (send-message (find-pathway-gene-interactors path) chans)
+                  )
+              )  pw)
 
           (if prot? 
             (send-message (find-protein (GeneNode gene) 0) chans))      
@@ -99,7 +106,7 @@
     )
 )
 
-(define (reactome gene chans prot? sm? namespaces num-parents biogrid coding-rna non-coding-rna)
+(define (reactome gene chans prot? sm? namespaces num-parents biogrid string coding-rna non-coding-rna)
 "
   From reactome
 "
@@ -124,6 +131,9 @@
                       )
                       (if biogrid
                           (send-message (pathway-gene-interactors path) chans )
+                      )
+                      (if string 
+                        (send-message (find-pathway-gene-interactors path) chans)
                       )
 
                       (if sm? (send-message (find-mol path "ChEBI") chans))

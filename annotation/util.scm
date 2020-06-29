@@ -35,6 +35,7 @@
 	#:use-module (ice-9 match)
   #:use-module (ice-9 threads)
   #:use-module (json)
+  #:use-module (opencog atom-service)
   #:use-module (ice-9 iconv)
 	#:export (create-node
 	          create-edge
@@ -107,23 +108,24 @@
   Call (cog-execute! QUERY), return results, delete the SetLink.
   This avoids a memory leak of SetLinks
 "
-	; Run the query
-	(define set-link (cog-execute! QUERY))
+	; ; Run the query
+	; (define set-link (cog-execute! QUERY))
 
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
+	; (lock-mutex run-query-mtx)
+	; (if (cog-atom? set-link)
+	; 	; Get the query results
+	; 	(let ((results (cog-outgoing-set set-link)))
+	; 		; Delete the SetLink
+	; 		(cog-delete set-link)
+	; 		(unlock-mutex run-query-mtx)
+	; 		; Return the results.
+	; 		results)
+	; 	; Try again
+	; 	(begin
+	; 		(unlock-mutex run-query-mtx)
+	; 		(run-query QUERY))
+	; )
+  (exec-patter "prod-atom" QUERY)
 )
 
 ; --------------------------------------------------------
@@ -303,20 +305,22 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-   (define pattern (string-append gene-name ".+$"))
-   (let ([res (filter-map
-      (lambda (some-gene)
-        (if (regexp-match? (string-match pattern (cog-name some-gene)))
-            (cog-name some-gene)
-            #f
-        ))
-      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
-      (cog-get-atoms 'GeneNode))])
+  ;  (define pattern (string-append gene-name ".+$"))
+  ;  (let ([res (filter-map
+  ;     (lambda (some-gene)
+  ;       (if (regexp-match? (string-match pattern (cog-name some-gene)))
+  ;           (cog-name some-gene)
+  ;           #f
+  ;       ))
+  ;     ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
+  ;     (cog-get-atoms 'GeneNode))])
       
-      (if (> (length res) 5) 
-        (take res 5)
-        res
-  )))
+  ;     (if (> (length res) 5) 
+  ;       (take res 5)
+  ;       res
+  ; ))
+  (map cog-name (find-similar-node 'GeneNode gene-name))
+)
 
 ; --------------------------------------------------------
 

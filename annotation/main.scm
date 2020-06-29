@@ -26,17 +26,21 @@
     #:use-module (annotation graph)
     #:use-module (annotation gene-record)
     #:use-module (annotation biogrid)
+    #:use-module (annotation string)
+    #:use-module (annotation writer)
     #:use-module (annotation parser)
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (json)
     #:use-module (ice-9 match)
     #:use-module (ice-9 threads)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
     #:use-module (ice-9 futures)
+    #:use-module (fibers)
+    #:use-module (fibers channels)
     #:use-module (srfi srfi-1)
+    #:use-module (json)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
 )
@@ -66,19 +70,13 @@
         )  
       ))
 
-(define-public (gene-info genes file-name)
+(define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."
-  (let* ((info
-         (map (lambda (gene)
-                (list (ListLink (node-info (GeneNode gene))
-                                (ListLink (locate-node (GeneNode gene))))))
-              genes))
-              
-        (res (ListLink (ConceptNode "main") info))     
-        )
-        (write-to-file res file-name "main")
-        res
-  )
+
+  (for-each (lambda (gene)
+                (send-message (node-info (GeneNode gene)) chans)
+                (send-message (locate-node (GeneNode gene)) chans)
+            ) genes)
 )
 
 (define-public (mapSymbol gene-list)
@@ -86,13 +84,13 @@
   (map GeneNode gene-list))
 
 
-(define-public (parse-request gene-list file-name req)
+(define-public (parse-request req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
     )
-      (flatten (append (list (lambda () (gene-info gene-list file-name))) (vector->list (vector-map (lambda (i elm)
+      (vector->list (vector-map (lambda (i elm)
         (let  (
-            (func (find-module (assoc-ref elm "function_name") mods))
+            (func (find-module (assoc-ref elm "functionName") mods))
           )
             (if func 
                 (let* (                
@@ -112,7 +110,7 @@
                       )
                   ) filters))))
                   )
-                  (lambda () (apply func gene-list (append (list file-name) args)))
+                  (cons func args)
                   
                 )
                 '()
@@ -120,21 +118,33 @@
         
         ) 
         
-    ) table))))
+    ) table))
 ))
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((biogrid-genes (make-atom-set))
                  (biogrid-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set)))
-    (let* ([fns (parse-request genes-list file-name request)]
-           [result (map (lambda (x) (x)) fns)] 
-           [graphs (map (lambda (res) (atomese-parser res)) result)]
-           [super-graph (make-graph (append-map (lambda (graph) (graph-nodes graph)) graphs)
-                                    (append-map (lambda (graph) (graph-edges graph)) graphs)
-                                )]
-           )
+                 (biogrid-reported-pathways (make-atom-set))
+                 )
+    
+    (run-fibers (lambda ()
+      (let* (
+           [parser-chan (make-channel)]
+           [writer-chan (make-channel)]
+           [functions (parse-request request)]
+           [parser-port (open-file (get-file-path file-name file-name ".json") "w")]
+           [writer-port (open-file (get-file-path file-name "result") "w")]
+         )
+           
+          (spawn-fiber (lambda () (output-to-file writer-chan writer-port)))
 
-          (call-with-output-file (get-file-path file-name file-name ".json")
-                          (lambda (p) (scm->json (atomese-graph->scm super-graph) p))
-                 ))))
+          (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
+
+          (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
+
+          (send-message 'eof (list writer-chan parser-chan))
+      )
+    
+    ) #:drain? #t)
+  )
+)

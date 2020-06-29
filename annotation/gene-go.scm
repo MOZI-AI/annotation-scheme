@@ -24,27 +24,21 @@
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (annotation parser)
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes file-name #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein #t))
-    (let (
-        [result (flatten (map (lambda (gene) 
+(define* (gene-go-annotation gene-nodes chans #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein #t))
+    
+    (send-message (Concept "gene-go-annotation") chans)
+    (for-each (lambda (gene) 
           (if protein
-            (ListLink
-              (find-go-term (GeneNode gene) (string-split namespace #\ ) parents)
-              (find-proteins-goterm (GeneNode gene) (string-split namespace #\ ) parents)
+              (begin 
+                (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)
+
+                (send-message (find-proteins-goterm (GeneNode gene) (string-split namespace #\space) parents) chans)
+              )
+              
+              (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)
             )
-            (find-go-term (GeneNode gene) (string-split namespace #\ ) parents)
-          )
-          )gene-nodes))]
-          )
-    (let (
-    	[res (ListLink (ConceptNode "gene-go-annotation") (ListLink result))]
-  		)
-    	(write-to-file res file-name "gene-go")
-      res
-  	)
-  )
+          ) gene-nodes)
 )

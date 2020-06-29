@@ -23,11 +23,16 @@
   #:use-module (opencog exec)
   #:use-module (annotation graph)
   #:use-module (annotation util)
+  #:use-module (ice-9 suspendable-ports)
   #:use-module (ice-9 match)
+  #:use-module (ice-9 textual-ports)
+  #:use-module (fibers channels) 
+  #:use-module (json)
   #:export (atomese->graph
             atomese-parser))
 
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
+(install-suspendable-ports!)
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation"))
 
 (define *nodes* '())
 (define *edges* '())
@@ -42,7 +47,10 @@
          "inferred_interaction"
          "transcribed_to"
          "translated_to"
-         "from_organism")
+         "from_organism"
+         "binding" "reaction" "inhibition" "activation"
+         "expression" "catalysis" "ptmod")
+
      (set! *edges* (cons (create-edge (cadr lns)
                                       (car lns)
                                       predicate
@@ -150,11 +158,27 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser port #:optional mode)
+(define* (atomese-parser in-chan port)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph port)
-  (make-graph *nodes* *edges*))
+  
+
+  (let loop (
+      (msg (get-message in-chan))
+   )
+    (if (equal? msg 'eof)
+       (begin 
+          (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) port)
+          (close-port port)
+       )
+      (begin 
+         (atomese->graph msg)
+         (loop (get-message in-chan))
+      )
+    )
+  )
+)
+

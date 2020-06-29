@@ -3,21 +3,25 @@ AUTOMAKE_OPTIONS = foreign
 SOURCES = \
     annotation/util.scm  \
     annotation/functions.scm \
+    annotation/string-helpers.scm \
     annotation/gene-go.scm \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \
+    annotation/string.scm \
     annotation/main.scm \
     annotation/graph.scm \
     annotation/gene-record.scm \
     annotation/parser.scm \
     annotation/rna.scm \
+    annotation/writer.scm \
     annotation.scm 
 
 TESTS = \
     tests/parser-tests.scm \
     tests/util-tests.scm \
     tests/pathway-tests.scm \
-    tests/main-tests.scm
+    tests/main-tests.scm \
+    tests/string-tests.scm
 
 TEST_EXTENSIONS = .scm
 

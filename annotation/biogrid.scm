@@ -26,40 +26,44 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-    #:use-module (ice-9 match)
-    #:use-module (srfi srfi-1)
+     #:use-module (ice-9 match)
+     #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(define* (biogrid-interaction-annotation gene-nodes file-name
+(define* (biogrid-interaction-annotation gene-nodes
+                                         chans
                                          #:key
                                          (interaction "Proteins")
-                                         (namespace #f)
+                                         (namespace "")
                                          (parents 0)
                                          (coding #f)
                                          (noncoding #f)
-                                         (exclude-orgs #f)
+                                         (exclude-orgs "")
                                          )
-	(define namespaces
-		(if namespace (string-split namespace #\ ) '() ))
+	(define namespaces (if (string-null? namespace) 
+                            '() 
+                            (string-split namespace #\space)))
+     
+     (define exclude-taxonomies 
+          (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))
+          
+     (send-message (Concept "biogrid-interaction-annotation") chans)
 
-  (let* (
-       [exclude-taxonomies (if exclude-orgs (string-split exclude-orgs #\ ) '())]
-       [result
-          (append-map (lambda (gene)
+     (for-each (lambda (gene)
             (match interaction
               ("Proteins"
-               (append (match-gene-interactors (GeneNode gene)
+               (begin (match-gene-interactors (GeneNode gene)
+                           chans
                             #t namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
+                             chans
                             #t namespaces parents coding noncoding exclude-taxonomies)))
               ("Genes"
-               (append (match-gene-interactors (GeneNode gene)
+               (begin (match-gene-interactors (GeneNode gene)
+                              chans 
                             #f namespaces parents coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                            #f namespaces parents coding noncoding exclude-taxonomies))
-               )))
-          gene-nodes)]
-         [res (ListLink (ConceptNode "biogrid-interaction-annotation")
-                        (ListLink result))])
-    (write-to-file res file-name "biogrid")
-	res))
+                             chans
+                            #f namespaces parents coding noncoding exclude-taxonomies)))))
+          gene-nodes)
+)

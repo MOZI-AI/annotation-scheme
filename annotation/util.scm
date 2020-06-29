@@ -25,13 +25,17 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation graph)
+  #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)
 	#:use-module (ice-9 textual-ports)
 	#:use-module (ice-9 regex)
 	#:use-module (srfi srfi-1)
+  #:use-module (ice-9 threads)
 	#:use-module (ice-9 match)
   #:use-module (ice-9 threads)
+  #:use-module (json)
+  #:use-module (ice-9 iconv)
 	#:export (create-node
 	          create-edge
             write-to-file
@@ -39,6 +43,44 @@
 )
 
 ; ----------------------------------------------------
+;Define Parameters
+(define-public biogrid-genes (make-parameter (make-atom-set)))
+(define-public biogrid-pairs (make-parameter (make-atom-set)))
+(define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
+
+; ----------------------------------------------------
+;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
+(define-public cache-list '())
+
+(define (atom-hash ATOM SZ)
+	(catch #t
+		(lambda() (modulo (cog-handle ATOM) SZ))
+		(lambda (key . args) 0)))
+
+(define (atom-assoc ATOM ALIST)
+	(find (lambda (pr) (equal? ATOM (car pr))) ALIST))
+
+(define-public (make-afunc-cache AFUNC)
+"
+  make-afunc-cache AFUNC -- Return a caching version of AFUNC.
+  Here, AFUNC is a function that takes a single atom as an argument,
+  and returns some scheme object associated with that atom.
+  This returns a function that returns the same values that AFUNC would
+  return, for the same argument; but if a cached value is available,
+  then that is returned, instead of calling AFUNC a second time.  This
+  is useful whenever AFUNC is cpu-intensive, taking a long time to
+  compute.  In order for the cache to be valid, the value of AFUNC must
+  not depend on side-effects, because it will be called at most once.
+"
+  (define cache (make-hash-table))
+  (set! cache-list (append (list cache) cache-list))
+	(lambda (ITEM)
+		(define val (hashx-ref atom-hash atom-assoc cache ITEM))
+		(if val val
+			(let ((fv (AFUNC ITEM)))
+				(hashx-set! atom-hash atom-assoc cache ITEM fv)
+				fv)))
+)
 
 (define-public (memoize-function-call FUNC)
 "
@@ -59,10 +101,40 @@
 
 ; ----------------------------------------------------
 
+(define run-query-mtx (make-mutex))
+(define-public (run-query QUERY)
+"
+  Call (cog-execute! QUERY), return results, delete the SetLink.
+  This avoids a memory leak of SetLinks
+"
+	; Run the query
+	(define set-link (cog-execute! QUERY))
+
+	(lock-mutex run-query-mtx)
+	(if (cog-atom? set-link)
+		; Get the query results
+		(let ((results (cog-outgoing-set set-link)))
+			; Delete the SetLink
+			(cog-delete set-link)
+			(unlock-mutex run-query-mtx)
+			; Return the results.
+			results)
+		; Try again
+		(begin
+			(unlock-mutex run-query-mtx)
+			(run-query QUERY))
+	)
+)
+
+; --------------------------------------------------------
+
+
+
 ;; Define the parameters needed for GGI
 (define-public biogrid-genes (make-parameter (make-atom-set)))
 (define-public biogrid-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
+(define-public ws (make-parameter '()))
 
 (define (get-name atom)
  (if (> (length atom) 0)
@@ -81,7 +153,7 @@
 )
 
 ;; Find node name and description. See `node-info` below for documentation.
-(define (do-get-node-info node)
+(define-public (do-get-node-info node)
 	(define (node-name node)
 		(let ([lst (find-pathway-name node)])
 				(if (null? lst) (ConceptNode "N/A") (car lst))))
@@ -109,7 +181,7 @@
 
 
 ;;Finds a name of any node (Except GO which has different structure)
-(define (do-find-pathway-name pw)
+(define-public (do-find-pathway-name pw)
 	(define is-enst (string-prefix? "ENST" (cog-name pw)))
    (if (or is-enst (string-contains (cog-name pw) "Uniprot:"))
       (let ([predicate (if is-enst "transcribed_to" "expresses")])
@@ -118,11 +190,8 @@
            (TypedVariable (Variable "$a") (Type 'GeneNode)))
            (Evaluation (Predicate predicate)
               (List (Variable "$a") pw)))))
-      (run-query (Get
-         (VariableList
-         (TypedVariable (Variable "$a") (Type 'ConceptNode)))
-         (Evaluation (Predicate "has_name")
-            (List pw (Variable "$a"))))))
+      '()
+    )
 )
 
 (define find-pathway-name
@@ -179,45 +248,22 @@
   "Find the entrez_id of a gene."
   (let ((entrez (get-name
                   (run-query
-                   (GetLink
-                    (VariableNode "$a")
-                    (EvaluationLink
-                     (PredicateNode "has_entrez_id")
-                     (ListLink
-                      gene
-                      (VariableNode "$a"))))))))
+                    (Get
+                      (EvaluationLink (PredicateNode "has_entrez_id")
+                      (ListLink
+                          gene
+                          (VariableNode "$a"))))
+                    )
+                  )
+          )
+    )
     (match (string-split entrez #\:)
       ((single) single)
-      ((first second . rest) second))))
-
-; ----------------------------------------------------
-
-(define run-query-mtx (make-mutex))
-(define-public (run-query QUERY)
-"
-  Call (cog-execute! QUERY), return results, delete the SetLink.
-  This avoids a memory leak of SetLinks
-"
-	; Run the query
-	(define set-link (cog-execute! QUERY))
-
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
+      ((first second . rest) second))
+      
+  )
+      
 )
-
-; --------------------------------------------------------
 
 (define (do-find-name GO-ATOM)
 "
@@ -243,7 +289,7 @@
 
   (get-name
     (run-query
-     (GetLink
+     (Get
       (Variable "$name")
       (Evaluation
         (Predicate pname)
@@ -275,8 +321,8 @@
 ; --------------------------------------------------------
 
 (define-public (find-current-symbol gene)
-   (map (lambda (g) (cog-name g)) (run-query (BindLink
-            (TypedVariable (Variable "$g") (Type "GeneNode"))
+   (map (lambda (g) (cog-name g)) (run-query (Bind
+            (TypedVariable (Variable "$g") (Type 'GeneNode))
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))
@@ -387,7 +433,7 @@
   (let ([child (cog-outgoing-atom node 0)] 
         [parent (cog-outgoing-atom node 1) ])
       (run-query
-        (BindLink
+        (Bind
           (VariableNode "$loc")
           (ContextLink
             (MemberLink 
@@ -476,4 +522,17 @@
             #f
         )
     )
+)
+
+(define-public (send-message message channels)
+  (if (list? message)
+    (for-each (lambda (msg) (send-message msg channels)) message)
+    (for-each (lambda (chan) (put-message chan message))  channels)
+  )
+)
+
+(define-public (clear-atomspace) 
+      (clear)
+      (for-each hash-clear! cache-list)
+      (set! cache-list '())
 )

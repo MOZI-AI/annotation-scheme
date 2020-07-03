@@ -181,7 +181,7 @@
   (define var-go-term (Variable "$go-term"))
   (define var-drug-action (Variable "$drug-action"))
   (define var-drug (Variable "$drug"))
-  (define var-drug-type (Variable "$drug-type"))
+  (define var-drug-group (Variable "$drug-group"))
 
   (append-map
     (lambda (prot)
@@ -193,7 +193,7 @@
                 (TypedVariable var-go-term (Type "ConceptNode"))
                 (TypedVariable var-drug-action (Type "PredicateNode"))
                 (TypedVariable var-drug (Type "MoleculeNode"))
-                (TypedVariable var-drug-type (Type "ConceptNode"))
+                (TypedVariable var-drug-group (Type "ConceptNode"))
               )
               (And
                 (Evaluation
@@ -210,9 +210,9 @@
                   (List var-drug prot))
                 (Inheritance
                   var-drug
-                  var-drug-type)
+                  var-drug-group)
                 (Inheritance
-                  var-drug-type
+                  var-drug-group
                   (Concept "drug"))
               )
               (Evaluation

@@ -49,7 +49,25 @@
          "translated_to"
          "from_organism"
          "binding" "reaction" "inhibition" "activation"
-         "expression" "catalysis" "ptmod")
+         "expression" "catalysis" "ptmod"
+         ; These are from DrugBank indicating the action of a drug to a protein
+         "acetylation" "activator" "adduct" "aggregation inhibitor"
+         "agonist" "allosteric modulator" "antagonist" "antibody"
+         "antisense oligonucleotide" "binder" "binding" "blocker"
+         "chaperone" "chelator" "cleavage" "coating agent" "cofactor"
+         "component of" "cross-linking/alkylation" "degradation" "deoxidizer"
+         "desensitize the target" "diffusing substance" "dilator" "disruptor"
+         "downregulator" "gene replacement" "inactivator"
+         "incorporation into and destabilization" "inducer" "inhibition of synthesis"
+         "inhibitor" "inhibitory allosteric modulator"
+         "inhibits downstream inflammation cascades" "intercalation" "inverse agonist"
+         "ligand" "metabolizer" "modulator" "multitarget" "negative modulator"
+         "neutralizer" "nucleotide exchange blocker" "other" "other/unknown"
+         "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
+         "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
+         "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
+         "unknown" "vesicant" "weak inhibitor"
+     )
 
      (set! *edges* (cons (create-edge (cadr lns)
                                       (car lns)

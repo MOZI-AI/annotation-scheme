@@ -912,3 +912,23 @@
            (string-prefix? "GO:" (cog-name (gdr inhlink)))))
     (cog-incoming-by-type go-term 'InheritanceLink))
 )
+
+(define (find-go-namespace go-term)
+"
+  find-go-namespace GO-TERM
+
+  Find the namespace that GO-TERM is in.
+"
+  (define var-ns (Variable "$namespace"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-ns (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_namespace")
+          (List go-term var-ns)))
+      (Evaluation
+        (Predicate "GO_namespace")
+        (List go-term var-ns))))
+)

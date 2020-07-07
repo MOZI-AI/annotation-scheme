@@ -151,3 +151,9 @@
     (process-request genes-list file-name request)
   )
 )
+
+(define-public (annotate-go go-terms file-name request)
+  (parameterize ()
+    (process-request go-terms file-name request)
+  )
+)

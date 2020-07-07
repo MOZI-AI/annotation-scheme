@@ -871,3 +871,17 @@
 
 (define-public find-translates
 	(memoize-function-call do-find-translates))
+
+; --------------------------------------------------
+(define (find-go-gene go-term)
+"
+  find-go-gene GO-TERM
+
+  Find the genes associate with GO-TERM via a MemberLink.
+"
+  (filter
+    (lambda (memblink)
+      (and (equal? (gdr memblink) go-term)
+           (equal? (cog-type (gar memblink)) 'GeneNode)))
+    (cog-incoming-by-type go-term 'MemberLink))
+)

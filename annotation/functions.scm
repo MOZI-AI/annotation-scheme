@@ -898,3 +898,17 @@
            (equal? (cog-type (gar memblink)) 'MoleculeNode)))
     (cog-incoming-by-type go-term 'MemberLink))
 )
+
+(define (find-go-parents go-term)
+"
+  find-go-parents GO-TERM
+
+  Find the parent GO terms of GO-TERM via an InheritanceLink.
+"
+  (filter
+    (lambda (inhlink)
+      (and (equal? (gar inhlink) go-term)
+           (equal? (cog-type (gdr inhlink)) 'ConceptNode)
+           (string-prefix? "GO:" (cog-name (gdr inhlink)))))
+    (cog-incoming-by-type go-term 'InheritanceLink))
+)

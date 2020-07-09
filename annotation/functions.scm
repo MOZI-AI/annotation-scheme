@@ -933,26 +933,6 @@
         (List go-term var-ns))))
 )
 
-(define (find-go-name go-term)
-"
-  find-go-name GO-TERM
-
-  Find the name of GO-TERM.
-"
-  (define var-name (Variable "$name"))
-
-  (run-query
-    (Bind
-      (TypedVariable var-name (Type "ConceptNode"))
-      (Present
-        (Evaluation
-          (Predicate "GO_name")
-          (List go-term var-name)))
-      (Evaluation
-        (Predicate "GO_name")
-        (List go-term var-name))))
-)
-
 (define (find-go-has-part go-term)
 "
   find-go-has-part GO-TERM

@@ -18,6 +18,7 @@
 
 (define-module (annotation go)
     #:use-module (annotation functions)
+    #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog bioscience)
     #:export (go-annotation)
@@ -32,7 +33,7 @@
         (send-message (find-go-name go-node) chans)
         (send-message (find-go-namespace go-node) chans)
         (send-message (find-godef go-node) chans)
-        (send-message (find-go-genes go-node) chans)
+        (send-message (find-go-genes go-node biogrid) chans)
         (send-message (find-go-has-part go-node) chans)
         (send-message (find-go-regulates go-node) chans)
         (send-message (find-go-parents go-node) chans)

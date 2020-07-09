@@ -873,17 +873,35 @@
 	(memoize-function-call do-find-translates))
 
 ; --------------------------------------------------
-(define-public (find-go-genes go-term)
+(define-public (find-go-genes go-term biogrid?)
 "
-  find-go-gene GO-TERM
+  find-go-gene GO-TERM BIOGRID?
 
   Find the genes associate with GO-TERM via a MemberLink.
+  If BIOGRID? is true, the gene-gene interaction from
+  the BioBRID database will also be included.
 "
-  (filter
-    (lambda (memblink)
-      (and (equal? (gdr memblink) go-term)
-           (equal? (cog-type (gar memblink)) 'GeneNode)))
-    (cog-incoming-by-type go-term 'MemberLink))
+  (define var-gene-1 (Variable "$gene-1"))
+  (define var-gene-2 (Variable "$gene-2"))
+
+  (if biogrid?
+    (run-query
+      (Bind
+        (VariableSet
+          (TypedVariable var-gene-1 (Type "GeneNode"))
+          (TypedVariable var-gene-2 (Type "GeneNode")))
+        (Present
+          (Member var-gene-1 go-term)
+          (Evaluation
+            (Predicate "interacts_with")
+            (Set var-gene-1 var-gene-2)))
+        (Member var-gene-1 go-term)
+        (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
+    (filter
+      (lambda (memblink)
+        (and (equal? (gdr memblink) go-term)
+             (equal? (cog-type (gar memblink)) 'GeneNode)))
+      (cog-incoming-by-type go-term 'MemberLink)))
 )
 
 (define-public (find-go-proteins go-term)

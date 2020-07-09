@@ -952,3 +952,23 @@
         (Predicate "GO_name")
         (List go-term var-name))))
 )
+
+(define (find-go-has-part go-term)
+"
+  find-go-has-part GO-TERM
+
+  Find the other GO term that is linked with GO-TERM with GO_has_part predicate.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-go-term (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_has_part")
+          (List go-term var-go-term)))
+      (Evaluation
+        (Predicate "GO_has_part")
+        (List go-term var-go-term))))
+)

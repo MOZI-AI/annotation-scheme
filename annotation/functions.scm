@@ -198,7 +198,7 @@
       go
       (VariableNode "$v"))))))
 
-(define (find-go-name go)
+(define-public (find-go-name go)
   "Find the name of a GO term."
   (run-query (Bind
               (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
@@ -213,7 +213,7 @@
                 go
                 (VariableNode "$a"))))))
 
-(define (find-godef go)
+(define-public (find-godef go)
   "Find go definition for parser function."
   (run-query
    (Bind
@@ -873,7 +873,7 @@
 	(memoize-function-call do-find-translates))
 
 ; --------------------------------------------------
-(define (find-go-genes go-term)
+(define-public (find-go-genes go-term)
 "
   find-go-gene GO-TERM
 
@@ -886,7 +886,7 @@
     (cog-incoming-by-type go-term 'MemberLink))
 )
 
-(define (find-go-proteins go-term)
+(define-public (find-go-proteins go-term)
 "
   find-go-protein GO-TERM
 
@@ -899,7 +899,7 @@
     (cog-incoming-by-type go-term 'MemberLink))
 )
 
-(define (find-go-parents go-term)
+(define-public (find-go-parents go-term)
 "
   find-go-parents GO-TERM
 
@@ -913,7 +913,7 @@
     (cog-incoming-by-type go-term 'InheritanceLink))
 )
 
-(define (find-go-namespace go-term)
+(define-public (find-go-namespace go-term)
 "
   find-go-namespace GO-TERM
 
@@ -933,7 +933,7 @@
         (List go-term var-ns))))
 )
 
-(define (find-go-has-part go-term)
+(define-public (find-go-has-part go-term)
 "
   find-go-has-part GO-TERM
 
@@ -953,7 +953,7 @@
         (List go-term var-go-term))))
 )
 
-(define (find-go-regulates go-term)
+(define-public (find-go-regulates go-term)
 "
   find-go-regulates GO-TERM
 

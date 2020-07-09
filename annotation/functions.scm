@@ -972,3 +972,46 @@
         (Predicate "GO_has_part")
         (List go-term var-go-term))))
 )
+
+(define (find-go-regulates go-term)
+"
+  find-go-regulates GO-TERM
+
+  Find the other GO terms that are being regulated by GO-TERM,
+  this includes both positive and negative regulation.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (append
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_positively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_positively_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_negatively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_negatively_regulates")
+          (List go-term var-go-term))))
+  )
+)

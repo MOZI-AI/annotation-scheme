@@ -873,7 +873,7 @@
 	(memoize-function-call do-find-translates))
 
 ; --------------------------------------------------
-(define (find-go-gene go-term)
+(define (find-go-genes go-term)
 "
   find-go-gene GO-TERM
 
@@ -886,7 +886,7 @@
     (cog-incoming-by-type go-term 'MemberLink))
 )
 
-(define (find-go-protein go-term)
+(define (find-go-proteins go-term)
 "
   find-go-protein GO-TERM
 

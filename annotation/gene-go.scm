@@ -36,6 +36,8 @@
                 (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)
 
                 (send-message (find-proteins-goterm (GeneNode gene) (string-split namespace #\space) parents) chans)
+
+                (send-message (find-drugs-protein (GeneNode gene) (string-split namespace #\space)) chans)
               )
               
               (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents) chans)

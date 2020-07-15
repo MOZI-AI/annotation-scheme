@@ -172,6 +172,62 @@
     
     )))
 
+(define-public (find-drugs-protein gene namespace)
+"
+  find-drugs-protein GENE NAMESPACE
+
+  Find the drugs associated with the proteins expressed by GENE in GO terms under NAMESPACE.
+"
+  (define var-go-term (Variable "$go-term"))
+  (define var-drug-action (Variable "$drug-action"))
+  (define var-drug (Variable "$drug"))
+  (define var-drug-group (Variable "$drug-group"))
+
+  (append-map
+    (lambda (prot)
+      (append-map
+        (lambda (ns)
+          (run-query
+            (Bind
+              (VariableSet
+                (TypedVariable var-go-term (Type "ConceptNode"))
+                (TypedVariable var-drug-action (Type "PredicateNode"))
+                (TypedVariable var-drug (Type "MoleculeNode"))
+                (TypedVariable var-drug-group (Type "ConceptNode"))
+              )
+              (And
+                (Evaluation
+                  (Predicate "expresses")
+                  (List gene prot))
+                (Member
+                  gene
+                  var-go-term)
+                (Evaluation
+                  (Predicate "GO_namespace")
+                  (List var-go-term (Concept ns)))
+                (Evaluation
+                  var-drug-action
+                  (List var-drug prot))
+                (Inheritance
+                  var-drug
+                  var-drug-group)
+                (Inheritance
+                  var-drug-group
+                  (Concept "drug"))
+              )
+              (Evaluation
+                var-drug-action
+                (List var-drug prot))
+            )
+          )
+        )
+        namespace
+      )
+    )
+    (find-proteins gene)
+  )
+)
+
 (define (do-go-info go)
   "Add details about the GO term."
   (define GO-ns (find-GO-ns go))

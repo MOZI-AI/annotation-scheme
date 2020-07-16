@@ -910,11 +910,15 @@
 
   Find the proteins associate with GO-TERM via a MemberLink.
 "
-  (filter
-    (lambda (memblink)
-      (and (equal? (gdr memblink) go-term)
-           (equal? (cog-type (gar memblink)) 'MoleculeNode)))
-    (cog-incoming-by-type go-term 'MemberLink))
+  (define var-protein (Variable "$prot"))
+
+  (run-query
+    (Bind
+        (TypedVariable var-protein (Type "MoleculeNode"))
+        (Member var-protein go-term)
+        (Member var-protein go-term)
+    )
+  )
 )
 
 (define-public (find-go-parents go-term)

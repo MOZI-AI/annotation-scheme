@@ -116,7 +116,6 @@ To build the project manually, make sure you have the following dependencies ins
     ```
         scheme@(guile-user)> (include-rna (list "IGF1") "dir-name" #:coding #t #:noncoding #t #:protein 0)
 
-    ```
         scheme@(guile-user)> (gene-go-annotation (list "IGF1") "my-go-dir")
     ```
     Re-run Gene-Go annotation with one parent:

@@ -6,7 +6,12 @@ This project contains the scheme code that is used by MOZI annotation service. I
 
 You can use the `Dockerfile` to build an image that has all the necessary dependencies to run the project or you can build everything manually.
 
-To build the project manually, make sure you have [Atomspace](https://github.com/opencog/atomspace), [Opencog](https://github.com/opencog/opencog), and [guile-json, version 1.x](https://github.com/aconchillo/guile-json) installed. Once you have installed these dependencies, you can build the project using the following instructions:
+To build the project manually, make sure you have the following dependencies installed
+
+ - [Atomspace](https://github.com/opencog/atomspace)
+ - [agi-bio](https://github.com/opencog/agi-bio)
+ - [fibers](https://github.com/Habush/fibers)
+ - [guile-json, version 1.x](https://github.com/aconchillo/guile-json)
 
 1. Clone the project.
 
@@ -57,10 +62,10 @@ To build the project manually, make sure you have [Atomspace](https://github.com
     Required parameters are: list of genes, directory name to write the results, GO namespaces, number of parents to traverse for the GO term and boolean value to include proteins.
 
     ```
-        scheme@(guile-user)> (gene-go-annotation (list "IGF1") "dir-name" #:namespace "biological_process molecular_function cellular_component" #:parents 0 #:protein "True")
+        scheme@(guile-user)> (gene-go-annotation (list "IGF1") "dir-name" #:namespace "biological_process molecular_function cellular_component" #:parents 0 #:protein #t)
 
     ```
-    The default values has also been set to the namespace, number of parents and protein arguments to be "biological_process molecular_function cellular_component", 0 and "True" respectively. So, One can also do go-annotation by setting a value for list of genes and directory name as:
+    The default values has also been set to the namespace, number of parents and protein arguments to be "biological_process molecular_function cellular_component", 0 and #t respectively. So, One can also do go-annotation by setting a value for list of genes and directory name as:
 
     ```
         scheme@(guile-user)> (gene-go-annotation (list "IGF1") "dir-name")
@@ -74,7 +79,7 @@ To build the project manually, make sure you have [Atomspace](https://github.com
     Required parameters includes the list of genes, directory name to write the results, pathways name, options to include proteins and small molecules, cross annotation parameters for biogrid(1 or 0) and gene go annotations(set the namespace and number of parents).
 
     ```
-    scheme@(guile-user)> (gene-pathway-annotation (list "IGF1") "dir-name" #:pathway "reactome smpdb" #:include_prot "True" #:include_sm "True" #:namespace "biological_process" #:parents 0 #:biogrid 1)
+    scheme@(guile-user)> (gene-pathway-annotation (list "IGF1") "dir-name" #:pathway "reactome smpdb" #:include_prot #t #:include_sm #t #:namespace "biological_process" #:parents 0 #:biogrid 1)
 
     ```
     With the default parameters set, One can also do pathways annotations as:
@@ -109,9 +114,8 @@ To build the project manually, make sure you have [Atomspace](https://github.com
     Required parameters are list of genes, directory name to write the results, options to include coding RNA's, non-coding RNA's and proteins.
 
     ```
-        scheme@(guile-user)> (include-rna (list "IGF1") "dir-name" #:coding "True" #:noncoding "True" #:protein 0)
+        scheme@(guile-user)> (include-rna (list "IGF1") "dir-name" #:coding #t #:noncoding #t #:protein 0)
 
-    ```
         scheme@(guile-user)> (gene-go-annotation (list "IGF1") "my-go-dir")
     ```
     Re-run Gene-Go annotation with one parent:

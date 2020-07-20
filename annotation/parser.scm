@@ -19,13 +19,20 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation parser)
+  #:use-module (opencog)
+  #:use-module (opencog exec)
   #:use-module (annotation graph)
   #:use-module (annotation util)
+  #:use-module (ice-9 suspendable-ports)
   #:use-module (ice-9 match)
+  #:use-module (ice-9 textual-ports)
+  #:use-module (fibers channels) 
+  #:use-module (json)
   #:export (atomese->graph
             atomese-parser))
 
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation"))
+(install-suspendable-ports!)
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation"))
 
 (define *nodes* '())
 (define *edges* '())
@@ -39,7 +46,29 @@
          "interacts_with"
          "inferred_interaction"
          "transcribed_to"
-         "translated_to")
+         "translated_to"
+         "from_organism"
+         "binding" "reaction" "inhibition" "activation"
+         "expression" "catalysis" "ptmod"
+         ; These are from DrugBank indicating the action of a drug to a protein
+         "acetylation" "activator" "adduct" "aggregation inhibitor"
+         "agonist" "allosteric modulator" "antagonist" "antibody"
+         "antisense oligonucleotide" "binder" "binding" "blocker"
+         "chaperone" "chelator" "cleavage" "coating agent" "cofactor"
+         "component of" "cross-linking/alkylation" "degradation" "deoxidizer"
+         "desensitize the target" "diffusing substance" "dilator" "disruptor"
+         "downregulator" "gene replacement" "inactivator"
+         "incorporation into and destabilization" "inducer" "inhibition of synthesis"
+         "inhibitor" "inhibitory allosteric modulator"
+         "inhibits downstream inflammation cascades" "intercalation" "inverse agonist"
+         "ligand" "metabolizer" "modulator" "multitarget" "negative modulator"
+         "neutralizer" "nucleotide exchange blocker" "other" "other/unknown"
+         "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
+         "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
+         "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
+         "unknown" "vesicant" "weak inhibitor"
+     )
+
      (set! *edges* (cons (create-edge (cadr lns)
                                       (car lns)
                                       predicate
@@ -112,60 +141,62 @@
   "Recursively traverse the Atomese expression EXPR and build up a
 graph by mutating global variables."
   (define (expr->graph thing)
-    (match thing
+    (match (cog-type thing)
       ;; nodes
-      (((or 'Predicate 'PredicateNode
-             'Gene 'GeneNode
-             'Molecule 'MoleculeNode)
-        (? string? something)) something)
-      (((or 'Concept 'ConceptNode)
-        (? string? something))
-       (handle-node something))
-      (((or 'Variable 'VariableNode)
-        (? string? anything))
-       #false) ; ignore
+      ((or 'PredicateNode
+             'GeneNode
+             'MoleculeNode) (cog-name thing)) 
+      ('ConceptNode
+       (handle-node (cog-name thing)))
+      ('VariableNode
+       #f) ; ignore
 
       ;; member links
-      ((or ((or 'Member 'MemberLink) ('stv _ _) node1 node2)
-           ((or 'Member 'MemberLink) node1 node2))
-       (handle-ln (expr->graph node1)
-                  (expr->graph node2)
+      ('MemberLink
+       (handle-ln (expr->graph (gar thing))
+                  (expr->graph (gdr thing))
                   "annotates"))
 
       ;; inheritance links
-      ((or ((or 'Inheritance 'InheritanceLink) ('stv _ _) node1 node2)
-           ((or 'Inheritance 'InheritanceLink) node1 node2))
-       (handle-ln (expr->graph node1)
-                  (expr->graph node2)
+      ('InheritanceLink
+       (handle-ln (expr->graph (gar thing))
+                  (expr->graph (gdr thing))
                   "child_of"))
 
       ;; eval links
-      ((or ((or 'Evaluation 'EvaluationLink) ('stv _ _) node1 list-link)
-           ((or 'Evaluation 'EvaluationLink) node1 list-link))
-       (handle-eval-ln (expr->graph node1)
-                       (expr->graph list-link)))
+      ('EvaluationLink
+       (handle-eval-ln (expr->graph (gar thing))
+                       (expr->graph (gdr thing))))
 
       ;; lists
-      (((or 'List 'ListLink) . children)
-       (map expr->graph children))
-      (((or 'And 'AndLink 'Or 'OrLink) . links)
-       (map expr->graph links))
-
-      ;; SetLink
-      (((or 'List 'SetLink) . children)
-       (map expr->graph children))
+      ((or 'ListLink 'SetLink 'AndLink OrLink)
+       (map expr->graph (cog-outgoing-set thing)))
 
       ;; This shouldn't happen
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser port #:optional mode)
+(define* (atomese-parser in-chan port)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
-  (atomese->graph
-   (with-input-from-string port
-     read))
-  (make-graph *nodes* *edges*))
+  
+
+  (let loop (
+      (msg (get-message in-chan))
+   )
+    (if (equal? msg 'eof)
+       (begin 
+          (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) port)
+          (close-port port)
+       )
+      (begin 
+         (atomese->graph msg)
+         (loop (get-message in-chan))
+      )
+    )
+  )
+)
+

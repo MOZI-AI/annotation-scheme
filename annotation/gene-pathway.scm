@@ -22,116 +22,129 @@
 (define-module (annotation gene-pathway)
       #:use-module (annotation functions)
       #:use-module (annotation util)
+      #:use-module (annotation string-helpers)
       #:use-module (opencog)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
-      #:use-module (annotation parser)
       #:use-module (srfi srfi-1)
       #:use-module (ice-9 match)
       #:export (gene-pathway-annotation))
 
 ;; TODO: would be better to use a list for the "pathway" argument
 ;; instead of splitting a string.
-;; TODO: don't use the string "True" for include_prot and include_sm.
-(define* (gene-pathway-annotation gene-nodes file-name
+(define* (gene-pathway-annotation gene-nodes 
+                                  chans
                                   #:key
                                   (pathway "reactome")
-                                  (include_prot "True")
-                                  (include_sm "True")
+                                  (include_prot #t)
+                                  (include_sm #t)
                                   (namespace "")
                                   (parents 0)
-                                  (biogrid 1)
-                                  (regulates #t) 
+                                  (biogrid #f)
+                                  (string #f)
+                                  (regulates #t)
                                   (part-of #t)
                                   (bi-dir #t)
-                                  coding
-                                  noncoding)
+                                  (coding #f)
+                                  (noncoding #f))
 
-  (define do-coding (string=? coding "True"))
-  (define do-noncoding (string=? noncoding "True"))
+  (define namespaces (if (string-null? namespace) 
+                            '()
+                            (string-split namespace #\space)))
 
-  (let* ([pwlst '()]
-         [prot? (string=? include_prot "True")]
-         [sm? (string=? include_sm "True")]
-         [pathways (string-split pathway #\space)]
-         [result
-          (append-map (lambda (gene)
-                        (append 
-                         (node-info (GeneNode gene))
-                         (append-map (match-lambda
-                                       ("smpdb"
-                                        (smpdb gene prot? sm? namespace parents regulates part-of bi-dir biogrid do-coding do-noncoding))
-                                       ("reactome"
-                                        (match (reactome gene prot? sm? pwlst namespace parents regulates part-of bi-dir biogrid do-coding do-noncoding)
-                                          ((first . rest)
-                                           (set! pwlst (append pwlst rest))
-                                           first))))
-                                     pathways)))
-                      gene-nodes)]
-         [res (ListLink (ConceptNode "gene-pathway-annotation")
-                        (ListLink result))])
-    (write-to-file res file-name "gene-pathway")
-    res))
+  (let* (
+         [pathways (string-split pathway #\space)])
 
-(define (smpdb gene prot? sm? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
+        (if (not (null? pathways))
+          (begin 
+            (send-message (ConceptNode "gene-pathway-annotation") chans)
+
+            (for-each (lambda (gene)
+                            (for-each (lambda (pathway) 
+                            
+                              (if (string=? pathway "smpdb")
+                                (smpdb gene chans include_prot include_sm namespaces parents regulates part-of bi-dir biogrid string coding noncoding)
+                              )
+                              (if (string=? pathway "reactome")
+                                  (reactome gene chans include_prot include_sm namespaces parents regulates part-of bi-dir biogrid string coding noncoding)
+                              )) pathways))
+                        gene-nodes)
+          )
+        )              
+    
+  ))
+
+(define (smpdb gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
 "
   From SMPDB
 "
-	(define namespace-list (string-split namespaces #\space))
 
-  (let* ([pw (find-pathway-member (GeneNode gene) "SMP")]
-         [ls (append-map (lambda (path)
-                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
-                             (append
-                              (if sm? (find-mol node "ChEBI") '())
-                              (find-pathway-genes node namespace-list num-parents
-                                      regulates part-of bi-dir
-                                      coding-rna non-coding-rna prot?)
-                              (if prot?
-                                  (let ([prots (find-mol node "Uniprot")])
-                                    (if (null? prots)
-                                        (node-info node)
-                                        prots))
-                                  '())
-                              (if (= biogrid 1)
-                                  (pathway-gene-interactors node)
-                                  '()))))
-                         pw)])
-    (append pw
-            ;; when proteins are selected, genes should only be linked to
-            ;; proteins not to pathways
-            (if prot? (find-protein (GeneNode gene) 0) '())
-            ls)))
+  (let* ([pw (find-pathway-member (GeneNode gene) "SMP")])
 
-(define (reactome gene prot? sm? pwlst namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
+
+         (for-each (lambda (path)
+
+                  (send-message (list (Member (Gene gene) path) (node-info path)) chans)
+
+                  (if sm? 
+                    (send-message (find-mol path "ChEBI") chans))
+
+                  (send-message (find-pathway-genes path namespaces num-parents regulates part-of bi-dir 
+                                    coding-rna non-coding-rna prot?) chans)
+                  (if prot?
+                      (let ([prots (find-mol path "Uniprot")])
+                        (if (null? prots)
+                            (send-message prots chans))))
+                  
+                  (if biogrid
+                      (send-message (pathway-gene-interactors path) chans))
+                      
+                  (if string 
+                      (send-message (find-pathway-gene-interactors path) chans)
+                  )
+              )  pw)
+
+          (if prot? 
+            (send-message (find-protein (GeneNode gene) 0) chans))      
+
+    )
+)
+
+(define (reactome gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
 "
   From reactome
 "
-	(define namespace-list (string-split namespaces #\space))
 
   (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
-         [ls (append-map (lambda (path)
-                           (let ([node (cog-outgoing-atom (cog-outgoing-atom path 0) 1)])
-                             (set! pwlst (append pwlst (list node)))
+         [pwlst '()]
+        )
+      
+      (for-each  (lambda (path)
+                  
+                        (send-message (list (Member (Gene gene) path) (node-info path)) chans)
 
-                             (append
-                              (find-pathway-genes node namespace-list num-parents
-                                      regulates part-of bi-dir
-                                      coding-rna non-coding-rna prot?)
-                              (if prot?
-                                  (let ([prots (find-mol node "Uniprot")])
-                                    (if (null? prots)
-                                        (node-info node)
-                                        prots))
-                                '()
-                              )
-                              (if (= biogrid 1)
-                                  (pathway-gene-interactors node)
-                                  '())
-                              (if sm? (find-mol node "ChEBI") '())
-                              (list (pathway-hierarchy node pwlst)))))
-                         pw)])
-    (list (append pw
-                  (if prot? (find-protein (GeneNode gene) 1) '())
-                  ls)
-          pwlst)))
+                        (set! pwlst (append pwlst (list path)))
+
+                      (send-message
+                        (find-pathway-genes path namespaces num-parents
+                              regulates part-of bi-dir coding-rna non-coding-rna prot?) chans)
+                      (if prot?
+                          (let ([prots (find-mol path "Uniprot")])
+                            (if (null? prots)
+                                (send-message prots chans)))
+                      )
+                      (if biogrid
+                          (send-message (pathway-gene-interactors path) chans )
+                      )
+                      (if string 
+                        (send-message (find-pathway-gene-interactors path) chans)
+                      )
+
+                      (if sm? (send-message (find-mol path "ChEBI") chans))
+
+                      (send-message (pathway-hierarchy path pwlst) chans)) pw)
+
+
+      (if prot? 
+          (send-message (find-protein (GeneNode gene) 1) chans))
+))

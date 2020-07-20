@@ -125,7 +125,7 @@
 	; 		(unlock-mutex run-query-mtx)
 	; 		(run-query QUERY))
 	; )
-  (exec-patter "prod-atom" QUERY)
+  (exec-pattern "prod-atom" QUERY)
 )
 
 ; --------------------------------------------------------

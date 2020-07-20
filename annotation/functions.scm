@@ -254,7 +254,7 @@
       go
       (VariableNode "$v"))))))
 
-(define (find-go-name go)
+(define-public (find-go-name go)
   "Find the name of a GO term."
   (run-query (Bind
               (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
@@ -269,7 +269,7 @@
                 go
                 (VariableNode "$a"))))))
 
-(define (find-godef go)
+(define-public (find-godef go)
   "Find go definition for parser function."
   (run-query
    (Bind
@@ -927,3 +927,149 @@
 
 (define-public find-translates
 	(memoize-function-call do-find-translates))
+
+; --------------------------------------------------
+(define-public (find-go-genes go-term biogrid?)
+"
+  find-go-gene GO-TERM BIOGRID?
+
+  Find the genes associate with GO-TERM via a MemberLink.
+  If BIOGRID? is true, the gene-gene interaction from
+  the BioBRID database will also be included.
+"
+  (define var-gene-1 (Variable "$gene-1"))
+  (define var-gene-2 (Variable "$gene-2"))
+
+  (if biogrid?
+    (run-query
+      (Bind
+        (VariableSet
+          (TypedVariable var-gene-1 (Type "GeneNode"))
+          (TypedVariable var-gene-2 (Type "GeneNode")))
+        (Present
+          (Member var-gene-1 go-term)
+          (Evaluation
+            (Predicate "interacts_with")
+            (Set var-gene-1 var-gene-2)))
+        (Member var-gene-1 go-term)
+        (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
+    (filter
+      (lambda (memblink)
+        (and (equal? (gdr memblink) go-term)
+             (equal? (cog-type (gar memblink)) 'GeneNode)))
+      (cog-incoming-by-type go-term 'MemberLink)))
+)
+
+(define-public (find-go-proteins go-term)
+"
+  find-go-protein GO-TERM
+
+  Find the proteins associate with GO-TERM via a MemberLink.
+"
+  (define var-protein (Variable "$prot"))
+
+  (run-query
+    (Bind
+        (TypedVariable var-protein (Type "MoleculeNode"))
+        (Member var-protein go-term)
+        (Member var-protein go-term)
+    )
+  )
+)
+
+(define-public (find-go-parents go-term)
+"
+  find-go-parents GO-TERM
+
+  Find the parent GO terms of GO-TERM via an InheritanceLink.
+"
+  (filter
+    (lambda (inhlink)
+      (and (equal? (gar inhlink) go-term)
+           (equal? (cog-type (gdr inhlink)) 'ConceptNode)
+           (string-prefix? "GO:" (cog-name (gdr inhlink)))))
+    (cog-incoming-by-type go-term 'InheritanceLink))
+)
+
+(define-public (find-go-namespace go-term)
+"
+  find-go-namespace GO-TERM
+
+  Find the namespace that GO-TERM is in.
+"
+  (define var-ns (Variable "$namespace"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-ns (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_namespace")
+          (List go-term var-ns)))
+      (Evaluation
+        (Predicate "GO_namespace")
+        (List go-term var-ns))))
+)
+
+(define-public (find-go-has-part go-term)
+"
+  find-go-has-part GO-TERM
+
+  Find the other GO term that is linked with GO-TERM with GO_has_part predicate.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-go-term (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_has_part")
+          (List go-term var-go-term)))
+      (Evaluation
+        (Predicate "GO_has_part")
+        (List go-term var-go-term))))
+)
+
+(define-public (find-go-regulates go-term)
+"
+  find-go-regulates GO-TERM
+
+  Find the other GO terms that are being regulated by GO-TERM,
+  this includes both positive and negative regulation.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (append
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_positively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_positively_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_negatively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_negatively_regulates")
+          (List go-term var-go-term))))
+  )
+)

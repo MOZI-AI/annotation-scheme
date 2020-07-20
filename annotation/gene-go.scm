@@ -27,7 +27,11 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation gene-nodes chans #:key (namespace "biological_process molecular_function cellular_component") (parents 0) (protein #t) (regulates #t) (bi-dir #t))
+(define* (gene-go-annotation gene-nodes chans #:key 
+                            (namespace "biological_process molecular_function cellular_component") 
+                            (parents 0) 
+                            (protein #t) 
+                            (regulates #f) (bi-dir #f) (part-of #f))
     
     (send-message (Concept "gene-go-annotation") chans)
     (for-each (lambda (gene) 

@@ -30,35 +30,43 @@
     #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(define* (biogrid-interaction-annotation gene-nodes file-name
+(define* (biogrid-interaction-annotation gene-nodes
+                                         chans
                                          #:key
                                          (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
-                                         (regulates #t) (part-of #t) (bi-dir #t)
-                                         coding
-                                         noncoding)
+                                         (regulates #f) (part-of #f) (bi-dir #f)
+                                         (coding #f)
+                                         (noncoding #f)
+                                         (exclude-orgs ""))
 	(define namespaces
 		(if (null? namespace) '() (string-split namespace #\ )))
 
-  (let* ([rna (list (if coding (ConceptNode coding) '())
-                              (if noncoding (ConceptNode noncoding) '()))]
-         [result
-          (append-map (lambda (gene)
+    (define exclude-taxonomies 
+          (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))
+
+     (send-message (Concept "biogrid-interaction-annotation") chans)
+
+     (for-each (lambda (gene)
             (match interaction
               ("Proteins"
-               (append (match-gene-interactors (GeneNode gene)
-                            #t namespaces parents regulates part-of bi-dir coding noncoding)
+               (begin (match-gene-interactors (GeneNode gene) 
+                            chans #t 
+                            namespaces parents regulates part-of bi-dir
+                            coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                            #t namespaces parents regulates part-of bi-dir coding noncoding)))
+                             chans #t 
+                             namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies)))
               ("Genes"
-               (append rna
-                       (match-gene-interactors (GeneNode gene)
-                            #f namespaces parents regulates part-of bi-dir coding noncoding)
+               (begin (match-gene-interactors (GeneNode gene)
+                              chans #f 
+                              namespaces parents regulates part-of bi-dir
+                              coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                            #f namespaces parents regulates part-of bi-dir coding noncoding)))))
-          gene-nodes)]
-         [res (ListLink (ConceptNode "biogrid-interaction-annotation")
-                        (ListLink result))])
-    (write-to-file res file-name "biogrid")
-	res))
+                             chans #f 
+                             namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies)))))
+          gene-nodes)
+)

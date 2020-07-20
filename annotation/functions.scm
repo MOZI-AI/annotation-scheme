@@ -871,7 +871,7 @@
 )
 
 
-(define-public (generate-result gene-a gene-b chans do-protein namespaces num-parents namespaces num-parents regulates part-of bi-dir coding-rna non-coding-rna)
+(define-public (generate-result gene-a gene-b chans do-protein namespaces num-parents  regulates part-of bi-dir coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
 

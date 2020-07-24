@@ -26,8 +26,8 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-     #:use-module (ice-9 match)
-     #:use-module (srfi srfi-1)
+    #:use-module (ice-9 match)
+    #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
 (define* (biogrid-interaction-annotation gene-nodes
@@ -36,34 +36,37 @@
                                          (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
+                                         (regulates #f) (part-of #f) (bi-dir #f)
                                          (coding #f)
                                          (noncoding #f)
-                                         (exclude-orgs "")
-                                         )
-	(define namespaces (if (string-null? namespace) 
-                            '() 
-                            (string-split namespace #\space)))
-     
-     (define exclude-taxonomies 
+                                         (exclude-orgs ""))
+	(define namespaces
+		(if (null? namespace) '() (string-split namespace #\ )))
+
+    (define exclude-taxonomies 
           (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))
-          
+
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
      (for-each (lambda (gene)
             (match interaction
               ("Proteins"
-               (begin (match-gene-interactors (GeneNode gene)
-                           chans
-                            #t namespaces parents coding noncoding exclude-taxonomies)
+               (begin (match-gene-interactors (GeneNode gene) 
+                            chans #t 
+                            namespaces parents regulates part-of bi-dir
+                            coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                             chans
-                            #t namespaces parents coding noncoding exclude-taxonomies)))
+                             chans #t 
+                             namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies)))
               ("Genes"
                (begin (match-gene-interactors (GeneNode gene)
-                              chans 
-                            #f namespaces parents coding noncoding exclude-taxonomies)
+                              chans #f 
+                              namespaces parents regulates part-of bi-dir
+                              coding noncoding exclude-taxonomies)
                        (find-output-interactors (GeneNode gene)
-                             chans
-                            #f namespaces parents coding noncoding exclude-taxonomies)))))
+                             chans #f 
+                             namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies)))))
           gene-nodes)
 )

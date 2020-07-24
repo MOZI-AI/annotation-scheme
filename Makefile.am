@@ -21,8 +21,8 @@ TESTS = \
     tests/util-tests.scm \
     tests/pathway-tests.scm \
     tests/main-tests.scm \
-    tests/string-tests.scm
-
+    tests/string-tests.scm \
+    tests/go-tests.scm
 TEST_EXTENSIONS = .scm
 
 SCM_LOG_DRIVER = \

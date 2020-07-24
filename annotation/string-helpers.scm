@@ -75,8 +75,8 @@
 )
 
 
-(define-public (find-interaction gene chans interactions proteins namespace parents 
-               coding non-coding)
+(define-public (find-interaction gene chans interactions proteins
+                  namespace parents regulates part-of bi-dir coding non-coding)
    ;;Find Genes that interact with the input gene. Optionally specify a filter list of the interactions
    ;;If proteins option is true do a Protein-Protein interaction
    (let (
@@ -89,19 +89,21 @@
         )
          (for-each (lambda (res)
             (send-message res chans)
-            (do-cross-annotation res chans proteins namespace parents coding non-coding)
+            (do-cross-annotation res chans proteins namespace parents regulates part-of bi-dir coding non-coding)
          )        
             (append-map (lambda (prot) (cache-find-ggi (Set prot (List atoms)))) proteins))
         )
         (for-each (lambda (res)
          (send-message res chans)
-         (do-cross-annotation res chans proteins namespace parents coding non-coding)
+         (do-cross-annotation res chans proteins 
+               namespace parents regulates part-of bi-dir coding non-coding)
         ) (cache-find-ggi (Set gene (List atoms))))
       )  
    )
 )
 
-(define-public (find-output-interactions gene chans interactions proteins namespace parents coding non-coding)
+(define-public (find-output-interactions gene chans interactions proteins
+    namespace parents regulates part-of bi-dir coding non-coding)
 
    (define (get-output-interactors intrs)
       (append-map (lambda (intr)
@@ -129,11 +131,13 @@
    (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
       (for-each (lambda (res)
          (send-message res chans)
-         (do-cross-annotation res chans proteins namespace parents coding non-coding)) output-interactors)
+         (do-cross-annotation res chans proteins 
+               namespace parents regulates part-of bi-dir coding non-coding))output-interactors)
    )
 )
 
-(define (do-cross-annotation link out-chans protein namespace num-parent coding non-coding)
+(define (do-cross-annotation link out-chans protein
+             namespace num-parent regulates part-of bi-dir coding non-coding)
     "
      do-cross-annotation -- add info about matched variable nodes
     `namespaces` should be a scheme list of strings (possibly an empty list),
@@ -164,8 +168,8 @@
         (if (not (null? namespace))
             (begin 
                (send-message (Concept "gene-go-annotation") out-chans)
-               (send-message (find-go-term gene-a namespace num-parent) out-chans)
-               (send-message (find-go-term gene-b namespace num-parent) out-chans)
+               (send-message (find-go-term gene-a namespace num-parent regulates part-of bi-dir) out-chans)
+               (send-message (find-go-term gene-b namespace num-parent regulates part-of bi-dir) out-chans)
                (send-message (Concept "string-annotation") out-chans)
             )
 

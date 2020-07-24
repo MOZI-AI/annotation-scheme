@@ -25,7 +25,7 @@
     #:use-module (annotation util)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
-    #:export (find-ggi find-ppi find-output-interactions find-go-plus)
+    #:export (find-go-plus)
 )
 
 (define (add-go-info child-atom parent-atom)

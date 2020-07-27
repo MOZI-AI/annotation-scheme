@@ -222,3 +222,4 @@ build-aux/install-sh
 build-aux/missing
 
 Makefile
+build/

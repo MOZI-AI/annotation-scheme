@@ -172,6 +172,7 @@ graph by mutating global variables."
     (if (equal? msg 'eof)
        (begin 
           (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) port)
+          (force-output port)
           (close-port port)
        )
       (begin 

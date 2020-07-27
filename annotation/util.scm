@@ -24,6 +24,7 @@
 	#:use-module (opencog)
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
+  #:use-module (opencog grpc)
 	#:use-module (annotation graph)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
@@ -35,7 +36,6 @@
 	#:use-module (ice-9 match)
   #:use-module (ice-9 threads)
   #:use-module (json)
-  #:use-module (opencog atom-service)
   #:use-module (ice-9 iconv)
 	#:export (create-node
 	          create-edge
@@ -319,7 +319,7 @@
   ;       (take res 5)
   ;       res
   ; ))
-  (map cog-name (find-similar-node 'GeneNode gene-name))
+  (map cog-name (find-similar-node "prod-atom" 'GeneNode gene-name))
 )
 
 ; --------------------------------------------------------

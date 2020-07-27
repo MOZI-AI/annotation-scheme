@@ -33,7 +33,8 @@
       (msg (get-message chan))
    )
     (if (equal? msg 'eof)
-      (close-port port)   
+      (begin (force-output port)
+          (close-port port))
       (begin 
          (write msg port)
          (loop (get-message chan))

@@ -25,6 +25,7 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation graph)
+  #:use-module (opencog grpc)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)
@@ -108,22 +109,23 @@
   This avoids a memory leak of SetLinks
 "
 	; Run the query
-	(define set-link (cog-execute! QUERY))
+	; (define set-link (cog-execute! QUERY))
 
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
+	; (lock-mutex run-query-mtx)
+	; (if (cog-atom? set-link)
+	; 	; Get the query results
+	; 	(let ((results (cog-outgoing-set set-link)))
+	; 		; Delete the SetLink
+	; 		(cog-delete set-link)
+	; 		(unlock-mutex run-query-mtx)
+	; 		; Return the results.
+	; 		results)
+	; 	; Try again
+	; 	(begin
+	; 		(unlock-mutex run-query-mtx)
+	; 		(run-query QUERY))
+	; )
+  (exec-pattern "prod-atom" QUERY)
 )
 
 ; --------------------------------------------------------
@@ -471,11 +473,11 @@
 
 )
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
-(define-public (flatten x)
-  (cond ((null? x) '())
-        ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
-        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
-        (else (list x))))
+; (define-public (flatten x)
+;   (cond ((null? x) '())
+;         ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
+;         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
+;         (else (list x))))
 
 (define (do-find-organism gene)
 "
@@ -524,9 +526,23 @@
     )
 )
 
+(define (flatten-helper lst acc stk)
+  (cond ((null? lst) 
+         (if (null? stk) (reverse acc)
+             (flatten-helper (car stk) acc (cdr stk))))
+        ((pair? lst)
+         (flatten-helper (car lst) acc (if (null? (cdr lst)) 
+                                             stk 
+                                             (cons (cdr lst) stk))))
+        ((list? lst) 
+         (flatten-helper (cdr lst) (cons (car lst) acc) stk))
+        (else (flatten-helper '() (cons lst acc) stk))))
+
+(define-public (flatten lst) (flatten-helper lst '() '()))
+
 (define-public (send-message message channels)
-  (if (list? message)
-    (for-each (lambda (msg) (send-message msg channels)) message)
+  (if (or (list? message) (pair? message))
+    (for-each (lambda (msg) (send-message msg channels)) (flatten message))
     (for-each (lambda (chan) (put-message chan message))  channels)
   )
 )

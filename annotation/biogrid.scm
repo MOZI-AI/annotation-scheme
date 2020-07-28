@@ -26,8 +26,8 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation parser)
-    #:use-module (ice-9 match)
-    #:use-module (srfi srfi-1)
+      #:use-module (ice-9 match)
+      #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
 (define* (biogrid-interaction-annotation gene-nodes
@@ -51,22 +51,18 @@
      (for-each (lambda (gene)
             (match interaction
               ("Proteins"
-               (begin (match-gene-interactors (GeneNode gene) 
-                            chans #t 
-                            namespaces parents regulates part-of bi-dir
-                            coding noncoding exclude-taxonomies)
-                       (find-output-interactors (GeneNode gene)
-                             chans #t 
-                             namespaces parents regulates part-of bi-dir
-                             coding noncoding exclude-taxonomies)))
+               (begin (send-message (match-gene-interactors (GeneNode gene) 
+                         #t namespaces parents regulates part-of bi-dir
+                            coding noncoding exclude-taxonomies) chans)
+                       (send-message (find-output-interactors (GeneNode gene)
+                             #t namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies) chans)))
               ("Genes"
-               (begin (match-gene-interactors (GeneNode gene)
-                              chans #f 
+               (begin (send-message (match-gene-interactors (GeneNode gene) #f 
                               namespaces parents regulates part-of bi-dir
-                              coding noncoding exclude-taxonomies)
-                       (find-output-interactors (GeneNode gene)
-                             chans #f 
-                             namespaces parents regulates part-of bi-dir
-                             coding noncoding exclude-taxonomies)))))
+                              coding noncoding exclude-taxonomies) chans)
+                       (send-message (find-output-interactors (GeneNode gene)
+                             #f namespaces parents regulates part-of bi-dir
+                             coding noncoding exclude-taxonomies) chans)))))
           gene-nodes)
 )

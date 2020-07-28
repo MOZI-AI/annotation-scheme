@@ -144,8 +144,8 @@
 )
 
 (define-public (annotate-genes genes-list file-name request)
-  (parameterize ((biogrid-genes (make-atom-set))
-                 (biogrid-pairs (make-atom-set))
+  (parameterize ((intr-genes (make-atom-set))
+                 (gene-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
                 )
     (process-request genes-list file-name request)

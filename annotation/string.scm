@@ -45,8 +45,8 @@
 
     (send-message (Concept "string-annotation") chans)
     (for-each (lambda (gene) 
-        (find-interaction (GeneNode gene) chans interaction-lst protein 
-        namespaces parents regulates part-of bi-dir coding noncoding)
-        (find-output-interactions (GeneNode gene) chans interaction-lst protein namespaces parents regulates part-of bi-dir coding noncoding)
+        (send-message (find-interaction (GeneNode gene) interaction-lst protein 
+        namespaces parents regulates part-of bi-dir coding noncoding) chans)
+        (send-message (find-output-interactions (GeneNode gene) interaction-lst protein namespaces parents regulates part-of bi-dir coding noncoding) chans)
     ) genes)
 )

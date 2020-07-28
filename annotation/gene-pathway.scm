@@ -65,9 +65,7 @@
                               )) pathways))
                         gene-nodes)
           )
-        )              
-    
-  ))
+)))
 
 (define (smpdb gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
 "

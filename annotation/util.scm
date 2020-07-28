@@ -26,6 +26,7 @@
 	#:use-module (opencog bioscience)
   #:use-module (opencog grpc)
 	#:use-module (annotation graph)
+  #:use-module (opencog grpc)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)
@@ -42,11 +43,11 @@
             write-to-file
             get-file-path)
 )
+;Define Parameters
 
 ; ----------------------------------------------------
-;Define Parameters
-(define-public biogrid-genes (make-parameter (make-atom-set)))
-(define-public biogrid-pairs (make-parameter (make-atom-set)))
+(define-public intr-genes (make-parameter (make-atom-set)))
+(define-public gene-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 
 ; ----------------------------------------------------
@@ -133,8 +134,8 @@
 
 
 ;; Define the parameters needed for GGI
-(define-public biogrid-genes (make-parameter (make-atom-set)))
-(define-public biogrid-pairs (make-parameter (make-atom-set)))
+(define-public intr-genes (make-parameter (make-atom-set)))
+(define-public gene-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 (define-public ws (make-parameter '()))
 
@@ -475,11 +476,11 @@
 
 )
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
-(define-public (flatten x)
-  (cond ((null? x) '())
-        ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
-        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
-        (else (list x))))
+; (define-public (flatten x)
+;   (cond ((null? x) '())
+;         ((and (cog-link? x) (null? (cog-outgoing-set x))) '())
+;         ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
+;         (else (list x))))
 
 (define (do-find-organism gene)
 "
@@ -528,9 +529,23 @@
     )
 )
 
+(define (flatten-helper lst acc stk)
+  (cond ((null? lst) 
+         (if (null? stk) (reverse acc)
+             (flatten-helper (car stk) acc (cdr stk))))
+        ((pair? lst)
+         (flatten-helper (car lst) acc (if (null? (cdr lst)) 
+                                             stk 
+                                             (cons (cdr lst) stk))))
+        ((list? lst) 
+         (flatten-helper (cdr lst) (cons (car lst) acc) stk))
+        (else (flatten-helper '() (cons lst acc) stk))))
+
+(define-public (flatten lst) (flatten-helper lst '() '()))
+
 (define-public (send-message message channels)
-  (if (list? message)
-    (for-each (lambda (msg) (send-message msg channels)) message)
+  (if (or (list? message) (pair? message))
+    (for-each (lambda (msg) (send-message msg channels)) (flatten message))
     (for-each (lambda (chan) (put-message chan message))  channels)
   )
 )
@@ -539,4 +554,17 @@
       (clear)
       (for-each hash-clear! cache-list)
       (set! cache-list '())
+)
+
+;; helper function to convert stvs to scheme boolean values
+(define-public (stv->scm tv)
+  (= 1 (cog-tv-mean tv))
+)
+
+;; helper function to conver scheme boolean vals to stvs
+(define-public (scm->stv val)
+    (if val
+        (SimpleTruthValue 1 0)
+        (SimpleTruthValue 0 0)
+    )
 )

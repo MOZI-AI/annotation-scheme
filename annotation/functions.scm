@@ -23,10 +23,9 @@
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
     #:use-module (annotation util)
-;    #:use-module (rnrs base)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
-    #:export (find-ggi find-ppi find-output-interactions)
+    #:export (find-go-plus)
 )
 
 (define (add-go-info child-atom parent-atom)
@@ -95,7 +94,7 @@
    (append-map add-go-member-ns namespaces)
 )
 
-(define-public (find-go-term g namespaces num-parents)
+(define-public (find-go-term g namespaces num-parents regulates part-of bi-dir)
 "
   The main function to find the go terms for a gene with a
   specification of the parents.
@@ -122,13 +121,154 @@
    ; res is list of the GO terms directly related to 
    ; the input gene (g) that are members of the input namespaces
    (define res (find-memberln g namespaces))
-
+   (define go-regulates (append-map (lambda (go) (find-go-plus go regulates part-of bi-dir)) res))
    (define all-parents (loop num-parents res '()))
 
-   (cons (node-info g) all-parents)
+   (append (node-info g) all-parents go-regulates)
 )
 
-(define-public (find-proteins-goterm gene namespace parent)
+(define regulates-rln (List (Concept "GO_regulates") (Concept "GO_positively_regulates") (Concept "GO_negatively_regulates")))
+
+(define (do-find-regulates input-atom)
+      (if (stv->scm (cog-tv input-atom))
+         (append (append-map (lambda (reg) (run-query (Bind 
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+
+         ))) (cog-outgoing-set regulates-rln))
+
+         (append-map (lambda (reg) (run-query (Bind 
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (Variable "$go")
+                  (gar input-atom)
+               )
+            )
+
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (Variable "$go")
+                  (gar input-atom)
+               )
+            )
+
+         ))) (cog-outgoing-set regulates-rln)))
+
+         (append-map (lambda (reg) (run-query (Bind 
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+
+            (Evaluation
+               (Predicate (cog-name reg))
+               (ListLink
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+
+         ))) (cog-outgoing-set regulates-rln))
+      
+      )
+   )
+
+(define find-go-regulates (memoize-function-call do-find-regulates))
+
+(define (do-find-part-of input-atom)
+   (if (stv->scm (cog-tv input-atom))
+      (append
+         (run-query (Bind
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+         ))
+         (run-query
+            (Bind
+               (Evaluation
+                  (Predicate "has_part")
+                  (List
+                     (Variable "$go")
+                     (gar input-atom)
+                  )
+               )
+               (Evaluation
+                  (Predicate "has_part")
+                  (List
+                     (Variable "$go")
+                     (gar input-atom)
+                  )
+               )
+            )
+         
+         ))
+      (run-query (Bind
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+            (Evaluation
+               (Predicate "has_part")
+               (List
+                  (gar input-atom)
+                  (Variable "$go")
+               )
+            )
+         ))
+   )
+)
+
+(define find-part-of (memoize-function-call do-find-part-of))
+
+(define* (find-go-plus go-term #:optional (regulates #t) (part_of #t) (bi-direction #t))
+   (define (find-go-plus-info ln)
+      (if (equal? go-term (gadr ln))
+           (go-info (gddr ln))
+           (go-info (gadr ln))
+       )
+   )
+   (let (
+      [go-reg-terms (if regulates (find-go-regulates (Set go-term (scm->stv bi-direction))) '())]
+      [go-part-terms (if part_of (find-part-of (Set go-term (scm->stv bi-direction))) '())]
+   ) 
+      (append go-reg-terms go-part-terms (append-map find-go-plus-info go-reg-terms) 
+         (append-map find-go-plus-info go-part-terms))
+   )
+)
+
+(define-public (find-proteins-goterm gene namespace parent regulates part-of bi-dir)
   "Find GO terms for proteins coded by the given gene."
   (let* ([prots (find-proteins gene)])
     
@@ -161,7 +301,7 @@
                 ))
 
                (list
-                  (find-go-term prot namespace parent)
+                  (find-go-term prot namespace parent regulates part-of bi-dir)
                   (EvaluationLink (PredicateNode "expresses")
                      (ListLink gene prot))
                ))) prots)
@@ -171,6 +311,62 @@
           )
     
     )))
+
+(define-public (find-drugs-protein gene namespace)
+"
+  find-drugs-protein GENE NAMESPACE
+
+  Find the drugs associated with the proteins expressed by GENE in GO terms under NAMESPACE.
+"
+  (define var-go-term (Variable "$go-term"))
+  (define var-drug-action (Variable "$drug-action"))
+  (define var-drug (Variable "$drug"))
+  (define var-drug-group (Variable "$drug-group"))
+
+  (append-map
+    (lambda (prot)
+      (append-map
+        (lambda (ns)
+          (run-query
+            (Bind
+              (VariableSet
+                (TypedVariable var-go-term (Type "ConceptNode"))
+                (TypedVariable var-drug-action (Type "PredicateNode"))
+                (TypedVariable var-drug (Type "MoleculeNode"))
+                (TypedVariable var-drug-group (Type "ConceptNode"))
+              )
+              (And
+                (Evaluation
+                  (Predicate "expresses")
+                  (List gene prot))
+                (Member
+                  gene
+                  var-go-term)
+                (Evaluation
+                  (Predicate "GO_namespace")
+                  (List var-go-term (Concept ns)))
+                (Evaluation
+                  var-drug-action
+                  (List var-drug prot))
+                (Inheritance
+                  var-drug
+                  var-drug-group)
+                (Inheritance
+                  var-drug-group
+                  (Concept "drug"))
+              )
+              (Evaluation
+                var-drug-action
+                (List var-drug prot))
+            )
+          )
+        )
+        namespace
+      )
+    )
+    (find-proteins gene)
+  )
+)
 
 (define (do-go-info go)
   "Add details about the GO term."
@@ -198,7 +394,7 @@
       go
       (VariableNode "$v"))))))
 
-(define (find-go-name go)
+(define-public (find-go-name go)
   "Find the name of a GO term."
   (run-query (Bind
               (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
@@ -213,7 +409,7 @@
                 go
                 (VariableNode "$a"))))))
 
-(define (find-godef go)
+(define-public (find-godef go)
   "Find go definition for parser function."
   (run-query
    (Bind
@@ -250,7 +446,7 @@
 
 ; --------------------------------------------------------
 
-(define (add-pathway-genes pathway gene namespace-list num-parents
+(define (add-pathway-genes pathway gene namespace-list num-parents regulates part-of bi-dir
                 do-coding-rna do-non-coding-rna do-protein)
 
 	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
@@ -264,7 +460,7 @@
 		(if no-ns '()
 			(list
 				(Concept "gene-go-annotation")
-				(find-go-term gene namespace-list num-parents)
+				(find-go-term gene namespace-list num-parents regulates part-of bi-dir)
 				(Concept "gene-pathway-annotation")))
 		(if no-rna '()
 			(let* ([rnaresult
@@ -288,7 +484,8 @@
 
 (define get-pathway-genes (memoize-function-call do-get-pathway-genes))
 
-(define-public (find-pathway-genes pathway namespace-list num-parents
+(define-public (find-pathway-genes pathway namespace-list 
+                  num-parents regulates part-of bi-dir
                   coding-rna non-coding-rna do-protein)
 "
   Find genes which code the proteins in a given pathway.  Perform
@@ -306,7 +503,8 @@
 "
 	(map
 		(lambda (gene)
-			(add-pathway-genes pathway gene namespace-list num-parents
+			(add-pathway-genes pathway gene namespace-list num-parents 
+            regulates part-of bi-dir
 				coding-rna non-coding-rna do-protein))
 		(get-pathway-genes pathway))
 )
@@ -372,6 +570,42 @@
 
 ; --------------------------------------------------------
 
+(define chebi-rlns '("has_part" "has_role"))
+
+(define (do-find-mol-go-plus mol)
+   (let* (
+      [chebis (append-map (lambda (rln)
+         (run-query (Bind 
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink
+                              mol
+                              (Variable "$mol")
+                           )
+                        )
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink
+                              mol
+                              (Variable "$mol")
+                           )
+                        )))
+      )  chebi-rlns)]
+
+      [parents (run-query (Bind 
+             (TypedVariable (Variable "$par") (Type 'ConceptNode))
+             (Inheritance mol (Variable "$par"))
+             (Inheritance mol (Variable "$par"))))]) 
+
+      (append chebis parents)
+   )
+
+)
+
+(define-public find-mol-go-plus
+   (memoize-function-call do-find-mol-go-plus)
+)
+
 (define-public (pathway-hierarchy pw lst)
 "
   pathway-hierarchy -- Find hierarchy of the reactome pathway.
@@ -388,7 +622,7 @@
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
         (find-coding-gene mol)
-        '()
+        (find-mol-go-plus mol)
         )
       (node-info mol)
       (ListLink
@@ -399,7 +633,7 @@
       (MemberLink mol path)
       (if (string-contains (cog-name mol) "Uniprot")
         (find-coding-gene mol)
-        '()
+        (find-mol-go-plus mol)
       )
       (node-info mol)
       (ListLink (locate-node mol))
@@ -445,15 +679,15 @@
 ; ------------------------------------
 
 
-(define-public (match-gene-interactors gene chans do-protein namespace parents coding non-coding exclude-orgs)
+(define-public (match-gene-interactors gene do-protein namespace parents regulates part-of bi-dir coding non-coding exclude-orgs)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
   If do-protein is #t then protein interactions are included.
 "
-	(for-each
+	(append-map
 		(lambda (act-gene)
-			(generate-result gene act-gene chans do-protein namespace parents coding non-coding))
+			(generate-result gene act-gene do-protein namespace parents regulates part-of bi-dir coding non-coding))
 
 		(run-query (Get
                   (And 
@@ -466,15 +700,10 @@
                               (List 
                                  (Variable "$a")
                                  (ConceptNode (string-append "ncbi:" org))
-                              )
-                           )
-                        )
-                     ) exclude-orgs))
-               ))
-      )
-)
+                              )))) exclude-orgs))
+               ))))
 
-(define-public (find-output-interactors gene chans do-protein namespace parents coding non-coding exclude-orgs)
+(define-public (find-output-interactors gene do-protein namespace parents regulates part-of bi-dir coding non-coding exclude-orgs)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
@@ -483,9 +712,9 @@
 
   If do-protein is #t then protein interactions are included.
 "
-	(for-each
+	(append-map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) chans do-protein namespace parents coding non-coding))
+			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents regulates part-of bi-dir coding non-coding))
 
 		(run-query (Get
             (VariableList
@@ -506,25 +735,14 @@
                               (Evaluation (Predicate "from_organism")
                                  (List 
                                     (Variable "$a")
-                                    (ConceptNode (string-append "ncbi:" org))
-                                 )
-                              )
-                           )
+                                    (ConceptNode (string-append "ncbi:" org)))))
                            (Absent 
                               (Evaluation (Predicate "from_organism")
                                  (List 
                                     (Variable "$b")
                                     (ConceptNode (string-append "ncbi:" org))
-                                 )
-                              )
-                           )
-                        )
-                        
-                     ) exclude-orgs)
-               
-               )
-         )))
-)
+                                 ))))
+                        ) exclude-orgs))))))
 
 ;; ------------------------------------------------------
 
@@ -637,8 +855,7 @@
 )
 
 
-(define-public (generate-result gene-a gene-b chans do-protein namespaces num-parents
-                                coding-rna non-coding-rna)
+(define-public (generate-result gene-a gene-b do-protein namespaces num-parents  regulates part-of bi-dir coding-rna non-coding-rna)
 "
   generate-result -- add info about matched variable nodes
 
@@ -657,9 +874,9 @@
 		    (equal? (cog-type gene-b) 'VariableNode))
 		(ListLink)
 		(let* (
-				[already-done-a ((biogrid-genes) gene-a)]
-				[already-done-b ((biogrid-genes) gene-b)]
-            [already-done-pair ((biogrid-pairs) (List gene-a gene-b))]
+				[already-done-a ((intr-genes) gene-a)]
+				[already-done-b ((intr-genes) gene-b)]
+            [already-done-pair ((gene-pairs) (List gene-a gene-b))]
 
 				[output (find-pubmed-id gene-a gene-b)]
             [interaction (if do-protein
@@ -680,8 +897,8 @@
                     (if (null? namespaces) '()
                         (list
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a namespaces num-parents)
-                           (find-go-term gene-b namespaces num-parents)
+                           (find-go-term gene-a namespaces num-parents regulates part-of bi-dir)
+                           (find-go-term gene-b namespaces num-parents regulates part-of bi-dir)
                            (Concept "biogrid-interaction-annotation"))
                     )]
                  [rna-cross-annotation
@@ -692,15 +909,13 @@
                           (find-rna gene-b coding-rna non-coding-rna do-protein)
                           (Concept "biogrid-interaction-annotation"))
                         '()     
-                     )
-                          
-                     ])
+                     )])
                       (if do-protein
                         (let ([coding-prot-a (find-protein-form gene-a)]
                               [coding-prot-b (find-protein-form gene-b)])
                         (if (not (or (equal? coding-prot-a (ListLink))
                                 (equal? coding-prot-b (ListLink))))
-                          (send-message (list
+                          (append (list
                             interaction
                             (Evaluation (Predicate "expresses") (List gene-a coding-prot-a))
                             (node-info gene-a)
@@ -709,68 +924,60 @@
                             (Evaluation (Predicate "expresses") (List gene-b coding-prot-b))
                             (node-info gene-b)
                             (node-info coding-prot-b)
-                            (locate-node coding-prot-b)
+                            (locate-node coding-prot-b))
                             go-cross-annotation
-                            rna-cross-annotation
-                          ) chans)
-                        ))
-                      (send-message (list
-                          interaction
-                          (node-info gene-a)
-                          (locate-node gene-a)
-                          (node-info gene-b)
-                          (locate-node gene-b)
-                          go-cross-annotation
-                          rna-cross-annotation
-                      ) chans)
-                    )
-                  ))
+                            rna-cross-annotation) ))
+
+                           (append (list
+                              interaction
+                              (node-info gene-a)
+                              (locate-node gene-a)
+                              (node-info gene-b)
+                              (locate-node gene-b))
+                              go-cross-annotation
+                              rna-cross-annotation))))
 
               ;; One of the two genes is done already. Do the other one.
               ((or (not already-done-a) (not already-done-b))
-              (let* (
-                  [gene-x (if already-done-a gene-b gene-a)]
-                  [go-cross-annotation
-                     (if (null? namespaces) '()
-                        (list
-                           (Concept "gene-go-annotation")
-                           (find-go-term gene-x namespaces num-parents)
-                           (Concept "biogrid-interaction-annotation"))
-                     )]
-                  [rna-cross-annotation
-                     (if (or coding-rna non-coding-rna)
-                        (list
-                           (Concept "rna-annotation")
-                           (find-rna gene-x coding-rna non-coding-rna do-protein)
-                           (Concept "biogrid-interaction-annotation"))
-                        '()
-                    )])
-                 (if do-protein
-                    (let ([coding-prot (find-protein-form gene-x)])
-                       (if (not (equal? coding-prot (ListLink)))
-                          (send-message (list
-                            interaction
-                            (Evaluation (Predicate "expresses") (List gene-x coding-prot))
-                            (node-info gene-x)
-                            (node-info coding-prot)
-                            (locate-node coding-prot)
-                            go-cross-annotation
-                            rna-cross-annotation) chans)
-                    ))
-                    (send-message (list
-                       interaction
-                       (node-info gene-x)
-                       (locate-node  gene-x)
-                       go-cross-annotation
-                       rna-cross-annotation) chans)
-                )))
+               (let* (
+                     [gene-x (if already-done-a gene-b gene-a)]
+                     [go-cross-annotation
+                        (if (null? namespaces) '()
+                           (list
+                              (Concept "gene-go-annotation")
+                              (find-go-term gene-x namespaces num-parents regulates part-of bi-dir)
+                              (Concept "biogrid-interaction-annotation"))
+                        )]
+                     [rna-cross-annotation
+                        (if (or coding-rna non-coding-rna)
+                           (list
+                              (Concept "rna-annotation")
+                              (find-rna gene-x coding-rna non-coding-rna do-protein)
+                              (Concept "biogrid-interaction-annotation"))
+                           '()
+                     )])
+                  (if do-protein
+                     (let ([coding-prot (find-protein-form gene-x)])
+                        (if (not (equal? coding-prot (ListLink)))
+                           (append (list
+                              interaction
+                              (Evaluation (Predicate "expresses") (List gene-x coding-prot))
+                              (node-info gene-x)
+                              (node-info coding-prot)
+                              (locate-node coding-prot))
+                              go-cross-annotation
+                              rna-cross-annotation)
+                     ))
+                     (append (list
+                        interaction
+                        (node-info gene-x)
+                        (locate-node  gene-x)
+                        go-cross-annotation)
+                        rna-cross-annotation)
+                  )))
 
               ;;; Both of the genes have been done.
-              (else (if (not already-done-pair)  (send-message interaction chans)))
-          )
-      )
-   )
-)
+              (else (if (not already-done-pair)  (list interaction)))))))
 
 ;; ------------------------------------------------------
 
@@ -871,3 +1078,149 @@
 
 (define-public find-translates
 	(memoize-function-call do-find-translates))
+
+; --------------------------------------------------
+(define-public (find-go-genes go-term biogrid?)
+"
+  find-go-gene GO-TERM BIOGRID?
+
+  Find the genes associate with GO-TERM via a MemberLink.
+  If BIOGRID? is true, the gene-gene interaction from
+  the BioBRID database will also be included.
+"
+  (define var-gene-1 (Variable "$gene-1"))
+  (define var-gene-2 (Variable "$gene-2"))
+
+  (if biogrid?
+    (run-query
+      (Bind
+        (VariableSet
+          (TypedVariable var-gene-1 (Type "GeneNode"))
+          (TypedVariable var-gene-2 (Type "GeneNode")))
+        (Present
+          (Member var-gene-1 go-term)
+          (Evaluation
+            (Predicate "interacts_with")
+            (Set var-gene-1 var-gene-2)))
+        (Member var-gene-1 go-term)
+        (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
+    (filter
+      (lambda (memblink)
+        (and (equal? (gdr memblink) go-term)
+             (equal? (cog-type (gar memblink)) 'GeneNode)))
+      (cog-incoming-by-type go-term 'MemberLink)))
+)
+
+(define-public (find-go-proteins go-term)
+"
+  find-go-protein GO-TERM
+
+  Find the proteins associate with GO-TERM via a MemberLink.
+"
+  (define var-protein (Variable "$prot"))
+
+  (run-query
+    (Bind
+        (TypedVariable var-protein (Type "MoleculeNode"))
+        (Member var-protein go-term)
+        (Member var-protein go-term)
+    )
+  )
+)
+
+(define-public (find-go-parents go-term)
+"
+  find-go-parents GO-TERM
+
+  Find the parent GO terms of GO-TERM via an InheritanceLink.
+"
+  (filter
+    (lambda (inhlink)
+      (and (equal? (gar inhlink) go-term)
+           (equal? (cog-type (gdr inhlink)) 'ConceptNode)
+           (string-prefix? "GO:" (cog-name (gdr inhlink)))))
+    (cog-incoming-by-type go-term 'InheritanceLink))
+)
+
+(define-public (find-go-namespace go-term)
+"
+  find-go-namespace GO-TERM
+
+  Find the namespace that GO-TERM is in.
+"
+  (define var-ns (Variable "$namespace"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-ns (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_namespace")
+          (List go-term var-ns)))
+      (Evaluation
+        (Predicate "GO_namespace")
+        (List go-term var-ns))))
+)
+
+(define-public (find-go-has-part go-term)
+"
+  find-go-has-part GO-TERM
+
+  Find the other GO term that is linked with GO-TERM with GO_has_part predicate.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (run-query
+    (Bind
+      (TypedVariable var-go-term (Type "ConceptNode"))
+      (Present
+        (Evaluation
+          (Predicate "GO_has_part")
+          (List go-term var-go-term)))
+      (Evaluation
+        (Predicate "GO_has_part")
+        (List go-term var-go-term))))
+)
+
+(define-public (find-go-regulates go-term)
+"
+  find-go-regulates GO-TERM
+
+  Find the other GO terms that are being regulated by GO-TERM,
+  this includes both positive and negative regulation.
+"
+  (define var-go-term (Variable "$go-term"))
+
+  (append
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_positively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_positively_regulates")
+          (List go-term var-go-term))))
+    (run-query
+      (Bind
+        (TypedVariable var-go-term (Type "ConceptNode"))
+        (Present
+          (Evaluation
+            (Predicate "GO_negatively_regulates")
+            (List go-term var-go-term)))
+        (Evaluation
+          (Predicate "GO_negatively_regulates")
+          (List go-term var-go-term))))
+  )
+)

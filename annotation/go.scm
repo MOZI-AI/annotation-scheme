@@ -1,5 +1,4 @@
 ;;; MOZI-AI Annotation Scheme
-;;; Copyright © 2020 Abdulrahman Semrie
 ;;;
 ;;; This file is part of MOZI-AI Annotation Scheme
 ;;;
@@ -17,27 +16,30 @@
 ;;; along with this software.  If not, see
 ;;; <http://www.gnu.org/licenses/>.
 
-(define-module (annotation writer)
+(define-module (annotation go)
+    #:use-module (annotation functions)
+    #:use-module (annotation util)
     #:use-module (opencog)
-    #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (ice-9 suspendable-ports)
-    #:use-module (ice-9 textual-ports)
-    #:use-module (fibers channels)
+    #:export (go-annotation)
 )
 
-(install-suspendable-ports!)
+(define* (go-annotation go-terms chans #:key (biogrid #f) (protein #t))
+  (send-message (Concept "go-annotation") chans)
 
-(define-public (output-to-file proc port)
-    (let loop (
-      (msg (proc))
-   )
-    (if (equal? msg 'eof)
-      (begin (force-output port)
-          (close-port port))
-      (begin 
-         (write msg port)
-         (loop (proc))
+  (for-each
+    (lambda (go-term)
+      (let ((go-node (Concept go-term)))
+        (send-message (find-go-name go-node) chans)
+        (send-message (find-go-namespace go-node) chans)
+        (send-message (find-godef go-node) chans)
+        (send-message (find-go-genes go-node biogrid) chans)
+        (send-message (find-go-has-part go-node) chans)
+        (send-message (find-go-regulates go-node) chans)
+        (send-message (find-go-parents go-node) chans)
+        (if protein (send-message (find-go-proteins go-node) chans))
       )
     )
-))
+    go-terms
+  )
+)

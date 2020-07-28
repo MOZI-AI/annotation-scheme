@@ -38,12 +38,10 @@
                                   (pathway "reactome")
                                   (include_prot #t)
                                   (include_sm #t)
-                                  (namespace "")
-                                  (parents 0)
-                                  (biogrid #f)
-                                  (string #f)
-                                  (coding #f)
-                                  (noncoding #f))
+                                  (namespace "") (parents 0)
+                                  (biogrid #f) (string #f)
+                                  (regulates #f) (part-of #f) (bi-dir #f)
+                                  (coding #f) (noncoding #f))
 
   (define namespaces (if (string-null? namespace) 
                             '()
@@ -60,18 +58,16 @@
                             (for-each (lambda (pathway) 
                             
                               (if (string=? pathway "smpdb")
-                                (smpdb gene chans include_prot include_sm namespaces parents biogrid string coding noncoding)
+                                (smpdb gene chans include_prot include_sm namespaces parents regulates part-of bi-dir biogrid string coding noncoding)
                               )
                               (if (string=? pathway "reactome")
-                                  (reactome gene chans include_prot include_sm namespaces parents biogrid string coding noncoding)
+                                  (reactome gene chans include_prot include_sm namespaces parents regulates part-of bi-dir biogrid string coding noncoding)
                               )) pathways))
                         gene-nodes)
           )
-        )              
-    
-  ))
+)))
 
-(define (smpdb gene chans prot? sm? namespaces num-parents biogrid string coding-rna non-coding-rna)
+(define (smpdb gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
 "
   From SMPDB
 "
@@ -86,7 +82,8 @@
                   (if sm? 
                     (send-message (find-mol path "ChEBI") chans))
 
-                  (send-message (find-pathway-genes path namespaces num-parents coding-rna non-coding-rna prot?) chans)
+                  (send-message (find-pathway-genes path namespaces num-parents regulates part-of bi-dir 
+                                    coding-rna non-coding-rna prot?) chans)
                   (if prot?
                       (let ([prots (find-mol path "Uniprot")])
                         (if (null? prots)
@@ -106,7 +103,7 @@
     )
 )
 
-(define (reactome gene chans prot? sm? namespaces num-parents biogrid string coding-rna non-coding-rna)
+(define (reactome gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
 "
   From reactome
 "
@@ -123,7 +120,7 @@
 
                       (send-message
                         (find-pathway-genes path namespaces num-parents
-                              coding-rna non-coding-rna prot?) chans)
+                              regulates part-of bi-dir coding-rna non-coding-rna prot?) chans)
                       (if prot?
                           (let ([prots (find-mol path "Uniprot")])
                             (if (null? prots)

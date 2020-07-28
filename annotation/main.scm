@@ -63,8 +63,7 @@
                           )
                         )
                     )
-                ) gene-list))
-        )
+                ) gene-list)))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records)))
@@ -106,46 +105,46 @@
                               (if (or (string=? val "True") (string=? val "False"))
                                 (str->tv val)
                                 val
-                              )
-                          ))
-                      )
-                  ) filters))))
+                              ))))) filters))))
                   )
-                  (cons func args)
-                  
-                )
+                  (cons func args))
                 '()
-            )
-        
-        ) 
-        
-    ) table))
+            ))) table))
 ))
 
-(define-public (annotate-genes genes-list file-name request)
-  (parameterize ((biogrid-genes (make-atom-set))
-                 (biogrid-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set))
-                 )
-    
-    (run-fibers (lambda ()
-      (let* (
-           [parser-chan (make-channel)]
-           [writer-chan (make-channel)]
-           [functions (parse-request request)]
-           [parser-port (open-file (get-file-path file-name file-name ".json") "w")]
-           [writer-port (open-file (get-file-path file-name "result") "w")]
-         )
-           
-          (spawn-fiber (lambda () (output-to-file writer-chan writer-port)))
+(define (process-request item-list file-name request)
+  (run-fibers
+    (lambda ()
+      (let ((parser-chan (make-channel))
+            (writer-chan (make-channel))
+            (functions (parse-request request))
+            (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
+            (writer-port (open-file (get-file-path file-name "result") "w"))
+           )
+        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port)))
 
-          (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
+        (spawn-fiber (lambda () 
+            (let ([graph (atomese-parser (lambda () (get-message parser-chan)))])
+              (scm->json graph parser-port))))
 
-          (for-each (lambda (fn) (apply (car fn) genes-list (list parser-chan writer-chan) (cdr fn))) functions)
+        (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan writer-chan) (cdr fn))) functions)
 
-          (send-message 'eof (list writer-chan parser-chan))
+        (send-message 'eof (list writer-chan parser-chan))
       )
-    
-    ) #:drain? #t)
+    )
+    #:drain? #t))
+
+(define-public (annotate-genes genes-list file-name request)
+  (parameterize ((intr-genes (make-atom-set))
+                 (gene-pairs (make-atom-set))
+                 (biogrid-reported-pathways (make-atom-set))
+                )
+    (process-request genes-list file-name request)
+  )
+)
+
+(define-public (annotate-go go-terms file-name request)
+  (parameterize ()
+    (process-request go-terms file-name request)
   )
 )

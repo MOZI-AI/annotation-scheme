@@ -62,8 +62,7 @@
                           )
                         )
                     )
-                ) gene-list))
-        )
+                ) gene-list)))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records)))
@@ -105,20 +104,11 @@
                               (if (or (string=? val "True") (string=? val "False"))
                                 (str->tv val)
                                 val
-                              )
-                          ))
-                      )
-                  ) filters))))
+                              ))))) filters))))
                   )
-                  (cons func args)
-                  
-                )
+                  (cons func args))
                 '()
-            )
-        
-        ) 
-        
-    ) table))
+            ))) table))
 ))
 
 (define (process-request item-list file-name request)
@@ -130,18 +120,18 @@
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
             (writer-port (open-file (get-file-path file-name "result") "w"))
            )
-        (spawn-fiber (lambda () (output-to-file writer-chan writer-port)))
+        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port)))
 
-        (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
+        (spawn-fiber (lambda () 
+            (let ([graph (atomese-parser (lambda () (get-message parser-chan)))])
+              (scm->json graph parser-port))))
 
         (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan writer-chan) (cdr fn))) functions)
 
         (send-message 'eof (list writer-chan parser-chan))
       )
     )
-    #:drain? #t
-  )
-)
+    #:drain? #t))
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((intr-genes (make-atom-set))

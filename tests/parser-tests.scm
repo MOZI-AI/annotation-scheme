@@ -11,7 +11,7 @@
 
 (test-begin "parser")
 
-(define res  (ListLink
+(define res  (list
          (EvaluationLink
             (PredicateNode "has_pubmedID")
             (ListLink
@@ -58,11 +58,15 @@
             )
          )
 ))
+(define n (length res))
+(define i 0)
+(define proc (let ()
+   (lambda () (set! i (+ i 1)) (if (>= i n) 'eof (list-ref res (- i 1))))
+))
 
-(test-assert "atomese-parser"  (graph? (atomese-parser res)))
+(test-assert "node-count" (= (vector-length (cdar (atomese-parser proc))) 2))
 
-(test-assert "node-count" (= (length (graph-nodes (atomese-parser res))) 2))
-
-(test-assert "edge-count" (= (length (graph-edges (atomese-parser res))) 1))
+(define i 0) ;; reset the list index
+(test-assert "edge-count" (= (vector-length (cdadr (atomese-parser proc))) 1))
 
 (test-end "parser")

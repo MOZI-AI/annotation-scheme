@@ -40,11 +40,15 @@
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
+    #:use-module (ice-9 suspendable-ports)
+    #:use-module (ice-9 textual-ports)
     #:use-module (srfi srfi-1)
     #:use-module (json)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
 )
+
+(install-suspendable-ports!)
 
 (define mods '((annotation biogrid) (annotation gene-pathway) (annotation gene-go) (annotation rna) (annotation string)))
 
@@ -54,7 +58,7 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-                    (if (check-node 'GeneNode g)
+                    (if (check-node "prod-atom"'GeneNode g)
                         (make-gene g  "" (find-similar-gene g))
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
@@ -123,9 +127,9 @@
            )
         (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port)))
 
-        (spawn-fiber (lambda () 
-            (let ([graph (atomese-parser (lambda () (get-message parser-chan)))])
-              (scm->json graph parser-port))))
+        (spawn-fiber (lambda () (atomese-parser (lambda () (get-message parser-chan)) parser-port) 
+          (close-port parser-port)
+        ))
 
         (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan writer-chan) (cdr fn))) functions)
 

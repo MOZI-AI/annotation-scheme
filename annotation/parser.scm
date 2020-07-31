@@ -23,15 +23,13 @@
   #:use-module (opencog exec)
   #:use-module (annotation graph)
   #:use-module (annotation util)
-  #:use-module (ice-9 suspendable-ports)
-  #:use-module (ice-9 match)
   #:use-module (ice-9 textual-ports)
+  #:use-module (ice-9 match)
   #:use-module (fibers channels) 
   #:use-module (json)
   #:export (atomese->graph
             atomese-parser))
 
-(install-suspendable-ports!)
 (define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation"))
 
 (define *nodes* '())
@@ -176,20 +174,20 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser proc)
+(define* (atomese-parser proc parser-port)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
   (set! *annotation* "")
   (set! *prev-annotation* "")
   
-
-  (let loop (
-      (msg (proc))
-   )
+  (let loop ((msg (proc)))
     (if (equal? msg 'eof)
-        (atomese-graph->scm (make-graph *nodes* *edges*))
-      (begin 
-         (atomese->graph msg)
-         (loop (proc))))))
+        (begin       
+           (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) parser-port)
+           (force-output parser-port)
+          ) 
+        (begin 
+          (atomese->graph msg)
+          (loop (proc))))))
 

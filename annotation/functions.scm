@@ -872,7 +872,7 @@
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
 		    (equal? (cog-type gene-b) 'VariableNode))
-		(ListLink)
+		   '()
 		(let* (
 				[already-done-a ((intr-genes) gene-a)]
 				[already-done-b ((intr-genes) gene-b)]
@@ -926,7 +926,9 @@
                             (node-info coding-prot-b)
                             (locate-node coding-prot-b))
                             go-cross-annotation
-                            rna-cross-annotation) ))
+                            rna-cross-annotation)
+
+                            '()))
 
                            (append (list
                               interaction
@@ -967,6 +969,7 @@
                               (locate-node coding-prot))
                               go-cross-annotation
                               rna-cross-annotation)
+                           '()
                      ))
                      (append (list
                         interaction
@@ -977,7 +980,7 @@
                   )))
 
               ;;; Both of the genes have been done.
-              (else (if (not already-done-pair)  (list interaction)))))))
+              (else (if (not already-done-pair)  (list interaction) '()))))))
 
 ;; ------------------------------------------------------
 

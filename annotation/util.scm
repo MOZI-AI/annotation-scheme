@@ -108,7 +108,7 @@
   Call (cog-execute! QUERY), return results, delete the SetLink.
   This avoids a memory leak of SetLinks
 "
-	Run the query
+
 	(define set-link (cog-execute! QUERY))
 
 	(lock-mutex run-query-mtx)
@@ -253,18 +253,12 @@
                       (EvaluationLink (PredicateNode "has_entrez_id")
                       (ListLink
                           gene
-                          (VariableNode "$a"))))
-                    )
-                  )
-          )
-    )
+                          (VariableNode "$a"))))))))
     (match (string-split entrez #\:)
       ((single) single)
       ((first second . rest) second))
       
-  )
-      
-)
+  ))
 
 (define (do-find-name GO-ATOM)
 "

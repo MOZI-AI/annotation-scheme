@@ -120,16 +120,28 @@
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
             (writer-port (open-file (get-file-path file-name "result") "w"))
            )
-        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port)))
+        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
 
-        (spawn-fiber (lambda () 
-            (let ([graph (atomese-parser (lambda () (get-message parser-chan)))])
-              (scm->json graph parser-port))))
-
-        (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan writer-chan) (cdr fn))) functions)
-
-        (send-message 'eof (list writer-chan parser-chan))
-      )
+        (spawn-fiber (lambda ()
+            (catch #t 
+              (lambda () 
+                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
+                (send-message 'eof (list writer-chan parser-chan))) 
+              (lambda _
+                (send-message 'eof (list writer-chan parser-chan)))
+              (let ((err (current-error-port)))
+                (lambda (key . args)
+                  (false-if-exception
+                  (let ((stack (make-stack #t 4)))
+                    (format err "Uncaught exception in task:\n")
+                    ;; FIXME: Guile's display-backtrace isn't respecting
+                    ;; stack narrowing; manually passing stack-length as
+                    ;; depth is a workaround.
+                    (display-backtrace stack err 0 (stack-length stack))
+                    (print-exception err (stack-ref stack 0)
+                                      key args))))))))
+                         
+          (atomese-parser (lambda () (get-message parser-chan)) parser-port))
     )
     #:drain? #t))
 

@@ -7,7 +7,8 @@
     #:use-module (annotation gene-pathway)
     #:use-module (annotation graph)
     #:use-module (annotation biogrid)
-    #:use-module (annotation parser))
+    #:use-module (annotation parser)
+    #:use-module (json))
 
 (test-begin "parser")
 
@@ -64,9 +65,20 @@
    (lambda () (set! i (+ i 1)) (if (>= i n) 'eof (list-ref res (- i 1))))
 ))
 
-(test-assert "node-count" (= (vector-length (cdar (atomese-parser proc))) 2))
+(define out (open-output-file "test.json"))
+(atomese-parser proc out)
+(define input (open-input-file "test.json"))
 
-(define i 0) ;; reset the list index
-(test-assert "edge-count" (= (vector-length (cdadr (atomese-parser proc))) 1))
+(define json (json->scm input))
+
+
+(test-assert "node-count" (= 2 (vector-length (assoc-ref json "nodes"))))
+
+(test-assert "edge-count" (= 1 (vector-length (assoc-ref json "edges"))))
+
+
+(close-port input)
+;;remove the file
+(system "rm test.json")
 
 (test-end "parser")

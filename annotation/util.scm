@@ -25,7 +25,6 @@
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
 	#:use-module (annotation graph)
-  #:use-module (opencog grpc)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)

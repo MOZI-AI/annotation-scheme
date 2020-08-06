@@ -21,25 +21,19 @@
     #:use-module (rnrs records inspection)
     #:use-module (rnrs records syntactic)
     #:use-module (ice-9 match)
+    #:use-module (srfi srfi-43)
     #:export (make-gene
               make-gene-info 
-              gene-record->scm
-    )
-)
+              gene-record->scm))
 
 (define-record-type gene
     (fields name 
             current
-            similar
-    )
-)
+            similar))
 
 (define-record-type gene-info
     (fields (mutable current)
-            (mutable similar) 
-
-    )
-)
+            (mutable similar)))
 
 (define (gene-record->scm record)
     (define record->scm
@@ -47,11 +41,7 @@
             ((? gene? rec)
                 `(("symbol" . ,(gene-name rec))
                   ("current" . ,(gene-current rec))
-                  ("similar" . ,(gene-similar rec))
-                )
-            )
-            (anything anything)
-        )
-    )
-    (record->scm record)
-)
+                  ("similar" . ,(list->vector (gene-similar rec)))
+                ))
+            (anything anything)))
+    (record->scm record))

@@ -58,16 +58,10 @@
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f
-                            (make-gene g (car curr) '())
-                          )
-                        )
-                    )
-                ) gene-list)))
+                            (make-gene g (car curr) '()))))) gene-list)))
         (if (null? records)
           "[]"
-          (scm->json-string (list->vector (map gene-record->scm records)))
-        )  
-      ))
+          (scm->json-string (list->vector (map gene-record->scm records))))))
 
 (define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."
@@ -85,12 +79,11 @@
 
 (define-public (parse-request req)
     (let (
-        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
-    )
+        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))))))
+
       (vector->list (vector-map (lambda (i elm)
         (let  (
-            (func (find-module (assoc-ref elm "functionName") mods))
-          )
+            (func (find-module (assoc-ref elm "functionName") mods)))
             (if func 
                 (let* (                
                   (filters (assoc-ref elm "filters"))
@@ -103,13 +96,9 @@
                               (string->number val)
                               (if (or (string=? val "True") (string=? val "False"))
                                 (str->tv val)
-                                val
-                              ))))) filters))))
-                  )
+                                val ))))) filters)))))
                   (cons func args))
-                '()
-            ))) table))
-))
+                '()))) table))))
 
 (define (process-request item-list file-name request)
   (run-fibers

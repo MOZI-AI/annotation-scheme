@@ -309,8 +309,7 @@
       
       (if (> (length res) 5) 
         (take res 5)
-        res
-  )))
+        res)))
 
 ; --------------------------------------------------------
 
@@ -320,8 +319,7 @@
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))
-            (VariableNode "$g"))))
-)
+            (VariableNode "$g")))))
 
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))

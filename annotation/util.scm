@@ -26,7 +26,6 @@
 	#:use-module (opencog bioscience)
   #:use-module (opencog grpc)
 	#:use-module (annotation graph)
-  #:use-module (opencog grpc)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
 	#:use-module (rnrs exceptions)
@@ -112,21 +111,20 @@
 	; ; Run the query
 	; (define set-link (cog-execute! QUERY))
 
-	; (lock-mutex run-query-mtx)
-	; (if (cog-atom? set-link)
-	; 	; Get the query results
-	; 	(let ((results (cog-outgoing-set set-link)))
-	; 		; Delete the SetLink
-	; 		(cog-delete set-link)
-	; 		(unlock-mutex run-query-mtx)
-	; 		; Return the results.
-	; 		results)
-	; 	; Try again
-	; 	(begin
-	; 		(unlock-mutex run-query-mtx)
-	; 		(run-query QUERY))
-	; )
-  (exec-pattern "prod-atom" QUERY)
+	(lock-mutex run-query-mtx)
+	(if (cog-atom? set-link)
+		; Get the query results
+		(let ((results (cog-outgoing-set set-link)))
+			; Delete the SetLink
+			(cog-delete set-link)
+			(unlock-mutex run-query-mtx)
+			; Return the results.
+			results)
+		; Try again
+		(begin
+			(unlock-mutex run-query-mtx)
+			(run-query QUERY))
+	)
 )
 
 ; --------------------------------------------------------
@@ -255,16 +253,12 @@
                       (EvaluationLink (PredicateNode "has_entrez_id")
                       (ListLink
                           gene
-                          (VariableNode "$a"))))
-                    )
-                  )
-          )
-    )
+                          (VariableNode "$a"))))))))
     (match (string-split entrez #\:)
       ((single) single)
       ((first second . rest) second))
       
-  )
+  ))
       
 )
 
@@ -331,8 +325,7 @@
             (Evaluation
                (Predicate "has_current_symbol")
                (ListLink (Gene gene) (Variable "$g")))
-            (VariableNode "$g"))))
-)
+            (VariableNode "$g")))))
 
 (define-public (build-pubmed-url nodename)
  (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))

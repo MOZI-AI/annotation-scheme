@@ -182,10 +182,12 @@ graph by mutating global variables."
   (set! *prev-annotation* "")
   
   (let loop ((msg (proc)))
+   )
     (if (equal? msg 'eof)
-        (begin       
-           (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) parser-port)
+      (let ((scm-graph (atomese-graph->scm (make-graph *nodes* *edges*))))
+          (scm->json scm-graph parser-port)
            (force-output parser-port)
+          (close-port parser-port)
           ) 
         (begin 
           (atomese->graph msg)

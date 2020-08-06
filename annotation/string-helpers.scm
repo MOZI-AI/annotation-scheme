@@ -31,7 +31,7 @@
 
 ;;Different modes of interactions
 
-(define all-interactions '("binding" "reaction" "inhibition" "activation" "expression" "catalysis" "ptmod"))
+(define-public all-interactions '("binding" "reaction" "inhibition" "activation" "expression" "catalysis" "ptmod"))
 
 (define symmetric-interactions '("binding" "reaction"))
 

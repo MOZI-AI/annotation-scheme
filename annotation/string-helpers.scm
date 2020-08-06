@@ -31,7 +31,7 @@
 
 ;;Different modes of interactions
 
-(define all-interactions '("binding" "reaction" "inhibition" "activation" "expression" "catalysis" "ptmod"))
+(define-public all-interactions '("binding" "reaction" "inhibition" "activation" "expression" "catalysis" "ptmod"))
 
 (define symmetric-interactions '("binding" "reaction"))
 
@@ -75,7 +75,7 @@
 )
 
 
-(define-public (find-interaction gene chans interactions proteins
+(define-public (find-interaction gene interactions proteins
                   namespace parents regulates part-of bi-dir coding non-coding)
    ;;Find Genes that interact with the input gene. Optionally specify a filter list of the interactions
    ;;If proteins option is true do a Protein-Protein interaction
@@ -87,22 +87,20 @@
         (let (
             [proteins (find-proteins gene)]
         )
-         (for-each (lambda (res)
-            (send-message res chans)
-            (do-cross-annotation res chans proteins namespace parents regulates part-of bi-dir coding non-coding)
+         (append-map (lambda (res)
+            (do-cross-annotation res proteins namespace parents regulates part-of bi-dir coding non-coding)
          )        
             (append-map (lambda (prot) (cache-find-ggi (Set prot (List atoms)))) proteins))
         )
-        (for-each (lambda (res)
-         (send-message res chans)
-         (do-cross-annotation res chans proteins 
+        (append-map (lambda (res)
+         (do-cross-annotation res proteins 
                namespace parents regulates part-of bi-dir coding non-coding)
         ) (cache-find-ggi (Set gene (List atoms))))
       )  
    )
 )
 
-(define-public (find-output-interactions gene chans interactions proteins
+(define-public (find-output-interactions gene interactions proteins
     namespace parents regulates part-of bi-dir coding non-coding)
 
    (define (get-output-interactors intrs)
@@ -129,15 +127,14 @@
    )
 
    (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
-      (for-each (lambda (res)
-         (send-message res chans)
-         (do-cross-annotation res chans proteins 
-               namespace parents regulates part-of bi-dir coding non-coding))output-interactors)
+      (append-map (lambda (res)
+         (do-cross-annotation res proteins 
+               namespace parents regulates part-of bi-dir coding non-coding)) output-interactors)
    )
 )
 
-(define (do-cross-annotation link out-chans protein
-             namespace num-parent regulates part-of bi-dir coding non-coding)
+(define (do-cross-annotation link do-protein
+             namespaces num-parents regulates part-of bi-dir coding-rna non-coding-rna)
     "
      do-cross-annotation -- add info about matched variable nodes
     `namespaces` should be a scheme list of strings (possibly an empty list),
@@ -151,38 +148,50 @@
     (let* (
         [gene-a (gadr link)]
         [gene-b (gddr link)]
-        [already-done-a ((biogrid-genes) gene-a)]
-        [already-done-b ((biogrid-genes) gene-b)]
-    )
+        [already-done-a ((intr-genes) gene-a)]
+        [already-done-b ((intr-genes) gene-b)]
+        [already-done-pair ((gene-pairs) (List gene-a gene-b))])
         
-        (if (not already-done-a)
-            (send-message (node-info gene-a) out-chans)
-        )
-
-        (if (not already-done-b)
-            (send-message (node-info gene-b) out-chans)
-        )
-        
-        
-        ;;go-cross annotation
-        (if (not (null? namespace))
-            (begin 
-               (send-message (Concept "gene-go-annotation") out-chans)
-               (send-message (find-go-term gene-a namespace num-parent regulates part-of bi-dir) out-chans)
-               (send-message (find-go-term gene-b namespace num-parent regulates part-of bi-dir) out-chans)
-               (send-message (Concept "string-annotation") out-chans)
-            )
-
-        )
-
-        (if (or coding non-coding)
-            (begin 
-               (send-message (Concept "rna-annotation") out-chans)
-               (send-message (find-rna gene-a coding non-coding protein) out-chans)
-               (send-message (Concept "string-annotation") out-chans)
-            )
-        )
-   ))
+        (cond 
+          ((and (not already-done-a) (not already-done-b))
+            (let ([go-cross-annotation
+                    (if (null? namespaces) '()
+                        (list
+                           (Concept "gene-go-annotation")
+                           (find-go-term gene-a namespaces num-parents regulates part-of bi-dir)
+                           (find-go-term gene-b namespaces num-parents regulates part-of bi-dir)
+                           (Concept "biogrid-interaction-annotation"))
+                    )]
+                    [rna-cross-annotation
+                      (if (or coding-rna non-coding-rna)
+                        (list
+                            (Concept "rna-annotation")
+                            (find-rna gene-a coding-rna non-coding-rna do-protein)
+                            (find-rna gene-b coding-rna non-coding-rna do-protein)
+                            (Concept "biogrid-interaction-annotation"))
+                          '()     
+                      )])
+                    (append (list link (node-info gene-a) (node-info gene-b))
+                      go-cross-annotation rna-cross-annotation)))
+            ((or (not already-done-a) (not already-done-b)
+              (let* ([gene-x (if already-done-a gene-b gene-a)]
+                    [go-cross-annotation
+                     (if (null? namespaces) '()
+                        (list
+                           (Concept "gene-go-annotation")
+                           (find-go-term gene-x namespaces num-parents regulates part-of bi-dir)
+                           (Concept "biogrid-interaction-annotation"))
+                     )]
+                    [rna-cross-annotation
+                     (if (or coding-rna non-coding-rna)
+                        (list
+                           (Concept "rna-annotation")
+                           (find-rna gene-x coding-rna non-coding-rna do-protein)
+                           (Concept "biogrid-interaction-annotation"))
+                        '()
+                    )])
+                    (append (list link (node-info gene-x)) go-cross-annotation rna-cross-annotation))))
+            (else (if (not already-done-pair) (list link))))))
 
 
 

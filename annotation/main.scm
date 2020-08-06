@@ -58,17 +58,10 @@
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f
-                            (make-gene g (car curr) '())
-                          )
-                        )
-                    )
-                ) gene-list))
-        )
+                            (make-gene g (car curr) '()))))) gene-list)))
         (if (null? records)
           "[]"
-          (scm->json-string (list->vector (map gene-record->scm records)))
-        )  
-      ))
+          (scm->json-string (list->vector (map gene-record->scm records))))))
 
 (define-public (gene-info genes chans)
   "Add the name and description of gene nodes to the given list of GENES."
@@ -86,12 +79,11 @@
 
 (define-public (parse-request req)
     (let (
-        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))) ))
-    )
+        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))))))
+
       (vector->list (vector-map (lambda (i elm)
         (let  (
-            (func (find-module (assoc-ref elm "functionName") mods))
-          )
+            (func (find-module (assoc-ref elm "functionName") mods)))
             (if func 
                 (let* (                
                   (filters (assoc-ref elm "filters"))
@@ -104,22 +96,9 @@
                               (string->number val)
                               (if (or (string=? val "True") (string=? val "False"))
                                 (str->tv val)
-                                val
-                              )
-                          ))
-                      )
-                  ) filters))))
-                  )
-                  (cons func args)
-                  
-                )
-                '()
-            )
-        
-        ) 
-        
-    ) table))
-))
+                                val ))))) filters)))))
+                  (cons func args))
+                '()))) table))))
 
 (define (process-request item-list file-name request)
   (run-fibers
@@ -130,22 +109,34 @@
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
             (writer-port (open-file (get-file-path file-name "result") "w"))
            )
-        (spawn-fiber (lambda () (output-to-file writer-chan writer-port)))
+        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
 
-        (spawn-fiber (lambda () (atomese-parser parser-chan parser-port)))
-
-        (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan writer-chan) (cdr fn))) functions)
-
-        (send-message 'eof (list writer-chan parser-chan))
-      )
+        (spawn-fiber (lambda ()
+            (catch #t 
+              (lambda () 
+                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
+                (send-message 'eof (list writer-chan parser-chan))) 
+              (lambda _
+                (send-message 'eof (list writer-chan parser-chan)))
+              (let ((err (current-error-port)))
+                (lambda (key . args)
+                  (false-if-exception
+                  (let ((stack (make-stack #t 4)))
+                    (format err "Uncaught exception in task:\n")
+                    ;; FIXME: Guile's display-backtrace isn't respecting
+                    ;; stack narrowing; manually passing stack-length as
+                    ;; depth is a workaround.
+                    (display-backtrace stack err 0 (stack-length stack))
+                    (print-exception err (stack-ref stack 0)
+                                      key args))))))))
+                         
+          (atomese-parser (lambda () (get-message parser-chan)) parser-port))
     )
-    #:drain? #t
-  )
-)
+    #:drain? #t))
 
 (define-public (annotate-genes genes-list file-name request)
-  (parameterize ((biogrid-genes (make-atom-set))
-                 (biogrid-pairs (make-atom-set))
+  (parameterize ((intr-genes (make-atom-set))
+                 (gene-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
                 )
     (process-request genes-list file-name request)

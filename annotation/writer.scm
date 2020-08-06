@@ -28,17 +28,15 @@
 
 (install-suspendable-ports!)
 
-(define-public (output-to-file chan port)
+(define-public (output-to-file proc port)
     (let loop (
-      (msg (get-message chan))
+      (msg (proc))
    )
     (if (equal? msg 'eof)
       (close-port port)   
       (begin 
          (write msg port)
-         (loop (get-message chan))
+         (loop (proc))
       )
     )
-  )
-
-)
+))

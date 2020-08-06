@@ -176,7 +176,7 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser in-chan port)
+(define* (atomese-parser proc parser-port)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
@@ -185,18 +185,15 @@ graph by mutating global variables."
   
 
   (let loop (
-      (msg (get-message in-chan))
+      (msg (proc))
    )
     (if (equal? msg 'eof)
-       (begin 
-          (scm->json (atomese-graph->scm (make-graph *nodes* *edges*)) port)
-          (close-port port)
-       )
+      (let ((scm-graph (atomese-graph->scm (make-graph *nodes* *edges*))))
+          (scm->json scm-graph parser-port)
+          (force-output parser-port)
+          (close-port parser-port)
+      )
       (begin 
          (atomese->graph msg)
-         (loop (get-message in-chan))
-      )
-    )
-  )
-)
+         (loop (proc))))))
 

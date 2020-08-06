@@ -40,10 +40,8 @@
                 (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents regulates part-of bi-dir) chans)
 
                 (send-message (find-proteins-goterm (GeneNode gene) (string-split namespace #\space) parents regulates part-of bi-dir) chans)                
-(send-message (find-drugs-protein (GeneNode gene) (string-split namespace #\space)) chans)
-              )
-              
+                (send-message (find-drugs-protein (GeneNode gene) (string-split namespace #\space)) chans)
+              )      
               (send-message (find-go-term (GeneNode gene) (string-split namespace #\space) parents regulates part-of bi-dir) chans)
             )
-          ) gene-nodes)
-)
+          ) gene-nodes))

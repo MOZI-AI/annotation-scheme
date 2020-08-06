@@ -7,11 +7,12 @@
     #:use-module (annotation gene-pathway)
     #:use-module (annotation graph)
     #:use-module (annotation biogrid)
-    #:use-module (annotation parser))
+    #:use-module (annotation parser)
+    #:use-module (json))
 
 (test-begin "parser")
 
-(define res  (ListLink
+(define res  (list
          (EvaluationLink
             (PredicateNode "has_pubmedID")
             (ListLink
@@ -58,11 +59,26 @@
             )
          )
 ))
+(define n (length res))
+(define i 0)
+(define proc (let ()
+   (lambda () (set! i (+ i 1)) (if (>= i n) 'eof (list-ref res (- i 1))))
+))
 
-(test-assert "atomese-parser"  (graph? (atomese-parser res)))
+(define out (open-output-file "test.json"))
+(atomese-parser proc out)
+(define input (open-input-file "test.json"))
 
-(test-assert "node-count" (= (length (graph-nodes (atomese-parser res))) 2))
+(define json (json->scm input))
 
-(test-assert "edge-count" (= (length (graph-edges (atomese-parser res))) 1))
+
+(test-assert "node-count" (= 2 (vector-length (assoc-ref json "nodes"))))
+
+(test-assert "edge-count" (= 1 (vector-length (assoc-ref json "edges"))))
+
+
+(close-port input)
+;;remove the file
+(system "rm test.json")
 
 (test-end "parser")

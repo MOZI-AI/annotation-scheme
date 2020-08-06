@@ -256,17 +256,12 @@
    (define (find-go-plus-info ln)
       (if (equal? go-term (gadr ln))
            (go-info (gddr ln))
-           (go-info (gadr ln))
-       )
-   )
+           (go-info (gadr ln))))
    (let (
       [go-reg-terms (if regulates (find-go-regulates (Set go-term (scm->stv bi-direction))) '())]
-      [go-part-terms (if part_of (find-part-of (Set go-term (scm->stv bi-direction))) '())]
-   ) 
+      [go-part-terms (if part_of (find-part-of (Set go-term (scm->stv bi-direction))) '())]) 
       (append go-reg-terms go-part-terms (append-map find-go-plus-info go-reg-terms) 
-         (append-map find-go-plus-info go-part-terms))
-   )
-)
+         (append-map find-go-plus-info go-part-terms))))
 
 (define-public (find-proteins-goterm gene namespace parent regulates part-of bi-dir)
   "Find GO terms for proteins coded by the given gene."
@@ -1163,67 +1158,4 @@
       (Evaluation
         (Predicate "GO_namespace")
         (List go-term var-ns))))
-)
-
-(define-public (find-go-has-part go-term)
-"
-  find-go-has-part GO-TERM
-
-  Find the other GO term that is linked with GO-TERM with GO_has_part predicate.
-"
-  (define var-go-term (Variable "$go-term"))
-
-  (run-query
-    (Bind
-      (TypedVariable var-go-term (Type "ConceptNode"))
-      (Present
-        (Evaluation
-          (Predicate "GO_has_part")
-          (List go-term var-go-term)))
-      (Evaluation
-        (Predicate "GO_has_part")
-        (List go-term var-go-term))))
-)
-
-(define-public (find-go-regulates go-term)
-"
-  find-go-regulates GO-TERM
-
-  Find the other GO terms that are being regulated by GO-TERM,
-  this includes both positive and negative regulation.
-"
-  (define var-go-term (Variable "$go-term"))
-
-  (append
-    (run-query
-      (Bind
-        (TypedVariable var-go-term (Type "ConceptNode"))
-        (Present
-          (Evaluation
-            (Predicate "GO_regulates")
-            (List go-term var-go-term)))
-        (Evaluation
-          (Predicate "GO_regulates")
-          (List go-term var-go-term))))
-    (run-query
-      (Bind
-        (TypedVariable var-go-term (Type "ConceptNode"))
-        (Present
-          (Evaluation
-            (Predicate "GO_positively_regulates")
-            (List go-term var-go-term)))
-        (Evaluation
-          (Predicate "GO_positively_regulates")
-          (List go-term var-go-term))))
-    (run-query
-      (Bind
-        (TypedVariable var-go-term (Type "ConceptNode"))
-        (Present
-          (Evaluation
-            (Predicate "GO_negatively_regulates")
-            (List go-term var-go-term)))
-        (Evaluation
-          (Predicate "GO_negatively_regulates")
-          (List go-term var-go-term))))
-  )
 )

@@ -3,7 +3,7 @@
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
-    #:use-module (annotation functions)
+    #:use-module (annotation string-helpers)
     #:use-module (annotation util)
 )
 
@@ -16,16 +16,13 @@
 ;;Fake expression to find ppi
 (define expr-link (Evaluation 
                     (Predicate "expresses")
-                    (List (Gene "ARF5") (MoleculeNode "Uniprot:P84085"))
-            ))
+                    (List (Gene "ARF5") (MoleculeNode "Uniprot:P84085"))))
 
-(test-equal "find-ggi" 19 (length (find-ggi (Gene "ARF5"))))
+(define atoms (map (lambda (i) (Concept i)) all-interactions))
 
-(test-equal "find-ggi-filtered" 9 (length (find-ggi (Gene "ARF5") '("reaction"))))
+(test-equal "find-ggi" 19 (length (do-find-ggi (Set (Gene "ARF5") (List atoms)))))
 
-(test-equal "find-ppi" 19 (length (find-ppi (Gene "ARF5"))))
-
-(test-equal "find-ppi-filtered" 9 (length (find-ppi (Gene "ARF5") '("reaction"))))
+(test-equal "find-ggi-filtered" 9 (length (do-find-ggi (Set (Gene "ARF5") (List (Concept "reaction"))))))
 
 (clear)
 

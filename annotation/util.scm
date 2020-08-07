@@ -49,6 +49,8 @@
 (define-public gene-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 
+(define-public atomspace-id (if (getenv "ATOM_ID") (getenv "ATOM_ID") "prod-atom"))
+
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -102,29 +104,11 @@
 
 ; ----------------------------------------------------
 
-(define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
-  Call (cog-execute! QUERY), return results, delete the SetLink.
-  This avoids a memory leak of SetLinks
+  Execute Pattern Matching QUERY on remote atomspace
 "
-	; ; Run the query
-	; (define set-link (cog-execute! QUERY))
-
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
+  (exec-pattern atomspace-id QUERY)
 )
 
 ; --------------------------------------------------------
@@ -259,8 +243,6 @@
       ((first second . rest) second))
       
   ))
-      
-)
 
 (define (do-find-name GO-ATOM)
 "
@@ -300,21 +282,8 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-  ;  (define pattern (string-append gene-name ".+$"))
-  ;  (let ([res (filter-map
-  ;     (lambda (some-gene)
-  ;       (if (regexp-match? (string-match pattern (cog-name some-gene)))
-  ;           (cog-name some-gene)
-  ;           #f
-  ;       ))
-  ;     ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
-  ;     (cog-get-atoms 'GeneNode))])
-      
-  ;     (if (> (length res) 5) 
-  ;       (take res 5)
-  ;       res
-  ; ))
-  (map cog-name (find-similar-node "prod-atom" 'GeneNode gene-name))
+
+  (map cog-name (find-similar-node atomspace-id 'GeneNode gene-name))
 )
 
 ; --------------------------------------------------------

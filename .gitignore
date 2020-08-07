@@ -220,7 +220,10 @@ Makefile.in
 build-aux/install-sh
 
 build-aux/missing
-
+build-aux/compile
+build-aux/config.guess
+build-aux/config.sub
+env
 Makefile
 
 build/**

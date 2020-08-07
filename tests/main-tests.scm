@@ -15,10 +15,10 @@
 )
 
 (test-begin "main")
-
+(setenv "TEST_MODE" "TRUE")
 ;; Load test atomspace
-(primitive-load "tests/sample_dataset.scm")
-(primitive-load "annotation/pln_rule.scm")
+(primitive-load-path "tests/sample_dataset.scm")
+(primitive-load-path "annotation/pln_rule.scm")
 
 (define req "[{\"functionName\": \"gene-pathway-annotation\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"},{\"filter\": \"include_prot\", \"value\": \"True\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}, {\"functionName\": \"gene-go-annotation\", \"filters\": [{\"filter\": \"namespace\", \"value\": \"biological_process cellular_component molecular_function\"}, {\"filter\": \"parents\", \"value\": \"0\"}, {\"filter\": \"protein\", \"value\": \"True\"}]}, {\"functionName\": \"include-rna\", \"filters\": [{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"},{\"filter\": \"protein\", \"value\": \"1\"}]},{\"functionName\": \"biogrid-interaction-annotation\", \"filters\": [{\"filter\": \"interaction\", \"value\": \"Proteins\"}]}]")
 
@@ -46,4 +46,5 @@
 (test-equal "delete-genes" #t (cog-delete-recursive (GeneNode "IGF")))
 
 (clear)
+(setenv "TEST_MODE" #f) ;;remove the env variable
 (test-end "main")

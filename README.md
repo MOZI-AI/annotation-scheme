@@ -24,7 +24,8 @@ To build the project manually, make sure you have the following dependencies ins
     ~~~~
     $ cd annotation-scheme && \
         autoreconf -vif && \
-        ./configure && \
+        mkdir build && cd build \
+        ../configure && \
         make && \
         sudo make install && \
         sudo ldconfig /usr/local/lib/opencog

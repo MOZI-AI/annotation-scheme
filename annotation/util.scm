@@ -51,6 +51,7 @@
 
 (define-public atomspace-id (if (getenv "ATOM_ID") (getenv "ATOM_ID") "prod-atom"))
 
+(define (test-mode?) (if (getenv "TEST_MODE") #t #f))
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -107,9 +108,10 @@
 (define-public (run-query QUERY)
 "
   Execute Pattern Matching QUERY on remote atomspace
-"
-  (exec-pattern atomspace-id QUERY)
-)
+" 
+  (if (test-mode?)
+      (cog-outgoing-set (cog-execute! QUERY)) ;; we don't want to make calls to the server while running unit-tests
+      (exec-pattern atomspace-id QUERY)))
 
 ; --------------------------------------------------------
 
@@ -282,9 +284,24 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
+  (if (test-mode?)
+    (let* ([pattern (string-append gene-name ".+$")]
+        [res (filter-map (lambda (some-gene)
+        (if (regexp-match? (string-match pattern (cog-name some-gene)))
+            (cog-name some-gene)
+            #f))
+      ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
+      (cog-get-atoms 'GeneNode))])
+      
+      (if (> (length res) 5) 
+        (take res 5)
+        res))
+    (map cog-name (find-similar-node atomspace-id 'GeneNode gene-name))))
 
-  (map cog-name (find-similar-node atomspace-id 'GeneNode gene-name))
-)
+(define-public (atom-exists? type name)
+   (if (test-mode?)
+        (not (null? (cog-node type name)))
+        (check-node atomspace-id type name)))
 
 ; --------------------------------------------------------
 

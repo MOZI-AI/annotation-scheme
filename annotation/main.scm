@@ -36,7 +36,6 @@
     #:use-module (ice-9 threads)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
-    #:use-module (opencog grpc)
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
@@ -58,12 +57,13 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-                    (if (check-node atomspace-id 'GeneNode g)
-                        (make-gene g  "" (find-similar-gene g))
+                    (if (atom-exists? 'GeneNode g)
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f
-                            (make-gene g (car curr) '()))))) gene-list)))
+                            (make-gene g (car curr) '())))
+                        (make-gene g  "" (find-similar-gene g))
+                        )) gene-list)))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))

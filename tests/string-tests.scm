@@ -8,10 +8,10 @@
 )
 
 (test-begin "string")
+(setenv "TEST_MODE" "TRUE")
+(primitive-load-path "tests/string_ggi_sample.scm")
 
-(primitive-load "tests/string_ggi_sample.scm")
-
-(primitive-load "tests/string_ppi_sample.scm")
+(primitive-load-path "tests/string_ppi_sample.scm")
 
 ;;Fake expression to find ppi
 (define expr-link (Evaluation 
@@ -25,5 +25,5 @@
 (test-equal "find-ggi-filtered" 9 (length (do-find-ggi (Set (Gene "ARF5") (List (Concept "reaction"))))))
 
 (clear)
-
+(setenv "TEST_MODE" #f) ;;remove the env variable
 (test-end "string")

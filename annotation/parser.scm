@@ -67,8 +67,8 @@
          "unknown" "vesicant" "weak inhibitor"
      )
 
-     (set! *edges* (cons (create-edge (cadr lns)
-                                      (car lns)
+     (set! *edges* (cons (create-edge (caadr lns)
+                                      (caar lns)
                                       predicate
                                       (list *annotation*)
                                       "" predicate)
@@ -88,16 +88,19 @@
                '())
              (node-info-group-set! (node-data node)
                                    (append node-group (list *annotation*)))))
-         (begin
-           (set! *nodes*
-                 (cons (create-node (car lns) (cadr lns)
-                                    (build-desc-url (car lns))
-                                    ""
-                                    (list *annotation*)
-                                    (find-subgroup (car lns)))
-                       *nodes*))
-           (set! *atoms*
-                 (cons (car lns) *atoms*))))
+         (if (pair? (car lns))
+            (let ((id (caar lns))
+                  (type (cdar lns)))
+              (if (string=? type "uniprot") ;;uniprots share name is a gene node w/c has a type
+                  (set! *nodes*
+                      (cons (create-node id type (caadr lns) (build-desc-url id type)
+                              "" (list *annotation*)) *nodes*))
+                  (set! *nodes*
+                      (cons (create-node id type (cadr lns) (build-desc-url id type)
+                              "" (list *annotation*)) *nodes*)))
+              
+              (set! *atoms* (cons id *atoms*)))
+            (throw 'notype (car lns))))
      '())
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)
@@ -121,9 +124,12 @@
     (_ (error "Unrecognized predicate" predicate))))
 
 (define (handle-ln node-a node-b link)
-  (set! *edges*
-        (cons (create-edge node-a node-b link (list *annotation*) "" link)
-              *edges*)))
+  (let ((source (if (pair? node-a) (car node-a) node-a))
+        (dest (if (pair? node-b) (car node-b) node-b)))
+    (set! *edges*
+        (cons (create-edge source dest link (list *annotation*) "" link)
+              *edges*))     
+  ))
 
 (define (handle-list-ln node)
   (cond [(string? node) (list node)]
@@ -135,15 +141,19 @@
     (set! *annotation* node))
   node)
 
-(define (atomese->graph expr)
+(define-public (atomese->graph expr)
   "Recursively traverse the Atomese expression EXPR and build up a
 graph by mutating global variables."
   (define (expr->graph thing)
     (match (cog-type thing)
       ;; nodes
-      ((or 'PredicateNode
-             'GeneNode
-             'MoleculeNode) (cog-name thing)) 
+      ((or 'CellularComponentNode 'MolecularFunctionNode 'BiologicalProcessNode
+           'PathwayNode 'ReactomeNode 'SmpNode
+           'UberonNode 'CellNode 
+           'RnaNode 'MoleculeNode 'GeneNode
+           'ChebiNode 'UniprotNode 'PubchemNode
+           'RefseqNode 'EnstNode) (cons (cog-name thing) (atom-type->string thing)))
+      ('PredicateNode (cog-name thing)) 
       ('ConceptNode
        (handle-node (cog-name thing)))
       ('VariableNode

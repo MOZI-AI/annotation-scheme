@@ -17,7 +17,7 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation go)
-    #:use-module (annotation functions)
+    #:use-module (annotation go-helpers)
     #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog bioscience)
@@ -31,15 +31,7 @@
     (lambda (go-term)
       (let ((go-node (Concept go-term)))
         (send-message (find-go-name go-node) chans)
-        (send-message (find-go-namespace go-node) chans)
-        (send-message (find-godef go-node) chans)
-        (send-message (find-go-genes go-node biogrid) chans)
-        (send-message (find-go-has-part go-node) chans)
-        (send-message (find-go-regulates go-node) chans)
+        (send-message (find-go-plus go-node) chans)
         (send-message (find-go-parents go-node) chans)
-        (if protein (send-message (find-go-proteins go-node) chans))
-      )
-    )
-    go-terms
-  )
-)
+        (if protein (send-message (find-go-proteins go-node) chans))))
+    go-terms))

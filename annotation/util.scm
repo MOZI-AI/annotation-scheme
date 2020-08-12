@@ -126,9 +126,7 @@
 (define (get-name atom)
  (if (> (length atom) 0)
   (cog-name (car  atom))
-  ""
- )
-)
+  ""))
 
 
 (define* (create-node id name defn location annotation #:optional (subgroup ""))
@@ -540,10 +538,17 @@
   (= 1 (cog-tv-mean tv))
 )
 
-;; helper function to conver scheme boolean vals to stvs
+;; helper function to convert scheme boolean vals to stvs
 (define-public (scm->stv val)
     (if val
         (SimpleTruthValue 1 0)
         (SimpleTruthValue 0 0)
     )
 )
+
+;; helper function to convert GO namespace strings to TypeNodes
+(define-public (ns->type name)
+  (cond 
+    ((string=? name "biological_process") (TypeNode 'BiologicalProcess))
+    ((string=? name "molecular_function") (TypeNode 'MolecularFunction))
+    ((string=? name "cellular_component") (TypeNode 'CellularComponent))))

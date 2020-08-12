@@ -93,7 +93,7 @@
                       (send-message (pathway-gene-interactors path) chans))
                       
                   (if string 
-                      (send-message (find-pathway-gene-interactors path) chans)
+                      (send-message (find-pathway/go-gene-interactors path) chans)
                   )
               )  pw)
 
@@ -130,7 +130,7 @@
                           (send-message (pathway-gene-interactors path) chans )
                       )
                       (if string 
-                        (send-message (find-pathway-gene-interactors path) chans)
+                        (send-message (find-pathway/go-gene-interactors path) chans)
                       )
 
                       (if sm? (send-message (find-mol path "ChEBI") chans))

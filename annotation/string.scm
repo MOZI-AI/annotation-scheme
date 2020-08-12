@@ -43,7 +43,7 @@
 
     (define interaction-lst (if interactions (string-split interactions #\space) #f))
 
-    (send-message (Concept "string-annotation") chans)
+    (send-message (Concept "string-interaction-annotation") chans)
     (for-each (lambda (gene) 
         (send-message (find-interaction (GeneNode gene) interaction-lst protein 
         namespaces parents regulates part-of bi-dir coding noncoding) chans)

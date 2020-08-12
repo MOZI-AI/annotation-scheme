@@ -20,6 +20,7 @@
 
 (define-module (annotation gene-go)
     #:use-module (annotation functions)
+    #:use-module (annotation go-helpers)
     #:use-module (annotation util)
     #:use-module (opencog)
     #:use-module (opencog exec)

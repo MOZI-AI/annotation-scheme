@@ -139,16 +139,18 @@
 
 ;; Find node name and description. See `node-info` below for documentation.
 (define-public (do-get-node-info node)
-	(define (node-name node)
-		(let ([lst (find-pathway-name node)])
-				(if (null? lst) (ConceptNode "N/A") (car lst))))
+  
+  (define node-name 
+    (match (cog-type node) 
+      ((or 'ReactomeNode 'SmpNode 'PathwayNode) (ConceptNode "N/A"))
+      ((or 'UniprotNode 'EnstNode) (find-prot/enst-name node))
+      (_ (find-name node))))
 
-	(if (cog-node? node)
+	(if (null? node-name)
+    '()
     (append
       (find-organism node)
-		  (list (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node))))
-    )
-		(ListLink))
+		  (list (EvaluationLink (PredicateNode "has_name") (ListLink node node-name)))))
 )
 
 ; Cache results of do-get-node-info for performance.
@@ -162,56 +164,23 @@
   small molecule, RNA, GeneOntology (GO) term, cellular location, etc.
   Here, ENTITY is an AtomSpace Atom that encodes such an object.
 "
-	(list (memoize-node-info ENTITY)))
+	(memoize-node-info ENTITY))
 
 
 ;;Finds a name of any node (Except GO which has different structure)
-(define-public (do-find-pathway-name pw)
-	(define is-enst (string-prefix? "ENST" (cog-name pw)))
-   (if (or is-enst (string-contains (cog-name pw) "Uniprot:"))
-      (let ([predicate (if is-enst "transcribed_to" "expresses")])
-        (run-query (Get
+(define-public (do-find-prot/enst-name node)
+   (let* ([predicate (if (is-type? node 'EnstNode) "transcribed_to" "expresses")]
+          [name (run-query (Get
            (VariableList
            (TypedVariable (Variable "$a") (Type 'GeneNode)))
            (Evaluation (Predicate predicate)
-              (List (Variable "$a") pw)))))
-      '()
-    )
+              (List (Variable "$a") node))))])
+
+        (if (null? name) (Concept "N/A") (car name)))
 )
 
-(define find-pathway-name
-	(memoize-function-call do-find-pathway-name))
-
-(define-public (is-cellular-component? ATOM-LIST)
-"
-  is-cellular-component? ATOM-LIST
-
-  Return #t if any of the atoms in ATOM-LIST have the form
-
-     (Evaluation
-         (Predicate \"GO_namespace\")
-         (List
-            (Concept \"foo\")
-            (Concept \"cellular_component\")))
-
-  where (Concept \"foo\") could be anything. Otherwise, return #f.
-"
-	(any
-		(lambda (info)
-			(and
-				(equal? (cog-name (gar info)) "GO_namespace")
-				(equal? "cellular_component" (cog-name (gddr info)))))
-		ATOM-LIST)
-
-	; XXX TODO:
-	; The code below might run faster, because it does a hash
-	; compare instead of a string compare.
-	;
-	; (define pnas (Predicate "GO_namespace"))
-	; (define celc (Concept "cellular_component"))
-	; (any (lambda (info) (and
-	;     (equal? pnas (gar info)) (equal? celc (gddr info)))) ATOM-LIST)
-)
+(define find-prot/enst-name
+	(memoize-function-call do-find-prot/enst-name))
 
 (define-public (build-desc-url id type)
     (cond 
@@ -239,35 +208,19 @@
       ((single) single)
       ((first second . rest) second))))
 
-(define (do-find-name GO-ATOM)
+(define (do-find-name ATOM)
 "
-	find-name GO-ATOM
+	find-name ATOM
 
-	Find the name of GO-ATOM. This assumes a structure of the following
+	Find the name of ATOM. This assumes a structure of the following
    form, holding the name in the second spot:
 
-         (Evaluation
-             (Predicate \"GO_name\")  ; or (Predicate \"has_name\")
-             (List
-                 GO-ATOM
-                 (Concept \"some name\")))
-   and then this returns the string \"some name\" if such a structure
-   exists. Otherwise, it returns the empty string.
-   The predicate (Predicate \"GO_name\") is used whenever GO-ATOM
-   has the form (Concept \"GO:nnnnn\") where \"nnnnn\" is a number.
-   Otherwise, (Predicate \"has_name\") is used.
-"
-  (define pname
-     (if (regexp-match?  (string-match "GO:[0-9]+" (cog-name GO-ATOM)))
-       "GO_name" "has_name"))
-
-  (get-name
-    (run-query
-     (Get
-      (Variable "$name")
-      (Evaluation
-        (Predicate pname)
-        (List GO-ATOM (Variable "$name")))))))
+" 
+  (let ((name (run-query
+    (Get
+      (Evaluation (Predicate "has_name")
+      (List ATOM (Variable "$name")))))))
+    (if (null? name) '() (car name))))
 
 ; A memoized version of `do-find-name`, improves performance considerably
 ; on repeated searches.
@@ -320,15 +273,12 @@
 (define* (get-file-path id name #:optional (ext ".scm"))
     (catch #t (lambda ()
     (let*
-        (
-          [env-path (getenv "RESULT_DIR")]
+        ([env-path (getenv "RESULT_DIR")]
           [path (if (not env-path) 
             (begin 
               (if (not (file-exists? "/tmp/result"))
-                (mkdir "/tmp/result")
-              )
-              (string-append "/tmp/result/" id)
-            )
+                (mkdir "/tmp/result"))
+              (string-append "/tmp/result/" id))
             (string-append env-path "/" id))]
           [file-name (string-append path "/" name ext)])
         (if (not (file-exists? path))
@@ -441,8 +391,7 @@
 ; Cache results of do-find-organism for performance.
 (define cache-find-organism (memoize-function-call do-find-organism)) 
 
-(define-public (find-organism gene)
-   (list (cache-find-organism gene)))
+(define-public (find-organism gene) (cache-find-organism gene))
 
 
 (define-public (str->tv s)
@@ -511,3 +460,5 @@
   ;For ex. (type->string (CellularComponentNode "blah")) => "cellularcomponent"
   (string-downcase (string-drop-right (symbol->string (cog-type atom)) 4))
 )
+
+(define-public (is-type? node type) (or (equal? (cog-type node) type) (cog-subtype? type (cog-type node))))

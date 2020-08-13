@@ -184,7 +184,7 @@
 
 (define-public (build-desc-url id type)
     (cond 
-        ((string=? "chebi" type) (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" id))
+        ((string=? "chebi" type) (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split id #\:))))
         ((string=? "uniprot" type) (string-append "https://www.uniprot.org/uniprot/" id))
         ((or (string=? "cellularcomponent" type) (string=? "molecularfunction" type)
          (string=? "biologicalprocess" type)) (string-append "http://amigo.geneontology.org/amigo/term/" id))

@@ -343,3 +343,29 @@
   (run-query (Bind 
          (Inheritance go-term (Variable "$par"))
          (Inheritance go-term (Variable "$par")))))
+
+;; =========================== GO Plus Chebi ==============================
+(define chebi-rlns '("has_part" "has_role"))
+
+(define (do-find-mol-go-plus mol)
+   (let* (
+      [chebis (append-map (lambda (rln)
+         (run-query (Bind 
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink mol (Variable "$mol")))
+                        (Evaluation
+                           (Predicate rln)
+                           (ListLink mol (Variable "$mol"))))))  chebi-rlns)]
+
+      [parents (run-query (Bind 
+             (TypedVariable (Variable "$par") (Type 'ConceptNode))
+             (Inheritance mol (Variable "$par"))
+             (Inheritance mol (Variable "$par"))))]) 
+
+      (append chebis parents))
+)
+
+(define-public find-mol-go-plus
+   (memoize-function-call do-find-mol-go-plus)
+)

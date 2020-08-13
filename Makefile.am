@@ -8,6 +8,7 @@ SOURCES = \
     annotation/functions.scm \
     annotation/go-helpers.scm \
     annotation/string-helpers.scm \
+    annotation/pathway-helpers.scm \
     annotation/gene-go.scm \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \

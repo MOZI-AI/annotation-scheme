@@ -26,7 +26,6 @@
     #:use-module (annotation go-helpers)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
-    #:use-module (fibers channels)
 )
 
 (define-public (do-find-ggi input-set)
@@ -68,10 +67,10 @@
             [proteins (find-proteins gene)])
          (append-map (lambda (res)
             (do-cross-annotation res proteins namespace parents regulates part-of bi-dir coding non-coding))        
-            (append-map (lambda (prot) (cache-find-ggi (Set prot (List atoms)))) proteins)))
+            (append-map (lambda (prot) (cache-find-ggi (List prot (List atoms)))) proteins)))
         (append-map (lambda (res)
          (do-cross-annotation res proteins 
-               namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ggi (Set gene (List atoms)))))))
+               namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ggi (List gene (List atoms)))))))
 
 (define-public (find-output-interactions gene interactions proteins
     namespace parents regulates part-of bi-dir coding non-coding)

@@ -91,7 +91,7 @@
          (if (pair? (car lns))
             (let ((id (caar lns))
                   (type (cdar lns)))
-              (if (string=? type "uniprot") ;;uniprots share name is a gene node w/c has a type
+              (if (or (string=? type "uniprot") (string=? type "enst")) ;;uniprots & enst share name is a gene node w/c has a type
                   (set! *nodes*
                       (cons (create-node id type (caadr lns) (build-desc-url id type)
                               "" (list *annotation*)) *nodes*))

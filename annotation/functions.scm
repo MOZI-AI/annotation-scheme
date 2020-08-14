@@ -483,10 +483,10 @@
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 
-(define (do-get-rna gene)
+(define (do-get-rna atom)
 	(run-query (Get
-		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
-		(Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
+		(TypedVariable (Variable "$a") (gdr atom))
+		(Evaluation (Predicate "transcribed_to") (List (gar atom) (Variable "$a"))))))
 
 (define cache-get-rna
 	(memoize-function-call do-get-rna))
@@ -497,34 +497,33 @@
   GENE should be a GeneNode
   do-coding do-noncoding do-protein should be #t or #f
 "
-	(map
-		(lambda (transcribe)
-			(filterbytype gene transcribe do-coding do-noncoding do-protein))
-		(cache-get-rna gene))
+   (define type (cond 
+         ((and do-coding do-noncoding) (TypeChoice (Type "EnstNode") (Type "RefseqNode")))
+         (do-coding (Type "EnstNode"))
+         (do-noncoding (Type "RefseqNode"))
+         (else #f)))
+   (if type 
+      (append-map
+         (lambda (rna)
+            (add-rna-info gene rna do-protein))
+		   (cache-get-rna (List gene type)))
+      '()
+   )
 )
 
-(define (filterbytype gene rna cod ncod do-prot)
-  (ListLink
-   (if (and cod (string-prefix? "ENST" (cog-name rna)))
-       (list
-        (Evaluation (Predicate "transcribed_to") (List gene rna))
-        (node-info rna)
-        (if do-prot
-            (list
-             (Evaluation (Predicate "translated_to")
-                (ListLink rna (find-translates rna)))
-             (node-info (car (find-translates rna))))
-            '()))
-       '())
-   (if (and ncod (not (string-prefix? "ENST" (cog-name rna))))
-       (list
-        (Evaluation (Predicate "transcribed_to") (List gene rna))
-        (node-info rna))
-       '())))
+(define (add-rna-info gene rna do-prot)
+      (match (cons (cog-type rna) do-prot)
+         (('EnstNode . #t) 
+            (list (Evaluation (Predicate "transcribed_to") (List gene rna)) (node-info rna)
+            (Evaluation (Predicate "translated_to")
+                (ListLink rna (find-translates rna))) 
+            (node-info (car (find-translates rna)))))
+         
+         ((or ('EnstNode . #f) ('RefseqNode . _)) (list (Evaluation (Predicate "transcribed_to") (List gene rna)) (node-info rna)))))    
 
 (define (do-find-translates rna)
 	(run-query (Get
-		(TypedVariable (Variable "$a") (Type 'MoleculeNode))
+		(TypedVariable (Variable "$a") (Type 'UniprotNode))
 		(Evaluation (Predicate "translated_to")
 			(List rna (Variable "$a"))))))
 

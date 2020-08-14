@@ -43,6 +43,6 @@
 	(send-message (Concept "rna-annotation") chans)
 
 	(for-each (lambda (gene)
-				(find-rna (GeneNode gene) coding noncoding do-protein))
+				(send-message (find-rna (GeneNode gene) coding noncoding do-protein) chans))
 				gene-list)
 )

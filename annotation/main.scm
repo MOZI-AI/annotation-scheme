@@ -39,11 +39,15 @@
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
+    #:use-module (ice-9 suspendable-ports)
+    #:use-module (ice-9 textual-ports)
     #:use-module (srfi srfi-1)
     #:use-module (json)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
 )
+
+(install-suspendable-ports!)
 
 (define mods '((annotation biogrid) (annotation gene-pathway) (annotation gene-go) (annotation rna) (annotation string)))
 
@@ -53,12 +57,13 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-                    (if (null? (cog-node 'GeneNode g))
-                        (make-gene g  "" (find-similar-gene g))
+                    (if (atom-exists? 'GeneNode g)
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f
-                            (make-gene g (car curr) '()))))) gene-list)))
+                            (make-gene g (car curr) '())))
+                        (make-gene g  "" (find-similar-gene g))
+                        )) gene-list)))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))
@@ -130,8 +135,7 @@
                     (print-exception err (stack-ref stack 0)
                                       key args))))))))
                          
-          (atomese-parser (lambda () (get-message parser-chan)) parser-port))
-    )
+          (atomese-parser (lambda () (get-message parser-chan)) parser-port)))
     #:drain? #t))
 
 (define-public (annotate-genes genes-list file-name request)

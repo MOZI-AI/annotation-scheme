@@ -24,6 +24,7 @@
 	#:use-module (opencog)
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
+  #:use-module (opencog grpc)
 	#:use-module (annotation graph)
   #:use-module (fibers channels)
 	#:use-module (ice-9 optargs)
@@ -48,6 +49,9 @@
 (define-public gene-pairs (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 
+(define-public atomspace-id (if (getenv "ATOM_ID") (getenv "ATOM_ID") "prod-atom"))
+
+(define (test-mode?) (if (getenv "TEST_MODE") #t #f))
 ; ----------------------------------------------------
 ;;Use a global cache list. Using a local cache cause segfault error when clearing the current atomspace and re-running another annotation. We have to also clear the cache
 (define-public cache-list '())
@@ -101,30 +105,13 @@
 
 ; ----------------------------------------------------
 
-(define run-query-mtx (make-mutex))
 (define-public (run-query QUERY)
 "
-  Call (cog-execute! QUERY), return results, delete the SetLink.
-  This avoids a memory leak of SetLinks
-"
-
-	(define set-link (cog-execute! QUERY))
-
-	(lock-mutex run-query-mtx)
-	(if (cog-atom? set-link)
-		; Get the query results
-		(let ((results (cog-outgoing-set set-link)))
-			; Delete the SetLink
-			(cog-delete set-link)
-			(unlock-mutex run-query-mtx)
-			; Return the results.
-			results)
-		; Try again
-		(begin
-			(unlock-mutex run-query-mtx)
-			(run-query QUERY))
-	)
-)
+  Execute Pattern Matching QUERY on remote atomspace
+" 
+  (if (test-mode?)
+      (cog-outgoing-set (cog-execute! QUERY)) ;; we don't want to make calls to the server while running unit-tests
+      (exec-pattern atomspace-id QUERY)))
 
 ; --------------------------------------------------------
 
@@ -297,19 +284,24 @@
 ; --------------------------------------------------------
 
 (define-public (find-similar-gene gene-name)
-   (define pattern (string-append gene-name ".+$"))
-   (let ([res (filter-map
-      (lambda (some-gene)
+  (if (test-mode?)
+    (let* ([pattern (string-append gene-name ".+$")]
+        [res (filter-map (lambda (some-gene)
         (if (regexp-match? (string-match pattern (cog-name some-gene)))
             (cog-name some-gene)
-            #f
-        ))
+            #f))
       ; cog-get-atoms gets ALL of the GeneNodes in the atomspace...
       (cog-get-atoms 'GeneNode))])
       
       (if (> (length res) 5) 
         (take res 5)
-        res)))
+        res))
+    (map cog-name (find-similar-node atomspace-id 'GeneNode gene-name))))
+
+(define-public (atom-exists? type name)
+   (if (test-mode?)
+        (not (null? (cog-node type name)))
+        (check-node atomspace-id type name)))
 
 ; --------------------------------------------------------
 

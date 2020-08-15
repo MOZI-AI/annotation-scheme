@@ -1,5 +1,8 @@
 include guile.am
 AUTOMAKE_OPTIONS = foreign
+ACLOCAL_AMFLAGS = -I m4
+
+
 SOURCES = \
     annotation/util.scm  \
     annotation/functions.scm \

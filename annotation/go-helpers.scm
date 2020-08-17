@@ -359,6 +359,7 @@
                            (ListLink mol (Variable "$mol"))))))  chebi-rlns)]
 
       [parents (run-query (Bind 
+             ;; FIXME Add a specific type to parent chebi's instead of ConceptNode
              (TypedVariable (Variable "$par") (Type 'ConceptNode))
              (Inheritance mol (Variable "$par"))
              (Inheritance mol (Variable "$par"))))]) 

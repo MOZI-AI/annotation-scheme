@@ -156,7 +156,7 @@
   do-coding do-noncoding do-protein should be #t or #f
 "
    (define type (cond 
-         ((and do-coding do-noncoding) (TypeChoice (Type "EnstNode") (Type "RefseqNode")))
+         ((and do-coding do-noncoding) (TypeInh "RnaNode"))
          (do-coding (Type "EnstNode"))
          (do-noncoding (Type "RefseqNode"))
          (else #f)))

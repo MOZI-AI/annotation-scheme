@@ -105,7 +105,7 @@
                   (cons func args))
                 '()))) table))))
 
-(define (process-request item-list file-name request)
+(define (process-request genes-lst file-name request)
   (run-fibers
     (lambda ()
       (let ((parser-chan (make-channel))
@@ -119,7 +119,8 @@
         (spawn-fiber (lambda ()
             (catch #t 
               (lambda () 
-                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
+                (gene-info genes-lst (list parser-chan writer-chan))
+                (for-each (lambda (fn) (apply (car fn) genes-lst (list parser-chan  writer-chan) (cdr fn))) functions)
                 (send-message 'eof (list writer-chan parser-chan))) 
               (lambda _
                 (send-message 'eof (list writer-chan parser-chan)))

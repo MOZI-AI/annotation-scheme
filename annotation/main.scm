@@ -114,11 +114,12 @@
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
             (writer-port (open-file (get-file-path file-name "result") "w"))
            )
-        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
+        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port)))
 
         (spawn-fiber (lambda ()
             (catch #t 
               (lambda () 
+                (send-message (Concept "main") (list writer-chan parser-chan))
                 (gene-info genes-lst (list parser-chan writer-chan))
                 (for-each (lambda (fn) (apply (car fn) genes-lst (list parser-chan  writer-chan) (cdr fn))) functions)
                 (send-message 'eof (list writer-chan parser-chan))) 

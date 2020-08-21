@@ -296,12 +296,12 @@
       (if (> (length res) 5) 
         (take res 5)
         res))
-    (map cog-name (find-similar-node atomspace-id 'GeneNode gene-name))))
+    (map cog-name (find-similar-node atomspace-id "GeneNode" gene-name))))
 
 (define-public (atom-exists? type name)
    (if (test-mode?)
         (not (null? (cog-node type name)))
-        (check-node atomspace-id type name)))
+        (check-node atomspace-id (symbol->string type) name)))
 
 ; --------------------------------------------------------
 

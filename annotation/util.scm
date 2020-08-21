@@ -356,32 +356,6 @@
 
 )
 
-(define (is-compartment loc)
-	(any
-		(lambda (comp) (string-contains loc comp))
-		(list "vesicle" "photoreceptor" "plasma" "centriole"
-			"cytoplasm" "endosome" "golgi" "vacuole" "granule"
-			"endoplasmic" "mitochondri" "cytosol" "peroxisome"
-			"ribosomes" "lysosome" "nucle"))
-)
-
-(define (filter-loc node go)
-"
-  filter only Cell membrane and compartments
-
-  Return either the location or #f
-"
-  (define loc (string-downcase (find-name go)))
-
-  (if (or (and (not (string-contains loc "complex"))
-      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc)))
-          (is-compartment loc))
-      (Evaluation
-        (Predicate "has_location")
-        (ListLink node (Concept loc)))
-      #f)
-)
-
 (define (do-locate-node node)
   (define go-list (run-query
     (Get
@@ -393,19 +367,17 @@
            (List (Variable "$go") (Concept "cellular_component")))
         ))))
 
-  (define loc-list
-    (filter-map (lambda (go) (filter-loc node go)) go-list))
-
-  (if (not (null? loc-list)) loc-list
-    (run-query
-      (Bind
-        (Variable "$loc")
+  (if (not (null? go-list)) go-list
+    (run-query (Bind
+      (And
         (Evaluation
           (Predicate "has_location")
           (List node (Variable "$loc")))
         (Evaluation
-          (Predicate "has_location")
-          (List node (Variable "$loc"))))))
+          (Predicate "GO_name")
+          (List (Variable "$go") (Variable "$loc"))))
+      (Variable "$go")))
+  )
 )
 
 (define-public locate-node (make-afunc-cache do-locate-node))
@@ -418,22 +390,25 @@
         [parent (cog-outgoing-atom node 1) ])
       (run-query
         (Bind
-          (VariableNode "$loc")
+          (And
           (ContextLink
-            (MemberLink 
-              child
-              parent)
+            node
             (EvaluationLink
               (PredicateNode "has_location")
               (ListLink
                 child
+                (VariableNode "$loc"))))
+            (EvaluationLink
+              (PredicateNode "GO_name")
+              (ListLink
+                (VariableNode "$go")
                 (VariableNode "$loc")))
           )
             (EvaluationLink
               (PredicateNode "has_location")
               (ListLink
                 child
-                (VariableNode "$loc")))
+                (VariableNode "$go")))
           )
         )
     )

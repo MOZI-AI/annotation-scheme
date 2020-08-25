@@ -24,6 +24,7 @@
       #:use-module (annotation functions)
       #:use-module (annotation string-helpers)
       #:use-module (annotation pathway-helpers)
+      #:use-module (annotation biogrid-helpers)
       #:use-module (opencog)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)

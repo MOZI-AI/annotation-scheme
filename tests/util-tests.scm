@@ -8,6 +8,7 @@
 )
 
 (test-begin "util")
+(setenv "TEST_MODE" "TRUE")
 (primitive-load-path "tests/sample_dataset.scm")
 (define entrez-link (EvaluationLink
         (PredicateNode "has_entrez_id")
@@ -28,5 +29,5 @@
 
 (clear)
 
-
+(setenv "TEST_MODE" #f) ;;remove the env variable
 (test-end "util")

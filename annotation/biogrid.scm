@@ -22,6 +22,7 @@
 (define-module (annotation biogrid)
 	#:use-module (annotation functions)
 	#:use-module (annotation util)
+      #:use-module (annotation biogrid-helpers)
 	#:use-module (opencog)
 	#:use-module (opencog exec)
 	#:use-module (opencog bioscience)
@@ -41,7 +42,7 @@
                                          (noncoding #f)
                                          (exclude-orgs ""))
 	(define namespaces
-		(if (null? namespace) '() (string-split namespace #\ )))
+		(if (or (null? namespace) (string=? namespace "")) '() (string-split namespace #\ )))
 
     (define exclude-taxonomies 
           (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))

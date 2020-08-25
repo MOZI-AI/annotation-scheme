@@ -8,7 +8,7 @@
 )
 
 (test-begin "GO")
-
+(setenv "TEST_MODE" "TRUE")
 ;;Load test atomspace
 (primitive-load-path "tests/go_plus_sample.scm")
 (primitive-load-path "tests/go_plus_chebi_sample.scm")
@@ -18,4 +18,6 @@
 (test-equal "chebi-go-plus" 3 (length (find-mol-go-plus (MoleculeNode "ChEBI:15776"))))
 
 (clear)
+
+(setenv "TEST_MODE" #f) ;;remove the env variable
 (test-end "GO")

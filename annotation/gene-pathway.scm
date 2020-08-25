@@ -20,9 +20,11 @@
 ;;; <http://www.gnu.org/licenses/>.
 
 (define-module (annotation gene-pathway)
-      #:use-module (annotation functions)
       #:use-module (annotation util)
+      #:use-module (annotation functions)
       #:use-module (annotation string-helpers)
+      #:use-module (annotation pathway-helpers)
+      #:use-module (annotation biogrid-helpers)
       #:use-module (opencog)
       #:use-module (opencog exec)
       #:use-module (opencog bioscience)
@@ -63,8 +65,7 @@
                               (if (string=? pathway "reactome")
                                   (reactome gene chans include_prot include_sm namespaces parents regulates part-of bi-dir biogrid string coding noncoding)
                               )) pathways))
-                        gene-nodes)
-          )
+                        gene-nodes))
 )))
 
 (define (smpdb gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
@@ -72,7 +73,7 @@
   From SMPDB
 "
 
-  (let* ([pw (find-pathway-member (GeneNode gene) "SMP")])
+  (let* ([pw (find-pathway-member (GeneNode gene) 'SmpNode)])
 
 
          (for-each (lambda (path)
@@ -80,27 +81,21 @@
                   (send-message (list (Member (Gene gene) path) (node-info path)) chans)
 
                   (if sm? 
-                    (send-message (find-mol path "ChEBI") chans))
+                    (send-message (find-mol path 'ChebiNode) chans))
 
                   (send-message (find-pathway-genes path namespaces num-parents regulates part-of bi-dir 
                                     coding-rna non-coding-rna prot?) chans)
-                  (if prot?
-                      (let ([prots (find-mol path "Uniprot")])
-                        (if (null? prots)
-                            (send-message prots chans))))
+
+                  (if prot? (send-message (find-mol path 'UniprotNode) chans))
                   
                   (if biogrid
                       (send-message (pathway-gene-interactors path) chans))
                       
                   (if string 
-                      (send-message (find-pathway-gene-interactors path) chans)
-                  )
-              )  pw)
+                      (send-message (find-pathway/go-gene-interactors path) chans)))  pw)
 
           (if prot? 
-            (send-message (find-protein (GeneNode gene) 0) chans))      
-
-    )
+            (send-message (find-protein (GeneNode gene) 0) chans))      )
 )
 
 (define (reactome gene chans prot? sm? namespaces num-parents regulates part-of bi-dir biogrid string coding-rna non-coding-rna)
@@ -108,36 +103,28 @@
   From reactome
 "
 
-  (let* ([pw (find-pathway-member (GeneNode gene) "R-HSA")]
-         [pwlst '()]
-        )
+  (let* ([pw (find-pathway-member (GeneNode gene) 'ReactomeNode)]
+         [pwlst '()])
       
       (for-each  (lambda (path)
                   
-                        (send-message (list (Member (Gene gene) path) (node-info path)) chans)
+            (send-message (list (Member (Gene gene) path) (node-info path)) chans)
 
-                        (set! pwlst (append pwlst (list path)))
+            (set! pwlst (append pwlst (list path)))
 
-                      (send-message
-                        (find-pathway-genes path namespaces num-parents
-                              regulates part-of bi-dir coding-rna non-coding-rna prot?) chans)
-                      (if prot?
-                          (let ([prots (find-mol path "Uniprot")])
-                            (if (null? prots)
-                                (send-message prots chans)))
-                      )
-                      (if biogrid
-                          (send-message (pathway-gene-interactors path) chans )
-                      )
-                      (if string 
-                        (send-message (find-pathway-gene-interactors path) chans)
-                      )
+            (send-message
+              (find-pathway-genes path namespaces num-parents
+                    regulates part-of bi-dir coding-rna non-coding-rna prot?) chans)
 
-                      (if sm? (send-message (find-mol path "ChEBI") chans))
+            (if prot? (send-message (find-mol path 'UniprotNode) chans))
+            
+            (if biogrid
+                (send-message (pathway-gene-interactors path) chans ))
+            (if string 
+              (send-message (find-pathway/go-gene-interactors path) chans))
 
-                      (send-message (pathway-hierarchy path pwlst) chans)) pw)
+            (if sm? (send-message (find-mol path 'ChebiNode) chans))
 
-
+            (send-message (pathway-hierarchy path pwlst) chans)) pw)
       (if prot? 
-          (send-message (find-protein (GeneNode gene) 1) chans))
-))
+          (send-message (find-protein (GeneNode gene) 1) chans))))

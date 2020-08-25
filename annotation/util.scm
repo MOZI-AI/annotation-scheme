@@ -296,70 +296,62 @@
 			"ribosomes" "lysosome" "nucle"))
 )
 
-(define (filter-loc node go)
-"
-  filter only Cell membrane and compartments
-
-  Return either the location or #f
-"
-  (define loc (string-downcase (find-name go)))
-
-  (if (or (and (not (string-contains loc "complex"))
-      (or (string-suffix? "ome" loc) (string-suffix? "ome membrane" loc)))
-          (is-compartment loc))
-      (Evaluation
-        (Predicate "has_location")
-        (ListLink node (Concept loc)))
-      #f)
-)
-
 (define (do-locate-node node)
   (define go-list (run-query
-    (Get
-       (Variable "$go")
-       (And
-         (Member node (Variable "$go"))
-         (Evaluation
-           (Predicate "GO_namespace")
-           (List (Variable "$go") (Concept "cellular_component")))))))
+    (Bind
+       (TypedVariable (Variable "$go") (Type 'CellularComponent))
+        (Member node (Variable "$go"))
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$go")))
+        )))
 
-  (define loc-list
-    (filter-map (lambda (go) (filter-loc node go)) go-list))
-
-  (if (not (null? loc-list)) loc-list
+  (if (not (null? go-list)) go-list
     (run-query
       (Bind
         (Variable "$loc")
+        (And
         (Evaluation
           (Predicate "has_location")
           (List node (Variable "$loc")))
         (Evaluation
+          (Predicate "GO_name")
+          (List (Variable "$go") (Variable "$loc"))))
+        (Evaluation
           (Predicate "has_location")
-          (List node (Variable "$loc"))))))
+          (List node (Variable "$go"))))))
 )
 
 (define-public locate-node (make-afunc-cache do-locate-node))
 
-(define-public (add-loc node)
+(define-public (add-loc cont)
 "
   Add location of a gene/Molecule node in context of Reactome pathway
+  The input is a MemberLink with the gene member of a pathway i.e (Member gene pathway)
 "
-  (let ([child (cog-outgoing-atom node 0)] 
-        [parent (cog-outgoing-atom node 1) ])
+  (let ([gene (cog-outgoing-atom cont 0)])
       (run-query
         (Bind
-          (VariableNode "$loc")
-          (ContextLink
-            (MemberLink 
-              child parent)
+          (VariableList
+            (TypedVariable (VariableNode "$loc") (Type 'ConceptNode))
+            (TypedVariable (Variable "$go") (Type 'CellularComponent))) 
+          (And
+            (ContextLink
+              cont
+              (EvaluationLink
+                (PredicateNode "has_location")
+                (ListLink
+                  gene (VariableNode "$loc"))))
+            (EvaluationLink
+              (PredicateNode "has_name")
+              (ListLink
+                (VariableNode "$go")
+                (VariableNode "$loc"))))
             (EvaluationLink
               (PredicateNode "has_location")
               (ListLink
-                child (VariableNode "$loc"))))
-            (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                child (VariableNode "$loc"))))))
+                gene
+                (VariableNode "$go"))))))
 )
 
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list

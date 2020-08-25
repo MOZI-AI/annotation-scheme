@@ -142,7 +142,6 @@
   
   (define node-name 
     (match (cog-type node) 
-      ((or 'ReactomeNode 'SmpNode 'PathwayNode) (ConceptNode "N/A"))
       ((or 'UniprotNode 'EnstNode) (find-prot/enst-name node))
       (_ (find-name node))))
 
@@ -220,7 +219,7 @@
     (Get
       (Evaluation (Predicate "has_name")
       (List ATOM (Variable "$name")))))))
-    (if (null? name) '() (car name))))
+    (if (null? name) (Concept "N/A") (car name))))
 
 ; A memoized version of `do-find-name`, improves performance considerably
 ; on repeated searches.

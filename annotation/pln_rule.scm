@@ -1,6 +1,6 @@
 (use-modules (opencog) (opencog exec))
 
-(use-modules (annotation functions)) ;;; for find-pubmed-id
+(use-modules (annotation biogrid-helpers)) ;;; for find-pubmed-id
 
 (define biogrid_interaction_rule
     (Bind

@@ -357,14 +357,14 @@
 
 (define (do-locate-node node)
   (define go-list (run-query
-    (Get
+    (Bind
        (Variable "$go")
        (And
          (Member node (Variable "$go"))
          (Evaluation
            (Predicate "GO_namespace")
-           (List (Variable "$go") (Concept "cellular_component")))
-        ))))
+           (List (Variable "$go") (Concept "cellular_component"))))
+       (Evaluation (Predicate "has_location") (ListLink node (Variable "$go"))))))
 
   (if (not (null? go-list)) go-list
     (run-query (Bind
@@ -375,8 +375,7 @@
         (Evaluation
           (Predicate "GO_name")
           (List (Variable "$go") (Variable "$loc"))))
-      (Variable "$go")))
-  )
+      (Evaluation (Predicate "has_location") (ListLink node (Variable "$go"))))))
 )
 
 (define-public locate-node (make-afunc-cache do-locate-node))

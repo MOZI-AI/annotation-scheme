@@ -62,8 +62,7 @@
                           (if (null? curr)
                             #f
                             (make-gene g (car curr) '())))
-                        (make-gene g  "" (find-similar-gene g))
-                        )) gene-list)))
+                        (make-gene g  "" (find-similar-gene g)))) gene-list)))
         (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))
@@ -77,9 +76,14 @@
             ) genes)
 )
 
-(define-public (mapSymbol gene-list)
-  "Map gene symbols into GeneNodes."
-  (map GeneNode gene-list))
+(define-public (gene->protein gene-list chans)
+  "Get proteins for each gene"
+  (map (lambda (gene)
+    (let ((prots (find-proteins (GeneNode gene))))
+      (for-each (lambda (prot) 
+        (send-message (Evaluation (Predicate "expresses") (List (GeneNode gene) prot)) chans))  prots)
+      (cons (GeneNode gene) prots)
+    )) gene-list))
 
 
 (define-public (parse-request req)
@@ -87,8 +91,7 @@
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))))))
 
       (vector->list (vector-map (lambda (i elm)
-        (let  (
-            (func (find-module (assoc-ref elm "functionName") mods)))
+        (let  ((func (find-module (assoc-ref elm "functionName") mods)))
             (if func 
                 (let* (                
                   (filters (assoc-ref elm "filters"))
@@ -105,22 +108,28 @@
                   (cons func args))
                 '()))) table))))
 
-(define (process-request item-list file-name request)
+(define (process-request gene-list file-name request)
   (run-fibers
     (lambda ()
       (let ((parser-chan (make-channel))
             (writer-chan (make-channel))
             (functions (parse-request request))
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
-            (writer-port (open-file (get-file-path file-name "result") "w"))
-           )
+            (writer-port (open-file (get-file-path file-name "result") "w")))
+
+        
         (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
 
         (spawn-fiber (lambda ()
             (catch #t 
-              (lambda () 
-                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
-                (send-message 'eof (list writer-chan parser-chan))) 
+              (lambda ()
+                (let ((chans (list parser-chan writer-chan))
+                      (pairs '()))
+                  (send-message (Concept "main") chans)
+                  (set! pairs (gene->protein gene-list chans))
+                  (gene-info gene-list chans)
+                  (for-each (lambda (fn) (apply (car fn) pairs chans (cdr fn))) functions)
+                  (send-message 'eof chans))) 
               (lambda _
                 (send-message 'eof (list writer-chan parser-chan)))
               (let ((err (current-error-port)))
@@ -143,12 +152,8 @@
                  (gene-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
                 )
-    (process-request genes-list file-name request)
-  )
-)
+    (process-request genes-list file-name request)))
 
 (define-public (annotate-go go-terms file-name request)
   (parameterize ()
-    (process-request go-terms file-name request)
-  )
-)
+    (process-request go-terms file-name request)))

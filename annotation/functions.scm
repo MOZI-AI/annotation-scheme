@@ -78,8 +78,8 @@
          (run-query 
             (Bind 
                (VariableList
-                  (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
-                  (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+                  (TypedVariable (Variable "$p1") (Type 'UniprotNode))
+                  (TypedVariable (Variable "$p2") (Type 'UniprotNode)))
 
                (And 
                   (Member (Variable "$p1") node)
@@ -91,8 +91,8 @@
          (run-query 
             (Get 
                (VariableList
-                  (TypedVariable (Variable "$p1") (Type 'MoleculeNode))
-                  (TypedVariable (Variable "$p2") (Type 'MoleculeNode)))
+                  (TypedVariable (Variable "$p1") (Type 'UniprotNode))
+                  (TypedVariable (Variable "$p2") (Type 'UniprotNode)))
 
                (And 
                   (Member (Variable "$p1") node)
@@ -127,63 +127,72 @@
 
 ;;Return all proteins expressed by a gene
 (define (do-find-proteins gene)
-   (run-query (Bind
+   (run-query (Get
       (VariableList
          (TypedVariable (Variable "$p") (Type 'UniprotNode)))
-      (Evaluation (Predicate "expresses") (List gene (Variable "$p")))
-      (VariableNode "$p")))
+      (Evaluation (Predicate "expresses") (List gene (Variable "$p")))))
 )
 
 (define-public find-proteins
    (memoize-function-call do-find-proteins)
 )
 
+;---------------------------------------------
+;Given a protein find the gene that codes for that protein
+(define (do-get-coding-gene prot)
+   (run-query (Get (TypedVariable (Variable "$a") (Type "GeneNode"))
+      (Evaluation (Predicate "expresses")
+         (List (Variable "$a") prot))))
+)
+
+(define-public find-coding-gene (memoize-function-call do-get-coding-gene))
+
 ;; ------------------------------------------------------
 ;; Finds coding and non coding RNA for a given gene
 
-(define (do-get-rna atom)
+(define (do-get-crna prot)
 	(run-query (Get
-		(TypedVariable (Variable "$a") (gdr atom))
-		(Evaluation (Predicate "transcribed_to") (List (gar atom) (Variable "$a"))))))
+		(TypedVariable (Variable "$a") (TypeNode "EnstNode"))
+		(Evaluation (Predicate "translated_to") (List (Variable "$a") prot)))))
 
-(define cache-get-rna
-	(memoize-function-call do-get-rna))
+(define (do-get-nc-rna prot)
+   (run-query (Bind 
+      (VariableList
+       (TypedVariable (Variable "$a") (TypeNode "RefseqNode"))
+       (TypedVariable (Variable "$g") (TypeNode "GeneNode")))
+      (And 
+         (Evaluation (Predicate "expresses")
+            (List (Variable "$g") prot))
+         (Evaluation (Predicate "translated_to") 
+            (List (Variable "$g") (Variable "$a"))))
+      (Evaluation (Predicate "translated_to") 
+            (List (Variable "$g") (Variable "$a"))))))
 
-(define-public (find-rna gene do-coding do-noncoding do-protein)
+(define cache-get-crna
+	(memoize-function-call do-get-crna))
+
+(define cache-get-nc-rna
+	(memoize-function-call do-get-nc-rna))
+
+(define-public (find-rna prot do-coding do-noncoding)
 "
-  find-rna GENE do-coding do-noncoding do-protein
-  GENE should be a GeneNode
-  do-coding do-noncoding do-protein should be #t or #f
+  find-rna PROTEIN do-coding do-noncoding do-protein
+  PROTEIN should be a UniprotNode
+  do-coding do-noncoding should be #t or #f
 "
-   (define type (cond 
-         ((and do-coding do-noncoding) (TypeInh "RnaNode"))
-         (do-coding (Type "EnstNode"))
-         (do-noncoding (Type "RefseqNode"))
-         (else #f)))
-   (if type 
-      (append-map
-         (lambda (rna)
-            (add-rna-info gene rna do-protein))
-		   (cache-get-rna (List gene type)))
-      '()
-   )
-)
+   (let ((rnas (cond 
+      ((and do-coding do-noncoding)
+         (append (cache-get-crna prot) (cache-get-nc-rna prot)))
+      (do-coding (cache-get-crna prot))
+      (do-noncoding (cache-get-nc-rna prot))
+      (else '()))))
+   
+   (append-map (lambda (rna) (add-rna-info prot rna)) rnas)))
 
-(define (add-rna-info gene rna do-prot)
-      (match (cons (cog-type rna) do-prot)
-         (('EnstNode . #t) 
-            (list (Evaluation (Predicate "transcribed_to") (List gene rna)) (node-info rna)
-            (Evaluation (Predicate "translated_to")
-                (ListLink rna (find-translates rna))) 
-            (node-info (car (find-translates rna)))))
+(define (add-rna-info prot rna)
+      (match (cog-type rna)
+         ('EnstNode 
+            (list (node-info rna)
+               (Evaluation (Predicate "translated_to") (ListLink rna prot))))
          
-         ((or ('EnstNode . #f) ('RefseqNode . _)) (list (Evaluation (Predicate "transcribed_to") (List gene rna)) (node-info rna)))))    
-
-(define (do-find-translates rna)
-	(run-query (Get
-		(TypedVariable (Variable "$a") (Type 'UniprotNode))
-		(Evaluation (Predicate "translated_to")
-			(List rna (Variable "$a"))))))
-
-(define-public find-translates
-	(memoize-function-call do-find-translates))
+         ('RefseqNode (list rna (node-info (gddr rna))))))

@@ -28,21 +28,18 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna gene-list chans #:key (coding #t) (noncoding #t) (protein 1))
+(define* (include-rna lst chans #:key (coding #t) (noncoding #t))
 "
   The include-rna function finds coding and non-coding RNA forms of
-  the gene-list. Needs 4 arguments:
+  the lst. Needs 3 arguments:
   coding -> when True, includes the coding RNA's
   coding -> when True with protein True, includes the coding RNA's
             and corresponding coding proteins.
   non-coding -> when True includes the non-coding RNA's
-  protein -> scheme number, 0 or 1.
 "
-	(define do-protein (= protein 1))
-
 	(send-message (Concept "rna-annotation") chans)
 
-	(for-each (lambda (gene)
-				(send-message (find-rna (GeneNode gene) coding noncoding do-protein) chans))
-				gene-list)
+	(for-each (lambda (prot)
+				(send-message (find-rna prot coding noncoding) chans))
+				(cdr lst))
 )

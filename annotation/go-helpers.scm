@@ -43,22 +43,16 @@
                (ListLink go (VariableNode "$a"))))))
 
 
-(define (add-go-info child-atom parent-atom)
+(define* (add-go-info child-atom #:optional (parent-atom #f))
 "
    Add information for GO nodes
 "
-   (define parent-is-go?
-      (member (cog-type parent-atom) (list 'BiologicalProcessNode 'CellularComponentNode 'MolecularFunctionNode)))
 
-   (if parent-is-go?
-      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
-         (list
-            (Member child-atom parent-atom)
-            (find-go-name parent-atom))
-         (list
-           (Inheritance child-atom parent-atom)
-           (find-go-name parent-atom)))
-      #f))
+   (if parent-atom
+      (list
+         (Inheritance child-atom parent-atom)
+         (find-go-name parent-atom))
+      (find-go-name child-atom)))
 
 (define (find-parent node namespaces)
 "
@@ -88,20 +82,15 @@
   Find GO terms of a protein.  `protein` must be a GeneNode and `namespaces`
   must be a list of strings.
 "
-   (define (add-go-member-ns ns-name)
+   
+   ;;list of go atoms that this protein is a member of
+   (define go-list
+      (append-map (lambda (ns-name) (run-query (Get
+         (TypedVariable (Variable "$a") (ns->type ns-name))
+         (And
+            (Member protein (Variable "$a")))))) namespaces))
 
-      ;;list of go atoms that this protein is a member of
-      (define go-list
-         (run-query (Get
-            (TypedVariable (Variable "$a") (ns->type ns-name))
-            (And
-               (Member protein (Variable "$a"))))))
-
-      (filter-map
-         (lambda (thing) (add-go-info protein thing))
-         go-list))
-
-   (append-map add-go-member-ns namespaces)
+   (flatten (append-map (lambda (go) (list (Member protein go) (add-go-info go))) go-list))
 )
 
 (define-public (find-go-term prot namespaces num-parents regulates part-of bi-dir)

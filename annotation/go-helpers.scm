@@ -28,6 +28,7 @@
     #:use-module (annotation util)
     #:use-module (srfi srfi-1)
     #:use-module (ice-9 match)
+    #:export (find-go-plus)
 )
 
 (define-public (find-go-name go)

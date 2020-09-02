@@ -5,6 +5,7 @@
     #:use-module (opencog bioscience)
     #:use-module (annotation string-helpers)
     #:use-module (annotation util)
+    #:use-module (annotation functions)
 )
 
 (test-begin "string")

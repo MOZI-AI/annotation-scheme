@@ -12,6 +12,7 @@
     #:use-module (annotation parser)
 	#:use-module (annotation rna)
     #:use-module (json)
+	#:use-module (annotation go-helpers)
 )
 
 (test-begin "main")
@@ -36,7 +37,7 @@
 
 (define namespace (list "biological_process" "molecular_function" "cellular_component"))
 
-(test-equal "protein-goterm" 14 (length (find-proteins-goterm (GeneNode "IGF1") namespace 0 #f #f #f)))
+(test-equal "protein-goterm" 2 (length (find-proteins-goterm (GeneNode "IGF1") namespace 0 #f #f #f)))
 
 
 (test-equal "current_vs_prev_symbols" (ListLink) (find-protein-form (GeneNode "NOV")))

@@ -28,7 +28,7 @@
     #:use-module (ice-9 match)
 )
 
-(define-public (do-find-ggi input-set)
+(define-public (do-find-ppi input-set)
    (append-map (lambda (interaction)
       (if (member (cog-name interaction) symmetric-interactions)
          ;;symmetric - Use SetLink
@@ -50,58 +50,48 @@
 
 )
 
-(define-public cache-find-ggi
-   (memoize-function-call do-find-ggi)
+(define-public cache-find-ppi
+   (memoize-function-call do-find-ppi)
 )
 
 
-(define-public (find-interaction gene interactions proteins
-                  namespace parents regulates part-of bi-dir coding non-coding)
-   ;;Find Genes that interact with the input gene. Optionally specify a filter list of the interactions
-   ;;If proteins option is true do a Protein-Protein interaction
+(define-public (find-interaction prot interactions namespace parents regulates part-of bi-dir coding non-coding)
+   ;;Find proteins that interact with the input protein. Optionally specify a filter list of the interactions
    (let (
       [atoms (if interactions (map (lambda (e) (Concept e)) interactions) 
                (map (lambda (e) (Concept e)) all-interactions))])
-      (if proteins
-        (let (
-            [proteins (find-proteins gene)])
-         (append-map (lambda (res)
-            (do-cross-annotation res proteins namespace parents regulates part-of bi-dir coding non-coding))        
-            (append-map (lambda (prot) (cache-find-ggi (List prot (List atoms)))) proteins)))
-        (append-map (lambda (res)
-         (do-cross-annotation res proteins 
-               namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ggi (List gene (List atoms)))))))
+      
+        (append-map (lambda (res) 
+         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ppi (List prot (List atoms))))))
 
-(define-public (find-output-interactions gene interactions proteins
+(define-public (find-output-interactions prot interactions
     namespace parents regulates part-of bi-dir coding non-coding)
 
    (define (get-output-interactors intrs)
       (append-map (lambda (intr)
          (run-query (Bind
 			(VariableList
-				(TypedVariable (Variable "$a") (Type 'GeneNode))
-				(TypedVariable (Variable "$b") (Type 'GeneNode)))
+				(TypedVariable (Variable "$a") (Type 'UniprotNode))
+				(TypedVariable (Variable "$b") (Type 'UniprotNode)))
 
 			(And
 				(Evaluation (Predicate intr)
-					(Set gene (Variable "$a")))
+					(Set prot (Variable "$a")))
 
 				(Evaluation (Predicate intr)
 					(Set (Variable "$a") (Variable "$b")))
 
 				(Evaluation (Predicate intr)
-					(Set gene (Variable "$b"))))          
+					(Set prot (Variable "$b"))))          
             (Evaluation (Predicate intr)
                 (Set (Variable "$a") (Variable "$b")))))) intrs))
 
    (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
       (append-map (lambda (res)
-         (do-cross-annotation res proteins 
-               namespace parents regulates part-of bi-dir coding non-coding)) output-interactors))
+         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) output-interactors))
 )
 
-(define (do-cross-annotation link do-protein
-             namespaces num-parents regulates part-of bi-dir coding-rna non-coding-rna)
+(define-public (do-cross-annotation link namespaces num-parents regulates part-of bi-dir coding-rna non-coding-rna)
     "
      do-cross-annotation -- add info about matched variable nodes
     `namespaces` should be a scheme list of strings (possibly an empty list),
@@ -113,11 +103,11 @@
     `non-coding-rna` should be either #f or #t.
     "
     (let* (
-        [gene-a (gadr link)]
-        [gene-b (gddr link)]
-        [already-done-a ((intr-genes) gene-a)]
-        [already-done-b ((intr-genes) gene-b)]
-        [already-done-pair ((gene-pairs) (List gene-a gene-b))])
+        [prot-a (gadr link)]
+        [prot-b (gddr link)]
+        [already-done-a ((intr-genes) prot-a)]
+        [already-done-b ((intr-genes) prot-b)]
+        [already-done-pair ((gene-pairs) (List prot-a prot-b))])
         
         (cond 
           ((and (not already-done-a) (not already-done-b))
@@ -125,33 +115,34 @@
                     (if (null? namespaces) '()
                         (list
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-a namespaces num-parents regulates part-of bi-dir)
-                           (find-go-term gene-b namespaces num-parents regulates part-of bi-dir)
+                           (find-go-term prot-a namespaces num-parents regulates part-of bi-dir)
+                           (find-go-term prot-b namespaces num-parents regulates part-of bi-dir)
                            (Concept "string-interaction-annotation")))]
                     [rna-cross-annotation
                       (if (or coding-rna non-coding-rna)
                         (list
                             (Concept "rna-annotation")
-                            (find-rna gene-a coding-rna non-coding-rna do-protein)
-                            (find-rna gene-b coding-rna non-coding-rna do-protein)
+                            (find-rna prot-a coding-rna non-coding-rna)
+                            (find-rna prot-b coding-rna non-coding-rna)
                             (Concept "string-interaction-annotation"))
                           '())])
-                    (append (list link (node-info gene-a) (node-info gene-b))
-                      go-cross-annotation rna-cross-annotation)))
-            ((or (not already-done-a) (not already-done-b)
-              (let* ([gene-x (if already-done-a gene-b gene-a)]
+                  (append (list link (node-info prot-a) (node-info prot-b))
+                     go-cross-annotation rna-cross-annotation)))
+            
+            ((or (not already-done-a) (not already-done-b))
+              (let* ([prot-x (if already-done-a prot-b prot-a)]
                     [go-cross-annotation
                      (if (null? namespaces) '()
                         (list
                            (Concept "gene-go-annotation")
-                           (find-go-term gene-x namespaces num-parents regulates part-of bi-dir)
+                           (find-go-term prot-x namespaces num-parents regulates part-of bi-dir)
                            (Concept "string-interaction-annotation")))]
                     [rna-cross-annotation
                      (if (or coding-rna non-coding-rna)
                         (list
                            (Concept "rna-annotation")
-                           (find-rna gene-x coding-rna non-coding-rna do-protein)
+                           (find-rna prot-x coding-rna non-coding-rna)
                            (Concept "string-interaction-annotation"))
                         '())])
-                    (append (list link (node-info gene-x)) go-cross-annotation rna-cross-annotation))))
-            (else (if (not already-done-pair) (list link))))))
+                  (append (list link (node-info prot-x)) go-cross-annotation rna-cross-annotation)))
+            (else (if (not already-done-pair) (list link) '())))))

@@ -57,13 +57,13 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-                    (if (atom-exists? 'GeneNode g)
-                        (let* ([curr (find-current-symbol g)])
-                          (if (null? curr)
-                            #f
-                            (make-gene g (car curr) '())))
-                        (make-gene g  "" (find-similar-gene g)))) gene-list)))
-        (if (null? records)
+          (if (atom-exists? 'GeneNode g)
+            (let* ([curr (find-current-symbol g)])
+              (if (null? curr)
+                #f
+                (make-gene g (car curr) '())))
+            (make-gene g  "" (find-similar-gene g)))) gene-list)))
+      (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))
 
@@ -92,21 +92,21 @@
 
       (vector->list (vector-map (lambda (i elm)
         (let  ((func (find-module (assoc-ref elm "functionName") mods)))
-            (if func 
-                (let* (                
-                  (filters (assoc-ref elm "filters"))
-                  (args  (flatten (vector->list (vector-map (lambda (index f)
-                      (let* (
-                        (filter (assoc-ref f "filter"))
-                        (val (assoc-ref f "value")))
-                        (list (with-input-from-string (string-append "#:" filter) read) 
-                          (if (string->number val)
-                              (string->number val)
-                              (if (or (string=? val "True") (string=? val "False"))
-                                (str->tv val)
-                                val ))))) filters)))))
-                  (cons func args))
-                '()))) table))))
+          (if func 
+            (let* (                
+              (filters (assoc-ref elm "filters"))
+              (args  (flatten (vector->list (vector-map (lambda (index f)
+                (let* (
+                  (filter (assoc-ref f "filter"))
+                  (val (assoc-ref f "value")))
+                  (list (with-input-from-string (string-append "#:" filter) read) 
+                    (if (string->number val)
+                        (string->number val)
+                        (if (or (string=? val "True") (string=? val "False"))
+                          (str->tv val)
+                          val ))))) filters)))))
+              (cons func args))
+            '()))) table))))
 
 (define (process-request gene-list file-name request)
   (run-fibers

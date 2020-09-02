@@ -89,7 +89,7 @@
                (Evaluation (Predicate intr)
                      (Set  (Variable "$p1") (Variable "$p2")))))
          (run-query 
-            (Get 
+            (Bind 
                (VariableList
                   (TypedVariable (Variable "$p1") (Type 'UniprotNode))
                   (TypedVariable (Variable "$p2") (Type 'UniprotNode)))

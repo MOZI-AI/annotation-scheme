@@ -34,6 +34,7 @@
                             (regulates #f) (bi-dir #f) (part-of #f))
     
     (send-message (Concept "gene-go-annotation") chans)
-    (for-each (lambda (prot) 
-                (send-message (find-go-term prot (string-split namespace #\space) parents regulates part-of bi-dir) chans)  
-                (send-message (find-drugs-protein prot (string-split namespace #\space)) chans)) (cdr lst)))
+    (for-each (lambda (pair) 
+        (for-each (lambda (prot) 
+            (send-message (find-go-term prot (string-split namespace #\space) parents regulates part-of bi-dir) chans)  
+            (send-message (find-drugs-protein prot (string-split namespace #\space)) chans)) (cdr pair))) lst))

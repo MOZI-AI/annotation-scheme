@@ -40,14 +40,14 @@
 
 		(run-query (Get
       (And 
-          (Evaluation 
-            (Predicate "interacts_with")
-            (SetLink gene (Variable "$a")))
-          (map (lambda (org)
-            (Absent 
-                (Evaluation (Predicate "from_organism")
-                  (List  (Variable "$a")
-                      (ConceptNode (string-append "ncbi:" org)))))) exclude-orgs))))))
+        (Evaluation 
+          (Predicate "interacts_with")
+          (SetLink gene (Variable "$a")))
+        (map (lambda (org)
+          (Absent 
+            (Evaluation (Predicate "from_organism")
+              (List  (Variable "$a")
+                  (ConceptNode (string-append "ncbi:" org)))))) exclude-orgs))))))
 
 (define-public (find-output-interactors gene exclude-orgs)
 "
@@ -77,13 +77,13 @@
                   (And 
                     (Absent 
                       (Evaluation (Predicate "from_organism")
-                          (List  (Variable "$a")
-                            (ConceptNode (string-append "ncbi:" org)))))
+                        (List  (Variable "$a")
+                          (ConceptNode (string-append "ncbi:" org)))))
                     (Absent 
                       (Evaluation (Predicate "from_organism")
-                          (List 
-                            (Variable "$b")
-                            (ConceptNode (string-append "ncbi:" org))))))) exclude-orgs))))))
+                        (List 
+                          (Variable "$b")
+                          (ConceptNode (string-append "ncbi:" org))))))) exclude-orgs))))))
 ;; ------------------------------------------------------
 
 (define (generate-interactors path var1 var2)

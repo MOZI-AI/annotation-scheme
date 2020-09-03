@@ -72,7 +72,7 @@
 (define-public (find-pathway/go-gene-interactors node) (cache-pathway/go-gene-interactors node))
 
 (define (do-find-pathway/go-protein-interactors node)
-   ;Find genes that interact with each other and are members of the same pathway/GO category
+   ;Find proteins that interact with each other and are members of the same pathway/GO category
    (append-map (lambda (intr)
       (if (member intr symmetric-interactions)
          (run-query 

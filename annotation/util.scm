@@ -309,7 +309,9 @@
   (if (not (null? go-list)) go-list
     (run-query
       (Bind
-        (Variable "$loc")
+        (VariableList 
+        (TypedVariable (Variable "$loc") (Type 'ConceptNode))
+        (TypedVariable (Variable "$go") (Type 'CellularComponent)))
         (And
         (Evaluation
           (Predicate "has_location")

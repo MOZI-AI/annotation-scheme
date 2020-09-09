@@ -119,6 +119,8 @@
         (spawn-fiber (lambda ()
             (catch #t 
               (lambda () 
+                (send-message (Concept "main") (list writer-chan parser-chan))
+                (gene-info item-list (list parser-chan writer-chan))
                 (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
                 (send-message 'eof (list writer-chan parser-chan))) 
               (lambda _

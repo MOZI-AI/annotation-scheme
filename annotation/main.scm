@@ -57,7 +57,7 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-                    (if (atom-exists? 'GeneNode g)
+                    (if (atom-exists? "GeneNode" g)
                         (let* ([curr (find-current-symbol g)])
                           (if (null? curr)
                             #f

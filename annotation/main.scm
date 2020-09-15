@@ -57,13 +57,14 @@
    Validate if given gene strings in GENE-LIST exist in the atomspace.
 "
   (let* ((records (filter-map (lambda (g)
-          (if (atom-exists? "GeneNode" g)
-            (let* ([curr (find-current-symbol g)])
-              (if (null? curr)
-                #f
-                (make-gene g (car curr) '())))
-            (make-gene g  "" (find-similar-gene g)))) gene-list)))
-      (if (null? records)
+                    (if (atom-exists? "GeneNode" g)
+                        (let* ([curr (find-current-symbol g)])
+                          (if (null? curr)
+                            #f
+                            (make-gene g (car curr) '())))
+                        (make-gene g  "" (find-similar-gene g))
+                        )) gene-list)))
+        (if (null? records)
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))
 
@@ -108,7 +109,7 @@
               (cons func args))
             '()))) table))))
 
-(define (process-request gene-list file-name request)
+(define (process-request item-list file-name request)
   (run-fibers
     (lambda ()
       (let ((parser-chan (make-channel))
@@ -122,14 +123,11 @@
 
         (spawn-fiber (lambda ()
             (catch #t 
-              (lambda ()
-                (let ((chans (list parser-chan writer-chan))
-                      (pairs '()))
-                  (send-message (Concept "main") chans)
-                  (set! pairs (gene->protein gene-list chans))
-                  (gene-info gene-list chans)
-                  (for-each (lambda (fn) (apply (car fn) pairs chans (cdr fn))) functions)
-                  (send-message 'eof chans))) 
+              (lambda () 
+                (send-message (Concept "main") (list writer-chan parser-chan))
+                (gene-info item-list (list parser-chan writer-chan))
+                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
+                (send-message 'eof (list writer-chan parser-chan))) 
               (lambda _
                 (send-message 'eof (list writer-chan parser-chan)))
               (let ((err (current-error-port)))

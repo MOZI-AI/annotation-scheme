@@ -64,15 +64,24 @@
          "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
          "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
          "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
-         "unknown" "vesicant" "weak inhibitor"
+         "unknown" "vesicant" "weak inhibitor" "has_role"
      )
-
-     (set! *edges* (cons (create-edge (caadr lns)
+     ;; FIXME - Create an organism specific node and a Chebi parent specifc type
+     (if (or (string=? predicate "from_organism") (string=? predicate "has_role")) 
+        (set! *edges* (cons (create-edge (cadr lns)
+                                    (caar lns)
+                                    predicate
+                                    (list *annotation*)
+                                    "" predicate)
+                        *edges*))
+        (set! *edges* (cons (create-edge (caadr lns)
                                       (caar lns)
                                       predicate
                                       (list *annotation*)
                                       "" predicate)
                          *edges*))
+     )
+     
      '())
     ((or "has_name" "GO_name")
      (if (member (car lns) *atoms*)
@@ -100,7 +109,11 @@
                               "" (list *annotation*)) *nodes*)))
               
               (set! *atoms* (cons id *atoms*)))
-            (throw 'notype (car lns))))
+
+              ;; FIXME - Create an organism specific node and a Chebi parent specifc type
+              (set! *nodes*
+                      (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
+                              "" (list *annotation*)) *nodes*))))
      '())
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)

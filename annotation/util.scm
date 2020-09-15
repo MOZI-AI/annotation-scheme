@@ -175,7 +175,7 @@
            (Evaluation (Predicate predicate)
               (List (Variable "$a") node))))])
 
-        (if (null? name) (Concept "N/A") (car name)))
+        (if (null? name) (GeneNode "N/A") (car name)))
 )
 
 (define find-prot/enst-name

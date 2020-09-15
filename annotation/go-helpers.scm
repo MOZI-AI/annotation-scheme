@@ -43,22 +43,16 @@
                (ListLink go (VariableNode "$a"))))))
 
 
-(define (add-go-info child-atom parent-atom)
+(define* (add-go-info child-atom #:optional (parent-atom #f))
 "
    Add information for GO nodes
 "
-   (define parent-is-go?
-      (member (cog-type parent-atom) (list 'BiologicalProcessNode 'CellularComponentNode 'MolecularFunctionNode)))
 
-   (if parent-is-go?
-      (if (member (cog-type child-atom) '(GeneNode MoleculeNode))
-         (list
-            (Member child-atom parent-atom)
-            (find-go-name parent-atom))
-         (list
-           (Inheritance child-atom parent-atom)
-           (find-go-name parent-atom)))
-      #f))
+   (if parent-atom
+      (list
+         (Inheritance child-atom parent-atom)
+         (find-go-name parent-atom))
+      (find-go-name child-atom)))
 
 (define (find-parent node namespaces)
 "
@@ -83,30 +77,25 @@
    (append-map add-go-for-ns namespaces)
 )
 
-(define-public (find-memberln gene namespaces)
+(define-public (find-memberln protein namespaces)
 "
-  Find GO terms of a gene.  `gene` must be a GeneNode and `namespaces`
+  Find GO terms of a protein.  `protein` must be a GeneNode and `namespaces`
   must be a list of strings.
 "
-   (define (add-go-member-ns ns-name)
+   
+   ;;list of go atoms that this protein is a member of
+   (define go-list
+      (append-map (lambda (ns-name) (run-query (Get
+         (TypedVariable (Variable "$a") (ns->type ns-name))
+         (And
+            (Member protein (Variable "$a")))))) namespaces))
 
-      ;;list of go atoms that this gene is a member of
-      (define go-list
-         (run-query (Get
-            (TypedVariable (Variable "$a") (ns->type ns-name))
-            (And
-               (Member gene (Variable "$a"))))))
-
-      (filter-map
-         (lambda (thing) (add-go-info gene thing))
-         go-list))
-
-   (append-map add-go-member-ns namespaces)
+   (flatten (append-map (lambda (go) (list (Member protein go) (add-go-info go))) go-list))
 )
 
-(define-public (find-go-term g namespaces num-parents regulates part-of bi-dir)
+(define-public (find-go-term prot namespaces num-parents regulates part-of bi-dir)
 "
-  The main function to find the go terms for a gene with a
+  The main function to find the go terms for a protein with a
   specification of the parents.
   `namespaces` should be a list of strings.
   `num-parents` should be a number, the number of parents to look up.
@@ -129,12 +118,12 @@
          (loop (- i 1) (find-parents lis) next-acc)))
 
    ; res is list of the GO terms directly related to 
-   ; the input gene (g) that are members of the input namespaces
-   (define res (find-memberln g namespaces))
+   ; the input protein (prot) that are members of the input namespaces
+   (define res (find-memberln prot namespaces))
    (define go-regulates (append-map (lambda (go) (find-go-plus go regulates part-of bi-dir)) res))
    (define all-parents (loop num-parents res '()))
 
-   (append (node-info g) all-parents go-regulates)
+   (append (node-info prot) all-parents go-regulates)
 )
 
 ;; ======================= GO Plus =============================
@@ -241,20 +230,18 @@
           
           annotations))))
 
-(define-public (find-drugs-protein gene namespace)
+(define-public (find-drugs-protein prot namespace)
 "
-  find-drugs-protein GENE NAMESPACE
+  find-drugs-protein Protein NAMESPACE
 
-  Find the drugs associated with the proteins expressed by GENE in GO terms under NAMESPACE.
+  Find the drugs associated with the proteins expressed by Protein in GO terms under NAMESPACE.
 "
   (define var-go-term (Variable "$go-term"))
   (define var-drug-action (Variable "$drug-action"))
   (define var-drug (Variable "$drug"))
   (define var-drug-group (Variable "$drug-group"))
-
-  (append-map
-    (lambda (prot)
-      (append-map
+  
+   (append-map
         (lambda (ns)
           (run-query
             (Bind
@@ -264,11 +251,7 @@
                 (TypedVariable var-drug (Type "MoleculeNode"))
                 (TypedVariable var-drug-group (Type "ConceptNode")))
               (And
-                (Evaluation
-                  (Predicate "expresses")
-                  (List gene prot))
-                (Member gene var-go-term)
-
+                (Member prot var-go-term)
                 (Evaluation var-drug-action (List var-drug prot))
                 (Inheritance var-drug var-drug-group)
                 (Inheritance
@@ -277,7 +260,6 @@
               (Evaluation
                 var-drug-action
                 (List var-drug prot))))) namespace))
-    (find-proteins gene)))
 
 ; --------------------------------------------------
 (define-public (find-go-genes go-term string?)
@@ -331,7 +313,7 @@
 
   (run-query
     (Bind
-        (TypedVariable var-protein (Type "Uniprot"))
+        (TypedVariable var-protein (Type 'UniprotNode))
         (Member var-protein go-term)
         (Member var-protein go-term))))
 

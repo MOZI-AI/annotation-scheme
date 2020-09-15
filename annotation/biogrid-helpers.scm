@@ -29,65 +29,61 @@
 )
 
 
-(define-public (match-gene-interactors gene do-protein namespace parents regulates part-of bi-dir coding non-coding exclude-orgs)
+(define-public (match-gene-interactors gene exclude-orgs)
 "
   match-gene-interactors - Finds genes interacting with a given gene
 
-  If do-protein is #t then protein interactions are included.
 "
 	(append-map
 		(lambda (act-gene)
-			(generate-result gene act-gene do-protein namespace parents regulates part-of bi-dir coding non-coding))
+			(generate-result gene act-gene))
 
 		(run-query (Get
-                  (And 
-                     (Evaluation 
-                        (Predicate "interacts_with")
-                        (SetLink gene (Variable "$a")))
-                     (map (lambda (org)
-                        (Absent 
-                           (Evaluation (Predicate "from_organism")
-                              (List 
-                                 (Variable "$a")
-                                 (ConceptNode (string-append "ncbi:" org)))))) exclude-orgs))))))
+      (And 
+        (Evaluation 
+          (Predicate "interacts_with")
+          (SetLink gene (Variable "$a")))
+        (map (lambda (org)
+          (Absent 
+            (Evaluation (Predicate "from_organism")
+              (List  (Variable "$a")
+                  (ConceptNode (string-append "ncbi:" org)))))) exclude-orgs))))))
 
-(define-public (find-output-interactors gene do-protein namespace parents regulates part-of bi-dir coding non-coding exclude-orgs)
+(define-public (find-output-interactors gene exclude-orgs)
 "
   find-output-interactors -- Finds output genes interacting with each-other
 
   This finds a triangular relationship, between the given gene, and
   two others, such that all three interact with one-another.
-
-  If do-protein is #t then protein interactions are included.
 "
 	(append-map
 		(lambda (gene-pair)
-			(generate-result (gar gene-pair) (gdr gene-pair) do-protein namespace parents regulates part-of bi-dir coding non-coding))
+			(generate-result (gar gene-pair) (gdr gene-pair)))
 
 		(run-query (Get
-            (VariableList
-               (TypedVariable (Variable "$a") (Type 'GeneNode))
-               (TypedVariable (Variable "$b") (Type 'GeneNode)))
-               (And 
-                  (Evaluation (Predicate "interacts_with")
-                  (SetLink gene (Variable "$a")))
+      (VariableList
+          (TypedVariable (Variable "$a") (Type 'GeneNode))
+          (TypedVariable (Variable "$b") (Type 'GeneNode)))
+          (And 
+            (Evaluation (Predicate "interacts_with")
+            (SetLink gene (Variable "$a")))
 
-                  (Evaluation (Predicate "interacts_with")
-                     (SetLink (Variable "$a") (Variable "$b")))
+            (Evaluation (Predicate "interacts_with")
+              (SetLink (Variable "$a") (Variable "$b")))
 
-                  (Evaluation (Predicate "interacts_with")
-                     (SetLink gene (Variable "$b")))
-                  (map (lambda (org)
-                        (And 
-                           (Absent 
-                              (Evaluation (Predicate "from_organism")
-                                 (List  (Variable "$a")
-                                    (ConceptNode (string-append "ncbi:" org)))))
-                           (Absent 
-                              (Evaluation (Predicate "from_organism")
-                                 (List 
-                                    (Variable "$b")
-                                    (ConceptNode (string-append "ncbi:" org))))))) exclude-orgs))))))
+            (Evaluation (Predicate "interacts_with")
+                (SetLink gene (Variable "$b")))
+            (map (lambda (org)
+                  (And 
+                    (Absent 
+                      (Evaluation (Predicate "from_organism")
+                        (List  (Variable "$a")
+                          (ConceptNode (string-append "ncbi:" org)))))
+                    (Absent 
+                      (Evaluation (Predicate "from_organism")
+                        (List 
+                          (Variable "$b")
+                          (ConceptNode (string-append "ncbi:" org))))))) exclude-orgs))))))
 ;; ------------------------------------------------------
 
 (define (generate-interactors path var1 var2)
@@ -172,32 +168,12 @@
 		(if (not (null? prot)) (car prot) (ListLink)))
 )
 
-;; Cache previous results, so that they are not recomputed again,
-;; if the results are already known. Note that this function accounts
-;; for about 85% of the total execution time of `biogrid-interaction-annotation`,
-;; so any caching at all is a win. In a test of 681 genes, there is a
-;; cache hit 99 out of 100 times (that is, 100 times fewer calls to
-;; do-find-protein-form) resulting in a 400x speedup for this function(!)
-;; and a grand-total 9x speedup for `biogrid-interaction-annotation`.
-;; Wow.
-(define-public find-protein-form
-	(memoize-function-call do-find-protein-form))
 
 ;; ---------------------------------
 
-(define-public (generate-result gene-a gene-b do-protein namespaces num-parents  regulates part-of bi-dir coding-rna non-coding-rna)
+(define-public (generate-result gene-a gene-b)
 "
   generate-result -- add info about matched variable nodes
-
-  `prot` should be #t  for protein interactions to be computed.
-
-  `namespaces` should be a scheme list of strings (possibly an empty list),
-     each string a namespace name.
-
-  `num-parents` should be a number.
-
-  `coding-rna` should be either #f or #t.
-  `non-coding-rna` should be either #f or #t.
 "
 	(if
 		(or (equal? (cog-type gene-a) 'VariableNode)
@@ -206,91 +182,20 @@
 		(let* (
 				[already-done-a ((intr-genes) gene-a)]
 				[already-done-b ((intr-genes) gene-b)]
-            [already-done-pair ((gene-pairs) (List gene-a gene-b))]
-
+        [already-done-pair ((gene-pairs) (List gene-a gene-b))]
 				[output (find-pubmed-id gene-a gene-b)]
-            [interaction (if do-protein
-                (list
-                  (build-interaction gene-a gene-b output "interacts_with")
-                  (build-interaction
-                     (find-protein-form gene-a)
-                     (find-protein-form gene-b)
-                     output "inferred_interaction"))
-                (build-interaction gene-a gene-b output "interacts_with"))]
-          )
+        [interaction (build-interaction gene-a gene-b output "interacts_with")])
 
           ;; Neither gene has been done yet.
           (cond
               ((and (not already-done-a) (not already-done-b))
-              (let (
-                 [go-cross-annotation
-                    (if (null? namespaces) '()
-                        (list
-                           (Concept "gene-go-annotation")
-                           (find-go-term gene-a namespaces num-parents regulates part-of bi-dir)
-                           (find-go-term gene-b namespaces num-parents regulates part-of bi-dir)
-                           (Concept "biogrid-interaction-annotation"))
-                    )]
-                 [rna-cross-annotation
-                    (if (or coding-rna non-coding-rna)
-                       (list
-                          (Concept "rna-annotation")
-                          (find-rna gene-a coding-rna non-coding-rna do-protein)
-                          (find-rna gene-b coding-rna non-coding-rna do-protein)
-                          (Concept "biogrid-interaction-annotation"))
-                        '()     
-                     )])
-                      (if do-protein
-                        (let ([coding-prot-a (find-protein-form gene-a)]
-                              [coding-prot-b (find-protein-form gene-b)])
-                        (if (not (or (equal? coding-prot-a (ListLink))
-                                (equal? coding-prot-b (ListLink))))
-                          (append (list
-                            interaction
-                            (Evaluation (Predicate "expresses") (List gene-a coding-prot-a))
-                            (node-info gene-a) (node-info coding-prot-a)
-                            (locate-node coding-prot-a)
-                            (Evaluation (Predicate "expresses") (List gene-b coding-prot-b))
-                            (node-info gene-b) (node-info coding-prot-b)
-                            (locate-node coding-prot-b))
-                            go-cross-annotation rna-cross-annotation)
-                            '()))
-
-                           (append (list interaction
-                              (node-info gene-a) (locate-node gene-a)
-                              (node-info gene-b) (locate-node gene-b))
-                              go-cross-annotation rna-cross-annotation))))
+                (list interaction (node-info gene-a) (locate-node gene-a)
+                  (node-info gene-b) (locate-node gene-b)))
 
               ;; One of the two genes is done already. Do the other one.
               ((or (not already-done-a) (not already-done-b))
-               (let* (
-                     [gene-x (if already-done-a gene-b gene-a)]
-                     [go-cross-annotation
-                        (if (null? namespaces) '()
-                           (list
-                              (Concept "gene-go-annotation")
-                              (find-go-term gene-x namespaces num-parents regulates part-of bi-dir)
-                              (Concept "biogrid-interaction-annotation"))
-                        )]
-                     [rna-cross-annotation
-                        (if (or coding-rna non-coding-rna)
-                           (list
-                              (Concept "rna-annotation")
-                              (find-rna gene-x coding-rna non-coding-rna do-protein)
-                              (Concept "biogrid-interaction-annotation"))
-                           '()
-                     )])
-                  (if do-protein
-                     (let ([coding-prot (find-protein-form gene-x)])
-                        (if (not (equal? coding-prot (ListLink)))
-                           (append (list
-                              interaction
-                              (Evaluation (Predicate "expresses") (List gene-x coding-prot))
-                              (node-info gene-x) (node-info coding-prot)
-                              (locate-node coding-prot)) go-cross-annotation rna-cross-annotation)
-                           '()))
-                     (append (list interaction (node-info gene-x) (locate-node  gene-x)
-                        go-cross-annotation) rna-cross-annotation))))
+                (let ([gene-x (if already-done-a gene-b gene-a)])
+                 (list interaction (node-info gene-x) (locate-node  gene-x))))
 
               ;;; Both of the genes have been done.
               (else (if (not already-done-pair)  (list interaction) '()))))))
@@ -309,9 +214,7 @@
         (ListLink (EvaluationLink 
                   (PredicateNode interaction_pred) 
                   (SetLink interactor-1 interactor-2))  
-                pubmed))
-    )
-  )
+                pubmed))))
 )
 
 ;; ------------------------------------------------------
@@ -322,15 +225,12 @@
       [gene-b (gdr gene-set)])
       (run-query
          (Get
-            (VariableNode "$pub")
-               (EvaluationLink
-                (PredicateNode "has_pubmedID")
-                (ListLink
-                 (EvaluationLink 
-                  (PredicateNode "interacts_with") 
-                  (SetLink gene-a gene-b))
-                 (VariableNode "$pub")))))
-   ))
+          (VariableNode "$pub")
+            (EvaluationLink (PredicateNode "has_pubmedID")
+            (ListLink
+              (EvaluationLink  (PredicateNode "interacts_with") 
+              (SetLink gene-a gene-b))
+              (VariableNode "$pub")))))))
 
 (define cache-find-pubmed-id
 	(memoize-function-call do-find-pubmed-id))

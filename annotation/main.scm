@@ -77,9 +77,14 @@
             ) genes)
 )
 
-(define-public (mapSymbol gene-list)
-  "Map gene symbols into GeneNodes."
-  (map GeneNode gene-list))
+(define-public (gene->protein gene-list chans)
+  "Get proteins for each gene"
+  (map (lambda (gene)
+    (let ((prots (find-proteins (GeneNode gene))))
+      (for-each (lambda (prot) 
+        (send-message (Evaluation (Predicate "expresses") (List (GeneNode gene) prot)) chans))  prots)
+      (cons (GeneNode gene) prots)
+    )) gene-list))
 
 
 (define-public (parse-request req)
@@ -87,23 +92,22 @@
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))))))
 
       (vector->list (vector-map (lambda (i elm)
-        (let  (
-            (func (find-module (assoc-ref elm "functionName") mods)))
-            (if func 
-                (let* (                
-                  (filters (assoc-ref elm "filters"))
-                  (args  (flatten (vector->list (vector-map (lambda (index f)
-                      (let* (
-                        (filter (assoc-ref f "filter"))
-                        (val (assoc-ref f "value")))
-                        (list (with-input-from-string (string-append "#:" filter) read) 
-                          (if (string->number val)
-                              (string->number val)
-                              (if (or (string=? val "True") (string=? val "False"))
-                                (str->tv val)
-                                val ))))) filters)))))
-                  (cons func args))
-                '()))) table))))
+        (let  ((func (find-module (assoc-ref elm "functionName") mods)))
+          (if func 
+            (let* (                
+              (filters (assoc-ref elm "filters"))
+              (args  (flatten (vector->list (vector-map (lambda (index f)
+                (let* (
+                  (filter (assoc-ref f "filter"))
+                  (val (assoc-ref f "value")))
+                  (list (with-input-from-string (string-append "#:" filter) read) 
+                    (if (string->number val)
+                        (string->number val)
+                        (if (or (string=? val "True") (string=? val "False"))
+                          (str->tv val)
+                          val ))))) filters)))))
+              (cons func args))
+            '()))) table))))
 
 (define (process-request item-list file-name request)
   (run-fibers
@@ -112,8 +116,9 @@
             (writer-chan (make-channel))
             (functions (parse-request request))
             (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
-            (writer-port (open-file (get-file-path file-name "result") "w"))
-           )
+            (writer-port (open-file (get-file-path file-name "result") "w")))
+
+        
         (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
 
         (spawn-fiber (lambda ()
@@ -145,12 +150,8 @@
                  (gene-pairs (make-atom-set))
                  (biogrid-reported-pathways (make-atom-set))
                 )
-    (process-request genes-list file-name request)
-  )
-)
+    (process-request genes-list file-name request)))
 
 (define-public (annotate-go go-terms file-name request)
   (parameterize ()
-    (process-request go-terms file-name request)
-  )
-)
+    (process-request go-terms file-name request)))

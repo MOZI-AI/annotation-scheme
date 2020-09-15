@@ -34,7 +34,7 @@
 
 (define-public (find-pathway-member gene pathway-type)
 "
-  Find the pathway members of a gene
+  Find the pathways a protein belongs to 
 "
    (run-query (Get
          (TypedVariable (Variable "$pway") (Type pathway-type))
@@ -43,67 +43,59 @@
 
 ; --------------------------------------------------------
 
-(define (add-pathway-genes pathway gene namespace-list num-parents regulates part-of bi-dir
-                do-coding-rna do-non-coding-rna do-protein)
+(define (add-pathway-proteins pathway protein namespace-list num-parents regulates part-of bi-dir
+                do-coding-rna do-non-coding-rna)
 
 	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
 	(define no-ns (and (null? namespace-list) (= 0 num-parents)))
 
 	(append
 		(list 
-         (Member gene pathway)
-         (node-info gene)
-         (locate-node gene))
+         (Member protein pathway)
+         (node-info protein)
+         (locate-node protein))
 		(if no-ns '()
 			(list
 				(Concept "gene-go-annotation")
-				(find-go-term gene namespace-list num-parents regulates part-of bi-dir)
+				(find-go-term protein namespace-list num-parents regulates part-of bi-dir)
 				(Concept "gene-pathway-annotation")))
 		(if no-rna '()
 			(let* ([rnaresult
-						(find-rna gene do-coding-rna do-non-coding-rna do-protein)])
+						(find-rna protein do-coding-rna do-non-coding-rna)])
 				(if (null? rnaresult) '()
 					(list (Concept "rna-annotation") rnaresult
 						(Concept "gene-pathway-annotation"))))))
 )
 
-(define (do-get-pathway-genes pathway)
+(define (do-get-pathway-proteins pathway)
 	(run-query
-		(Bind
+		(Get
 			(VariableList
-				(TypedVariable (Variable "$p") (Type 'UniprotNode))
-				(TypedVariable (Variable "$g") (Type 'GeneNode)))
-			(And
-				(Member (Variable "$p") pathway)
-				(Evaluation (Predicate "expresses")
-					(List (Variable "$g") (Variable "$p"))))
-			(Variable "$g"))))
+				(TypedVariable (Variable "$p") (Type 'UniprotNode)))
+			(Member (Variable "$p") pathway))))
 
-(define get-pathway-genes (memoize-function-call do-get-pathway-genes))
+(define get-pathway-proteins (memoize-function-call do-get-pathway-proteins))
 
-(define-public (find-pathway-genes pathway namespace-list 
+(define-public (find-pathway-proteins pathway namespace-list 
                   num-parents regulates part-of bi-dir
-                  coding-rna non-coding-rna do-protein)
+                  coding-rna non-coding-rna)
 "
-  Find genes which code the proteins in a given pathway.  Perform
+  Find proteins in a given pathway.  Perform
   cross-annotation. If there is a list of namespaces, then annotate
-  each member genes of a pathway for its GO terms. If both
-  rna flags are true, annotate each member genes of a pathway for its
-  RNA transcribes. If do-protein is true, include the proteins in which the
-  RNA translates to.
+  each member proteins of a pathway for its GO terms. If both
+  rna flags are true, annotate each member proteins of a pathway for its
+  RNA transcribes. 
 
   'namespace-list' should be a list of string names of namespaces.
   'num-parents' should be a non-negative integer.
   'coding-rna' should be either #f or #t.
   'non-coding-rna' should be either #f or #t.
-  'do-protein' should be either #f or #t.
 "
 	(map
-		(lambda (gene)
-			(add-pathway-genes pathway gene namespace-list num-parents 
-            regulates part-of bi-dir
-				coding-rna non-coding-rna do-protein))
-		(get-pathway-genes pathway))
+		(lambda (prot)
+			(add-pathway-proteins pathway prot namespace-list num-parents 
+            regulates part-of bi-dir coding-rna non-coding-rna))
+		(get-pathway-proteins pathway))
 )
 
 ; --------------------------------------------------------

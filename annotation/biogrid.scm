@@ -31,10 +31,9 @@
       #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(define* (biogrid-interaction-annotation gene-nodes
+(define* (biogrid-interaction-annotation lst
                                          chans
                                          #:key
-                                         (interaction "Proteins")
                                          (namespace "")
                                          (parents 0)
                                          (regulates #f) (part-of #f) (bi-dir #f)
@@ -49,21 +48,7 @@
 
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
-     (for-each (lambda (gene)
-            (match interaction
-              ("Proteins"
-               (begin (send-message (match-gene-interactors (GeneNode gene) 
-                         #t namespaces parents regulates part-of bi-dir
-                            coding noncoding exclude-taxonomies) chans)
-                       (send-message (find-output-interactors (GeneNode gene)
-                             #t namespaces parents regulates part-of bi-dir
-                             coding noncoding exclude-taxonomies) chans)))
-              ("Genes"
-               (begin (send-message (match-gene-interactors (GeneNode gene) #f 
-                              namespaces parents regulates part-of bi-dir
-                              coding noncoding exclude-taxonomies) chans)
-                       (send-message (find-output-interactors (GeneNode gene)
-                             #f namespaces parents regulates part-of bi-dir
-                             coding noncoding exclude-taxonomies) chans)))))
-          gene-nodes)
+     (for-each (lambda (pair) 
+        (send-message (match-gene-interactors (car pair) exclude-taxonomies) chans)
+        (send-message (find-output-interactors (car pair) exclude-taxonomies) chans)) lst)
 )

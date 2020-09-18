@@ -247,6 +247,17 @@
         (not (null? (cog-node type name)))
         (check-node atomspace-id type name)))
 
+(define-public (find-atom-type names)
+    (let* ((types (find-type "prod-atom" names))
+          (result-table (make-hash-table (length types))))
+          (hash-set! result-table "found" '())
+          (hash-set! result-table "not-found" '())
+          (for-each (lambda (ls)
+              (if (cdr ls)
+                (hash-set! result-table "found" (append (hash-ref result-table "found") (list (cog-new-node (string->symbol (cdr ls)) (car ls)))))
+                (hash-set! result-table "not-found" (append (hash-ref result-table "not-found") (list (car ls))))))  types)
+      result-table))
+
 ; --------------------------------------------------------
 
 (define-public (find-current-symbol gene)

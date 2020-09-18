@@ -36,6 +36,7 @@
     #:use-module (ice-9 threads)
     #:use-module (srfi srfi-43)
     #:use-module (rnrs bytevectors)
+    #:use-module (rnrs hashtables)
     #:use-module (ice-9 futures)
     #:use-module (fibers)
     #:use-module (fibers channels)
@@ -45,11 +46,15 @@
     #:use-module (json)
     #:use-module (annotation functions)
     #:use-module (annotation rna)
+    #:use-module (annotation go)
 )
 
 (install-suspendable-ports!)
 
-(define mods '((annotation biogrid) (annotation gene-pathway) (annotation gene-go) (annotation rna) (annotation string)))
+(define protein-funcs '("gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "string-interaction-annotation" "include-rna"))
+(define go-funcs '("go-annotation"))
+
+(define mods '((annotation biogrid) (annotation gene-pathway) (annotation gene-go) (annotation rna) (annotation string) (annotation go)))
 
 (define-public (find-genes gene-list)
 "
@@ -68,13 +73,13 @@
           "[]"
           (scm->json-string (list->vector (map gene-record->scm records))))))
 
-(define-public (gene-info genes chans)
-  "Add the name and description of gene nodes to the given list of GENES."
-
-  (for-each (lambda (gene)
-                (send-message (node-info (GeneNode gene)) chans)
-                (send-message (locate-node (GeneNode gene)) chans)
-            ) genes)
+(define-public (main-node-info nodes chans)
+  "Add main node infos"
+  (send-message (Concept "main") chans)
+  (for-each (lambda (node)
+                (send-message (node-info node) chans)
+                (send-message (locate-node node) chans)
+            ) nodes)
 )
 
 (define-public (gene->protein gene-list chans)
@@ -89,10 +94,12 @@
 
 (define-public (parse-request req)
     (let (
-        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req))))))
+        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req)))))
+        (func-table (make-eq-hashtable)))
 
-      (vector->list (vector-map (lambda (i elm)
-        (let  ((func (find-module (assoc-ref elm "functionName") mods)))
+      (vector-for-each (lambda (i elm)
+        (let*  ((func-name (assoc-ref elm "functionName"))
+                (func (find-module func-name mods)))
           (if func 
             (let* (                
               (filters (assoc-ref elm "filters"))
@@ -106,44 +113,62 @@
                         (if (or (string=? val "True") (string=? val "False"))
                           (str->tv val)
                           val ))))) filters)))))
-              (cons func args))
-            '()))) table))))
+                (hashtable-set! func-table func-name (cons func args)))))) table)
+      func-table))
+
+(define (start-fiber atom inputs chans)
+    (catch #t 
+        (lambda ()                           
+          (apply (car inputs) atom chans (cdr inputs))
+          (send-message 'eof chans)) 
+        (lambda _
+          (send-message 'eof chans))
+        (let ((err (current-error-port)))
+          (lambda (key . args)
+            (false-if-exception
+            (let ((stack (make-stack #t 4)))
+              (format err "Uncaught exception in task:\n")
+              ;; FIXME: Guile's display-backtrace isn't respecting
+              ;; stack narrowing; manually passing stack-length as
+              ;; depth is a workaround.
+              (display-backtrace stack err 0 (stack-length stack))
+              (print-exception err (stack-ref stack 0)
+                                key args))))))
+)
 
 (define (process-request item-list file-name request)
-  (run-fibers
-    (lambda ()
-      (let ((parser-chan (make-channel))
-            (writer-chan (make-channel))
-            (functions (parse-request request))
-            (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
-            (writer-port (open-file (get-file-path file-name "result") "w")))
+  (let ((table (find-atom-type item-list)))
+      (if (not (null? (hash-ref table "not-found")))
+          (string-append "#f: " (string-join (hash-ref table "not-found") " "))
+          (run-fibers
+            (lambda ()
+              (let ((atom-lst (hash-ref table "found"))
+                    (parser-chan (make-channel))
+                    (writer-chan (make-channel))
+                    (functions (parse-request request))
+                    (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
+                    (writer-port (open-file (get-file-path file-name "result") "w")))
 
-        
-        (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan))     writer-port)))
+                    (spawn-fiber (lambda () (main-node-info atom-lst (list parser-chan writer-chan))))
+                    (spawn-fiber (lambda () (for-each (lambda (atom) 
+                        (match (cog-type atom)
+                          ((or 'UniprotNode 'GeneNode)
+                            ;; Using the defualt guile hashtable association functions like hash-for-each creates a continuation barrier
+                            ;; Hence why I'm using (rnrs hashtable) functions
+                            (vector-for-each (lambda (index key) 
+                              (if (member key protein-funcs)
+                                (start-fiber atom (hashtable-ref functions key '()) (list parser-chan writer-chan))
+                              )
+                            ) (hashtable-keys functions)))
+                          ((or 'CellularComponentNode 'BiologicalProcessNode 'MolecularFunctionNode)
+                            (vector-for-each (lambda (index key) 
+                              (if (member key go-funcs)
+                                (start-fiber atom (hashtable-ref functions key '()) (list parser-chan writer-chan))
+                              )
+                            ) (hashtable-keys functions)))
+                          (_ (send-message 'eof (list parser-chan writer-chan)) (format #t "Unsupport annotation for ~a" atom)))) atom-lst))))
 
-        (spawn-fiber (lambda ()
-            (catch #t 
-              (lambda () 
-                (send-message (Concept "main") (list writer-chan parser-chan))
-                (gene-info item-list (list parser-chan writer-chan))
-                (for-each (lambda (fn) (apply (car fn) item-list (list parser-chan  writer-chan) (cdr fn))) functions)
-                (send-message 'eof (list writer-chan parser-chan))) 
-              (lambda _
-                (send-message 'eof (list writer-chan parser-chan)))
-              (let ((err (current-error-port)))
-                (lambda (key . args)
-                  (false-if-exception
-                  (let ((stack (make-stack #t 4)))
-                    (format err "Uncaught exception in task:\n")
-                    ;; FIXME: Guile's display-backtrace isn't respecting
-                    ;; stack narrowing; manually passing stack-length as
-                    ;; depth is a workaround.
-                    (display-backtrace stack err 0 (stack-length stack))
-                    (print-exception err (stack-ref stack 0)
-                                      key args))))))))
-                         
-          (atomese-parser (lambda () (get-message parser-chan)) parser-port)))
-    #:drain? #t))
+        #:drain? #t)))))
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((intr-genes (make-atom-set))

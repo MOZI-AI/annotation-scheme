@@ -34,7 +34,7 @@
 
 ;; TODO: would be better to use a list for the "pathway" argument
 ;; instead of splitting a string.
-(define* (gene-pathway-annotation lst 
+(define* (gene-pathway-annotation node 
                                   chans
                                   #:key
                                   (pathway "reactome")
@@ -55,20 +55,20 @@
         (send-message (ConceptNode "gene-pathway-annotation") chans)
         (for-each (lambda (pathway)
           (if (string=? pathway "smpdb")
-            (smpdb lst chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))
+            (smpdb node chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))
           (if (string=? pathway "reactome")
-            (reactome lst chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))) pathways)))))
+            (reactome node chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))) pathways)))))
 
-(define (smpdb lst chans sm? namespaces num-parents regulates part-of bi-dir string coding-rna non-coding-rna)
+(define (smpdb node chans sm? namespaces num-parents regulates part-of bi-dir string coding-rna non-coding-rna)
 "
   From SMPDB
 "
-  (for-each (lambda (pair) (for-each (lambda (prot) 
-    (let* ([pw (find-pathway-member prot 'SmpNode)])
+  ;;TODO Add gene level annotation
+  (let* ([pw (find-pathway-member node 'SmpNode)])
 
     (for-each (lambda (path)
 
-      (send-message (list (Member prot path) (node-info path)) chans)
+      (send-message (list (Member node path) (node-info path)) chans)
 
       (if sm? 
         (send-message (find-mol path 'ChebiNode) chans))
@@ -77,19 +77,19 @@
          part-of bi-dir coding-rna non-coding-rna) chans)
           
       (if string 
-        (send-message (find-pathway/go-protein-interactors path) chans))) pw))) (cdr pair)))  lst))
+        (send-message (find-pathway/go-protein-interactors path) chans))) pw))
+)
 
-(define (reactome lst chans sm? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
+(define (reactome node chans sm? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
 "
   From reactome
 "
-  (for-each (lambda (pair) (for-each (lambda (prot)
-    (let* ([pw (find-pathway-member prot 'ReactomeNode)]
+  (let* ([pw (find-pathway-member node 'ReactomeNode)]
          [pwlst '()])
       
       (for-each  (lambda (path)
                   
-        (send-message (list (Member prot path) (node-info path)) chans)
+        (send-message (list (Member node path) (node-info path)) chans)
 
         (set! pwlst (append pwlst (list path)))
 
@@ -102,4 +102,5 @@
 
         (if sm? (send-message (find-mol path 'ChebiNode) chans))
 
-        (send-message (pathway-hierarchy path pwlst) chans)) pw))) (cdr pair))) lst))
+        (send-message (pathway-hierarchy path pwlst) chans)) pw))
+)

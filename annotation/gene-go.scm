@@ -28,13 +28,11 @@
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation lst chans #:key 
+(define* (gene-go-annotation node chans #:key 
                             (namespace "biological_process molecular_function cellular_component") 
                             (parents 0) 
                             (regulates #f) (bi-dir #f) (part-of #f))
     
     (send-message (Concept "gene-go-annotation") chans)
-    (for-each (lambda (pair) 
-        (for-each (lambda (prot) 
-            (send-message (find-go-term prot (string-split namespace #\space) parents regulates part-of bi-dir) chans)  
-            (send-message (find-drugs-protein prot (string-split namespace #\space)) chans)) (cdr pair))) lst))
+    (send-message (find-go-term node (string-split namespace #\space) parents regulates part-of bi-dir) chans)
+    (send-message (find-drugs-protein node (string-split namespace #\space)) chans))

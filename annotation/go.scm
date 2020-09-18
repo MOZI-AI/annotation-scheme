@@ -24,14 +24,11 @@
     #:export (go-annotation)
 )
 
-(define* (go-annotation go-terms chans #:key (biogrid #f) (protein #t))
+(define* (go-annotation go-node chans #:key (string #f) (protein #t))
   (send-message (Concept "go-annotation") chans)
 
-  (for-each
-    (lambda (go-term)
-      (let ((go-node (Concept go-term)))
+      (let ()
         (send-message (find-go-name go-node) chans)
         (send-message (find-go-plus go-node) chans)
         (send-message (find-go-parents go-node) chans)
-        (if protein (send-message (find-go-proteins go-node) chans))))
-    go-terms))
+        (if protein (send-message (find-go-proteins go-node string) chans))))

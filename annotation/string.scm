@@ -27,7 +27,7 @@
     #:export (string-annotation)
 )
 
-(define* (string-annotation lst chans #:key 
+(define* (string-annotation node chans #:key 
                                         (interactions #f)
                                         (namespace "")
                                         (parents 0)
@@ -43,9 +43,8 @@
     (define interaction-lst (if interactions (string-split interactions #\space) #f))
 
     (send-message (Concept "string-interaction-annotation") chans)
-    (for-each (lambda (pair) 
-        (for-each (lambda (prot)         
-            (send-message (find-interaction prot interaction-lst 
-                namespaces parents regulates part-of bi-dir coding noncoding) chans)         
-            (send-message (find-output-interactions prot interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans))  (cdr pair))) lst)
+    
+    (send-message (find-interaction node interaction-lst 
+                namespaces parents regulates part-of bi-dir coding noncoding) chans)
+    (send-message (find-output-interactions node interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans)
 )

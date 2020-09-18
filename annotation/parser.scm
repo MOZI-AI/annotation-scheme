@@ -22,6 +22,7 @@
   #:use-module (opencog)
   #:use-module (opencog exec)
   #:use-module (annotation graph)
+  #:use-module (fibers conditions)
   #:use-module (annotation util)
   #:use-module (ice-9 textual-ports)
   #:use-module (ice-9 match)
@@ -197,7 +198,7 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser proc parser-port)
+(define* (atomese-parser proc parser-port cond)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
@@ -209,7 +210,8 @@ graph by mutating global variables."
       (let ((scm-graph (atomese-graph->scm (make-graph *nodes* *edges*))))
           (scm->json scm-graph parser-port)
            (force-output parser-port)
-          (close-port parser-port)
+           (close-port parser-port)
+           (signal-condition! cond)
           ) 
         (begin 
           (atomese->graph msg)

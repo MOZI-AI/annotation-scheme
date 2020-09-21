@@ -148,14 +148,24 @@
 (define-public find-coding-gene (memoize-function-call do-get-coding-gene))
 
 ;; ------------------------------------------------------
-;; Finds coding and non coding RNA for a given gene
+;; Finds coding and non coding RNA for a given gene or protein
 
-(define (do-get-crna prot)
+(define (do-get-crna gene)
+   (run-query (Get
+         (TypedVariable (Variable "$a") (TypeNode "EnstNode"))
+         (Evaluation (Predicate "transcribed_to") (List gene (Variable "$a"))))))
+
+(define (do-get-nc-rna gene)
+   (run-query (Get
+         (TypedVariable (Variable "$a") (TypeNode "RefseqNode"))
+         (Evaluation (Predicate "translated_to") (List gene (Variable "$a"))))))
+
+(define (do-get-crna-proteins prot)
 	(run-query (Get
 		(TypedVariable (Variable "$a") (TypeNode "EnstNode"))
 		(Evaluation (Predicate "translated_to") (List (Variable "$a") prot)))))
 
-(define (do-get-nc-rna prot)
+(define (do-get-nc-rna-proteins prot)
    (run-query (Bind 
       (VariableList
        (TypedVariable (Variable "$a") (TypeNode "RefseqNode"))
@@ -168,34 +178,43 @@
       (Evaluation (Predicate "translated_to") 
             (List (Variable "$g") (Variable "$a"))))))
 
-(define cache-get-crna
-	(memoize-function-call do-get-crna))
+(define cache-get-crna (memoize-function-call do-get-crna))
 
-(define cache-get-nc-rna
-	(memoize-function-call do-get-nc-rna))
+(define cache-get-nc-rna (memoize-function-call do-get-nc-rna))
 
-(define-public (find-rna prot do-coding do-noncoding)
+(define cache-get-crna-proteins
+	(memoize-function-call do-get-crna-proteins))
+
+(define cache-get-nc-rna-proteins
+	(memoize-function-call do-get-nc-rna-proteins))
+
+(define-public (find-rna node do-coding do-noncoding)
 "
-  find-rna PROTEIN do-coding do-noncoding do-protein
-  PROTEIN should be a UniprotNode
+  find-rna node do-coding do-noncoding do-protein
+  node should be a UniprotNode
   do-coding do-noncoding should be #t or #f
 "
+   (define is-gene? (= (cog-type node) 'GeneNode))
    (let ((rnas (cond 
       ((and do-coding do-noncoding)
-         (append (cache-get-crna prot) (cache-get-nc-rna prot)))
-      (do-coding (cache-get-crna prot))
-      (do-noncoding (cache-get-nc-rna prot))
+         (append (if is-gene? (cache-get-crna node) (cache-get-crna-proteins node)) (if is-gene? (cache-get-nc-rna node) (cache-get-nc-rna node))))
+      (do-coding (if is-gene? (cache-get-crna node) (cache-get-crna-proteins node)))
+      (do-noncoding (if is-gene? (cache-get-nc-rna node) (cache-get-nc-rna node)))
       (else '()))))
    
-   (append-map (lambda (rna) (add-rna-info prot rna)) rnas)))
+   (append-map (lambda (rna) (add-rna-info node rna)) rnas)))
 
-(define (add-rna-info prot rna)
-      (match (cog-type rna)
-         ('EnstNode 
+(define (add-rna-info node rna)
+      (match (cons (cog-type node) (cog-type rna))
+         (('UniprotNode . 'EnstNode)
             (list (node-info rna)
-               (Evaluation (Predicate "translated_to") (ListLink rna prot))))
-         
-         ('RefseqNode (list rna (node-info (gddr rna))))))
+               (Evaluation (Predicate "translated_to") (ListLink rna node))))
+         (('GeneNode . 'EnstNode)
+            (list (node-info rna)
+               (Evaluation (Predicate "transcribed_to") (ListLink node rna node rna))))        
+         (('UniprotNode . 'RefseqNode) (list rna (node-info (gddr rna))))
+         (('GeneNode . 'RefseqNode) (list (node-info rna) 
+               (Evaluation (Predicate "translated_to") (ListLink node rna))))))
 
 (define-public (find-go-name go)
   "Find the name of a GO term."

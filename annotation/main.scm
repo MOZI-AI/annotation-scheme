@@ -79,8 +79,7 @@
   (send-message (Concept "main") chans)
   (for-each (lambda (node)
                 (send-message (node-info node) chans)
-                (send-message (locate-node node) chans)
-            ) nodes)
+                (send-message (locate-node node) chans)) nodes)
 )
 
 (define-public (parse-request req)
@@ -168,8 +167,7 @@
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((intr-genes (make-atom-set))
                  (gene-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set))
-                )
+                 (biogrid-reported-pathways (make-atom-set)))
     (process-request genes-list file-name request)))
 
 (define-public (annotate-go go-terms file-name request)

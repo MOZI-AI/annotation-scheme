@@ -194,7 +194,7 @@
   node should be a UniprotNode
   do-coding do-noncoding should be #t or #f
 "
-   (define is-gene? (= (cog-type node) 'GeneNode))
+   (define is-gene? (equal? (cog-type node) 'GeneNode))
    (let ((rnas (cond 
       ((and do-coding do-noncoding)
          (append (if is-gene? (cache-get-crna node) (cache-get-crna-proteins node)) (if is-gene? (cache-get-nc-rna node) (cache-get-nc-rna node))))

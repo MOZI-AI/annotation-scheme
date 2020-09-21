@@ -28,18 +28,15 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna lst chans #:key (coding #t) (noncoding #t))
+(define* (include-rna node chans #:key (coding #t) (noncoding #t))
 "
   The include-rna function finds coding and non-coding RNA forms of
-  the lst. Needs 3 arguments:
+  the node. Needs 3 arguments:
   coding -> when True, includes the coding RNA's
   coding -> when True with protein True, includes the coding RNA's
             and corresponding coding proteins.
   non-coding -> when True includes the non-coding RNA's
 "
 	(send-message (Concept "rna-annotation") chans)
-
-	(for-each (lambda (prot)
-				(send-message (find-rna prot coding noncoding) chans))
-				(cdr lst))
+	(send-message (find-rna node coding noncoding) chans)
 )

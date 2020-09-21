@@ -106,10 +106,27 @@
                 (hashtable-set! func-table func-name (cons func args)))))) table)
       func-table))
 
-(define (start-fiber atom inputs chans)
+(define (start-annotation atoms functions chans conds)
+    (define (apply-func input node) 
+      (apply (car input) node chans (cdr input)))
     (catch #t 
         (lambda ()                           
-          (apply (car inputs) atom chans (cdr inputs))) 
+          (main-node-info atoms chans)
+          (for-each (lambda (atom) 
+            (match (cog-type atom)
+              ((or 'UniprotNode 'GeneNode)
+                ;; Using the defualt guile hashtable association functions like hash-for-each creates a continuation barrier
+                ;; Hence why I'm using (rnrs hashtable) functions
+                (vector-for-each (lambda (index key) 
+                  (if (member key protein-funcs)
+                    (apply-func (hashtable-ref functions key '()) atom))) (hashtable-keys functions)))
+              ((or 'CellularComponentNode 'BiologicalProcessNode 'MolecularFunctionNode)
+                (vector-for-each (lambda (index key) 
+                  (if (member key go-funcs)
+                    (apply-func (hashtable-ref functions key '()) atom))) (hashtable-keys functions)))
+              (_ (send-message 'eof chans) (format #t "Unsupport annotation for ~a" atom)))) atoms)
+          (send-message 'eof chans)
+          (for-each wait conds)) 
         (lambda _
           (send-message 'eof chans))
         (let ((err (current-error-port)))
@@ -117,9 +134,6 @@
             (false-if-exception
             (let ((stack (make-stack #t 4)))
               (format err "Uncaught exception in task:\n")
-              ;; FIXME: Guile's display-backtrace isn't respecting
-              ;; stack narrowing; manually passing stack-length as
-              ;; depth is a workaround.
               (display-backtrace stack err 0 (stack-length stack))
               (print-exception err (stack-ref stack 0)
                                 key args))))))
@@ -143,25 +157,7 @@
 
                     (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port writer-cond)))
                     (spawn-fiber (lambda () (atomese-parser (lambda () (get-message parser-chan)) parser-port parser-cond)))
-                    
-                    (main-node-info atom-lst chans)
-                    (for-each (lambda (atom) 
-                      (match (cog-type atom)
-                        ((or 'UniprotNode 'GeneNode)
-                          ;; Using the defualt guile hashtable association functions like hash-for-each creates a continuation barrier
-                          ;; Hence why I'm using (rnrs hashtable) functions
-                          (vector-for-each (lambda (index key) 
-                            (if (member key protein-funcs)
-                              (start-fiber atom (hashtable-ref functions key '()) chans))) (hashtable-keys functions)))
-                        ((or 'CellularComponentNode 'BiologicalProcessNode 'MolecularFunctionNode)
-                          (vector-for-each (lambda (index key) 
-                            (if (member key go-funcs)
-                              (start-fiber atom (hashtable-ref functions key '()) chans))) (hashtable-keys functions)))
-                        (_ (send-message 'eof chans) (format #t "Unsupport annotation for ~a" atom)))) atom-lst)
-                        
-                        (send-message 'eof chans)             
-                        (wait writer-cond)
-                        (wait parser-cond))
+                    (start-annotation atom-lst functions chans (list parser-cond writer-cond)))
         #:drain? #t)))))
 
 (define-public (annotate-genes genes-list file-name request)

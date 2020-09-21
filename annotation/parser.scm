@@ -85,12 +85,12 @@
      
      '())
     ((or "has_name" "GO_name")
-     (if (member (car lns) *atoms*)
+     (if (member (caar lns) *atoms*)
          (when (and (not (string-null? *prev-annotation*))
                     (not (string=? *prev-annotation* *annotation*)))
            (let* ([node (car (filter (lambda (n)
                                        (string=? (node-info-id (node-data n))
-                                                 (car lns)))
+                                                 (caar lns)))
                                      *nodes*))]
                   [node-group (node-info-group (node-data node))])
              ;;check if it is the same node and exit if it is
@@ -142,8 +142,7 @@
         (dest (if (pair? node-b) (car node-b) node-b)))
     (set! *edges*
         (cons (create-edge source dest link (list *annotation*) "" link)
-              *edges*))     
-  ))
+              *edges*))))
 
 (define (handle-list-ln node)
   (cond [(string? node) (list node)]

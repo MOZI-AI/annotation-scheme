@@ -142,10 +142,10 @@
                     (parser-cond (make-condition))
                     (writer-cond (make-condition)))
 
-                    (spawn-fiber (lambda () (main-node-info atom-lst chans)))
                     (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port writer-cond)))
                     (spawn-fiber (lambda () (atomese-parser (lambda () (get-message parser-chan)) parser-port parser-cond)))
-
+                    
+                    (main-node-info atom-lst chans)
                     (for-each (lambda (atom) 
                       (match (cog-type atom)
                         ((or 'UniprotNode 'GeneNode)

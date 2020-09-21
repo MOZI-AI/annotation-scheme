@@ -7,6 +7,7 @@
     #:use-module (annotation gene-pathway)
     #:use-module (annotation graph)
     #:use-module (annotation biogrid)
+    #:use-module (fibers conditions)
     #:use-module (annotation parser)
     #:use-module (json))
 
@@ -67,7 +68,7 @@
 ))
 
 (define out (open-output-file "tests/test.json"))
-(atomese-parser proc out)
+(atomese-parser proc out (make-condition))
 (define input (open-input-file "tests/test.json"))
 
 (define json (json->scm input))

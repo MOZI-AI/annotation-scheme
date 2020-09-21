@@ -83,16 +83,6 @@
             ) nodes)
 )
 
-(define-public (gene->protein gene-list chans)
-  "Get proteins for each gene"
-  (map (lambda (gene)
-    (let ((prots (find-proteins (GeneNode gene))))
-      (for-each (lambda (prot) 
-        (send-message (Evaluation (Predicate "expresses") (List (GeneNode gene) prot)) chans))  prots)
-      (cons (GeneNode gene) prots)
-    )) gene-list))
-
-
 (define-public (parse-request req)
     (let (
         (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req)))))

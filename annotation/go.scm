@@ -19,6 +19,7 @@
 (define-module (annotation go)
     #:use-module (annotation go-helpers)
     #:use-module (annotation util)
+    #:use-module (annotation functions)
     #:use-module (opencog)
     #:use-module (opencog bioscience)
     #:export (go-annotation)

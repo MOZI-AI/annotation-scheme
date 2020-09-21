@@ -53,7 +53,7 @@
                (Evaluation (Predicate intr)
                   (Set  (Variable "$g1") (Variable "$g2")))))
          (run-query 
-            (Get 
+            (Bind 
                (VariableList
                   (TypedVariable (Variable "$g1") (Type 'GeneNode))
                   (TypedVariable (Variable "$g2") (Type 'GeneNode)))
@@ -289,3 +289,10 @@
 
    (append (node-info prot) all-parents)
 )
+
+(define-public (gene->protein gene chans)
+  "Get proteins for each gene"
+    (let ((prots (find-proteins gene)))
+      (for-each (lambda (prot) 
+        (send-message (Evaluation (Predicate "expresses") (List gene prot)) chans))  prots)
+      prots))

@@ -38,7 +38,7 @@
                                   chans
                                   #:key
                                   (pathway "reactome")
-                                  (include_sm #t)
+                                  (include_sm #t) (gene-level? #f)
                                   (namespace "") (parents 0)
                                   (biogrid #f) (string #f)
                                   (regulates #f) (part-of #f) (bi-dir #f)
@@ -54,12 +54,26 @@
       (begin 
         (send-message (ConceptNode "gene-pathway-annotation") chans)
         (for-each (lambda (pathway)
-          (if (string=? pathway "smpdb")
-            (smpdb node chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))
-          (if (string=? pathway "reactome")
-            (reactome node chans include_sm namespaces parents regulates part-of bi-dir string coding noncoding))) pathways)))))
+          (match (cons (cog-type node) gene-level?)
+            (('GeneNode . #f)
+                (let ((prots (gene->protein node chans)))
+                    (for-each (lambda (prot) 
+                        (if (string=? pathway "smpdb")
+                          (smpdb prot chans include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding))
+                        (if (string=? pathway "reactome")
+                          (reactome prot chans include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding))) prots)))
+            (('GeneNode . #t)
+                (if (string=? pathway "smpdb")
+                   (smpdb node chans include_sm gene-level? namespaces parents regulates part-of bi-dir string coding noncoding))
+                (if (string=? pathway "reactome")
+                   (reactome node chans include_sm gene-level? namespaces parents regulates part-of bi-dir string coding noncoding)))
+            (('UniprotNode . _)
+                (if (string=? pathway "smpdb")
+                   (smpdb node chans include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding))
+                (if (string=? pathway "reactome")
+                    (reactome node chans include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding))))) pathways)))))
 
-(define (smpdb node chans sm? namespaces num-parents regulates part-of bi-dir string coding-rna non-coding-rna)
+(define (smpdb node chans sm? gene-level? namespaces num-parents regulates part-of bi-dir string coding-rna non-coding-rna)
 "
   From SMPDB
 "
@@ -77,10 +91,12 @@
          part-of bi-dir coding-rna non-coding-rna) chans)
           
       (if string 
-        (send-message (find-pathway/go-protein-interactors path) chans))) pw))
+        (if gene-level?
+          (send-message (find-pathway/go-gene-interactors path) chans)
+          (send-message (find-pathway/go-protein-interactors path) chans)))) pw))
 )
 
-(define (reactome node chans sm? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
+(define (reactome node chans sm? gene-level? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
 "
   From reactome
 "
@@ -98,7 +114,9 @@
                 regulates part-of bi-dir coding-rna non-coding-rna) chans)
         
         (if string 
-          (send-message (find-pathway/go-protein-interactors path) chans))
+          (if gene-level?
+            (send-message (find-pathway/go-gene-interactors path) chans)
+            (send-message (find-pathway/go-protein-interactors path) chans)))
 
         (if sm? (send-message (find-mol path 'ChebiNode) chans))
 

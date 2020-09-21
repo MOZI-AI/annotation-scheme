@@ -196,3 +196,96 @@
                (Evaluation (Predicate "translated_to") (ListLink rna prot))))
          
          ('RefseqNode (list rna (node-info (gddr rna))))))
+
+(define-public (find-go-name go)
+  "Find the name of a GO term."
+  (run-query (Bind
+              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
+              (EvaluationLink
+               (PredicateNode "has_name")
+               (ListLink go (VariableNode "$a")))
+              (EvaluationLink
+               (PredicateNode "has_name")
+               (ListLink go (VariableNode "$a"))))))
+
+(define* (add-go-info child-atom #:optional (parent-atom #f))
+"
+   Add information for GO nodes
+"
+
+   (if parent-atom
+      (list
+         (Inheritance child-atom parent-atom)
+         (find-go-name parent-atom))
+      (find-go-name child-atom)))
+
+(define (find-parent node namespaces)
+"
+  Given an atom and list of namespaces, find the parents of that atom
+  in the specified namespaces. The namespaces must be a list of strings.
+"
+   (define atom (gdr node))
+
+   (define (add-go-for-ns ns-name)
+
+      ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
+      (define go-list
+         (run-query (Get
+            (TypedVariable (Variable "$a") (ns->type ns-name))
+            (And
+               (Inheritance atom (Variable "$a"))))))
+
+      (filter-map
+         (lambda (thing) (add-go-info atom thing))
+         go-list))
+
+   (append-map add-go-for-ns namespaces)
+)
+
+(define-public (find-memberln protein namespaces)
+"
+  Find GO terms of a protein.  `protein` must be a GeneNode and `namespaces`
+  must be a list of strings.
+"
+   
+   ;;list of go atoms that this protein is a member of
+   (define go-list
+      (append-map (lambda (ns-name) (run-query (Get
+         (TypedVariable (Variable "$a") (ns->type ns-name))
+         (And
+            (Member protein (Variable "$a")))))) namespaces))
+
+   (flatten (append-map (lambda (go) (list (Member protein go) (add-go-info go))) go-list))
+)
+
+(define-public (find-go-term prot namespaces num-parents regulates part-of bi-dir)
+"
+  The main function to find the go terms for a protein with a
+  specification of the parents.
+  `namespaces` should be a list of strings.
+  `num-parents` should be a number, the number of parents to look up.
+"
+
+   ;; Return a list of the parents of things in `lst`.
+   (define (find-parents lst)
+      (append-map
+         (lambda (item)
+            ; Something is sending us a stray #f for soe reason...
+            (if item (find-parent (car (flatten item)) namespaces) '()))
+         lst))
+
+   ;; breadth-first, depth-recursive loop. This gets all parents
+   ;; at depth `i` (thus, it's breadth-first) and then recurses
+   ;; to the next depth.
+   (define (loop i lis acc)
+      (define next-acc (append lis acc))
+      (if (= i 0) next-acc
+         (loop (- i 1) (find-parents lis) next-acc)))
+
+   ; res is list of the GO terms directly related to 
+   ; the input protein (prot) that are members of the input namespaces
+   (define res (find-memberln prot namespaces))
+   (define all-parents (loop num-parents res '()))
+
+   (append (node-info prot) all-parents)
+)

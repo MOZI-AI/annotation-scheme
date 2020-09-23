@@ -24,10 +24,10 @@
     #:use-module (annotation string-helpers)
     #:use-module (srfi srfi-1)
     #:use-module (fibers channels)
-    #:export (string-annotation)
+    #:export (string-interaction-annotation)
 )
 
-(define* (string-annotation node chans #:key 
+(define* (string-interaction-annotation node chans #:key 
                                         (interactions #f)
                                         (namespace "")
                                         (parents 0)

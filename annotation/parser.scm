@@ -31,7 +31,7 @@
   #:export (atomese->graph
             atomese-parser))
 
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation" "go-annotation"))
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-interaction-annotation" "go-annotation"))
 
 (define *nodes* '())
 (define *edges* '())

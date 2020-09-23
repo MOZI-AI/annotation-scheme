@@ -34,7 +34,7 @@
          ;;symmetric - Use SetLink
          (run-query (Bind 
             (VariableList 
-               (TypedVariable (Variable "$x") (Type (cog-type (car input-set)))))
+               (TypedVariable (Variable "$x") (Type (cog-type (gar input-set)))))
             (Evaluation 
                (Predicate (cog-name interaction))
                (Set (gar input-set) (Variable "$x")))
@@ -44,7 +44,7 @@
          ;;not symmetric - Use ListLink
          (run-query (Bind 
             (VariableList 
-               (TypedVariable (Variable "$x") (Type (cog-type (car input-set)))))
+               (TypedVariable (Variable "$x") (Type (cog-type (gar input-set)))))
             (Evaluation 
                (Predicate (cog-name interaction))
                (List (gar input-set) (Variable "$x")))
@@ -63,53 +63,53 @@
       (if (member (cog-name intr) symmetric-interactions)
          (run-query (Bind
             (VariableList 
-               (TypedVariable (Variable "$a") (Type (cog-type (car input-set))))
-               (TypedVariable (Variable "$b") (Type (cog-type (car input-set)))))
+               (TypedVariable (Variable "$a") (Type (cog-type (gar input-set))))
+               (TypedVariable (Variable "$b") (Type (cog-type (gar input-set)))))
             (And
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (Set (gar input-set) (Variable "$a")))
 
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (Set (Variable "$a") (Variable "$b")))
 
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (Set (gar input-set) (Variable "$b"))))          
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (Set (Variable "$a") (Variable "$b")))))
          (run-query (Bind
             (VariableList 
-               (TypedVariable (Variable "$a") (Type (cog-type (car input-set))))
-               (TypedVariable (Variable "$b") (Type (cog-type (car input-set)))))
+               (TypedVariable (Variable "$a") (Type (cog-type (gar input-set))))
+               (TypedVariable (Variable "$b") (Type (cog-type (gar input-set)))))
             (And
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (List (gar input-set) (Variable "$a")))
 
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (List (Variable "$a") (Variable "$b")))
 
-               (Evaluation (Predicate intr)
+               (Evaluation (Predicate (cog-name intr))
                   (List (gar input-set) (Variable "$b"))))          
-               (Evaluation (Predicate intr)
-                  (List (Variable "$a") (Variable "$b"))))))) (gdr input-set)))
+               (Evaluation (Predicate (cog-name intr))
+                  (List (Variable "$a") (Variable "$b"))))))) (cog-outgoing-set (gdr input-set))))
 
+(define get-output-interactors (memoize-function-call do-get-output-interactors))
+
+(define (get-interaction-atoms atom intrs) (List atom (Set (map (lambda (e) (Concept e)) intrs))))
 
 (define-public (find-interaction prot interactions namespace parents regulates part-of bi-dir coding non-coding)
    ;;Find proteins that interact with the input protein. Optionally specify a filter list of the interactions
    (let (
-      [atoms (if interactions (map (lambda (e) (Concept e)) interactions) 
-               (map (lambda (e) (Concept e)) all-interactions))])
+      [atoms (if interactions (get-interaction-atoms prot interactions) (get-interaction-atoms prot all-interactions))])
       
         (append-map (lambda (res) 
-         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ppi (List prot (List atoms))))))
+         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) (cache-find-ppi atoms))))
 
 (define-public (find-output-interactions prot interactions
     namespace parents regulates part-of bi-dir coding non-coding)
 
-
-
-   (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
+   (let ([atoms (if interactions (get-interaction-atoms prot interactions) (get-interaction-atoms prot all-interactions))])
       (append-map (lambda (res)
-         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) output-interactors))
+         (do-cross-annotation res namespace parents regulates part-of bi-dir coding non-coding)) (get-output-interactors atoms)))
 )
 
 (define-public (do-cross-annotation link namespaces num-parents regulates part-of bi-dir coding-rna non-coding-rna)

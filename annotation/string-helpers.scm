@@ -33,6 +33,8 @@
       (if (member (cog-name interaction) symmetric-interactions)
          ;;symmetric - Use SetLink
          (run-query (Bind 
+            (VariableList 
+               (TypedVariable (Variable "$x") (Type (cog-type (car input-set)))))
             (Evaluation 
                (Predicate (cog-name interaction))
                (Set (gar input-set) (Variable "$x")))
@@ -41,6 +43,8 @@
                (Set (gar input-set) (Variable "$x")))))
          ;;not symmetric - Use ListLink
          (run-query (Bind 
+            (VariableList 
+               (TypedVariable (Variable "$x") (Type (cog-type (car input-set)))))
             (Evaluation 
                (Predicate (cog-name interaction))
                (List (gar input-set) (Variable "$x")))
@@ -53,6 +57,40 @@
 (define-public cache-find-ppi
    (memoize-function-call do-find-ppi)
 )
+
+(define (do-get-output-interactors input-set)
+   (append-map (lambda (intr)
+      (if (member (cog-name intr) symmetric-interactions)
+         (run-query (Bind
+            (VariableList 
+               (TypedVariable (Variable "$a") (Type (cog-type (car input-set))))
+               (TypedVariable (Variable "$b") (Type (cog-type (car input-set)))))
+            (And
+               (Evaluation (Predicate intr)
+                  (Set (gar input-set) (Variable "$a")))
+
+               (Evaluation (Predicate intr)
+                  (Set (Variable "$a") (Variable "$b")))
+
+               (Evaluation (Predicate intr)
+                  (Set (gar input-set) (Variable "$b"))))          
+               (Evaluation (Predicate intr)
+                  (Set (Variable "$a") (Variable "$b")))))
+         (run-query (Bind
+            (VariableList 
+               (TypedVariable (Variable "$a") (Type (cog-type (car input-set))))
+               (TypedVariable (Variable "$b") (Type (cog-type (car input-set)))))
+            (And
+               (Evaluation (Predicate intr)
+                  (List (gar input-set) (Variable "$a")))
+
+               (Evaluation (Predicate intr)
+                  (List (Variable "$a") (Variable "$b")))
+
+               (Evaluation (Predicate intr)
+                  (List (gar input-set) (Variable "$b"))))          
+               (Evaluation (Predicate intr)
+                  (List (Variable "$a") (Variable "$b"))))))) (gdr input-set)))
 
 
 (define-public (find-interaction prot interactions namespace parents regulates part-of bi-dir coding non-coding)
@@ -67,24 +105,7 @@
 (define-public (find-output-interactions prot interactions
     namespace parents regulates part-of bi-dir coding non-coding)
 
-   (define (get-output-interactors intrs)
-      (append-map (lambda (intr)
-         (run-query (Bind
-			(VariableList
-				(TypedVariable (Variable "$a") (Type 'UniprotNode))
-				(TypedVariable (Variable "$b") (Type 'UniprotNode)))
 
-			(And
-				(Evaluation (Predicate intr)
-					(Set prot (Variable "$a")))
-
-				(Evaluation (Predicate intr)
-					(Set (Variable "$a") (Variable "$b")))
-
-				(Evaluation (Predicate intr)
-					(Set prot (Variable "$b"))))          
-            (Evaluation (Predicate intr)
-                (Set (Variable "$a") (Variable "$b")))))) intrs))
 
    (let ([output-interactors (if interactions (get-output-interactors interactions) (get-output-interactors all-interactions))])
       (append-map (lambda (res)

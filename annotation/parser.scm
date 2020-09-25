@@ -47,8 +47,11 @@
          "transcribed_to"
          "translated_to"
          "from_organism"
+         ;string predicates
          "binding" "reaction" "inhibition" "activation"
          "expression" "catalysis" "ptmod"
+         ;;GO plus predicates
+         "GO_regulates" "GO_positively_regulates" "GO_negatively_regulates"
          ; These are from DrugBank indicating the action of a drug to a protein
          "acetylation" "activator" "adduct" "aggregation inhibitor"
          "agonist" "allosteric modulator" "antagonist" "antibody"

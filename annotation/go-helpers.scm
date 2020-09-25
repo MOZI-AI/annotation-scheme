@@ -178,35 +178,41 @@
   (define var-gene-1 (Variable "$gene-1"))
   (define var-gene-2 (Variable "$gene-2"))
 
-  (if string?
-    (run-query
-      (Bind
-        (VariableSet
-          (TypedVariable var-gene-1 (Type "GeneNode"))
-          (TypedVariable var-gene-2 (Type "GeneNode")))
-        (Present
-          (Member var-gene-1 go-term)
-          (Evaluation
-            (Predicate "interacts_with")
-            (Set var-gene-1 var-gene-2)))
-        (Member var-gene-1 go-term)
-        (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
-    (filter
-      (lambda (memblink)
-        (and (equal? (gdr memblink) go-term)
-             (equal? (cog-type (gar memblink)) 'GeneNode)))
-      (cog-incoming-by-type go-term 'MemberLink)))
+;   (if string?
+;     (run-query
+;       (Bind
+;         (VariableSet
+;           (TypedVariable var-gene-1 (Type "GeneNode"))
+;           (TypedVariable var-gene-2 (Type "GeneNode")))
+;         (Present
+;           (Member var-gene-1 go-term)
+;           (Evaluation
+;             (Predicate "interacts_with")
+;             (Set var-gene-1 var-gene-2)))
+;         (Member var-gene-1 go-term)
+;         (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
+;     (filter
+;       (lambda (memblink)
+;         (and (equal? (gdr memblink) go-term)
+;              (equal? (cog-type (gar memblink)) 'GeneNode)))
+;       (cog-incoming-by-type go-term 'MemberLink)))
    
-   (if string?
-      (append (run-query (Bind 
-                (TypedVariable var-gene-1 (Type "GeneNode"))
-                (Member var-gene-1 go-term)
-                (Member var-gene-1 go-term)))
-              (find-pathway/go-gene-interactors go-term))
-      (run-query (Bind 
-        (TypedVariable var-gene-1 (Type "GeneNode"))
-        (Member var-gene-1 go-term)
-      (Member var-gene-1 go-term)))))
+;    (if string?
+;       (append (run-query (Bind 
+;                 (TypedVariable var-gene-1 (Type "GeneNode"))
+;                 (Member var-gene-1 go-term)
+;                 (Member var-gene-1 go-term)))
+;               (find-pathway/go-gene-interactors go-term))
+;       (run-query (Bind 
+;         (TypedVariable var-gene-1 (Type "GeneNode"))
+;         (Member var-gene-1 go-term)
+;       (Member var-gene-1 go-term))))
+   (append-map (lambda (ln)
+      (list ln (node-info (gar ln)))) (run-query (Bind 
+               (TypedVariable var-gene-1 (Type "GeneNode"))
+               (Member var-gene-1 go-term)
+               (Member var-gene-1 go-term))))
+)
 
 (define-public (find-go-proteins go-term string?)
 "
@@ -216,11 +222,13 @@
 "
   (define var-protein (Variable "$prot"))
 
-  (run-query
-    (Bind
-        (TypedVariable var-protein (Type 'UniprotNode))
-        (Member var-protein go-term)
-        (Member var-protein go-term))))
+  (append-map (lambda (ln)
+      (list ln (node-info (gar ln)))) 
+      (run-query
+         (Bind
+            (TypedVariable var-protein (Type 'UniprotNode))
+            (Member var-protein go-term)
+            (Member var-protein go-term)))))
 
 (define-public (find-go-parents go-term)
 "
@@ -228,9 +236,10 @@
 
   Find the parent GO terms of GO-TERM via an InheritanceLink.
 "
-  (run-query (Bind 
+  (append-map (lambda (ln) 
+    (list ln (find-go-name (gdr ln)))) (run-query (Bind 
          (Inheritance go-term (Variable "$par"))
-         (Inheritance go-term (Variable "$par")))))
+         (Inheritance go-term (Variable "$par"))))))
 
 ;; =========================== GO Plus Chebi ==============================
 (define chebi-rlns '("has_part" "has_role"))

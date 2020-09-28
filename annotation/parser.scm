@@ -68,23 +68,15 @@
          "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
          "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
          "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
-         "unknown" "vesicant" "weak inhibitor" "has_role"
+         "unknown" "vesicant" "weak inhibitor" "has_role" "has_part"
      )
-     ;; FIXME - Create an organism specific node and a Chebi parent specifc type
-     (if (or (string=? predicate "from_organism") (string=? predicate "has_role")) 
-        (set! *edges* (cons (create-edge (cadr lns)
-                                    (caar lns)
-                                    predicate
-                                    (list *annotation*)
-                                    "" predicate)
-                        *edges*))
-        (set! *edges* (cons (create-edge (caadr lns)
-                                      (caar lns)
-                                      predicate
-                                      (list *annotation*)
-                                      "" predicate)
-                         *edges*))
-     )
+    (set! *edges* (cons (create-edge (caadr lns)
+                                  (caar lns)
+                                  predicate
+                                  (list *annotation*)
+                                  "" predicate)
+                      *edges*))
+     
      
      '())
     ((or "has_name" "GO_name")
@@ -114,10 +106,13 @@
               
               (set! *atoms* (cons id *atoms*)))
 
-              ;; FIXME - Create an organism specific node and a Chebi parent specifc type
-              (set! *nodes*
-                      (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
-                              "" (list *annotation*)) *nodes*))))
+              ;; FIXME - Create specific types for GOCHEs
+              (begin 
+                (set! *nodes*
+                        (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
+                                "" (list *annotation*)) *nodes*))
+                (set! *atoms* (cons (car lns) *atoms*)))
+              ))
      '())
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)
@@ -168,7 +163,7 @@ graph by mutating global variables."
            'UberonNode 'CellNode 
            'RnaNode 'MoleculeNode 'GeneNode
            'ChebiNode 'UniprotNode 'PubchemNode
-           'RefseqNode 'EnstNode) (cons (cog-name thing) (atom-type->string thing)))
+           'RefseqNode 'EnstNode 'ChebiOntologyNode 'NcbiTaxonomyNode) (cons (cog-name thing) (atom-type->string thing)))
       ('PredicateNode (cog-name thing)) 
       ('ConceptNode
        (handle-node (cog-name thing)))

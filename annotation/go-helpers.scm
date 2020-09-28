@@ -256,8 +256,8 @@
                            (ListLink mol (Variable "$mol"))))))  chebi-rlns)]
 
       [parents (run-query (Bind 
-             ;; FIXME Add a specific type to parent chebi's instead of ConceptNode
-             (TypedVariable (Variable "$par") (Type 'ConceptNode))
+             ;; FIXME Add a specific type to GOCHEs instead of ConceptNode
+             (VariableList (TypedVariable (Variable "$par") (TypeChoice (Type 'ConceptNode) (Type 'ChebiOntologyNode))))
              (Inheritance mol (Variable "$par"))
              (Inheritance mol (Variable "$par"))))]) 
 

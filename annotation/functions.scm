@@ -238,28 +238,42 @@
          (find-go-name parent-atom))
       (find-go-name child-atom)))
 
-(define (find-parent node namespaces)
+(define-public (find-parent node namespaces parents)
 "
   Given an atom and list of namespaces, find the parents of that atom
   in the specified namespaces. The namespaces must be a list of strings.
 "
-   (define atom (gdr node))
 
-   (define (add-go-for-ns ns-name)
+   (define (find-parent-helper atom)
 
       ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
       (define go-list
-         (run-query (Get
+         (append-map (lambda (ns-name) (run-query (Get
             (TypedVariable (Variable "$a") (ns->type ns-name))
             (And
-               (Inheritance atom (Variable "$a"))))))
+               (Inheritance atom (Variable "$a")))))) namespaces))
 
-      (filter-map
+      (flatten (filter-map
          (lambda (thing) (add-go-info atom thing))
-         go-list))
+         go-list)))
 
-   (append-map add-go-for-ns namespaces)
-)
+   
+   ;; Return a list of the parents of things in `lst`.
+   (define (find-parents lst)
+      (append-map
+         (lambda (item)
+            ; Something is sending us a stray #f for soe reason...
+            (if item (find-parent-helper (gdr (car (flatten item)))) '()))
+         lst))
+
+   ;; breadth-first, depth-recursive loop. This gets all parents
+   ;; at depth `i` (thus, it's breadth-first) and then recurses
+   ;; to the next depth.
+   (let loop ((i parents)
+               (lst (find-parent-helper node))
+               (acc '()))
+      (if (= i 0) acc
+         (loop (- i 1) (find-parents lst) (append lst acc)))))
 
 (define-public (find-memberln protein namespaces)
 "
@@ -284,30 +298,14 @@
   `namespaces` should be a list of strings.
   `num-parents` should be a number, the number of parents to look up.
 "
-
-   ;; Return a list of the parents of things in `lst`.
-   (define (find-parents lst)
-      (append-map
-         (lambda (item)
-            ; Something is sending us a stray #f for soe reason...
-            (if item (find-parent (car (flatten item)) namespaces) '()))
-         lst))
-
-   ;; breadth-first, depth-recursive loop. This gets all parents
-   ;; at depth `i` (thus, it's breadth-first) and then recurses
-   ;; to the next depth.
-   (define (loop i lis acc)
-      (define next-acc (append lis acc))
-      (if (= i 0) next-acc
-         (loop (- i 1) (find-parents lis) next-acc)))
+   
 
    ; res is list of the GO terms directly related to 
    ; the input protein (prot) that are members of the input namespaces
    (define res (find-memberln prot namespaces))
-   (define all-parents (loop num-parents res '()))
+   (define all-parents (append-map (lambda (node) (find-parent node namespaces num-parents))  res))
 
-   (append (node-info prot) all-parents)
-)
+   (append (node-info prot) all-parents))
 
 (define-public (gene->protein gene chans)
   "Get proteins for each gene"

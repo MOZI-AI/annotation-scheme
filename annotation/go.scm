@@ -25,12 +25,16 @@
     #:export (go-annotation)
 )
 
-(define* (go-annotation go-node chans #:key (string #f) (protein #t))
+(define* (go-annotation go-node chans #:key (string #t) (protein #t)
+                (namespace "biological_process molecular_function cellular_component") 
+                (parents 1))
+
+  (define namespaces (str->list namespace))
   (send-message (Concept "go-annotation") chans)
 
   (let ()
     (send-message (find-go-name go-node) chans)
     (send-message (find-go-plus go-node) chans)
-    (send-message (find-go-parents go-node) chans)
+    (send-message (find-parent go-node namespaces parents) chans)
     (if protein 
         (send-message (find-go-proteins go-node string) chans))))

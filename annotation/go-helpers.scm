@@ -141,30 +141,26 @@
 
   Find the drugs associated with the proteins expressed by Protein in GO terms under NAMESPACE.
 "
-  (define var-go-term (Variable "$go-term"))
-  (define var-drug-action (Variable "$drug-action"))
-  (define var-drug (Variable "$drug"))
-  (define var-drug-group (Variable "$drug-group"))
   
    (append-map
         (lambda (ns)
           (run-query
             (Bind
               (VariableSet
-                (TypedVariable var-go-term (ns->type ns))
-                (TypedVariable var-drug-action (Type "PredicateNode"))
-                (TypedVariable var-drug (Type "MoleculeNode"))
-                (TypedVariable var-drug-group (Type "ConceptNode")))
+                (TypedVariable (Variable "$go-term") (ns->type ns))
+                (TypedVariable (Variable "$drug-action") (Type "PredicateNode"))
+                (TypedVariable (Variable "$drug") (Type "MoleculeNode"))
+                (TypedVariable (Variable "$drug-group") (Type "ConceptNode")))
               (And
-                (Member prot var-go-term)
-                (Evaluation var-drug-action (List var-drug prot))
-                (Inheritance var-drug var-drug-group)
+                (Member prot (Variable "$go-term"))
+                (Evaluation (Variable "$drug-action") (List (Variable "$drug") prot))
+                (Inheritance (Variable "$drug") (Variable "$drug-group"))
                 (Inheritance
-                  var-drug-group
+                  (Variable "$drug-group")
                   (Concept "drug")))
               (Evaluation
-                var-drug-action
-                (List var-drug prot))))) namespace))
+                (Variable "$drug-action")
+                (List (Variable "$drug") prot))))) namespace))
 
 ; --------------------------------------------------
 (define-public (find-go-genes go-term string?)
@@ -175,44 +171,16 @@
   If STRING? is true, the gene-gene interaction from
   the STRING database will also be included.
 "
-  (define var-gene-1 (Variable "$gene-1"))
-  (define var-gene-2 (Variable "$gene-2"))
-
-;   (if string?
-;     (run-query
-;       (Bind
-;         (VariableSet
-;           (TypedVariable var-gene-1 (Type "GeneNode"))
-;           (TypedVariable var-gene-2 (Type "GeneNode")))
-;         (Present
-;           (Member var-gene-1 go-term)
-;           (Evaluation
-;             (Predicate "interacts_with")
-;             (Set var-gene-1 var-gene-2)))
-;         (Member var-gene-1 go-term)
-;         (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
-;     (filter
-;       (lambda (memblink)
-;         (and (equal? (gdr memblink) go-term)
-;              (equal? (cog-type (gar memblink)) 'GeneNode)))
-;       (cog-incoming-by-type go-term 'MemberLink)))
-   
-;    (if string?
-;       (append (run-query (Bind 
-;                 (TypedVariable var-gene-1 (Type "GeneNode"))
-;                 (Member var-gene-1 go-term)
-;                 (Member var-gene-1 go-term)))
-;               (find-pathway/go-gene-interactors go-term))
-;       (run-query (Bind 
-;         (TypedVariable var-gene-1 (Type "GeneNode"))
-;         (Member var-gene-1 go-term)
-;       (Member var-gene-1 go-term))))
-   (append-map (lambda (ln)
-      (list ln (node-info (gar ln)))) (run-query (Bind 
-               (TypedVariable var-gene-1 (Type "GeneNode"))
-               (Member var-gene-1 go-term)
-               (Member var-gene-1 go-term))))
-)
+   (define genes (append-map (lambda (ln)
+      (list ln (node-info (gar ln)))) 
+      (run-query
+         (Bind
+            (TypedVariable (Variable "$gene") (Type "GeneNode"))
+            (Member (Variable "$gene") go-term)
+            (Member (Variable "$gene") go-term)))))
+   (if string? 
+      (append genes (find-pathway/go-gene-interactors go-term))
+      genes))
 
 (define-public (find-go-proteins go-term string?)
 "
@@ -220,15 +188,17 @@
 
   Find the proteins associate with GO-TERM via a MemberLink.
 "
-  (define var-protein (Variable "$prot"))
 
-  (append-map (lambda (ln)
+  (define proteins (append-map (lambda (ln)
       (list ln (node-info (gar ln)))) 
       (run-query
          (Bind
-            (TypedVariable var-protein (Type 'UniprotNode))
-            (Member var-protein go-term)
-            (Member var-protein go-term)))))
+            (TypedVariable (Variable "$prot") (Type 'UniprotNode))
+            (Member (Variable "$prot") go-term)
+            (Member (Variable "$prot") go-term)))))
+   (if string? 
+      (append proteins (find-pathway/go-protein-interactors go-term))
+      proteins))
 
 (define-public (find-go-parents go-term)
 "

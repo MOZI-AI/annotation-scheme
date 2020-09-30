@@ -40,8 +40,7 @@
                                          (coding #f)
                                          (noncoding #f)
                                          (exclude-orgs ""))
-	(define namespaces
-		(if (or (null? namespace) (string=? namespace "")) '() (string-split namespace #\ )))
+	(define namespaces (str->list namespace))
 
     (define exclude-taxonomies 
           (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))

@@ -457,6 +457,9 @@
     )
 )
 
+(define-public (str->list str-lst)
+  (if (string-null? str-lst) '() (string-split str-lst #\space)))
+
 ;; helper function to convert GO namespace strings to TypeNodes
 (define-public (ns->type name)
   (cond 

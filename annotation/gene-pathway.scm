@@ -44,11 +44,9 @@
                                   (regulates #f) (part-of #f) (bi-dir #f)
                                   (coding #f) (noncoding #f))
 
-  (define namespaces (if (string-null? namespace) 
-                          '()
-                          (string-split namespace #\space)))
+  (define namespaces (str->list namespace))
 
-  (let* ([pathways (string-split pathway #\space)])
+  (let* ([pathways (str->list pathway)])
 
     (if (not (null? pathways))
       (begin 

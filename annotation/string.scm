@@ -39,11 +39,9 @@
                                         (noncoding #f)
                                     )
     
-    (define namespaces (if (string-null? namespace) 
-                           '()
-                            (string-split namespace #\space)))
+    (define namespaces (str->list namespace))
 
-    (define interaction-lst (if interactions (string-split interactions #\space) #f))
+    (define interaction-lst (if interactions (str->list interactions) #f))
 
     (send-message (Concept "string-interaction-annotation") chans)
     (match (cons (cog-type node) gene-level?)

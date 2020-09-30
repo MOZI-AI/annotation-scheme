@@ -43,7 +43,7 @@
 
 ; --------------------------------------------------------
 
-(define (add-pathway-proteins pathway protein namespace-list num-parents regulates part-of bi-dir
+(define (add-pathway-node pathway node namespace-list num-parents regulates part-of bi-dir
                 do-coding-rna do-non-coding-rna)
 
 	(define no-rna (not (or do-coding-rna do-non-coding-rna)))
@@ -51,30 +51,30 @@
 
 	(append
 		(list 
-         (Member protein pathway)
-         (node-info protein)
-         (locate-node protein))
+         (Member node pathway)
+         (node-info node)
+         (locate-node node))
 		(if no-ns '()
 			(list
 				(Concept "gene-go-annotation")
-				(find-go-term protein namespace-list num-parents regulates part-of bi-dir)
+				(find-go-term node namespace-list num-parents regulates part-of bi-dir)
 				(Concept "gene-pathway-annotation")))
 		(if no-rna '()
 			(let* ([rnaresult
-						(find-rna protein do-coding-rna do-non-coding-rna)])
+						(find-rna node do-coding-rna do-non-coding-rna)])
 				(if (null? rnaresult) '()
 					(list (Concept "rna-annotation") rnaresult
 						(Concept "gene-pathway-annotation"))))))
 )
 
-(define (do-get-pathway-proteins pathway)
+(define (do-get-pathway-nodes atom)
 	(run-query
 		(Get
 			(VariableList
-				(TypedVariable (Variable "$p") (Type 'UniprotNode)))
-			(Member (Variable "$p") pathway))))
+				(TypedVariable (Variable "$p") (gdr atom)))
+			(Member (Variable "$p") (gar atom)))))
 
-(define get-pathway-proteins (memoize-function-call do-get-pathway-proteins))
+(define get-pathway-nodes (memoize-function-call do-get-pathway-nodes))
 
 (define-public (find-pathway-proteins pathway namespace-list 
                   num-parents regulates part-of bi-dir
@@ -93,9 +93,30 @@
 "
 	(map
 		(lambda (prot)
-			(add-pathway-proteins pathway prot namespace-list num-parents 
+			(add-pathway-node pathway prot namespace-list num-parents 
             regulates part-of bi-dir coding-rna non-coding-rna))
-		(get-pathway-proteins pathway))
+		(get-pathway-nodes (List pathway (Type "UniprotNode"))))
+)
+
+(define-public (find-pathway-genes pathway namespace-list
+                  num-parents regulates part-of bi-dir
+                  coding-rna non-coding-rna)
+  "
+  Find genes in a given pathway.  Perform
+  cross-annotation. If there is a list of namespaces, then annotate
+  each member genes of a pathway for its GO terms. If both
+  rna flags are true
+
+  'namespace-list' should be a list of string names of namespaces.
+  'num-parents' should be a non-negative integer.
+  'coding-rna' should be either #f or #t.
+  'non-coding-rna' should be either #f or #t.
+"           
+	(map
+		(lambda (gene)
+			(add-pathway-node pathway gene namespace-list num-parents 
+            regulates part-of bi-dir coding-rna non-coding-rna))
+		(get-pathway-nodes (List pathway (Type "GeneNode"))))
 )
 
 ; --------------------------------------------------------

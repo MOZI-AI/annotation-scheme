@@ -22,6 +22,7 @@
   #:use-module (opencog)
   #:use-module (opencog exec)
   #:use-module (annotation graph)
+  #:use-module (fibers conditions)
   #:use-module (annotation util)
   #:use-module (ice-9 textual-ports)
   #:use-module (ice-9 match)
@@ -30,7 +31,7 @@
   #:export (atomese->graph
             atomese-parser))
 
-(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-annotation"))
+(define annts '("main" "gene-go-annotation" "gene-pathway-annotation" "biogrid-interaction-annotation" "rna-annotation" "string-interaction-annotation" "go-annotation"))
 
 (define *nodes* '())
 (define *edges* '())
@@ -46,8 +47,11 @@
          "transcribed_to"
          "translated_to"
          "from_organism"
+         ;string predicates
          "binding" "reaction" "inhibition" "activation"
          "expression" "catalysis" "ptmod"
+         ;;GO plus predicates
+         "GO_regulates" "GO_positively_regulates" "GO_negatively_regulates"
          ; These are from DrugBank indicating the action of a drug to a protein
          "acetylation" "activator" "adduct" "aggregation inhibitor"
          "agonist" "allosteric modulator" "antagonist" "antibody"
@@ -64,32 +68,24 @@
          "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
          "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
          "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
-         "unknown" "vesicant" "weak inhibitor" "has_role"
+         "unknown" "vesicant" "weak inhibitor" "has_role" "has_part"
      )
-     ;; FIXME - Create an organism specific node and a Chebi parent specifc type
-     (if (or (string=? predicate "from_organism") (string=? predicate "has_role")) 
-        (set! *edges* (cons (create-edge (cadr lns)
-                                    (caar lns)
-                                    predicate
-                                    (list *annotation*)
-                                    "" predicate)
-                        *edges*))
-        (set! *edges* (cons (create-edge (caadr lns)
-                                      (caar lns)
-                                      predicate
-                                      (list *annotation*)
-                                      "" predicate)
-                         *edges*))
-     )
+    (set! *edges* (cons (create-edge (caadr lns)
+                                  (caar lns)
+                                  predicate
+                                  (list *annotation*)
+                                  "" predicate)
+                      *edges*))
+     
      
      '())
     ((or "has_name" "GO_name")
-     (if (member (car lns) *atoms*)
+     (if (member (caar lns) *atoms*)
          (when (and (not (string-null? *prev-annotation*))
                     (not (string=? *prev-annotation* *annotation*)))
            (let* ([node (car (filter (lambda (n)
                                        (string=? (node-info-id (node-data n))
-                                                 (car lns)))
+                                                 (caar lns)))
                                      *nodes*))]
                   [node-group (node-info-group (node-data node))])
              ;;check if it is the same node and exit if it is
@@ -110,10 +106,13 @@
               
               (set! *atoms* (cons id *atoms*)))
 
-              ;; FIXME - Create an organism specific node and a Chebi parent specifc type
-              (set! *nodes*
-                      (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
-                              "" (list *annotation*)) *nodes*))))
+              ;; FIXME - Create specific types for GOCHEs
+              (begin 
+                (set! *nodes*
+                        (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
+                                "" (list *annotation*)) *nodes*))
+                (set! *atoms* (cons (car lns) *atoms*)))
+              ))
      '())
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)
@@ -141,8 +140,7 @@
         (dest (if (pair? node-b) (car node-b) node-b)))
     (set! *edges*
         (cons (create-edge source dest link (list *annotation*) "" link)
-              *edges*))     
-  ))
+              *edges*))))
 
 (define (handle-list-ln node)
   (cond [(string? node) (list node)]
@@ -165,7 +163,7 @@ graph by mutating global variables."
            'UberonNode 'CellNode 
            'RnaNode 'MoleculeNode 'GeneNode
            'ChebiNode 'UniprotNode 'PubchemNode
-           'RefseqNode 'EnstNode) (cons (cog-name thing) (atom-type->string thing)))
+           'RefseqNode 'EnstNode 'ChebiOntologyNode 'NcbiTaxonomyNode) (cons (cog-name thing) (atom-type->string thing)))
       ('PredicateNode (cog-name thing)) 
       ('ConceptNode
        (handle-node (cog-name thing)))
@@ -197,7 +195,7 @@ graph by mutating global variables."
       (unknown (pk 'unknown unknown #false))))
   (expr->graph expr))
 
-(define* (atomese-parser proc parser-port)
+(define* (atomese-parser proc parser-port cond)
   (set! *nodes* '())
   (set! *edges* '())
   (set! *atoms* '())
@@ -209,7 +207,8 @@ graph by mutating global variables."
       (let ((scm-graph (atomese-graph->scm (make-graph *nodes* *edges*))))
           (scm->json scm-graph parser-port)
            (force-output parser-port)
-          (close-port parser-port)
+           (close-port parser-port)
+           (signal-condition! cond)
           ) 
         (begin 
           (atomese->graph msg)

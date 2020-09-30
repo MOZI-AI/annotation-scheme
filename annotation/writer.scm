@@ -24,17 +24,20 @@
     #:use-module (ice-9 suspendable-ports)
     #:use-module (ice-9 textual-ports)
     #:use-module (fibers channels)
+    #:use-module (fibers conditions)
 )
 
 (install-suspendable-ports!)
 
-(define-public (output-to-file proc port)
+(define-public (output-to-file proc port cond)
     (let loop (
       (msg (proc))
    )
     (if (equal? msg 'eof)
       (begin (force-output port)
-          (close-port port))
+          (close-port port)
+          (signal-condition! cond)
+      )
       (begin 
          (write msg port)
          (loop (proc))

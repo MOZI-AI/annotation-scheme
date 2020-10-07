@@ -288,7 +288,7 @@
          (And
             (Member protein (Variable "$a")))))) namespaces))
 
-   (flatten (append-map (lambda (go) (list (Member protein go) (add-go-info go))) go-list))
+   (map (lambda (go) (list (Member protein go) (add-go-info go))) go-list)
 )
 
 (define-public (find-go-term prot namespaces num-parents regulates part-of bi-dir)
@@ -303,13 +303,14 @@
    ; res is list of the GO terms directly related to 
    ; the input protein (prot) that are members of the input namespaces
    (define res (find-memberln prot namespaces))
-   (define all-parents (append-map (lambda (node) (find-parent node namespaces num-parents))  res))
+   (define all-parents (append-map (lambda (ls) (find-parent (gdr (car ls)) namespaces num-parents))  res))
 
-   (append (node-info prot) all-parents))
+   (append res all-parents))
 
 (define-public (gene->protein gene chans)
   "Get proteins for each gene"
     (let ((prots (find-proteins gene)))
-      (for-each (lambda (prot) 
+      (for-each (lambda (prot)
+         (send-message (node-info prot) chans) 
         (send-message (Evaluation (Predicate "expresses") (List gene prot)) chans))  prots)
       prots))

@@ -44,15 +44,7 @@
     (define interaction-lst (if interactions (str->list interactions) #f))
 
     (send-message (Concept "string-interaction-annotation") chans)
-    (match (cons (cog-type node) gene-level?)
-        (('GeneNode . #f)
-            (let ((prots (gene->protein node chans)))
-                (for-each (lambda (prot) 
-                    (send-message (find-interaction prot interaction-lst
-                            namespaces parents regulates part-of bi-dir coding noncoding) chans)
-                    (send-message (find-output-interactions prot interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans)) prots)))
-        ((or ('GeneNode . #t) ('UniprotNode . _))
-            (send-message (find-interaction node interaction-lst
-                namespaces parents regulates part-of bi-dir coding noncoding) chans)
-            (send-message (find-output-interactions node interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans)))
+    (send-message (find-interaction node interaction-lst
+        namespaces parents regulates part-of bi-dir coding noncoding) chans)
+    (send-message (find-output-interactions node interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans)
 )

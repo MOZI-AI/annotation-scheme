@@ -48,6 +48,8 @@
 ; ----------------------------------------------------
 (define-public intr-genes (make-parameter (make-atom-set)))
 (define-public gene-pairs (make-parameter (make-atom-set)))
+(define-public intr-genes-string (make-parameter (make-atom-set)))
+(define-public gene-pairs-string (make-parameter (make-atom-set)))
 (define-public biogrid-reported-pathways (make-parameter (make-atom-set)))
 
 (define-public atomspace-id (if (getenv "ATOM_ID") (getenv "ATOM_ID") "prod-atom"))

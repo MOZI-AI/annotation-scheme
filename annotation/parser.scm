@@ -89,10 +89,11 @@
                                      *nodes*))]
                   [node-group (node-info-group (node-data node))])
              ;;check if it is the same node and exit if it is
-             (when (string=? (car node-group) *annotation*)
-               '())
-             (node-info-group-set! (node-data node)
-                                   (append node-group (list *annotation*)))))
+             (if (string=? (car node-group) *annotation*)
+               '()
+                (node-info-group-set! (node-data node)
+                                   (append node-group (list *annotation*)))
+              )))
          (if (pair? (car lns))
             (let ((id (caar lns))
                   (type (cdar lns)))

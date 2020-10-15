@@ -12,6 +12,7 @@
     #:use-module (annotation parser)
 	#:use-module (annotation rna)
     #:use-module (json)
+	#:use-module (annotation go-helpers)
 )
 
 (test-begin "main")
@@ -20,9 +21,9 @@
 (primitive-load-path "tests/sample_dataset.scm")
 (primitive-load-path "annotation/pln_rule.scm")
 
-(define req "[{\"functionName\": \"gene-pathway-annotation\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"},{\"filter\": \"include_prot\", \"value\": \"True\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}, {\"functionName\": \"gene-go-annotation\", \"filters\": [{\"filter\": \"namespace\", \"value\": \"biological_process cellular_component molecular_function\"}, {\"filter\": \"parents\", \"value\": \"0\"}, {\"filter\": \"protein\", \"value\": \"True\"}]}, {\"functionName\": \"include-rna\", \"filters\": [{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"},{\"filter\": \"protein\", \"value\": \"1\"}]},{\"functionName\": \"biogrid-interaction-annotation\", \"filters\": [{\"filter\": \"interaction\", \"value\": \"Proteins\"}]}]")
+(define req "[{\"functionName\": \"gene-pathway-annotation\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}, {\"functionName\": \"gene-go-annotation\", \"filters\": [{\"filter\": \"namespace\", \"value\": \"biological_process cellular_component molecular_function\"}, {\"filter\": \"parents\", \"value\": \"0\"}]}, {\"functionName\": \"include-rna\", \"filters\": [{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}]},{\"functionName\": \"biogrid-interaction-annotation\", \"filters\": []}]")
 
-(define invalid-req "[{\"functionName\": \"unknown-function\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"},{\"filter\": \"include_prot\", \"value\": \"True\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}]")
+(define invalid-req "[{\"functionName\": \"unknown-function\", \"filters\": [{\"filter\": \"pathway\", \"value\": \"smpdb reactome\"}, {\"filter\": \"include_sm\", \"value\": \"False\"},{\"filter\": \"coding\", \"value\": \"True\"},{\"filter\": \"noncoding\", \"value\": \"True\"}, {\"filter\": \"biogrid\", \"value\": \"0\"}]}]")
 
 (test-equal "parse-request" 4 (length (parse-request req)))
 
@@ -36,10 +37,7 @@
 
 (define namespace (list "biological_process" "molecular_function" "cellular_component"))
 
-(test-equal "protein-goterm" 14 (length (find-proteins-goterm (GeneNode "IGF1") namespace 0 #f #f #f)))
-
-
-(test-equal "current_vs_prev_symbols" (ListLink) (find-protein-form (GeneNode "NOV")))
+(test-equal "protein-goterm" 2 (length (find-proteins-goterm (GeneNode "IGF1") namespace 0 #f #f #f)))
 
 (test-equal "find-genes" "[]" (find-genes (list "IGF1" "TF")))
 

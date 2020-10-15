@@ -6,7 +6,10 @@ ACLOCAL_AMFLAGS = -I m4
 SOURCES = \
     annotation/util.scm  \
     annotation/functions.scm \
+    annotation/go-helpers.scm \
     annotation/string-helpers.scm \
+    annotation/pathway-helpers.scm \
+    annotation/biogrid-helpers.scm \
     annotation/gene-go.scm \
     annotation/gene-pathway.scm \
     annotation/biogrid.scm \

@@ -64,15 +64,24 @@
          "oxidizer" "partial agonist" "partial antagonist" "positive allosteric modulator"
          "positive modulator" "potentiator" "product of" "protector" "reducer" "regulator"
          "stabilization" "stimulator" "substrate" "suppressor" "translocation inhibitor"
-         "unknown" "vesicant" "weak inhibitor"
+         "unknown" "vesicant" "weak inhibitor" "has_role"
      )
-
-     (set! *edges* (cons (create-edge (cadr lns)
-                                      (car lns)
+     ;; FIXME - Create an organism specific node and a Chebi parent specifc type
+     (if (or (string=? predicate "from_organism") (string=? predicate "has_role")) 
+        (set! *edges* (cons (create-edge (cadr lns)
+                                    (caar lns)
+                                    predicate
+                                    (list *annotation*)
+                                    "" predicate)
+                        *edges*))
+        (set! *edges* (cons (create-edge (caadr lns)
+                                      (caar lns)
                                       predicate
                                       (list *annotation*)
                                       "" predicate)
                          *edges*))
+     )
+     
      '())
     ((or "has_name" "GO_name")
      (if (member (car lns) *atoms*)
@@ -88,16 +97,23 @@
                '())
              (node-info-group-set! (node-data node)
                                    (append node-group (list *annotation*)))))
-         (begin
-           (set! *nodes*
-                 (cons (create-node (car lns) (cadr lns)
-                                    (build-desc-url (car lns))
-                                    ""
-                                    (list *annotation*)
-                                    (find-subgroup (car lns)))
-                       *nodes*))
-           (set! *atoms*
-                 (cons (car lns) *atoms*))))
+         (if (pair? (car lns))
+            (let ((id (caar lns))
+                  (type (cdar lns)))
+              (if (or (string=? type "uniprot") (string=? type "enst")) ;;uniprots & enst share name is a gene node w/c has a type
+                  (set! *nodes*
+                      (cons (create-node id type (caadr lns) (build-desc-url id type)
+                              "" (list *annotation*)) *nodes*))
+                  (set! *nodes*
+                      (cons (create-node id type (cadr lns) (build-desc-url id type)
+                              "" (list *annotation*)) *nodes*)))
+              
+              (set! *atoms* (cons id *atoms*)))
+
+              ;; FIXME - Create an organism specific node and a Chebi parent specifc type
+              (set! *nodes*
+                      (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
+                              "" (list *annotation*)) *nodes*))))
      '())
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)
@@ -121,9 +137,12 @@
     (_ (error "Unrecognized predicate" predicate))))
 
 (define (handle-ln node-a node-b link)
-  (set! *edges*
-        (cons (create-edge node-a node-b link (list *annotation*) "" link)
-              *edges*)))
+  (let ((source (if (pair? node-a) (car node-a) node-a))
+        (dest (if (pair? node-b) (car node-b) node-b)))
+    (set! *edges*
+        (cons (create-edge source dest link (list *annotation*) "" link)
+              *edges*))     
+  ))
 
 (define (handle-list-ln node)
   (cond [(string? node) (list node)]
@@ -135,15 +154,19 @@
     (set! *annotation* node))
   node)
 
-(define (atomese->graph expr)
+(define-public (atomese->graph expr)
   "Recursively traverse the Atomese expression EXPR and build up a
 graph by mutating global variables."
   (define (expr->graph thing)
     (match (cog-type thing)
       ;; nodes
-      ((or 'PredicateNode
-             'GeneNode
-             'MoleculeNode) (cog-name thing)) 
+      ((or 'CellularComponentNode 'MolecularFunctionNode 'BiologicalProcessNode
+           'PathwayNode 'ReactomeNode 'SmpNode
+           'UberonNode 'CellNode 
+           'RnaNode 'MoleculeNode 'GeneNode
+           'ChebiNode 'UniprotNode 'PubchemNode
+           'RefseqNode 'EnstNode) (cons (cog-name thing) (atom-type->string thing)))
+      ('PredicateNode (cog-name thing)) 
       ('ConceptNode
        (handle-node (cog-name thing)))
       ('VariableNode

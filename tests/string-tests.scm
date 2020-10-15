@@ -5,24 +5,22 @@
     #:use-module (opencog bioscience)
     #:use-module (annotation string-helpers)
     #:use-module (annotation util)
+    #:use-module (annotation functions)
 )
 
 (test-begin "string")
 (setenv "TEST_MODE" "TRUE")
-(primitive-load-path "tests/string_ggi_sample.scm")
 
 (primitive-load-path "tests/string_ppi_sample.scm")
 
-;;Fake expression to find ppi
-(define expr-link (Evaluation 
-                    (Predicate "expresses")
-                    (List (Gene "ARF5") (MoleculeNode "Uniprot:P84085"))))
 
 (define atoms (map (lambda (i) (Concept i)) all-interactions))
+(define lst (do-find-ppi (Set (UniprotNode "P84085") (List atoms))))
+(test-equal "find-ppi" 19 (length lst))
 
-(test-equal "find-ggi" 19 (length (do-find-ggi (Set (Gene "ARF5") (List atoms)))))
+(map (lambda (l) (display (gddr l))) lst)
 
-(test-equal "find-ggi-filtered" 9 (length (do-find-ggi (Set (Gene "ARF5") (List (Concept "reaction"))))))
+(test-equal "find-ppi-filtered" 2 (length (do-find-ppi (Set (UniprotNode "Q9Y587") (List (Concept "binding") (Concept "reaction"))))))
 
 (clear)
 (setenv "TEST_MODE" #f) ;;remove the env variable

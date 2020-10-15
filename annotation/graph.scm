@@ -74,10 +74,10 @@
 ;;Record Definitions
 (define-record-type node-info
   (fields id
+          (mutable type)
           (mutable name)
           (mutable defn)
           (mutable location)
-          (mutable subgroup)
           (mutable group)))
 
 (define-record-type node
@@ -127,10 +127,10 @@
          ("group" . ,(thing->scm (node-group thing)))))
       ((? node-info? thing)
        `(("id"         . ,(thing->scm (node-info-id thing)))
+         ("type"       . ,(thing->scm (node-info-type thing)))
          ("name"       . ,(thing->scm (node-info-name thing)))
          ("definition" . ,(thing->scm (node-info-defn thing)))
          ("location"   . ,(thing->scm (node-info-location thing)))
-         ("subgroup"   . ,(thing->scm (node-info-subgroup thing)))
          ("group"      . ,(list->vector (thing->scm (node-info-group thing))))))
       (anything anything)))
   (thing->scm graph))

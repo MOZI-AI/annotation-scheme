@@ -126,13 +126,11 @@
 (define (get-name atom)
  (if (> (length atom) 0)
   (cog-name (car  atom))
-  ""
- )
-)
+  ""))
 
 
-(define* (create-node id name defn location annotation #:optional (subgroup ""))
-    (make-node (make-node-info id name defn location subgroup annotation) "nodes")
+(define* (create-node id type name defn location annotation)
+    (make-node (make-node-info id type name defn location annotation) "nodes")
 )
 
 (define* (create-edge node1 node2 name annotation #:optional (pubmedId "") (subgroup ""))
@@ -141,16 +139,17 @@
 
 ;; Find node name and description. See `node-info` below for documentation.
 (define-public (do-get-node-info node)
-	(define (node-name node)
-		(let ([lst (find-pathway-name node)])
-				(if (null? lst) (ConceptNode "N/A") (car lst))))
+  
+  (define node-name 
+    (match (cog-type node) 
+      ((or 'UniprotNode 'EnstNode) (find-prot/enst-name node))
+      (_ (find-name node))))
 
-	(if (cog-node? node)
+	(if (null? node-name)
+    '()
     (append
       (find-organism node)
-		  (list (EvaluationLink (PredicateNode "has_name") (ListLink node (node-name node))))
-    )
-		(ListLink))
+		  (list (EvaluationLink (PredicateNode "has_name") (ListLink node node-name)))))
 )
 
 ; Cache results of do-get-node-info for performance.
@@ -164,71 +163,36 @@
   small molecule, RNA, GeneOntology (GO) term, cellular location, etc.
   Here, ENTITY is an AtomSpace Atom that encodes such an object.
 "
-	(list (memoize-node-info ENTITY)))
+	(memoize-node-info ENTITY))
 
 
 ;;Finds a name of any node (Except GO which has different structure)
-(define-public (do-find-pathway-name pw)
-	(define is-enst (string-prefix? "ENST" (cog-name pw)))
-   (if (or is-enst (string-contains (cog-name pw) "Uniprot:"))
-      (let ([predicate (if is-enst "transcribed_to" "expresses")])
-        (run-query (Get
+(define-public (do-find-prot/enst-name node)
+   (let* ([predicate (if (is-type? node 'EnstNode) "transcribed_to" "expresses")]
+          [name (run-query (Get
            (VariableList
            (TypedVariable (Variable "$a") (Type 'GeneNode)))
            (Evaluation (Predicate predicate)
-              (List (Variable "$a") pw)))))
-      '()
-    )
+              (List (Variable "$a") node))))])
+
+        (if (null? name) (GeneNode "N/A") (car name)))
 )
 
-(define find-pathway-name
-	(memoize-function-call do-find-pathway-name))
+(define find-prot/enst-name
+	(memoize-function-call do-find-prot/enst-name))
 
-(define-public (is-cellular-component? ATOM-LIST)
-"
-  is-cellular-component? ATOM-LIST
-
-  Return #t if any of the atoms in ATOM-LIST have the form
-
-     (Evaluation
-         (Predicate \"GO_namespace\")
-         (List
-            (Concept \"foo\")
-            (Concept \"cellular_component\")))
-
-  where (Concept \"foo\") could be anything. Otherwise, return #f.
-"
-	(any
-		(lambda (info)
-			(and
-				(equal? (cog-name (gar info)) "GO_namespace")
-				(equal? "cellular_component" (cog-name (gddr info)))))
-		ATOM-LIST)
-
-	; XXX TODO:
-	; The code below might run faster, because it does a hash
-	; compare instead of a string compare.
-	;
-	; (define pnas (Predicate "GO_namespace"))
-	; (define celc (Concept "cellular_component"))
-	; (any (lambda (info) (and
-	;     (equal? pnas (gar info)) (equal? celc (gddr info)))) ATOM-LIST)
-)
-
-(define-public (build-desc-url node)
+(define-public (build-desc-url id type)
     (cond 
-        ((string-prefix? "ChEBI" node) (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split node #\:))))
-        ((string-prefix? "Uniprot" node) (string-append "https://www.uniprot.org/uniprot/" (cadr (string-split node #\:))))
-        ((string-prefix? "GO" node) (string-append "http://amigo.geneontology.org/amigo/term/" node))
-        ((string-prefix? "SMP" node) (string-append "http://smpdb.ca/view/" node))
-        ((string-prefix? "R-HSA" node)
-          (string-append "http://www.reactome.org/content/detail/" node)
-        )
-        ((string-prefix? "ENST" node) (string-append "http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=" node))
-        ((or (string-prefix? "NM_" node) (string-prefix? "NR_" node) (string-prefix? "NP_" node) (string-prefix? "YP_" node))
-          (string-append "https://www.ncbi.nlm.nih.gov/nuccore/" node))
-        (else (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez (GeneNode node)))))
-)
+        ((string=? "chebi" type) (string-append "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=" (cadr (string-split id #\:))))
+        ((string=? "uniprot" type) (string-append "https://www.uniprot.org/uniprot/" id))
+        ((or (string=? "cellularcomponent" type) (string=? "molecularfunction" type)
+         (string=? "biologicalprocess" type)) (string-append "http://amigo.geneontology.org/amigo/term/" id))
+        ((string=? "smp" type) (string-append "http://smpdb.ca/view/" id))
+        ((string=? "reactome" type)
+          (string-append "http://www.reactome.org/content/detail/" id))
+        ((string=? "enst" type) (string-append "http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=" id))
+        ((string=? "refseq" type) (string-append "https://www.ncbi.nlm.nih.gov/nuccore/" id))
+        (else (string-append "https://www.ncbi.nlm.nih.gov/gene/"  (find-entrez (GeneNode id))))))
 
 (define (find-entrez gene)
   "Find the entrez_id of a gene."
@@ -241,40 +205,21 @@
                           (VariableNode "$a"))))))))
     (match (string-split entrez #\:)
       ((single) single)
-      ((first second . rest) second))
-      
-  ))
+      ((first second . rest) second))))
 
-(define (do-find-name GO-ATOM)
+(define (do-find-name ATOM)
 "
-	find-name GO-ATOM
+	find-name ATOM
 
-	Find the name of GO-ATOM. This assumes a structure of the following
+	Find the name of ATOM. This assumes a structure of the following
    form, holding the name in the second spot:
 
-         (Evaluation
-             (Predicate \"GO_name\")  ; or (Predicate \"has_name\")
-             (List
-                 GO-ATOM
-                 (Concept \"some name\")))
-   and then this returns the string \"some name\" if such a structure
-   exists. Otherwise, it returns the empty string.
-   The predicate (Predicate \"GO_name\") is used whenever GO-ATOM
-   has the form (Concept \"GO:nnnnn\") where \"nnnnn\" is a number.
-   Otherwise, (Predicate \"has_name\") is used.
-"
-  (define pname
-     (if (regexp-match?  (string-match "GO:[0-9]+" (cog-name GO-ATOM)))
-       "GO_name" "has_name"))
-
-  (get-name
-    (run-query
-     (Get
-      (Variable "$name")
-      (Evaluation
-        (Predicate pname)
-        (List GO-ATOM (Variable "$name"))))))
-)
+" 
+  (let ((name (run-query
+    (Get
+      (Evaluation (Predicate "has_name")
+      (List ATOM (Variable "$name")))))))
+    (if (null? name) (Concept "N/A") (car name))))
 
 ; A memoized version of `do-find-name`, improves performance considerably
 ; on repeated searches.
@@ -313,8 +258,7 @@
             (VariableNode "$g")))))
 
 (define-public (build-pubmed-url nodename)
- (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:)))
-)
+ (string-append "https://www.ncbi.nlm.nih.gov/pubmed/?term=" (cadr (string-split nodename #\:))))
 
 (define* (write-to-file result id name #:optional (ext ".scm"))
     (let*
@@ -323,110 +267,95 @@
         )
         (call-with-output-file file-name
             (lambda (p)
-              (write result p)
-            )
-          )
-  ))
+              (write result p)))))
 
 (define* (get-file-path id name #:optional (ext ".scm"))
     (catch #t (lambda ()
     (let*
-        (
-          [env-path (getenv "RESULT_DIR")]
+        ([env-path (getenv "RESULT_DIR")]
           [path (if (not env-path) 
             (begin 
               (if (not (file-exists? "/tmp/result"))
-                (mkdir "/tmp/result")
-              )
-              (string-append "/tmp/result/" id)
-            )
+                (mkdir "/tmp/result"))
+              (string-append "/tmp/result/" id))
             (string-append env-path "/" id))]
-          [file-name (string-append path "/" name ext)]
-        )
+          [file-name (string-append path "/" name ext)])
         (if (not (file-exists? path))
-            (mkdir path)
-        )
-        file-name
-  ))  
+            (mkdir path))
+        file-name))  
   (lambda (key . parameters)
       (format (current-error-port) "Cannot write scheme result files. ~a: ~a\n" key parameters)
-      #f
-    ))
+      #f)))
 
+(define (is-compartment loc)
+	(any
+		(lambda (comp) (string-contains loc comp))
+		(list "vesicle" "photoreceptor" "plasma" "centriole"
+			"cytoplasm" "endosome" "golgi" "vacuole" "granule"
+			"endoplasmic" "mitochondri" "cytosol" "peroxisome"
+			"ribosomes" "lysosome" "nucle"))
 )
 
 (define (do-locate-node node)
   (define go-list (run-query
     (Bind
-       (Variable "$go")
-       (And
-         (Member node (Variable "$go"))
-         (Evaluation
-           (Predicate "GO_namespace")
-           (List (Variable "$go") (Concept "cellular_component"))))
-       (Evaluation (Predicate "has_location") (ListLink node (Variable "$go"))))))
+       (TypedVariable (Variable "$go") (Type 'CellularComponent))
+        (Member node (Variable "$go"))
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$go")))
+        )))
 
   (if (not (null? go-list)) go-list
-    (run-query (Bind
-      (And
+    (run-query
+      (Bind
+        (VariableList 
+        (TypedVariable (Variable "$loc") (Type 'ConceptNode))
+        (TypedVariable (Variable "$go") (Type 'CellularComponent)))
+        (And
         (Evaluation
           (Predicate "has_location")
           (List node (Variable "$loc")))
         (Evaluation
           (Predicate "GO_name")
           (List (Variable "$go") (Variable "$loc"))))
-      (Evaluation (Predicate "has_location") (ListLink node (Variable "$go"))))))
+        (Evaluation
+          (Predicate "has_location")
+          (List node (Variable "$go"))))))
 )
 
 (define-public locate-node (make-afunc-cache do-locate-node))
 
-(define-public (add-loc node)
+(define-public (add-loc cont)
 "
   Add location of a gene/Molecule node in context of Reactome pathway
+  The input is a MemberLink with the gene member of a pathway i.e (Member gene pathway)
 "
-  (let ([child (cog-outgoing-atom node 0)] 
-        [parent (cog-outgoing-atom node 1) ])
+  (let ([gene (cog-outgoing-atom cont 0)])
       (run-query
         (Bind
+          (VariableList
+            (TypedVariable (VariableNode "$loc") (Type 'ConceptNode))
+            (TypedVariable (Variable "$go") (Type 'CellularComponent))) 
           (And
-          (ContextLink
-            node
+            (ContextLink
+              cont
+              (EvaluationLink
+                (PredicateNode "has_location")
+                (ListLink
+                  gene (VariableNode "$loc"))))
             (EvaluationLink
-              (PredicateNode "has_location")
-              (ListLink
-                child
-                (VariableNode "$loc"))))
-            (EvaluationLink
-              (PredicateNode "GO_name")
+              (PredicateNode "has_name")
               (ListLink
                 (VariableNode "$go")
-                (VariableNode "$loc")))
-          )
+                (VariableNode "$loc"))))
             (EvaluationLink
               (PredicateNode "has_location")
               (ListLink
-                child
-                (VariableNode "$go")))
-          )
-        )
-    )
+                gene
+                (VariableNode "$go"))))))
 )
 
-(define-public (find-subgroup name) 
-    (let ((initial (string-split name #\:)))
-        (match initial
-            ((a b) a )
-            ((a)
-                (cond 
-                    ((string-prefix? "R-HSA" a) "Reactome")
-                    ((string-prefix? "SMP" a) "SMPDB")
-                    (else "Genes")
-                )
-            )
-        )
-    )
-
-)
 ;;a helper function to flatten a list, i.e convert a list of lists into a single list
 ; (define-public (flatten x)
 ;   (cond ((null? x) '())
@@ -450,36 +379,28 @@
       )
       (list
         (Evaluation (Predicate "from_organism") (List gene (Variable "$org")))
-        (Evaluation (Predicate "has_name") (List (Variable "$org") (VariableNode "$name"))))
-  ))
+        (Evaluation (Predicate "has_name") (List (Variable "$org") (VariableNode "$name"))))))
 )
 ; Cache results of do-find-organism for performance.
 (define cache-find-organism (memoize-function-call do-find-organism)) 
 
-(define-public (find-organism gene)
-   (list (cache-find-organism gene)))
+(define-public (find-organism gene) (cache-find-organism gene))
 
 
 (define-public (str->tv s)
   (if (string=? "True" s)
       #t
-      #f
-  )
-)
+      #f))
 
 (define-public (find-module name modules)
   "
   Return the reference to an object in the list of modules with the specified name
   "
     (let (
-        [var  (any (lambda (mod) (module-variable (resolve-module mod) (string->symbol name))) modules)]
-    )
+        [var  (any (lambda (mod) (module-variable (resolve-module mod) (string->symbol name))) modules)])
         (if var 
             (variable-ref var)
-            #f
-        )
-    )
-)
+            #f)))
 
 (define (flatten-helper lst acc stk)
   (cond ((null? lst) 
@@ -498,8 +419,7 @@
 (define-public (send-message message channels)
   (if (or (list? message) (pair? message))
     (for-each (lambda (msg) (send-message msg channels)) (flatten message))
-    (for-each (lambda (chan) (put-message chan message))  channels)
-  )
+    (for-each (lambda (chan) (put-message chan message))  channels))
 )
 
 (define-public (clear-atomspace) 
@@ -513,10 +433,25 @@
   (= 1 (cog-tv-mean tv))
 )
 
-;; helper function to conver scheme boolean vals to stvs
+;; helper function to convert scheme boolean vals to stvs
 (define-public (scm->stv val)
     (if val
         (SimpleTruthValue 1 0)
         (SimpleTruthValue 0 0)
     )
 )
+
+;; helper function to convert GO namespace strings to TypeNodes
+(define-public (ns->type name)
+  (cond 
+    ((string=? name "biological_process") (TypeNode 'BiologicalProcess))
+    ((string=? name "molecular_function") (TypeNode 'MolecularFunction))
+    ((string=? name "cellular_component") (TypeNode 'CellularComponent))))
+
+(define-public (atom-type->string atom)
+  ;Convert a node type to a string representation
+  ;For ex. (type->string (CellularComponentNode "blah")) => "cellularcomponent"
+  (string-downcase (string-drop-right (symbol->string (cog-type atom)) 4))
+)
+
+(define-public (is-type? node type) (or (equal? (cog-type node) type) (cog-subtype? type (cog-type node))))

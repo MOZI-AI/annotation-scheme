@@ -19,8 +19,8 @@
                (EvaluationLink
                   (PredicateNode "interacts_with")
                   (ListLink
-                     (MoleculeNode "Uniprot:P05019")
-                     (MoleculeNode "Uniprot:P17936")
+                     (Uniprot "Uniprot:P05019")
+                     (Uniprot "Uniprot:P17936")
                   )
                )
                (ListLink
@@ -30,31 +30,32 @@
                )
             )
          )
+         (Member (Uniprot "Uniprot:P17936") (CellularComponent "membrane"))
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P17936")
+               (Uniprot "Uniprot:P17936")
                (GeneNode "IGFBP3")
             )
          )
          (EvaluationLink
             (PredicateNode "has_name")
             (ListLink
-               (MoleculeNode "Uniprot:P05019")
+               (Uniprot "Uniprot:P05019")
                (GeneNode "IGF1")
             )
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P17936")
+               (Uniprot "Uniprot:P17936")
                (ConceptNode "extracellular region")
             )
          )
          (EvaluationLink (stv 1 1)
             (PredicateNode "has_location")
             (ListLink
-               (MoleculeNode "Uniprot:P17936")
+               (Uniprot "Uniprot:P17936")
                (ConceptNode "endoplasmic reticulum lumen")
             )
          )
@@ -65,16 +66,16 @@
    (lambda () (set! i (+ i 1)) (if (>= i n) 'eof (list-ref res (- i 1))))
 ))
 
-(define out (open-output-file "test.json"))
+(define out (open-output-file "tests/test.json"))
 (atomese-parser proc out)
-(define input (open-input-file "test.json"))
+(define input (open-input-file "tests/test.json"))
 
 (define json (json->scm input))
 
 
 (test-assert "node-count" (= 2 (vector-length (assoc-ref json "nodes"))))
 
-(test-assert "edge-count" (= 1 (vector-length (assoc-ref json "edges"))))
+(test-assert "edge-count" (= 2 (vector-length (assoc-ref json "edges"))))
 
 
 (close-port input)

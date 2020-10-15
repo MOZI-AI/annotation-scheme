@@ -28,7 +28,7 @@
 	#:export (include-rna)
 )
 
-(define* (include-rna node chans #:key (coding #t) (noncoding #t))
+(define* (include-rna node chans #:key (coding #t) (noncoding #t) (gene-level? #f))
 "
   The include-rna function finds coding and non-coding RNA forms of
   the node. Needs 3 arguments:

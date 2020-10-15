@@ -126,9 +126,9 @@
     (let* (
         [prot-a (gadr link)]
         [prot-b (gddr link)]
-        [already-done-a ((intr-genes) prot-a)]
-        [already-done-b ((intr-genes) prot-b)]
-        [already-done-pair ((gene-pairs) (List prot-a prot-b))])
+        [already-done-a ((intr-genes-string) prot-a)]
+        [already-done-b ((intr-genes-string) prot-b)]
+        [already-done-pair ((gene-pairs-string) (List prot-a prot-b))])
         
         (cond 
           ((and (not already-done-a) (not already-done-b))

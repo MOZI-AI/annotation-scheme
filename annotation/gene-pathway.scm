@@ -40,7 +40,7 @@
                                   (pathway "reactome")
                                   (include_sm #t) (gene-level? #f)
                                   (namespace "") (parents 0)
-                                  (biogrid #f) (string #f)
+                                  (string? #f)
                                   (regulates #f) (part-of #f) (bi-dir #f)
                                   (coding #f) (noncoding #f))
 
@@ -53,18 +53,10 @@
         (send-message (ConceptNode "gene-pathway-annotation") chans)
         (for-each (lambda (pathway)
           (let ((pathway-type (if (string=? pathway "reactome") 'ReactomeNode 'SmpNode)))
-            (match (cons (cog-type node) gene-level?)
-            (('GeneNode . #f)
-                (let ((prots (gene->protein node chans)))
-                    (for-each (lambda (prot) 
-                      (annotate-pathways prot chans pathway-type include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding)) prots)))
-            (('GeneNode . #t)
-                (annotate-pathways node chans pathway-type include_sm #t namespaces parents regulates part-of bi-dir string coding noncoding))
-            (('UniprotNode . _)
-                (annotate-pathways node chans pathway-type include_sm #f namespaces parents regulates part-of bi-dir string coding noncoding))))) pathways)))))
+            (annotate-pathways node chans pathway-type include_sm gene-level? namespaces parents regulates part-of bi-dir string? coding noncoding))) pathways)))))
 
 
-(define (annotate-pathways node chans pathway-type sm? gene-level? namespaces num-parents regulates part-of bi-dir biogrid coding-rna non-coding-rna)
+(define (annotate-pathways node chans pathway-type sm? gene-level? namespaces num-parents regulates part-of bi-dir string? coding-rna non-coding-rna)
 
   (let* ([pw (find-pathway-member node pathway-type)])
 
@@ -82,7 +74,7 @@
            part-of bi-dir coding-rna non-coding-rna) chans)
       )
      
-      (if string 
+      (if string?
         (if gene-level?
           (send-message (find-pathway/go-gene-interactors path) chans)
           (send-message (find-pathway/go-protein-interactors path) chans)))) pw))

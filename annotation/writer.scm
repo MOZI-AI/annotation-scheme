@@ -31,8 +31,7 @@
 
 (define-public (output-to-file proc port cond)
     (let loop (
-      (msg (proc))
-   )
+      (msg (proc)))
     (if (equal? msg 'eof)
       (begin (force-output port)
           (close-port port)
@@ -40,7 +39,5 @@
       )
       (begin 
          (write msg port)
-         (loop (proc))
-      )
-    )
+         (loop (proc))))
 ))

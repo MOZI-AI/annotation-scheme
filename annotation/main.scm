@@ -83,9 +83,11 @@
 )
 
 (define-public (parse-request req)
-    (let (
-        (table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req)))))
-        (func-table (make-eq-hashtable)))
+    (let ((table (if (string? req) (json-string->scm req) (json-string->scm (utf8->string (u8-list->bytevector req)))))
+        ;; Using the defualt guile hashtable association functions like hash-for-each creates a continuation barrier
+        ;; Hence why I'm using (rnrs hashtable) functions
+        (func-table (make-eq-hashtable))
+        (gene-level? #f))
 
       (vector-for-each (lambda (i elm)
         (let*  ((func-name (assoc-ref elm "functionName"))
@@ -97,6 +99,7 @@
                 (let* (
                   (filter (assoc-ref f "filter"))
                   (val (assoc-ref f "value")))
+                  (if (string=? filter "gene-level?") (set! gene-level? (str->tv val)))
                   (list (with-input-from-string (string-append "#:" filter) read) 
                     (if (string->number val)
                         (string->number val)
@@ -104,26 +107,28 @@
                           (str->tv val)
                           val ))))) filters)))))
                 (hashtable-set! func-table func-name (cons func args)))))) table)
-      func-table))
+      (cons gene-level? func-table)))
 
-(define (start-annotation atoms functions chans conds)
-    (define (apply-func input node) 
-      (apply (car input) node chans (cdr input)))
+(define (start-annotation atoms gene-level? functions chans conds)
+    (define (apply-func node func-lst)
+      (vector-for-each (lambda (index key) 
+          (if (member key func-lst)
+            (apply (car (hashtable-ref functions key '())) node chans (cdr (hashtable-ref functions key '()))))) (hashtable-keys functions)))
+
     (catch #t 
         (lambda ()                           
           (main-node-info atoms chans)
           (for-each (lambda (atom) 
             (match (cog-type atom)
               ((or 'UniprotNode 'GeneNode)
-                ;; Using the defualt guile hashtable association functions like hash-for-each creates a continuation barrier
-                ;; Hence why I'm using (rnrs hashtable) functions
-                (vector-for-each (lambda (index key) 
-                  (if (member key protein-funcs)
-                    (apply-func (hashtable-ref functions key '()) atom))) (hashtable-keys functions)))
+                (match (cons (cog-type atom) gene-level?)
+                  (('GeneNode . #f)
+                    (let ((prots (gene->protein atom chans)))
+                        (for-each (lambda (prot) (apply-func prot protein-funcs)) prots)))
+                  ((or ('GeneNode . #t) ('UniprotNode . _))
+                    (apply-func atom protein-funcs))))
               ((or 'CellularComponentNode 'BiologicalProcessNode 'MolecularFunctionNode)
-                (vector-for-each (lambda (index key) 
-                  (if (member key go-funcs)
-                    (apply-func (hashtable-ref functions key '()) atom))) (hashtable-keys functions)))
+                (apply-func atom go-funcs))
               (_ (send-message 'eof chans) (format #t "Unsupport annotation for ~a" atom)))) atoms)
           (send-message 'eof chans)
           (for-each wait conds)) 
@@ -149,7 +154,7 @@
                     (parser-chan (make-channel))
                     (writer-chan (make-channel))
                     (chans (list writer-chan parser-chan))
-                    (functions (parse-request request))
+                    (parse-lst (parse-request request))
                     (parser-port (open-file (get-file-path file-name file-name ".json") "w"))
                     (writer-port (open-file (get-file-path file-name "result") "w"))
                     (parser-cond (make-condition))
@@ -157,13 +162,15 @@
 
                     (spawn-fiber (lambda () (output-to-file (lambda () (get-message writer-chan)) writer-port writer-cond)))
                     (spawn-fiber (lambda () (atomese-parser (lambda () (get-message parser-chan)) parser-port parser-cond)))
-                    (start-annotation atom-lst functions chans (list parser-cond writer-cond)))
+                    (start-annotation atom-lst (car parse-lst) (cdr parse-lst) chans (list parser-cond writer-cond)))
         #:drain? #t)))))
 
 (define-public (annotate-genes genes-list file-name request)
   (parameterize ((intr-genes (make-atom-set))
                  (gene-pairs (make-atom-set))
-                 (biogrid-reported-pathways (make-atom-set)))
+                 (biogrid-reported-pathways (make-atom-set))
+                 (intr-genes-string (make-atom-set))
+                 (gene-pairs-string (make-atom-set)))
     (process-request genes-list file-name request)))
 
 (define-public (annotate-go go-terms file-name request)

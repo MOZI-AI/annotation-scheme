@@ -25,16 +25,20 @@
     #:use-module (opencog)
     #:use-module (opencog exec)
     #:use-module (opencog bioscience)
+    #:use-module (ice-9 match)
     #:export (gene-go-annotation)
 )
 
-(define* (gene-go-annotation lst chans #:key 
+(define* (gene-go-annotation node chans #:key 
                             (namespace "biological_process molecular_function cellular_component") 
-                            (parents 0) 
+                            (parents 0)
+                            (gene-level? #f) 
                             (regulates #f) (bi-dir #f) (part-of #f))
-    
+
+    (define namespaces (str->list namespace))
     (send-message (Concept "gene-go-annotation") chans)
-    (for-each (lambda (pair) 
-        (for-each (lambda (prot) 
-            (send-message (find-go-term prot (string-split namespace #\space) parents regulates part-of bi-dir) chans)  
-            (send-message (find-drugs-protein prot (string-split namespace #\space)) chans)) (cdr pair))) lst))
+    (if (equal? (cog-type node) 'UniprotNode)
+        (begin 
+           (send-message (find-go-term node namespaces parents regulates part-of bi-dir) chans)
+           (send-message (find-drugs-protein node namespaces) chans))
+        (send-message (find-go-term node namespaces parents regulates part-of bi-dir) chans)))

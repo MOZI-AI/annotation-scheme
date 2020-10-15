@@ -20,6 +20,7 @@ SOURCES = \
     annotation/parser.scm \
     annotation/rna.scm \
     annotation/writer.scm \
+    annotation/go.scm \
     annotation.scm 
 
 TESTS = \

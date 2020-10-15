@@ -31,7 +31,7 @@
       #:use-module (srfi srfi-1)
 	#:export (biogrid-interaction-annotation))
 
-(define* (biogrid-interaction-annotation lst
+(define* (biogrid-interaction-annotation node
                                          chans
                                          #:key
                                          (namespace "")
@@ -40,15 +40,12 @@
                                          (coding #f)
                                          (noncoding #f)
                                          (exclude-orgs ""))
-	(define namespaces
-		(if (or (null? namespace) (string=? namespace "")) '() (string-split namespace #\ )))
+	(define namespaces (str->list namespace))
 
     (define exclude-taxonomies 
           (if (number? exclude-orgs) (list (number->string exclude-orgs)) '()))
 
      (send-message (Concept "biogrid-interaction-annotation") chans)
 
-     (for-each (lambda (pair) 
-        (send-message (match-gene-interactors (car pair) exclude-taxonomies) chans)
-        (send-message (find-output-interactors (car pair) exclude-taxonomies) chans)) lst)
-)
+        (send-message (match-gene-interactors node exclude-taxonomies) chans)
+        (send-message (find-output-interactors node exclude-taxonomies) chans))

@@ -21,14 +21,17 @@
     #:use-module (opencog)
     #:use-module (opencog bioscience)
     #:use-module (annotation util)
+    #:use-module (annotation functions)
     #:use-module (annotation string-helpers)
     #:use-module (srfi srfi-1)
+    #:use-module (ice-9 match)
     #:use-module (fibers channels)
-    #:export (string-annotation)
+    #:export (string-interaction-annotation)
 )
 
-(define* (string-annotation lst chans #:key 
+(define* (string-interaction-annotation node chans #:key 
                                         (interactions #f)
+                                        (gene-level? #f)
                                         (namespace "")
                                         (parents 0)
                                         (regulates #f) (part-of #f) (bi-dir #f)
@@ -36,16 +39,12 @@
                                         (noncoding #f)
                                     )
     
-    (define namespaces (if (string-null? namespace) 
-                           '()
-                            (string-split namespace #\space)))
+    (define namespaces (str->list namespace))
 
-    (define interaction-lst (if interactions (string-split interactions #\space) #f))
+    (define interaction-lst (if interactions (str->list interactions) #f))
 
     (send-message (Concept "string-interaction-annotation") chans)
-    (for-each (lambda (pair) 
-        (for-each (lambda (prot)         
-            (send-message (find-interaction prot interaction-lst 
-                namespaces parents regulates part-of bi-dir coding noncoding) chans)         
-            (send-message (find-output-interactions prot interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans))  (cdr pair))) lst)
+    (send-message (find-interaction node interaction-lst
+        namespaces parents regulates part-of bi-dir coding noncoding) chans)
+    (send-message (find-output-interactions node interaction-lst namespaces parents regulates part-of bi-dir coding noncoding) chans)
 )

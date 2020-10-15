@@ -31,101 +31,6 @@
     #:export (find-go-plus)
 )
 
-(define-public (find-go-name go)
-  "Find the name of a GO term."
-  (run-query (Bind
-              (TypedVariable (Variable "$a") (TypeNode 'ConceptNode))
-              (EvaluationLink
-               (PredicateNode "has_name")
-               (ListLink go (VariableNode "$a")))
-              (EvaluationLink
-               (PredicateNode "has_name")
-               (ListLink go (VariableNode "$a"))))))
-
-
-(define* (add-go-info child-atom #:optional (parent-atom #f))
-"
-   Add information for GO nodes
-"
-
-   (if parent-atom
-      (list
-         (Inheritance child-atom parent-atom)
-         (find-go-name parent-atom))
-      (find-go-name child-atom)))
-
-(define (find-parent node namespaces)
-"
-  Given an atom and list of namespaces, find the parents of that atom
-  in the specified namespaces. The namespaces must be a list of strings.
-"
-   (define atom (gdr node))
-
-   (define (add-go-for-ns ns-name)
-
-      ;; list of go-atoms that are parent of this go atom and are in the namespce specified by namespaces parameter
-      (define go-list
-         (run-query (Get
-            (TypedVariable (Variable "$a") (ns->type ns-name))
-            (And
-               (Inheritance atom (Variable "$a"))))))
-
-      (filter-map
-         (lambda (thing) (add-go-info atom thing))
-         go-list))
-
-   (append-map add-go-for-ns namespaces)
-)
-
-(define-public (find-memberln protein namespaces)
-"
-  Find GO terms of a protein.  `protein` must be a GeneNode and `namespaces`
-  must be a list of strings.
-"
-   
-   ;;list of go atoms that this protein is a member of
-   (define go-list
-      (append-map (lambda (ns-name) (run-query (Get
-         (TypedVariable (Variable "$a") (ns->type ns-name))
-         (And
-            (Member protein (Variable "$a")))))) namespaces))
-
-   (flatten (append-map (lambda (go) (list (Member protein go) (add-go-info go))) go-list))
-)
-
-(define-public (find-go-term prot namespaces num-parents regulates part-of bi-dir)
-"
-  The main function to find the go terms for a protein with a
-  specification of the parents.
-  `namespaces` should be a list of strings.
-  `num-parents` should be a number, the number of parents to look up.
-"
-
-   ;; Return a list of the parents of things in `lst`.
-   (define (find-parents lst)
-      (append-map
-         (lambda (item)
-            ; Something is sending us a stray #f for soe reason...
-            (if item (find-parent (car (flatten item)) namespaces) '()))
-         lst))
-
-   ;; breadth-first, depth-recursive loop. This gets all parents
-   ;; at depth `i` (thus, it's breadth-first) and then recurses
-   ;; to the next depth.
-   (define (loop i lis acc)
-      (define next-acc (append lis acc))
-      (if (= i 0) next-acc
-         (loop (- i 1) (find-parents lis) next-acc)))
-
-   ; res is list of the GO terms directly related to 
-   ; the input protein (prot) that are members of the input namespaces
-   (define res (find-memberln prot namespaces))
-   (define go-regulates (append-map (lambda (go) (find-go-plus go regulates part-of bi-dir)) res))
-   (define all-parents (loop num-parents res '()))
-
-   (append (node-info prot) all-parents go-regulates)
-)
-
 ;; ======================= GO Plus =============================
 
 (define regulates-rln (List (Concept "GO_regulates") (Concept "GO_positively_regulates") (Concept "GO_negatively_regulates")))
@@ -236,30 +141,26 @@
 
   Find the drugs associated with the proteins expressed by Protein in GO terms under NAMESPACE.
 "
-  (define var-go-term (Variable "$go-term"))
-  (define var-drug-action (Variable "$drug-action"))
-  (define var-drug (Variable "$drug"))
-  (define var-drug-group (Variable "$drug-group"))
   
    (append-map
         (lambda (ns)
           (run-query
             (Bind
               (VariableSet
-                (TypedVariable var-go-term (ns->type ns))
-                (TypedVariable var-drug-action (Type "PredicateNode"))
-                (TypedVariable var-drug (Type "MoleculeNode"))
-                (TypedVariable var-drug-group (Type "ConceptNode")))
+                (TypedVariable (Variable "$go-term") (ns->type ns))
+                (TypedVariable (Variable "$drug-action") (Type "PredicateNode"))
+                (TypedVariable (Variable "$drug") (Type "MoleculeNode"))
+                (TypedVariable (Variable "$drug-group") (Type "ConceptNode")))
               (And
-                (Member prot var-go-term)
-                (Evaluation var-drug-action (List var-drug prot))
-                (Inheritance var-drug var-drug-group)
+                (Member prot (Variable "$go-term"))
+                (Evaluation (Variable "$drug-action") (List (Variable "$drug") prot))
+                (Inheritance (Variable "$drug") (Variable "$drug-group"))
                 (Inheritance
-                  var-drug-group
+                  (Variable "$drug-group")
                   (Concept "drug")))
               (Evaluation
-                var-drug-action
-                (List var-drug prot))))) namespace))
+                (Variable "$drug-action")
+                (List (Variable "$drug") prot))))) namespace))
 
 ; --------------------------------------------------
 (define-public (find-go-genes go-term string?)
@@ -270,38 +171,16 @@
   If STRING? is true, the gene-gene interaction from
   the STRING database will also be included.
 "
-  (define var-gene-1 (Variable "$gene-1"))
-  (define var-gene-2 (Variable "$gene-2"))
-
-  (if string?
-    (run-query
-      (Bind
-        (VariableSet
-          (TypedVariable var-gene-1 (Type "GeneNode"))
-          (TypedVariable var-gene-2 (Type "GeneNode")))
-        (Present
-          (Member var-gene-1 go-term)
-          (Evaluation
-            (Predicate "interacts_with")
-            (Set var-gene-1 var-gene-2)))
-        (Member var-gene-1 go-term)
-        (Evaluation (Predicate "interacts_with") (Set var-gene-1 var-gene-2))))
-    (filter
-      (lambda (memblink)
-        (and (equal? (gdr memblink) go-term)
-             (equal? (cog-type (gar memblink)) 'GeneNode)))
-      (cog-incoming-by-type go-term 'MemberLink)))
-   
-   (if string?
-      (append (run-query (Bind 
-                (TypedVariable var-gene-1 (Type "GeneNode"))
-                (Member var-gene-1 go-term)
-                (Member var-gene-1 go-term)))
-              (find-pathway/go-gene-interactors go-term))
-      (run-query (Bind 
-        (TypedVariable var-gene-1 (Type "GeneNode"))
-        (Member var-gene-1 go-term)
-      (Member var-gene-1 go-term)))))
+   (define genes (append-map (lambda (ln)
+      (list ln (node-info (gar ln)))) 
+      (run-query
+         (Bind
+            (TypedVariable (Variable "$gene") (Type "GeneNode"))
+            (Member (Variable "$gene") go-term)
+            (Member (Variable "$gene") go-term)))))
+   (if string? 
+      (append genes (find-pathway/go-gene-interactors go-term))
+      genes))
 
 (define-public (find-go-proteins go-term string?)
 "
@@ -309,13 +188,17 @@
 
   Find the proteins associate with GO-TERM via a MemberLink.
 "
-  (define var-protein (Variable "$prot"))
 
-  (run-query
-    (Bind
-        (TypedVariable var-protein (Type 'UniprotNode))
-        (Member var-protein go-term)
-        (Member var-protein go-term))))
+  (define proteins (append-map (lambda (ln)
+      (list ln (node-info (gar ln)))) 
+      (run-query
+         (Bind
+            (TypedVariable (Variable "$prot") (Type 'UniprotNode))
+            (Member (Variable "$prot") go-term)
+            (Member (Variable "$prot") go-term)))))
+   (if string? 
+      (append proteins (find-pathway/go-protein-interactors go-term))
+      proteins))
 
 (define-public (find-go-parents go-term)
 "
@@ -323,9 +206,10 @@
 
   Find the parent GO terms of GO-TERM via an InheritanceLink.
 "
-  (run-query (Bind 
+  (append-map (lambda (ln) 
+    (list ln (find-go-name (gdr ln)))) (run-query (Bind 
          (Inheritance go-term (Variable "$par"))
-         (Inheritance go-term (Variable "$par")))))
+         (Inheritance go-term (Variable "$par"))))))
 
 ;; =========================== GO Plus Chebi ==============================
 (define chebi-rlns '("has_part" "has_role"))
@@ -342,8 +226,8 @@
                            (ListLink mol (Variable "$mol"))))))  chebi-rlns)]
 
       [parents (run-query (Bind 
-             ;; FIXME Add a specific type to parent chebi's instead of ConceptNode
-             (TypedVariable (Variable "$par") (Type 'ConceptNode))
+             ;; FIXME Add a specific type to GOCHEs instead of ConceptNode
+             (VariableList (TypedVariable (Variable "$par") (TypeChoice (Type 'ConceptNode) (Type 'ChebiOntologyNode))))
              (Inheritance mol (Variable "$par"))
              (Inheritance mol (Variable "$par"))))]) 
 

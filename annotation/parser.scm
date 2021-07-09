@@ -80,8 +80,24 @@
      
      '())
     ((or "has_name" "GO_name")
-     (if (member (caar lns) *atoms*)
-         (when (and (not (string-null? *prev-annotation*))
+      (let* ([id (caar lns)]
+            [type (cdar lns)]
+            [node (car (filter (lambda (n)
+                          (string=? (node-info-id (node-data n))
+                              id)) *nodes*))]
+            [info (node-data node)])
+        (if (pair? (car lns))
+              (if (or (string=? type "uniprot") (string=? type "enst")) ;;uniprots & enst share name is a gene node w/c has a type
+                  (node-info-name-set! info (caadr lns))
+                  ; (set! *nodes*
+                  ;     (cons (create-node id type (caadr lns) (build-desc-url id type)
+                  ;             "" (list *annotation*)) *nodes*))
+                  (node-info-name-set! info (cadr lns))
+                  ; (set! *nodes*
+                  ;     (cons (create-node id type (cadr lns) (build-desc-url id type)
+                  ;             "" (list *annotation*)) *nodes*))
+                  ))
+        (when (and (not (string-null? *prev-annotation*))
                     (not (string=? *prev-annotation* *annotation*)))
            (let* ([node (car (filter (lambda (n)
                                        (string=? (node-info-id (node-data n))
@@ -93,28 +109,8 @@
                '()
                 (node-info-group-set! (node-data node)
                                    (append node-group (list *annotation*)))
-              )))
-         (if (pair? (car lns))
-            (let ((id (caar lns))
-                  (type (cdar lns)))
-              (if (or (string=? type "uniprot") (string=? type "enst")) ;;uniprots & enst share name is a gene node w/c has a type
-                  (set! *nodes*
-                      (cons (create-node id type (caadr lns) (build-desc-url id type)
-                              "" (list *annotation*)) *nodes*))
-                  (set! *nodes*
-                      (cons (create-node id type (cadr lns) (build-desc-url id type)
-                              "" (list *annotation*)) *nodes*)))
-              
-              (set! *atoms* (cons id *atoms*)))
-
-              ;; FIXME - Create specific types for GOCHEs
-              (begin 
-                (set! *nodes*
-                        (cons (create-node (car lns) "N/A" (cadr lns) (build-desc-url (car lns) "N/A")
-                                "" (list *annotation*)) *nodes*))
-                (set! *atoms* (cons (car lns) *atoms*)))
-              ))
-     '())
+              )))          
+        '()))
     ("GO_namespace"
      (if (and (member (car lns) *atoms*)
               (string=? (car lns) (node-info-id (node-data (car *nodes*)))))
@@ -153,6 +149,14 @@
     (set! *annotation* node))
   node)
 
+(define (add-node id type)
+    (if (not (member id **atoms**))
+      (set! *nodes*
+          (cons (create-node id type "" (build-desc-url id type)
+                  "" (list *annotation*)) *nodes*)))
+    (set! *atoms* (cons id *atoms*))
+    (cons id type))
+
 (define-public (atomese->graph expr)
   "Recursively traverse the Atomese expression EXPR and build up a
 graph by mutating global variables."
@@ -164,7 +168,7 @@ graph by mutating global variables."
            'UberonNode 'CellNode 
            'RnaNode 'MoleculeNode 'GeneNode
            'ChebiNode 'UniprotNode 'PubchemNode
-           'RefseqNode 'EnstNode 'ChebiOntologyNode 'NcbiTaxonomyNode) (cons (cog-name thing) (atom-type->string thing)))
+           'RefseqNode 'EnstNode 'ChebiOntologyNode 'NcbiTaxonomyNode) (add-node (cog-name thing) (atom-type->string thing)))
       ('PredicateNode (cog-name thing)) 
       ('ConceptNode
        (handle-node (cog-name thing)))

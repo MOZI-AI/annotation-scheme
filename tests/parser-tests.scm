@@ -64,7 +64,7 @@
 (define n (length res))
 (define i 0)
 (define proc (let ()
-   (lambda () (set! i (+ i 1)) (if (>= i n) 'eof (list-ref res (- i 1))))
+   (lambda () (set! i (+ i 1)) (if (>= (- i 1) n) 'eof (list-ref res (- i 1))))
 ))
 
 (define out (open-output-file "tests/test.json"))
